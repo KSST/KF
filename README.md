@@ -1,4 +1,1 @@
-KF
-==
-
 Koch Framework

@@ -1,0 +1,60 @@
+<?php
+
+/**
+ * Koch Framework
+ * Jens A. Koch © 2005 - onwards
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Koch\Datagrid\ColumnRenderer;
+
+/**
+ * Datagrid Column Renderer Link.
+ *
+ * Renders cells with a link (a href).
+ */
+class Link extends ColumnRenderer implements ColumnRendererInterface
+{
+    public $link            = '';
+    public $linkFormat      = '&id=%{id}';
+    public $linkId          = '';
+    public $linkTitle       = '';
+    public $nameWrapLength  = 50;
+    public $nameFormat      = '%{name}';
+
+    /**
+     * Render the value(s) of a cell
+     *
+     * @param Clansuite_Datagrid_Cell
+     * @return string Return html-code
+     */
+    public function renderCell($oCell)
+    {
+        // assign values to internal var
+        $values = $oCell->getValues();
+
+        // set internal link
+        $this->link = parent::getColumn()->getBaseURL();
+
+        // validate
+        if ( false == isset($values['name']) ) {
+            throw new Clansuite_Exception(_('A link needs a name. Please define "name" in the ResultKeys'));
+        } else {
+            if ( mb_strlen($values['name']) > $this->nameWrapLength ) {
+                $values['name'] = mb_substr($values['name'], 0, $this->nameWrapLength-3) . '...';
+            }
+        }
+
+        // render
+        return $this->_replacePlaceholders( $values,
+                                            Clansuite_HTML::renderElement(  'a',
+                                                                            $this->nameFormat,
+                                                                            array(  'href'  => Clansuite_Datagrid::appendUrl($this->linkFormat),
+                                                                                    'id'    => $this->linkId,
+                                                                                    'title' => $this->linkTitle )));
+    }
+}
