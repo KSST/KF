@@ -78,22 +78,20 @@ namespace<br>";
      */
     public static function writeAutoloadingMapFile($array)
     {
-        $mapfile = ROOT_CACHE . 'autoloader.classmap.php';
-
-        if (is_writable($mapfile) === false) {
+        if (is_writable(self::$mapfile) === false) {
             self::readAutoloadingMapFile();
         }
 
-        if (is_writable($mapfile) === true) {
-            $bytes_written = file_put_contents($mapfile, serialize($array), LOCK_EX);
+        if (is_writable(self::$mapfile) === true) {
+            $bytes_written = file_put_contents(self::$mapfile, serialize($array), LOCK_EX);
 
             if ($bytes_written === false) {
-                trigger_error('Autoloader could not write the map cache file: ' . $mapfile, E_USER_ERROR);
+                trigger_error('Autoloader could not write the map cache file: ' . self::$mapfile, E_USER_ERROR);
             } else {
                 return true;
             }
         } else {
-            trigger_error('Autoload cache file not writable: ' . $mapfile, E_USER_ERROR);
+            trigger_error('Autoload cache file not writable: ' . self::$mapfile, E_USER_ERROR);
         }
     }
 
@@ -104,11 +102,8 @@ namespace<br>";
      */
     public static function readAutoloadingMapFile()
     {
-        // check if file for the autoloading map exists
-        $mapfile = ROOT_CACHE . 'autoloader.classmap.php';
-
         // create file, if not existant
-        if (is_file($mapfile) === false) {
+        if (is_file(self::$mapfile) === false) {
             $file_resource = fopen($mapfile, 'a', false);
             fclose($file_resource);
             unset($file_resource);
@@ -116,7 +111,7 @@ namespace<br>";
             return array();
         } else { // load map from file
             // Note: delete the autoloader.config.php file, if you get an unserialization error like "error at offset xy"
-            return unserialize(file_get_contents($mapfile));
+            return unserialize(file_get_contents(self::$mapfile));
         }
     }
 
@@ -238,8 +233,8 @@ namespace<br>";
      *
      * @param array inclusions classmap (classname => file)
      */
-    public static function setInclusionsMap(array $inclusions_classmap)
+    public static function setInclusionsMap(array $classmap)
     {
-        self::$inclusions_map = $inclusions_classmap;
+        self::$inclusions_classmap = $classmap;
     }
 }
