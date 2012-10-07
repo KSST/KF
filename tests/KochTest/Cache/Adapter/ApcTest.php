@@ -10,7 +10,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
      * @var Apc
      */
     protected $object;
-    
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -21,7 +21,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The APC extension is not available.');
             $this->expectException();
         }
-        
+
         $this->object = new Apc;
     }
 
@@ -50,7 +50,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
      */
     public function testStore()
     {
-        $this->assertFalse($this->object->contains('key1'));        
+        $this->assertFalse($this->object->contains('key1'));
         $this->object->store('key1', 'value1');
         $this->assertEqual('value1', $this->object->fetch('key1'));
     }
