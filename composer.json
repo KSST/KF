@@ -20,7 +20,7 @@
 
     "require": {
         "php": ">=5.3.3",
-        "doctrine/orm"       : "2.3.0",
+        "doctrine/orm" : "2.3.0",
         "doctrine/migrations": "dev-master",
         "gedmo/doctrine-extensions": "dev-master",
         "smarty/smarty": "v3.1.12",
@@ -28,10 +28,12 @@
         "swiftmailer/swiftmailer": "v4.2.1"
     },
     "suggest": {
+        "ext-apc" : "*",
+        "ext-gettext" : "*",
         "ext-intl" : "*",
-        "ext-apc"  : "*",
+        "ext-json" : "*",
         "ext-mbstring" : "*",
-        "ext-gettext" : "*"
+        "ext-yaml" : "*"
     },
     "autoload": {
         "psr-0": {
