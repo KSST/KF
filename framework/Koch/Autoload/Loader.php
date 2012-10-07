@@ -102,7 +102,7 @@ namespace<br>";
      */
     public static function readAutoloadingMapFile()
     {
-        if(self::$mapfile === '') {
+        if (self::$mapfile === '') {
             throw new RuntimeException('No classmap file set. Use method ->setClassMapFile() to set one.');
         }
 
