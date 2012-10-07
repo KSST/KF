@@ -2,7 +2,7 @@
 
 /**
  * Clansuite - just an eSports CMS
- * Jens-André Koch © 2005 - onwards
+ * Jens-Andrï¿½ Koch ï¿½ 2005 - onwards
  * http://www.clansuite.com/
  *
  * This file is part of "Clansuite - just an eSports CMS".
@@ -34,7 +34,7 @@ class ClansuiteTestsuite extends TestSuite
         parent::__construct('Testsuite for "Clansuite - just an eSports CMS"');
 
         // walk through dir /unittests and grab all tests
-        $this->scanDirForTests(dirname(__FILE__) . '/unittests');
+        $this->scanDirForTests(dirname(__FILE__) . '/KochTest');
 
         // Debug array with test files
         // var_dump($this->files);

@@ -308,7 +308,7 @@ class Loader
      */
     public static function writeAutoloadingMapFile($array)
     {
-        $mapfile = ROOT_CACHE . 'autoloader.classmap.php';
+        $mapfile = 'autoloader.classmap.php';
 
         if (is_writable($mapfile) === false) {
             self::readAutoloadingMapFile();
@@ -335,7 +335,7 @@ class Loader
     public static function readAutoloadingMapFile()
     {
         // check if file for the autoloading map exists
-        $mapfile = ROOT_CACHE . 'autoloader.classmap.php';
+        $mapfile = 'autoloader.classmap.php';
 
         // create file, if not existant
         if (is_file($mapfile) === false) {
