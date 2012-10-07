@@ -19,7 +19,7 @@ script:
  #
  # run unit-tests
  #
- #- php ./tests/runAllTests.php
+ - php ./tests/runAllTests.php
  #
  # run UTF8 encoding check
  #
