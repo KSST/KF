@@ -223,11 +223,21 @@ namespace<br>";
         return self::$autoloader_map;
     }
 
+    /**
+     * Setter for the classmap file
+     *
+     * @param string classmap filepath.
+     */
     public static function setClassMapFile($mapfile)
     {
         self::$mapfile = $mapfile;
     }
 
+    /**
+     * Setter for the inclusions classmap.
+     *
+     * @param array inclusions classmap (classname => file)
+     */
     public static function setInclusionsMap(array $inclusions_classmap)
     {
         self::$inclusions_map = $inclusions_classmap;
