@@ -83,22 +83,16 @@ if (empty($_SERVER['SERVER_NAME'])) {
     $_SERVER['SERVER_NAME'] = gethostname();
 }
 
-//  acquire clansuite path constants
-#include dirname(__DIR__) . '/Clansuite/Application.php';
-#\Clansuite\Application::define_ConstantsAndPaths();
-#\Clansuite\Application::initialize_Loader();
-
-#\Koch\Localization\Utf8::initialize();
-
-/**
- * Constants
- *
- * Constants must be defined, after initialize_paths(),
- * because of the automatic apc constants cache in
- * define_ConstantsAndPaths().
- */
+// Constants
 define('REWRITE_ENGINE_ON', 1);
 define('TESTSUBJECT_DIR', dirname(__DIR__) . '/');
+define('KOCH_FRAMEWORK', dirname(ROOT) . '/framework/Koch/');
+
+// Autoloader
+include KOCH_FRAMEWORK . 'Autoload/Loader.php';
+new \Koch\Autoload\Loader();
+
+\Koch\Localization\Utf8::initialize();
 
 /**
  * We might need some debug utils,
