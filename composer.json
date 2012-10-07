@@ -20,15 +20,12 @@
 
     "require": {
         "php": ">=5.3.3",
-
         "doctrine/orm"       : "2.3.0",
         "doctrine/migrations": "dev-master",
-
         "gedmo/doctrine-extensions": "dev-master",
-
         "smarty/smarty": "v3.1.12",
-
-        "ezyang/htmlpurifier" : "dev-master"
+        "ezyang/htmlpurifier" : "dev-master",
+        "swiftmailer/swiftmailer": "v4.2.1"
     },
     "suggest": {
         "ext-intl" : "*",
