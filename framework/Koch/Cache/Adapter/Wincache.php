@@ -79,8 +79,8 @@ class Wincache extends AbstractCache implements CacheInterface
     public function delete($key)
     {
         return xcache_unset($key);
-    }    
-    
+    }
+
     public function clear()
     {
         wincache_ucache_clear();
