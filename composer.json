@@ -1,0 +1,45 @@
+{
+    "name": "ksst/kf",
+    "description": "Koch Framework",
+    "homepage": "http://clansuite.com/",
+    "license": "GPL-2.0+",
+    "keywords": ["cms", "cmf", "framework"],
+    "type": "library",
+    "authors": [
+        {
+            "name": "Jens-André Koch",
+            "email": "jakoch@web.de"
+        }
+    ],
+    "support": {
+        "irc": "irc://irc.freenode.org/clansuite",
+        "forum": "http://forum.clansuite.com/",
+        "source": "https://github.com/jakoch/Clansuite/",
+        "issues": "http://trac.clansuite.com/"
+    },
+
+    "require": {
+        "php": ">=5.3.3",
+
+        "doctrine/orm"       : "2.3.0",
+        "doctrine/migrations": "dev-master",
+
+        "gedmo/doctrine-extensions": "dev-master",
+
+        "smarty/smarty": "v3.1.12",
+
+        "ezyang/htmlpurifier" : "dev-master"
+    },
+    "suggest": {
+        "ext-intl" : "*",
+        "ext-apc"  : "*",
+        "ext-mbstring" : "*",
+        "ext-gettext" : "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "Koch\\": "framework/Koch/",
+            "KochTest\\": "tests/KochTest"
+        }
+    }
+}
