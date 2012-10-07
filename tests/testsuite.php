@@ -35,7 +35,7 @@ class ClansuiteTestsuite extends TestSuite
                 $this->addFile($test_file);
             }
         } else {
-            echo 'No UnitTests found.';
+            echo 'No UnitTests found.' . PHP_EOL;
         }
     }
 
