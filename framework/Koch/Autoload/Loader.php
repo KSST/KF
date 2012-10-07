@@ -108,7 +108,7 @@ namespace<br>";
 
         // create file, if not existant
         if (is_file(self::$mapfile) === false) {
-            $file_resource = fopen($mapfile, 'a', false);
+            $file_resource = fopen(self::$mapfile, 'a', false);
             fclose($file_resource);
             unset($file_resource);
 
