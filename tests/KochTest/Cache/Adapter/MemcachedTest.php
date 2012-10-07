@@ -21,7 +21,7 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The memcached extension is not available.');
             $this->expectException();
         }
-        
+
         $this->object = new Memcached;
     }
 
