@@ -222,4 +222,14 @@ namespace<br>";
     {
         return self::$autoloader_map;
     }
+
+    public static function setClassMapFile($mapfile)
+    {
+        self::$mapfile = $mapfile;
+    }
+
+    public static function setInclusionsMap(array $inclusions_classmap)
+    {
+        self::$inclusions_map = $inclusions_classmap;
+    }
 }
