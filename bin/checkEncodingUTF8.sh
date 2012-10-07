@@ -38,6 +38,8 @@ else
   rootpath=$1
 fi
 
+echo -e "\033[40m\033[1;33m [ Running UTF-8 Encoding Check ... ] \033[0m"
+
 checkDirectory ${rootpath}
 
 exit 0
