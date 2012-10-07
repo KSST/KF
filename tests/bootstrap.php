@@ -86,7 +86,7 @@ if (empty($_SERVER['SERVER_NAME'])) {
 // Constants
 define('REWRITE_ENGINE_ON', 1);
 define('TESTSUBJECT_DIR', dirname(__DIR__) . '/');
-define('KOCH_FRAMEWORK', dirname(ROOT) . '/framework/Koch/');
+define('KOCH_FRAMEWORK', dirname(__DIR__) . '/framework/Koch/');
 
 // Autoloader
 include KOCH_FRAMEWORK . 'Autoload/Loader.php';
