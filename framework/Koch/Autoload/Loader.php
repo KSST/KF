@@ -56,6 +56,10 @@ class Loader
      */
     private static $autoloader_map = array();
 
+    public static $inclusions_map = array();
+
+    public static $mapfile = '';
+
     public function __construct()
     {
         spl_autoload_register(array($this, 'autoload'), true, true);
@@ -451,5 +455,15 @@ class Loader
     public static function getAutoloaderClassMap()
     {
         return self::$autoloader_map;
+    }
+
+    public static function setClassMapFile($mapfile)
+    {
+        self::$mapfile = $mapfile;
+    }
+
+    public static function setInclusionsMap(array $inclusions_classmap)
+    {
+        self::$inclusions_map = $inclusions_classmap;
     }
 }
