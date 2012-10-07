@@ -56,7 +56,7 @@ class Loader
      */
     private static $autoloader_map = array();
 
-    public static $inclusions_map = array();
+    public static $inclusions_classmap = array();
 
     public static $mapfile = '';
 
