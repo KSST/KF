@@ -233,7 +233,7 @@ namespace<br>";
      *
      * @param array inclusions classmap (classname => file)
      */
-    public static function setInclusionsMap(array $classmap)
+    public static function setInclusionsClassMap(array $classmap)
     {
         self::$inclusions_classmap = $classmap;
     }
