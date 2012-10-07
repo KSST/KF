@@ -79,7 +79,8 @@ define('KOCH_FRAMEWORK', dirname(__DIR__) . '/framework/Koch/');
 
 // Autoloader
 include KOCH_FRAMEWORK . 'Autoload/Loader.php';
-new \Koch\Autoload\Loader();
+$autoloader = new \Koch\Autoload\Loader();
+$autoloader->setClassMapFile(__DIR__ . '/autoloader.classmap.php'); // KF/tests/autoloader.classmap.php
 
 \Koch\Localization\Utf8::initialize();
 
