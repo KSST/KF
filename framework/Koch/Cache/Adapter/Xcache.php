@@ -92,7 +92,7 @@ class Xcache extends AbstractCache implements CacheInterface
     {
         return xcache_unset($key);
     }
-    
+
     public function clear()
     {
         return xcache_clear_cache();

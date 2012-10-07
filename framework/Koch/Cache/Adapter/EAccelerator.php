@@ -121,10 +121,10 @@ class EAccelerator extends AbstractCache implements CacheInterface
     {
         return eaccelerator_rm($key);
     }
-    
+
     /**
      * Clears the cache
-     * 
+     *
      * @return boolean True if cache cleared.
      */
     public function clear()
