@@ -23,7 +23,7 @@ class ClansuiteTestsuite extends TestSuite
         parent::__construct('Testsuite for "Clansuite - just an eSports CMS"');
 
         // walk through dir /unittests and grab all tests
-        $this->scanDirForTests(dirname(__FILE__) . '/unittests');
+        $this->scanDirForTests(__DIR__ . '/KochTest');
 
         // Debug array with test files
         // var_dump($this->files);
