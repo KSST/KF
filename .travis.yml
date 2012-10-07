@@ -26,6 +26,5 @@ script:
  - ./bin/checkEncodingUTF8.sh framework
 
 notifications:
+  irc: "irc.freenode.org#koch"
   email: false
-  irc:
-    - "irc.freenode.org#koch"
