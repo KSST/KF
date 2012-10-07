@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-Andrï¿½ Koch ï¿½ 2005 - onwards
+ * Jens A. Koch © 2005 - onwards
  *
  * SPDX-License-Identifier: MIT
  *
