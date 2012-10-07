@@ -12,10 +12,9 @@
         }
     ],
     "support": {
-        "irc": "irc://irc.freenode.org/clansuite",
-        "forum": "http://forum.clansuite.com/",
-        "source": "https://github.com/jakoch/Clansuite/",
-        "issues": "http://trac.clansuite.com/"
+
+        "source": "https://github.com/KSST/KF/",
+        "issues": "https://github.com/KSST/KF/issues/"
     },
 
     "require": {
