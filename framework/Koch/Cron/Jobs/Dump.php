@@ -12,7 +12,9 @@
 
 namespace Koch\Cron\Jobs;
 
-class Dump implements Cronjob
+use Koch\Cron\CronjobInterface;
+
+class Dump implements CronjobInterface
 {
     public function execute()
     {
