@@ -85,22 +85,22 @@ class INI
             // checking if it's an array, if so, it's a section heading
             if (is_array($item)) {
                 // write an comment header block
-                $content .= CR;
-                $content .= ';----------------------------------------' . CR;
-                $content .= '; ' . $key . CR;
-                $content .= ';----------------------------------------' . CR;
+                $content .= PHP_EOL;
+                $content .= ';----------------------------------------' . PHP_EOL;
+                $content .= '; ' . $key . PHP_EOL;
+                $content .= ';----------------------------------------' . PHP_EOL;
 
                 // write an parseable [array_header] block
-                $content .= '[' . $key . ']' . CR;
+                $content .= '[' . $key . ']' . PHP_EOL;
 
                 // for every element after that
                 foreach ($item as $key2 => $item2) {
                     if (is_numeric($item2) || is_bool($item2)) {
                         // write numeric and boolean values without quotes
-                        $content .= $key2 . ' = ' . $item2 . CR;
+                        $content .= $key2 . ' = ' . $item2 . PHP_EOL;
                     } else {
                         // write value with quotes
-                        $content .= $key2 .' = "' . $item2 . '"'.CR;
+                        $content .= $key2 .' = "' . $item2 . '"'.PHP_EOL;
                     }
                 }
             }
@@ -108,16 +108,16 @@ class INI
             else {
                 if (is_numeric($item) || is_bool($item)) {
                     // write numeric and boolean values without quotes
-                    $content .= $key . ' = ' . $item . CR;
+                    $content .= $key . ' = ' . $item . PHP_EOL;
                 } else {
                     // it's a string - write value with quotes
-                    $content .= $key2 .' = "' . $item2 . '"'.CR;
+                    $content .= $key2 .' = "' . $item2 . '"'.PHP_EOL;
                 }
             }
         }
 
         // add php closing tag
-        $content .= CR . '; DO NOT REMOVE THIS LINE */ ?>';
+        $content .= PHP_EOL . '; DO NOT REMOVE THIS LINE */ ?>';
 
         if (is_writable($file)) {
             if (!$filehandle = fopen($file, 'wb')) {
