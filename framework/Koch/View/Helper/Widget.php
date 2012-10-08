@@ -39,12 +39,9 @@ class Widget
      */
     public static function loadModul($module, $controller)
     {
-        $module_path = Mapper::getModulePath($module);
-        #echo $module_path . '<br>';
         $classname = Mapper::mapControllerToClassname($module, $controller);
-        #echo $classname . '<br>';
 
+        // autoload via class_exists
         return class_exists($classname);
     }
-
 }

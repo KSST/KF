@@ -102,13 +102,15 @@ class Smarty extends AbstractRenderer
          */
         $this->renderer->debugging = DEBUG ? true : false; // set smarty debugging, when debug on
         if ($this->renderer->debugging === true) {
-            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';   // set debugging template for smarty
-            #$this->renderer->debug_tpl  = ROOT_LIBRARIES . 'smarty/debug.tpl';   // set debugging template for smarty
-            $this->renderer->clearCompiledTemplate(); // clear compiled tpls in case of debug
-            $this->renderer->clearAllCache();         // clear cache
+            // set debugging template for smarty
+            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';  
+            // clear compiled tpls in case of debug and clear cache
+            $this->renderer->clearCompiledTemplate(); 
+            $this->renderer->clearAllCache();
         }
 
-        $this->renderer->auto_literal = true;     // auto delimiter of javascript/css (The literal tag of Smarty v2.x)
+        // auto delimiter of javascript/css (The literal tag of Smarty v2.x)
+        $this->renderer->auto_literal = true;     
 
         /**
          * SMARTY FILTERS
@@ -129,7 +131,8 @@ class Smarty extends AbstractRenderer
          */
         // defines the compiler class for Smarty ... ONLY FOR ADVANCED USERS
         // $this->renderer->compiler_class   = "Smarty_Compiler";
-        // set individual compile_id instead of assign compile_ids to function-calls (useful with prefilter for different languages)
+        // set individual compile_id instead of assign compile_ids to function-calls
+        // this is useful with prefilter for different languages
         // $this->renderer->compile_id       = 0;
 
         /**
@@ -137,7 +140,8 @@ class Smarty extends AbstractRenderer
          * @see http://www.smarty.net/manual/de/variable.compile.check.php
          */
         if ($this->renderer->debugging === true) {
-            // if a template was changed it would be recompiled, if set to false nothing will be compiled (changes take no effect)
+            // if a template was changed it would be recompiled, 
+            // if set to false nothing will be compiled (changes take no effect)
             $this->renderer->compile_check = true;
             // if true compiles each template everytime, overwrites $compile_check
             $this->renderer->force_compile = true;
@@ -255,7 +259,9 @@ class Smarty extends AbstractRenderer
         if (is_dir($templatepath) === true and is_readable($templatepath) === true) {
             $this->renderer->template_dir[] = $templatepath;
         } else {
-            throw new Exception('Invalid Smarty Template path provided: Path not existing or not readable. Path: ' . $templatepath);
+            throw new Exception(
+                'Invalid Smarty Template path provided: Path not existing or not readable. Path: ' . $templatepath
+            );
         }
     }
 
@@ -566,22 +572,23 @@ class Smarty extends AbstractRenderer
      * Keep in mind ! that we spend a lot of time and ideas on this project.
      * Do not remove this! Please give something back to the community.
      *
+     * @param $file string filename
      * @param $filecontent string The content of the layouttemplate file.
      * @return boolean
      */
-    public static function preRenderCheck($filename, $filecontent)
+    public static function preRenderCheck($file, $filecontent)
     {
         $renderChecksArray = array(
             '1' => array(
                 'needle' => '{include file=\'copyright.tpl\'}',
                 'exceptionmessage' => 'The copyright tag is missing. Please insert {include file=\'copyright.tpl\'}
-                 in your layout/wrapper template file: <br /> ' . $filename,
+                 in your layout/wrapper template file: <br /> ' . $file,
                 'exceptioncode' => '12'
             ),
             '2' => array(
                 'needle' => '{include file=\'clansuite_header_notice.tpl\'}',
                 'exceptionmessage' => 'The header notice tag is missing. Please insert
-                 {include file=\'clansuite_header_notice.tpl\'} in your layout/wrapper template file: <br /> ' . $filename,
+                 {include file=\'clansuite_header_notice.tpl\'} in your layout/wrapper template file: <br /> ' . $file,
                 'exceptioncode' => '13'
             ),
             '3' => array(
@@ -596,7 +603,8 @@ class Smarty extends AbstractRenderer
                 return true;
             } else {
                 throw new \Koch\Exception\Exception(
-                        $preRenderCheck['exceptionmessage'], $preRenderCheck['exceptioncode']
+                    $preRenderCheck['exceptionmessage'],
+                    $preRenderCheck['exceptioncode']
                 );
             }
         }
