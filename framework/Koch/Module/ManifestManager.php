@@ -126,7 +126,7 @@ class ManifestManager
      */
     public static function getModuleDirectories()
     {
-        return glob( ROOT_MOD . '[a-zA-Z]*', GLOB_ONLYDIR );
+        return glob(ROOT_MOD . '[a-zA-Z]*', GLOB_ONLYDIR);
     }
 
     /**
@@ -150,20 +150,19 @@ class ManifestManager
 
         foreach ($module_dirs as $module_path) {
             // strip path off
-            $modulename = str_replace( ROOT_MOD, '', $module_path);
+            $modulename = str_replace(ROOT_MOD, '', $module_path);
 
             if ($only_modulenames === true) {
                 if ($named_array === false) {
                     $modules[] = $modulename;
                 } else {
-                    $modules[] = array ( 'name' => $modulename);
+                    $modules[] = array('name' => $modulename);
                 }
             } else {
                 if ($named_array === false) {
-                    $modules[] = array( $modulename => $module_path );
+                    $modules[] = array($modulename => $module_path );
                 } else {
-                    $modules[] = array ( 'name' => $modulename,
-                                         'path' => $module_path);
+                    $modules[] = array('name' => $modulename, 'path' => $module_path);
                 }
             }
         }
@@ -332,7 +331,7 @@ class ManifestManager
 
     public static function getLanguageInfosForModule($modulepath)
     {
-        $langinfo = array();
+        $lang = array();
 
         // we are looking at the languages folder for the given module path
         $module_lang_dir = $modulepath . DIRECTORY_SEPARATOR . 'languages';
@@ -344,8 +343,9 @@ class ManifestManager
 
         // lets recurse this directory
         $iterator = new \RecursiveIteratorIterator(
-                        new \RecursiveDirectoryIterator($module_lang_dir, \FilesystemIterator::UNIX_PATHS),
-                            \RecursiveIteratorIterator::LEAVES_ONLY);
+            new \RecursiveDirectoryIterator($module_lang_dir, \FilesystemIterator::UNIX_PATHS),
+            \RecursiveIteratorIterator::LEAVES_ONLY
+        );
 
         // some leaves found (dirs and files)
         foreach ($iterator as $file) {
@@ -361,22 +361,24 @@ class ManifestManager
 
             // fetch file extension (mo|po)
             if (version_compare(PHP_VERSION, '5.3.6') >= 0) {
-                $extension = $file->getExtension();
+                $ext = $file->getExtension();
             } else { // php lower then 5.3.6
-                $extension = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
+                $ext = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
             }
+
+            $isReadable = $file->isReadable() ? 'r' : '';
+            $isWritable = $file->isWritable() ? 'w' : '';
 
             /**
              * Add some more pieces of information about the file
              */
-
-            $langinfo[$locale][$extension]['pathName']       = realpath($file->getPathName());
-            $langinfo[$locale][$extension]['fileName']       = $file->getFileName();
-            $langinfo[$locale][$extension]['filePermString'] = self::file_permissions($langinfo[$locale][$extension]['pathName']);
-            $langinfo[$locale][$extension]['fileReadable']   = $file->isReadable();
-            $langinfo[$locale][$extension]['fileWriteable']  = $file->isWritable();
-            $langinfo[$locale][$extension]['timestamp']      = date(DATE_FORMAT, $file->getCTime());
-            $langinfo[$locale][$extension]['cssClass']        = '-' . ($file->isReadable() ? 'r' : '') . ($file->isWritable() ? 'w' : '');
+            $lang[$locale][$ext]['pathName'] = realpath($file->getPathName());
+            $lang[$locale][$ext]['fileName'] = $file->getFileName();
+            $lang[$locale][$ext]['filePermString'] = self::file_permissions($lang[$locale][$ext]['pathName']);
+            $lang[$locale][$ext]['fileReadable'] = $file->isReadable();
+            $lang[$locale][$ext]['fileWriteable'] = $file->isWritable();
+            $lang[$locale][$ext]['timestamp'] = date(DATE_FORMAT, $file->getCTime());
+            $lang[$locale][$ext]['cssClass'] = '-' . $isReadable . $isWritable;
 
         }
 
@@ -391,24 +393,24 @@ class ManifestManager
             self::$l10n_sys_locales = $l10n_sys_locales;
         }
 
-        foreach ($langinfo as $locale => $filedata) {
+        foreach ($lang as $locale => $filedata) {
             // get more data about that locale from the locales array
             if (isset(self::$l10n_sys_locales[$locale]) == true) {
-                $langinfo[$locale]['country_www']   = self::$l10n_sys_locales[$locale]['country-www'];
-                $langinfo[$locale]['lang_native']   = self::$l10n_sys_locales[$locale]['lang-native'];
-                $langinfo[$locale]['lang_www']      = self::$l10n_sys_locales[$locale]['lang-www'];
-                $langinfo[$locale]['lang']          = self::$l10n_sys_locales[$locale]['lang'];
+                $lang[$locale]['country_www']   = self::$l10n_sys_locales[$locale]['country-www'];
+                $lang[$locale]['lang_native']   = self::$l10n_sys_locales[$locale]['lang-native'];
+                $lang[$locale]['lang_www']      = self::$l10n_sys_locales[$locale]['lang-www'];
+                $lang[$locale]['lang']          = self::$l10n_sys_locales[$locale]['lang'];
             } else { // locale not in locales array
-                $langinfo[$locale]['country_www']   = 'unknown';
-                $langinfo[$locale]['lang_native']   = '<em>locale: </em>' . $locale;
-                $langinfo[$locale]['lang_www']  = '';
-                $langinfo[$locale]['lang']   = $locale;
+                $lang[$locale]['country_www']   = 'unknown';
+                $lang[$locale]['lang_native']   = '<em>locale: </em>' . $locale;
+                $lang[$locale]['lang_www']  = '';
+                $lang[$locale]['lang']   = $locale;
             }
         }
 
         #\Koch\Debug\Debug::printR($langinfo);
 
-        return $langinfo;
+        return $lang;
     }
 
     /**
@@ -423,6 +425,11 @@ class ManifestManager
         static $permissions = array("---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx");
         $perm_oct = substr(decoct(fileperms($filename)), 3);
 
-        return "[" . $permissions[(int) $perm_oct[0]] . '|' . $permissions[(int) $perm_oct[1]] . '|' . $permissions[(int) $perm_oct[2]] . "]";
+        $string = '[';
+        $string .= $permissions[(int) $perm_oct[0]] . '|';
+        $string .= $permissions[(int) $perm_oct[1]] . '|';
+        $srring .= $permissions[(int) $perm_oct[2]] . ']';
+
+        return $string;
     }
 }

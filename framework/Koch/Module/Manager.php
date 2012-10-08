@@ -49,7 +49,7 @@ class Manager
         // $this->config = loadRelevantStuff($module);
 
         // allow fluent chaining
-        return this;
+        return $this;
     }
 
     /**

@@ -37,11 +37,11 @@ namespace Koch\Module;
  */
 interface ModuleInterface
 {
-    public function action_list();     // GET     /foos
-    public function action_show();     // GET     /foos/:foo_id
-    public function action_new();      // GET     /foos/new
-    public function action_edit();     // GET     /foos/:foo_id/edit
-    public function action_create();   // POST    /foos
-    public function action_update();   // PUT     /foos/:foo_id
-    public function action_destroy();  // DELETE  /foos/:foo_id
+    public function actionList();     // GET     /foos
+    public function actionShow();     // GET     /foos/:foo_id
+    public function actionNew();      // GET     /foos/new
+    public function actionEdit();     // GET     /foos/:foo_id/edit
+    public function actionCreate();   // POST    /foos
+    public function actionUpdate();   // PUT     /foos/:foo_id
+    public function actionDestroy();  // DELETE  /foos/:foo_id
 }
