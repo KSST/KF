@@ -437,10 +437,10 @@ class Smarty extends AbstractRenderer
     public function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
     {
         $this->renderer->clearCache(
-            $template_name, 
-            $cache_id = null, 
-            $compile_id = null, 
-            $exp_time = null, 
+            $template_name,
+            $cache_id = null,
+            $compile_id = null,
+            $exp_time = null,
             $type = null
         );
     }

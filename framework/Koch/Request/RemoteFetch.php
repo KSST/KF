@@ -40,7 +40,7 @@ class RemoteFetch
      *
      * @param $url URL of remote content to fetch
      */
-    public static function snoopy_get_file($url)
+    public static function snoopyGetFile($url)
     {
         $remote_content = null;
 
@@ -65,7 +65,7 @@ class RemoteFetch
      *
      * @param $url URL of remote content to fetch
      */
-    public static function curl_get_file($url)
+    public static function curlGetFile($url)
     {
         $curl = curl_init();
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
@@ -87,7 +87,7 @@ class RemoteFetch
      * @param $flags
      * @param $context
      */
-    public static function remote_get_file($url, $flags = null, $context = null)
+    public static function remoteGetFile($url, $flags = null, $context = null)
     {
         #if(true === ini_get('allow_url_fopen'))
         #{
@@ -108,7 +108,7 @@ class RemoteFetch
      */
     public static function updateFileIfDifferent($remote_file, $local_file)
     {
-        $data = self::remote_get_file($remote_file);
+        $data = self::remoteGetFile($remote_file);
 
         if ($data !== false) {
             if (sha1($data) !== sha1_file($local_file)) {
