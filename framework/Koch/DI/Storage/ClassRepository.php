@@ -43,14 +43,17 @@ class ClassRepository
     {
         return array_merge(
            self::$reflection->concreteSubgraphOf($interface),
-                self::$reflection->implementationsOf($interface));
+           self::$reflection->implementationsOf($interface)
+        );
     }
 
     public function isSupertype($class, $type)
     {
         $supertypes = array_merge(
-                array($class), self::$reflection->interfacesOf($class),
-                self::$reflection->parentsOf($class));
+            array($class),
+            self::$reflection->interfacesOf($class),
+            self::$reflection->parentsOf($class)
+        );
 
         return in_array($type, $supertypes);
     }

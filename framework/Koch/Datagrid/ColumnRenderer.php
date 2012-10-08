@@ -100,9 +100,10 @@ class ColumnRenderer extends Renderer
         // @todo replace count() with check for first placeholder element: if($_Placeholders[1][0] !== null)
         //       and move count into the if
         $_PlacerholderCount = count($placeholders[1]);
+
         if ($_PlacerholderCount > 0) {
             // loop over placeholders
-            for ($i=0;$i<$_PlacerholderCount;$i++) {
+            for ($i=0; $i<$_PlacerholderCount; $i++) {
                 if (isset($values[$placeholders[1][$i]])) {
                     $replacements['%{' . $placeholders[1][$i] . '}'] = $values[$placeholders[1][$i]];
                 }

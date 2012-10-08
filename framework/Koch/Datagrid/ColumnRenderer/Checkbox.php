@@ -48,7 +48,13 @@ class Checkbox extends ColumnRenderer implements ColumnRendererInterface
 
         return $oCheckbox->render();
 
-        // $html = '<input type="checkbox" value="%s" id="Checkbox-%s" name="Checkbox[]" />';
-        // return sprintf($html, $oCell->getValue(), $oCell->getValue());
+        /*
+
+        return sprintf(
+            '<input type="checkbox" value="%s" id="Checkbox-%s" name="Checkbox[]" />',
+            $oCell->getValue(),
+            $oCell->getValue()
+        );
+        */
     }
 }
