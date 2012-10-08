@@ -14,5 +14,5 @@ namespace Koch\Session;
 
 class PHPNativeSession
 {
-
+    // no body
 }

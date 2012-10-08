@@ -21,10 +21,10 @@ namespace Koch\Session;
  */
 interface SessionInterface
 {
-    public function session_open();
-    public function session_close();
-    public function session_read($id);
-    public function session_write($id, $data);
-    public function session_destroy($id);
-    public function session_gc($maxlifetime);
+    public function sessionOpen();
+    public function sessionClose();
+    public function sessionRead($id);
+    public function sessionWrite($id, $data);
+    public function sessionDestroy($id);
+    public function sessionGc($maxlifetime);
 }

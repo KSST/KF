@@ -79,7 +79,7 @@ class GuestUser
          * Sets the Default Theme for all Guest Visitors, if not already set via a GET request.
          * Theme for Guest Users as defined by config['template']['frontend_theme']
          */
-        if (empty($_SESSION['user']['frontend_theme']) and isset($this->config['template']['frontend_theme']) === true) {
+        if (empty($_SESSION['user']['frontend_theme']) and isset($this->config['template']['frontend_theme']) == true) {
             $_SESSION['user']['frontend_theme'] = $this->config['template']['frontend_theme'];
         }
 
