@@ -75,14 +75,21 @@ class Context
 
     public function create($type, $nesting = array())
     {
-        $lifecycle = $this->pickFactory($type, $this->repository()->candidatesFor($type));
-        $context = $this->determineContext($lifecycle->class);
-        $wrapper = $context->hasWrapper($type, $nesting);
+        $lifecycle  = $this->pickFactory($type, $this->repository()->candidatesFor($type));
+        $context    = $this->determineContext($lifecycle->class);
+        $wrapper    = $context->hasWrapper($type, $nesting);
+
         if ($wrapper) {
             return $this->create($wrapper, $this->cons($wrapper, $nesting));
         }
-        $instance = $lifecycle->instantiate($context->createDependencies(
-                        $this->repository()->getConstructorParameters($lifecycle->class), $this->cons($lifecycle->class, $nesting)));
+
+        $instance = $lifecycle->instantiate(
+            $context->createDependencies(
+                $this->repository()->getConstructorParameters($lifecycle->class),
+                $this->cons($lifecycle->class, $nesting)
+            )
+        );
+
         $this->invokeSetters($context, $nesting, $lifecycle->class, $instance);
 
         return $instance;
@@ -121,8 +128,14 @@ class Context
     private function invokeSetters($context, $nesting, $class, $instance)
     {
         foreach ($context->settersFor($class) as $setter) {
-            $context->invoke($instance, $setter, $context->createDependencies(
-                            $this->repository()->getParameters($class, $setter), $this->cons($class, $nesting)));
+            $context->invoke(
+                $instance,
+                $setter,
+                $context->createDependencies(
+                    $this->repository()->getParameters($class, $setter),
+                    $this->cons($class, $nesting)
+                )
+            );
         }
     }
 
@@ -130,14 +143,12 @@ class Context
     {
         $setters = isset($this->types[$class]) ? $this->types[$class]->setters : array();
 
-        return array_values(array_keys(array_flip(array_merge(
-                                                $setters, $this->parent->settersFor($class)))));
+        return array_values(array_keys(array_flip(array_merge($setters, $this->parent->settersFor($class)))));
     }
 
     public function wrappersFor($type)
     {
-        return array_values(array_merge(
-                                $this->wrappers, $this->parent->wrappersFor($type)));
+        return array_values(array_merge($this->wrappers, $this->parent->wrappersFor($type)));
     }
 
     public function createDependencies($parameters, $nesting)
