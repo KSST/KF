@@ -27,5 +27,5 @@ namespace Koch\DI\Exception;
 
 class CannotDetermineImplementation extends \Exception
 {
-
+    // no body
 }

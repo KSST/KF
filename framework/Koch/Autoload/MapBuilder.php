@@ -72,7 +72,7 @@ class MapBuilder
 
         if (is_string($dir)) {
             $dir = new \RecursiveIteratorIterator(
-                            new \RecursiveDirectoryIterator($dir, \FilesystemIterator::UNIX_PATHS)
+                new \RecursiveDirectoryIterator($dir, \FilesystemIterator::UNIX_PATHS)
             );
         }
 
@@ -165,5 +165,4 @@ class MapBuilder
 
         file_put_contents($mapfile, $content);
     }
-
 }

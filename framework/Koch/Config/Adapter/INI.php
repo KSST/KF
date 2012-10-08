@@ -102,7 +102,7 @@ class INI
                         // write value with quotes
                         $content .= $key2 .' = "' . $item2 . '"'.PHP_EOL;
                     }
-                }           
+                }
             } else {
                  // if it's not an array, then it's not a section, so it's a value
                 if (is_numeric($item) || is_bool($item)) {

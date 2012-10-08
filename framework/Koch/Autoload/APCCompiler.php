@@ -63,7 +63,11 @@ class APCCompiler
                 echo PHP_EOL . '-------------------------' . PHP_EOL;
             }
             echo 'Runtime Errors' . PHP_EOL;
-            echo (apc_compile_dir(APC_COMPILE_DIR, APC_COMPILE_RECURSIVELY) ? 'Cache Created' : 'Cache Not Created') . PHP_EOL;
+            if (apc_compile_dir(APC_COMPILE_DIR, APC_COMPILE_RECURSIVELY) === true) {
+                echo 'Cache Created' . PHP_EOL;
+            } else {
+                echo 'Cache Not Created' . PHP_EOL;
+            }
             echo PHP_EOL . '-------------------------' . PHP_EOL;
             var_dump(apc_cache_info());
         } else {

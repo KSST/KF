@@ -72,7 +72,9 @@ class Memcached extends AbstractCache implements CacheInterface
     public function __construct()
     {
         if (extension_loaded('memcached') === false) {
-            throw new Exception('The PHP extension memcache (cache) is not loaded! You may enable it in "php.ini"!', 300);
+            throw new Exception(
+                'The PHP extension memcache (cache) is not loaded! You may enable it in "php.ini"!'
+            );
         }
 
         // instantiate object und set to class
