@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Koch Framework Smarty View Helper for rendering Flashmessages
  */

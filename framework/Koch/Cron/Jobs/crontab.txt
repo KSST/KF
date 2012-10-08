@@ -1,4 +1,4 @@
-﻿# Koch Framework Crontab
+# Koch Framework Crontab
 #
 # Comments start with '#'
 #

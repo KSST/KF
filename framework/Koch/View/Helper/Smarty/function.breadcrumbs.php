@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * This smarty function is part of "Koch Framework".
  *
