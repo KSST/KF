@@ -103,7 +103,7 @@ class File extends AbstractCache implements CacheInterface
     {
         // get name and lifetime
         $file = $this->filesystemKey($key);
-        $cache_lifetime = str_pad( (int) $cache_lifetime, 10, '0', STR_PAD_LEFT);
+        $cache_lifetime = str_pad((int) $cache_lifetime, 10, '0', STR_PAD_LEFT);
 
         // write key file
         $success = (bool) file_put_contents($file, $cache_lifetime * 60, FILE_EX);
