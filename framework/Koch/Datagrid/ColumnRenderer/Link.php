@@ -48,7 +48,7 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
                 $values['name'] = mb_substr($values['name'], 0, $this->nameWrapLength - 3) . '...';
             }
         }
-        
+
         // render ahref
         $options = array(
             'href' => Clansuite_Datagrid::appendUrl($this->linkFormat),
