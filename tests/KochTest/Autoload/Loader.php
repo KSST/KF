@@ -18,7 +18,9 @@ class ThisClassExists
 }
 
 class LoaderTest extends Clansuite_UnitTestCase
-{
+{  
+    public $classMapFile = 'autoloader.classmap.php';
+    
     public function setUp()
     {
         parent::setUp();
@@ -33,6 +35,8 @@ class LoaderTest extends Clansuite_UnitTestCase
         if (extension_loaded('apc') === true and ini_get('apc.enabled') and ini_get('apc.enable_cli')) {
             apc_clear_cache('user');
         }
+        
+        Loader::setClassMapFile('autoloader.classmap.php');
     }
 
     public function tearDown()
@@ -124,7 +128,7 @@ class LoaderTest extends Clansuite_UnitTestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addToMapping( TESTSUBJECT_DIR . 'framework/Koch/Tools/SysInfo.php', 'Sysinfo' );
+        Loader::addToMapping( KOCH_FRAMEWORK . 'Tools/SysInfo.php', 'Sysinfo' );
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 
@@ -137,7 +141,7 @@ class LoaderTest extends Clansuite_UnitTestCase
         $this->assertFalse(Loader::autoloadIncludePath('\Namespace\Library\SomeUnknownClass'));
 
         // set the include path to our fixtures directory, where a namespaces class exists
-        $path = __DIR__ . DIRECTORY_SEPARATOR . 'fixtures';
+        $path = __DIR__ . '/fixtures';
         set_include_path($path . PATH_SEPARATOR . get_include_path());
 
         // try to load existing namespaced class
@@ -145,14 +149,14 @@ class LoaderTest extends Clansuite_UnitTestCase
    }
 
    public function testMethod_writeAutoloadingMapFile()
-    {
-        $classmap_file = ROOT_CACHE . 'autoloader.classmap.php';
-        if (is_file($classmap_file)) {
-            unlink($classmap_file);
+   {
+        if (is_file($this->classmap_file)) {
+            unlink($this->classmap_file);
         }
+        
         // file will be created
         $this->assertIdentical(array(), Loader::readAutoloadingMapFile());
-        $this->assertTrue(is_file($classmap_file));
+        $this->assertTrue(is_file($this->classmap_file));
 
         $array = array('class' => 'file');
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
@@ -161,13 +165,12 @@ class LoaderTest extends Clansuite_UnitTestCase
 
     public function testMethod_readAutoloadingMapFile()
     {
-        $classmap_file = ROOT_CACHE . 'autoloader.classmap.php';
-        if (is_file($classmap_file)) {
-            unlink($classmap_file);
+        if (is_file($this->classmap_file)) {
+            unlink($this->classmap_file);
         }
         // file will be created
         $this->assertIdentical(array(), Loader::readAutoloadingMapFile());
-        $this->assertTrue(is_file($classmap_file));
+        $this->assertTrue(is_file($this->classmap_file));
 
         $array = array ( 'class' => 'file' );
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
