@@ -51,7 +51,7 @@ class BlockIps implements EventInterface
 
         $ip = $request->getRemoteAddress();
 
-        if (in_array($ip,$this->blockedIps)) {
+        if (in_array($ip, $this->blockedIps)) {
             $event->cancel();
         }
     }
