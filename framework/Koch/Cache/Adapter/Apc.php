@@ -136,7 +136,7 @@ class Apc extends AbstractCache implements CacheInterface
          */
         if (false === function_exists('apc_sma_info')) {
             $info['sma_info'] = apc_sma_info(); // set "false" for details
-            
+
             // Calculate "APC Memory Size" (Number of Segments * Size of Segment)
             $memsize = $info['sma_info']['num_seg'] * $info['sma_info']['seg_size'];
             $info['sma_info']['mem_size'] = $memsize;
@@ -152,10 +152,10 @@ class Apc extends AbstractCache implements CacheInterface
         }
 
         if (true === function_exists('apc_cache_info')) {
-            
+
             // Retrieves cached information and meta-data from APC's data store
             $info['cache_info'] = apc_cache_info();
-            
+
             #\Koch\Debug\Debug::printR(apc_cache_info());
             $info['cache_info']['cached_files'] = count($info['cache_info']['cache_list']);
             $info['cache_info']['deleted_files'] = count($info['cache_info']['deleted_list']);
@@ -185,19 +185,19 @@ class Apc extends AbstractCache implements CacheInterface
 
             // Request Rate (hits, misses) / cache requests/second
             $start_time = (time() - $info['system_cache_info']['start_time']);
-            
+
             $req_rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
             $info['system_cache_info']['req_rate'] = sprintf('%.2f', $req_rate);
-            
+
             $hit_rate = ($info['system_cache_info']['num_hits']) / $start_time;
             $info['system_cache_info']['hit_rate'] = sprintf('%.2f', $hit_rate);
-            
+
             $miss_rate = ($info['system_cache_info']['num_misses'] / $start_time);
             $info['system_cache_info']['miss_rate'] = sprintf('%.2f', $miss_rate);
-            
+
             $insert_rate = (($info['system_cache_info']['num_inserts']) / $start_time);
             $info['system_cache_info']['insert_rate'] = sprintf('%.2f', $insert_rate);
-            
+
             // size
             $info['system_cache_info']['size_files'] = \Koch\Functions\Functions::getsize($info['system_cache_info']['mem_size']);
         }
