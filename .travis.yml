@@ -16,7 +16,7 @@ before_install:
   - git submodule update --init --recursive
 
 script:
-  - phpunit
+  - phpunit -c tests/phpunit.xml
   #
   # run php-cs-fixer
   #
