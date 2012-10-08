@@ -38,14 +38,14 @@ class PHPArray extends Form implements FormGeneratorInterface
             if ($form_object === null) {
                 // init parent Koch_Form with name, method and action
                 parent::__construct(
-                    $form_array['form']['name'], 
-                    $form_array['form']['method'], 
+                    $form_array['form']['name'],
+                    $form_array['form']['method'],
                     $form_array['form']['action']
                 );
             } else {
                 $form_object::__construct(
-                    $form_array['form']['name'], 
-                    $form_array['form']['method'], 
+                    $form_array['form']['name'],
+                    $form_array['form']['method'],
                     $form_array['form']['action']
                 );
             }
