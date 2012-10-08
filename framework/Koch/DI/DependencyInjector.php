@@ -140,5 +140,4 @@ class DependencyInjector
     {
         return $this->repository;
     }
-
 }

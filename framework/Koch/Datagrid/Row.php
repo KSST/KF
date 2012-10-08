@@ -28,21 +28,21 @@ class Row extends Base
      *
      * @var array Clansuite_Datagrid_Cell
      */
-    private $_Cells = array();
+    private $Cells = array();
 
     /**
      * The datagrid
      *
      * @var Clansuite_Datagrid $_Datagrid
      */
-    private $_Datagrid;
+    private $Datagrid;
 
     /**
      * The position of a column
      *
      * @var int
      */
-    private $_Position = 0;
+    private $Position = 0;
 
     //--------------------
     // Setter
@@ -55,7 +55,7 @@ class Row extends Base
      */
     public function setCells($_Cells)
     {
-        $this->_Cells = $_Cells;
+        $this->Cells = $_Cells;
     }
 
     /**
@@ -65,7 +65,7 @@ class Row extends Base
      */
     public function setPosition($_Position)
     {
-        $this->_Position = $_Position;
+        $this->Position = $_Position;
     }
 
     //--------------------
@@ -79,7 +79,7 @@ class Row extends Base
      */
     public function getCells()
     {
-        return $this->_Cells;
+        return $this->Cells;
     }
 
     /**
@@ -89,7 +89,7 @@ class Row extends Base
      */
     public function getPosition()
     {
-        return $this->_Position;
+        return $this->Position;
     }
 
     //--------------------
@@ -104,6 +104,6 @@ class Row extends Base
     public function addCell(&$_Cell)
     {
         // array_push($this->_Cells, $_Cell);
-        $this->_Cells[] = $_Cell;
+        $this->Cells[] = $_Cell;
     }
 }

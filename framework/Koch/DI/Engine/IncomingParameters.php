@@ -29,5 +29,4 @@ class IncomingParameters
 
         return $this->injector;
     }
-
 }

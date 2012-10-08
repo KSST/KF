@@ -25,21 +25,21 @@ class Cell extends Base
      *
      * @var array Mixed values
     */
-    private $_Values = array();
+    private $Values = array();
 
     /**
      * Column object (Clansuite_Datagrid_Column)
      *
      * @var object Clansuite_Datagrid_Column
      */
-    private $_columnObject;
+    private $columnObject;
 
     /**
      * Row object (Clansuite_Datagrid_Row)
      *
      * @var object Clansuite_Datagrid_Row
      */
-    private $_Row;
+    private $Row;
 
     /**
      * Set the column object of this cell
@@ -48,7 +48,7 @@ class Cell extends Base
      */
     public function setColumnObject($_columnObject)
     {
-        $this->_columnObject = $_columnObject;
+        $this->columnObject = $_columnObject;
     }
 
     /**
@@ -68,7 +68,7 @@ class Cell extends Base
      */
     public function setRow($_Row)
     {
-        $this->_Row = $_Row;
+        $this->Row = $_Row;
     }
 
     /**
@@ -78,7 +78,7 @@ class Cell extends Base
      */
     public function setValue($_Value)
     {
-        $this->_Values[0] = $_Value;
+        $this->Values[0] = $_Value;
     }
 
     /**
@@ -88,7 +88,7 @@ class Cell extends Base
      */
     public function setValues($_Values)
     {
-        $this->_Values = $_Values;
+        $this->Values = $_Values;
     }
 
     /**
@@ -98,7 +98,7 @@ class Cell extends Base
      */
     public function getColumn()
     {
-        return $this->_columnObject;
+        return $this->columnObject;
     }
 
     /**
@@ -118,7 +118,7 @@ class Cell extends Base
      */
     public function getRow()
     {
-        return $this->_Row;
+        return $this->Row;
     }
 
     /**
@@ -128,7 +128,7 @@ class Cell extends Base
      */
     public function getValue()
     {
-        return $this->_Values[0];
+        return $this->Values[0];
     }
 
     /**
@@ -138,7 +138,7 @@ class Cell extends Base
      */
     public function getValues()
     {
-        return $this->_Values;
+        return $this->Values;
     }
 
     /**

@@ -20,5 +20,4 @@ class Type
     {
         array_unshift($this->setters, $method);
     }
-
 }

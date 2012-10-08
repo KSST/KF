@@ -28,7 +28,7 @@ class Column extends Base
      *
      * @var array Clansuite_Datagrid_Cell
      */
-    private $_cells = array();
+    private $cells = array();
 
     /**
      * The sortmode of the column
@@ -42,28 +42,28 @@ class Column extends Base
      *
      * @var string
      */
-    private $_sortField = '';
+    private $sortField = '';
 
     /**
      * The position of a column
      *
      * @var int
      */
-    private $_position = 0;
+    private $position = 0;
 
     /**
      * Renderer for the cell
      *
      * @var object Clansuite_Datagrid_Column_Renderer
      */
-    private $_renderer;
+    private $renderer;
 
     /**
      * Boolean datagrid column values for configuration, wrapped into an array
      *
      * @var array
      */
-    private $_features = array(
+    private $features = array(
         'Sorting'       => true,
         'Search'        => true
     );
@@ -79,7 +79,7 @@ class Column extends Base
      */
     public function setCells($_Cells)
     {
-        $this->_cells = $_Cells;
+        $this->cells = $_Cells;
     }
 
     /**
@@ -89,7 +89,7 @@ class Column extends Base
      */
     public function setPosition($_Position)
     {
-        $this->_position = $_Position;
+        $this->position = $_Position;
     }
 
     /**
@@ -100,9 +100,9 @@ class Column extends Base
     public function setRenderer($_Renderer)
     {
         if ($_Renderer instanceof Clansuite_Datagrid_Column_Renderer_Base) {
-            $this->_renderer = $_Renderer;
+            $this->renderer = $_Renderer;
         } else {
-            $this->_renderer = $this->loadColumnRenderer($_Renderer);
+            $this->renderer = $this->loadColumnRenderer($_Renderer);
         }
     }
 
@@ -113,7 +113,7 @@ class Column extends Base
      */
     public function setSortField($_sortField)
     {
-        $this->_sortField = $_sortField;
+        $this->sortField = $_sortField;
     }
 
     /**
@@ -137,7 +137,7 @@ class Column extends Base
      */
     public function getPosition()
     {
-        return $this->_position;
+        return $this->position;
     }
 
     /**
@@ -147,7 +147,7 @@ class Column extends Base
      */
     public function getRenderer()
     {
-        return $this->_renderer;
+        return $this->renderer;
     }
 
     /**
@@ -157,7 +157,7 @@ class Column extends Base
      */
     public function getSortField()
     {
-        return $this->_sortField;
+        return $this->sortField;
     }
 
     /**
@@ -183,10 +183,10 @@ class Column extends Base
      */
     public function isEnabled($feature)
     {
-        if ( !isset($this->_features[$feature]) ) {
+        if ( !isset($this->features[$feature]) ) {
             throw new Clansuite_Exception(_('There is no such feature in this datagrid column: ') . $feature);
         } else {
-            return $this->_features[$feature];
+            return $this->features[$feature];
         }
     }
 
@@ -199,10 +199,10 @@ class Column extends Base
      */
     public function enableFeature($feature)
     {
-        if ( false == isset($this->_features[$feature]) ) {
+        if ( false == isset($this->features[$feature]) ) {
             return false;
         } else {
-            $this->_features[$feature] = true;
+            $this->features[$feature] = true;
 
             return true;
         }
@@ -218,10 +218,10 @@ class Column extends Base
      */
     public function disableFeature($feature)
     {
-        if ( false == isset($this->_features[$feature]) ) {
+        if ( false == isset($this->features[$feature]) ) {
             return false;
         } else {
-            $this->_features[$feature] = false;
+            $this->features[$feature] = false;
 
             return true;
         }
@@ -234,7 +234,7 @@ class Column extends Base
      */
     public function addCell($cell)
     {
-        array_push($this->_cells, $cell);
+        array_push($this->cells, $cell);
     }
 
     /**

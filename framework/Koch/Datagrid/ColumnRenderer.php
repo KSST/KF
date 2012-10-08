@@ -24,7 +24,7 @@ class ColumnRenderer extends Renderer
      *
      * @var object Clansuite_Datagrid_Column
      */
-    private $_column;
+    private $column;
 
     //---------------------
     // Setter
@@ -37,7 +37,7 @@ class ColumnRenderer extends Renderer
      */
     public function setColumn($column)
     {
-        $this->_column = $column;
+        $this->column = $column;
     }
 
     //---------------------
@@ -51,7 +51,7 @@ class ColumnRenderer extends Renderer
      */
     public function getColumn()
     {
-        return $this->_column;
+        return $this->column;
     }
 
     /**
