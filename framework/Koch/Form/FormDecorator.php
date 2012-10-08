@@ -31,9 +31,11 @@ use Koch\Form\DecoratorInterface;
  * Koch Framework - Class for Decorating Forms.
  *
  * The base class for all decorators. It has the same type as Koch_Form itself.
- * The decorator pattern suggests that the decorator implements all public methods of the component which it decorates.
- * Being "of the same type as Koch_Form" is achieved by implementing all methods described by Koch_Form_Interface,
- * NOT by extending Koch_Form. "Implementing all methods" is achieved by using the magical __call() method.
+ * The decorator pattern suggests that the decorator implements all public
+ * methods of the component which it decorates.
+ * Being "of the same type as Koch_Form" is achieved by implementing all methods
+ * described by Koch_Form_Interface, NOT by extending Koch_Form.
+ * "Implementing all methods" is achieved by using the magical __call() method.
  *
  * @see __call
  *
@@ -45,8 +47,9 @@ use Koch\Form\DecoratorInterface;
  * }
  *
  * and implementing each method in this way, we simply use _call($method, $parameters).
- * Ok, it's a tradeoff between magic against implementation of the interface plus loosing the knowledege
- * in which decorator the method is called. If you still want to know, if a method exists on a decorator, use hasMethod().
+ * Ok, it's a tradeoff between magic against implementation of the interface
+ * plus loosing the knowledege in which decorator the method is called.
+ * If you still want to know, if a method exists on a decorator, use hasMethod().
  * Effect is that all children of this base class have all the methods of Koch_Form.
  *
  * @pattern Decorator, [GoF, 216/220]

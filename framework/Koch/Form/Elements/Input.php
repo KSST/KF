@@ -218,22 +218,26 @@ class Input extends FormElement implements FormElementInterface
      */
     public function render()
     {
-        $html  = null;
-        $html .= '<input type="'.$this->type.'" name="'.$this->name.'"';
-        $html .= (bool) $this->id ? ' id="'.$this->id.'"' : null;
-        $html .= (bool) $this->value ? ' value="'.$this->value.'"' : null;
-        $html .= (bool) $this->placeholder ? ' placeholder="'.$this->placeholder.'"' : null;
-        $html .= (bool) $this->size ? ' size="'.$this->size.'"' : null;
+        $html = null;
+        $html .= '<input type="' . $this->type . '" name="' . $this->name . '"';
+        $html .= (bool) $this->id ? ' id="' . $this->id . '"' : null;
+        $html .= (bool) $this->value ? ' value="' . $this->value . '"' : null;
+        $html .= (bool) $this->placeholder ? ' placeholder="' . $this->placeholder . '"' : null;
+        $html .= (bool) $this->size ? ' size="' . $this->size . '"' : null;
         $html .= (bool) $this->readonly ? ' readonly="readonly"' : null;
         $html .= (bool) $this->disabled ? ' disabled="disabled"' : null;
-        $html .= (bool) $this->maxlength ? ' maxlength="'.$this->maxlength.'"' : null;
-        $html .= (bool) $this->pattern ? ' pattern="'.$this->pattern.'"' : null;
-        $html .= (bool) $this->class ? ' class="'.$this->class.'"' : null;
-        $html .= ($this->type == 'image') ? ' source="'.$this->source.'"' : null;
-        $html .= ($this->type == 'image' and (bool) $this->width and (bool) $this->height) ? '  style="width:'.$this->width.'px; height:'.$this->height.'px;"' : null;
+        $html .= (bool) $this->maxlength ? ' maxlength="' . $this->maxlength . '"' : null;
+        $html .= (bool) $this->pattern ? ' pattern="' . $this->pattern . '"' : null;
+        $html .= (bool) $this->class ? ' class="' . $this->class . '"' : null;
+        if ($this->type == 'image') {
+            $html .= ' source="' . $this->source . '"';
+            if ((bool) $this->width and (bool) $this->height) {
+                $html .= ' style="width:' . $this->width . 'px; height:' . $this->height . 'px;"';
+            }
+        }
         $html .= (bool) $this->checked ? ' checked="checked"' : null;
         $html .= (bool) $this->additional_attr_text ? $this->additional_attr_text : null;
-        $html .= (bool) $this->additional_attributes ? $this->render_attributes($this->additional_attributes) : null;
+        $html .= (bool) $this->additional_attributes ? $this->renderAttributes($this->additional_attributes) : null;
         $html .= ' />' . CR;
 
         return $html;

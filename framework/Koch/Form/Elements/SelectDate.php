@@ -55,7 +55,9 @@ class SelectDate extends Input implements FormElementInterface
         if (in_array($type, $types) === true) {
             $this->type = $type;
         } else {
-            throw new \Koch\Exception\Exception('Invalid formfield type specified. Choose one of ' . explode(',', $types));
+            throw new \Koch\Exception\Exception(
+                'Invalid formfield type specified. Choose one of ' . explode(',', $types)
+            );
         }
 
         return $this;

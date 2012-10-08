@@ -38,7 +38,8 @@ abstract class FormElementDecorator implements DecoratorInterface
     // instance of formelement, which is to decorate
     protected $formelement;
 
-    private $name, $class;
+    private $name;
+    private $class;
 
     public function getName()
     {

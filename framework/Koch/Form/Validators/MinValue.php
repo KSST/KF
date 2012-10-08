@@ -78,5 +78,4 @@ class MinValue extends Validator
 
         return true;
     }
-
 }

@@ -67,7 +67,7 @@ class CancelButton extends Input implements FormElementInterface
         if ($suppressWrapping === false) {
             $this->cancelURL = 'window.location.href=\'' . $cancelURL . '\'';
         } else {
-           $this->cancelURL = $cancelURL;
+            $this->cancelURL = $cancelURL;
         }
     }
 

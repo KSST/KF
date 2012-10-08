@@ -56,7 +56,8 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
     public function render()
     {
         // a) loads the nicedit javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/nicedit/nicedit.js'. '" type="text/javascript"></script>';
+        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/nicedit/nicedit.js'. '"';
+        $javascript .= ' type="text/javascript"></script>';
 
         // b) handler to attach nicedit to all textareas
         $javascript .= "<script type=\"text/javascript\">// <![CDATA[

@@ -438,12 +438,12 @@ class FormElement implements FormElementInterface
         }
     }
 
-   /**
-    * Setter method for Attribute
-    *
-    * @param type $attribute Attribute name
-    * @param type $value Value
-    */
+    /**
+     * Setter method for Attribute
+     *
+     * @param type $attribute Attribute name
+     * @param type $value     Value
+     */
     public function setAttribute($attribute, $value)
     {
         $this->{$attribute} = $value;
@@ -455,7 +455,7 @@ class FormElement implements FormElementInterface
      * @param  array  $attributes key=>value pairs corresponding to HTML attributes name="value"
      * @return string Attributes as HTML
      */
-    public function render_attributes(array $attributes=array())
+    public function renderAttributes(array $attributes = array())
     {
         if (empty($attributes) === true) {
             return '';
@@ -579,10 +579,10 @@ class FormElement implements FormElementInterface
      * The Validator is stored into the validators array.
      * So a formelement might have multiple validators.
      *
-     * @param  Koch_Validator   $validator Accepts a Koch_Validator Object that has to implement Koch_Validator_Interface.
+     * @param  Koch_Validator   $validator Accepts a Validator object.
      * @return Koch_Formelement
      */
-    public function setValidator(/*Koch_Formelement_Validates_Interface*/ $validator)
+    public function setValidator($validator)
     {
         $this->validators[] = $validator;
 
@@ -605,9 +605,8 @@ class FormElement implements FormElementInterface
             return $this->validators[$class];
         } elseif (true === class_exists($class)) {
             return new $class();
-        }
-        // validator not found
-        else {
+        } else {
+            // validator not found
             throw new \Exception('Validator named ' . $validator . ' not available.');
         }
     }
@@ -679,24 +678,24 @@ class FormElement implements FormElementInterface
     }
 
     /**
-      * Sets the error state of the form (formHasError).
-      *
-      * @param boolean $boolean
-      */
-     public function setError($boolean = true)
-     {
-         $this->error = $boolean;
-     }
+     * Sets the error state of the form (formHasError).
+     *
+     * @param boolean $boolean
+     */
+    public function setError($boolean = true)
+    {
+        $this->error = $boolean;
+    }
 
-     /**
-      * Returns the error state of the form.
-      *
-      * @return boolean False, if form has an error. True, otherwise.
-      */
-     public function hasError()
-     {
-         return $this->error;
-     }
+    /**
+     * Returns the error state of the form.
+     *
+     * @return boolean False, if form has an error. True, otherwise.
+     */
+    public function hasError()
+    {
+        return $this->error;
+    }
 
     /**
      * ===================================================================================

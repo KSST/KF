@@ -82,9 +82,8 @@ class Doctrine extends Form implements FormGeneratorInterface
         $tableColumns = $table->getColumnNames();
 
         // loop over all columns
-        foreach ( $tableColumns as $columnName) // => $columnType
-
-        {
+        foreach ($tableColumns as $columnName) {
+            // => $columnType
             // and check wheather the $columnName is to exclude
             if (in_array($columnName, $this->excludeColumns)) {
                 // stop the foreach-loop here and reenter it
@@ -95,12 +94,12 @@ class Doctrine extends Form implements FormGeneratorInterface
             $fieldName = $table->getClassnameToReturn() . '[$columnName]';
 
             // if columnname is identifier
-            if ( $table->isIdentifier($columnName) ) {
+            if ($table->isIdentifier($columnName)) {
                 // add it as an hidden field
                 #$form[] = new Koch_Form->formfactory( 'hidden', $fieldName);
             } else {
                 // transform columnName to a printable name
-                $printableName = ucwords(str_replace('_','',$columnName));
+                $printableName = ucwords(str_replace('_', '', $columnName));
 
                 // determine the columnname type and add the formfield
                 #$form[] = new Koch_Form->formfactory( $table->getTypeOf($columnName), $fieldName, $printableName);
