@@ -104,7 +104,7 @@ class Theme
         }
 
         // check absolute, return www
-        if (is_dir(ROOT_THEMES_FRONTEND . $theme )) {
+        if (is_dir(ROOT_THEMES_FRONTEND . $theme)) {
              return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
         }
 
@@ -325,7 +325,7 @@ class Theme
         $i = 0;
         $themes = array();
 
-        $dirs = new \DirectoryIterator( $dir );
+        $dirs = new \DirectoryIterator($dir);
 
         foreach ($dirs as $dir) {
             /**

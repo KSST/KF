@@ -19,6 +19,8 @@ class Factory extends AbstractLifecycle
     public function instantiate($dependencies)
     {
         return call_user_func_array(
-                        array(new \ReflectionClass($this->class), 'newInstance'), $dependencies);
+            array(new \ReflectionClass($this->class), 'newInstance'),
+            $dependencies
+        );
     }
 }

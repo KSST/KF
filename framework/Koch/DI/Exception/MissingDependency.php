@@ -14,5 +14,5 @@ namespace Koch\DI\Exception;
 
 class MissingDependency extends \Exception
 {
-
+    // no body
 }

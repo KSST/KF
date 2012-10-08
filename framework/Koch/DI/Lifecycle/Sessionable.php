@@ -29,7 +29,9 @@ class Sessionable extends AbstractLifecycle
         @session_start();
         if (false === isset($_SESSION[$this->slot])) {
             $_SESSION[$this->slot] = call_user_func_array(
-                    array(new ReflectionClass($this->class), 'newInstance'), $dependencies);
+                array(new ReflectionClass($this->class), 'newInstance'),
+                $dependencies
+            );
         }
 
         return $_SESSION[$this->slot];

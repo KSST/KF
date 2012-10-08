@@ -30,5 +30,4 @@ namespace . $classname, '\\');
 
         file_put_contents($mapfile, $content);
     }
-
 }

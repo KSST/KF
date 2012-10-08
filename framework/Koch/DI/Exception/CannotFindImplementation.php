@@ -14,5 +14,5 @@ namespace Koch\DI\Exception;
 
 class CannotFindImplementation extends \Exception
 {
-
+    // no body
 }

@@ -16,7 +16,6 @@ before_install:
   - git submodule update --init --recursive
 
 script:
-  - phpcs --encoding=utf-8 --tab-width=4 --extensions=php --standard=PSR2 ./framework/Koch
   #
   # run php-cs-fixer
   #
@@ -29,6 +28,10 @@ script:
   # run UTF8 encoding check
   #
   - ./bin/checkEncodingUTF8.sh framework
+  #
+  # run CodeSniffer
+  #
+  - phpcs --encoding=utf-8 --tab-width=4 --extensions=php --standard=PSR2 ./framework/Koch
 
 notifications:
   irc: "irc.freenode.org#koch"

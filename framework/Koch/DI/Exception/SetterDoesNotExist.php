@@ -14,5 +14,5 @@ namespace Koch\DI\Exception;
 
 class SetterDoesNotExist extends \Exception
 {
-
+    // no body
 }
