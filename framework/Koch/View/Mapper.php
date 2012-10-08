@@ -50,7 +50,8 @@ class Mapper
 
         // check if extension is one of the allowed ones
         if (false === in_array($template_extension, $allowed_extensions)) {
-            $message = 'Template Extension invalid <strong>' . $template_extension . '</strong> on <strong>' . $template . '</strong>';
+            $message = 'Template Extension invalid <strong>' . $template_extension . '</strong>';
+            $message .= ' on <strong>' . $template . '</strong>';
             trigger_error($message, E_USER_NOTICE);
         }
     }
@@ -118,13 +119,10 @@ class Mapper
         $theme_template = self::getThemeTemplatePath($template);
 
         // check if template was found there, else it's null
-        if ($theme_template != null) {
-            #\Koch\Debug\Debug::firebug(__METHOD__ .' tries fetching template ("'. $theme_template . '") from THEME directory.');
-
+        if ($theme_template != null) { 
             return $theme_template;
-        } else { // fetch the template by searching in the Module Template Path
-            #\Koch\Debug\Debug::firebug(__METHOD__ .' tries fetching template ("'. $template . '") from MODULE directory.');
-
+        } else { 
+            // fetch the template by searching in the Module Template Path
             return self::getModuleTemplatePath($template);
         }
     }
@@ -153,23 +151,21 @@ class Mapper
 
             // (a) USER BACKENDTHEME - check in the active session backendtheme
             // e.g. /themes/backend/ + admin/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . DIRECTORY_SEPARATOR;
+            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme;
             // e.g. /themes/backend/ + admin/modules/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR;
+            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (b) BACKEND FALLBACK - check the fallback dir: themes/admin
             $theme_paths[] = ROOT_THEMES_BACKEND . 'admin' . DIRECTORY_SEPARATOR;
-        }
-        /**
-         * 2. FRONTEND THEME
-         */
-        else {
+        } else {
+            // 2. FRONTEND THEME
+            
             // get frontend theme from session for path construction
             $frontendtheme = HttpRequest::getRoute()->getFrontendTheme();
 
             // (a) USER FRONTENDTHEME - check, if template exists in current session user THEME
             $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR;
             // (b) FRONTEND FALLBACK - check, if template exists in usertheme/modulename/tpl
-            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR . $module . DIRECTORY_SEPARATOR;
+            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (c) FRONTEND FALLBACK - check, if template exists in standard theme
             $theme_paths[] = ROOT_THEMES_FRONTEND . 'standard' . DIRECTORY_SEPARATOR;
         }
