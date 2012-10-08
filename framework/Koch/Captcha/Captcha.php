@@ -122,7 +122,7 @@ class Captcha
             $random = mt_rand(48, 122);
 
             // not the excluded chars and only special chars segments
-            if(in_array($random, $excludeChars) == false and
+            if (in_array($random, $excludeChars) == false and
                     ( ($random >= 50 && $random <= 57)   // ASCII 48->57:  numbers   0-9
                     | ($random >= 65 && $random <= 90))  // ASCII 65->90:  uppercase A-Z
                     | ($random >= 97 && $random <= 122)  // ASCII 97->122: lowercase a-z
@@ -151,8 +151,10 @@ class Captcha
         $this->captcha = imagecreatetruecolor($this->image_width, $this->image_height);
 
         // switch between captcha types
-        switch (1) { // rand(1,2))
-            case 1: // captcha with some effects
+        // rand(1,2)
+        switch (1) {
+            // captcha with some effects
+            case 1:
                 // create backgroundcolor from random RGB colors
                 $background_color = imagecolorallocate($this->captcha, rand(100, 255), rand(100, 255), rand(0, 255));
 
@@ -160,13 +162,12 @@ class Captcha
                  * Background Fill Effects
                  */
                 switch (rand(1, 2)) {
-                    case 1: // Solid Fill
-
+                    // Solid Fill
+                    case 1:
                         imagefill($this->captcha, 0, 0, $background_color);
                         break;
-
-                    case 2: // Gradient Fill
-
+                    // Gradient Fill
+                    case 2:
                         for ($i = 0, $rd = mt_rand(0, 100), $gr = mt_rand(0, 100), $bl = mt_rand(0, 100); $i <= $this->image_height; $i++) {
                             $g = imagecolorallocate($this->captcha, $rd+=2, $gr+=2, $bl+=2);
                             imageline($this->captcha, 0, $i, $this->image_width, $i, $g);
@@ -216,7 +217,10 @@ class Captcha
                      */
                     $bbox = imageftbbox($size, $angle, self::$font, $captcha_string[$i]);
                     $x = $spacing / 4 + $i * $spacing + 2;
-                    $y = $height / 2 + ($box[2] - $box[5]) / 4;
+                    /*
+                     * @todo $height is undefined
+                     */
+                    $y = /*$height / */ 2 + ($bbox[2] - $bbox[5]) / 4;
                     #$x = $bbox[0] + (imagesx($this->captcha) / 2) - ($bbox[4] / 2) - 5;
                     #$y = $bbox[1] + (imagesy($this->captcha) / 2) - ($bbox[5] / 2) - 5;
                     unset($bbox);
@@ -291,14 +295,18 @@ class Captcha
             imagedestroy($this->captcha);
 
             // we apply some html magic here => output the image by send it as inlined data ;)
-            return sprintf('<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />', base64_encode($imagesource));
+            return sprintf(
+                '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />', base64_encode($imagesource)
+            );
         } elseif ($render_type == 'file_html') {
             // remove outdated captcha images
             self::garbage_collection();
             // write png to file
             imagepng($this->captcha, $this->options['image_dir'] . '/' . $this->_id . '.png');
             // return html img tag which points to the image file
-            return '<img alt="Captcha Image from File" src="' . $this->options['image_url'] . '/' . $this->_id . '.png" alt="' . $this->options['imgage_alt'] . '" />';
+            return '<img alt="Captcha Image from File"
+                src="' . $this->options['image_url'] . '/' . $this->_id . '.png"
+                alt="' . $this->options['imgage_alt'] . '" />';
         }
     }
 
@@ -311,6 +319,9 @@ class Captcha
     {
         // perform the garbage_collection in 10 % of all calls
         if (mt_rand(0, 9) == 0) {
+            /*
+             * @todo $this is not accessible in static context
+             */
             $iterator = new \DirectoryIterator($this->options['image_dir']);
             foreach ($iterator as $file) {
                 // delete all png files
