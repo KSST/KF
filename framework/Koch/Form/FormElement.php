@@ -37,10 +37,19 @@ class FormElement implements FormElementInterface
     /**
      * @var string
      */
-    public $name, $id, $type, $class, $size, $disabled, $maxlength, $style, $onclick;
-
-    public $label, $value, $position, $required;
-
+    public $name;
+    public $id;
+    public $type;
+    public $class;
+    public $size;
+    public $disabled;
+    public $maxlength;
+    public $style;
+    public $onclick;
+    public $label;
+    public $value;
+    public $position;
+    public $required;
     public $additional_attributes;
 
     protected $formelementdecorators = array();
@@ -507,19 +516,32 @@ class FormElement implements FormElementInterface
     public function mapRulenameToClassname($rule)
     {
         switch ($rule) {
-            case 'email':      return 'Email';
-            case 'equals':     return 'Equals';
-            case 'ip':         return 'Ip';
-            case 'locale':     return 'Locale';
-            case 'maxlength':  return 'MaxLength';
-            case 'maxvalue':   return 'MaxValue';
-            case 'minlength':  return 'MinLength';
-            case 'minvalue':   return 'MinValue';
-            case 'range':      return 'Range';
-            case 'regexp':     return 'RegExp';
-            case 'required':   return 'Required';
-            case 'string':     return 'String';
-            case 'url':        return 'Url';
+            case 'email':
+                return 'Email';
+            case 'equals':
+                return 'Equals';
+            case 'ip':
+                return 'Ip';
+            case 'locale':
+                return 'Locale';
+            case 'maxlength':
+                return 'MaxLength';
+            case 'maxvalue':
+                return 'MaxValue';
+            case 'minlength':
+                return 'MinLength';
+            case 'minvalue':
+                return 'MinValue';
+            case 'range':
+                return 'Range';
+            case 'regexp':
+                return 'RegExp';
+            case 'required':
+                return 'Required';
+            case 'string':
+                return 'String';
+            case 'url':
+                return 'Url';
         }
     }
 
@@ -663,7 +685,7 @@ class FormElement implements FormElementInterface
       */
      public function setError($boolean = true)
      {
-        $this->error = $boolean;
+         $this->error = $boolean;
      }
 
      /**
@@ -673,7 +695,7 @@ class FormElement implements FormElementInterface
       */
      public function hasError()
      {
-        return $this->error;
+         return $this->error;
      }
 
     /**

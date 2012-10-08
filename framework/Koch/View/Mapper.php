@@ -132,9 +132,9 @@ class Mapper
         $theme_template = self::getThemeTemplatePath($template);
 
         // check if template was found there, else it's null
-        if ($theme_template != null) { 
+        if ($theme_template != null) {
             return $theme_template;
-        } else { 
+        } else {
             // fetch the template by searching in the Module Template Path
             return self::getModuleTemplatePath($template);
         }
@@ -171,7 +171,7 @@ class Mapper
             $theme_paths[] = ROOT_THEMES_BACKEND . 'admin' . DIRECTORY_SEPARATOR;
         } else {
             // 2. FRONTEND THEME
-            
+
             // get frontend theme from session for path construction
             $frontendtheme = HttpRequest::getRoute()->getFrontendTheme();
 
