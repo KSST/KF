@@ -24,7 +24,8 @@
         "gedmo/doctrine-extensions": "dev-master",
         "smarty/smarty": "v3.1.12",
         "ezyang/htmlpurifier" : "dev-master",
-        "swiftmailer/swiftmailer": "v4.2.1"
+        "swiftmailer/swiftmailer": "v4.2.1",
+        "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {
         "ext-apc" : "*",
@@ -36,8 +37,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Koch\\": "framework/Koch/",
-            "KochTest\\": "tests/KochTest"
+            "Koch\\": "framework/",
+            "KochTest\\": "tests/"
         }
     }
 }
