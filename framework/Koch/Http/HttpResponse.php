@@ -10,10 +10,258 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespaces, the methodname can not be setCookie()
-     *       because this would conflict with the php function name.
+namespace Koch\Http;
+
+/**
+ * Class for Response Handling.
+ *
+ * This class represents the web response object on a request processed by Koch Framework.
+ *
+ * @category    Koch
+ * @package     Core
+ * @subpackage  HttpResponse
+ */
+class HttpResponse implements HttpResponseInterface
+{
+    /**
+     * Status of the response as integer value.
+     * $statusCode = '200' => 'OK'
+     *
+     * @var       integer
      */
-    public static function createCookie($name, $value='', $maxage = 0, $path='', $domain='', $secure = false, $HTTPOnly = false)
+    private static $statusCode = '200';
+
+    /**
+     * @var array Array holding the response headers.
+     */
+    private static $headers = array();
+
+    /**
+     * @var string String holding the response content (body).
+     */
+    private static $content = null;
+
+    /**
+     * @var string String holding the content type.
+     */
+    private static $content_type = 'text/html';
+
+    /**
+     * Sets the HTTP Status Code for this response.
+     * This method is also used to set the return status code when there
+     * is no error (for example for the status codes 200 (OK) or 301 (Moved permanently) ).
+     *
+     * @param int $statusCode The status code to set
+     */
+    public static function setStatusCode($statusCode)
+    {
+        self::$statusCode = (string) $statusCode;
+    }
+
+    /**
+     * Returns the HTTP Status Code.
+     *
+     * @return int HTTP Status Code.
+     */
+    public static function getStatusCode()
+    {
+        return self::$statusCode;
+    }
+
+    /**
+     * Returns the HTTP 1.1 status code description for a given status code.
+     *
+     * @link http://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html
+     */
+    public static function getStatusCodeDescription($statusCode)
+    {
+        /**
+         * Array holding some often occuring status descriptions.
+         * @var array
+         */
+        static $statusCodes = array(
+           // Successful
+           '200' => 'OK',
+           '201' => 'Created',
+           '202' => 'Accepted',
+           // Redirection
+           '301' => 'Moved Permanently',
+           '302' => 'Found',
+           '303' => 'See Other',
+           '304' => 'Not Modified',
+           '307' => 'Temporary Redirect',
+           // Client Error
+           '400' => 'Bad Request',
+           '401' => 'Unauthorized',
+           '403' => 'Forbidden',
+           '404' => 'Not Found',
+           // Server Error
+           '500' => 'Internal Server Error',
+           '503' => 'Service Temporarily Unavailable'
+        );
+
+        return $statusCodes[$statusCode];
+    }
+
+     /**
+      * add a header to the response array, which is send to the browser
+      *
+      * @param  string $name the name of the header
+      * @param  string $value the value of the header
+      */
+    public static function addHeader($name, $value)
+    {
+        self::$headers[$name] = $value;
+    }
+
+    /**
+     * setContent appends or replaces the content of the
+     * http response buffer.
+     *
+     * appends content to the response body.
+     * when $replace is true, the bodycontent is replaced.
+     *
+     * @param string  $content Content to store in the buffer
+     * @param boolean $replace Toggle between append or replace.
+     */
+    public static function setContent($content, $replace = false)
+    {
+        // check, if the content should be replaced
+        if ($replace === false) {
+            // no, just append the content
+            self::$content .= $content;
+        } else {
+            // replace the body with the content
+            self::$content = $content;
+        }
+    }
+
+    /**
+     * get content retunrs the response body
+     */
+    public static function getContent()
+    {
+        return self::$content;
+    }
+
+    /**
+     * Set the content type
+     *
+     * @param  string $type Content type: html, txt, xml, json.
+     * @return string
+     */
+    public static function setContentType($type = 'html', $charset = 'UTF-8')
+    {
+        $types = array(
+            'csv'  => 'text/csv',
+            'html' => 'text/html',
+            'txt'  => 'text/plain',
+            'xml'  => 'application/xml',
+            'rss'  => 'application/rss+xml',
+            'json' => 'application/json',
+            'js'   => 'application/javascript',
+        );
+
+        if (isset($types[$type]) === false) {
+            throw new \InvalidArgumentException('Specified type not valid. Use: html, txt, xml or json.');
+        }
+
+        #addHeader('Content-Type', $type . ($charset ? '; charset='.$charset.': ''));
+        self::$content_type = $types[$type];
+    }
+
+    /**
+     * Returns the content type for insertion into the header.
+     *
+     * @return string A content type, like "application/json" or "text/html".
+     */
+    public static function getContentType()
+    {
+        if (empty(self::$content_type) === true) {
+            self::setContentType('html');
+        }
+
+        return self::$content_type;
+    }
+
+    /**
+     * This flushes the headers and bodydata to the client.
+     */
+    public static function sendResponse()
+    {
+        // save session before exit
+        if ((bool) session_id()) {
+            session_write_close();
+        }
+
+        // activateOutputCompression when not in debugging mode
+        if (XDEBUG === false and DEBUG === false) {
+            \Koch\Http\ResponseEncode::start_outputbuffering('7');
+        }
+
+        // Send the status line
+        self::addHeader('HTTP/1.1', self::$statusCode.' '.self::getStatusCodeDescription(self::$statusCode));
+
+        // Set X-Powered-By Header to Clansuite Signature
+        $pwd_by = '[ Clansuite - just an eSport CMS ][ Version : '. CLANSUITE_VERSION .' ][ http://clansuite.com/ ]';
+        self::addHeader('X-Powered-By', $pwd_by);
+
+        // Suppress Framesets
+        self::addHeader('X-Frame-Options', 'deny'); // not SAMEORIGIN
+
+        // Send our Content-Type with UTF-8 encoding
+        self::addHeader('Content-Type', self::getContentType(). '; charset=UTF-8');
+
+        // Send user specificed headers from self::$headers array
+        if (false === headers_sent()) {
+            foreach (self::$headers as $name => $value) {
+                $header = $name . ': ' . $value;
+                $header = str_replace(array("\n", "\r"), '', $header); // header injection
+                header($header, false);
+            }
+        }
+
+        // make it possible to attach HTML content to the body directly before flushing the response
+        // \Your\Application::triggerEvent('onBeforeResponse', array('content' => self::$content));
+
+        // Finally echo the response body
+        echo self::getContent();
+
+        // Flush Compressed Buffer
+        if (XDEBUG === false and DEBUG === false) {
+            \Koch\Http\ResponseEncode::end_outputbuffering();
+
+            // send response and do some more php processing afterwards
+            if (is_callable('fastcgi_finish_request') === true) {
+                fastcgi_finish_request();
+            }
+        }
+
+        // OK, Reset -> Package delivered! Return to Base!
+        self::clearHeaders();
+    }
+
+    /**
+     * Resets the Headers and the Data
+     */
+    public static function clearHeaders()
+    {
+        self::$headers = array();
+        self::$content = null;
+    }
+    /**
+     * A better alternative (RFC 2109 compatible) to the php setcookie() function
+     *
+     * @param string Name of the cookie
+     * @param string Value of the cookie
+     * @param int Lifetime of the cookie
+     * @param string Path where the cookie can be used
+     * @param string Domain which can read the cookie
+     * @param bool Secure mode?
+     * @param bool Only allow HTTP usage? (PHP 5.2)
+     * @return true Cookie set.
+     */
+    public static function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
     {
         $ob = ini_get('output_buffering');
 
@@ -41,12 +289,12 @@ namespaces, the methodname can not be setCookie()
             }
         }
 
-        header('Set-Cookie: '.rawurlencode($name).'='.rawurlencode($value)
-                                    .(true === empty($domain) ? '' : '; Domain='.$domain)
-                                    .(true === empty($maxage) ? '' : '; Max-Age='.$maxage)
-                                    .(true === empty($path) ? '' : '; Path='.$path)
-                                    .(false === $secure ? '' : '; Secure')
-                                    .(false === $HTTPOnly ? '' : '; HttpOnly'), false);
+        header('Set-Cookie: ' . rawurlencode($name) . '=' . rawurlencode($value)
+            . (true === empty($domain) ? '' : '; Domain=' . $domain)
+            . (true === empty($maxage) ? '' : '; Max-Age=' . $maxage)
+            . (true === empty($path) ? '' : '; Path=' . $path)
+            . (false === $secure ? '' : '; Secure')
+            . (false === $HTTPOnly ? '' : '; HttpOnly'), false);
 
         return true;
     }

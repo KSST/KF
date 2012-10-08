@@ -13,7 +13,7 @@
 namespace Koch\Form\Generators;
 
 /**
- * Koch FrameworkForm Generator via Doctrine Records
+ * Koch Framework - Form Generator via Doctrine Record
  *
  * Purpose: automatic form generation from doctrine records/tables.
  *

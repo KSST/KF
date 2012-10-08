@@ -13,20 +13,28 @@
 namespace Koch\Form\Generators;
 
 /**
- * Koch FrameworkForm Generator via Array
+ * Form Generator from a PHP Array description.
  *
  * Purpose: automatic form generation from an array.
  */
-class Array extends Form implements FormGeneratorInterface
+class PHPArray extends Form implements FormGeneratorInterface
 {
     public function __construct(array $form_array = null, $form_object = null)
     {
         if (null != $form_array) {
-            if (null == $form_object) {
+            if ($form_object === null) {
                 // init parent Koch_Form with name, method and action
-                parent::__construct($form_array['form']['name'], $form_array['form']['method'], $form_array['form']['action']);
+                parent::__construct(
+                    $form_array['form']['name'], 
+                    $form_array['form']['method'], 
+                    $form_array['form']['action']
+                );
             } else {
-                $form_object::__construct($form_array['form']['name'], $form_array['form']['method'], $form_array['form']['action']);
+                $form_object::__construct(
+                    $form_array['form']['name'], 
+                    $form_array['form']['method'], 
+                    $form_array['form']['action']
+                );
             }
 
             // unset the key form inside form_array, because the "form" description is no longer needed, parent Koch_Form is already informed
