@@ -411,7 +411,9 @@ class Datagrid extends Base
         $acceptedOptions = array( 'Entity', 'ColumnSets', 'Url');
         foreach ($acceptedOptions as $value) {
             if (false === isset($options[$value])) {
-                throw new Clansuite_Exception('Datagrid Option(s) missing. Valid options are: '. var_export($acceptedOptions, true));
+                throw new Clansuite_Exception(
+                    'Datagrid Option(s) missing. Valid options are: '. var_export($acceptedOptions, true)
+                );
             }
         }
         unset($value);
@@ -435,11 +437,11 @@ class Datagrid extends Base
         $this->disableFeature(array('Label', 'Caption', 'Description'));
 
         // set scalar values
-        $this->setAlias( $this->getDoctrineEntityName() );
+        $this->setAlias($this->getDoctrineEntityName());
 
         // reset session?
-        if ( isset($_REQUEST[$this->getParameterAlias('Reset')]) ) {
-               $_SESSION['Datagrid_' . $this->getAlias()] = '';
+        if (isset($_REQUEST[$this->getParameterAlias('Reset')])) {
+            $_SESSION['Datagrid_' . $this->getAlias()] = '';
         }
 
         // set properties to datagrid
@@ -475,7 +477,7 @@ class Datagrid extends Base
          * It is passed to the row generator.
          * The row generator will take the data set generate the rows of the table and the cells within
          */
-        $this->_generateRows($result);
+        $this->generateRows($result);
     }
 
     /**
@@ -713,7 +715,7 @@ class Datagrid extends Base
      *
      * @param array Results-array from doctrine named query
      */
-    private function _generateRows($data)
+    private function generateRows($data)
     {
         foreach ($data as $rowKey => $rowValues) {
             /**
@@ -721,7 +723,7 @@ class Datagrid extends Base
              */
             $this->triggerDataModificationHook($rowValues);
 
-            $oRow = new Clansuite_Datagrid_Row($this);
+            $oRow = new Row($this);
 
             $oRow->setAlias('Row_' . $rowKey);
             $oRow->setId('RowId_' . $rowKey);
@@ -729,7 +731,7 @@ class Datagrid extends Base
             $oRow->setPosition($rowKey);
 
             foreach ($this->columnSets as $columnKey => $columnSet) {
-                $oCell = new Clansuite_Datagrid_Cell();
+                $oCell = new Cell();
                 $oRow->addCell($oCell);
                 $this->rowObjects[$rowKey] = $oRow;
 
@@ -739,7 +741,7 @@ class Datagrid extends Base
                 $oCell->setColumnObject($oCol);
                 $oCell->setRow($oRow);
 
-                $values = $this->_getCellValues($columnSet, $rowValues);
+                $values = $this->getCellValues($columnSet, $rowValues);
 
                 // Set empty values if not in dataset
                 $oCell->setValues($values);
@@ -754,12 +756,12 @@ class Datagrid extends Base
      * @param array The dbSet for this column
      * @return string The records value
      */
-    private function _getCellValues(&$_ColumnSet, &$_Dataset)
+    private function getCellValues(&$_ColumnSet, &$_Dataset)
     {
         $aResultSet = null;
 
         if (false === is_array($_ColumnSet)) {
-            throw new Clansuite_Exception(_('You have not supplied any columnset to validate.'));
+            throw new \Koch\Exception\Exception(_('You have not supplied any columnset to validate.'));
         }
 
         // Standard for ResultSets is an array
@@ -809,21 +811,22 @@ class Datagrid extends Base
         $SortOrder  = '';
 
         // Set SortColumn and sortorder if in session
-        if ( isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']) and isset($_SESSION['Datagrid_' . $this->getAlias()]['SortOrder']) ) {
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'])
+            and isset($_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'])) {
             $SortColumn = $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'];
-            $SortOrder  = $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'];
+            $SortOrder = $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'];
         }
 
         // Prefer requests
-        if ( isset($_REQUEST[$this->getParameterAlias('SortColumn')]) and isset($_REQUEST[$this->getParameterAlias('SortOrder')]) ) {
+        if ( isset($_REQUEST[$this->getParameterAlias('SortColumn')])
+            and isset($_REQUEST[$this->getParameterAlias('SortOrder')]) ) {
             $SortColumn = $_REQUEST[$this->getParameterAlias('SortColumn')];
             $SortOrder  = $_REQUEST[$this->getParameterAlias('SortOrder')];
         }
 
         // Check for valid formats of key and value
-        if( ($SortColumn != '' and $SortOrder != '') AND
-            ( preg_match('#^([0-9a-z_]+)#i', $SortColumn) and preg_match('#([a-z]+)$#i', $SortOrder) ) )
-        {
+        if (($SortColumn != '' and $SortOrder != '') AND
+            ( preg_match('#^([0-9a-z_]+)#i', $SortColumn) and preg_match('#([a-z]+)$#i', $SortOrder) )) {
             $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']   = $SortColumn;
             $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'] = $SortOrder;
 
@@ -854,12 +857,14 @@ class Datagrid extends Base
         $SearchColumn    = '';
         $SearchForValue  = '';
 
-        if ( isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn']) and isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue']) ) {
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn'])
+            and isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'])) {
             $SearchColumn    = $_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn'];
             $SearchForValue  = $_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'];
         }
 
-        if ( isset($_REQUEST[$this->getParameterAlias('SearchColumn')]) and isset($_REQUEST[$this->getParameterAlias('SearchForValue')]) ) {
+        if (isset($_REQUEST[$this->getParameterAlias('SearchColumn')])
+            and isset($_REQUEST[$this->getParameterAlias('SearchForValue')])) {
             $SearchColumn    = $_REQUEST[$this->getParameterAlias('SearchColumn')];
             $SearchForValue  = $_REQUEST[$this->getParameterAlias('SearchForValue')];
         }
@@ -871,13 +876,12 @@ class Datagrid extends Base
         // var_dump( $this->queryBuilder->getDQL() ); exit;
 
         // Check for valid formats of key and value
-        if ( ($SearchColumn != '' and $SearchForValue != '') ) {
+        if (($SearchColumn != '' and $SearchForValue != '')) {
             $this->queryBuilder->add('andWhere',
                     // string = ANDWHERE a.fieldname LIKE :SearchForValue
                     $this->queryBuilder->expr()->like(
                             'a.' . $this->getColumn($SearchColumn)->getSortField(),
-                            '%' . $SearchForValue . '%'
-                            )
+                            '%' . $SearchForValue . '%')
             );
 
             // DEBUG

@@ -29,8 +29,8 @@ class ClassRepository
     public function candidatesFor($interface)
     {
         return array_merge(
-           self::$reflection->concreteSubgraphOf($interface),
-           self::$reflection->implementationsOf($interface)
+            self::$reflection->concreteSubgraphOf($interface),
+            self::$reflection->implementationsOf($interface)
         );
     }
 
