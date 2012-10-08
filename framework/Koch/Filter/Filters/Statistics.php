@@ -55,8 +55,8 @@ class Statistics implements FilterInterface
         $this->user = $user;
 
         // Load Models
-        Doctrine::loadModels( ROOT_MOD . 'statistics/model/records/generated/' );
-        Doctrine::loadModels( ROOT_MOD . 'statistics/model/records/' );
+        Doctrine::loadModels(ROOT_MOD . 'statistics/model/records/generated/');
+        Doctrine::loadModels(ROOT_MOD . 'statistics/model/records/');
 
         $cfg = $config->readModuleConfig('statistics');
         $this->statsWhoDeleteTime = $cfg['statistics']['deleteTimeWho'];

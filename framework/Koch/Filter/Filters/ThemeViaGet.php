@@ -71,9 +71,8 @@ class ThemeViaGet implements FilterInterface
 
         /**
          * Inputfilter for $_GET['theme']. Allowed Chars are: az, 0-9, underscore.
-         *
          */
-        if (false === $this->input->check( $theme, 'is_abc|is_int|is_custom', '_' ) ) {
+        if (false === $this->input->check($theme, 'is_abc|is_int|is_custom', '_' )) {
             throw new \InvalidArgumentException('Please provide a proper theme name.');
         }
 

@@ -92,13 +92,15 @@ class SessionSecurity implements FilterInterface
          */
 
         if ($this->config['session']['check_host'] == true) {
-            if ( !isset( $_SESSION['client_host'] ) ) {
+            if ( isset($_SESSION['client_host']) === false ) {
                 $_SESSION['client_host'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
-            } else { if ( gethostbyaddr($_SERVER['REMOTE_ADDR']) != $_SESSION['client_host'] )
-                session_unset();
-                session_destroy();
+            } else {
+                if (gethostbyaddr($_SERVER['REMOTE_ADDR']) != $_SESSION['client_host']) {
+                    session_unset();
+                    session_destroy();
 
-                $this->response->redirect('index.php?mod=login');
+                    $this->response->redirect('index.php?mod=login');
+                }
             }
         }
 

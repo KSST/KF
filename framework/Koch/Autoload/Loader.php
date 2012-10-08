@@ -343,7 +343,7 @@ class Loader
 
             return array();
         } else { // load map from file
-            // Note: delete the autoloader.config.php file, if you get an unserialization error like "error at offset xy"
+            // Note: delete the $mapfile file, if you get an unserialization error like "error at offset xy"
             return unserialize(file_get_contents(self::$mapfile));
         }
     }
@@ -379,7 +379,7 @@ class Loader
      */
     public static function addToMapping($filename, $classname)
     {
-        self::$autoloader_map = array_merge( (array) self::$autoloader_map, array( $classname => $filename ));
+        self::$autoloader_map = array_merge((array) self::$autoloader_map, array( $classname => $filename ));
 
         if (defined('APC') and APC  == true) {
             return self::writeAutoloadingMapApc(self::$autoloader_map);
