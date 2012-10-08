@@ -60,7 +60,7 @@ class Csv extends AbstractRenderer
     }
 
     /**
-     * mssafe_csv() builds csv files readable by ms-excel/access.
+     * mssafeCsv() builds csv files readable by ms-excel/access.
      *
      * Note:
      * 1) For MS Applications the line-endings have to be \r\n not only \n
@@ -75,7 +75,7 @@ class Csv extends AbstractRenderer
      * @param array  $data     the array with the data to write as csv
      * @param array  $header   additional array with column headings (first row of the data)
      */
-    private function mssafe_csv($filepath, $data, $header = array())
+    private function mssafeCsv($filepath, $data, $header = array())
     {
         $fp = fopen($filepath, 'w');
 

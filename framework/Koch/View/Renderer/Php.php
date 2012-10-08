@@ -36,11 +36,14 @@ class Php extends Renderer_Base
      */
     public function fetch($filename = null, array $data = array())
     {
+        if(is_array($data)) {
+            $this->data = $data;
+        }
+        
         $file = '';
 
         if ($filename === null) {
-            // @todo where does dir come from???
-            $file = $directory . DIRECTORY_SEPARATOR . $filename . '.tpl';
+            $file = $filename . '.tpl';
         } else {
             $file = $this->file;
         }
