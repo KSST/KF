@@ -18,7 +18,7 @@ class APCCompiler
     {
         $compiled = true;
 
-        if(true === $recursively) {           
+        if (true === $recursively) {
             foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir) {
                 $compiled = $compiled && apc_compile_dir($dir, $recursively);
             }

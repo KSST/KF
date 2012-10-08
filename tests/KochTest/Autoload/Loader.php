@@ -18,9 +18,9 @@ class ThisClassExists
 }
 
 class LoaderTest extends Clansuite_UnitTestCase
-{  
+{
     public $classMapFile = 'autoloader.classmap.php';
-    
+
     public function setUp()
     {
         parent::setUp();
@@ -35,7 +35,7 @@ class LoaderTest extends Clansuite_UnitTestCase
         if (extension_loaded('apc') === true and ini_get('apc.enabled') and ini_get('apc.enable_cli')) {
             apc_clear_cache('user');
         }
-        
+
         Loader::setClassMapFile('autoloader.classmap.php');
     }
 
@@ -153,7 +153,7 @@ class LoaderTest extends Clansuite_UnitTestCase
         if (is_file($this->classmap_file)) {
             unlink($this->classmap_file);
         }
-        
+
         // file will be created
         $this->assertIdentical(array(), Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classmap_file));

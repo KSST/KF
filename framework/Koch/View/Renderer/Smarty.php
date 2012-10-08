@@ -90,14 +90,14 @@ class Smarty extends AbstractRenderer
         $this->renderer->debugging = DEBUG ? true : false; // set smarty debugging, when debug on
         if ($this->renderer->debugging === true) {
             // set debugging template for smarty
-            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';  
+            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';
             // clear compiled tpls in case of debug and clear cache
-            $this->renderer->clearCompiledTemplate(); 
+            $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
         }
 
         // auto delimiter of javascript/css (The literal tag of Smarty v2.x)
-        $this->renderer->auto_literal = true;     
+        $this->renderer->auto_literal = true;
 
         /**
          * SMARTY FILTERS
@@ -127,7 +127,7 @@ class Smarty extends AbstractRenderer
          * @see http://www.smarty.net/manual/de/variable.compile.check.php
          */
         if ($this->renderer->debugging === true) {
-            // if a template was changed it would be recompiled, 
+            // if a template was changed it would be recompiled,
             // if set to false nothing will be compiled (changes take no effect)
             $this->renderer->compile_check = true;
             // if true compiles each template everytime, overwrites $compile_check
@@ -323,7 +323,7 @@ class Smarty extends AbstractRenderer
      /**
      * Magic Method to testing with empty() and isset() for Smarty Template Variables
      *
-     * @param string $key
+     * @param  string  $key
      * @return boolean
      */
     public function __isset($key)
@@ -334,7 +334,7 @@ class Smarty extends AbstractRenderer
     /**
      * Magic Method to unset() Smarty Template Variables
      *
-     * @param string $key
+     * @param  string $key
      * @return void
      */
     public function __unset($key)

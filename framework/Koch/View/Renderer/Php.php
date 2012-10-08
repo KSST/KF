@@ -36,10 +36,10 @@ class Php extends Renderer_Base
      */
     public function fetch($filename = null, array $data = array())
     {
-        if(is_array($data)) {
+        if (is_array($data)) {
             $this->data = $data;
         }
-        
+
         $file = '';
 
         if ($filename === null) {
