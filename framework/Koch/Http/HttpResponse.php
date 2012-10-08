@@ -216,7 +216,8 @@ class HttpResponse implements HttpResponseInterface
         self::addHeader('HTTP/1.1', self::$statusCode.' '.self::getStatusCodeDescription(self::$statusCode));
 
         // Set X-Powered-By Header to Clansuite Signature
-        self::addHeader('X-Powered-By', '[ Clansuite - just an eSport CMS ][ Version : '. CLANSUITE_VERSION .' ][ http://clansuite.com/ ]');
+        $pwd_by = '[ Clansuite - just an eSport CMS ][ Version : '. CLANSUITE_VERSION .' ][ http://clansuite.com/ ]';
+        self::addHeader('X-Powered-By', $pwd_by);
 
         // Suppress Framesets
         self::addHeader('X-Frame-Options', 'deny'); // not SAMEORIGIN
@@ -271,12 +272,9 @@ class HttpResponse implements HttpResponseInterface
      * @param string Domain which can read the cookie
      * @param bool Secure mode?
      * @param bool Only allow HTTP usage? (PHP 5.2)
-     *
-     * @todo If namespaces are used, renamed method to setCookie().
-     * Note: until php6 namespaces, the methodname can not be setCookie()
-     *       because this would conflict with the php function name.
+     * @return true Cookie set.
      */
-    public static function createCookie($name, $value='', $maxage = 0, $path='', $domain='', $secure = false, $HTTPOnly = false)
+    public static function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
     {
         $ob = ini_get('output_buffering');
 
@@ -304,12 +302,12 @@ class HttpResponse implements HttpResponseInterface
             }
         }
 
-        header('Set-Cookie: '.rawurlencode($name).'='.rawurlencode($value)
-                                    .(true === empty($domain) ? '' : '; Domain='.$domain)
-                                    .(true === empty($maxage) ? '' : '; Max-Age='.$maxage)
-                                    .(true === empty($path) ? '' : '; Path='.$path)
-                                    .(false === $secure ? '' : '; Secure')
-                                    .(false === $HTTPOnly ? '' : '; HttpOnly'), false);
+        header('Set-Cookie: ' . rawurlencode($name) . '=' . rawurlencode($value)
+            . (true === empty($domain) ? '' : '; Domain=' . $domain)
+            . (true === empty($maxage) ? '' : '; Max-Age=' . $maxage)
+            . (true === empty($path) ? '' : '; Path=' . $path)
+            . (false === $secure ? '' : '; Secure')
+            . (false === $HTTPOnly ? '' : '; HttpOnly'), false);
 
         return true;
     }

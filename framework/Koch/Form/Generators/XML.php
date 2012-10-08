@@ -26,7 +26,7 @@
 namespace Koch\Form\Generators;
 
 /**
- * Koch FrameworkForm Generator via XML
+ * Koch Framework - Form Generator from XML description.
  *
  * Purpose:
  * 1) form generation (html representation) from an xml description file (xml->form(html))

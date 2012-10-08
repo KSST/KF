@@ -76,7 +76,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * 4) Clear Array, Filter and Assign the $_REQUEST Global to it
      * 5) Detect REST Tunneling through POST and set request_method accordingly
      */
-    public function __construct(/*$ids_on = false*/)
+    public function __construct() /*$ids_on = false*/
     {
         // 1) Drop $_REQUEST and $GLOBALS. Usage is forbidden!
         unset($_REQUEST);
@@ -189,7 +189,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
              * check if we have some rules to process
              */
             if (true === is_array($array_or_parametername)) {
-                $array_name         = $array_or_parametername[0];      // GET|POST|COOKIE
+                $array_name = $array_or_parametername[0];      // GET|POST|COOKIE
                 #$validation_rules   = $array_or_parametername[1];      // some validation commands
 
                 /**
@@ -200,8 +200,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
                 /**
                  * VALID or Exception
                  */
-               #$this->validateParameter($parameter, $validation_rules);
-
+                #$this->validateParameter($parameter, $validation_rules);
             } else { // if(is_int($array_or_parametername))
                 $this->expectParameter($array_or_parametername);
             }
@@ -363,7 +362,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function getHeader($name)
     {
-        $name = 'HTTP_' . mb_strtoupper(str_replace('-','_', $name));
+        $name = 'HTTP_' . mb_strtoupper(str_replace('-', '_', $name));
 
         if ($_SERVER[$name] !== null) {
             return $_SERVER[$name];
@@ -414,7 +413,8 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     private static function getServerPort()
     {
-        if ( isset($_SERVER['HTTPS']) == false and $_SERVER['SERVER_PORT'] != 80 or isset($_SERVER['HTTPS']) and $_SERVER['SERVER_PORT'] != 443 ) {
+        if (isset($_SERVER['HTTPS']) == false and $_SERVER['SERVER_PORT'] != 80
+            or isset($_SERVER['HTTPS']) and $_SERVER['SERVER_PORT'] != 443) {
             return ':'.$_SERVER['SERVER_PORT'];
         }
     }
