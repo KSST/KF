@@ -208,7 +208,8 @@ class Smarty extends AbstractRenderer
                 ROOT_LIBRARIES . 'smarty/plugins',
                 KOCH_FRAMEWORK . 'View/Helper/Smarty',
                 ROOT_MOD . TargetRoute::getModule() . '/View/Helper/Smarty'
-        ));
+            )
+        );
 
         #\Koch\Debug\Debug::printR($this->renderer->plugins_dir);
 
@@ -327,26 +328,26 @@ class Smarty extends AbstractRenderer
     }
 
      /**
-      * Magic Method to testing with empty() and isset() for Smarty Template Variables
-      *
-      * @param string $key
-      * @return boolean
-      */
-     public function __isset($key)
-     {
-         return (null !== $this->renderer->getTemplateVars($key));
-     }
-
-     /**
-      * Magic Method to unset() Smarty Template Variables
-      *
-      * @param string $key
-      * @return void
-      */
-     public function __unset($key)
+     * Magic Method to testing with empty() and isset() for Smarty Template Variables
+     *
+     * @param string $key
+     * @return boolean
+     */
+    public function __isset($key)
     {
-         $this->renderer->clearAssign($key);
-     }
+        return (null !== $this->renderer->getTemplateVars($key));
+    }
+
+    /**
+     * Magic Method to unset() Smarty Template Variables
+     *
+     * @param string $key
+     * @return void
+     */
+    public function __unset($key)
+    {
+        $this->renderer->clearAssign($key);
+    }
 
     /**
      * Executes the template fetching and returns the result.
@@ -594,9 +595,10 @@ class Smarty extends AbstractRenderer
             if (false != mb_strpos($filecontent, $preRenderCheck['needle'])) {
                 return true;
             } else {
-                throw new \Koch\Exception\Exception($preRenderCheck['exceptionmessage'], $preRenderCheck['exceptioncode']);
+                throw new \Koch\Exception\Exception(
+                        $preRenderCheck['exceptionmessage'], $preRenderCheck['exceptioncode']
+                );
             }
         }
     }
-
 }
