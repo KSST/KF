@@ -40,5 +40,4 @@ class Value extends AbstractLifecycle
     {
         return $this->instance;
     }
-
 }

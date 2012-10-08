@@ -88,8 +88,8 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * incomming via GET, if nothing is incomming, sets the default value of 8.
      *
      * @param string $keyname     The keyname to find in the array.
-     * @param mixed  $default_one A default value, which is returned, if the keyname was not found.
-     * @param mixed  $default_two A default value, which is returned, if the keyname was not found and default_one is null.
+     * @param mixed  $default_one Default value. Returned, if the keyname was not found.
+     * @param mixed  $default_two Default value. Returned, if the keyname was not found and default_one is null.
      */
     public function getConfigValue($keyname, $default_one = null, $default_two = null)
     {

@@ -77,5 +77,4 @@ class ClassRepository
 
         return $reflection->getMethod($method)->getParameters();
     }
-
 }

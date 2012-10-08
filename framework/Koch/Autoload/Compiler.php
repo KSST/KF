@@ -45,7 +45,7 @@ class Compiler
     /**
      * Wraps php tags around the content of the monolith
      */
-    public static function empower_monolith()
+    public static function empowerMonolith()
     {
         $content = '<?php ' . file_get_contents(self::$monolith_filename) . '?>';
         file_put_contents(self::$monolith_filename, $content);
@@ -81,7 +81,7 @@ class Compiler
                 $content = file_get_contents(self::$monolith_file);
 
                 // apply string modification (strips unnessecary things off)
-                $new_content = self::remove_comments_from_string($content);
+                $new_content = self::removeCommentsFromString($content);
                 //$new_content = self::strip_php_tags($new_content);
                 //$new_content = self::strip_empty_lines($new_content);
 
@@ -100,7 +100,7 @@ class Compiler
      * @param $sourcecode The sourcecode string to clean up.
      * @return string The sourcecode string without comments.
      */
-    public static function remove_comments_from_string($sourcecode)
+    public static function removeCommentsFromString($sourcecode)
     {
         // check if sourcecode is set
         if ($sourcecode === null) {
@@ -147,7 +147,7 @@ class Compiler
      * @param $string sourcecode-string to clean up
      * @return string
      */
-    public static function strip_empty_lines($string)
+    public static function stripEmptyLines($string)
     {
         $string = preg_replace('/[\r\n]+[\s\t]*[\r\n]+/', "\n", $string);
         $string = preg_replace('/^[\s\t]*[\r\n]+/', '', $string);
@@ -161,7 +161,7 @@ class Compiler
      * @param $string sourcecode-string to clean up
      * @return string
      */
-    public static function strip_php_tags($string)
+    public static function stripPhpTags($string)
     {
         // remove php opening and closing tag from beginning and end
         $string = substr($string, strlen('<?php' . PHP_EOL));

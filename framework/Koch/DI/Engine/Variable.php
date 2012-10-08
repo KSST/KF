@@ -48,5 +48,4 @@ class Variable
 
         return $this->context;
     }
-
 }

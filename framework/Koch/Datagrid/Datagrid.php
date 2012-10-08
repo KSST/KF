@@ -61,7 +61,7 @@ class Datagrid extends Base
      *
      * @var array
      */
-    private $_columnSets = array();
+    private $columnSets = array();
 
     /**
      * Associative Array for the definition of BatchActions for this grid.
@@ -69,7 +69,7 @@ class Datagrid extends Base
      *
      * @var array
      */
-    private $_batchActions = array();
+    private $batchActions = array();
 
     /**
      * Array with a class and method callback for altering the result set.
@@ -83,14 +83,14 @@ class Datagrid extends Base
      *
      * @var array
      */
-    private $_Cells = array();
+    private $Cells = array();
 
     /**
      * Amount of columns
      *
      * @var integer
      */
-    private $_ColCount = 0;
+    private $ColCount = 0;
 
     /**
      * Array of Clansuite_Datagrid_Column objects
@@ -115,7 +115,7 @@ class Datagrid extends Base
      *
      * @var array
      */
-    private $_features = array(
+    private $features = array(
         'Caption'       => true,
         'Header'        => true,
         'Footer'        => true,
@@ -139,7 +139,7 @@ class Datagrid extends Base
      *
      * @var array
      */
-    private $_requestParameterAliasMap = array(
+    private $requestParameterAliasMap = array(
         'SortColumn'        => 'sortC',
         'SortOrder'         => 'sortO',
         'Page'              => 'p',
@@ -162,21 +162,21 @@ class Datagrid extends Base
      *
      * @var string
      */
-    private $_doctrineEntityName;
+    private $doctrineEntityName;
 
     /**
      * The renderer for the datagrid
      *
      * @var Clansuite_Datagrid_Renderer
      */
-    private $_renderer;
+    private $renderer;
 
     /**
      * Results per Page
      *
      * @var int
      */
-    private $_resultsPerPage;
+    private $resultsPerPage;
 
     /**
      * Array of Clansuite_Datagrid_Row objects
@@ -204,7 +204,7 @@ class Datagrid extends Base
      */
     public function setBatchActions($batchActions)
     {
-        $this->_batchActions = $batchActions;
+        $this->batchActions = $batchActions;
     }
 
     /**
@@ -234,7 +234,7 @@ class Datagrid extends Base
      */
     public function setResultsPerPage($resultsPerPage)
     {
-        $this->_resultsPerPage = $resultsPerPage;
+        $this->resultsPerPage = $resultsPerPage;
     }
 
     public function setTotalResultsCount($count)
@@ -266,17 +266,17 @@ class Datagrid extends Base
 
     public function setDoctrineEntityName($entityname)
     {
-        $this->_doctrineEntityName = $entityname;;
+        $this->doctrineEntityName = $entityname;;
     }
 
     public function getDoctrineEntityName()
     {
-        return $this->_doctrineEntityName;
+        return $this->doctrineEntityName;
     }
 
     public function getBatchActions()
     {
-        return $this->_batchActions;
+        return $this->batchActions;
     }
 
     /**
@@ -323,7 +323,7 @@ class Datagrid extends Base
      */
     public function getParameterAlias($_internalKey)
     {
-        return $this->_requestParameterAliasMap[$_internalKey];
+        return $this->requestParameterAliasMap[$_internalKey];
     }
 
     /**
@@ -333,7 +333,7 @@ class Datagrid extends Base
      */
     public function getRenderer()
     {
-        return $this->_renderer;
+        return $this->renderer;
     }
 
     /**
@@ -351,7 +351,7 @@ class Datagrid extends Base
         } elseif ( isset($_REQUEST[$this->getParameterAlias('ResultsPerPage')]) ) {
             $resultsPerPage = (int) $_REQUEST[$this->getParameterAlias('ResultsPerPage')];
         } else { // if page is not inside session or request, we are on the first page
-            $resultsPerPage = $this->_resultsPerPage; // default via setResultsPerPage / config
+            $resultsPerPage = $this->resultsPerPage; // default via setResultsPerPage / config
         }
 
         // Add to session
@@ -553,10 +553,10 @@ class Datagrid extends Base
      */
     public function isEnabled($feature)
     {
-        if ( isset($this->_features[$feature]) === false ) {
+        if ( isset($this->features[$feature]) === false ) {
             throw new Clansuite_Exception(_('There is no such feature in this datagrid: ') . $feature);
         } else {
-            return $this->_features[$feature];
+            return $this->features[$feature];
         }
     }
 
@@ -573,7 +573,7 @@ class Datagrid extends Base
         $features = (array) $features;
 
         foreach ($features as $feature) {
-            $this->_features[$feature] = true;
+            $this->features[$feature] = true;
         }
     }
 
@@ -592,7 +592,7 @@ class Datagrid extends Base
 
         // disable several datagrid features
         foreach ($features as $feature) {
-            $this->_features[$feature] = false;
+            $this->features[$feature] = false;
         }
     }
 
@@ -661,7 +661,7 @@ class Datagrid extends Base
         }
 
         // Everything validates
-        $this->_columnSets = $_columnSets;
+        $this->columnSets = $_columnSets;
     }
 
     /**
@@ -671,7 +671,7 @@ class Datagrid extends Base
      */
     public function getColumnSets()
     {
-        return $this->_columnSets;
+        return $this->columnSets;
     }
 
     /**
@@ -681,7 +681,7 @@ class Datagrid extends Base
     {
         $colSet = null;
 
-        foreach ($this->_columnSets as $colKey => &$colSet) {
+        foreach ($this->columnSets as $colKey => &$colSet) {
             $oCol = new Clansuite_Datagrid_Column();
             $oCol->setAlias($colSet['Alias']);
             $oCol->setId($colSet['Alias']);
@@ -741,7 +741,7 @@ class Datagrid extends Base
             $oRow->setName('RowName_' . $rowKey);
             $oRow->setPosition($rowKey);
 
-            foreach ($this->_columnSets as $columnKey => $columnSet) {
+            foreach ($this->columnSets as $columnKey => $columnSet) {
                 $oCell = new Clansuite_Datagrid_Cell();
                 $oRow->addCell($oCell);
                 $this->rowObjects[$rowKey] = $oRow;

@@ -30,7 +30,7 @@ namespace Koch\Datatype;
  */
 class Conversion
 {
-    public static function XMLToArray($xml, $recursionDepth = 0)
+    public static function xmlToArray($xml, $recursionDepth = 0)
     {
         XML::toArray($xml, $recursionDepth);
     }

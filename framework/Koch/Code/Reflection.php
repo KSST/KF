@@ -44,7 +44,7 @@ class Reflection
      *
      * @param string $classname
      */
-    public function __construct( $classname = null)
+    public function __construct($classname = null)
     {
         $this->setClassName($classname);
     }

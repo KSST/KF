@@ -72,7 +72,9 @@ class Factory
         } elseif ($extension == '.config.yaml') {
             $adapter = 'yaml';
         } else {
-            throw new \Koch\Exception\Exception('No handler for that type of configuration file found (' . $extension .')');
+            throw new \Koch\Exception\Exception(
+                'No handler for that type of configuration file found (' . $extension .')'
+            );
         }
 
         return $adapter;

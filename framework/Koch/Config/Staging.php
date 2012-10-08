@@ -67,21 +67,18 @@ class Staging
             case 'clansuite.dev':
                 $filename = 'development.php';
                 break;
-
             // staging configuration
             case 'clansuite-stage.com':
             case 'www.clansuite-stage.com':
             case 'clansuite.stage':
                 $filename = 'staging.php';
                 break;
-
             // intern configuration
             case 'clansuite-intern.com':
             case 'www.clansuite-intern.com':
             case 'clansuite.intern':
                 $filename = 'intern.php';
                 break;
-
             default:
                 $filename = 'production.php';
         }

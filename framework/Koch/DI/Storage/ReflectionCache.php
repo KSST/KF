@@ -120,5 +120,4 @@ class ReflectionCache
         $this->implementations_of[$interface] =
                 array_values(array_keys(array_flip($this->implementations_of[$interface])));
     }
-
 }

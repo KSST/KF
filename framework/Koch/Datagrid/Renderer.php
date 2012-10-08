@@ -37,7 +37,7 @@ class Renderer
      *
      * @var Clansuite_Datagrid $_Datagrid
      */
-    private static $_datagrid;
+    private static $datagrid;
 
     /**
      * The look of the links of the pager
@@ -50,7 +50,7 @@ class Renderer
      *
      * @var array
      */
-    private static $_resultsPerPageItems = array(5, 10, 20, 50, 100);
+    private static $resultsPerPageItems = array(5, 10, 20, 50, 100);
 
     /**
      * Instantiate renderer and attach Datagrid to it
@@ -71,7 +71,7 @@ class Renderer
      */
     public static function setDatagrid($_Datagrid)
     {
-        self::$_datagrid = $_Datagrid;
+        self::$datagrid = $_Datagrid;
     }
 
     /**
@@ -81,7 +81,7 @@ class Renderer
      */
     public static function getDatagrid()
     {
-        return self::$_datagrid;
+        return self::$datagrid;
     }
 
     /**
@@ -91,7 +91,7 @@ class Renderer
      */
     public static function setResultsPerPageItems(array $_Items)
     {
-        self::$_resultsPerPageItems = $_Items;
+        self::$resultsPerPageItems = $_Items;
     }
 
     public static function setPagerCssClass($pagerCssClass)
@@ -339,7 +339,7 @@ class Renderer
      */
     public static function getResultsPerPageItems()
     {
-        return self::$_resultsPerPageItems;
+        return self::$resultsPerPageItems;
     }
 
     /**
