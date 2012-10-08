@@ -57,7 +57,7 @@ class Manager
             }
         }
 
-        return $this->routes;;
+        return $this->routes;
     }
 
     /**
