@@ -148,7 +148,7 @@ class User
         /**
          * Create $_SESSION['user'] array, containing user data
          */
-        if ( is_array($this->user) ) {
+        if (is_array($this->user) === true) {
             /**
              * Transfer User Data into Session
              */
@@ -227,7 +227,7 @@ class User
             $_SESSION['user']['group'] = '';
             $_SESSION['user']['rights'] = '';
 
-            if ( false === empty($this->user['CsGroups'])) {
+            if (false === empty($this->user['CsGroups'])) {
                 $_SESSION['user']['group']  = $this->user['CsGroups'][0]['group_id'];
                 $_SESSION['user']['role']   = $this->user['CsGroups'][0]['role_id'];
                 $_SESSION['user']['rights'] = Koch\ACL::createRightSession(
@@ -389,17 +389,14 @@ class User
 
             $this->moduleconfig = $this->config->readModuleConfig('account');
 
-            /**
-             * Proceed if match
-             */
-            if ( is_array($this->user) and
-                    Koch\Security::check_salted_hash(
-                            $_COOKIE['cs_cookie_password'],
-                            $this->user['passwordhash'],
-                            $this->user['salt'],
-                            $this->moduleconfig['login']['hash_algorithm']) and
-                    $_COOKIE['cs_cookie_user_id'] == $this->user['user_id'] )
-            {
+            $hash_ok = Koch\Security::checkSaltedHash(
+                $_COOKIE['cs_cookie_password'],
+                $this->user['passwordhash'],
+                $this->user['salt'],
+                $this->moduleconfig['login']['hash_algorithm']
+            );
+
+            if (is_array($this->user) and $hash_ok and $_COOKIE['cs_cookie_user_id'] == $this->user['user_id']) {
                 // Update the cookie
                 $this->setRememberMeCookie($_COOKIE['cs_cookie_user_id'], $_COOKIE['cs_cookie_password']);
 
@@ -408,9 +405,8 @@ class User
 
                 // Update Session in DB
                 $this->sessionSetUserId($this->user['user_id']);
-            } else // Delete cookies, if no match
-
-            {
+            } else {
+                // Delete cookies, if no match
                 setcookie('cs_cookie_user_id', false );
                 setcookie('cs_cookie_password', false );
             }
@@ -454,9 +450,9 @@ class User
      * @param $permission string The permission name, e.g. 'action_show'.
      * @return boolean True if the user has the permission, false otherwise.
      */
-    public static function hasAccess( $modulename = '', $permission = '' )
+    public static function hasAccess($modulename = '', $permission = '')
     {
-        return Koch\ACL::checkPermission( $modulename, $permission );
+        return Koch\ACL::checkPermission($modulename, $permission);
     }
 
     /**
@@ -470,7 +466,7 @@ class User
                 ->delete('CsUsers')
                 ->from('CsUsers')
                 ->where('activated = ? AND joined < ?')
-                ->execute( array( 0, time() - 259200 ) );
+                ->execute(array(0, time() - 259200));
     }
 
     /**
@@ -480,9 +476,7 @@ class User
      */
     public function isUserAuthed()
     {
-        if(true === isset($_SESSION['user']['authed']) and
-           true === (bool) $_SESSION['user']['authed'])
-        {
+        if (true === isset($_SESSION['user']['authed']) and true === (bool) $_SESSION['user']['authed']) {
             return true;
         } else {
             return false;

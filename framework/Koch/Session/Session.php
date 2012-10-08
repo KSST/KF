@@ -84,8 +84,7 @@ class Session implements SessionInterface, \ArrayAccess
          * The value comming from the clansuite config and is a minute value.
          */
         if(isset($this->config['session']['session_expire_time'])
-             and $this->config['session']['session_expire_time'] <= 60)
-        {
+             and $this->config['session']['session_expire_time'] <= 60) {
             $this->session_expire_time = $this->config['session']['session_expire_time'] * 60;
         }
 
@@ -126,9 +125,12 @@ class Session implements SessionInterface, \ArrayAccess
          * Userspace Session Storage
          */
         session_set_save_handler(
-                array($this, 'session_open'), array($this, 'session_close'), array($this, 'session_read'), array($this, 'session_write'), // this redefines session_write_close()
-                array($this, 'session_destroy'), // this redefines session_destroy()
-                array($this, 'session_gc')
+            array($this, 'sessionOpen'),
+            array($this, 'sessionClose'),
+            array($this, 'sessionRead'),
+            array($this, 'sessionWrite'), // this redefines session_write_close()
+            array($this, 'sessionDestroy'), // this redefines session_destroy()
+            array($this, 'sessionGc')
         );
 
 
@@ -202,7 +204,7 @@ class Session implements SessionInterface, \ArrayAccess
      *
      * @return true
      */
-    public function session_open()
+    public function sessionOpen()
     {
         return true;
     }
@@ -212,7 +214,7 @@ class Session implements SessionInterface, \ArrayAccess
      *
      * @return true
      */
-    public function session_close()
+    public function sessionClose()
     {
         session_write_close();
 
@@ -225,7 +227,7 @@ class Session implements SessionInterface, \ArrayAccess
      * @param  integer $session_id contains the session_id
      * @return string  string of the session data
      */
-    public function session_read( $session_id )
+    public function sessionRead($session_id)
     {
         try {
             $em = \Clansuite\Application::getEntityManager();
@@ -269,7 +271,7 @@ class Session implements SessionInterface, \ArrayAccess
      * @param  array   $data       contains session_data
      * @return bool
      */
-    public function session_write($session_id, $data)
+    public function sessionWrite($session_id, $data)
     {
         /**
          * Try to INSERT Session Data or REPLACE Session Data in case session_id already exists
@@ -310,7 +312,7 @@ class Session implements SessionInterface, \ArrayAccess
      *
      * @param string $session_id
      */
-    public function session_destroy($session_id)
+    public function sessionDestroy($session_id)
     {
         // Unset all of the session variables.
         $_SESSION = array();
@@ -353,7 +355,7 @@ class Session implements SessionInterface, \ArrayAccess
      * @param int session life time (mins)
      * @return boolean
      */
-    public function session_gc($maxlifetime = 30)
+    public function sessionGc($maxlifetime = 30)
     {
         if ($maxlifetime == 0) {
             return;

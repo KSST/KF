@@ -379,7 +379,7 @@ class Router implements RouterInterface, \ArrayAccess
              * mod_rewrite is off. the requested url style is:
              * ROOT/index.php?mod=new&ctrl=admin&action=show&id=2
              */
-            
+
             // get only the part after "index.php?"
             if (false !== strpos($urlstring, 'index.php?')) {
                 $urlstring = strstr($urlstring, 'index.php?');
@@ -791,7 +791,7 @@ class Router implements RouterInterface, \ArrayAccess
     public function checkEnvForModRewrite()
     {
         // ensure apache has module mod_rewrite active
-        if( true === function_exists('apache_get_modules') and true === in_array('mod_rewrite', apache_get_modules())) {
+        if ( true === function_exists('apache_get_modules') and true === in_array('mod_rewrite', apache_get_modules())) {
             if (true === is_file(ROOT . '.htaccess')) {
                 // load htaccess and check if RewriteEngine is enabled
                 $htaccess_content = file_get_contents(ROOT . '.htaccess');

@@ -27,5 +27,5 @@ namespace Koch\Session;
 
 abstract class AbstractSession implements SessionInterface
 {
-
+    // no body
 }

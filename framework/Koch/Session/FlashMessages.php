@@ -137,7 +137,8 @@ class FlashMessages /* extends Koch_Session */
             $html = '';
             foreach ($flashmessages as $flashmessage) {
                 foreach ($flashmessage as $type => $message) {
-                    $html .= '<link rel="stylesheet" type="text/css" href="'. WWW_ROOT_THEMES_CORE .  'css/error.css" />';
+                    $html .= '<link rel="stylesheet" type="text/css"';
+                    $html .= ' href="'. WWW_ROOT_THEMES_CORE .  'css/error.css" />';
                     $html .= '<div id="flashmessage" class="flashmessage ' . $type . '">' . $message . '</div>';
                 }
             }
