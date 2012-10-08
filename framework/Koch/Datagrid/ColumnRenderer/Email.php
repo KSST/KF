@@ -42,12 +42,12 @@ class Email extends ColumnRenderer implements ColumnRendererInterface
     {
         $_Values = $oCell->getValues();
 
-        if ( isset($_Values[0]) AND isset($_Values[1]) ) {
-            return sprintf('<a href="mailto:%s">%s</a>', $_Values[0], $_Values[1] );
+        if (isset($_Values[0]) AND isset($_Values[1])) {
+            return sprintf('<a href="mailto:%s">%s</a>', $_Values[0], $_Values[1]);
         }
 
-        if ( isset($_Values[0]) ) {
-            return sprintf('<a href="mailto:%s">%s</a>', $_Values[0], $_Values[0] );
+        if (isset($_Values[0])) {
+            return sprintf('<a href="mailto:%s">%s</a>', $_Values[0], $_Values[0]);
         }
     }
 }
