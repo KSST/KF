@@ -168,7 +168,10 @@ class Captcha
                         break;
                     // Gradient Fill
                     case 2:
-                        for ($i = 0, $rd = mt_rand(0, 100), $gr = mt_rand(0, 100), $bl = mt_rand(0, 100); $i <= $this->image_height; $i++) {
+                        $rd = mt_rand(0, 100);
+                        $gr = mt_rand(0, 100);
+                        $bl = mt_rand(0, 100);
+                        for ($i = 0; $i <= $this->image_height; $i++) {
                             $g = imagecolorallocate($this->captcha, $rd+=2, $gr+=2, $bl+=2);
                             imageline($this->captcha, 0, $i, $this->image_width, $i, $g);
                         }
@@ -176,15 +179,34 @@ class Captcha
                 }
 
                 // create textcolor from random RGB colors
-                $text_color = imagecolorallocate($this->captcha, mt_rand(50, 240), mt_rand(50, 240), mt_rand(0, 255));
+                $textcolor = imagecolorallocate(
+                    $this->captcha,
+                    mt_rand(50, 240),
+                    mt_rand(50, 240),
+                    mt_rand(0, 255)
+                );
 
                 // add some noise
                 for ($i = 1; $i <= 4; $i++) {
-                    imageellipse($this->captcha, mt_rand(1, 200), mt_rand(1, 50), mt_rand(50, 100), mt_rand(12, 25), $text_color);
+                    imageellipse(
+                        $this->captcha,
+                        mt_rand(1, 200),
+                        mt_rand(1, 50),
+                        mt_rand(50, 100),
+                        mt_rand(12, 25),
+                        $textcolor
+                    );
                 }
 
                 for ($i = 1; $i <= 4; $i++) {
-                    imageellipse($this->captcha, mt_rand(1, 200), mt_rand(1, 50), mt_rand(50, 100), mt_rand(12, 25), $background_color);
+                    imageellipse(
+                        $this->captcha,
+                        mt_rand(1, 200),
+                        mt_rand(1, 50),
+                        mt_rand(50, 100),
+                        mt_rand(12, 25),
+                        $background_color
+                    );
                 }
 
                 #\Koch\Debug\Debug::firebug($string_length);
@@ -296,7 +318,8 @@ class Captcha
 
             // we apply some html magic here => output the image by send it as inlined data ;)
             return sprintf(
-                '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />', base64_encode($imagesource)
+                '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />',
+                base64_encode($imagesource)
             );
         } elseif ($render_type == 'file_html') {
             // remove outdated captcha images
@@ -315,7 +338,7 @@ class Captcha
      * is performed in 10% of all calls to this method and
      * removes old captcha images from the captcha images directory.
      */
-    public static function garbage_collection()
+    public static function garbageCollection()
     {
         // perform the garbage_collection in 10 % of all calls
         if (mt_rand(0, 9) == 0) {
