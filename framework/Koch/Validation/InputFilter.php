@@ -31,44 +31,37 @@ class InputFilter
      * @param string $string       String to modify
      * @param string $modificators One OR Multiple Modificators to use on the String
      */
-    public function modify($string='', $modificators='' )
+    public function modify($string = '', $modificators = '')
     {
         $mods = array();
-        $mods = mb_split('[|]' ,$modificators);
+        $mods = mb_split('[|]', $modificators);
 
         foreach ($mods as $key => $value) {
             switch ($value) {
                 case 'add_slashes':
                     $string = addslashes($string);
                     break;
-
                 case 'strip_slashes':
                     $string = stripslashes($string);
                     break;
-
                 case 'strip_tags':
                     $string = striptags($string);
                     break;
-
                 case 'urlencode':
                     $string = urlencode($string);
                     break;
-
                 case 'urldecode':
                     $string = urldecode($string);
                     break;
-
                     // Replacement: ? instead of &#233
                     // todo: include replacement of & with amp -> menueditor.module.php line155
                 case 'html_replace:numeric_entities':
                     $string = preg_replace('/[^!-%\x27-;=?-~ ]/e', '"&#".ord("$0").chr(59)', $str);
                     break;
-
                     // Replacement: zB &#8364 instead of &euro
                 case 'html_replace:normal_to_numerical_entities':
-                    $string = $this->modify( html_entity_decode($string),'html_numeric_entities' );
+                    $string = $this->modify(html_entity_decode($string), 'html_numeric_entities');
                     break;
-
                 default:
                     break;
             }
@@ -134,7 +127,7 @@ class InputFilter
      *
      * @return Returns boolean TRUE or FALSE.
      */
-    public function check( $string = '', $types = '', $pattern = '', $length = 0 )
+    public function check($string = '', $types = '', $pattern = '', $length = 0)
     {
         $r_bool  = false;
         $bools   = array();

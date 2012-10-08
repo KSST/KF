@@ -76,7 +76,7 @@ class Php extends Renderer_Base
      * @param  mixed             $value Variable value
      * @return Koch_Renderer_PHP
      */
-    public function assign($key, $value=null)
+    public function assign($key, $value = null)
     {
         if (is_object($key)) {
             // @todo pull object props to array
