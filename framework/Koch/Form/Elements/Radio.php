@@ -70,5 +70,4 @@ class Radio extends Input implements FormElementInterface
 
         return $this;
     }
-
 }

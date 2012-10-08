@@ -14,6 +14,7 @@ namespace Koch\Form\Elements;
 
 use Koch\Form\FormElement;
 use Koch\Form\FormElementInterface;
+use \Koch\Functions;
 
 /**
  * This class renders the formelement textarea.
@@ -131,7 +132,7 @@ class Textarea extends FormElement implements FormElementInterface
         return $this;
     }
 
-    public function setEditorFormelement(Koch_Formelement_Interface $editorObject)
+    public function setEditorFormelement(FormelementInterface $editorObject)
     {
         $this->editorObject = $editorObject;
 
@@ -170,9 +171,11 @@ class Textarea extends FormElement implements FormElementInterface
     }
 
     /**
-     * At some point in the lifetime of this object you decided that this textarea should be a wysiwyg editor.
-     * The editorFactory will load the file and instantiate the editor object. But you already defined some properties
-     * like Cols or Rows for this textarea. Therefore it's now time to transfer these properties to the editor object.
+     * At some point in the lifetime of this object
+     * you decided that this textarea should be a wysiwyg editor.
+     * The editorFactory will load the file and instantiate the editor object.
+     * But you already defined some properties like Cols or Rows for this textarea.
+     * Therefore it's now time to transfer these properties to the editor object.
      * Because we don't render this textarea, but the requested wysiwyg editor object.
      */
     private function transferPropertiesToEditor()
@@ -222,7 +225,7 @@ class Textarea extends FormElement implements FormElementInterface
         /**
          * Content between tags (value)
          */
-        $html .= \Koch\Functions\Functions::UTF8_to_HTML($this->getValue());
+        $html .= Functions::UTF8_to_HTML($this->getValue());
 
         /**
          * Closing of textarea tag

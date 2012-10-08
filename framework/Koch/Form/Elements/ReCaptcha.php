@@ -70,14 +70,15 @@ class ReCaptcha extends Captcha implements FormElementInterface
      */
     public function validate()
     {
-        $response = recaptcha_check_answer( $this->privateKey,
-                                            $this->request->getRemoteAddress(),
-                                            $this->request->getParameterFromPost('recaptcha_challenge_field'),
-                                            $this->request->getParameterFromPost('recaptcha_response_field')
-                                          );
+        $response = recaptcha_check_answer(
+            $this->privateKey,
+            $this->request->getRemoteAddress(),
+            $this->request->getParameterFromPost('recaptcha_challenge_field'),
+            $this->request->getParameterFromPost('recaptcha_response_field')
+        );
 
         if ($response->is_valid == false) {
-            return _('The reCAPTCHA was not entered correctly. Go back and try again. (reCAPTCHA said: ' . $resp->error . ')');
+            return _('The reCAPTCHA was not entered correctly. Try again. (recaptcha error ' . $resp->error . ')');
         }
     }
 

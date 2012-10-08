@@ -59,7 +59,7 @@ class SelectLocale extends Select implements FormElementInterface
 
         $this->setOptions($options);
 
-        $this->setLabel( _('Select Locale') );
+        $this->setLabel(_('Select Locale'));
 
         // You will find the value of the drop down in $_POST['locale']!
         $this->setName('locale');

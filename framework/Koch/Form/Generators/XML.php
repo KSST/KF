@@ -64,5 +64,4 @@ class XML extends Koch_Form implements FormGeneratorInterface
           Koch\Config_XML::writeConfig($filename, $array);
          */
     }
-
 }

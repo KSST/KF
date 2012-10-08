@@ -21,5 +21,4 @@ class Password extends Text implements FormElementInterface
     {
         $this->type = 'password';
     }
-
 }

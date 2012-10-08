@@ -111,9 +111,11 @@ class Captcha extends FormElement implements FormElementInterface
     }
 
     /**
-     * At some point in the lifetime of this object you decided that this captcha should be a captcha element of specific kind.
-     * The captchaFactory will load the file and instantiate the captcha object. But you already defined some properties
-     * like Name or Size for this captcha. Therefore it's now time to transfer these properties to the captcha object.
+     * At some point in the lifetime of this object you decided that
+     * this captcha should be a captcha element of specific kind.
+     * The captchaFactory will load the file and instantiate the captcha object.
+     * But you already defined some properties like Name or Size for this captcha.
+     * Therefore it's now time to transfer these properties to the captcha object.
      * Because we don't render this captcha, but the requested captcha object.
      */
     private function transferPropertiesToCaptcha()

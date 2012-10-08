@@ -147,5 +147,4 @@ class JqSelectDate extends FormElement implements FormElementInterface
 
         return $html;
     }
-
 }

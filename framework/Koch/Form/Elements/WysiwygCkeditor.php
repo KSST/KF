@@ -44,7 +44,8 @@ class WysiwygCkeditor extends Textarea implements FormElementInterface
     public function render()
     {
         // a) loads the ckeditor javascript files
-        $javascript = '<script type="text/javascript" src="'.WWW_ROOT_THEMES_CORE . 'javascript/ckeditor/ckeditor.js"></script>';
+        $javascript = '<script type="text/javascript"';
+        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/ckeditor/ckeditor.js"></script>';
 
         // b) plug it to an specific textarea by ID
         // This script block must be included at any point "after" the <textarea> tag in the page.

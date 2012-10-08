@@ -45,7 +45,7 @@ class Ip extends Validator
             $value = idn_to_ascii($value);
         }
 
-        if (true === (bool) filter_var( $value, FILTER_VALIDATE_IP, $this->getOptions() )) {
+        if (true === (bool) filter_var($value, FILTER_VALIDATE_IP, $this->getOptions())) {
             return true;
         } else {
             return false;

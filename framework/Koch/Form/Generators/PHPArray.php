@@ -12,6 +12,8 @@
 
 namespace Koch\Form\Generators;
 
+use \Koch\Functions;
+
 /**
  * Form Generator from a PHP Array description.
  *
@@ -37,16 +39,18 @@ class PHPArray extends Form implements FormGeneratorInterface
                 );
             }
 
-            // unset the key form inside form_array, because the "form" description is no longer needed, parent Koch_Form is already informed
+            // unset the key form inside form_array
+            // because the "form" description is no longer needed
+            // parent Koch_Form is already informed
             unset($form_array['form']);
 
-            $this->validateArray_generateForm($form_array);
+            $this->validateArrayAndgenerateForm($form_array);
 
             return $this;
         }
     }
 
-    public function validateArray_generateForm($form_array)
+    public function validateArrayAndgenerateForm($form_array)
     {
         // first we ensure, that the formdescription meets certain requirements
         if (self::validateFormArrayStructure($form_array)) {
@@ -100,7 +104,10 @@ class PHPArray extends Form implements FormGeneratorInterface
                 #\Koch\Debug\Debug::firebug($obligatory_form_array_elements);
 
                 // this does the validation. it ensures that required keys are present
-                $report_differences_or_true = \Koch\Functions\Functions::array_compare($obligatory_form_array_elements, array_keys($form_array_element));
+                $report_differences_or_true = Functions::array_compare(
+                    $obligatory_form_array_elements,
+                    array_keys($form_array_element)
+                );
 
                 // errorcheck for valid formfield elements
                 if (is_array($report_differences_or_true) == false) {
@@ -108,9 +115,11 @@ class PHPArray extends Form implements FormGeneratorInterface
                     return true;
                 } else {
                     // form description arrays are not identical
-                    throw new \Koch\Exception\Exception('Form Array Structure not valid. The first array shows the obligatory form array elements.
+                    throw new \Koch\Exception\Exception(
+                        'Form Array Structure not valid. The first array shows the obligatory form array elements.
                          The second array shows your form definition. Please add the missing array keys with values.'
-                            .var_dump($report_differences_or_true));
+                        . var_dump($report_differences_or_true)
+                    );
                 }
             }
         }
