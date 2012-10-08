@@ -1,9 +1,6 @@
 <?php
-namespace Koch\Config\Adapter;
 
-if (count(get_included_files()) == 1) {
-    require_once 'autorun.php';
-}
+namespace Koch\Config\Adapter;
 
 class INITest extends \PHPUnit_Framework_TestCase
 {
@@ -45,9 +42,11 @@ class INITest extends \PHPUnit_Framework_TestCase
         return dirname(__DIR__) . '/fixtures/writeTest.ini';
     }
 
-    public function testReadConfig_throwsException_IfFileNotFound()
+    /*
+     * @expectedException FileNotFound
+     */
+    public function testReadConfigWithException()
     {
-        $this->expectException();
         $this->object->readConfig('not-existant-file.ini');
     }
 
@@ -58,19 +57,21 @@ class INITest extends \PHPUnit_Framework_TestCase
     {
         $ini_array = $this->object->writeConfig($this->getFile(), $this->getIniArray());
 
-        $this->assertEqual($ini_array, $this->getIniArray());
+        $this->assertEquals($ini_array, $this->getIniArray());
 
         unlink($this->getFile());
     }
 
     /**
      * @covers Koch\Config\Adapter\INI::writeConfig
+     *
+     * @expectedException PHPUnit_Framework_Error
+     * @expectedException FileNotFound
      */
-    public function testWriteConfig_secondParameterMustBeArray()
+    public function testWriteConfigSecondParameterMustBeArray()
     {
-        $this->expectError(); // from "array" type hint
-        $this->expectException();
-        $ini_array = $this->object->writeConfig($this->getFile(), 'string');
+        // from "array" type hint
+        $this->object->writeConfig($this->getFile(), 'string');
     }
 
     public function testReadingBooleanValues()
@@ -100,7 +101,7 @@ class INITest extends \PHPUnit_Framework_TestCase
             'bool_key' => true
         );
 
-        $this->assertEqual($expected, $config);
+        $this->assertEquals($expected, $config);
     }
 
     /**
@@ -113,8 +114,8 @@ class INITest extends \PHPUnit_Framework_TestCase
 
         $ini_array = $this->object->readConfig($this->getFile());
 
-        $this->assertEqual($ini_array, $this->getIniArray());
+        $this->assertEquals($ini_array, $this->getIniArray());
 
-        $this->assertIsA($ini_array['section']['key3-int'], 'string');
+        $this->assertInternalType($ini_array['section']['key3-int'], 'string');
     }
 }

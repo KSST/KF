@@ -67,7 +67,7 @@ class LoaderTest extends Clansuite_UnitTestCase
     public function testUnitTestHelper_createClass()
     {
         $class = $this->createClass('MyClass');
-        $this->assertIsA($class, 'MyClass');
+        $this->assertInternalType($class, 'MyClass');
         unset($class);
     }
     */

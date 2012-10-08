@@ -20,9 +20,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // config is needed for log rotation setting
-        $config = new Config();
+        //$config = new Config();
 
-        $this->object = new File($config);
+       // $this->object = new File($config);
     }
 
     /**
