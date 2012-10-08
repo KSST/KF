@@ -43,8 +43,8 @@ class Koch_Form_Validators_Ip_Test extends Clansuite_UnitTestCase
 
         // IDNA URL based on intl extension
         if (function_exists('idn_to_ascii')) {
-            $this->assertEqual(idn_to_ascii('url-ästhetik.de'),
-                        $this->validator->validate('url-ästhetik.de'));
+            $this->assertEquals(idn_to_ascii('url-ï¿½sthetik.de'),
+                        $this->validator->validate('url-ï¿½sthetik.de'));
         }
 
         // does not accept URLs

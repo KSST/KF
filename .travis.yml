@@ -16,22 +16,23 @@ before_install:
   - git submodule update --init --recursive
 
 script:
+  - phpunit
   #
   # run php-cs-fixer
   #
-  - output=$(php ./bin/php-cs-fixer/php-cs-fixer.phar fix -v --level=all --dry-run .); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
+  # - output=$(php ./bin/php-cs-fixer/php-cs-fixer.phar fix -v --level=all --dry-run .); if [[ $output ]]; then while read -r line; do echo -e "\e[00;31m$line\e[00m"; done <<< "$output"; false; fi;
   #
   # run UTF8 encoding check
   #
-  - ./bin/checkEncodingUTF8.sh framework
+  # ./bin/checkEncodingUTF8.sh framework
   #
   # run CodeSniffer
   #
-  - phpcs --encoding=utf-8 --tab-width=4 --extensions=php --standard=PSR2 ./framework/Koch
+  # phpcs --encoding=utf-8 --tab-width=4 --extensions=php --standard=PSR2 ./framework/Koch
   #
   # run unit-tests
   #
-  - ./tests/runTests.sh
+  # ./tests/runTests.sh
 
 notifications:
   irc: "irc.freenode.org#koch"

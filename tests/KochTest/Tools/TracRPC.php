@@ -38,9 +38,9 @@ class TracRPC_Test extends Clansuite_UnitTestCase
                       'multiCall' => '1',
                       'json_decode' => '1'));
 
-        $this->assertEqual('http://trac.clansuite.com/login/jsonrpc', $this->trac->tracURL);
-        $this->assertEqual('user', $this->trac->username);
-        $this->assertEqual('password', $this->trac->password);
+        $this->assertEquals('http://trac.clansuite.com/login/jsonrpc', $this->trac->tracURL);
+        $this->assertEquals('user', $this->trac->username);
+        $this->assertEquals('password', $this->trac->password);
         $this->assertTrue($this->trac->multiCall);
         $this->asserttrue($this->trac->json_decode);
 
