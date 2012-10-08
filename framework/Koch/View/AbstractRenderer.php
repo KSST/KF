@@ -180,7 +180,9 @@ abstract class AbstractRenderer
     /**
      * Reset the Cache of the Renderer
      */
-    abstract public function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null);
+    abstract public function clearCache(
+        $template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null
+    );
 
     public function getViewMapper()
     {
@@ -312,7 +314,7 @@ abstract class AbstractRenderer
     public function getLayoutTemplate()
     {
         if ($this->layoutTemplate == null) {
-            $this->setLayoutTemplate( $this->getTheme()->getLayoutFile() );
+            $this->setLayoutTemplate($this->getTheme()->getLayoutFile());
         }
 
         return $this->layoutTemplate;
@@ -383,7 +385,9 @@ abstract class AbstractRenderer
         if (method_exists($this->renderer, $method)) {
             return call_user_func_array(array($this->renderer, $method), $arguments);
         } else {
-            throw new Exception('Method "'. $method .'()" not existant in Render Engine "' . get_class($this->renderer) .'"!', 1);
+            throw new Exception(
+                'Method "'. $method .'()" not existant in Render Engine "' . get_class($this->renderer) .'"!'
+            );
         }
     }
 

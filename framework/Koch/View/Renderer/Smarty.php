@@ -163,7 +163,11 @@ class Smarty extends AbstractRenderer
             // $this->renderer->setCaching(true);
             $this->renderer->caching = (bool) $this->config['smarty']['cache'];
             // -1 ... dont expire, 0 ... refresh everytime
-            $this->renderer->cache_lifetime = isset($this->config['smarty']['cache_lifetime']) ? $this->config['smarty']['cache_lifetime'] : 0;
+            if (isset($this->config['smarty']['cache_lifetime']) === true) {
+                $this->renderer->cache_lifetime = $this->config['smarty']['cache_lifetime'];
+            } else {
+             $this->renderer->cache_lifetime = 0;
+            }
             // $this->renderer->cache_handler_func   = "";      // Specify your own cache_handler function
             $this->renderer->cache_modified_check   = 1;       // set to 1 to activate
         }
