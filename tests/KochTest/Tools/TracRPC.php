@@ -18,7 +18,7 @@ class TracRPC_Test extends Clansuite_UnitTestCase
      */
     public function setUp()
     {
-        //require_once TESTSUBJECT_DIR . '/framework/tools/tracrpc.php';
+        //require_once KOCH_FRAMEWORK . 'tools/tracrpc.php';
     }
 
     /**
