@@ -39,7 +39,9 @@ class EAccelerator extends AbstractCache implements CacheInterface
     public function __construct()
     {
         if (extension_loaded('eaccelerator') === false) {
-            throw new Exception('The PHP extension eAccelerator (cache) is not loaded! You may enable it in "php.ini!"', 300);
+            throw new Exception(
+                'The PHP extension eAccelerator (cache) is not loaded! You may enable it in "php.ini!"'
+            );
         }
 
         // @todo ensure eaccelerator 0.9.5 is in use
