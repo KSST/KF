@@ -62,5 +62,4 @@ class APCCompiler
             echo '</pre>';
         }
     }
-
 }

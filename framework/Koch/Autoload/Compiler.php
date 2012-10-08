@@ -60,8 +60,7 @@ class Compiler
             if($phpfile->isDot() === false and
                $phpfile->isDir() === false and
                $phpfile->getFilename() != basename($_SERVER['PHP_SELF']) and
-               $phpfile->getFilename() != self::$monolith_file)
-            {
+               $phpfile->getFilename() != self::$monolith_file) {
                 //echo 'Processing: ' . $phpfile . '<br>';
 
                 // get file content
