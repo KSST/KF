@@ -48,6 +48,11 @@ class EditButton extends ColumnRenderer implements ColumnRendererInterface
 
         return $oImagebutton->render();
 
-        #return sprintf('<input type="button" value="EditButton" id="EditButton-%s" name="EditButton" />', $oCell->getValue());
+        /*
+        return sprintf(
+            '<input type="button" value="EditButton" id="EditButton-%s" name="EditButton" />',
+            $oCell->getValue()
+        );
+        */
     }
 }
