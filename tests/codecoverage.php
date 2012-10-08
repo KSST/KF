@@ -62,11 +62,13 @@ class Clansuite_CodeCoverage
 
         $coverage = new CodeCoverage();
         $coverage->log = 'coverage.sqlite';
-        $coverage->root = TESTSUBJECT_DIR;
+        $coverage->root = dirname(__DIR__);
         $coverage->includes[] = '.*\.php$';
         $coverage->excludes[] = 'simpletest';
         $coverage->excludes[] = 'tests';
         $coverage->excludes[] = 'libraries';
+        $coverage->excludes[] = 'vendor';
+        $coverage->excludes[] = 'vendors';
         $coverage->excludes[] = 'coverage-report';
         $coverage->excludes[] = 'sweety';
         $coverage->excludes[] = './.*.php';
