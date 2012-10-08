@@ -88,13 +88,13 @@ class ColumnRenderer extends Renderer
      * @param  string $format
      * @return string
      */
-    public function _replacePlaceholders($values, $format)
+    public function replacePlaceholders($values, $format)
     {
         $placeholders   = array();
         $replacements   = array();
 
         // search for placeholders %{...}
-        preg_match_all('#%\{([^\}]+)\}#', $format, $placeholders, PREG_PATTERN_ORDER );
+        preg_match_all('#%\{([^\}]+)\}#', $format, $placeholders, PREG_PATTERN_ORDER);
 
         // check if placeholders are used
         // @todo replace count() with check for first placeholder element: if($_Placeholders[1][0] !== null)
@@ -103,7 +103,7 @@ class ColumnRenderer extends Renderer
         if ($_PlacerholderCount > 0) {
             // loop over placeholders
             for ($i=0;$i<$_PlacerholderCount;$i++) {
-                if ( isset($values[$placeholders[1][$i]]) ) {
+                if (isset($values[$placeholders[1][$i]])) {
                     $replacements['%{' . $placeholders[1][$i] . '}'] = $values[$placeholders[1][$i]];
                 }
             }
