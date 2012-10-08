@@ -154,14 +154,14 @@ class Cronjobs
     private $loadCronjobsFrom = 'FILE';
 
     // Constants
-    const const_PC_MINUTE = '1';
-    const const_PC_HOUR = '2';
-    const const_PC_DOM = '3';
-    const const_PC_MONTH = '4';
-    const const_PC_DOW = '5';
-    const const_PC_CMD = '7';
-    const const_PC_COMMENT = '8';
-    const const_PC_CRONLINE = '20';
+    const CONST_PC_MINUTE = '1';
+    const CONST_PC_HOUR = '2';
+    const CONST_PC_DOM = '3';
+    const CONST_PC_MONTH = '4';
+    const CONST_PC_DOW = '5';
+    const CONST_PC_CMD = '7';
+    const CONST_PC_COMMENT = '8';
+    const CONST_PC_CRONLINE = '20';
 
     /**
      * The file that contains the job descriptions.
@@ -317,12 +317,9 @@ class Cronjobs
             $months30 = Array(4, 6, 9, 11);
             $months31 = Array(1, 3, 5, 7, 8, 10, 12);
 
-            if(
-                    (in_array($dateArr['mon'], $months28) && $dateArr['mday']==28) ||
-                    ( in_array($dateArr['mon'], $months30) && $dateArr['mday']==30) ||
-                    ( in_array($dateArr['mon'], $months31) && $dateArr['mday']==31)
-            )
-            {
+            if((in_array($dateArr['mon'], $months28) && $dateArr['mday']==28) ||
+               ( in_array($dateArr['mon'], $months30) && $dateArr['mday']==30) ||
+               ( in_array($dateArr['mon'], $months31) && $dateArr['mday']==31)) {
                 $dateArr['mon']++;
                 $dateArr['mday'] = 1;
             }
@@ -358,18 +355,18 @@ class Cronjobs
         $lastScheduled = $job['lastScheduled'];
 
         if ($lastScheduled < time()) {
-            #echo '<br>Running     '.$job[self::const_PC_CRONLINE];
+            #echo '<br>Running     '.$job[self::CONST_PC_CRONLINE];
             #echo '<br> Last run:       '.date('r',$lastActual);
             #echo '<br> Last scheduled: '.date('r',$lastScheduled);
-            #Koch_Logger::writeLog('Running     '.$job[self::const_PC_CRONLINE]);
+            #Koch_Logger::writeLog('Running     '.$job[self::CONST_PC_CRONLINE]);
             #Koch_Logger::writeLog('  Last run:       '.date('r',$lastActual));
             #Koch_Logger::writeLog('  Last scheduled: '.date('r',$lastScheduled));
 
             /* if ($debug) {
              */
-            include __DIR__ . '/' . $job[self::const_PC_CMD];
+            include __DIR__ . '/' . $job[self::CONST_PC_CMD];
 
-            $jobname = mb_substr($job[self::const_PC_CMD], 9, -12);
+            $jobname = mb_substr($job[self::CONST_PC_CMD], 9, -12);
 
             // instantiate job
             $classname = 'Koch_Cronjob_' . ucfirst($jobname);
@@ -381,28 +378,28 @@ class Cronjobs
             /* }
              * lse
              {
-             * nclude($job[self::const_PC_CMD]);
+             * nclude($job[self::CONST_PC_CMD]);
              } */
 
-            $this->markLastRun($job[self::const_PC_CMD], $lastScheduled);
+            $this->markLastRun($job[self::CONST_PC_CMD], $lastScheduled);
 
-            #echo 'Completed    '.$job[self::const_PC_CRONLINE];
+            #echo 'Completed    '.$job[self::CONST_PC_CRONLINE];
 
             /* @todo log
-             * ogMessage('Completed    '.$job[self::const_PC_CRONLINE]);
+             * ogMessage('Completed    '.$job[self::CONST_PC_CRONLINE]);
              * f ($sendLogToEmail != '')
              {
-             * ail($sendLogToEmail, '[cron] '.$job[self::const_PC_COMMENT], $resultsSummary);
+             * ail($sendLogToEmail, '[cron] '.$job[self::CONST_PC_COMMENT], $resultsSummary);
              }
              */
 
             return true;
         } else {
             if ($debug) {
-                Koch_Logger::writeLog('Skipping     ' . $job[self::const_PC_CRONLINE]);
+                Koch_Logger::writeLog('Skipping     ' . $job[self::CONST_PC_CRONLINE]);
                 Koch_Logger::writeLog('  Last run:       ' . date('r', $lastActual));
                 Koch_Logger::writeLog('  Last scheduled: ' . date('r', $lastScheduled));
-                Koch_Logger::writeLog('Completed    ' . $job[self::const_PC_CRONLINE]);
+                Koch_Logger::writeLog('Completed    ' . $job[self::CONST_PC_CRONLINE]);
             }
 
             return false;
@@ -434,20 +431,20 @@ class Cronjobs
                 if (preg_match('~^([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-7,/*]+|(-|/|Sun|Mon|Tue|Wed|Thu|Fri|Sat)+)\\s+([^#]*)\\s*(#.*)?$~i', $file[$i], $job)) {
                     $jobNumber = count($jobs);
                     $jobs[$jobNumber] = $job;
-                    if ($jobs[$jobNumber][self::const_PC_DOW][0]!='*' and ! is_numeric($jobs[$jobNumber][self::const_PC_DOW])) {
-                        $jobs[$jobNumber][self::const_PC_DOW] = str_replace(
+                    if ($jobs[$jobNumber][self::CONST_PC_DOW][0]!='*' and ! is_numeric($jobs[$jobNumber][self::CONST_PC_DOW])) {
+                        $jobs[$jobNumber][self::CONST_PC_DOW] = str_replace(
                                         array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
                                         array(0, 1, 2, 3, 4, 5, 6),
-                                        $jobs[$jobNumber][self::const_PC_DOW]);
+                                        $jobs[$jobNumber][self::CONST_PC_DOW]);
                     }
-                    $jobs[$jobNumber][self::const_PC_CMD] = trim($job[self::const_PC_CMD]);
-                    $jobs[$jobNumber][self::const_PC_COMMENT] = trim(mb_substr($job[self::const_PC_COMMENT], 1));
-                    $jobs[$jobNumber][self::const_PC_CRONLINE] = $file[$i];
+                    $jobs[$jobNumber][self::CONST_PC_CMD] = trim($job[self::CONST_PC_CMD]);
+                    $jobs[$jobNumber][self::CONST_PC_COMMENT] = trim(mb_substr($job[self::CONST_PC_COMMENT], 1));
+                    $jobs[$jobNumber][self::CONST_PC_CRONLINE] = $file[$i];
                 }
 
-                $jobfile = $this->getJobFileName($jobs[$jobNumber][self::const_PC_CMD]);
+                $jobfile = $this->getJobFileName($jobs[$jobNumber][self::CONST_PC_CMD]);
 
-                $jobs[$jobNumber]['lastActual'] = $this->getLastActualRunTime($jobs[$jobNumber][self::const_PC_CMD]);
+                $jobs[$jobNumber]['lastActual'] = $this->getLastActualRunTime($jobs[$jobNumber][self::CONST_PC_CMD]);
                 $jobs[$jobNumber]['lastScheduled'] = $this->getLastScheduledRunTime($jobs[$jobNumber]);
             }
         }
@@ -466,36 +463,36 @@ class Cronjobs
     {
         $extjob = Array();
 
-        $this->parseElement($job[self::const_PC_MINUTE], $extjob[self::const_PC_MINUTE], 60);
-        $this->parseElement($job[self::const_PC_HOUR], $extjob[self::const_PC_HOUR], 24);
-        $this->parseElement($job[self::const_PC_DOM], $extjob[self::const_PC_DOM], 31);
-        $this->parseElement($job[self::const_PC_MONTH], $extjob[self::const_PC_MONTH], 12);
-        $this->parseElement($job[self::const_PC_DOW], $extjob[self::const_PC_DOW], 7);
+        $this->parseElement($job[self::CONST_PC_MINUTE], $extjob[self::CONST_PC_MINUTE], 60);
+        $this->parseElement($job[self::CONST_PC_HOUR], $extjob[self::CONST_PC_HOUR], 24);
+        $this->parseElement($job[self::CONST_PC_DOM], $extjob[self::CONST_PC_DOM], 31);
+        $this->parseElement($job[self::CONST_PC_MONTH], $extjob[self::CONST_PC_MONTH], 12);
+        $this->parseElement($job[self::CONST_PC_DOW], $extjob[self::CONST_PC_DOW], 7);
 
-        $dateArr = getdate($this->getLastActualRunTime($job[self::const_PC_CMD]));
+        $dateArr = getdate($this->getLastActualRunTime($job[self::CONST_PC_CMD]));
 
         $minutesAhead = 0;
         while($minutesAhead < 525600 and
-        ( !$extjob[self::const_PC_MINUTE][$dateArr['minutes']] or
-        ! $extjob[self::const_PC_HOUR][$dateArr['hours']] or
-        ( !$extjob[self::const_PC_DOM][$dateArr['mday']] or ! $extjob[self::const_PC_DOW][$dateArr['wday']]) or
-        ! $extjob[self::const_PC_MONTH][$dateArr['mon']])
+        ( !$extjob[self::CONST_PC_MINUTE][$dateArr['minutes']] or
+        ! $extjob[self::CONST_PC_HOUR][$dateArr['hours']] or
+        ( !$extjob[self::CONST_PC_DOM][$dateArr['mday']] or ! $extjob[self::CONST_PC_DOW][$dateArr['wday']]) or
+        ! $extjob[self::CONST_PC_MONTH][$dateArr['mon']])
         )
         {
 
-            if (!$extjob[self::const_PC_DOM][$dateArr['mday']] or ! $extjob[self::const_PC_DOW][$dateArr['wday']]) {
+            if (!$extjob[self::CONST_PC_DOM][$dateArr['mday']] or ! $extjob[self::CONST_PC_DOW][$dateArr['wday']]) {
                 $this->incrementDate($dateArr, 1, 'mday');
                 $minutesAhead+=1440;
                 continue;
             }
 
-            if (!$extjob[self::const_PC_HOUR][$dateArr['hours']]) {
+            if (!$extjob[self::CONST_PC_HOUR][$dateArr['hours']]) {
                 $this->incrementDate($dateArr, 1, 'hour');
                 $minutesAhead+=60;
                 continue;
             }
 
-            if (!$extjob[self::const_PC_MINUTE][$dateArr['minutes']]) {
+            if (!$extjob[self::CONST_PC_MINUTE][$dateArr['minutes']]) {
                 $this->incrementDate($dateArr, 1, 'minute');
                 $minutesAhead++;
                 continue;
@@ -528,13 +525,4 @@ class Cronjobs
         $jobfile = $this->getJobFileName($jobname);
         touch($jobfile);
     }
-
-}
-
-/**
- * Interface for Cronjob
- */
-interface Cronjob
-{
-    public function execute();
 }
