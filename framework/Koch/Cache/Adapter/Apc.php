@@ -158,7 +158,7 @@ class Apc extends AbstractCache implements CacheInterface
             // Calculate "APC Free Memory Percentage" ( mem_size*100/mem_used )
             $apc_sysinfos['sma_info']['mem_avail_percentage'] = sprintf('(%.1f%%)', $apc_sysinfos['sma_info']['avail_mem'] * 100 / $apc_sysinfos['sma_info']['mem_size']);
         }
-        
+
         if (true === function_exists('apc_cache_info') {
             // Retrieves cached information and meta-data from APC's data store
             $apc_sysinfos['cache_info'] = apc_cache_info();
