@@ -32,7 +32,7 @@ class String extends ColumnRenderer implements ColumnRendererInterface
         if ($this->stringFormat == '') {
             return $oCell->getValue();
         } else {
-            return $this->_replacePlaceholders($oCell->getValues(), $this->stringFormat);
+            return $this->replacePlaceholders($oCell->getValues(), $this->stringFormat);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace Koch\Cache\Adapter;
 use Koch\Cache\AbstractCache;
 use Koch\Cache\CacheInterface;
 use Koch\Exception\Exception;
+use Koch\Functions\Functions;
 
 /**
  * Cache Handler for APC (Alternative PHP Cache).
@@ -186,8 +187,8 @@ class Apc extends AbstractCache implements CacheInterface
             // Request Rate (hits, misses) / cache requests/second
             $start_time = (time() - $info['system_cache_info']['start_time']);
 
-            $req_rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
-            $info['system_cache_info']['req_rate'] = sprintf('%.2f', $req_rate);
+            $rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
+            $info['system_cache_info']['req_rate'] = sprintf('%.2f', $rate);
 
             $hit_rate = ($info['system_cache_info']['num_hits']) / $start_time;
             $info['system_cache_info']['hit_rate'] = sprintf('%.2f', $hit_rate);
@@ -199,7 +200,7 @@ class Apc extends AbstractCache implements CacheInterface
             $info['system_cache_info']['insert_rate'] = sprintf('%.2f', $insert_rate);
 
             // size
-            $info['system_cache_info']['size_files'] = \Koch\Functions\Functions::getsize($info['system_cache_info']['mem_size']);
+            $info['system_cache_info']['size_files'] = Functions::getsize($info['system_cache_info']['mem_size']);
         }
 
         $info['settings'] = ini_get_all('apc');
@@ -263,20 +264,16 @@ class Apc extends AbstractCache implements CacheInterface
     {
         $compiled = true;
 
-        switch ($recursively) {
+        if (true === $recursively) {
             // compile files in subdirectories
             // WATCH OUT ! RECURSION
-            case true:
-                foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir) {
-                    $compiled = $compiled && $this->compile_dir($dir, $recursively);
-                }
-
-            // compile files in root directory
-            case false:
-                foreach (glob($root . DIRECTORY_SEPARATOR . '*.php') as $filename) {
-                    $compiled = $compiled && $this->compile_file($filename);
-                }
-                break;
+            foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir) {
+                $compiled = $compiled && $this->compile_dir($dir, $recursively);
+            }
+        }
+        // compile files in root directory
+        foreach (glob($root . DIRECTORY_SEPARATOR . '*.php') as $filename) {
+            $compiled = $compiled && $this->compile_file($filename);
         }
 
         return $compiled;

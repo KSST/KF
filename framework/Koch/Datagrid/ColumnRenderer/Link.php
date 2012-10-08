@@ -49,7 +49,7 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
             }
         }
 
-        // render ahref
+        // render a href
         $options = array(
             'href' => Clansuite_Datagrid::appendUrl($this->linkFormat),
             'id' => $this->linkId,
