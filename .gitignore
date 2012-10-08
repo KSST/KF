@@ -39,7 +39,7 @@ cache
 .svn/entries
 
 # PHPUnit
-phpunit.xml
+# phpunit.xml
 
 # PHP composer related
 composer.lock
