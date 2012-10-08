@@ -54,13 +54,13 @@ final class Security
      * @return boolean true if the incomming hashed password matches the hashed+salted in db,
      *                               false otherwise
      */
-    public static function check_salted_hash( $passwordhash, $databasehash, $salt, $hash_algorithm )
+    public static function checkSaltedHash($passwordhash, $databasehash, $salt, $hash_algorithm)
     {
         // combine incomming $salt and $passwordhash (which is already sha1)
         $salted_string =  $salt . $passwordhash;
 
         // get hash_algo from config and generate hash from $salted_string
-        $hash = self::generate_hash($hash_algorithm, $salted_string);
+        $hash = self::generateHash($hash_algorithm, $salted_string);
 
         // then compare
         return $databasehash === $hash;
@@ -84,16 +84,16 @@ final class Security
      *
      * @return array $hash Array containing ['salt'] and ['hash']
      */
-    public static function build_salted_hash( $string = '', $hash_algorithm = '')
+    public static function buildSaltedHash($string = '', $hash_algorithm = '')
     {
         // set up the array
         $salted_hash_array = array();
         // generate the salt with fixed length 6 and place it into the array
-        $salted_hash_array['salt'] = self::generate_salt(6);
+        $salted_hash_array['salt'] = self::generateSalt(6);
         // combine salt and string
         $salted_string = $salted_hash_array['salt'] . $string;
         // generate hash from "salt+string" and place it into the array
-        $salted_hash_array['hash'] = self::generate_hash($hash_algorithm, $salted_string);
+        $salted_hash_array['hash'] = self::generateHash($hash_algorithm, $salted_string);
         // return array with elements ['salt'], ['hash']
         return $salted_hash_array;
     }
@@ -112,7 +112,7 @@ final class Security
      *
      * @return string The hashed string.
      */
-    public static function generate_hash($hash_algorithm = null, $string = '')
+    public static function generateHash($hash_algorithm = null, $string = '')
     {
         /**
          * check, if we can use skein_hash()
@@ -150,7 +150,7 @@ final class Security
      *
      * @return string Returns a string with random generated characters and numbers
      */
-    public static function generate_salt($length)
+    public static function generateSalt($length)
     {
         // set salt to empty
         $salt = '';
