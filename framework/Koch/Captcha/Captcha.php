@@ -126,8 +126,7 @@ class Captcha
                     ( ($random >= 50 && $random <= 57)   // ASCII 48->57:  numbers   0-9
                     | ($random >= 65 && $random <= 90))  // ASCII 65->90:  uppercase A-Z
                     | ($random >= 97 && $random <= 122)  // ASCII 97->122: lowercase a-z
-            )
-            {
+            ) {
                 // adds a random char to the string
                 $string .= chr($random);
             }
