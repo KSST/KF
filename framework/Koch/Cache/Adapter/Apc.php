@@ -124,10 +124,10 @@ class Apc extends AbstractCache implements CacheInterface
      */
     public function stats()
     {
-        $apc_sysinfos = array();
+        $info = array();
         // Retrieve APC Version
-        $apc_sysinfos['version'] = phpversion('apc');
-        $apc_sysinfos['phpversion'] = phpversion();
+        $info['version'] = phpversion('apc');
+        $info['phpversion'] = phpversion();
 
         /**
          * ========================================================
@@ -135,64 +135,81 @@ class Apc extends AbstractCache implements CacheInterface
          * ========================================================
          */
         if (false === function_exists('apc_sma_info')) {
-            $apc_sysinfos['sma_info'] = apc_sma_info(); // set "false" for details
+            $info['sma_info'] = apc_sma_info(); // set "false" for details
+            
             // Calculate "APC Memory Size" (Number of Segments * Size of Segment)
-            $apc_sysinfos['sma_info']['mem_size'] = $apc_sysinfos['sma_info']['num_seg'] * $apc_sysinfos['sma_info']['seg_size'];
+            $memsize = $info['sma_info']['num_seg'] * $info['sma_info']['seg_size'];
+            $info['sma_info']['mem_size'] = $memsize;
 
             // Calculate "APC Memory Usage" ( mem_size - avail_mem )
-            $apc_sysinfos['sma_info']['mem_used'] = $apc_sysinfos['sma_info']['mem_size'] - $apc_sysinfos['sma_info']['avail_mem'];
+            $memusage = $info['sma_info']['mem_size'] - $info['sma_info']['avail_mem'];
+            $info['sma_info']['mem_used'] = $memusage;
 
             // Calculate "APC Free Memory Percentage" ( mem_size*100/mem_used )
-            $apc_sysinfos['sma_info']['mem_avail_percentage'] = sprintf('(%.1f%%)', $apc_sysinfos['sma_info']['avail_mem'] * 100 / $apc_sysinfos['sma_info']['mem_size']);
+            $memsize_total = $info['sma_info']['avail_mem'] * 100;
+            $avail_mem_percent = sprintf('(%.1f%%)', $memsize_total  / $info['sma_info']['mem_size']);
+            $info['sma_info']['mem_avail_percentage'] = $avail_mem_percent;
         }
 
-        if (true === function_exists('apc_cache_info') {
+        if (true === function_exists('apc_cache_info')) {
+            
             // Retrieves cached information and meta-data from APC's data store
-            $apc_sysinfos['cache_info'] = apc_cache_info();
+            $info['cache_info'] = apc_cache_info();
+            
             #\Koch\Debug\Debug::printR(apc_cache_info());
-            $apc_sysinfos['cache_info']['cached_files'] = count($apc_sysinfos['cache_info']['cache_list']);
-            $apc_sysinfos['cache_info']['deleted_files'] = count($apc_sysinfos['cache_info']['deleted_list']);
+            $info['cache_info']['cached_files'] = count($info['cache_info']['cache_list']);
+            $info['cache_info']['deleted_files'] = count($info['cache_info']['deleted_list']);
 
             /**
              * ========================================================
              *   System Cache Informations
              * ========================================================
              */
-            $apc_sysinfos['system_cache_info'] = apc_cache_info('system', false); // set "false" for details
+            $info['system_cache_info'] = apc_cache_info('system', false); // set "false" for details
             // Calculate "APC Hit Rate Percentage"
-            $total_hits = ($apc_sysinfos['system_cache_info']['num_hits'] + $apc_sysinfos['system_cache_info']['num_misses']);
+            $hits = ($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']);
 
             // div by zero fix
-            if ($total_hits == 0) {
-                $total_hits = 1;
+            if ($hits == 0) {
+                $hits = 1;
             }
 
-            $hit_rate = $apc_sysinfos['system_cache_info']['num_hits'] * 100 / $total_hits;
-            $apc_sysinfos['system_cache_info']['hit_rate_percentage'] = sprintf('(%.1f%%)', $hit_rate);
+            $hit_rate_percentage = $info['system_cache_info']['num_hits'] * 100 / $hits;
+            $info['system_cache_info']['hit_rate_percentage'] = sprintf('(%.1f%%)', $hit_rate_percentage);
 
             // Calculate "APC Miss Rate Percentage"
-            $apc_sysinfos['system_cache_info']['miss_rate_percentage'] = sprintf('(%.1f%%)', $apc_sysinfos['system_cache_info']['num_misses'] * 100 / $total_hits);
-            $apc_sysinfos['system_cache_info']['files_cached'] = count($apc_sysinfos['system_cache_info']['cache_list']);
-            $apc_sysinfos['system_cache_info']['files_deleted'] = count($apc_sysinfos['system_cache_info']['deleted_list']);
+            $miss_percentage = $info['system_cache_info']['num_misses'] * 100 / $hits;
+            $info['system_cache_info']['miss_rate_percentage'] = sprintf('(%.1f%%)', $miss_percentage);
+            $info['system_cache_info']['files_cached'] = count($info['system_cache_info']['cache_list']);
+            $info['system_cache_info']['files_deleted'] = count($info['system_cache_info']['deleted_list']);
 
-            $time = time();
             // Request Rate (hits, misses) / cache requests/second
-            $apc_sysinfos['system_cache_info']['req_rate'] = sprintf('%.2f', ($apc_sysinfos['system_cache_info']['num_hits'] + $apc_sysinfos['system_cache_info']['num_misses']) / ($time - $apc_sysinfos['system_cache_info']['start_time']));
-            $apc_sysinfos['system_cache_info']['hit_rate'] = sprintf('%.2f', ($apc_sysinfos['system_cache_info']['num_hits']) / ($time - $apc_sysinfos['system_cache_info']['start_time']));
-            $apc_sysinfos['system_cache_info']['miss_rate'] = sprintf('%.2f', ($apc_sysinfos['system_cache_info']['num_misses']) / ($time - $apc_sysinfos['system_cache_info']['start_time']));
-            $apc_sysinfos['system_cache_info']['insert_rate'] = sprintf('%.2f', ($apc_sysinfos['system_cache_info']['num_inserts']) / ($time - $apc_sysinfos['system_cache_info']['start_time']));
+            $start_time = (time() - $info['system_cache_info']['start_time']);
+            
+            $req_rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
+            $info['system_cache_info']['req_rate'] = sprintf('%.2f', $req_rate);
+            
+            $hit_rate = ($info['system_cache_info']['num_hits']) / $start_time;
+            $info['system_cache_info']['hit_rate'] = sprintf('%.2f', $hit_rate);
+            
+            $miss_rate = ($info['system_cache_info']['num_misses'] / $start_time);
+            $info['system_cache_info']['miss_rate'] = sprintf('%.2f', $miss_rate);
+            
+            $insert_rate = (($info['system_cache_info']['num_inserts']) / $start_time);
+            $info['system_cache_info']['insert_rate'] = sprintf('%.2f', $insert_rate);
+            
             // size
-            $apc_sysinfos['system_cache_info']['size_files'] = \Koch\Functions\Functions::getsize($apc_sysinfos['system_cache_info']['mem_size']);
+            $info['system_cache_info']['size_files'] = \Koch\Functions\Functions::getsize($info['system_cache_info']['mem_size']);
         }
 
-        $apc_sysinfos['settings'] = ini_get_all('apc');
+        $info['settings'] = ini_get_all('apc');
 
         /**
          * ini_get_all array mod: for each accessvalue
          * add the name of the PHP ACCESS CONSTANTS as 'accessname'
          * @todo: cleanup?
          */
-        foreach ($apc_sysinfos['settings'] as $key => $value) {
+        foreach ($info['settings'] as $key => $value) {
             foreach ($value as $key2 => $value2) {
                 if ($key2 == 'access') {
                     $name = '';
@@ -212,15 +229,15 @@ class Apc extends AbstractCache implements CacheInterface
                     }
 
                     // add accessname to the original array
-                    $apc_sysinfos['settings'][$key]['accessname'] = $name;
+                    $info['settings'][$key]['accessname'] = $name;
                     unset($name);
                 }
             }
         }
 
-        #$apc_sysinfos['sma_info']['size_vars']  = \Koch\Functions\Functions::getsize($cache_user['mem_size']);
+        #$info['sma_info']['size_vars']  = \Koch\Functions\Functions::getsize($cache_user['mem_size']);
 
-        return $apc_sysinfos;
+        return $info;
     }
 
     /**
