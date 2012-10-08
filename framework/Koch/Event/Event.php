@@ -131,7 +131,9 @@ class Event implements \ArrayAccess
         if (true === array_key_exists($name, $this->context)) {
             return $this->context[$name];
         } else {
-            throw new \Koch\Exception\Exception(sprintf(_('The event "%s" has no context parameter "%s" .'), $this->eventname, $name));
+            throw new \Koch\Exception\Exception(
+                sprintf(_('The event "%s" has no context parameter "%s" .'), $this->eventname, $name)
+            );
         }
     }
 
