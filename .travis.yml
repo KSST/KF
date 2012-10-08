@@ -6,17 +6,17 @@
 language: php
 
 php:
-  - 5.3.3
+  - 5.3
   - 5.4
 
 before_install:
-  - pear install pear/PHP_CodeSniffer-1.4.0
-  - phpenv rehash
+  # - pear install pear/PHP_CodeSniffer-1.4.0
+  # - phpenv rehash
   - composer install
   - git submodule update --init --recursive
 
 script:
-  - phpunit -c tests/phpunit.xml
+  - php tests/runTests.php
   #
   # run php-cs-fixer
   #
