@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 exit(0);
 
 //var_dump($_FILES);

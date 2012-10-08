@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Koch FrameworkSmarty Viewhelper
  *

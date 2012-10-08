@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Project:     smarty_ajax: AJAX-enabled Smarty plugins
  * File:        function.ajax_update.php
