@@ -25,14 +25,14 @@ namespace Koch\Module;
 class Decorator
 {
     // the moduleController to decorate
-    protected $_moduleController;
+    protected $moduleController;
 
     /**
      * Decorate
      */
     public function decorate(Koch_Module_Interface $moduleController)
     {
-        $this->_moduleController = $moduleController;
+        $this->moduleController = $moduleController;
     }
 
     /**
@@ -48,9 +48,9 @@ class Decorator
         }
 
         // is the method provided by an encapsulated decorator?
-        if ($this->_moduleController instanceof Koch_Module_ControllerDecorator) {
+        if ($this->moduleController instanceof Koch_Module_ControllerDecorator) {
             // dig into the encapsulated controller and ask for the method
-            return $this->_moduleController->hasMethod($methodname);
+            return $this->moduleController->hasMethod($methodname);
         }
 
         // there was no method found

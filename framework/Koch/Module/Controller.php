@@ -73,23 +73,23 @@ namespace prefix
 
         // check if the module has a models dir
         if (is_dir($module_models_path) === true) {
-           if ($entity !== null) {
-               // use second parameter of method
-               $entity = $module_models_path . 'Entities/' . ucfirst($entity) . '.php';
-           } else {
-               // build entity filename by modulename
-               $entity = $module_models_path . 'Entities/' . ucfirst($modulename) . '.php';
-           }
+            if ($entity !== null) {
+                // use second parameter of method
+                $entity = $module_models_path . 'Entities/' . ucfirst($entity) . '.php';
+            } else {
+                // build entity filename by modulename
+                $entity = $module_models_path . 'Entities/' . ucfirst($modulename) . '.php';
+            }
 
-           if (is_file($entity) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
-               include $entity;
-           }
+            if (is_file($entity) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
+                include $entity;
+            }
 
-           $repos = $module_models_path . 'Repositories/' . ucfirst($modulename) . 'Repository.php';
+            $repos = $module_models_path . 'Repositories/' . ucfirst($modulename) . 'Repository.php';
 
-           if (is_file($repos) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
-               include $repos;
-           }
+            if (is_file($repos) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
+                include $repos;
+            }
         }
         // else Module has no Model Data
     }
@@ -183,9 +183,8 @@ namespace prefix
         // if already set, get the rendering engine from the view variable
         if ($this->view !== null) {
             return $this->view;
-        }
-        // else, set the RenderEngine to the view variable and return it
-        else {
+        } else {
+            // else, set the RenderEngine to the view variable and return it
             $this->view = $this->getRenderEngine();
 
             return $this->view;
@@ -271,7 +270,8 @@ namespace prefix
      * 3. assign model data to that view object (a,b,c)
      * 5. set data to response object
      *
-     * @param $templates mixed|array|string Array with keys 'layout_template' / 'content_template' and templates as values or just content template name.
+     * @param $templates mixed|array|string Array with keys 'layout_template' / 'content_template' and templates
+     * as values or just content template name.
      */
     public function display($templates = null)
     {
@@ -293,7 +293,9 @@ namespace prefix
         }
 
         // only the "content template" is set
-        if (is_string($templates)) { $view_mapper->setTemplate($templates); }
+        if (is_string($templates)) {
+            $view_mapper->setTemplate($templates);
+        }
 
         // get the templatename
         $template = $view_mapper->getTemplateName();
@@ -339,7 +341,7 @@ namespace prefix
         $filename  = mb_strtolower($formname) . 'Form.php';
         $directory = ROOT_MOD . mb_strtolower($module) . '/Form/';
 
-        Loader::requireFile( $directory . $filename, $classname );
+        Loader::requireFile($directory . $filename, $classname);
 
         // form preparation stage (combine description and add additional formelements)
         $form = new $classname;
