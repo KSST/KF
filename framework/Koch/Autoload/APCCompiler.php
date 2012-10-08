@@ -27,18 +27,18 @@ namespace Koch\Autoload;
 
 class APCCompiler
 {
-    public function apc_compile_dir($root, $recursively = true)
+    public function compileDir($root, $recursively = true)
     {
         $compiled = true;
 
-        switch ($recursively) {
-            case true:
-                foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir)
-                    $compiled = $compiled && apc_compile_dir($dir, $recursively);
-            case false:
-                foreach (glob($root . DIRECTORY_SEPARATOR . '*.php') as $file)
-                    $compiled = $compiled && apc_compile_file($file);
-                break;
+        if(true === $recursively) {           
+            foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir) {
+                $compiled = $compiled && apc_compile_dir($dir, $recursively);
+            }
+        } else {
+            foreach (glob($root . DIRECTORY_SEPARATOR . '*.php') as $file) {
+                $compiled = $compiled && apc_compile_file($file);
+            }
         }
 
         return $compiled;
