@@ -82,7 +82,7 @@ class XML
      * @param int Recursion Depth
      * @return array Returns assoc array containing the data from XML. Otherwise, returns null.
      */
-    public static function toArray($xml, $recursionDepth=0)
+    public static function toArray($xml, $recursionDepth = 0)
     {
         // Keep an eye on how deeply we are involved in recursion.
         if ($recursionDepth > self::MAX_RECURSION_DEPTH_ALLOWED) {
