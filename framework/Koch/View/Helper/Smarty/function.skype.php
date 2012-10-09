@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  * @package Smarty
@@ -25,7 +26,7 @@
  * @param Smarty $smarty
  * @return string
  */
-function Smarty_function_skype($params, $smarty)
+function smarty_function_skype($params, $smarty)
 {
     if (empty($params['username'])) {
         trigger_error("skype: missing skype parameter");
@@ -34,7 +35,7 @@ function Smarty_function_skype($params, $smarty)
     }
 
     $cUrl = curl_init();
-    curl_setopt($cUrl, CURLOPT_URL, 'http://mystatus.skype.com/'.$params['username'].'.num');
+    curl_setopt($cUrl, CURLOPT_URL, 'http://mystatus.skype.com/' . $params['username'] . '.num');
     curl_setopt($cUrl, CURLOPT_RETURNTRANSFER, 1);
     curl_setopt($cUrl, CURLOPT_TIMEOUT, 5);
 

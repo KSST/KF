@@ -16,7 +16,7 @@
  * @param mixed Variable to firedebug
  * @return string
  */
-function Smarty_modifier_purify($string)
+function smarty_modifier_purify($string)
 {
     /**
      * @var object HTMLPurifier

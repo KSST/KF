@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  * @package Smarty
@@ -22,12 +23,12 @@
  * @param Smarty $smarty
  * @return string
  */
-function Smarty_function_pagination($params, $smarty)
+function smarty_function_pagination($params, $smarty)
 {
     // check if a alphabet pagination is requested
-    if ( isset($params['type']) and $params['type'] == 'alphabet' ) {
+    if (isset($params['type']) and $params['type'] == 'alphabet') {
         // check if file exists
-        if ( $smarty->templateExists('pagination-alphabet.tpl') == false ) {
+        if ($smarty->templateExists('pagination-alphabet.tpl') == false) {
             echo 'Pagination Template for alphabet not found.';
         } else { // load the generic pagination template
 
@@ -36,7 +37,7 @@ function Smarty_function_pagination($params, $smarty)
     }
 
     // check if file exists
-    if ( $smarty->templateExists('pagination-generic.tpl') == false ) {
+    if ($smarty->templateExists('pagination-generic.tpl') == false) {
         echo 'Pagination Template not found.';
     } else { // load the generic pagination template
 

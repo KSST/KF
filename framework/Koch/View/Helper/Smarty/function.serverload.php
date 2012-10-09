@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  * @package Smarty
@@ -8,7 +9,7 @@
 /**
  * smarty_function_serverload
  */
-function Smarty_function_serverload($params)
+function smarty_function_serverload($params)
 {
     if (mb_strtoupper(mb_substr(PHP_OS, 0, 3)) === 'WIN') {
         $wmi = new COM("Winmgmts://");
@@ -39,7 +40,8 @@ function Smarty_function_serverload($params)
         }
     } else {
         // check if exists, else define
-        if ( false === function_exists('sys_getloadavg') ) {
+        if (false === function_exists('sys_getloadavg')) {
+
             function sys_getloadavg()
             {
                 // get average server load in the last minute. Keep quiet cause virtual hosts can give perm denied
@@ -50,6 +52,7 @@ function Smarty_function_serverload($params)
                     return $serverload;
                 }
             }
+
         }
 
         // get
@@ -57,6 +60,6 @@ function Smarty_function_serverload($params)
         if (empty($cpuload)) {
             $cpuload = array(0, 0, 0);
         }
-        echo '1[' .$cpuload[0]. '] 5[' .$cpuload[1]. '] 15[' .$cpuload[2]. ']';
+        echo '1[' . $cpuload[0] . '] 5[' . $cpuload[1] . '] 15[' . $cpuload[2] . ']';
     }
 }

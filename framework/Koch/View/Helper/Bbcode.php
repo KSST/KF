@@ -26,6 +26,7 @@ namespace Koch\View\Helper;
  */
 class Bbcode
 {
+
     /**
      * @var object instance of StringParser_BBCode
      */
@@ -58,58 +59,64 @@ class Bbcode
         /**
          * Conversions & Filters
          */
-
-        $this->bbcode->addFilter (STRINGPARSER_FILTER_PRE, array( $this, 'convertlinebreaks' ) );
-        $this->bbcode->addParser (array ('block', 'inline', 'link', 'listitem',), 'htmlspecialchars');
-        $this->bbcode->addParser (array ('block', 'inline', 'link', 'listitem',), 'nl2br');
+        $this->bbcode->addFilter(STRINGPARSER_FILTER_PRE, array($this, 'convertlinebreaks'));
+        $this->bbcode->addParser(array('block', 'inline', 'link', 'listitem',), 'htmlspecialchars');
+        $this->bbcode->addParser(array('block', 'inline', 'link', 'listitem',), 'nl2br');
 
         /**
          * Generate Standard BB Codes
          */
-
         /**
          * BB Code: [url][/url]
          */
-        $this->bbcode->addCode('url',
-                'usecontent?',
-                array($this, 'do_bbcode_url'),
-                array('usecontent_param' => 'default'),
-                'link',
-                array('listitem', 'block', 'inline'),
-                array('link'));
+        $this->bbcode->addCode(
+            'url',
+            'usecontent?',
+            array($this, 'do_bbcode_url'),
+            array('usecontent_param' => 'default'),
+            'link',
+            array('listitem', 'block', 'inline'),
+            array('link')
+        );
 
         /**
          * BB Code: [link][/link]
          */
-        $this->bbcode->addCode('link',
-                'callback_replace_single',
-                array($this, 'do_bbcode_url'),
-                array(),
-                'link',
-                array('listitem', 'block', 'inline'),
-                array('link'));
+        $this->bbcode->addCode(
+            'link',
+            'callback_replace_single',
+            array($this, 'do_bbcode_url'),
+            array(),
+            'link',
+            array('listitem', 'block', 'inline'),
+            array('link')
+        );
 
         /**
          * BB Code: [link][/link]
          */
-        $this->bbcode->addCode('img',
-                'usecontent',
-                array($this, 'do_bbcode_img'),
-                array(), 'image',
-                array('listitem', 'block', 'inline',
-                    'link'),
-                array());
+        $this->bbcode->addCode(
+            'img',
+            'usecontent',
+            array($this, 'do_bbcode_img'),
+            array(), 'image',
+            array('listitem', 'block', 'inline','link'),
+            array()
+        );
+
         /**
          * BB Code: [code][/code]
          * This uses geshi syntax highlighting.
          */
-        $this->bbcode->addCode('code',
-                'usecontent?',
-                array($this, 'do_bbcode_code'),
-                array('usecontent_param' => 'default'),
-                'code',
-                array('listitem', 'block', 'inline'),
-                array('code'));
+        $this->bbcode->addCode(
+            'code',
+            'usecontent?',
+            array($this, 'do_bbcode_code'),
+            array('usecontent_param' => 'default'),
+            'code',
+            array('listitem', 'block', 'inline'),
+            array('code')
+        );
 
         $this->bbcode->setOccurrenceType('img', 'image');
     }
@@ -135,10 +142,13 @@ class Bbcode
             /**
              * assign the code via stringparser object and its method addCode()
              */
-            $this->bbcode->addCode ($code['name'], 'simple_replace', null,
-                                    array ('start_tag' => $code['start_tag'], 'end_tag' => $code['end_tag']),
-                                    $code['content_type'],
-                                    $allowed_in, $not_allowed_in);
+            $this->bbcode->addCode(
+                $code['name'],
+                'simple_replace',
+                null,
+                array('start_tag' => $code['start_tag'],'end_tag' => $code['end_tag']),
+                $code['content_type'], $allowed_in, $not_allowed_in
+            );
         }
     }
 
@@ -165,17 +175,17 @@ class Bbcode
      *
      * @todo $params and $node_objects are unuseed check
      */
-    private function do_bbcode_url ($action, $attributes, $content, $params, $node_object)
+    private function do_bbcode_url($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
         }
 
-        if (!isset ($attributes['default'])) {
-            return '<a href="'.htmlspecialchars ($content).'">'.htmlspecialchars ($content).'</a>';
+        if (!isset($attributes['default'])) {
+            return '<a href="' . htmlspecialchars($content) . '">' . htmlspecialchars($content) . '</a>';
         }
 
-        return '<a href="'.htmlspecialchars ($attributes['default']).'">'.$content.'</a>';
+        return '<a href="' . htmlspecialchars($attributes['default']) . '">' . $content . '</a>';
     }
 
     /**
@@ -184,13 +194,13 @@ class Bbcode
      * @todo comment params
      * @return image string
      */
-    private function do_bbcode_img ($action, $attributes, $content, $params, $node_object)
+    private function do_bbcode_img($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
         }
 
-        return '<img src="'.htmlspecialchars($content).'" alt="">';
+        return '<img src="' . htmlspecialchars($content) . '" alt="">';
     }
 
     /**
@@ -198,14 +208,14 @@ class Bbcode
      *
      * @return codehighlighted string
      */
-    private function do_bbcode_code ($action, $attributes, $content, $params, $node_object)
+    private function do_bbcode_code($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
         }
 
         // Include & Instantiate GeSHi
-        if ( false === class_exists('GeSHi',false) ) {
+        if (false === class_exists('GeSHi', false)) {
             include dirname(dirname(dirname(__DIR__))) . '/vendor/geshi/geshi.php';
         }
 
@@ -222,8 +232,9 @@ class Bbcode
      *
      * @todo note by vain: why is this needed? describe problem?
      */
-    private function convertlinebreaks ($text)
+    private function convertlinebreaks($text)
     {
-        return preg_replace ("/\015\012|\015|\012/", "\n", $text);
+        return preg_replace("/\015\012|\015|\012/", "\n", $text);
     }
+
 }

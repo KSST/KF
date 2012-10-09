@@ -13,7 +13,7 @@
  * @param Smarty $smarty
  * @return string
  */
-function Smarty_compiler_continue($contents, $smarty)
+function smarty_compiler_continue($contents, $smarty)
 {
     return 'continue;';
 }

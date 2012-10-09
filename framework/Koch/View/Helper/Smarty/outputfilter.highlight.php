@@ -1,10 +1,10 @@
 <?php
+
 /**
  * Smarty plugin
  * @package Smarty
  * @subpackage plugins
  */
-
 /*
  * Smarty plugin
  * -------------------------------------------------------------
@@ -26,8 +26,8 @@
  *           patched by mose <mose@feu.org>
  *           Referer parsing by mdavey
  * -------------------------------------------------------------
-*/
-function Smarty_outputfilter_highlight($source, $smarty)
+ */
+function smarty_outputfilter_highlight($source, $smarty)
 {
     $highlight = $_REQUEST['highlight'];
     $feature_referer_highlight = $GLOBALS['feature_referer_highlight']; // @todo remove globals
@@ -36,7 +36,7 @@ function Smarty_outputfilter_highlight($source, $smarty)
         $refererhi = _refererhi();
         if (($refererhi !== null) && !empty($refererhi)) {
             if (($highlight !== null) && !empty($highlight)) {
-                $highlight = $highlight." ".$refererhi;
+                $highlight = $highlight . " " . $refererhi;
             } else {
                 $highlight = $refererhi;
             }
@@ -48,13 +48,12 @@ function Smarty_outputfilter_highlight($source, $smarty)
     }
 
     $source = preg_replace_callback(
-            '~(?:<head>.*?</head>                          // head blocks
+        '~(?:<head>.*?</head>                          // head blocks
       |<div[^>]*nohighlight.*?</div>\{\*nohighlight  // div with nohightlight
       |<script[^>]+>.*?</script>                     // script blocks
       |onmouseover=(?:"[^"]*"|\'[^\']*\')            // onmouseover (user popup)
       |<[^>]*?>                                      // all html tags
-      |(' . _enlightColor($highlight) . '))~xsi',
-            '_enlightColor',  $source);
+      |(' . _enlightColor($highlight) . '))~xsi', '_enlightColor', $source);
 
     return $source;
 }
@@ -64,7 +63,7 @@ function _enlightColor($matches)
     static $colword = array();
     if (is_string($matches)) { // just to set the color array
         // This array is used to choose colors for supplied highlight terms
-        $colorArr = array('#ffff66','#ff9999','#A0FFFF','#ff66ff','#99ff99');
+        $colorArr = array('#ffff66', '#ff9999', '#A0FFFF', '#ff66ff', '#99ff99');
 
         // Wrap all the highlight words with tags bolding them and changing
         // their background colors
@@ -74,9 +73,9 @@ function _enlightColor($matches)
         foreach ($wordArr as $word) {
             if ($word == '')
                 continue;
-            $seaword .= $seasep.preg_quote($word, '~');
-            $seasep ='|';
-            $colword[mb_strtolower($word)] = $colorArr[$i%5];
+            $seaword .= $seasep . preg_quote($word, '~');
+            $seasep = '|';
+            $colword[mb_strtolower($word)] = $colorArr[$i % 5];
             $i++;
         }
 
@@ -85,7 +84,7 @@ function _enlightColor($matches)
     // actual replacement callback
     if ($matches[1] !== null) {
         return '<span style="color:black; background-color:'
-                . $colword[mb_strtolower($matches[1])] . ';">' . $matches[1] . '</span>';
+            . $colword[mb_strtolower($matches[1])] . ';">' . $matches[1] . '</span>';
     }
 
     return $matches[0];
@@ -96,11 +95,11 @@ function _enlightColor($matches)
 function _refererhi()
 {
     $referer = parse_url($_SERVER['HTTP_REFERER']);
-    parse_str($referer['query'],$vars);
+    parse_str($referer['query'], $vars);
     if ($vars['q'] !== null) {
         return $vars['q'];
-    } else { if ($vars['p'] !== null)
-
-        return $vars['p'];
+    } else {
+        if ($vars['p'] !== null)
+            return $vars['p'];
     }
 }
