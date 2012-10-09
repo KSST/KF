@@ -243,7 +243,8 @@ class Debug
         $includedFilesCount = count($includedFiles);
         $includedFilesTotalSize = \Koch\Functions\Functions::getsize($includedFilesTotalSize);
 
-        self::printR(array('count' => $includedFilesCount, 'size' => $includedFilesTotalSize, 'files' => $includedFiles));
+        $array = array('count' => $includedFilesCount, 'size' => $includedFilesTotalSize, 'files' => $includedFiles);
+        self::printR($array);
     }
 
     /**

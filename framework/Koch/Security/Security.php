@@ -177,7 +177,7 @@ final class Security
             // add a char from the random_chars to the salt, until we got the wanted $length
             while (strlen($salt) < $length) {
                 // get a random char of $chars
-                $char_to_add = $chars[mt_rand(0,$number_of_random_chars)];
+                $char_to_add = $chars[mt_rand(0, $number_of_random_chars)];
                 // ensure that a random_char is not used twice in the salt
                 if (strstr($salt, $char_to_add) === false) {
                     // finally => add char to salt

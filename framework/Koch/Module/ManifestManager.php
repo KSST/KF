@@ -233,7 +233,7 @@ class ManifestManager
     {
         foreach ($module_directories as $module_path) {
             // strip off path info and get the modulename
-            $modulename = str_replace( ROOT_MOD, '', $module_path);
+            $modulename = str_replace(ROOT_MOD, '', $module_path);
         }
 
         self::writeModuleRegistry();
@@ -269,7 +269,7 @@ class ManifestManager
              */
 
             // 1) get the modulename, by stripping off the path info
-            $modulename = str_replace( ROOT_MOD, '', $modulepath);
+            $modulename = str_replace(ROOT_MOD, '', $modulepath);
 
             self::$modulesinfo[$modulename]['name']   = $modulename;
             self::$modulesinfo[$modulename]['id']     = $number_of_modules;
@@ -280,11 +280,12 @@ class ManifestManager
             self::$modulesinfo[$modulename]['active'] = self::isModuleActive($modulename);
 
             // hasMenu / ModuleNavigation
-            self::$modulesinfo[$modulename]['menu']   = is_file($modulepath . DIRECTORY_SEPARATOR . $modulename .'.menu.php');
+            self::$modulesinfo[$modulename]['menu'] = is_file($modulepath . '/' . $modulename . '.menu.php');
 
             // hasInfo
-            $module_infofile = $modulepath . DIRECTORY_SEPARATOR . $modulename . '.info.php';
+            $module_infofile = $modulepath . '/' . $modulename . '.info.php';
             $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
+
             if (is_file($module_infofile) === true) {
                 #\Koch\Debug\Debug::firebug($module_infofile);
 

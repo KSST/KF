@@ -39,12 +39,14 @@ class DoorKeeper
     /**
      * Constant string with the uri to the current PHPIDS default filter for download
      */
-    const PHPIDS_DEFAULT_FILTER_URI = 'http://dev.itratos.de/projects/php-ids/repository/raw/trunk/lib/IDS/default_filter.xml';
+    const PHPIDS_DEFAULT_FILTER_URI =
+    'http://dev.itratos.de/projects/php-ids/repository/raw/trunk/lib/IDS/default_filter.xml';
 
     /**
      * Constant string with the uri to the current Converter.php for download
      */
-    const PHPIDS_CONVERTER_URI = 'http://dev.itratos.de/projects/php-ids/repository/raw/trunk/lib/IDS/Converter.php';
+    const PHPIDS_CONVERTER_URI =
+    'http://dev.itratos.de/projects/php-ids/repository/raw/trunk/lib/IDS/Converter.php';
 
     /**
      * Note: content PHPIDS_UPDATE_XML_URI is currently not used for sha1 checking
@@ -117,5 +119,4 @@ class DoorKeeper
         Koch_Remotefetch::updateFileIfDifferent(self::PHPIDS_DEFAULT_FILTER_URI, IDS_FILTER_PATH);
         Koch_Remotefetch::updateFileIfDifferent(self::PHPIDS_CONVERTER_URI, ROOT_LIBRARIES . 'IDS/Converter.php');
     }
-
 }

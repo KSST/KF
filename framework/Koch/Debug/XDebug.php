@@ -168,8 +168,11 @@ class XDebug
             echo "<script type=\"text/javascript\">
                   var xdebugErrorTable = document.getElementsByClassName('xdebug-error');
                   if (xdebugErrorTable.length > 0) {
-                    var xdebugErrorTableTds = document.getElementsByClassName('xdebug-error')[0].getElementsByTagName('td');
-                    for (var i = 0; i < xdebugErrorTableTds.length; i++) {xdebugErrorTableTds[i].setAttribute('bgcolor', '');}
+                    var xdebugErrorTableTds =
+                    document.getElementsByClassName('xdebug-error')[0].getElementsByTagName('td');
+                    for (var i = 0; i < xdebugErrorTableTds.length; i++) {
+                        xdebugErrorTableTds[i].setAttribute('bgcolor', '');
+                    }
                   }";
 
             /**
@@ -407,7 +410,7 @@ class XDebug
      */
     public static function roundMB($value)
     {
-        return round(($value/1048576),2);
+        return round(($value/1048576), 2);
     }
 
     /**
@@ -481,5 +484,4 @@ class XDebug
 
         return $html;
     }
-
 }

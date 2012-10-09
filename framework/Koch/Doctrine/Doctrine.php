@@ -65,8 +65,7 @@ class Doctrine
         if (empty($config['database']['driver']) === true
         or empty($config['database']['user']) === true
         or empty($config['database']['host']) === true
-        or empty($config['database']['dbname']) === true)
-        {
+        or empty($config['database']['dbname']) === true) {
             $msg1 = _('The database connection configuration is missing.');
             $msg2 = _('Please use <a href=%s>Installation</a> to perform a proper installation.');
 
@@ -130,7 +129,8 @@ class Doctrine
         // set annotation driver for entities
         $config->setMetadataDriverImpl(
             $config->newDefaultAnnotationDriver(
-                self::getModelPathsForAllModules()));
+                self::getModelPathsForAllModules())
+        );
 
         /**
          * This is slow like hell, because getAllClassNames traverses all
@@ -182,7 +182,7 @@ class Doctrine
          * The constant definition is for building (raw) sql queries manually.
          * The database prefixing is registered via an event.
          */
-        define('DB_PREFIX', $clansuite_config['database']['prefix'] );
+        define('DB_PREFIX', $clansuite_config['database']['prefix']);
 
         $tablePrefix = new \DoctrineExtensions\TablePrefix\TablePrefix(DB_PREFIX);
         $event->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
