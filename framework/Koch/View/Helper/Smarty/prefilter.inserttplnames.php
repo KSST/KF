@@ -19,7 +19,11 @@
  * Author:  Jens-André Koch
  * --------------------------------------------------------
  */
-function Smarty_prefilter_inserttplnames( $tpl_source, $compiler )
+function smarty_prefilter_inserttplnames($tpl_source, $compiler)
 {
-    return "\n<!-- [-Start-] Included Template {\$smarty.current_dir}/{\$smarty.template} -->\n".$tpl_source."\n<!-- [-End-] Included Template {\$smarty.current_dir}/{\$smarty.template}  -->\n";
+    $html = "\n<!-- [-Start-] Included Template {\$smarty.current_dir}/{\$smarty.template} -->\n";
+    $html .= $tpl_source;
+    $html .= "\n<!-- [-End-] Included Template {\$smarty.current_dir}/{\$smarty.template}  -->\n";
+
+    return $html;
 }

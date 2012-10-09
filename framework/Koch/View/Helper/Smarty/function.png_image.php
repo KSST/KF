@@ -24,9 +24,9 @@
  *           {png_image src="somepic.png" height="0" width="0"} // slower because of extra 'getimagesize'
  * I added a new functionality for display image as a valid XHTML 1.0 tag
  * -------------------------------------------------------------
-*/
+ */
 
-function Smarty_function_png_image($params, $smarty)
+function smarty_function_png_image($params, $smarty)
 {
     $height = '';
     $width = '';
@@ -54,10 +54,10 @@ function Smarty_function_png_image($params, $smarty)
     if (($height == 0) or ($width == 0)) {
         $currentimagesize = getimagesize($src);
         $width = $currentimagesize[0];
-        $height= $currentimagesize[1];
+        $height = $currentimagesize[1];
     }
 
-    if (false == (stristr( $_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
+    if (false == (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
         $html = "<img src='$src' height='$height' width='$width' alt='$alt' $extra />";
     } else {
         $html = "<SPAN $extra STYLE='position:relative;height:$height;width:$width;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\"$src\",sizingMethod=\"scale\");'></SPAN>";

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Koch FrameworkSmarty Viewhelper
  *
@@ -24,10 +25,10 @@
  * @param Smarty $smarty
  * @return string
  */
-function Smarty_function_array($params, $smarty)
+function smarty_function_array($params, $smarty)
 {
     // be sure array has a name
-    if ( empty($params['name']) or is_string($params['name']) == false) {
+    if (empty($params['name']) or is_string($params['name']) == false) {
         trigger_error('array: name as parameter');
 
         return;
@@ -41,7 +42,7 @@ function Smarty_function_array($params, $smarty)
     }
 
     // be sure explode parameter is present
-    if ( empty($params['explode'])) {
+    if (empty($params['explode'])) {
         trigger_error('array: missing explode (true, false) as parameter');
 
         return;
@@ -50,7 +51,7 @@ function Smarty_function_array($params, $smarty)
     }
 
     // be sure delimiter parameter is present
-    if ( empty($params['delimiter'])) {
+    if (empty($params['delimiter'])) {
         trigger_error('array: missing delimiter definition as parameter');
 
         return;

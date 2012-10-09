@@ -1,45 +1,45 @@
 <?php
 
 /*
-* Smarty plugin
-* -------------------------------------------------------------
-* Type:     function
-* Name:     sliding_page
-* Purpose:  create a sliding-pager for page browsing
-* Version:  0.1
-* Date:     April 11, 2004
-* Last Modified:    April 11, 2004
-* Author:   Mario Witte <mario dot witte at chengfu dot net>
-* HTTP:     http://www.chengfu.net/
-* -------------------------------------------------------------
-*/
-function Smarty_function_sliding_pager($params, $smarty)
+ * Smarty plugin
+ * -------------------------------------------------------------
+ * Type:     function
+ * Name:     sliding_page
+ * Purpose:  create a sliding-pager for page browsing
+ * Version:  0.1
+ * Date:     April 11, 2004
+ * Last Modified:    April 11, 2004
+ * Author:   Mario Witte <mario dot witte at chengfu dot net>
+ * HTTP:     http://www.chengfu.net/
+ * -------------------------------------------------------------
+ */
+function smarty_function_sliding_pager($params, $smarty)
 {
     /*
-    @param  mixed   $pagecount          - number of pages to browse
-    @param  int     $linknum            - max. number of links to show on one page (default: 5)
-    @param  int     $curpage            - current page number
-    @param  string  baseurl             - baseurl to which the pagenumber will appended
-    @param  string  url_append          - text to append to url after pagenumber, e.g. "html" (default: "")
-    @param  string  txt_first           - text for link to first page (default: "&&")
-    @param  string  txt_prev            - text for link to previous page (default: "&")
-    @param  string  separator           - text to echobetween page numbers (default: "&|&")
-    @param  string  txt_next            - text for link to next page (default: "&")
-    @param  string  txt_last            - text for link to last page (default: "&&")
-    @param  string  txt_skip            - text shown when page s are skipped (not shown) (default: "&...&")
-    @param  string  css_class           - css class for the pager (default: "")
-    @param  boolean link_current        - whether to link the current page (default: false)
-    */
+      @param  mixed   $pagecount          - number of pages to browse
+      @param  int     $linknum            - max. number of links to show on one page (default: 5)
+      @param  int     $curpage            - current page number
+      @param  string  baseurl             - baseurl to which the pagenumber will appended
+      @param  string  url_append          - text to append to url after pagenumber, e.g. "html" (default: "")
+      @param  string  txt_first           - text for link to first page (default: "&&")
+      @param  string  txt_prev            - text for link to previous page (default: "&")
+      @param  string  separator           - text to echobetween page numbers (default: "&|&")
+      @param  string  txt_next            - text for link to next page (default: "&")
+      @param  string  txt_last            - text for link to last page (default: "&&")
+      @param  string  txt_skip            - text shown when page s are skipped (not shown) (default: "&...&")
+      @param  string  css_class           - css class for the pager (default: "")
+      @param  boolean link_current        - whether to link the current page (default: false)
+     */
 
     /* Define all vars with default value */
     $linknum = 5;
-    $url_append= '';
+    $url_append = '';
     $txt_first = '&&';
-    $txt_prev  = '&';
+    $txt_prev = '&';
     $separator = '&|&';
-    $txt_next  = '&';
-    $txt_last  = '&&';
-    $txt_skip  = '&...&';
+    $txt_next = '&';
+    $txt_last = '&&';
+    $txt_skip = '&...&';
     $css_class = '';
     $link_current = false;
 
@@ -47,7 +47,8 @@ function Smarty_function_sliding_pager($params, $smarty)
     extract($params);
 
     /* Convert page count if array */
-    if (is_array($pagecount)) $pagecount = count($pagecount);
+    if (is_array($pagecount))
+        $pagecount = count($pagecount);
 
     /* Define additional required vars */
     $delta_l = 0;
@@ -114,16 +115,16 @@ function Smarty_function_sliding_pager($params, $smarty)
 
     /* Build link bar */
     $retval = '';
-    $css_class = $css_class ? 'class="'.$css_class.'"' : '';
+    $css_class = $css_class ? 'class="' . $css_class . '"' : '';
     if ($curpage > 1) {
-        $retval .= '<a href="'.$baseurl.'1'.$url_append.'" '.$css_class.'>'.$txt_first.'</a>';
+        $retval .= '<a href="' . $baseurl . '1' . $url_append . '" ' . $css_class . '>' . $txt_first . '</a>';
         $retval .= $separator;
-        $retval .= '<a href="'.$baseurl.($curpage - 1).$url_append.'" '.$css_class.'>'.$txt_prev.'</a>';
+        $retval .= '<a href="' . $baseurl . ($curpage - 1) . $url_append . '" ' . $css_class . '>' . $txt_prev . '</a>';
         $retval .= $separator;
     }
 
     if ($links[0] != 1) {
-        $retval .= '<a href="'.$baseurl.'1'.$url_append.'" '.$css_class.'>1</a>';
+        $retval .= '<a href="' . $baseurl . '1' . $url_append . '" ' . $css_class . '>1</a>';
         if ($links[0] == 2) {
             $retval .= $separator;
         } else {
@@ -134,7 +135,7 @@ function Smarty_function_sliding_pager($params, $smarty)
     $size = count($links);
     for ($i = 0; $i < $size; $i++) {
         if ($links[$i] != $curpage or $link_current) {
-            $retval .= '<a href="'.$baseurl.$links[$i].$url_append.'" '.$css_class.'>'.$links[$i].'</a>';
+            $retval .= '<a href="' . $baseurl . $links[$i] . $url_append . '" ' . $css_class . '>' . $links[$i] . '</a>';
         } else {
             $retval .= $links[$i];
         }
@@ -150,14 +151,14 @@ function Smarty_function_sliding_pager($params, $smarty)
         } else {
             $retval .= $separator;
         }
-        $retval .= '<a href="'.$baseurl.$pagecount.$url_append.'" '.$css_class.'>'.$pagecount.'</a>';
+        $retval .= '<a href="' . $baseurl . $pagecount . $url_append . '" ' . $css_class . '>' . $pagecount . '</a>';
     }
 
     if ($curpage != $pagecount) {
         $retval .= $separator;
-        $retval .= '<a href="'.$baseurl.($curpage + 1).$url_append.'" '.$css_class.'>'.$txt_next.'</a>';
+        $retval .= '<a href="' . $baseurl . ($curpage + 1) . $url_append . '" ' . $css_class . '>' . $txt_next . '</a>';
         $retval .= $separator;
-        $retval .= '<a href="'.$baseurl.$pagecount.$url_append.'" '.$css_class.'>'.$txt_last.'</a>';
+        $retval .= '<a href="' . $baseurl . $pagecount . $url_append . '" ' . $css_class . '>' . $txt_last . '</a>';
     }
 
     return $retval;

@@ -19,12 +19,12 @@
  * @param integer
  * @return string
  */
-function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
+function smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
 {
     $_replace = array(
-        "\n" => '<i>\n</i>',
-        "\r" => '<i>\r</i>',
-        "\t" => '<i>\t</i>'
+                                                "\n" => '<i>\n</i>',
+                                                "\r" => '<i>\r</i>',
+                                                "\t" => '<i>\t</i>'
     );
 
     switch (gettype($var)) {
@@ -34,7 +34,7 @@ function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
                 $results .= '<br/>' . str_repeat('&nbsp;', $depth * 2)
                     . '<b>' . strtr($curr_key, $_replace) . '</b> =&gt; '
                     . smarty_modifier_debug_print_var($curr_val, ++$depth, $length);
-                    $depth--;
+                $depth--;
             }
             break;
         case 'object' :
@@ -44,7 +44,7 @@ function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
                 $results .= '<br/>' . str_repeat('&nbsp;', $depth * 2)
                     . '<b> -&gt;' . strtr($curr_key, $_replace) . '</b> = '
                     . smarty_modifier_debug_print_var($curr_val, ++$depth, $length);
-                    $depth--;
+                $depth--;
             }
             break;
         case 'boolean' :
@@ -67,7 +67,7 @@ function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
             break;
         case 'string' :
             $results = strtr($var, $_replace);
-            if (mb_strlen($var) > $length ) {
+            if (mb_strlen($var) > $length) {
                 $results = mb_substr($var, 0, $length - 3) . '...';
             }
             $results = htmlspecialchars('"' . $results . '"');
@@ -75,7 +75,7 @@ function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
         case 'unknown type' :
         default :
             $results = strtr((string) $var, $_replace);
-            if (mb_strlen($results) > $length ) {
+            if (mb_strlen($results) > $length) {
                 $results = mb_substr($results, 0, $length - 3) . '...';
             }
             $results = htmlspecialchars($results);
@@ -83,5 +83,3 @@ function Smarty_modifier_debug_print_var($var, $depth = 0, $length = 300)
 
     return $results;
 }
-
-/* vim: set expandtab: */

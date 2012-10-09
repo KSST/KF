@@ -591,7 +591,7 @@ class Functions
      * @param $seconds int
      * @return string Ouput: 4D 10:12:20
      */
-    public static function format_seconds_to_shortstring($seconds = 0)
+    public static function formatSecondsToShortstring($seconds = 0)
     {
         $time = '';
         if ($seconds !== null) {
