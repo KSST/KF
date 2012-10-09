@@ -325,7 +325,7 @@ namespace prefix
     {
         if (null === $module) {
             $module = HttpRequest::getRoute()->getModule();
-         }
+        }
 
         if (null === $action) {
             $action = HttpRequest::getRoute()->getAction();
@@ -333,7 +333,7 @@ namespace prefix
 
         if (null === $formname) {
             // construct formname like "news"_"action_admin_show"
-            $formname  = ucfirst($module) . '_' . ucfirst($action); // @todo adjust to PSR0
+            $formname = ucfirst($module) . '_' . ucfirst($action); // @todo adjust to PSR0
         }
 
         // construct formname, classname, filename, load file, instantiate the form
@@ -423,7 +423,7 @@ namespace prefix
      * triggerEvent is shortcut/convenience method for Eventdispatcher->triggerEvent
      *
      * @param mixed (string|object) $event   Name of Event or Event object to trigger.
-     * @param object                $context Context of the event triggering, often the object from where we are calling ($this). Default Null.
+     * @param object                $context Context of the event triggering, often simply ($this). Default Null.
      * @param string                $info    Some pieces of information. Default Null.
      */
     public function triggerEvent($event, $context = null, $info = null)

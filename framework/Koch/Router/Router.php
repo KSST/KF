@@ -495,7 +495,7 @@ class Router implements RouterInterface, \ArrayAccess
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
             $this->uri_segments = $this->parseUrl_Rewrite($this->uri);
         } else {
-            $this->uri_segments = $this->parseUrl_noRewrite($this->uri);
+            $this->uri_segments = $this->parseUrlNoRewrite($this->uri);
 
             /**
              * Handle the noRewrite URL segments by inserting them into a TargetRoute.
@@ -558,7 +558,7 @@ class Router implements RouterInterface, \ArrayAccess
                  * Regexp: "#(?P<controller>[a-z0-9_-]+)\/?#"
                  * Matches: $matches['controller'] = 'news';
                  */
-                if (1 === preg_match( $route_values['regexp'], $this->uri, $matches)) {
+                if (1 === preg_match($route_values['regexp'], $this->uri, $matches)) {
 
                     // matches[0] contains $this->uri
                     unset($matches[0]);
@@ -632,7 +632,7 @@ class Router implements RouterInterface, \ArrayAccess
      * @param  string $url The Request URL
      * @return array  Array with URI segments.
      */
-    private static function parseUrl_Rewrite($uri)
+    private static function parseUrlRewrite($uri)
     {
         $uri = str_replace(strtolower($_SERVER['SCRIPT_NAME']), '', $uri);
 
@@ -696,7 +696,7 @@ class Router implements RouterInterface, \ArrayAccess
      * @param  string $url The Request URL
      * @return array  Array with URI segments.
      */
-    private function parseUrl_noRewrite($uri)
+    private function parseUrlNoRewrite($uri)
     {
         if (false !== strpos('?', $uri)) {
             return array(0 => $uri);
@@ -778,7 +778,8 @@ class Router implements RouterInterface, \ArrayAccess
     public function checkEnvForModRewrite()
     {
         // ensure apache has module mod_rewrite active
-        if ( true === function_exists('apache_get_modules') and true === in_array('mod_rewrite', apache_get_modules())) {
+        if (true === function_exists('apache_get_modules')
+            and true === in_array('mod_rewrite', apache_get_modules())) {
             if (true === is_file(ROOT . '.htaccess')) {
                 // load htaccess and check if RewriteEngine is enabled
                 $htaccess_content = file_get_contents(ROOT . '.htaccess');
@@ -850,7 +851,8 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // Load Routes from Cache
-        if (true === self::$use_cache and true === empty($this->routes) and Cache::contains('clansuite.routes')) {
+        if (true === self::$use_cache and true === empty($this->routes) and
+            Cache::contains('clansuite.routes')) {
             $this->addRoutes(Cache::read('clansuite.routes'));
         }
 
@@ -871,22 +873,34 @@ class Router implements RouterInterface, \ArrayAccess
          */
         if (empty($this->routes) === true) {
             # one segment
-            $this->addRoute('/:module');                                             // "/news"                 (list)
+            //// "/news" (list)
+            $this->addRoute('/:module');
             # two segments
-            $this->addRoute('/:module/:action');                                     // "/news/new"               (new)
-            $this->addRoute('/:module/:controller');                                 // "/news/news"              (list)
-            $this->addRoute('/:controller/(:id)', array(1 => 'id'));                 // "/news/31"        (show/update/delete)
-            $this->addRoute('/:module/(:id)', array(1 => 'id'));                     // "/news/news/31"   (show/update/delete)
+            // "/news/new" (new)
+            $this->addRoute('/:module/:action');
+            // "/news/news" (list)
+            $this->addRoute('/:module/:controller');
+            // "/news/31" (show/update/delete)
+            $this->addRoute('/:controller/(:id)', array(1 => 'id'));
+            // "/news/news/31" (show/update/delete)
+            $this->addRoute('/:module/(:id)', array(1 => 'id'));
             # three segments
-            $this->addRoute('/:module/:controller/:action');                         // "/news/news/new"          (new)
-            $this->addRoute('/:controller/:action/(:id)', array(2 => 'id'));         // "/news/edit/42"           (edit)
-            $this->addRoute('/:module/(:id)/:action', array(1 => 'id'));             // "/news/42/edit"           (edit)
-            $this->addRoute('/:module/:controller/(:id)', array(2 => 'id'));         // "/news/news/31"   (show/update/delete)
+            // "/news/news/new" (new)
+            $this->addRoute('/:module/:controller/:action');
+            // "/news/edit/42" (edit)
+            $this->addRoute('/:controller/:action/(:id)', array(2 => 'id'));
+            // "/news/42/edit" (edit)
+            $this->addRoute('/:module/(:id)/:action', array(1 => 'id'));
+            // "/news/news/31" (show/update/delete)
+            $this->addRoute('/:module/:controller/(:id)', array(2 => 'id'));
             # four segments
-            $this->addRoute('/:module/:controller/(:id)/:action', array(2 => 'id')); // "/news/news/31/edit"      (edit)
-            $this->addRoute('/:module/:controller/:action/(:id)', array(3 => 'id')); // "/news/news/edit/31"      (edit)
+            // "/news/news/31/edit" (edit)
+            $this->addRoute('/:module/:controller/(:id)/:action', array(2 => 'id'));
+            // "/news/news/edit/31" (edit)
+            $this->addRoute('/:module/:controller/:action/(:id)', array(3 => 'id'));
             # five segments
-            $this->addRoute('/:module/:controller/:action/(:id)/:format', array(4 => 'id')); // "/news/news/edit/31.html" (edit)
+            // "/news/news/edit/31.html" (edit)
+            $this->addRoute('/:module/:controller/:action/(:id)/:format', array(4 => 'id'));
         }
     }
 

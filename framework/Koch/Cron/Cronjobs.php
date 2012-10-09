@@ -418,7 +418,8 @@ class Cronjobs
                 if (preg_match($regexp, $job)) {
                     $jobNumber = count($jobs);
                     $jobs[$jobNumber] = $job;
-                    if ($jobs[$jobNumber][self::CONST_PC_DOW][0]!='*' and ! is_numeric($jobs[$jobNumber][self::CONST_PC_DOW])) {
+                    if ($jobs[$jobNumber][self::CONST_PC_DOW][0]!='*'
+                        and !is_numeric($jobs[$jobNumber][self::CONST_PC_DOW])) {
                         $jobs[$jobNumber][self::CONST_PC_DOW] = str_replace(
                             array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
                             array(0, 1, 2, 3, 4, 5, 6),

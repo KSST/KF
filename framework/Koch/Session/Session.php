@@ -70,8 +70,8 @@ class Session implements SessionInterface, \ArrayAccess
          * Set the Session Expire Time.
          * The value comming from the clansuite config and is a minute value.
          */
-        if(isset($this->config['session']['session_expire_time'])
-             and $this->config['session']['session_expire_time'] <= 60) {
+        if (isset($this->config['session']['session_expire_time'])
+            and $this->config['session']['session_expire_time'] <= 60) {
             $this->session_expire_time = $this->config['session']['session_expire_time'] * 60;
         }
 
@@ -218,10 +218,12 @@ class Session implements SessionInterface, \ArrayAccess
     {
         try {
             $em = \Clansuite\Application::getEntityManager();
-            $query = $em->createQuery('SELECT s.session_data, s.session_starttime
-                                       FROM \Entity\Session s
-                                       WHERE s.session_name = :name
-                                       AND s.session_id = :id');
+            $query = $em->createQuery(
+                'SELECT s.session_data, s.session_starttime
+                FROM \Entity\Session s
+                WHERE s.session_name = :name
+                AND s.session_id = :id'
+            );
             $query->setParameters(array('name' => self::SESSION_NAME, 'id' => $session_id));
             $result = $query->getResult();
 
@@ -316,8 +318,8 @@ class Session implements SessionInterface, \ArrayAccess
 
         $query = $em->createQuery(
             'DELETE \Entity\Session s
-                WHERE s.session_name = :name
-                    AND s.session_id = :id'
+            WHERE s.session_name = :name
+            AND s.session_id = :id'
         );
 
         $query->setParameters(array(
@@ -362,8 +364,8 @@ class Session implements SessionInterface, \ArrayAccess
 
         $query = $em->createQuery(
             'DELETE \Entity\Session s
-                WHERE s.session_name = :name
-                    AND s.session_starttime < :time'
+            WHERE s.session_name = :name
+            AND s.session_starttime < :time'
         );
 
         $query->setParameters(array(

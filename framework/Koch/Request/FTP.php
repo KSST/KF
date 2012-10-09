@@ -1,9 +1,10 @@
 <?php
 
 /**
-* Koch Framework
-* Jens A. Koch © 2005 - onwards
-* * SPDX-License-Identifier: MIT
+ * Koch Framework
+ * Jens A. Koch © 2005 - onwards
+ *
+ * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
  * the LICENSE file that was distributed with this source code.
@@ -12,56 +13,57 @@
 namespace Koch\Request;
 
 /**
-* Koch Framework - Core FTP Class
-*
-* Allows connections to FTP servers and basic directory and file operations.
-*/
+ * Koch Framework - Core FTP Class
+ *
+ * Allows connections to FTP servers and basic directory and file operations.
+ */
 class FTP
 {
+
     /**
-* @var array $errors An array of any errors
-*/
+     * @var array $errors An array of any errors
+     */
     public $errors = array();
 
     /**
-* @var ressource
-*/
+     * @var ressource
+     */
     private $connection;
 
     /**
-* @var string $server The server hostname to connect to.
-*/
+     * @var string $server The server hostname to connect to.
+     */
     private $server;
 
     /**
-* @var string $username The username required to access the FTP server.
-*/
+     * @var string $username The username required to access the FTP server.
+     */
     private $username;
 
     /**
-* @var string $password The password required to access the FTP server.
-*/
+     * @var string $password The password required to access the FTP server.
+     */
     private $password;
 
     /**
-* @var int $port The port number to connect to the FTP server on.
-*/
+     * @var int $port The port number to connect to the FTP server on.
+     */
     private $port;
 
     /**
-* @var bool $passive Whether or not to use a passive or active connection.
-*/
+     * @var bool $passive Whether or not to use a passive or active connection.
+     */
     private $passive;
 
     /**
-* Default Constructor
-*
-* @param string $server The server hostname to connect to.
-* @param string $username The username required to access the FTP server.
-* @param string $password The password required to access the FTP server.
-* @param int $port The port number to connect to the FTP server on.
-* @param bool $passive Whether or not to use a passive or active connection.
-*/
+     * Default Constructor
+     *
+     * @param string $server   The server hostname to connect to.
+     * @param string $username The username required to access the FTP server.
+     * @param string $password The password required to access the FTP server.
+     * @param int    $port     The port number to connect to the FTP server on.
+     * @param bool   $passive  Whether or not to use a passive or active connection.
+     */
     public function __construct($server, $username, $password, $port = 21, $passive = FALSE)
     {
         if (extension_loaded('ftp') === false) {
@@ -76,14 +78,14 @@ class FTP
     }
 
     /**
-* Tries to
-* (1) open a connection to the remote server
-* (2) authenticate the user
-* (3) set the connection mode
-*
-* @return bool
-*/
-    private function open_connection()
+     * Tries to
+     * (1) open a connection to the remote server
+     * (2) authenticate the user
+     * (3) set the connection mode
+     *
+     * @return bool
+     */
+    private function openConnection()
     {
         // open connection
         if (!$connection = @ftp_connect($this->server, $this->port)) {
@@ -110,15 +112,15 @@ class FTP
     }
 
     /**
-* Upload a local file to the remote server
-*
-* @param string $source_file The local file to upload
-* @param string $destination_file The remote location and name of the file
-* @param string $transfer_mode optional Defaults to Binary connections but can use FTP_ASCII
-*/
+     * Upload a local file to the remote server
+     *
+     * @param string $source_file      The local file to upload
+     * @param string $destination_file The remote location and name of the file
+     * @param string $transfer_mode    optional Defaults to Binary connections but can use FTP_ASCII
+     */
     public function upload($source_file, $destination_file, $transfer_mode = FTP_BINARY)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -143,16 +145,16 @@ class FTP
     }
 
     /**
-* Download a a file from remote server to local file
-*
-* @param string $source_file The remote file
-* @param string $destination_file The local file to create
-* @param string $transfer_mode optional Defaults to Binary connections but can use FTP_ASCII
-* @return bool
-*/
+     * Download a a file from remote server to local file
+     *
+     * @param  string $source_file      The remote file
+     * @param  string $destination_file The local file to create
+     * @param  string $transfer_mode    optional Defaults to Binary connections but can use FTP_ASCII
+     * @return bool
+     */
     public function download($source_file, $destination_file, $transfer_mode = FTP_BINARY)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -170,14 +172,14 @@ class FTP
     }
 
     /**
-* Deletes a remote file
-*
-* @param string $file The remote file to delete
-* @return bool
-*/
-    public function delete_file($file = '')
+     * Deletes a remote file
+     *
+     * @param  string $file The remote file to delete
+     * @return bool
+     */
+    public function deleteFile($file = '')
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -195,20 +197,20 @@ class FTP
     }
 
     /**
-* Rename or move a file or a directory
-*
-* @param string $source_file The file or folder to be renamed/moved
-* @param string $renamed_file The destination or new name of the file/folder
-* @return bool
-*/
-    public function rename_or_move($source_file, $renamed_file)
+     * Rename or move a file or a directory
+     *
+     * @param  string $source_file  The file or folder to be renamed/moved
+     * @param  string $renamed_file The destination or new name of the file/folder
+     * @return bool
+     */
+    public function renameOrMove($source_file, $renamed_file)
     {
         // if source and target files are equal, do nothing and return early
         if ($source_file == $renamed_file) {
             return true;
         }
 
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -225,14 +227,14 @@ class FTP
     }
 
     /**
-* Create a remote directory (mkdir)
-*
-* @param string $dir The path of the remote directory to create
-* @return bool
-*/
+     * Create a remote directory (mkdir)
+     *
+     * @param  string $dir The path of the remote directory to create
+     * @return bool
+     */
     public function createDirectory($dir)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -249,14 +251,14 @@ class FTP
     }
 
     /**
-* Delete a remote directory (rmdir)
-*
-* @param string $dir The path of the remote directory to delete
-* @return bool
-*/
+     * Delete a remote directory (rmdir)
+     *
+     * @param  string $dir The path of the remote directory to delete
+     * @return bool
+     */
     public function deleteDirectory($dir)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -273,15 +275,15 @@ class FTP
     }
 
     /**
-* Set permissions on a file or directory (chmod)
-*
-* @param string $file The file or directory to modify
-* @param int $chmod optional The permissions to apply Default 0755
-* @return bool
-*/
+     * Set permissions on a file or directory (chmod)
+     *
+     * @param  string $file  The file or directory to modify
+     * @param  int    $chmod optional The permissions to apply Default 0755
+     * @return bool
+     */
     public function setPermissions($file, $chmod = 0755)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -307,26 +309,26 @@ class FTP
     }
 
     /**
-* Check if a file exists
-*
-* @param string $filename The remote file to check
-* @return bool|int FALSE if file doesn't exist or the number of bytes
-*/
+     * Check if a file exists
+     *
+     * @param  string   $filename The remote file to check
+     * @return bool|int FALSE if file doesn't exist or the number of bytes
+     */
     public function isFile($filename)
     {
-        $this->file_size($filename);
+        $this->fileSize($filename);
     }
 
     /**
-* Get the size in bytes of a remote file
-* Can be used to check if a file exists
-*
-* @param string $filename The remote file to check
-* @return bool|int FALSE if file doesn't exist or the number of bytes
-*/
-    public function file_size($filename)
+     * Get the size in bytes of a remote file
+     * Can be used to check if a file exists
+     *
+     * @param  string   $filename The remote file to check
+     * @return bool|int FALSE if file doesn't exist or the number of bytes
+     */
+    public function fileSize($filename)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -345,14 +347,14 @@ class FTP
     }
 
     /**
-* Checks whether a directory exists by trying to navigate to it
-*
-* @param string $dir The directory to check
-* @return bool
-*/
+     * Checks whether a directory exists by trying to navigate to it
+     *
+     * @param  string $dir The directory to check
+     * @return bool
+     */
     public function isDir($dir)
     {
-        if ($this->open_connection() === false) {
+        if ($this->openConnection() === false) {
             return false;
         }
 
@@ -368,14 +370,14 @@ class FTP
     }
 
     /**
-* Returns the contents of a directory
-*
-* @param string $dir The directory to read
-* @return array|bool An array of files or a FALSE on error
-*/
+     * Returns the contents of a directory
+     *
+     * @param  string     $dir The directory to read
+     * @return array|bool An array of files or a FALSE on error
+     */
     public function getDirectoryContent($dir)
     {
-        $this->open_connection();
+        $this->openConnection();
 
         $f = @ftp_nlist($this->connection, $dir);
 
@@ -392,10 +394,10 @@ class FTP
     }
 
     /**
-    * Attempts to close the connection
-    *
-    * @return bool
-    */
+     * Attempts to close the connection
+     *
+     * @return bool
+     */
     private function close_connection()
     {
         if (@ftp_close($this->connection) === false) {
