@@ -52,7 +52,7 @@ class Maintenance implements FilterInterface
         $smarty = new Smarty($this->config);
 
         // fetch maintenance template
-        $html = $smarty->fetch(ROOT_THEMES_CORE . 'view/smarty/maintenance.tpl', true);
+        $html = $smarty->fetch($this->config['maintenance']['template'], true);
 
         // output
         $response->setContent($html);

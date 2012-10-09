@@ -253,7 +253,7 @@ class Datagrid extends Base
 
     public function setDoctrineEntityName($entityname)
     {
-        $this->doctrineEntityName = $entityname;;
+        $this->doctrineEntityName = $entityname;
     }
 
     public function getDoctrineEntityName()
@@ -640,7 +640,8 @@ class Datagrid extends Base
 
             // No SortCol although sorting is enabled
             if ( isset($columnSet['Sort']) and !isset($columnSet['SortCol']) ) {
-                throw new Clansuite_Exception(sprintf(_('The datagrid columnset has an error at key %s (sorting is enabled but "SortCol" is missing)'), $key));
+                $msg = _('The datagrid columnset has an error at key %s (sorting is enabled but "SortCol" is missing)');
+                throw new \Koch\Exception\Exception(sprintf($msg, $key));
             }
 
             // Default type: String
@@ -877,11 +878,13 @@ class Datagrid extends Base
 
         // Check for valid formats of key and value
         if (($SearchColumn != '' and $SearchForValue != '')) {
-            $this->queryBuilder->add('andWhere',
-                    // string = ANDWHERE a.fieldname LIKE :SearchForValue
-                    $this->queryBuilder->expr()->like(
-                            'a.' . $this->getColumn($SearchColumn)->getSortField(),
-                            '%' . $SearchForValue . '%')
+            $this->queryBuilder->add(
+                'andWhere',
+                // string = ANDWHERE a.fieldname LIKE :SearchForValue
+                $this->queryBuilder->expr()->like(
+                    'a.' . $this->getColumn($SearchColumn)->getSortField(),
+                    '%' . $SearchForValue . '%'
+                )
             );
 
             // DEBUG

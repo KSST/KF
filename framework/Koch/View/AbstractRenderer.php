@@ -241,15 +241,15 @@ abstract class AbstractRenderer
         $template_constants['meta'] = $this->config['meta'];
 
         /**
-         * c) Clansuite Version
+         * c) Application Version
          *
          *    Note: This is doubled functionality.
-         *    You can use $smarty.const.CLANSUITE_VERSION or $clansuite_version in a template.
+         *    You can use $smarty.const.APPLICATION_VERSION or $application_version in a template.
          */
-        $template_constants['clansuite_version']       = CLANSUITE_VERSION;
-        $template_constants['clansuite_version_state'] = CLANSUITE_VERSION_STATE;
-        $template_constants['clansuite_version_name']  = CLANSUITE_VERSION_NAME;
-        $template_constants['clansuite_url']           = CLANSUITE_URL;
+        $template_constants['application_version']       = APPLICATION_VERSION;
+        $template_constants['application_version_state'] = APPLICATION_VERSION_STATE;
+        $template_constants['application_version_name']  = APPLICATION_VERSION_NAME;
+        $template_constants['application_url']           = APPLICATION_URL;
 
         /**
          * d) Page related

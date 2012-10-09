@@ -145,7 +145,8 @@ class DoctrineProfiler
         }
 
         $html .= '</table>';
-        $html .= '<p style="font-weight: bold;">&nbsp; &raquo; &nbsp; '.$query_counter.' statements in ' . sprintf('%2.5f', $time) . ' secs.</p>';
+        $html .= '<p style="font-weight: bold;">&nbsp; &raquo; &nbsp;' . $query_counter;
+        $html .= ' statements in ' . sprintf('%2.5f', $time) . ' secs.</p>';
         $html .= '</fieldset>';
 
         echo $html;
