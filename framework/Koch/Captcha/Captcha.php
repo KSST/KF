@@ -53,6 +53,11 @@ class Captcha
     public static $font;
 
     /**
+     * @var array List of font folders.
+     */
+    public static $font_folders = array();
+
+    /**
      * @var resource The captcha image.
      */
     public $captcha;
@@ -66,8 +71,36 @@ class Captcha
             throw new \Koch\Exception\Exception(_('GD Library missing.'));
         }
 
+        // set frameworks font folder as default
+        self::$font_folder[] = __DIR__ . '/fonts';
+
         // pick a random font from the fonts dir
-        self::$font = self::getRandomFont(ROOT_THEMES_CORE . 'fonts/');
+        self::$font = self::getRandomFont(self::$font_folders);
+    }
+
+    /**
+     * Set one or more font folders.
+     *
+     * @param string|array $folders
+     */
+    public static function setFontFolder($folders)
+    {
+        // folder might be string
+        $folders = (array) $folders;
+
+        foreach ($folders as $folder) {
+            self::$font_folders[] = $folder;
+        }
+    }
+
+    /**
+     * Set the captcha font to use.
+     *
+     * @param string $font Fullpath to a font.ttf.
+     */
+    public static function setFont($font)
+    {
+        self::$font = $font;
     }
 
     /**
@@ -77,6 +110,11 @@ class Captcha
      */
     public static function getRandomFont($fonts_dir)
     {
+        // select one random dir, when multiple font folders are set
+        if (is_array($fonts_dir)) {
+            $fonts_dir = $fonts_dir[array_rand($fonts_dir)];
+        }
+
         // build the fonts array by detecting all font files
         $iterator = new \DirectoryIterator($fonts_dir);
 
