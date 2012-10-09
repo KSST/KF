@@ -55,19 +55,21 @@ class SwiftMailer
      */
     private function loadMailer()
     {
+        $vendor = dirname(dirname(__DIR__)) . '/vendor/';
+
         // Include the Swiftmailer Class
-        include ROOT_LIBRARIES . 'swiftmailer/Swift.php';
+        include $vendor . 'swiftmailer/Swift.php';
 
         /**
          * Include the Swiftmailer Connection Class and Set $connection
          */
         if ($this->config['email']['mailmethod'] != 'smtp') {
-            include ROOT_LIBRARIES . 'swiftmailer/Swift/Connection/Sendmail.php';
+            include $vendor . 'swiftmailer/Swift/Connection/Sendmail.php';
         }
 
         switch ($this->config['email']['mailmethod']) {
             case 'smtp':
-                include ROOT_LIBRARIES . 'swiftmailer/Swift/Connection/SMTP.php';
+                include $vendor . 'swiftmailer/Swift/Connection/SMTP.php';
                 $connection = new Swift_Connection_SMTP($this->config['email']['mailerhost'], $this->config['email']['mailerport'], $this->config['email']['mailencryption']);
                 break;
 

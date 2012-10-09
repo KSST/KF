@@ -69,6 +69,8 @@ class YAML
      */
     public static function writeConfig($file, array $array)
     {
+        $spyc_lib = dirname(dirname(dirname(__DIR__))) . '/vendor/spyc/Spyc.class.php';
+
         /**
          * transform PHP Array into YAML Format
          */
@@ -79,10 +81,10 @@ class YAML
             $yaml = syck_dump($data);
         }
         // else check, if we have spyc as library
-        elseif (is_file(ROOT_LIBRARIES . '/spyc/Spyc.class.php') === true) {
+        elseif (is_file($spyc_lib) === true) {
             // ok, load spyc
             if (false === class_exists('Spyc', false)) {
-                include ROOT_LIBRARIES . '/spyc/Spyc.class.php';
+                include $spyc_lib;
             }
 
             $spyc = new Spyc();

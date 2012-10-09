@@ -48,11 +48,13 @@ class Xtemplate extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
+        $xtpl = dirname(dirname(dirname(__DIR__))) . '/vendor/xtemplate/xtemplate.class.php';
+
         // prevent redeclaration
         if (class_exists('XTemplate', false) == false) {
             // check if library exists
-            if (is_file(ROOT_LIBRARIES . 'xtemplate/xtemplate.class.php') === true) {
-                include ROOT_LIBRARIES . 'xtemplate/xtemplate.class.php';
+            if (is_file($xtpl) === true) {
+                include $xtpl;
             } else {
                 throw new Exception('XTemplate Library missing!');
             }

@@ -87,18 +87,20 @@ class Doctrine
     {
         self::checkDataSourceName($clansuite_config);
 
+        $vendor = dirname(dirname(__DIR__)) . '/vendor/';
+
         // ensure doctrine2 exists in the libraries folder
-        if (is_file(ROOT_LIBRARIES . 'Doctrine/Common/ClassLoader.php') === false) {
+        if (is_file($vendor . 'Doctrine/Common/ClassLoader.php') === false) {
             throw new \Koch\Exception\Exception('Doctrine2 not found. Check Libraries Folder.', 100);
         }
 
         // get isolated loader
-        require ROOT_LIBRARIES . 'Doctrine/Common/ClassLoader.php';
+        require $vendor . 'Doctrine/Common/ClassLoader.php';
 
         // setup autoloaders with namespace and path to search in
-        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', ROOT_LIBRARIES);
+        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', $vendor);
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', ROOT_LIBRARIES .  'Doctrine/Symfony');
+        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', $vendor .  'Doctrine/Symfony');
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader('Entity', ROOT . 'Doctrine');
         $classLoader->register();
@@ -108,7 +110,7 @@ class Doctrine
         $classLoader->register();
 
         // include Doctrine Extensions
-        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', ROOT_LIBRARIES);
+        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', $vendor);
         $classLoader->register();
 
         // fetch doctrine config handler for configuring
