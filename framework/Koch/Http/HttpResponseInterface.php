@@ -28,7 +28,7 @@ interface HttpResponseInterface
     public static function sendResponse();
 
     // Cookie Methods
-    public static function createCookie(
+    public static function setCookie(
         $name,
         $value = '',
         $maxage = 0,
