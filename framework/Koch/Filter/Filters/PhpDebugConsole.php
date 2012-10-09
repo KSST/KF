@@ -64,8 +64,8 @@ class PhpDebugConsole implements FilterInterface
          */
 
         // Additional ini path for PHPDEBUG
-        define('ADD_PHPDEBUG_ROOT', ROOT_LIBRARIES . 'phpdebug' );
-        set_include_path(ADD_PHPDEBUG_ROOT . PATH_SEPARATOR. get_include_path());
+        define('ADD_PHPDEBUG_ROOT', ROOT_LIBRARIES . 'phpdebug');
+        set_include_path(ADD_PHPDEBUG_ROOT . PATH_SEPARATOR . get_include_path());
 
         // Load Library
         if (false === class_exists('PHP_Debug', false)) {
@@ -116,25 +116,5 @@ class PhpDebugConsole implements FilterInterface
 
         // and output the debugging console at the end of the application runtime
         \Koch\Event\Dispatcher::instantiate()->addEventHandler('onApplicationShutdown', $event);
-    }
-}
-
-/**
- * Helper Object for echoing the HTML content
- */
-class DebugConsoleResponse_Event // implements Koch_Event_Interface
-{
-    public $name = 'DebugConsoleResponse';
-
-    private $debugbarHTML;
-
-    public function __construct($debugbarHTML)
-    {
-        $this->debugbarHTML = $debugbarHTML;
-    }
-
-    public function execute()
-    {
-        echo $this->debugbarHTML;
     }
 }

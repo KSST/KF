@@ -45,8 +45,10 @@ class Utf8
         if (UTF8_MBSTRING === true) {
             // we do not accept mbstring function overloading set in php.ini
             if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING) {
-                $msg = _('The string functions are overloaded by mbstring. Please stop that.
-                          Check php.ini - setting: mbstring.func_overload.');
+                $msg = _(
+                    'The string functions are overloaded by mbstring. Please stop that.
+                    Check php.ini - setting: mbstring.func_overload.'
+                );
                 trigger_error($msg, E_USER_ERROR);
             }
 

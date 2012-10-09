@@ -56,20 +56,20 @@ class Upload implements ArrayAccess, IteratorAggregate, Countable
                 $filecounter = count($files);
                 for ($i = 0; $i < $filecounter; $i++) {
                     $this->files[$formId][$i] = new Koch_File(
-                            $fileInfo['name'][$i],
-                            $fileInfo['type'][$i],
-                            $fileInfo['size'][$i],
-                            $fileInfo['tmp_name'][$i],
-                            $fileInfo['error'][$i]
+                        $fileInfo['name'][$i],
+                        $fileInfo['type'][$i],
+                        $fileInfo['size'][$i],
+                        $fileInfo['tmp_name'][$i],
+                        $fileInfo['error'][$i]
                     );
                 }
             } else {
                 $this->files[$formId] = new Koch_File(
-                        $fileInfo['name'],
-                        $fileInfo['type'],
-                        $fileInfo['size'],
-                        $fileInfo['tmp_name'],
-                        $fileInfo['error']
+                    $fileInfo['name'],
+                    $fileInfo['type'],
+                    $fileInfo['size'],
+                    $fileInfo['tmp_name'],
+                    $fileInfo['error']
                 );
             }
         }

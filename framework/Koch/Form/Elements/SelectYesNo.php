@@ -51,5 +51,4 @@ class SelectYesNo extends Select implements FormElementInterface
 
         return parent::render();
     }
-
 }

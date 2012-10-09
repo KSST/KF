@@ -60,14 +60,16 @@ use Koch\Form\DecoratorInterface;
  */
 abstract class FormDecorator implements DecoratorInterface
 {
+
     /**
      * Instance of the form, which is to decorate.
      *
      * @var Koch_Form Defaults to null.
      */
     protected $form = null;
-
-    private $name, $class, $id;
+    private $name;
+    private $class;
+    private $id;
 
     public function getName()
     {
@@ -80,10 +82,10 @@ abstract class FormDecorator implements DecoratorInterface
     }
 
     /**
-    * Set css class
-    *
-    * @param string $classname
-    */
+     * Set css class
+     *
+     * @param string $classname
+     */
     public function setClass($classname)
     {
         $this->class = $classname;
@@ -92,20 +94,20 @@ abstract class FormDecorator implements DecoratorInterface
     }
 
     /**
-    * Get css class
-    *
-    * @return string
-    */
+     * Get css class
+     *
+     * @return string
+     */
     public function getClass()
     {
         return $this->class;
     }
 
     /**
-    * Set html id attribute
-    *
-    * @param string $id
-    */
+     * Set html id attribute
+     *
+     * @param string $id
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -114,10 +116,10 @@ abstract class FormDecorator implements DecoratorInterface
     }
 
     /**
-    * Get html id attribute value
-    *
-    * @return string
-    */
+     * Get html id attribute value
+     *
+     * @return string
+     */
     public function getId()
     {
         return $this->id;
@@ -189,7 +191,7 @@ abstract class FormDecorator implements DecoratorInterface
     public function __call($method, $parameters)
     {
         if (is_object($this->form) === true) {
-            return call_user_func_array( array($this->form, $method), $parameters);
+            return call_user_func_array(array($this->form, $method), $parameters);
         }
     }
 }

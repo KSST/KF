@@ -35,7 +35,9 @@ class Radio extends Input implements FormElementInterface
      *
      * @var string
      */
-    protected $label, $description;
+    protected $label;
+
+    protected $description;
 
     /**
      * constructor

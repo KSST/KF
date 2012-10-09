@@ -37,11 +37,11 @@ namespace Koch\Module;
  */
 interface AdminModuleInterface
 {
-    public function action_admin_list();     // GET     /foos
-    public function action_admin_show();     // GET     /foos/:foo_id
-    public function action_admin_new();      // GET     /foos/new
-    public function action_admin_edit();     // GET     /foos/:foo_id/edit
-    public function action_admin_insert();   // POST    /foos
-    public function action_admin_update();   // PUT     /foos/:foo_id
-    public function action_admin_delete();   // DELETE  /foos/:foo_id
+    public function actionAdminList();     // GET     /foos
+    public function actionAdminShow();     // GET     /foos/:foo_id
+    public function actionAdminNew();      // GET     /foos/new
+    public function actionAdminEdit();     // GET     /foos/:foo_id/edit
+    public function actionAdminInsert();   // POST    /foos
+    public function actionAdminUpdate();   // PUT     /foos/:foo_id
+    public function actionAdminDelete();   // DELETE  /foos/:foo_id
 }

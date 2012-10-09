@@ -186,6 +186,6 @@ final class Security
             }
 
             return $salt;
-         }
+        }
     }
 }

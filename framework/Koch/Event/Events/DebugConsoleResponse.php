@@ -23,12 +23,26 @@
  *
  */
 
-namespace Koch\Form\Elements;
+namespace Koch\Event\Events;
 
-use Koch\Form\FormElement;
-use Koch\Form\FormElementInterface;
+use Koch\Event\EventInterface;
 
-class Label extends FormElement implements FormElementInterface
+/**
+ * Helper Object for echoing the HTML content onApplicationShutdown
+ */
+class DebugConsoleResponse implements EventInterface
 {
-    // @todo
+    public $name = 'DebugConsoleResponse';
+
+    private $debugbarHTML;
+
+    public function __construct($debugbarHTML)
+    {
+        $this->debugbarHTML = $debugbarHTML;
+    }
+
+    public function execute()
+    {
+        echo $this->debugbarHTML;
+    }
 }

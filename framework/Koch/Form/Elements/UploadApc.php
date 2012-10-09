@@ -95,7 +95,8 @@ class UploadApc extends File implements FormElementInterface
 
                                 var percent = parseInt(100*(status['current']/status['total']));
                                 document.getElementById('uploadFile').innerHTML = status['filename'];
-                                document.getElementById('uploadSize').innerHTML = (parseInt(status['current'])/1024) + 'KB of ' + (parseInt(status['total'])/1024) + 'KB';
+                                document.getElementById('uploadSize').innerHTML =
+                                (parseInt(status['current'])/1024) + 'KB of ' + (parseInt(status['total'])/1024) + 'KB';
                                 document.getElementById('progressBar').style.width = ''+percent+'%';
 
                                 // jquery progress bar
@@ -147,7 +148,8 @@ class UploadApc extends File implements FormElementInterface
         }
         $submit = new Koch_Formelement_Submitbutton();
         $submit->setValue(_('Upload File'));
-        $submit->setAdditionalAttributeAsText("onclick=\"this.disabled=true; setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" ");
+        $submit->setAdditionalAttributeAsText("onclick=\"this.disabled=true;" .
+            "setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" ");
         $html .= $submit;
 
         return $javascript.$html;

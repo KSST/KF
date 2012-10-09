@@ -83,15 +83,10 @@ class Po
 
             switch ($key) {
                 case '#,': // flag...
-
                     $fuzzy = in_array('fuzzy', preg_split('/,\s*/', $data));
-
                 case '#':  // translator-comments
-
                 case '#.': // extracted-comments
-
                 case '#:': // reference...
-
                 case '#|': // msgid previous-untranslated-string
                     // start a new entry
                     if (count($temp) && array_key_exists('msgid', $temp) && array_key_exists('msgstr', $temp)) {
@@ -104,25 +99,17 @@ class Po
                         $fuzzy = false;
                     }
                     break;
-
                 case 'msgctxt': // context
-
                 case 'msgid': // untranslated-string
-
                 case 'msgid_plural': // untranslated-string-plural
-
                     $state = $key;
                     $temp[$state] = $data;
                     break;
-
                 case 'msgstr': // translated-string
-
                     $state = 'msgstr';
                     $temp[$state][] = $data;
                     break;
-
                 default :
-
                     if (strpos($key, 'msgstr[') !== false) {
                         // translated-string-case-n
                         $state = 'msgstr';
@@ -131,19 +118,13 @@ class Po
                         // continued lines
                         switch ($state) {
                             case 'msgctxt':
-
                             case 'msgid':
-
                             case 'msgid_plural':
-
                                 $temp[$state] .= "\n" . $line;
                                 break;
-
                             case 'msgstr':
-
                                 $temp[$state][count($temp[$state]) - 1] .= "\n" . $line;
                                 break;
-
                             default :
                                 // parse error
                                 fclose($fh);

@@ -104,6 +104,6 @@ class Firebug implements LoggerInterface
      */
     public function writeLog($data)
     {
-        self::$firephp->fb($data['message'], $data['label'], $this->getFirePHPLoglevel($data['level']) );
+        self::$firephp->fb($data['message'], $data['label'], $this->getFirePHPLoglevel($data['level']));
     }
 }

@@ -110,13 +110,15 @@ class Mo
         $offsets = array_merge($key_offsets, $value_offsets);
 
         // write header
-        $mo .= pack('Iiiiiii', 0x950412de, // magic number
-                0, // version
-                count($hash), // number of entries in the catalog
-                28, // key index offset (7*4)
-                28 + count($hash) * 8, // value index offset (7*4 + length of hash*8)
-                0, // hashtable size (unused, thus 0)
-                $key_start                      // hashtable offset
+        $mo .= pack(
+            'Iiiiiii',
+            0x950412de,             // magic number
+            0,                      // version
+            count($hash),           // number of entries in the catalog
+            28,                     // key index offset (7*4)
+            28 + count($hash) * 8,  // value index offset (7*4 + length of hash*8)
+            0,                      // hashtable size (unused, thus 0)
+            $key_start              // hashtable offset
         );
 
         // offsets

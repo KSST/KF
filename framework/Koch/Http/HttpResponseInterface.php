@@ -41,6 +41,15 @@ interface HttpResponseInterface
     public static function sendResponse();
 
     // Cookie Methods
-    public static function createCookie($name, $value='', $maxage = 0, $path='', $domain='', $secure = false, $HTTPOnly = false);
+    public static function createCookie(
+        $name,
+        $value = '',
+        $maxage = 0,
+        $path = '',
+        $domain = '',
+        $secure = false,
+        $HTTPOnly = false
+    );
+
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null);
 }

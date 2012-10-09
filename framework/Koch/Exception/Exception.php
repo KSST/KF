@@ -103,7 +103,7 @@ class Exception extends \Exception
      * @see http://php.net/manual/de/function.set-exception-handler.php
      * @param $exception PHP Exception Objects are valid (Type Hint).
      */
-    public function exception_handler(\Exception $exception)
+    public function exceptionHandler(\Exception $exception)
     {
         // re/assign variables from an uncatched exception to this exception object
         $this->message = $exception->getMessage();
@@ -141,8 +141,12 @@ class Exception extends \Exception
 
         include_once __DIR__ . '/Renderer/YellowScreenOfDeath.php';
         echo \Koch\Exception\Renderer\YellowScreenOfDeath::renderException(
-                $this->message, $this->string, $this->code,
-                $this->file, $this->line, $this->trace
+            $this->message,
+            $this->string,
+            $this->code,
+            $this->file,
+            $this->line,
+            $this->trace
         );
     }
 

@@ -41,7 +41,7 @@ class Url extends Validator
 
     protected function processValidationLogic($value)
     {
-        if (true === (bool) filter_var( $value, FILTER_VALIDATE_URL, $this->getOptions())) {
+        if (true === (bool) filter_var($value, FILTER_VALIDATE_URL, $this->getOptions())) {
             return true;
         } else {
             return false;
