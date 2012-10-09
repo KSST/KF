@@ -48,7 +48,6 @@ namespace "Koch\Form\Element\" + formelement name
             // if not, redisplay the form (decorate with errors + render)
             $this->addDecorator('errors');
             $this->render();
-
         } else { // form was properly filled, display a success web page or a flashmessage
             /**
              * Success - form content valid.
@@ -92,7 +91,7 @@ namespace "Koch\Form\Element\" + formelement name
         }
         // fetch data from POST
         elseif (null === $data) {
-            if ('POST' === Koch_HttpRequest::getRequestMethod() ) {
+            if ('POST' === Koch_HttpRequest::getRequestMethod()) {
                 $data = Koch_HttpRequest::getPost();
             }
         }
@@ -292,7 +291,7 @@ namespace "Koch\Form\Element\" + formelement name
         if (isset($this->formdecorators[$decorator]) === true) {
             return $this->formdecorators[$decorator];
         } else {
-           throw new \Exception('The Form does not have a Decorator called "' . $decorator . '".');
+            throw new \Exception('The Form does not have a Decorator called "' . $decorator . '".');
         }
     }
 
@@ -325,7 +324,7 @@ namespace "Koch\Form\Element\" + formelement name
         return new $class();
     }
 
-     /**
+    /**
      * Sets the Decorator Attributes Array
      *
      * Decorators are not instantiated at the time of the form definition via an array.
@@ -373,7 +372,6 @@ namespace "Koch\Form\Element\" + formelement name
         $attributes = (array) $this->decoratorAttributes;
 
         #\Koch\Debug::printR($attributes);
-
         // level 1
         foreach ($attributes as $decorator_type => $decoratorname_array) {
             // apply settings for the form itself
@@ -382,7 +380,6 @@ namespace "Koch\Form\Element\" + formelement name
                 foreach ($decoratorname_array as $decoratorname => $attribute_and_value) {
                     $decorator = $this->getDecorator($decoratorname);
                     #\Koch\Debug::printR($attribute_and_value);
-
                     // level 3
                     foreach ($attribute_and_value as $attribute => $value) {
                         $decorator->$attribute = $value;
@@ -397,7 +394,6 @@ namespace "Koch\Form\Element\" + formelement name
                 foreach ($decoratorname_array as $decoratorname => $attribute_and_value) {
                     $decorator = $this->getFormelementDecorator($decoratorname);
                     #\Koch\Debug::printR($attribute_and_value);
-
                     // level 3
                     foreach ($attribute_and_value as $attribute => $value) {
                         $decorator->$attribute = $value;
@@ -484,21 +480,20 @@ namespace "Koch\Form\Element\" + formelement name
      *      Form Groups
      * ===================================================================================
      */
-
     /**
      * Adds a new group to the form, to group one or several formelements inside.
      *
      * @return Koch_Form
      */
     /*
-    public function addGroup($groupname)
-    {
-        // @todo groupname becomes ID of decorator (e.g. a fieldset)
+      public function addGroup($groupname)
+      {
+      // @todo groupname becomes ID of decorator (e.g. a fieldset)
 
-        $this->formgroups[] = $groupname;
+      $this->formgroups[] = $groupname;
 
-        return $this;
-    }*/
+      return $this;
+      } */
 
     /**
      * ===================================================================================
@@ -554,45 +549,45 @@ namespace "Koch\Form\Element\" + formelement name
      * ===================================================================================
      */
 
-     /**
-      * Sets the error state of the form (formHasError).
-      *
-      * @param boolean $boolean
-      */
-     public function setErrorState($boolean = true)
-     {
+    /**
+     * Sets the error state of the form (formHasError).
+     *
+     * @param boolean $boolean
+     */
+    public function setErrorState($boolean = true)
+    {
         $this->error = $boolean;
-     }
+    }
 
-     /**
-      * Returns the error state of the form.
-      *
-      * @return boolean False, if form has an error. True, otherwise.
-      */
-     public function getErrorState()
-     {
+    /**
+     * Returns the error state of the form.
+     *
+     * @return boolean False, if form has an error. True, otherwise.
+     */
+    public function getErrorState()
+    {
         return $this->error;
-     }
+    }
 
-     public function addErrorMessage($errormessage)
-     {
+    public function addErrorMessage($errormessage)
+    {
         $this->errormessages[] = $errormessage;
-     }
+    }
 
-     public function addErrorMessages(array $errormessages)
-     {
+    public function addErrorMessages(array $errormessages)
+    {
         $this->errormessages = $errormessages;
-     }
+    }
 
-     public function resetErrormessages()
-     {
+    public function resetErrormessages()
+    {
         $this->errormessages = array();
-     }
+    }
 
-     public function getErrormessages()
-     {
+    public function getErrormessages()
+    {
         return $this->errormessages;
-     }
+    }
 
     /**
      * ============================

@@ -28,44 +28,29 @@ namespace Koch\View\Helper;
 class Javascripts extends Layout
 {
 
-    public static function addJS_JQuery()
+    public static function addJQuery()
     {
         self::addJS('jquery/jquery.js');
         self::addJS('jquery/jquery.ui.js');
     }
 
-    public static function addJS_Lightbox()
+    public static function addLightbox()
     {
         self::addJS('lightbox/scripts/lightbox.js');
-    }
-
-    public static function addCSS_Lightbox()
-    {
         self::addCSS('lightbox/css/lightbox.css');
     }
 
-    public static function addJS_Moofx()
-    {
-        self::addJS('moo-fx/moo.fx.js');
-    }
-
-    public static function addJS_Mootools()
-    {
-        self::addJS('mootools/mootools.js');
-        self::addJS('mootools/mootools-more.js');
-    }
-
-    public static function addJS_Overlib()
+    public static function addOverlib()
     {
         self::addJS('overlib/overlib.js');
     }
 
-    public static function addJS_Tabpane()
+    public static function addTabpane()
     {
         self::addJS('tabpane/tabpane.js');
     }
 
-    public static function addJS_Clip()
+    public static function addClip()
     {
         self::addJS('clip');
     }
@@ -87,7 +72,7 @@ class Javascripts extends Layout
      * @param $version string The JQuery Version Number to load, like "1.3.2".
      * @param $service string jquery for download from code.jquery.com, google for google.com/jsapi
      */
-    public static function addJS_JQuery_Service($version = null, $service = 'google')
+    public static function addJQueryService($version = null, $service = 'google')
     {
         // determine service
         if ($service == 'jquery') {
@@ -121,7 +106,7 @@ class Javascripts extends Layout
      *
      * @param $version string The GoogleCDN Version Number to load, like "1.3.2".
      */
-    public static function addJS_JQuery_GoogleCDN_Service($version = null)
+    public static function addJQueryGoogleCDNService($version = null)
     {
         if ($version === null) {
             $version = 'latest';
@@ -129,7 +114,7 @@ class Javascripts extends Layout
             /**
              * JQuery version whitelist ensures a certain compatibilty frame
              */
-            $jquery_version_whitelist = array( '1.4.2', '1.4.1' ); // not 'latest'
+            $jquery_version_whitelist = array( '1.7.2', '1.8.1' ); // not 'latest'
 
             if ( in_array($version, $jquery_version_whitelist) ) {
                 $this->jquery_initscript  = '';
@@ -156,9 +141,9 @@ class Javascripts extends Layout
     {
         if (is_array($filenames)) {
             foreach ($filenames as $filename) {
-                $js_file = WWW_ROOT_THEMES_CORE . 'javascript/'.$filename.'.js';
+                $js_file = WWW_ROOT_THEMES_CORE . 'javascript/' . $filename . '.js';
 
-                return '<script src="'.$js_file.'" type="text/javascript"></script>'.CR;
+                return '<script src="' . $js_file . '" type="text/javascript"></script>' . CR;
             }
         }
     }
@@ -170,9 +155,9 @@ class Javascripts extends Layout
      */
     public static function addJS($filename)
     {
-        $js_file = WWW_ROOT_THEMES_CORE . 'javascript/'.$filename.'.js';
+        $js_file = WWW_ROOT_THEMES_CORE . 'javascript/' . $filename . '.js';
 
-        return '<script src="'.$js_file.'" type="text/javascript"></script>'.CR;
+        return '<script src="' . $js_file . '" type="text/javascript"></script>' . CR;
     }
 
     /**
@@ -183,11 +168,11 @@ class Javascripts extends Layout
      */
     public static function addJSInit($name, $init)
     {
-        $addJSInit  = '';
-        $addJSInit .= '<!-- initialize javascript: '.$name.' -->'.CR;
-        $addJSInit .= '<script type="text/javascript">'.CR.'// <![CDATA[';
+        $addJSInit = '';
+        $addJSInit .= '<!-- initialize javascript: ' . $name . ' -->' . CR;
+        $addJSInit .= '<script type="text/javascript">' . CR . '// <![CDATA[';
         $addJSInit .= $init;
-        $addJSInit .= CR.'// ]]></script>'.CR;
+        $addJSInit .= CR . '// ]]></script>' . CR;
 
         return $addJSInit;
     }

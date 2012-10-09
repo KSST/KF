@@ -85,7 +85,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
     /**
      * Administrative Functions for ReCaptcha
      */
-    public function get_apikey()
+    public function getAPIKey()
     {
         return recaptcha_get_signup_url();
     }

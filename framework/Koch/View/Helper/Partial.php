@@ -22,7 +22,7 @@ namespace Koch\View\Helper;
 class Partial extends Layout
 {
     // var $_blocks contains all block elements as Separate Objects
-    private $_blockObjects = array();
+    private $blockObjects = array();
 
     // no constructor
     public function __construct()
@@ -33,13 +33,13 @@ class Partial extends Layout
     // add block object
     public function addBlock($name, Block $block)
     {
-        $this->_blockObjects[$name] = $block;
+        $this->blockObjects[$name] = $block;
     }
 
     // execute each block in the container
     public function execute()
     {
-        foreach ($this->_blockObjects as $block) {
+        foreach ($this->blockObjects as $block) {
             $block->execute(); // $_blocks[] = $smarty->fetch("blockTemplate.tpl");
         }
     }
@@ -50,12 +50,12 @@ class Partial extends Layout
     public function render($params, $smarty)
     {
         // Set Smarty as View to each Block
-        foreach ($this->_blockObjects as $block) {
+        foreach ($this->blockObjects as $block) {
             $block->setView($smarty);
         }
 
         // Assign BlockObjects to Smarty
-        $smarty->assign('block', $this->_blockObjects);
+        $smarty->assign('block', $this->blockObjects);
 
         // Display it via /core/tools/sidebar.tpl
         // which loops over each Array Element (one block) and displays it
@@ -67,6 +67,6 @@ class Partial extends Layout
      */
     public function getBlocks()
     {
-        return $this->_blockObjects;
+        return $this->blockObjects;
     }
 }

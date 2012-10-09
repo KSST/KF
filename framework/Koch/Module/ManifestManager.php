@@ -362,7 +362,7 @@ class ManifestManager
              */
             $lang[$locale][$ext]['pathName'] = realpath($file->getPathName());
             $lang[$locale][$ext]['fileName'] = $file->getFileName();
-            $lang[$locale][$ext]['filePermString'] = self::file_permissions($lang[$locale][$ext]['pathName']);
+            $lang[$locale][$ext]['filePermString'] = self::filePermissions($lang[$locale][$ext]['pathName']);
             $lang[$locale][$ext]['fileReadable'] = $file->isReadable();
             $lang[$locale][$ext]['fileWriteable'] = $file->isWritable();
             $lang[$locale][$ext]['timestamp'] = date(DATE_FORMAT, $file->getCTime());
@@ -408,7 +408,7 @@ class ManifestManager
      * @param  type   $filename
      * @return string File Permissions as string, e.h. "rwx", "rw-"
      */
-    private static function file_permissions($filename)
+    private static function filePermissions($filename)
     {
         static $permissions = array("---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx");
         $perm_oct = substr(decoct(fileperms($filename)), 3);

@@ -24,9 +24,7 @@ class ButtonBar extends FormElement implements FormElementInterface
      *
      * @var array $_buttons buttonname => button object
      */
-    private $_buttons = array( 'submitbutton' => '',
-                               'resetbutton'  => '',
-                               'cancelbutton' => '');
+    private $buttons = array('submitbutton' => '', 'resetbutton' => '', 'cancelbutton' => '');
 
     /**
      * Adds the objects to the buttonnames fo the initial buttons array
@@ -58,7 +56,7 @@ class ButtonBar extends FormElement implements FormElementInterface
         }
 
         // attach button object to buttons array
-        $this->_buttons[$buttonname] = $formelement;
+        $this->buttons[$buttonname] = $formelement;
 
         return $this;
     }
@@ -71,20 +69,20 @@ class ButtonBar extends FormElement implements FormElementInterface
      */
     public function getButton($buttonname)
     {
-        if ($this->_buttons[$buttonname] === null) {
+        if ($this->buttons[$buttonname] === null) {
             throw new \Koch\Exception\Exception(_('This button does not exist, so its not in this buttonbar: ') . $buttonname);
         }
 
         // return the button object
-        if (is_object($this->_buttons[$buttonname])) {
-            return $this->_buttons[$buttonname];
+        if (is_object($this->buttons[$buttonname])) {
+            return $this->buttons[$buttonname];
         }
 
         // instantiate the button object first and then return
-        if ( false === is_object($this->_buttons[$buttonname])) {
+        if (false === is_object($this->buttons[$buttonname])) {
             $this->addButton($buttonname);
 
-            return $this->_buttons[$buttonname];
+            return $this->buttons[$buttonname];
         }
     }
 
@@ -96,8 +94,8 @@ class ButtonBar extends FormElement implements FormElementInterface
      */
     public function removeButton($_buttonname)
     {
-        if ( isset($this->_buttons[$_buttonname]) ) {
-            unset($this->_buttons[$_buttonname]);
+        if (isset($this->buttons[$_buttonname])) {
+            unset($this->buttons[$_buttonname]);
         }
 
         return $this;
@@ -117,9 +115,9 @@ class ButtonBar extends FormElement implements FormElementInterface
      */
     public function render()
     {
-        $htmlString = '<div class="'.$this->getClass().'">';
+        $htmlString = '<div class="' . $this->getClass() . '">';
 
-        foreach ($this->_buttons as $buttonname => $buttonobject) {
+        foreach ($this->buttons as $buttonname => $buttonobject) {
             if (is_object($buttonobject)) {
                 $htmlString .= $buttonobject->render();
             } else {

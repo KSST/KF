@@ -176,9 +176,17 @@ class Image
 
     public function resample()
     {
-
         imagecopyresampled(
-                $this->workImage, $this->originalImage, 0, 0, $this->startX, $this->startY, $this->newWidth, $this->newHeight, $this->originalWidth, $this->originalHeight
+            $this->workImage,
+            $this->originalImage,
+            0,
+            0,
+            $this->startX,
+            $this->startY,
+            $this->newWidth,
+            $this->newHeight,
+            $this->originalWidth,
+            $this->originalHeight
         );
 
         $this->startX = 0;
@@ -214,5 +222,4 @@ class Image
     {
         imagedestroy($this->originalImage);
     }
-
 }

@@ -168,7 +168,11 @@ abstract class AbstractRenderer
      * Reset the Cache of the Renderer
      */
     abstract public function clearCache(
-        $template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null
+        $template_name,
+        $cache_id = null,
+        $compile_id = null,
+        $exp_time = null,
+        $type = null
     );
 
     public function getViewMapper()

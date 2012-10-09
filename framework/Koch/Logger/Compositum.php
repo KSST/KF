@@ -48,9 +48,8 @@ class Compositum implements LoggerInterface
             $data['message'] = $data['0'];
             $data['label'] = $data['1'];
             $data['level'] = $data['2'];
-        }
-        // first parameter is string
-        else {
+        } else {
+            // first parameter is string
             $data['message'] = $data_or_msg;
             $data['label'] = $label;
             $data['level'] = $level;
@@ -95,5 +94,4 @@ class Compositum implements LoggerInterface
             }
         }
     }
-
 }

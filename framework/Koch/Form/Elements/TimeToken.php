@@ -22,7 +22,7 @@ class TimeToken extends FormElement implements FormElementInterface
 {
     public function generateToken()
     {
-       // @todo consider using PHP Spam Kit Class
+        // @todo consider using PHP Spam Kit Class
     }
 
     /**
@@ -30,6 +30,6 @@ class TimeToken extends FormElement implements FormElementInterface
      */
     public function render()
     {
-        return '<input type="hidden" name="'.$this->generateToken().'" value="1" />';
+        return '<input type="hidden" name="' . $this->generateToken() . '" value="1" />';
     }
 }

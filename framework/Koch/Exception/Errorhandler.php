@@ -140,8 +140,7 @@ class Errorhandler
              * SMARTY or from a template_c file (extension tpl.php).
              */
             if((true === (bool) mb_strpos(mb_strtolower($errfile), 'smarty')) or
-               (true === (bool) mb_strpos(mb_strtolower($errfile), 'tpl.php')))
-            {
+               (true === (bool) mb_strpos(mb_strtolower($errfile), 'tpl.php'))) {
                 // render the smarty template error
                 echo SmartyTemplateError::render($errno, $errorname, $errstr, $errfile, $errline, $errcontext);
             } else {
@@ -399,9 +398,9 @@ class Errorhandler
                 // get ALL LINES syntax highlighted source-code of the file and explode it into an array
                 // the if check is needed to workaround "highlight_file() has been disabled for security reasons"
                 if (function_exists('highlight_file') === true) {
-                   $array_content = explode('<br />', highlight_file($file, true));
+                    $array_content = explode('<br />', highlight_file($file, true));
                 } else {
-                   $array_content = explode('<br />', $file);
+                    $array_content = explode('<br />', $file);
                 }
 
                 // get the ERROR SURROUNDING LINES from ALL LINES
@@ -487,7 +486,7 @@ class Errorhandler
 
             // build an edit link
             return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
-        }
+        } else {
         /*
          * elseif (DEVELOPMENT) {
             // link to our editor
@@ -497,9 +496,7 @@ class Errorhandler
             $link = strtr($fileLinkFormatString, array('%f' => $file, '%l' => $line));
 
             return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
-         }
-         */
-        else {
+         } else { */
             // shorten file string by removing the root path
             $file = str_replace(ROOT, '..' . DIRECTORY_SEPARATOR, $file);
 

@@ -58,7 +58,7 @@ class Select extends FormElement implements FormElementInterface
      * Sets the array with options for the dropdown element.
      *
      * @param  array                    $options
-     * @param  boolean                  $addSelectText Adds " - Select -" as first entry to the options array. Default true.
+     * @param  boolean                  $addSelectText Adds " - Select -" as first entry to the options array.
      * @return \Koch\FormElement\Select
      */
     public function setOptions($options, $addSelectText = true)
@@ -179,5 +179,4 @@ class Select extends FormElement implements FormElementInterface
             return '<option value="' . $key . '">' . $value . '</option>';
         }
     }
-
 }

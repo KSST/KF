@@ -64,7 +64,7 @@ class FTP
      * @param int    $port     The port number to connect to the FTP server on.
      * @param bool   $passive  Whether or not to use a passive or active connection.
      */
-    public function __construct($server, $username, $password, $port = 21, $passive = FALSE)
+    public function __construct($server, $username, $password, $port = 21, $passive = false)
     {
         if (extension_loaded('ftp') === false) {
             throw new Exception('PHP extension FTP is not loaded.');
@@ -134,12 +134,12 @@ class FTP
         // attempt to send file
         if (false === @ftp_put($this->connection, $destination_file, $source_file, $transfer_mode)) {
             $this->errors[] = 'Unable to send file to remote server, does destination folder exist?';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -161,12 +161,12 @@ class FTP
         // download file
         if (false === @ftp_get($this->connection, $destination_file, $source_file, $transfer_mode)) {
             $this->errors[] = 'Unable to download file, does local folder exist.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -186,12 +186,12 @@ class FTP
         // delete file
         if (false === @ftp_delete($this->connection, $file)) {
             $this->errors[] = 'Unable to delete remote file, have you checked permissions.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -216,12 +216,12 @@ class FTP
 
         if (false === @ftp_rename($this->connection, $source_file, $renamed_file)) {
             $this->errors[] = 'Unable to rename/move file';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -238,14 +238,14 @@ class FTP
             return false;
         }
 
-        if (ftp_mkdir($this->connection, $dir) === FALSE) {
+        if (ftp_mkdir($this->connection, $dir) === false) {
             $this->errors[] = 'Unable to create remote directory.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -264,12 +264,12 @@ class FTP
 
         if (false === @ftp_rmdir($this->connection, $dir)) {
             $this->errors[] = 'Unable to delete remote directory.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -290,20 +290,20 @@ class FTP
         if (function_exists('ftp_chmod') === false) {
             if (false === @ftp_site($this->connection, sprintf('CHMOD %o %s', $chmod, $file))) {
                 $this->errors[] = 'Unable to modify permissions.';
-                $this->close_connection();
+                $this->closeConnection();
 
                 return false;
             }
         } else {
             if (false === @ftp_chmod($this->connection, $chmod, $file)) {
                 $this->errors[] = 'Unable to modify permissions.';
-                $this->close_connection();
+                $this->closeConnection();
 
                 return false;
             }
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -336,12 +336,12 @@ class FTP
 
         if ($file_size === false or $file_size == -1) {
             $this->errors[] = 'Unable to find remote file.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return $file_size;
     }
@@ -359,12 +359,12 @@ class FTP
         }
 
         if (false === @ftp_chdir($this->connection, $dir)) {
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return true;
     }
@@ -383,12 +383,12 @@ class FTP
 
         if (empty($f) === true) {
             $this->errors[] = 'Unable to read remote directory.';
-            $this->close_connection();
+            $this->closeConnection();
 
             return false;
         }
 
-        $this->close_connection();
+        $this->closeConnection();
 
         return $f;
     }
@@ -398,7 +398,7 @@ class FTP
      *
      * @return bool
      */
-    private function close_connection()
+    private function closeConnection()
     {
         if (@ftp_close($this->connection) === false) {
             return false;
@@ -408,5 +408,4 @@ class FTP
 
         return true;
     }
-
 }

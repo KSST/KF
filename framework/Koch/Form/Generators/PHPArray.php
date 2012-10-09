@@ -141,7 +141,7 @@ class PHPArray extends Form implements FormGeneratorInterface
                 // @todo ensure these elements exist !!!
 
                 // add a new element to this form, position it by it's number in the array
-                $this->addElement( $form_array_element['formfieldtype'], $form_array_element_number );
+                $this->addElement($form_array_element['formfieldtype'], $form_array_element_number);
 
                 // fetch the new formelement object by its positional number
                 $formelement = $this->getElementByPosition($form_array_element_number);

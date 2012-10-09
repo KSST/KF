@@ -21,13 +21,21 @@ namespace Koch\Image;
  */
 class Watermark extends Image
 {
-
     public function __construct($function, $config)
     {
         if ($function == 'image') {
+
             $watermark = imagecreatefrompng($config['file']);
 
-            imagecopy($this->workImage, $watermark, $config['pos_x'], $config['pos_y'], 0, 0, imagesx($watermark), imagesy($watermark)
+            imagecopy(
+                $this->workImage,
+                $watermark,
+                $config['pos_x'],
+                $config['pos_y'],
+                0,
+                0,
+                imagesx($watermark),
+                imagesy($watermark)
             );
         }
     }

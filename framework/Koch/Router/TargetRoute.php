@@ -292,8 +292,8 @@ class TargetRoute extends Mapper
         }
 
         // this shows how many routes were tried
-        #echo '<br><strong>Route failure. Not found ' . $filename .' ### '. $classname .' ### '. $method . '</strong><br>';
-
+        //echo '<br><strong>Route failure.<br>';
+        //echo 'Not found ' . $filename .' ### '. $classname .' ### '. $method . '</strong><br>';
         return false;
     }
 

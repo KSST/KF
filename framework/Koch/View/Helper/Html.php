@@ -74,7 +74,9 @@ class Html /* extends DOMDocument */
      */
     public static function mailto($mail = '', $title = '')
     {
-        if(empty($title)) $title = $mail;
+        if (empty($title)) {
+            $title = $mail;
+        }
 
         return '<a href="mailto:'.$mail.'">'.$title.'</a>';
     }
