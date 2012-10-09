@@ -19,11 +19,11 @@ function checkDirectory() {
                                 charset=`file -bi ${name} | grep -o 'utf-8'`
                                 if [ 'utf-8' != "${charset}" ]; then
                                     file -bi ${name} | grep -v 'charset=utf-8' | xargs echo -e "\e[00;31m ${name} is encoded in"
-                                    echo  -e " \e[00m"
+                                    echo -en " \e[00m"
                                 fi
                                 bom=`grep -l $'\xEF\xBB\xBF' ${name}`
                                 if [ "${bom}" == "${name}" ]; then
-                                    echo -e "\e[00;31m ${name} has a UTF-8 BOM \033[0m"
+                                    echo -en "\e[00;31m ${name} has a UTF-8 BOM \033[0m"
                                 fi
                         elif [ -d ${name} ]; then
                                 checkDirectory ${name}
