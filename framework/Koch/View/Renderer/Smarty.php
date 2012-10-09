@@ -57,11 +57,13 @@ class Smarty extends AbstractRenderer
      */
     public function initializeEngine($template = null)
     {
+        $smarty = dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/Smarty.class.php';
+
         // prevent redeclaration
         if (class_exists('Smarty', false) === false) {
             // check if Smarty library exists
-            if (is_file(ROOT_LIBRARIES . 'smarty/Smarty.class.php') === true) {
-                include ROOT_LIBRARIES . 'smarty/Smarty.class.php';
+            if (is_file($smarty) === true) {
+                include $smarty;
             } else {
                 throw new Exception('Smarty Template Library missing!');
             }

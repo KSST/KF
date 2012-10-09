@@ -32,7 +32,7 @@ class Feed
         error_reporting(0);
 
         // load simplepie
-        include ROOT_LIBRARIES . 'simplepie/simplepie.inc';
+        include dirname(dirname(__DIR__)) . '/vendor/simplepie/simplepie.inc';
 
         // instantiate simplepie
         $simplepie = new \SimplePie();

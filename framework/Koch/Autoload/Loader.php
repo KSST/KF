@@ -167,7 +167,7 @@ namespace<br>";
      * Snoopy, SimplePie, PclZip, graph, GeSHi, feedcreator, browscap, bbcode
      *
      * You can also pass a custom map, like so:
-     * loadLibrary('xtemplate', ROOT_LIBRARIES . 'xtemplate/xtemplate.class.php' )
+     * loadLibrary('xtemplate', dirname(dirname(__DIR__)) . '/vendor/xtemplate/xtemplate.class.php' )
      *
      * @param  string $classname Library classname to load.
      * @param  string $path      Path to the class.
@@ -182,19 +182,21 @@ namespace<br>";
 
         $classname = strtolower($classname);
 
+        $vendor_folder = dirname(dirname(__DIR__)) . '/vendor';
+
         if ($path !== null) {
             $map = array($classname, $path);
         } else {
             // autoloading map - ROOT_LIBRARIES/..
             $map = array(
-                'snoopy'        => ROOT_LIBRARIES . 'snoopy/Snoopy.class.php',
-                'simplepie'     => ROOT_LIBRARIES . 'simplepie/simplepie.inc',
-                'pclzip'        => ROOT_LIBRARIES . 'pclzip/pclzip.lib.php',
-                'graph'         => ROOT_LIBRARIES . 'graph/graph.class.php',
-                'geshi'         => ROOT_LIBRARIES . 'geshi/geshi.php',
-                'feedcreator'   => ROOT_LIBRARIES . 'feedcreator/feedcreator.class.php',
-                'browscap'      => ROOT_LIBRARIES . 'browscap/Browscap.php',
-                'bbcode'        => ROOT_LIBRARIES . 'bbcode/stringparser_bbcode.class.php',
+                'snoopy'        => $vendor_folder . 'snoopy/Snoopy.class.php',
+                'simplepie'     => $vendor_folder . 'simplepie/simplepie.inc',
+                'pclzip'        => $vendor_folder . 'pclzip/pclzip.lib.php',
+                'graph'         => $vendor_folder . 'graph/graph.class.php',
+                'geshi'         => $vendor_folder . 'geshi/geshi.php',
+                'feedcreator'   => $vendor_folder . 'feedcreator/feedcreator.class.php',
+                'browscap'      => $vendor_folder . 'browscap/Browscap.php',
+                'bbcode'        => $vendor_folder . 'bbcode/stringparser_bbcode.class.php',
             );
         }
 

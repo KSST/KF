@@ -11,9 +11,9 @@
  */
 
 namespace and path to search in
-        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', ROOT_LIBRARIES);
+        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', $vendor);
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', ROOT_LIBRARIES .  'Doctrine/Symfony');
+        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', $vendor .  'Doctrine/Symfony');
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader('Entity', ROOT . 'Doctrine');
         $classLoader->register();
@@ -23,7 +23,7 @@ namespace and path to search in
         $classLoader->register();
 
         // include Doctrine Extensions
-        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', ROOT_LIBRARIES);
+        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', $vendor);
         $classLoader->register();
 
         // fetch doctrine config handler for configuring
