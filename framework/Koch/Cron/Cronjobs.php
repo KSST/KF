@@ -25,8 +25,6 @@
 
 namespace Koch\Cron;
 
-$cron = new Cronjobs;
-
 /**
  * Koch Framework - Class for Cronjob handling.
  *
@@ -264,7 +262,7 @@ class Cronjobs
     /**
      * multisort asc/desc
      */
-    private function multisort(&$array, $sortby, $order='asc')
+    private function multisort(&$array, $sortby, $order = 'asc')
     {
         foreach ($array as $val) {
             $sortarray[] = $val[$sortby];
@@ -317,7 +315,7 @@ class Cronjobs
             $months30 = Array(4, 6, 9, 11);
             $months31 = Array(1, 3, 5, 7, 8, 10, 12);
 
-            if((in_array($dateArr['mon'], $months28) && $dateArr['mday']==28) ||
+            if ((in_array($dateArr['mon'], $months28) && $dateArr['mday']==28) ||
                ( in_array($dateArr['mon'], $months30) && $dateArr['mday']==30) ||
                ( in_array($dateArr['mon'], $months31) && $dateArr['mday']==31)) {
                 $dateArr['mon']++;
@@ -340,7 +338,8 @@ class Cronjobs
             }
         }
 
-        #if ($debug) echo sprintf('to %02d.%02d. %02d:%02d',$dateArr[mday],$dateArr[mon],$dateArr[hours],$dateArr[minutes]).CR;
+        //if ($debug) echo sprintf('to %02d.%02d. %02d:%02d',
+        //$dateArr[mday],$dateArr[mon],$dateArr[hours],$dateArr[minutes]).CR;
     }
 
     /**
@@ -424,18 +423,20 @@ class Cronjobs
 
         $file_count = count($file);
 
+        $rexexp = '~^([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-7,/*]+|';
+        $regexp .= '(-|/|Sun|Mon|Tue|Wed|Thu|Fri|Sat)+)\\s+([^#]*)\\s*(#.*)?$~i';
+
         for ($i = 0; $i < $file_count; $i++) {
-            if ($file[$i][0]!='#') {
-                #old regex, without dow abbreviations:
-                #if (preg_match("~^([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-7,/*]+|Sun|Mon|Tue|Wen|Thu|Fri|Sat)\\s+([^#]*)(#.*)?$~i",$file[$i],$job)) {
-                if (preg_match('~^([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-9,/*]+)\\s+([-0-7,/*]+|(-|/|Sun|Mon|Tue|Wed|Thu|Fri|Sat)+)\\s+([^#]*)\\s*(#.*)?$~i', $file[$i], $job)) {
+            if ($file[$i][0] != '#') {
+                if (preg_match($regexp, $job)) {
                     $jobNumber = count($jobs);
                     $jobs[$jobNumber] = $job;
                     if ($jobs[$jobNumber][self::CONST_PC_DOW][0]!='*' and ! is_numeric($jobs[$jobNumber][self::CONST_PC_DOW])) {
                         $jobs[$jobNumber][self::CONST_PC_DOW] = str_replace(
-                                        array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
-                                        array(0, 1, 2, 3, 4, 5, 6),
-                                        $jobs[$jobNumber][self::CONST_PC_DOW]);
+                            array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'),
+                            array(0, 1, 2, 3, 4, 5, 6),
+                            $jobs[$jobNumber][self::CONST_PC_DOW]
+                        );
                     }
                     $jobs[$jobNumber][self::CONST_PC_CMD] = trim($job[self::CONST_PC_CMD]);
                     $jobs[$jobNumber][self::CONST_PC_COMMENT] = trim(mb_substr($job[self::CONST_PC_COMMENT], 1));
@@ -472,13 +473,12 @@ class Cronjobs
         $dateArr = getdate($this->getLastActualRunTime($job[self::CONST_PC_CMD]));
 
         $minutesAhead = 0;
-        while($minutesAhead < 525600 and
+        while ($minutesAhead < 525600 and
         ( !$extjob[self::CONST_PC_MINUTE][$dateArr['minutes']] or
         ! $extjob[self::CONST_PC_HOUR][$dateArr['hours']] or
         ( !$extjob[self::CONST_PC_DOM][$dateArr['mday']] or ! $extjob[self::CONST_PC_DOW][$dateArr['wday']]) or
         ! $extjob[self::CONST_PC_MONTH][$dateArr['mon']])
-        )
-        {
+        ) {
 
             if (!$extjob[self::CONST_PC_DOM][$dateArr['mday']] or ! $extjob[self::CONST_PC_DOW][$dateArr['wday']]) {
                 $this->incrementDate($dateArr, 1, 'mday');

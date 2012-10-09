@@ -94,7 +94,7 @@ class Smarty extends AbstractRenderer
     {
         /**
          * Directories
-         */           
+         */
         $this->renderer->compile_dir = $this->config['smarty']['cache_dir'] . 'tpl_compile/';
         $this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
         $this->renderer->cache_dir   = $this->config['smarty']['cache_dir'] . 'tpl_cache/';
@@ -540,11 +540,11 @@ class Smarty extends AbstractRenderer
             return $this->fetch($template);
         }
 
-        if ($this->getRenderMode() === 'LAYOUT') {            
+        if ($this->getRenderMode() === 'LAYOUT') {
                 // assign the modulecontent
                 $this->assign('content', $this->fetch($template));
 
-                return $this->fetch($this->getLayoutTemplate());            
+                return $this->fetch($this->getLayoutTemplate());
         }
     }
 

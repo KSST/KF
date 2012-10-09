@@ -66,20 +66,20 @@ class ThemeViaGet implements FilterInterface
             return;
         }
 
+        // get parameter
         $theme = '';
         $theme = $request->getParameterFromGet('theme');
 
-        /**
-         * Inputfilter for $_GET['theme']. Allowed Chars are: az, 0-9, underscore.
-         */
+        // Inputfilter for $_GET['theme']. Allowed Chars are: az, 0-9, underscore.
         if (false === $this->input->check($theme, 'is_abc|is_int|is_custom', '_' )) {
             throw new \InvalidArgumentException('Please provide a proper theme name.');
         }
 
+        // compose theme dir
         $themedir = '';
         $themedir = ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR;
 
-        // theme exists, set it as session-user-theme
+        // if theme exists, set it as frontend theme to the session
         if (is_dir($themedir) and is_file($themedir . 'theme_info.xml')) {
             $_SESSION['user']['frontend_theme'] = $theme;
         }

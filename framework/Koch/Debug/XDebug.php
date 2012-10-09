@@ -77,7 +77,7 @@ class XDebug
     /**
      * XDebug Helper Functions
      */
-    public static function is_xdebug_active()
+    public static function isXdebugActive()
     {
         if (extension_loaded('xdebug') and xdebug_is_enabled()) {
             return true;
@@ -89,10 +89,10 @@ class XDebug
     /**
      * Initializes XDEBUG
      */
-    public static function start_xdebug()
+    public static function startXdebug()
     {
         // Start XDEBUG Tracing and Coverage
-        if (self::is_xdebug_active()) {
+        if (self::isXdebugActive()) {
             // do some xdebug configuration
             self::configure();
 
@@ -117,7 +117,7 @@ class XDebug
     public static function render()
     {
         // Start XDEBUG Tracing and Coverage
-        if (self::is_xdebug_active()) {
+        if (self::isXdebugActive()) {
             /**
              * This is the CSS for XDebug Fatal Error
              */
@@ -413,12 +413,12 @@ class XDebug
     /**
      * @param mixed $variable The variable to debug display.
      */
-    public static function xd_varDump($var)
+    public static function xDump($var)
     {
         echo xdebug_var_dump($var);
     }
 
-    public static function xd_break()
+    public static function xBreak()
     {
         echo xdebug_break();
     }

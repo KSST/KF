@@ -57,7 +57,9 @@ class Debug
         $trace_line = $file[$trace['line']-1];
 
         echo '<pre>';
-        echo '<b>Debugging <font color=red>'.basename($trace['file']).'</font> on line <font color=red>'.$trace['line'].'</font></b>:' . PHP_EOL;
+        echo '<b>Debugging';
+        echo '<font color=red>'.basename($trace['file']).'</font>';
+        echo ' on line <font color=red>'.$trace['line'].'</font></b>:' . PHP_EOL;
         echo "<div style='background: #f5f5f5; padding: 0.2em 0em;'>".htmlspecialchars($trace_line).'</div>' . PHP_EOL;
 
         echo '<b>Type</b>: ' . gettype($var) .  PHP_EOL; // uhhh.. gettype is slow like hell
@@ -204,15 +206,15 @@ class Debug
         /**
          * Get the file, to show the exact origin of the debug call.
          *
-         * It's one level under.
+         * It's one level below.
          */
         $file_content = file($trace[$level]['file']);
         $origin_of_call = $file_content[ $trace[$level]['line']-1 ];
 
-        echo sprintf('<pre><b>Debugging <font color=red>%s</font> on line <font color=red>%s</font>:</b>
-            <div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>',
-            basename($file), $line, htmlspecialchars($origin_of_call)
-        );
+        $format = '<pre><b>Debugging <font color=red>%s</font> on line <font color=red>%s</font>:</b>';
+        $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
+
+        echo sprintf($format, basename($file), $line, htmlspecialchars($origin_of_call));
     }
 
     /**

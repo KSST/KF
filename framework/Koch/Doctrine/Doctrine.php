@@ -62,7 +62,7 @@ class Doctrine
     public static function checkDataSourceName($config)
     {
         // check if database settings are available
-        if(empty($config['database']['driver']) === true
+        if (empty($config['database']['driver']) === true
         or empty($config['database']['user']) === true
         or empty($config['database']['host']) === true
         or empty($config['database']['dbname']) === true)

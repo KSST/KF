@@ -171,7 +171,9 @@ class Renderer
      */
     public static function getLastIndice()
     {
-        return min(self::getDatagrid()->getTotalResultsCount(), (self::getDatagrid()->getPage() * self::getDatagrid()->getResultsPerPage()));
+        $i = self::getDatagrid()->getPage() * self::getDatagrid()->getResultsPerPage();
+
+        return min(self::getDatagrid()->getTotalResultsCount(), $i);
     }
 
     /**
@@ -350,7 +352,8 @@ class Renderer
      */
     private static function renderTable()
     {
-        $table_sprintf = '<table class="DatagridTable DatagridTable-%s" cellspacing="0" cellpadding="0" border="0" id="%s">' . CR;
+        $table_sprintf = '<table class="DatagridTable DatagridTable-%s"';
+        $table_sprintf .= ' cellspacing="0" cellpadding="0" border="0" id="%s">' . CR;
         $table_sprintf .= CR . '%s' . CR ;
         $table_sprintf .= '</table>' . CR;
 
@@ -375,7 +378,10 @@ class Renderer
     private static function renderLabel()
     {
         if (self::getDatagrid()->isEnabled('Label')) {
-            return '<div class="DatagridLabel DatagridLabel-' . self::getDatagrid()->getAlias() . '">' . CR . self::getDatagrid()->getLabel() . CR . '</div>';
+            $html = '<div class="DatagridLabel DatagridLabel-' . self::getDatagrid()->getAlias() . '">' . CR;
+            $html .= self::getDatagrid()->getLabel() . CR . '</div>';
+
+            return $html;
         }
     }
 
@@ -387,7 +393,10 @@ class Renderer
     private static function renderDescription()
     {
         if (self::getDatagrid()->isEnabled('Description')) {
-            return '<div class="DatagridDescription DatagridDescription-' . self::getDatagrid()->getAlias() . '">' . CR . self::getDatagrid()->getDescription() . CR . '</div>';
+            $html = '<div class="DatagridDescription DatagridDescription-' . self::getDatagrid()->getAlias();
+            $html .= '">' . CR . self::getDatagrid()->getDescription() . CR . '</div>';
+
+            return $html;
         }
     }
 
@@ -420,7 +429,12 @@ class Renderer
      */
     private static function getURLStringWithSorting($_SortColumn, $_SortOrder)
     {
-        $url_string = sprintf('?%s=%s&%s=%s', self::getDatagrid()->getParameterAlias('SortColumn'), $_SortColumn, self::getDatagrid()->getParameterAlias('SortOrder'), $_SortOrder
+        $url_string = sprintf(
+            '?%s=%s&%s=%s',
+            self::getDatagrid()->getParameterAlias('SortColumn'),
+            $_SortColumn,
+            self::getDatagrid()->getParameterAlias('SortOrder'),
+            $_SortOrder
         );
 
         return self::getDatagrid()->appendUrl($url_string);
@@ -465,8 +479,9 @@ class Renderer
     /**
      * Render the pagination for the datagrid
      *
-     * @param  boolean $_ShowResultsPerPage If true, the drop-down for maximal results per page is shown. Otherwise the total number of items.
-     * @return string  Returns the html-code for the pagination row
+     * @param boolean $_ShowResultsPerPage If true, the drop-down for maximal results per page is shown.
+     * Otherwise the total number of items.
+     * @return string Returns the html-code for the pagination row
      */
     private static function renderTablePagination($_ShowResultsPerPage = true)
     {
@@ -484,10 +499,13 @@ class Renderer
             // results per page drop down
             if ($_ShowResultsPerPage) {
                 $html .= '<div class="ResultsPerPage">';
-                $html .= '<select name="' . self::getDatagrid()->getParameterAlias('ResultsPerPage') . '" onchange="this.form.submit();">';
+                $html .= '<select name="' . self::getDatagrid()->getParameterAlias('ResultsPerPage') . '"';
+                $html .= ' onchange="this.form.submit();">';
                 $_ResultsPerPageItems = self::getResultsPerPageItems();
                 foreach ($_ResultsPerPageItems as $item) {
-                    $html .= '<option value="' . $item . '" ' . ((self::getDatagrid()->getResultsPerPage() == $item) ? 'selected="selected"' : '') . '>' . $item . '</option>';
+                    $html .= '<option value="' . $item . '" ';
+                    $html .= ((self::getDatagrid()->getResultsPerPage() == $item) ? 'selected="selected"' : '');
+                    $html .= '>' . $item . '</option>';
                 }
                 $html .= '</select>';
                 $html .= '</div>';
@@ -599,7 +617,8 @@ class Renderer
         // render a "no results" row
         if ($html == '') {
             $html .= '<tr class="DatagridRow DatagridRow-NoResults">';
-            $html .= '<td class="DatagridCell DatagridCell-NoResults" colspan="' . self::getDatagrid()->getColumnCount() . '">';
+            $html .= '<td class="DatagridCell DatagridCell-NoResults"';
+            $html .= ' colspan="' . self::getDatagrid()->getColumnCount() . '">';
             $html .= _('No Results');
             $html .= '</td>';
             $html .= '</tr>';
@@ -675,12 +694,16 @@ class Renderer
     private static function renderTableColumn($columnObject)
     {
         $html = '';
-        $html .= '<th id="ColHeaderId-' . $columnObject->getAlias() . '" class="ColHeader ColHeader-' . $columnObject->getAlias() . '">';
+        $html .= '<th id="ColHeaderId-' . $columnObject->getAlias() . '"';
+        $html .= ' class="ColHeader ColHeader-' . $columnObject->getAlias() . '">';
         $html .= $columnObject->getName();
 
         if ($columnObject->isEnabled('Sorting')) {
             $html .= '&nbsp;<a href="';
-            $html .= self::getURLStringWithSorting($columnObject->getAlias(), self::getDatagrid()->getSortDirectionOpposite($columnObject->getSortOrder()));
+            $html .= self::getURLStringWithSorting(
+                $columnObject->getAlias(),
+                self::getDatagrid()->getSortDirectionOpposite($columnObject->getSortOrder())
+            );
             $html .= '">';
             $html .= _($columnObject->getSortOrder());
             $html .= '</a>';
@@ -730,7 +753,8 @@ class Renderer
                     if ($_SESSION['Datagrid_' . self::getDatagrid()->getAlias()]['SearchColumn'] == $columnObject->getAlias()) {
                         $selected = ' selected="selected"';
                     }
-                    $html .= '<option value="' . $columnObject->getAlias() . '"' . $selected . '>' . $columnObject->getName() . '</option>';
+                    $html .= '<option value="' . $columnObject->getAlias() . '"' . $selected . '>';
+                    $html .= $columnObject->getName() . '</option>';
                 }
             }
             $html .= '</select>';
@@ -755,19 +779,42 @@ class Renderer
         $html .= '<link rel="stylesheet" type="text/css" href="' . WWW_ROOT_THEMES_CORE . 'css/datagrid.css" />' . CR;
         $html .= '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/datagrid.js" type="text/javascript"></script>' . CR;
 
-        $html .= '<form action="' . self::getDatagrid()->getBaseURL() . '" method="post" name="Datagrid-' . self::getDatagrid()->getAlias() . '" id="Datagrid-' . self::getDatagrid()->getAlias() . '">' . CRT;
-
-        #$_htmlCode .= '<input type="hidden" name="action" value="' . Clansuite_Action_Controller_Resolver::getDefaultActionName() . '" />';
-        #$_htmlCode .= '<input type="hidden" name="action" id="ActionId" value="' . ((($_REQUEST['action'] !== null) && preg_match('#^[0-9a-z_]$#i',$_REQUEST['action']))?$_REQUEST['action']:'show') . '" />';
+        $html .= '<form action="' . self::getDatagrid()->getBaseURL() . '" method="post"';
+        $html .= ' name="Datagrid-' . self::getDatagrid()->getAlias() . '"';
+        $html .= ' id="Datagrid-' . self::getDatagrid()->getAlias() . '">' . CRT;
 
         /**
          * Add hidden input fields to store the parameters of the datagrid between requests.
          */
         $input_field_sprintf = '<input type="hidden" name="%s" value="%s" />';
-        $html .= sprintf($input_field_sprintf, self::getDatagrid()->getParameterAlias('Page'), self::getDatagrid()->getPage());
-        $html .= sprintf($input_field_sprintf, self::getDatagrid()->getParameterAlias('ResultsPerPage'), self::getDatagrid()->getResultsPerPage());
-        $html .= sprintf($input_field_sprintf, self::getDatagrid()->getParameterAlias('SortColumn'), self::getDatagrid()->getSortColumn());
-        $html .= sprintf($input_field_sprintf, self::getDatagrid()->getParameterAlias('SortOrder'), self::getDatagrid()->getSortOrder());
+
+        // hidden inputfield PAGE
+        $html .= sprintf(
+            $input_field_sprintf,
+            self::getDatagrid()->getParameterAlias('Page'),
+            self::getDatagrid()->getPage()
+        );
+
+        // hidden inputfield ResultsPerPage
+        $html .= sprintf(
+            $input_field_sprintf,
+            self::getDatagrid()->getParameterAlias('ResultsPerPage'),
+            self::getDatagrid()->getResultsPerPage()
+        );
+
+        // hidden inputfield SortColumn
+        $html .= sprintf(
+            $input_field_sprintf,
+            self::getDatagrid()->getParameterAlias('SortColumn'),
+            self::getDatagrid()->getSortColumn()
+        );
+
+        // hidden inputfield SortOrder
+        $html .= sprintf(
+            $input_field_sprintf,
+            self::getDatagrid()->getParameterAlias('SortOrder'),
+            self::getDatagrid()->getSortOrder()
+        );
 
         $html .= '<div class="Datagrid ' . self::getDatagrid()->getClass() . '">' . CR;
 
@@ -787,5 +834,4 @@ class Renderer
     {
         return self::render();
     }
-
 }
