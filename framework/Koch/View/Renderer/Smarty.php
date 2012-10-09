@@ -81,10 +81,10 @@ class Smarty extends AbstractRenderer
     {
         /**
          * Directories
-         */
-        $this->renderer->compile_dir = ROOT_CACHE . 'tpl_compile/';
+         */           
+        $this->renderer->compile_dir = $this->config['smarty']['cache_dir'] . 'tpl_compile/';
         $this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
-        $this->renderer->cache_dir   = ROOT_CACHE . 'tpl_cache/';
+        $this->renderer->cache_dir   = $this->config['smarty']['cache_dir'] . 'tpl_cache/';
 
         /**
          * Debugging
@@ -92,7 +92,7 @@ class Smarty extends AbstractRenderer
         $this->renderer->debugging = DEBUG ? true : false; // set smarty debugging, when debug on
         if ($this->renderer->debugging === true) {
             // set debugging template for smarty
-            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';
+            $this->renderer->debug_tpl = $this->config['smarty']['debug_template'];
             // clear compiled tpls in case of debug and clear cache
             $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
@@ -527,85 +527,16 @@ class Smarty extends AbstractRenderer
             return $this->fetch($template);
         }
 
-        if ($this->getRenderMode() === 'LAYOUT') {
-            // ensure that smarty tags {$content} and {copyright} are present in the layout template
-            #if(true === $this->preRenderChecks())
-            #{
+        if ($this->getRenderMode() === 'LAYOUT') {            
                 // assign the modulecontent
                 $this->assign('content', $this->fetch($template));
 
-                return $this->fetch($this->getLayoutTemplate());
-            #}
+                return $this->fetch($this->getLayoutTemplate());            
         }
     }
 
     public function renderPartial($template)
     {
         return $this->renderer->fetch($template);
-    }
-
-    /**
-     * preRenderChecks
-     */
-    public function preRenderChecks()
-    {
-        $layout_tpl_name = $this->getLayoutTemplate();
-
-        $this->renderer->template_dir = \Koch\Functions\Functions::array_flatten($this->renderer->template_dir);
-
-        foreach ($this->renderer->template_dir as $dir) {
-            $filename = $dir . $layout_tpl_name;
-
-            if (is_file($filename) === true) {
-                return self::preRenderCheck($filename, file_get_contents($filename));
-            }
-        }
-    }
-
-    /**
-     * Ensures that the Layouttemplate has the Copyright-Signs applied
-     *
-     * - copyright.tpl
-     * - clansuite_header_notice.tpl
-     *
-     * Keep in mind ! that we spend a lot of time and ideas on this project.
-     * Do not remove this! Please give something back to the community.
-     *
-     * @param $file string filename
-     * @param $filecontent string The content of the layouttemplate file.
-     * @return boolean
-     */
-    public static function preRenderCheck($file, $filecontent)
-    {
-        $renderChecksArray = array(
-            '1' => array(
-                'needle' => '{include file=\'copyright.tpl\'}',
-                'exceptionmessage' => 'The copyright tag is missing. Please insert {include file=\'copyright.tpl\'}
-                 in your layout/wrapper template file: <br /> ' . $file,
-                'exceptioncode' => '12'
-            ),
-            '2' => array(
-                'needle' => '{include file=\'clansuite_header_notice.tpl\'}',
-                'exceptionmessage' => 'The header notice tag is missing. Please insert
-                 {include file=\'clansuite_header_notice.tpl\'} in your layout/wrapper template file: <br /> ' . $file,
-                'exceptioncode' => '13'
-            ),
-            '3' => array(
-                'needle' => '{$content}',
-                'exceptionmessage' => 'The content variable {$content} must be within the wrapper template!',
-                'exceptioncode' => '14'
-            ),
-        );
-
-        foreach ($renderChecksArray as $preRenderCheck) {
-            if (false != mb_strpos($filecontent, $preRenderCheck['needle'])) {
-                return true;
-            } else {
-                throw new \Koch\Exception\Exception(
-                    $preRenderCheck['exceptionmessage'],
-                    $preRenderCheck['exceptioncode']
-                );
-            }
-        }
     }
 }
