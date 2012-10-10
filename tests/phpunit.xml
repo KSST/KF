@@ -1,0 +1,14 @@
+<phpunit bootstrap="./bootstrap.php" colors="true">
+    <testsuite name="Koch Framework Test Suite">
+        <directory>./</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../framework/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-text" target="php://stdout"/>
+    </logging>
+</phpunit>

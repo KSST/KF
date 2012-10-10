@@ -1,7 +1,8 @@
 <?php
+
 namespace Koch\Config;
 
-class StagingTest extends \Clansuite_UnitTestCase
+class StagingTest extends \PHPUnit_Framework_Testcase
 {
     /**
      * @var Staging
@@ -37,17 +38,17 @@ class StagingTest extends \Clansuite_UnitTestCase
         // new key exists
         $this->assertTrue(array_key_exists('overloaded-key', $overloaded_cfg));
         // new key has correct value
-        $this->assertEqual($overloaded_cfg['overloaded-key'], $array_to_overload['overloaded-key']);
+        $this->assertEquals($overloaded_cfg['overloaded-key'], $array_to_overload['overloaded-key']);
 
         // overloading of key ['error']['development']
         // original value is 0
-        $this->assertEqual($array_to_overload['error']['development'], '0');
+        $this->assertEquals($array_to_overload['error']['development'], '0');
         // expect that error array is present
         $this->assertTrue(array_key_exists('error', $overloaded_cfg));
         // expect that error array has a key developement
         $this->assertTrue(array_key_exists('development', $overloaded_cfg['error']));
         // expect that this key is set to 1 (on)
-        $this->assertEqual($overloaded_cfg['error']['development'], '1');
+        $this->assertEquals($overloaded_cfg['error']['development'], '1');
         // expect that both values are not equal
         $this->assertNotEqual($overloaded_cfg['error']['development'], $array_to_overload['error']['development']);
     }
@@ -63,6 +64,6 @@ class StagingTest extends \Clansuite_UnitTestCase
 
         $filename = Staging::getFilename();
 
-        $this->assertEqual($filename,$expected_filename);
+        $this->assertEquals($filename,$expected_filename);
     }
 }

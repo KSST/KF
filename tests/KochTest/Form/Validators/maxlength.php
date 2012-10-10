@@ -30,7 +30,7 @@ class Koch_Form_Validator_MaxLength_Test extends Clansuite_UnitTestCase
         $this->validator->maxlength = 1980;
 
         // getter returns integer
-        $this->assertEqual(1980, $this->validator->getMaxlength());
+        $this->assertEquals(1980, $this->validator->getMaxlength());
 
         // getter returns integer not string
         $this->assertNotIdentical('1980', $this->validator->getMaxlength());
@@ -40,11 +40,11 @@ class Koch_Form_Validator_MaxLength_Test extends Clansuite_UnitTestCase
     {
          // setter accepts numeric
          $this->validator->setMaxlength(19);
-         $this->assertEqual(19, $this->validator->getMaxlength());
+         $this->assertEquals(19, $this->validator->getMaxlength());
 
          // setter accepts string
          $this->validator->setMaxlength('19');
-         $this->assertEqual(19, $this->validator->getMaxlength());
+         $this->assertEquals(19, $this->validator->getMaxlength());
     }
 
     public function testMethod_processValidationLogic()
@@ -74,7 +74,7 @@ class Koch_Form_Validator_MaxLength_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMaxlength('1980');
 
-        $this->assertEqual('The value exceeds the maxlength of 1980 chars',
+        $this->assertEquals('The value exceeds the maxlength of 1980 chars',
                            $this->validator->getErrorMessage());;
     }
 
@@ -82,7 +82,7 @@ class Koch_Form_Validator_MaxLength_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMaxlength('1980');
 
-        $this->assertEqual('Please enter 1980 chars at maximum.',
+        $this->assertEquals('Please enter 1980 chars at maximum.',
                            $this->validator->getValidationHint());;
     }
 }

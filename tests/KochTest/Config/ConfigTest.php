@@ -1,4 +1,5 @@
 <?php
+
 namespace Koch\Config;
 
 /**
@@ -17,7 +18,7 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new Config;
+        //$this->object = new Config;
     }
 
     /**
