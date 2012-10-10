@@ -39,7 +39,7 @@ class AuthenticationLogging implements EventInterface
 {
     protected $logger;
 
-    public function __construct(Koch_Logger $logger, Koch_HttpRequest $request)
+    public function __construct(\Koch\Logger\LoggerInterface $logger, \Koch\Http\HttpRequestInterface $request)
     {
         // set request object
         $this->request = $request;
@@ -47,7 +47,7 @@ class AuthenticationLogging implements EventInterface
         $this->logger = $logger;
     }
 
-    public function execute(Koch_Event $event)
+    public function execute(\Koch\Event\Event $event)
     {
         $authdata = $event->getInfo();
 

@@ -1,6 +1,8 @@
 <?php
 
-namespace Koch\Config\Adapter;
+namespace KochTest\Config\Adapter;
+
+use Koch\Config\Adapter\INI;
 
 class INITest extends \PHPUnit_Framework_TestCase
 {

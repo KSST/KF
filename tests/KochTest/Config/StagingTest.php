@@ -1,6 +1,8 @@
 <?php
 
-namespace Koch\Config;
+namespace KochTest\Config;
+
+use Koch\Config\Staging;
 
 class StagingTest extends \PHPUnit_Framework_Testcase
 {
