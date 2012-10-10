@@ -282,7 +282,7 @@ class Datagrid extends Base
     /**
      * Get a column depending on its alias
      *
-     * @param  string $sColumnKey Name of the Column
+     * @param  string                        $sColumnKey Name of the Column
      * @return Koch\Datagrid\Datagrid\Column
      */
     public function getColumn($sColumnKey)
