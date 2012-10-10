@@ -24,7 +24,7 @@ class String extends ColumnRenderer implements ColumnRendererInterface
     /**
      * Render the value(s) of a cell
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid\Cell
      * @return string Return html-code
      */
     public function renderCell($oCell)

@@ -28,23 +28,23 @@ class Cell extends Base
     private $Values = array();
 
     /**
-     * Column object (Clansuite_Datagrid_Column)
+     * Column object (Koch\Datagrid\Datagrid\Column)
      *
-     * @var object Clansuite_Datagrid_Column
+     * @var object Koch\Datagrid\Datagrid\Column
      */
     private $columnObject;
 
     /**
-     * Row object (Clansuite_Datagrid_Row)
+     * Row object (Koch\Datagrid\Datagrid\Row)
      *
-     * @var object Clansuite_Datagrid_Row
+     * @var object Koch\Datagrid\Datagrid\Row
      */
     private $Row;
 
     /**
      * Set the column object of this cell
      *
-     * @param Clansuite_Datagrid_Column $_columnObject
+     * @param Koch\Datagrid\Datagrid\Column $_columnObject
      */
     public function setColumnObject($_columnObject)
     {
@@ -54,7 +54,7 @@ class Cell extends Base
     /**
      * Set the datagrid object
      *
-     * @param Clansuite_Datagrid $_Datagrid
+     * @param Koch\Datagrid\Datagrid $_Datagrid
      */
     public function setjjjDatagrid($_Datagrid)
     {
@@ -64,7 +64,7 @@ class Cell extends Base
     /**
      * Set the row object of this cell
      *
-     * @param Clansuite_Datagrid_Row $_Row
+     * @param Koch\Datagrid\Datagrid\Row $_Row
      */
     public function setRow($_Row)
     {
@@ -94,7 +94,7 @@ class Cell extends Base
     /**
      * Returns the column object of this cell
      *
-     * @return Clansuite_Datagrid_Column $_columnObject
+     * @return Koch\Datagrid\Datagrid\Column $_columnObject
      */
     public function getColumn()
     {
@@ -104,7 +104,7 @@ class Cell extends Base
     /**
      * Get the Datagrid object
      *
-     * @return Clansuite_Datagrid $_Datagrid
+     * @return Koch\Datagrid\Datagrid $_Datagrid
      */
     public function getDatagrid()
     {
@@ -114,7 +114,7 @@ class Cell extends Base
     /**
      * Returns the row object of this cell
      *
-     * @return Clansuite_Datagrid_Row $_Row
+     * @return Koch\Datagrid\Datagrid\Row $_Row
      */
     public function getRow()
     {

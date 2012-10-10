@@ -22,7 +22,7 @@ class ColumnRenderer extends Renderer
     /**
      * The column object
      *
-     * @var object Clansuite_Datagrid_Column
+     * @var object Koch\Datagrid\Datagrid\Column
      */
     private $column;
 
@@ -33,7 +33,7 @@ class ColumnRenderer extends Renderer
     /**
      * Set the col object
      *
-     * @param Clansuite_Datagrid_Column $column
+     * @param Koch\Datagrid\Datagrid\Column $column
      */
     public function setColumn($column)
     {
@@ -47,7 +47,7 @@ class ColumnRenderer extends Renderer
     /**
      * Get the column object
      *
-     * @return Clansuite_Datagrid_Column
+     * @return Koch\Datagrid\Datagrid\Column
      */
     public function getColumn()
     {
@@ -57,7 +57,7 @@ class ColumnRenderer extends Renderer
     /**
      * Instantiate the Column Base
      *
-     * @param Clansuite_Datagrid_Column
+     * @param Koch\Datagrid\Datagrid\Column
      */
     public function __construct($column)
     {

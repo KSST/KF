@@ -26,7 +26,7 @@ class Column extends Base
     /**
      * All cells of this column (array of references)
      *
-     * @var array Clansuite_Datagrid_Cell
+     * @var array Koch\Datagrid\Datagrid_Cell
      */
     private $cells = array();
 
@@ -54,7 +54,7 @@ class Column extends Base
     /**
      * Renderer for the cell
      *
-     * @var object Clansuite_Datagrid_Column_Renderer
+     * @var object Koch\Datagrid\Datagrid_Column_Renderer
      */
     private $renderer;
 
@@ -75,7 +75,7 @@ class Column extends Base
     /**
      * Set all row-cells
      *
-     * @param array Clansuite_Datagrid_Cell
+     * @param array Koch\Datagrid\Datagrid_Cell
      */
     public function setCells($_Cells)
     {
@@ -95,11 +95,11 @@ class Column extends Base
     /**
      * Set the renderer for the column
      *
-     * @param mixed string|object Renderer Name|Clansuite_Datagrid_Column_Renderer
+     * @param mixed string|object Renderer Name|Koch\Datagrid\Datagrid_Column_Renderer
      */
     public function setRenderer($_Renderer)
     {
-        if ($_Renderer instanceof Clansuite_Datagrid_Column_Renderer_Base) {
+        if ($_Renderer instanceof Koch\Datagrid\Datagrid_Column_Renderer_Base) {
             $this->renderer = $_Renderer;
         } else {
             $this->renderer = $this->loadColumnRenderer($_Renderer);
@@ -143,7 +143,7 @@ class Column extends Base
     /**
      * Get the renderer for the column
      *
-     * @return Clansuite_Datagrid_Column_Renderer
+     * @return Koch\Datagrid\Datagrid_Column_Renderer
      */
     public function getRenderer()
     {
@@ -184,7 +184,7 @@ class Column extends Base
     public function isEnabled($feature)
     {
         if ( !isset($this->features[$feature]) ) {
-            throw new Clansuite_Exception(_('There is no such feature in this datagrid column: ') . $feature);
+            throw new Koch\Exception\Exception(_('There is no such feature in this datagrid column: ') . $feature);
         } else {
             return $this->features[$feature];
         }
@@ -230,7 +230,7 @@ class Column extends Base
     /**
      * Add a cell reference to the col
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid_Cell
      */
     public function addCell($cell)
     {
@@ -247,7 +247,7 @@ class Column extends Base
     {
         $rendererName = mb_strtolower($rendererName);
 
-        $className = 'Clansuite_Datagrid_Column_Renderer_' . ucfirst($rendererName);
+        $className = 'Koch\Datagrid\Datagrid_Column_Renderer_' . ucfirst($rendererName);
 
         if (false == class_exists($className, false)) {
             $file = KOCH_FRAMEWORK . 'viewhelper/datagrid/columns/' . $rendererName . '.php';
@@ -256,10 +256,10 @@ class Column extends Base
                 include $file;
 
                 if (false == class_exists($className, false)) {
-                    throw new Clansuite_Exception(_('The column renderer class does not exist: ') . $className);
+                    throw new Koch\Exception\Exception(_('The column renderer class does not exist: ') . $className);
                 }
             } else {
-                throw new Clansuite_Exception(_('The column renderer file does not exist: ') . $file);
+                throw new Koch\Exception\Exception(_('The column renderer file does not exist: ') . $file);
             }
         }
 
@@ -271,7 +271,7 @@ class Column extends Base
      * Default renderer: String
      *
      * @return string Returns html-code
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid_Cell
      */
     public function renderCell($oCell)
     {
