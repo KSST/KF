@@ -45,7 +45,7 @@ class BlockIps implements EventInterface
         $this->blockedIps = $blockedIps;
     }
 
-    public function execute(Koch_Event $event)
+    public function execute(\Koch\Event\Event $event)
     {
         $request = Clansuite_CMS::getInjector()->instantiate('Koch_HttpRequest');
 

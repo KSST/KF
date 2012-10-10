@@ -41,7 +41,7 @@ class DebugConsoleResponse implements EventInterface
         $this->debugbarHTML = $debugbarHTML;
     }
 
-    public function execute()
+    public function execute(\Koch\Event\Event $event)
     {
         echo $this->debugbarHTML;
     }
