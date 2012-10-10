@@ -7,7 +7,7 @@ use Koch\Form\Form;
 /**
  * @todo method chaining tests on all setter methods
  */
-class FormTest extends Clansuite_UnitTestCase
+class FormTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_Form

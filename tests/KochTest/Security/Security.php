@@ -1,5 +1,5 @@
 <?php
-class SecurityTest extends Clansuite_UnitTestCase
+class SecurityTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
     {
@@ -21,7 +21,7 @@ class SecurityTest extends Clansuite_UnitTestCase
         $this->assertEquals(strlen($salt), 12);
     }
 
-    public function testMethod_generate_hash()
+    public function testMethod_generateHash()
     {
         $hash_md5 = \Koch\Security\Security::generateHash('md5', 'admin');
 
@@ -32,14 +32,14 @@ class SecurityTest extends Clansuite_UnitTestCase
         $this->assertIdentical('d033e22ae348aeb5660fc2140aec35850c4da997', $hash_sha1);
     }
 
-    public function testMethod_build_salted_hash()
+    public function testMethod_buildSaltedHash()
     {
         $salted_hash = \Koch\Security\Security::buildSaltedHash('admin', 'md5');
 
         $this->assertTrue(is_array($salted_hash), true);
      }
 
-    public function testMethod_check_salted_hash()
+    public function testMethod_checkSaltedHash()
     {
         // md5('admin'); from form input
         $passwordhash = '21232f297a57a5a743894a0e4a801fc3';

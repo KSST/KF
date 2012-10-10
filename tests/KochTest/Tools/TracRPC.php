@@ -5,7 +5,7 @@ if (count(get_included_files()) == 1) {
 
 use \Koch\Tools\TracRPC;
 
-class TracRPC_Test extends Clansuite_UnitTestCase
+class TracRPC_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_TracRPC

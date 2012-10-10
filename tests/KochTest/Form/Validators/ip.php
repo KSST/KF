@@ -1,5 +1,5 @@
 <?php
-class Koch_Form_Validators_Ip_Test extends Clansuite_UnitTestCase
+class Koch_Form_Validators_Ip_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Koch_Form_Validator_Ip

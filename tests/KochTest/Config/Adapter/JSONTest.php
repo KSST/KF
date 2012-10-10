@@ -39,7 +39,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedException FileNotFound
+     * @expectedExceptiom Koch\Exception\Exception
+     * @expectedException JSON Config File not existing or not readable
      */
     public function testReadConfigThrowsExceptionFileNotFound()
     {
@@ -74,7 +75,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
         $int_or_bool = $this->object->writeConfig($file, $array);
 
-        $this->assertInternalType($int_or_bool, 'int');
+        $this->assertTrue((bool) $int_or_bool);
 
         unlink($file);
     }
