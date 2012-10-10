@@ -28,6 +28,6 @@ class HttpResponse_Test extends Clansuite_UnitTestCase
 
     public function testProperty_DefaultStatusIs200()
     {
-        $this->assertEqual(200, HttpResponse::getStatusCode());
+        $this->assertEquals(200, HttpResponse::getStatusCode());
     }
 }

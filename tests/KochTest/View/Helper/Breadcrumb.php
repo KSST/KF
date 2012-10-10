@@ -188,7 +188,7 @@ class BreadcrumbTest extends Clansuite_UnitTestCase
         $t_array = $this->object->getTrail(false);
 
         // return value is an array
-        $this->assertIsA($t_array, 'array');
+        $this->assertInternalType($t_array, 'array');
         // array is not empty
         $bool = empty($t_array) ? true : false;
         $this->assertFalse($bool);

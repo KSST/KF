@@ -38,15 +38,19 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         return dirname(__DIR__) . '/fixtures/file.json';
     }
 
-    public function testReadConfig_throwsException_IfFileNotFound()
+    /*
+     * @expectedException FileNotFound
+     */
+    public function testReadConfigThrowsExceptionFileNotFound()
     {
-        $this->expectException();
         $this->object->readConfig('not-existant-file.json');
     }
 
-    public function testReadConfig_throwsException_JsonError()
+    /*
+    * @expectedException JsonError
+    */
+    public function testReadConfigThrowsExceptionJsonError()
     {
-        $this->expectException();
         $this->object->readConfig('not-existant-file.json');
     }
 
@@ -55,12 +59,9 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $this->expectException();
         $json = $this->object->readConfig($this->getFile());
-
         $expected = array();
-
-        $this->assertEqual($expected, $json);
+        $this->assertEquals($expected, $json);
     }
 
     /**
@@ -73,7 +74,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
         $int_or_bool = $this->object->writeConfig($file, $array);
 
-        $this->assertIsA($int_or_bool, 'int');
+        $this->assertInternalType($int_or_bool, 'int');
 
         unlink($file);
     }
@@ -85,6 +86,6 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     {
         $errmsg = $this->object->getJsonErrorMessage(JSON_ERROR_DEPTH);
         $expected = 'The maximum stack depth has been exceeded.';
-        $this->assertEqual($expected, $errmsg);
+        $this->assertEquals($expected, $errmsg);
     }
 }
