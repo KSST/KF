@@ -85,7 +85,7 @@ class Captcha
         }
 
         // set frameworks font folder as default
-        self::$font_folder[] = __DIR__ . '/fonts';
+        self::$font_folders[] = __DIR__ . '/fonts';
 
         // pick a random font from the fonts dir
         self::$font = self::getRandomFont(self::$font_folders);
