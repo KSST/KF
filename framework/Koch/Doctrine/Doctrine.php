@@ -82,9 +82,9 @@ class Doctrine
      *
      * @return Doctrine_Enitity_Manager
      */
-    public static function init($clansuite_config)
+    public static function init($config)
     {
-        self::checkDataSourceName($clansuite_config);
+        self::checkDataSourceName($config);
 
         $vendor = dirname(dirname(__DIR__)) . '/vendor/';
 
@@ -127,10 +127,7 @@ class Doctrine
         $config->setQueryCacheImpl($cache);
 
         // set annotation driver for entities
-        $config->setMetadataDriverImpl(
-            $config->newDefaultAnnotationDriver(
-                self::getModelPathsForAllModules())
-        );
+        $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(self::getModelPathsForAllModules()));
 
         /**
          * This is slow like hell, because getAllClassNames traverses all
@@ -154,14 +151,14 @@ class Doctrine
 
         // use main configuration values for setting up the connection
         $connectionOptions = array(
-            'driver'    => $clansuite_config['database']['driver'],
-            'user'      => $clansuite_config['database']['user'],
-            'password'  => $clansuite_config['database']['password'],
-            'dbname'    => $clansuite_config['database']['dbname'],
-            'host'      => $clansuite_config['database']['host'],
-            'charset'   => $clansuite_config['database']['charset'],
+            'driver'    => $config['database']['driver'],
+            'user'      => $config['database']['user'],
+            'password'  => $config['database']['password'],
+            'dbname'    => $config['database']['dbname'],
+            'host'      => $config['database']['host'],
+            'charset'   => $config['database']['charset'],
             'driverOptions' => array(
-                'charset' => $clansuite_config['database']['charset']
+                'charset' => $config['database']['charset']
             )
         );
 
@@ -182,7 +179,7 @@ class Doctrine
          * The constant definition is for building (raw) sql queries manually.
          * The database prefixing is registered via an event.
          */
-        define('DB_PREFIX', $clansuite_config['database']['prefix']);
+        define('DB_PREFIX', $config['database']['prefix']);
 
         $tablePrefix = new \DoctrineExtensions\TablePrefix\TablePrefix(DB_PREFIX);
         $event->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
@@ -197,17 +194,13 @@ class Doctrine
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
          */
-        if($clansuite_config['database']['driver'] !== null and
-                 $clansuite_config['database']['driver'] == "pdo_mysql")
-        {
-             /**
-              * @todo eval database.charset true?
-              * wouldn't it be better to use utf-8 to name it explicitly
-              */
-            if ($clansuite_config['database']['charset'] !== null) {
+        if ($config['database']['driver'] !== null and $config['database']['driver'] == "pdo_mysql") {
+            if ($config['database']['charset'] !== null) {
                 $event->addEventSubscriber(
                     new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit(
-                            $clansuite_config['database']['charset'], 'utf8_unicode_ci')
+                        $config['database']['charset'],
+                        'utf8_unicode_ci'
+                    )
                 );
             }
         }
@@ -229,7 +222,7 @@ class Doctrine
         self::$em = $em;
 
         // done with config, remove to safe memory
-        unset($clansuite_config, $em, $event, $cache, $classLoader, $config);
+        unset($config, $em, $event, $cache, $classLoader, $config);
 
         return self::$em;
     }
@@ -293,14 +286,13 @@ class Doctrine
         $model_dirs = array();
 
         // get all module directories
-        $dirs = glob( ROOT_MOD . '[a-zA-Z]*', GLOB_ONLYDIR );
+        $dirs = glob(ROOT_MOD . '[a-zA-Z]*', GLOB_ONLYDIR);
 
         foreach ($dirs as $key => $dir_path) {
             /**
              * It's easier to include dirpath models (subfolder and files will be autoloaded)
              * therefor the records have to be removed
              */
-
             // Entity Path
             $entity_path = $dir_path . '/Model/Entity';
 
@@ -314,7 +306,7 @@ class Doctrine
             if (is_dir($repos_path)) {
                 $model_dirs[] = $repos_path;
             }
-         }
+        }
 
         #$model_dirs[] = ROOT . 'doctrine';
 
@@ -330,9 +322,11 @@ class Doctrine
      */
     public static function getStats()
     {
-        echo sprintf('Doctrine Queries (%d @ %s sec)',
-                self::$sqlLoggerStack->currentQuery,
-                round(self::getExecTime(), 3));
+        echo sprintf(
+            'Doctrine Queries (%d @ %s sec)',
+            self::$sqlLoggerStack->currentQuery,
+            round(self::getExecTime(), 3)
+        );
     }
 
     /**

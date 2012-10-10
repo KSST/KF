@@ -39,9 +39,7 @@ use Koch\Form\FormDecorator;
 class Div extends FormDecorator
 {
     /**
-     * Name of this decorator
-     *
-     * @var string
+     * @var string Name of this decorator
      */
     public $name = 'div';
 

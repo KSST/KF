@@ -152,8 +152,8 @@ class Errorhandler
              * we need to detect, if an E_USER_ERROR is either incoming from
              * SMARTY or from a template_c file (extension tpl.php).
              */
-            if((true === (bool) mb_strpos(mb_strtolower($errfile), 'smarty')) or
-               (true === (bool) mb_strpos(mb_strtolower($errfile), 'tpl.php'))) {
+            if ((true === (bool) mb_strpos(mb_strtolower($errfile), 'smarty')) or
+                (true === (bool) mb_strpos(mb_strtolower($errfile), 'tpl.php'))) {
                 // render the smarty template error
                 echo SmartyTemplateError::render($errno, $errorname, $errstr, $errfile, $errline, $errcontext);
             } else {
@@ -204,7 +204,8 @@ class Errorhandler
     /**
      * getDebugBacktrace
      *
-     * Transforms the output of php's  debug_backtrace() to a more readable html format.
+     * Transforms the output of php's debug_backtrace() and exception backtraces
+     * to a more readable html format.
      *
      * @return string $backtrace_string contains the backtrace
      */
@@ -221,7 +222,7 @@ class Errorhandler
             $trace = debug_backtrace();
 
             /**
-             * Now we get rid of several last calls in the backtrace stack
+             * Now we get rid of several last calls in the backtrace stack,
              * to get nearer to the relevant error position in the stack.
              *
              * What exactly happens is: we shift-off the last 3 calls to
@@ -500,16 +501,16 @@ class Errorhandler
             // build an edit link
             return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
         } else {
-        /*
-         * elseif (DEVELOPMENT) {
-            // link to our editor
-            $fileLinkFormatString = 'index.php?module=editor&action=edit&file=%f&line=%l';
+            /*
+             * elseif (DEVELOPMENT) {
+              // link to our editor
+              $fileLinkFormatString = 'index.php?module=editor&action=edit&file=%f&line=%l';
 
-            // insert file:line into the fileLinkFormatString
-            $link = strtr($fileLinkFormatString, array('%f' => $file, '%l' => $line));
+              // insert file:line into the fileLinkFormatString
+              $link = strtr($fileLinkFormatString, array('%f' => $file, '%l' => $line));
 
-            return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
-         } else { */
+              return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
+              } else { */
             // shorten file string by removing the root path
             $file = str_replace(ROOT, '..' . DIRECTORY_SEPARATOR, $file);
 

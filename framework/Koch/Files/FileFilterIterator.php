@@ -23,19 +23,26 @@
  *
  */
 
-namespace Koch\Form\Decorators\Form;
+namespace Koch\Files;
 
-use Koch\Form\FormDecorator;
-
-class Errors extends FormDecorator
+/**
+ * File type filter for the SPL FilterIterator.
+ *
+ * If the directory iterator is wrapped into this filter,
+ * it will fetch only files with a certain type.
+ */
+class FileFilterIterator extends \FilterIterator
 {
-    /**
-     * @var string Name of this decorator
-     */
-    public $name = 'errors';
+    protected $files;
 
-    public function render($html_form_content)
+    public function __construct($iterator, array $files)
     {
-        return $html_form_content;
+        $this->files = $files;
+        parent::__construct($iterator);
+    }
+
+    public function accept()
+    {
+        return (in_array($this->current(), $this->files) === true) ? true : false;
     }
 }

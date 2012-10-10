@@ -741,26 +741,35 @@ class Renderer
     private static function renderTableSearch()
     {
         $html = '';
+
         if (self::getDatagrid()->isEnabled('Search')) {
+
+            $value = htmlentities($_SESSION['Datagrid_' . self::getDatagrid()->getAlias()]['SearchForValue']);
+
             $html .= '<tr><td colspan="' . self::getDatagrid()->getColumnCount() . '">';
             $html .= _('Search: ');
-            $html .= '<input type="text" value="' . htmlentities($_SESSION['Datagrid_' . self::getDatagrid()->getAlias()]['SearchForValue']) . '" name="' . self::getDatagrid()->getParameterAlias('SearchForValue') . '" />';
+            $html .= '<input type="text"';
+            $html .= ' value="' . $value . '"';
+            $html .= ' name="' . self::getDatagrid()->getParameterAlias('SearchForValue') . '" />';
             $html .= ' <select name="' . self::getDatagrid()->getParameterAlias('SearchColumn') . '">';
+
             $columnsArray = self::getDatagrid()->getColumns();
+
             foreach ($columnsArray as $columnObject) {
+
                 if ($columnObject->isEnabled('Search')) {
-                    $selected = '';
-                    if ($_SESSION['Datagrid_' . self::getDatagrid()->getAlias()]['SearchColumn'] == $columnObject->getAlias()) {
-                        $selected = ' selected="selected"';
-                    }
-                    $html .= '<option value="' . $columnObject->getAlias() . '"' . $selected . '>';
-                    $html .= $columnObject->getName() . '</option>';
+                    $searchColumn = $_SESSION['Datagrid_' . self::getDatagrid()->getAlias()]['SearchColumn'];
+                    $selected = ($searchColumn == $columnObject->getAlias()) ? ' selected="selected"' : '';
                 }
+
+                $html .= '<option value="' . $columnObject->getAlias() . '"' . $selected . '>';
+                $html .= $columnObject->getName() . '</option>';
             }
-            $html .= '</select>';
-            $html .= ' <input type="submit" class="ButtonGreen" value="' . _('Search') . '" />';
-            $html .= '</td></tr>';
         }
+
+        $html .= '</select>';
+        $html .= ' <input type="submit" class="ButtonGreen" value="' . _('Search') . '" />';
+        $html .= '</td></tr>';
 
         return $html;
     }

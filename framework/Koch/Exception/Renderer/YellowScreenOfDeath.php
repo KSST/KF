@@ -47,7 +47,8 @@ class YellowScreenOfDeath
         }
 
         // Header
-        $html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
+        $html = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"';
+        $html .= ' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">';
         $html .= '<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">';
         $html .= '<head>';
         $html .= '<title>Clansuite Exception ' . $code . ' - ' . $message . '</title>';
@@ -107,8 +108,9 @@ class YellowScreenOfDeath
             $html .= '<tr><td><strong>PHP: </strong></td><td>' . PHP_VERSION . ' ' . PHP_EXTRA_VERSION . '</td></tr>';
             $html .= '<tr><td><strong>Server: </strong></td><td>' . $_SERVER['SERVER_SOFTWARE'] . '</td></tr>';
             $html .= '<tr><td><strong>Agent: </strong></td><td>' . $_SERVER['HTTP_USER_AGENT'] . '</td></tr>';
-            $html .= '<tr><td><strong>Clansuite: </strong></td><td>' . CLANSUITE_VERSION . ' ' . CLANSUITE_VERSION_STATE;
-            $html .= ' (' . CLANSUITE_VERSION_NAME . ')</td></tr>';
+            $html .= '<tr><td><strong>Application: </strong></td>';
+            $html .= '<td>' . APPLICATION_VERSION . ' ' . APPLICATION_VERSION_STATE;
+            $html .= ' (' . APPLICATION_VERSION_NAME . ')</td></tr>';
             $html .= '</table></div>';
         }
 
