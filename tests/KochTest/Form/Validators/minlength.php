@@ -34,7 +34,7 @@ class Koch_Form_Validator_MinLength_Test extends Clansuite_UnitTestCase
         $this->validator->minlength = 1980;
 
         // getter returns integer
-        $this->assertEqual(1980, $this->validator->getMinlength());
+        $this->assertEquals(1980, $this->validator->getMinlength());
 
         // getter returns integer not string
         $this->assertNotIdentical('1980', $this->validator->getMinlength());
@@ -45,10 +45,10 @@ class Koch_Form_Validator_MinLength_Test extends Clansuite_UnitTestCase
         // set property
         $this->validator->setMinlength('1980');
 
-        $this->assertEqual(1980, $this->validator->getMinlength());
+        $this->assertEquals(1980, $this->validator->getMinlength());
 
         // property
-        $this->assertEqual('1980', $this->validator->minlength);
+        $this->assertEquals('1980', $this->validator->minlength);
     }
 
     public function testMethod_processValidationLogic()
@@ -79,7 +79,7 @@ class Koch_Form_Validator_MinLength_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMinlength('19');
 
-        $this->assertEqual('The value deceeds (is less than) the Minlength of 19 chars.',
+        $this->assertEquals('The value deceeds (is less than) the Minlength of 19 chars.',
                            $this->validator->getErrorMessage());;
     }
 
@@ -87,7 +87,7 @@ class Koch_Form_Validator_MinLength_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMinlength('19');
 
-        $this->assertEqual('Please enter 19 chars at maximum.',
+        $this->assertEquals('Please enter 19 chars at maximum.',
                            $this->validator->getValidationHint());;
     }
 }
