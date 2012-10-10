@@ -42,7 +42,7 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
     /**
      * Render the value(s) of a cell
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid\Cell
      * @return string Return html-code
      */
     public function renderCell($oCell)
@@ -55,7 +55,7 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
 
         // validate
         if (false == isset($values['name'])) {
-            throw new Clansuite_Exception(_('A link needs a name. Please define "name" in the ResultKeys'));
+            throw new Koch\Exception\Exception(_('A link needs a name. Please define "name" in the ResultKeys'));
         } else {
             if (mb_strlen($values['name']) > $this->nameWrapLength) {
                 $values['name'] = mb_substr($values['name'], 0, $this->nameWrapLength - 3) . '...';
@@ -64,13 +64,13 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
 
         // render a href
         $options = array(
-            'href' => Clansuite_Datagrid::appendUrl($this->linkFormat),
+            'href' => Koch\Datagrid\Datagrid::appendUrl($this->linkFormat),
             'id' => $this->linkId,
             'title' => $this->linkTitle
         );
-        $html_ahref = Clansuite_HTML::renderElement('a', $this->nameFormat, $options);
+        $html_link = Koch\View\Helper\Html::renderElement('a', $this->nameFormat, $options);
 
         // replace
-        return $this->_replacePlaceholders($values, $html_ahref);
+        return $this->_replacePlaceholders($values, $html_link);
     }
 }

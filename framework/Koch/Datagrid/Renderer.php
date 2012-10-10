@@ -35,7 +35,7 @@ class Renderer
     /**
      * The datagrid
      *
-     * @var Clansuite_Datagrid $_Datagrid
+     * @var Koch\Datagrid\Datagrid $_Datagrid
      */
     private static $datagrid;
 
@@ -55,7 +55,7 @@ class Renderer
     /**
      * Instantiate renderer and attach Datagrid to it
      *
-     * @param Clansuite_Datagrid $_Datagrid
+     * @param Koch\Datagrid\Datagrid $_Datagrid
      */
     public function __construct($_Datagrid)
     {
@@ -67,7 +67,7 @@ class Renderer
     /**
      * Set the datagrid object
      *
-     * @param Clansuite_Datagrid $_Datagrid
+     * @param Koch\Datagrid\Datagrid $_Datagrid
      */
     public static function setDatagrid($_Datagrid)
     {
@@ -77,7 +77,7 @@ class Renderer
     /**
      * Get the Datagrid object
      *
-     * @return Clansuite_Datagrid $_Datagrid
+     * @return Koch\Datagrid\Datagrid $_Datagrid
      */
     public static function getDatagrid()
     {
@@ -633,7 +633,7 @@ class Renderer
      * Render a single row
      * HTML: <tr>(.*)</tr>
      *
-     * @param $row Clansuite_Datagrid_Row
+     * @param $row Koch\Datagrid\Datagrid_Row
      * @param $alternate row alternating toggle
      * @return string Returns the html-code for a single row
      */
@@ -665,7 +665,7 @@ class Renderer
      * Render a single cell
      * * HTML: <td>(.*)</td>
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid_Cell
      * @return string Return the html-code for the cell
      */
     private static function renderTableCell($_oCell)
@@ -688,7 +688,7 @@ class Renderer
      * - if sorting is enabled, displayes sort order toggle
      * - sort order toggle is text or icon
      *
-     * @param Clansuite_Datagrid_Column
+     * @param Koch\Datagrid\Datagrid_Column
      * @return string Returns the html-code for a single column
      */
     private static function renderTableColumn($columnObject)
@@ -784,9 +784,12 @@ class Renderer
         // Build htmlcode
         $html = '';
 
-        $html .= '<link rel="stylesheet" type="text/css" href="' . WWW_ROOT_THEMES_CORE . 'css/pagination.css" />' . CR;
-        $html .= '<link rel="stylesheet" type="text/css" href="' . WWW_ROOT_THEMES_CORE . 'css/datagrid.css" />' . CR;
-        $html .= '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/datagrid.js" type="text/javascript"></script>' . CR;
+        $html .= '<link rel="stylesheet" type="text/css"';
+        $html .= ' href="' . WWW_ROOT_THEMES_CORE . 'css/pagination.css" />' . CR;
+        $html .= '<link rel="stylesheet" type="text/css"';
+        $html .= ' href="' . WWW_ROOT_THEMES_CORE . 'css/datagrid.css" />' . CR;
+        $html .= '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/datagrid.js"';
+        $html .= ' type="text/javascript"></script>' . CR;
 
         $html .= '<form action="' . self::getDatagrid()->getBaseURL() . '" method="post"';
         $html .= ' name="Datagrid-' . self::getDatagrid()->getAlias() . '"';

@@ -32,7 +32,7 @@ use DoctrineExtensions\Paginate\Paginate;
  *
  * Purpose:
  * Automatic datagrid generation from doctrine records/tables.
- * Doctrine_Table => Doctrine_Query => Clansuite_Datagrid
+ * Doctrine_Table => Doctrine_Query => Koch\Datagrid\Datagrid
  *
  * Datagrid builds a table with the following structure:
  *
@@ -79,7 +79,7 @@ class Datagrid extends Base
     private $dataModifyHook = array('class' => '', 'method' => '');
 
     /**
-     * Array of Clansuite_Datagrid_Cell objects
+     * Array of Koch\Datagrid\Datagrid\Cell objects
      *
      * @var array
      */
@@ -93,7 +93,7 @@ class Datagrid extends Base
     private $ColCount = 0;
 
     /**
-     * Array of Clansuite_Datagrid_Column objects
+     * Array of Koch\Datagrid\Datagrid\Column objects
      *
      * @var array
      */
@@ -167,7 +167,7 @@ class Datagrid extends Base
     /**
      * The renderer for the datagrid
      *
-     * @var Clansuite_Datagrid_Renderer
+     * @var Koch\Datagrid\Datagrid\Renderer
      */
     private $renderer;
 
@@ -179,7 +179,7 @@ class Datagrid extends Base
     private $resultsPerPage;
 
     /**
-     * Array of Clansuite_Datagrid_Row objects
+     * Array of Koch\Datagrid\Datagrid\Row objects
      *
      * @var array
      */
@@ -208,7 +208,7 @@ class Datagrid extends Base
     }
 
     /**
-     * Sets the column objects of the grid (Clansuite_Datagrid_Column)
+     * Sets the column objects of the grid (Koch\Datagrid\Datagrid\Column)
      *
      * @param array $_Cols
      */
@@ -255,7 +255,7 @@ class Datagrid extends Base
     }
 
     /**
-     * Sets the row objects of the grid (Clansuite_Datagrid_Row)
+     * Sets the row objects of the grid (Koch\Datagrid\Datagrid\Row)
      *
      * @param array $_Rows
      */
@@ -282,8 +282,8 @@ class Datagrid extends Base
     /**
      * Get a column depending on its alias
      *
-     * @param  string                    $sColumnKey Name of the Column
-     * @return Clansuite_Datagrid_Column
+     * @param  string $sColumnKey Name of the Column
+     * @return Koch\Datagrid\Datagrid\Column
      */
     public function getColumn($sColumnKey)
     {
@@ -301,7 +301,7 @@ class Datagrid extends Base
     }
 
     /**
-     * Returns the column objects (Clansuite_Datagrid_Col)
+     * Returns the column objects (Koch\Datagrid\Datagrid\Col)
      *
      * @return array
      */
@@ -329,7 +329,7 @@ class Datagrid extends Base
     /**
      * Get the renderer object
      *
-     * @return Clansuite_Datagrid_Renderer
+     * @return Koch\Datagrid\Datagrid\Renderer
      */
     public function getRenderer()
     {
@@ -371,7 +371,7 @@ class Datagrid extends Base
     }
 
     /**
-     * Returns the row objects (Clansuite_Datagrid_Row)
+     * Returns the row objects (Koch\Datagrid\Datagrid\Row)
      *
      * @return array
      */
@@ -424,7 +424,7 @@ class Datagrid extends Base
         $acceptedOptions = array( 'Entity', 'ColumnSets', 'Url');
         foreach ($acceptedOptions as $value) {
             if (false === isset($options[$value])) {
-                throw new Clansuite_Exception(
+                throw new Koch\Exception\Exception(
                     'Datagrid Option(s) missing. Valid options are: '. var_export($acceptedOptions, true)
                 );
             }
@@ -556,7 +556,7 @@ class Datagrid extends Base
     public function isEnabled($feature)
     {
         if ( isset($this->features[$feature]) === false ) {
-            throw new Clansuite_Exception(_('There is no such feature in this datagrid: ') . $feature);
+            throw new Koch\Exception\Exception(_('There is no such feature in this datagrid: ') . $feature);
         } else {
             return $this->features[$feature];
         }
@@ -609,7 +609,7 @@ class Datagrid extends Base
         $this->execute();
 
         // attach Datagrid to renderer
-        $renderer = new Clansuite_Datagrid_Renderer($this);
+        $renderer = new Koch\Datagrid\Datagrid_Renderer($this);
 
         return $renderer->render();
     }
@@ -629,7 +629,7 @@ class Datagrid extends Base
             // define exception message string for usage with sprintf + gettext
             $exception_sprintf = _('The datagrid columnset has an error. The array key "%s" is missing.)');
 
-            throw new Clansuite_Exception(sprintf($exception_sprintf, $columnKey));
+            throw new Koch\Exception\Exception(sprintf($exception_sprintf, $columnKey));
         }
     }
 
@@ -685,7 +685,7 @@ class Datagrid extends Base
         $colSet = null;
 
         foreach ($this->columnSets as $colKey => &$colSet) {
-            $oCol = new Clansuite_Datagrid_Column();
+            $oCol = new Koch\Datagrid\Datagrid_Column();
             $oCol->setAlias($colSet['Alias']);
             $oCol->setId($colSet['Alias']);
             $oCol->setName($colSet['Name']);

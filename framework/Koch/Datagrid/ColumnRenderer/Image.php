@@ -37,7 +37,7 @@ class Image extends ColumnRenderer implements ColumnRendererInterface
     /**
      * Render the value(s) of a cell
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid\Cell
      * @return string Return html-code
      */
     public function renderCell($oCell)
@@ -49,6 +49,8 @@ class Image extends ColumnRenderer implements ColumnRendererInterface
             $image_alt = mb_substr($value, 0, $this->nameWrapLength - 5) . 'Image';
         }
 
-        return $this->replacePlaceholders($value, Clansuite_HTML::img($value, array( 'alt'  => $image_alt)));
+        $html_img = Koch\View\Helper\Html::img($value, array( 'alt'  => $image_alt));
+
+        return $this->replacePlaceholders($value, $html_img);
     }
 }

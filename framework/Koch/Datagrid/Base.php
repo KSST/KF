@@ -166,7 +166,7 @@ class Base
                 // setter method exists
                 $this->$method($value);
             } else {
-                throw new Clansuite_Exception('Unknown property ' . $key . ' for Datagrid');
+                throw new Koch\Exception\Exception('Unknown property ' . $key . ' for Datagrid');
             }
         }
 

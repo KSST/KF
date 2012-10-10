@@ -39,14 +39,14 @@ class Row extends Base
     /**
      * All cells of this row
      *
-     * @var array Clansuite_Datagrid_Cell
+     * @var array Koch\Datagrid\Datagrid\Cell
      */
     private $Cells = array();
 
     /**
      * The datagrid
      *
-     * @var Clansuite_Datagrid $_Datagrid
+     * @var Koch\Datagrid\Datagrid $_Datagrid
      */
     private $Datagrid;
 
@@ -64,7 +64,7 @@ class Row extends Base
     /**
      * Set all row-cells
      *
-     * @param array Clansuite_Datagrid_Cell
+     * @param array Koch\Datagrid\Datagrid\Cell
      */
     public function setCells($_Cells)
     {
@@ -88,7 +88,7 @@ class Row extends Base
     /**
      * Get the cells for this row
      *
-     * @return array Clansuite_Datagrid_Cell
+     * @return array Koch\Datagrid\Datagrid\Cell
      */
     public function getCells()
     {
@@ -112,7 +112,7 @@ class Row extends Base
     /**
      * Add a cell to the row
      *
-     * @param Clansuite_Datagrid_Cell
+     * @param Koch\Datagrid\Datagrid\Cell
      */
     public function addCell(&$_Cell)
     {
