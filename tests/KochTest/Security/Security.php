@@ -18,7 +18,7 @@ class SecurityTest extends Clansuite_UnitTestCase
         $this->assertTrue(is_string($salt), true);
 
         // ensure $salt has correct length
-        $this->assertEqual(strlen($salt), 12);
+        $this->assertEquals(strlen($salt), 12);
     }
 
     public function testMethod_generate_hash()

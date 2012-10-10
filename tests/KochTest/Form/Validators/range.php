@@ -41,11 +41,11 @@ class Koch_Form_Validator_Range_Test extends Clansuite_UnitTestCase
                            $this->validator->options['options']['max_range']);
 
         // string to int
-        $this->assertEqual($minimum_length,
+        $this->assertEquals($minimum_length,
                            $this->validator->options['options']['min_range']);
 
          // string to int
-        $this->assertEqual($maximum_length,
+        $this->assertEquals($maximum_length,
                            $this->validator->options['options']['max_range']);
 
     }

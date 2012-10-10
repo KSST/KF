@@ -30,7 +30,7 @@ class Koch_Form_Validators_Equals_Test extends Clansuite_UnitTestCase
         $this->validator->equalsTo = 1980;
 
         // getter returns integer
-        $this->assertEqual(1980, $this->validator->getEqualsTo());
+        $this->assertEquals(1980, $this->validator->getEqualsTo());
 
         // getter returns integer not string
         $this->assertNotIdentical('1980', $this->validator->getEqualsTo());
@@ -40,11 +40,11 @@ class Koch_Form_Validators_Equals_Test extends Clansuite_UnitTestCase
     {
          // setter accepts numeric
          $this->validator->setEqualsTo(19);
-         $this->assertEqual(19, $this->validator->getEqualsTo());
+         $this->assertEquals(19, $this->validator->getEqualsTo());
 
          // setter accepts string
          $this->validator->setEqualsTo('19');
-         $this->assertEqual(19, $this->validator->getEqualsTo());
+         $this->assertEquals(19, $this->validator->getEqualsTo());
     }
 
     public function testMethod_processValidationLogic()
