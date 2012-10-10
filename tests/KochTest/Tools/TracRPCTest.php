@@ -1,11 +1,10 @@
 <?php
-if (count(get_included_files()) == 1) {
-    require_once 'autorun.php';
-}
 
-use \Koch\Tools\TracRPC;
+namespace KochTest\Tools;
 
-class TracRPC_Test extends \PHPUnit_Framework_TestCase
+use Koch\Tools\TracRPC;
+
+class TracRPCTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_TracRPC

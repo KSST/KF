@@ -1,6 +1,6 @@
 <?php
 
-namespace KochTest\View\Helber;
+namespace KochTest\View\Helper;
 
 use Koch\View\Helper\Breadcrumb;
 use Koch\Router\TargetRoute;
