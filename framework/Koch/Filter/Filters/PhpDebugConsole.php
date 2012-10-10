@@ -91,7 +91,8 @@ class PhpDebugConsole implements FilterInterface
          *  Load JS / CSS for PHP Debug Console into the Output Buffer
          */
         $html  = '<script type="text/javascript" src="'.$options['HTML_DIV_js_path'].'/html_div.js"></script>';
-        $html .= '<link rel="stylesheet" type="text/css" media="screen" href="'.$options['HTML_DIV_css_path'].'/html_div.css" />';
+        $html .= '<link rel="stylesheet" type="text/css"';
+        $html .= ' media="screen" href="'.$options['HTML_DIV_css_path'].'/html_div.css" />';
 
         unset($options);
 

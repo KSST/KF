@@ -16,11 +16,8 @@ use Koch\Form\FormDecorator;
 
 class Html5Validation extends FormDecorator
 {
-
     /**
-     * Name of this decorator
-     *
-     * @var string
+     * @var string Name of this decorator
      */
     public $name = 'html5validation';
 
@@ -33,13 +30,14 @@ class Html5Validation extends FormDecorator
      */
     public function addValidationJavascript()
     {
-        // init var
-        $html_form = '';
+        $html = '';
 
         // add html5 validation support for FF,O,IE
-        $html_form .= '<script type="text/javascript" src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.html5form-min.js">';
+        $html .= '<script type="text/javascript"';
+        $html .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.html5form-min.js">';
 
-        $ident_form = '[Error] Form has no id or name!';
+        $ident_form = '[Error] Form has no attribute "id" or "name"!';
+
         // to identify the form use the name or id
         if ( mb_strlen($this->getName()) > 0 ) {
              $ident_form .= $this->getName();
@@ -50,13 +48,13 @@ class Html5Validation extends FormDecorator
         }
 
         // activate html5 syntax validation support on the form
-        $html_form .= '<script>
+        $html .= '<script>
                       $(document).ready(function(){
                           $(\'#' . $ident_form . '\').html5form();
                       });
                       </script>';
 
-        return $html_form;
+        return $html;
     }
 
     public function render($html_form_content)

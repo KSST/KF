@@ -32,9 +32,7 @@ use Koch\Form\FormElementDecorator;
 class Formelement extends FormelementDecorator
 {
     /**
-     * Name of this decorator
-     *
-     * @var string
+     * @var string Name of this decorator
      */
     public $name = 'formelement';
 

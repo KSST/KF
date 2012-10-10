@@ -17,9 +17,7 @@ use Koch\Form\FormDecorator;
 class Listing extends FormDecorator
 {
     /**
-     * Name of this decorator
-     *
-     * @var string
+     * @var string Name of this decorator
      */
     public $name = 'list';
 

@@ -61,8 +61,9 @@ class SmartyMoves implements FilterInterface
          * The X marks the position: X</head>
          */
         $matches = array();
-        preg_match_all('!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is', $content, $matches);
-        $content = preg_replace('!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is', '', $content);
+        $regexp1 = '!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is';
+        preg_match_all($regexp, $content, $matches);
+        $content = preg_replace($regexp, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $value) {
             $content = str_replace('</head>', $value."\n".'</head>', $content);
@@ -73,8 +74,9 @@ class SmartyMoves implements FilterInterface
          * The X marks the position: <body>X
          */
         $matches = array();
-        preg_match_all('!@@@SMARTY:POST_BODY_OPEN:BEGIN@@@(.*?)@@@SMARTY:POST_BODY_OPEN:END@@@!is', $content, $matches);
-        $content = preg_replace('!@@@SMARTY:POST_BODY_OPEN:BEGIN@@@(.*?)@@@SMARTY:POST_BODY_OPEN:END@@@!is', '', $content);
+        $regexp2 = '!@@@SMARTY:POST_BODY_OPEN:BEGIN@@@(.*?)@@@SMARTY:POST_BODY_OPEN:END@@@!is';
+        preg_match_all($regexp2, $content, $matches);
+        $content = preg_replace($regexp2, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $values) {
             $content = str_replace('<body>', '<body>'."\n".$value, $content);
@@ -85,8 +87,9 @@ class SmartyMoves implements FilterInterface
          * The X marks the position: X</body>
          */
         $matches = array();
-        preg_match_all('!@@@SMARTY:PRE_BODY_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_BODY_CLOSE:END@@@!is', $content, $matches);
-        $content = preg_replace('!@@@SMARTY:PRE_BODY_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_BODY_CLOSE:END@@@!is', '', $content);
+        $regexp3 = '!@@@SMARTY:PRE_BODY_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_BODY_CLOSE:END@@@!is';
+        preg_match_all($regexp3, $content, $matches);
+        $content = preg_replace($regexp3, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $values) {
             $content = str_replace('</body>', $value."\n".'</body>', $content);

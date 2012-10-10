@@ -27,9 +27,7 @@ use Koch\Form\FormElementDecorator;
 class Description extends FormelementDecorator
 {
     /**
-     * Name of this decorator
-     *
-     * @var string
+     * @var string Name of this decorator
      */
     public $name = 'description';
 
