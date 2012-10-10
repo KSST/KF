@@ -24,8 +24,10 @@
         "gedmo/doctrine-extensions": "dev-master",
         "smarty/smarty": "v3.1.12",
         "ezyang/htmlpurifier" : "dev-master",
-        "swiftmailer/swiftmailer": "v4.2.1",
-        "mikey179/vfsStream": "*"
+        "swiftmailer/swiftmailer": "v4.2.1"
+    },
+    "require-dev": {
+        "mikey179/vfsStream": "*",
         "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {
