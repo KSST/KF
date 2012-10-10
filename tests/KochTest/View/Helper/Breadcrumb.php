@@ -1,5 +1,8 @@
 <?php
 
+namespace KochTest\View\Helber;
+
+use Koch\View\Helper\Breadcrumb;
 use Koch\Router\TargetRoute;
 
 /**
@@ -19,7 +22,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new \Koch\View\Helper\Breadcrumb;
+        $this->object = new Breadcrumb;
     }
 
     /**
@@ -46,14 +49,14 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $t_array = $this->object->getTrail(false);
 
         // title is uppercased on first char
-        $this->assertIdentical('ModulenameA', $t_array[0]['title']);
+        $this->assertSame('ModulenameA', $t_array[0]['title']);
         // short url to qualified url
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=modulenameA', $t_array[0]['link']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameA', $t_array[0]['link']);
 
         // title is uppercased on first char
-        $this->assertIdentical('ModulenameB', $t_array[1]['title']);
+        $this->assertSame('ModulenameB', $t_array[1]['title']);
         // slash at the start is removed and shorturl to qualified url
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=modulenameB', $t_array[1]['link']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameB', $t_array[1]['link']);
     }
 
     /**
@@ -72,8 +75,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
         $t_array = $this->object->getTrail(false);
 
-        $this->assertIdentical('ModulenameC', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=modulenameC', $t_array[0]['link']);
+        $this->assertSame('ModulenameC', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameC', $t_array[0]['link']);
     }
 
     /**
@@ -100,16 +103,16 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         #var_dump($t_array);
 
         // Level 1 - expected Home
-        $this->assertIdentical('Home', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT, $t_array[0]['link']);
+        $this->assertSame('Home', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT, $t_array[0]['link']);
 
         // Level 2 - Modulename News
-        $this->assertIdentical('News', $t_array[1]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
+        $this->assertSame('News', $t_array[1]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
 
         // Level 3 - Action  Show
-        $this->assertIdentical('Show', $t_array[2]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $t_array[2]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
 
         /**
          * case B -  normal module - backend access => module = news, sub = admin, action =  action_admin_show
@@ -130,16 +133,16 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         #var_dump($t_array);
 
         // expected values on level 0
-        $this->assertIdentical('Control Center', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
 
         // expected values on level 1
-        $this->assertIdentical('News Admin', $t_array[1]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin', $t_array[1]['link']);
+        $this->assertSame('News Admin', $t_array[1]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin', $t_array[1]['link']);
 
         // expected values on level 2
-        $this->assertIdentical('Show', $t_array[2]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $t_array[2]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=show', $t_array[2]['link']);
 
         /**
          * case c -  Control Center => module = controlcenter, action = show
@@ -160,16 +163,16 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         #var_dump($t_array);
 
         // Level 1 - expected
-        $this->assertIdentical('Control Center', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
 
         // Level 2 - Modulename News
-        $this->assertIdentical('News', $t_array[1]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
+        $this->assertSame('News', $t_array[1]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
 
         // Level 3 - Action  Show
-        $this->assertIdentical('Show', $t_array[2]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $t_array[2]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
 
     }
 
@@ -205,8 +208,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
         $t_array = $this->object->getTrail(false);
 
-        $this->assertIdentical('Home', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT, $t_array[0]['link']);
+        $this->assertSame('Home', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT, $t_array[0]['link']);
 
         // case CONTROLCENTER module
 
@@ -215,8 +218,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
         $t_array = $this->object->getTrail(false);
 
-        $this->assertIdentical('Control Center', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
 
         // case ADMIN submodule => the first breadcrumb is also the controlcenter (because backend of module)
 
@@ -225,8 +228,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
         $t_array = $this->object->getTrail(false);
 
-        $this->assertIdentical('Control Center', $t_array[0]['title']);
-        $this->assertIdentical(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $t_array[0]['title']);
+        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
     }
 
     public function testResetBreadcrumbs()
@@ -238,6 +241,6 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
        $t_array = $this->object->getTrail(false);
 
-       $this->assertIdentical(array(), $t_array);
+       $this->assertSame(array(), $t_array);
     }
 }
