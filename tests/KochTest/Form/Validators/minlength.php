@@ -2,7 +2,7 @@
 /**
  * @todo method chaining tests on all setter methods
  */
-class Koch_Form_Validator_MinLength_Test extends Clansuite_UnitTestCase
+class Koch_Form_Validator_MinLength_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Koch_Form_Validator_minlength

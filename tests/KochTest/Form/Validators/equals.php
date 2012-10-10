@@ -1,6 +1,6 @@
 <?php
 
-class Koch_Form_Validators_Equals_Test extends Clansuite_UnitTestCase
+class Koch_Form_Validators_Equals_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Koch_Form_Validator_Equals

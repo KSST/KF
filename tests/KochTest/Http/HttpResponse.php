@@ -1,7 +1,7 @@
 <?php
 use Koch\Http\HttpResponse;
 
-class HttpResponse_Test extends Clansuite_UnitTestCase
+class HttpResponse_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_HttpResponse

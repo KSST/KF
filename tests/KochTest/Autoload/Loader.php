@@ -17,7 +17,7 @@ class ThisClassExists
 
 }
 
-class LoaderTest extends Clansuite_UnitTestCase
+class LoaderTest extends \PHPUnit_Framework_TestCase
 {
     public $classMapFile = 'autoloader.classmap.php';
 

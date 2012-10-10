@@ -43,7 +43,8 @@ class INITest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedException FileNotFound
+     * @expectedException Exception
+     * @expectedExceptionMessage File not found
      */
     public function testReadConfigWithException()
     {
@@ -116,6 +117,6 @@ class INITest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($ini_array, $this->getIniArray());
 
-        $this->assertInternalType($ini_array['section']['key3-int'], 'string');
+        $this->assertInternalType($ini_array['section']['key3-int'], 'int');
     }
 }

@@ -3,7 +3,7 @@
 
 use Koch\Feed\Feed;
 
-class FeedTest extends Clansuite_UnitTestCase
+class FeedTest extends \PHPUnit_Framework_TestCase
 {
     // path to valid rss feed
     public $feed_url = '';

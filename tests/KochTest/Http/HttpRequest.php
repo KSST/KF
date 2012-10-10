@@ -1,7 +1,7 @@
 <?php
 use \Koch\Http\HttpRequest;
 
-class HttpRequest_Test extends Clansuite_UnitTestCase
+class HttpRequest_Test extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_HttpRequest

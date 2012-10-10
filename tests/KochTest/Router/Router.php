@@ -5,7 +5,7 @@ use Koch\Router\TargetRoute;
 use Koch\Http\HttpRequest;
 use Koch\Config\Config;
 
-class RouterTest extends Clansuite_UnitTestCase
+class RouterTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Clansuite_Router
