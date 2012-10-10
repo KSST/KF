@@ -36,7 +36,7 @@ class FeedTest extends Clansuite_UnitTestCase
     {
         $simplepie_feed_object = Feed::fetchRSS($this->feed_url);
 
-        $this->assertIsA($simplepie_feed_object, 'SimplePie');
+        $this->assertInternalType($simplepie_feed_object, 'SimplePie');
     }
 
     /**
@@ -70,7 +70,7 @@ class FeedTest extends Clansuite_UnitTestCase
     {
         $feedcreator_object = Feed::getFeedcreator();
 
-        #$this->assertIsA($feedcreator_object, 'FeedCreator');
-        $this->assertIsA($feedcreator_object, 'UniversalFeedCreator');
+        #$this->assertInternalType($feedcreator_object, 'FeedCreator');
+        $this->assertInternalType($feedcreator_object, 'UniversalFeedCreator');
     }
 }

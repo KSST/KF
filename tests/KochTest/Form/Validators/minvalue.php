@@ -34,7 +34,7 @@ class Koch_Form_Validator_MinValue_Test extends Clansuite_UnitTestCase
         $this->validator->minvalue = 1980;
 
         // getter returns integer
-        $this->assertEqual(1980, $this->validator->getMinvalue());
+        $this->assertEquals(1980, $this->validator->getMinvalue());
 
         // getter returns integer not string
         $this->assertNotIdentical('1980', $this->validator->getMinvalue());
@@ -48,7 +48,7 @@ class Koch_Form_Validator_MinValue_Test extends Clansuite_UnitTestCase
 
         $this->validator->setMinvalue(1980);
 
-        $this->assertEqual(1980, $this->validator->getMinvalue());
+        $this->assertEquals(1980, $this->validator->getMinvalue());
     }
 
     public function testMethod_processValidationLogic()
@@ -81,7 +81,7 @@ class Koch_Form_Validator_MinValue_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMinvalue(19);
 
-        $this->assertEqual('The value deceeds (is less than) the minimum value of 19.',
+        $this->assertEquals('The value deceeds (is less than) the minimum value of 19.',
                            $this->validator->getErrorMessage());;
     }
 
@@ -89,7 +89,7 @@ class Koch_Form_Validator_MinValue_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMinvalue(19);
 
-        $this->assertEqual('Please enter a value not deceeding (being less than) the minimum value of 19.',
+        $this->assertEquals('Please enter a value not deceeding (being less than) the minimum value of 19.',
                            $this->validator->getValidationHint());;
     }
 }

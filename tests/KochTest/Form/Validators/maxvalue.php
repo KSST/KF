@@ -30,7 +30,7 @@ class Koch_Form_Validator_MaxValue_Test extends Clansuite_UnitTestCase
         $this->validator->maxvalue = 1980;
 
         // getter returns integer
-        $this->assertEqual(1980, $this->validator->getMaxvalue());
+        $this->assertEquals(1980, $this->validator->getMaxvalue());
 
         // getter returns integer not string
         $this->assertNotIdentical('1980', $this->validator->getMaxvalue());
@@ -40,12 +40,12 @@ class Koch_Form_Validator_MaxValue_Test extends Clansuite_UnitTestCase
     {
          // setter accepts numeric
          $this->validator->setMaxvalue(19);
-         $this->assertEqual(19, $this->validator->getMaxvalue());
+         $this->assertEquals(19, $this->validator->getMaxvalue());
 
          $this->expectException('InvalidArgumentException',
             'Parameter Maxvalue must be numeric (int|float) and not string.');
          $this->validator->setMaxvalue('19');
-         $this->assertEqual(19, $this->validator->getMaxvalue());
+         $this->assertEquals(19, $this->validator->getMaxvalue());
     }
 
     public function testMethod_processValidationLogic()
@@ -80,7 +80,7 @@ class Koch_Form_Validator_MaxValue_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setMaxvalue(1980);
 
-        $this->assertEqual('The value exceeds the maximum value of 1980.',
+        $this->assertEquals('The value exceeds the maximum value of 1980.',
                            $this->validator->getErrorMessage());;
     }
 
@@ -88,7 +88,7 @@ class Koch_Form_Validator_MaxValue_Test extends Clansuite_UnitTestCase
     {
         $this->validator->setmaxvalue(1980);
 
-        $this->assertEqual('The value must be smaller than 1980.',
+        $this->assertEquals('The value must be smaller than 1980.',
                            $this->validator->getValidationHint());;
     }
 }

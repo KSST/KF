@@ -35,13 +35,13 @@ class HttpRequest_Test extends Clansuite_UnitTestCase
     public function testMethod_getRequestMethod()
     {
         $this->request->setRequestMethod('BEAVIS');
-        $this->assertEqual('BEAVIS', HttpRequest::getRequestMethod());
+        $this->assertEquals('BEAVIS', HttpRequest::getRequestMethod());
     }
 
     public function testMethod_setRequestMethod()
     {
         $this->request->setRequestMethod('BUTTHEAD');
-        $this->assertEqual('BUTTHEAD', HttpRequest::getRequestMethod());
+        $this->assertEquals('BUTTHEAD', HttpRequest::getRequestMethod());
     }
 
     public function testMethod_isGET()

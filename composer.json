@@ -27,7 +27,8 @@
         "swiftmailer/swiftmailer": "v4.2.1"
     },
     "require-dev": {
-        "mikey179/vfsStream": "*"
+        "mikey179/vfsStream": "*",
+        "phpunit/PHPUnit": "3.7.*"
     },
     "suggest": {
         "ext-apc" : "*",
@@ -39,8 +40,8 @@
     },
     "autoload": {
         "psr-0": {
-            "Koch\\": "framework/Koch/",
-            "KochTest\\": "tests/KochTest"
+            "Koch\\": "framework/",
+            "KochTest\\": "tests/"
         }
     }
 }
