@@ -12,6 +12,8 @@
 
 namespace Koch\Datagrid\ColumnRenderer;
 
+use Koch\Datagrid\ColumnRenderer;
+
 /**
  * Datagrid Column Renderer for Edit Button Cells
  *
