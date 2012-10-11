@@ -1,11 +1,16 @@
 <?php
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\MinLength;
+
 /**
  * @todo method chaining tests on all setter methods
  */
-class Koch_Form_Validator_MinLength_Test extends \PHPUnit_Framework_TestCase
+class MinLengthTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_minlength
+     * @var MinLength
      */
     protected $validator;
 
@@ -37,7 +42,7 @@ class Koch_Form_Validator_MinLength_Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getMinlength());
 
         // getter returns integer not string
-        $this->assertNotIdentical('1980', $this->validator->getMinlength());
+        $this->assertNotSame('1980', $this->validator->getMinlength());
     }
 
     public function testMethod_setMinlength()

@@ -1,14 +1,13 @@
 <?php
-if (count(get_included_files()) == 1) {
-    require_once 'autorun.php';
-}
 
-use \Koch\Tools\TracRPC;
+namespace KochTest\Tools;
 
-class TracRPC_Test extends \PHPUnit_Framework_TestCase
+use Koch\Tools\TracRPC;
+
+class TracRPCTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Clansuite_TracRPC
+     * @var TracRPC
      */
     protected $trac;
 
@@ -48,13 +47,12 @@ class TracRPC_Test extends \PHPUnit_Framework_TestCase
 
     /**
      * Not a mock. It's a live request.
+     *
+     * @expectedException           Exception
+     * @expectedExceptionMessage    You are trying an authenticated access without providing username and password.
      */
     public function testMethod_Constructor_WithoutCredentials()
     {
-        $this->expectException(
-            new Exception('You are trying an authenticated access without providing username and password.')
-        );
-
         // request to "/login" without credentials
         $this->trac = new TracRPC('http://trac.clansuite.com/login/jsonrpc');
         $response = $this->trac->getWikiPage('ClansuiteTeam');
@@ -71,7 +69,7 @@ class TracRPC_Test extends \PHPUnit_Framework_TestCase
 
         $this->assertNotNull($response);
         $this->assertTrue(is_string($response));
-        $this->assertContainsString('Clansuite Team', $response);
+        $this->assertContains('Clansuite Team', $response);
         unset($response);
     }
 
@@ -102,7 +100,7 @@ class TracRPC_Test extends \PHPUnit_Framework_TestCase
 
         $real_response = self::objectToArray($response);
 
-        $this->assertContainsString('Gettext', $real_response['description']);
+        $this->assertContains('Gettext', $real_response['description']);
         unset($response);
     }
 
@@ -120,7 +118,7 @@ class TracRPC_Test extends \PHPUnit_Framework_TestCase
         $real_response = self::objectToArray($response);
 
         // datetime contains a string like "012-02-17T17:00:00"
-        $this->assertContainsString('T', $real_response['due']['1']);
+        $this->assertContains('T', $real_response['due']['1']);
         unset($response);
     }
 

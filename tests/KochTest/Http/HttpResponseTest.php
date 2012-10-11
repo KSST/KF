@@ -1,10 +1,13 @@
 <?php
+
+namespace KochTest\Http\HttpResponse;
+
 use Koch\Http\HttpResponse;
 
-class HttpResponse_Test extends \PHPUnit_Framework_TestCase
+class HttpResponseTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Clansuite_HttpResponse
+     * @var HttpResponse
      */
     protected $response;
 

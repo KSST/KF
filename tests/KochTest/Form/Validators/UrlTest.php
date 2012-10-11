@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validators_Locale_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Url;
+
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Locale
+     * @var Url
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validators_Locale_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Locale;
+        $this->validator = new Url;
     }
 
     /**
@@ -32,21 +37,23 @@ class Koch_Form_Validators_Locale_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
-        $this->assertTrue($this->validator->validate('de'));
+        // IDNA URL based on intl extension
+        if (function_exists('idn_to_ascii')) {
+            $this->assertEquals(idn_to_ascii('url-�sthetik.de'),
+                        $this->validator->validate('url-�sthetik.de'));
+        }
 
-        $this->assertTrue($this->validator->validate('de-DE'));
+        // hmm... this puny doesn't ride...
+        $this->assertFalse($this->validator->validate('http://www.t�st.com'));
 
-        // zh-TW - Chinese Taiwan
-        $this->assertTrue($this->validator->validate('zh-Hant-TW'));
+        // no dash
+        $this->assertTrue($this->validator->validate('http://clansuite.com'));
 
-        // fr-CA Canadian Frenchy
-        $this->assertTrue($this->validator->validate('fr-CA'));
+        // 1 dash
+        $this->assertTrue($this->validator->validate('http://clan-cms.com'));
 
-        $this->assertTrue($this->validator->validate('en-US'));
-
-        $this->assertTrue($this->validator->validate('no-tt'));
-
-        $this->assertTrue($this->validator->validate('no-No'));
+        // 2 dashes
+        $this->assertTrue($this->validator->validate('http://jens-andre-koch.de'));
     }
 
     public function testMethod_getErrorMessage()

@@ -1,5 +1,5 @@
 <?php
-#namespace Koch\Test;
+namespace KochTest\Feed;
 
 use Koch\Feed\Feed;
 
@@ -46,7 +46,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         $feedcontent = Feed::fetchRawRSS($this->feed_url, false);
 
-        $this->assertContainsString('title>clansuite.com Google Group</title>', $feedcontent);
+        $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
     }
 
     /**
@@ -60,7 +60,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_file(ROOT_CACHE . md5($this->feed_url)));
 
         // check for content
-        $this->assertContainsString('title>clansuite.com Google Group</title>', $feedcontent);
+        $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
     }
 
     /**

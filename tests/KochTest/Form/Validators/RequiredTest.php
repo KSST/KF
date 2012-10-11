@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Required;
+
+class RequiredTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Email
+     * @var Required
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Email;
+        $this->validator = new \Koch\Form\Validators\Required;
     }
 
     /**
@@ -27,15 +32,9 @@ class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
 
     public function testMethod_processValidationLogic()
     {
-        /**
-         * method processValidationLogic is indirectly tested via calling
-         * validate() on the parent class, which then calls processValidationLogic()
-         */
+        $this->assertFalse($this->validator->validate(''));
 
-        $this->assertTrue($this->validator->validate('charles@bronson.com'));
-
-        $this->assertTrue($this->validator->validate('billy@microsoft.com'));
-        $this->assertFalse($this->validator->validate('billy[at]microsoft[dot]com'));
+        $this->assertTrue($this->validator->validate('Evolution'));
     }
 
     public function testMethod_getErrorMessage()

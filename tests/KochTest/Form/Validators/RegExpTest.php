@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_RegExp_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\RegExp;
+
+class RegExpTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Url
+     * @var RegExp
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_RegExp_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\RegExp;
+        $this->validator = new RegExp;
     }
 
     /**
