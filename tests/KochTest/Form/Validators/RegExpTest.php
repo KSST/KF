@@ -56,6 +56,8 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
         $regexp = '/php/i';
         $this->validator->setRegexp($regexp);
         $this->assertTrue($this->validator->validate('php is elefantastic.'));
+
+        $this->assertFalse($this->validator->validate('The regexp was not found in here.'));
     }
 
     /**
