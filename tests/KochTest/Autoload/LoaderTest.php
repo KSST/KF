@@ -129,7 +129,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addToMapping( dirname(dirname(__DIR__)) . '/framework/Koch/Tools/SysInfo.php', 'Sysinfo' );
+        Loader::addToMapping( dirname(dirname(dirname(__DIR__))) . '/framework/Koch/Tools/SysInfo.php', 'Sysinfo' );
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 
@@ -151,13 +151,13 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
    public function testMethod_writeAutoloadingMapFile()
    {
-        if (is_file($this->classmap_file)) {
-            unlink($this->classmap_file);
+        if (is_file($this->classMapFile)) {
+            unlink($this->classMapFile);
         }
 
         // file will be created
         $this->assertSame(array(), Loader::readAutoloadingMapFile());
-        $this->assertTrue(is_file($this->classmap_file));
+        $this->assertTrue(is_file($this->classMapFile));
 
         $array = array('class' => 'file');
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
@@ -166,12 +166,12 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_readAutoloadingMapFile()
     {
-        if (is_file($this->classmap_file)) {
-            unlink($this->classmap_file);
+        if (is_file($this->classMapFile)) {
+            unlink($this->classMapFile);
         }
         // file will be created
         $this->assertSame(array(), Loader::readAutoloadingMapFile());
-        $this->assertTrue(is_file($this->classmap_file));
+        $this->assertTrue(is_file($this->classMapFile));
 
         $array = array ( 'class' => 'file' );
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));

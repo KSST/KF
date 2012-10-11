@@ -47,7 +47,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
 
     /*
      * expectedException        InvalidArgumentException
-     * expectedExceptionMessage Parameter Maxvalue must be numeric (int|float) and not string.
+     * expectedExceptionMessage Parameter Minvalue must be numeric (int|float) and not string.
      */
     public function testMethod_setMinvalue()
     {

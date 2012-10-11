@@ -80,7 +80,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     {
         // 1) Drop $_REQUEST and $GLOBALS. Usage is forbidden!
         unset($_REQUEST);
-        unset($GLOBALS);
+        //unset($GLOBALS);
 
         /*if ($ids_on === true) {
             // 2) Run Intrusion Detection System (on GET, POST, COOKIES)
@@ -94,7 +94,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
 
         // block XSS
         $_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
-        $_SERVER['QUERY_STRING'] = htmlspecialchars($_SERVER['QUERY_STRING']);
+        if (isset($_SERVER['QUERY_STRING'])) {
+            htmlspecialchars($_SERVER['QUERY_STRING']);
+        }
 
         /**
          *  5) Init Parameter Arrays and Assign the GLOBALS
@@ -629,7 +631,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         $allowed_rest_methodnames = array('DELETE', 'PUT');
 
         // request_method has to be POST AND GET has to to have the method GET
-        if ($_SERVER['REQUEST_METHOD'] == 'POST' and $this->issetParameter('GET', 'method')) {
+        if (isset($_SERVER['REQUEST_METHOD']) === true
+            and $_SERVER['REQUEST_METHOD'] == 'POST'
+            and $this->issetParameter('GET', 'method')) {
             // check for allowed rest commands
             if (in_array(mb_strtoupper($_GET['method']), $allowed_rest_methodnames)) {
                 // set the internal (tunneled) method as new REQUEST_METHOD
@@ -651,7 +655,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             } else {
                 throw new \Koch\Exception\Exception('Request Method failure. You tried to tunnel a '.$this->getParameter('method','GET').' request through an HTTP POST request.');
             }
-        } elseif ($_SERVER['REQUEST_METHOD'] == 'GET' and $this->issetParameter('GET', 'method')) {
+        } elseif (isset($_SERVER['REQUEST_METHOD']) === true
+            and $_SERVER['REQUEST_METHOD'] == 'GET'
+            and $this->issetParameter('GET', 'method')) {
             // NOPE, there's no tunneling through GET!
             throw new \Koch\Exception\Exception('Request Method failure. You tried to tunnel a '.$this->getParameter('method','GET').' request through an HTTP GET request.');
         }

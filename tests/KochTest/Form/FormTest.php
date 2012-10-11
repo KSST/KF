@@ -167,11 +167,11 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $this->form->copyObjectProperties($from_object_a, $to_object_b);
 
-        $this->assertSame($from_object_a, $to_object_b);
-        $this->assertTrue($to_object_b->attribute_string, 'value_of_attr_a');
-        $this->assertTrue($to_object_b->attribute_int, 9);
-        $this->assertTrue($to_object_b->attribute_bool, true);
-        $this->assertTrue($to_object_b->attribute_array['key'], 'value');
+        $this->assertEquals($from_object_a, $to_object_b);
+        $this->assertAttributeSame($to_object_b->attribute_string, 'value_of_attr_a');
+        $this->assertAttributeSame($to_object_b->attribute_int, 9);
+        $this->assertAttributeSame($to_object_b->attribute_bool, true);
+        $this->assertAttributeSame($to_object_b->attribute_array['key'], 'value');
     }
 
     /**
@@ -411,12 +411,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->registerDefaultFormDecorators();
         $default_form_decorators = $this->form->getDecorators();
         $this->assertTrue(array_key_exists('form', $default_form_decorators));
-        $this->assertTrue($this->form->getDecorator('form'));
+        $this->assertInstanceOf('Koch\Form\Decorators\Form\Form', $this->form->getDecorator('form'));
     }
 
     /*
      * expectedException        Exception
-     * expectedExceptionMessage The Formdecorator "not-existing-formdecorator" was not found.
+     * expectedExceptionMessage The Form does not have a Decorator called "not-existing-formdecorator".
      */
     public function testgetDecorator_exception_notfound()
     {
@@ -429,9 +429,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $html = $this->form->render();
         $this->assertFalse(empty($html));
-        $this->assertTrue(strpos($html, '<form'));
-        $this->assertTrue(strpos($html, '<textarea id="textarea-formelement-0">'));
-        $this->assertTrue(strpos($html, '</form>'));
+        $this->assertContains('<form', $html);
+        $this->assertContains('<textarea id="textarea-formelement-0">', $html);
+        $this->assertContains('</form>', $html);
     }
 
     public function test__toString()
@@ -443,9 +443,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $html = ob_get_clean();
 
         $this->assertFalse(empty($html));
-        $this->assertTrue(strpos($html, '<form'));
-        $this->assertTrue(strpos($html, '<textarea id="textarea-formelement-0">'));
-        $this->assertTrue(strpos($html, '</form>'));
+        $this->assertContains('<form', $html);
+        $this->assertContains('<textarea id="textarea-formelement-0">', $html);
+        $this->assertContains('</form>', $html);
     }
 
     public function testAddElement()
@@ -458,7 +458,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formelement = new \Koch\Form\Elements\Text;
         $formelement->setID('text-formelement-0');
 
-        $this->assertSame($formelement, $formelements_array[0]);
+        $this->assertAttributeContains($formelement->id, $formelements_array[0]);
     }
 
     public function testAddElement_withSettingAttributes()
@@ -503,7 +503,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $array['1']->setID('file-formelement-1');
         $array['2']->setID('captcha-formelement-2');
 
-        $this->assertSame($array, $this->form->getFormelements());
+        $this->assertEquals($array, $this->form->getFormelements());
     }
 
     public function testAddElement_switchEncodingWhenUsingFormelementFile()
@@ -535,7 +535,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $array['1']->setID('file-formelement-1');
         $array['2']->setID('captcha-formelement-2');
 
-        $this->assertSame($array, $this->form->getFormelements());
+        $this->assertEquals($array, $this->form->getFormelements());
     }
 
     public function testDelElementByName()
@@ -584,7 +584,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $formelement_object = $this->form->formelementFactory('text');
 
-        $this->assertSame(new \Koch\Form\Elements\Text, $formelement_object);
+        $this->assertInstanceof('\Koch\Form\Elements\Text', $formelement_object);
     }
 
     public function testsetValues_DataArrayPassedToMethod()
@@ -687,7 +687,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $form_decorator_object = $this->form->DecoratorFactory('label');
 
-        $this->assertSame(new \Koch\Form\Decorators\Form\Label, $form_decorator_object);
+        $this->assertInstanceOf('Koch\Form\Decorators\Form\Label', $form_decorator_object);
     }
 
     public function testsetDecoratorAttributesArray()

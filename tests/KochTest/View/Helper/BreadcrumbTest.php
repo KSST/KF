@@ -191,7 +191,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $t_array = $this->object->getTrail(false);
 
         // return value is an array
-        $this->assertInternalType($t_array, 'array');
+        $this->assertInternalType('array', $t_array);
         // array is not empty
         $bool = empty($t_array) ? true : false;
         $this->assertFalse($bool);

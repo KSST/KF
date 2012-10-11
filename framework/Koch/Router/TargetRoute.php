@@ -413,7 +413,7 @@ class TargetRoute extends Mapper
             'module' => 'index',
             'controller' => 'index',
             'action' => 'list',
-            'method' => 'action_list',
+            'method' => 'actionList',
             'params' => null,
             // Output
             'format' => 'html',

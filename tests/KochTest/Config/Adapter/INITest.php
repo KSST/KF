@@ -82,16 +82,16 @@ class INITest extends \PHPUnit_Framework_TestCase
         $file = dirname(__DIR__) . '/fixtures/booleans.ini';
         $config = $this->object->readConfig($file);
 
-        $this->assertTrue($config['booleans']['test_on']);
-        $this->assertFalse($config['booleans']['test_off']);
+        $this->assertTrue((bool) $config['booleans']['test_on']);
+        $this->assertFalse((bool) $config['booleans']['test_off']);
 
-        $this->assertTrue($config['booleans']['test_yes']);
-        $this->assertFalse($config['booleans']['test_no']);
+        $this->assertTrue((bool) $config['booleans']['test_yes']);
+        $this->assertFalse((bool) $config['booleans']['test_no']);
 
-        $this->assertTrue($config['booleans']['test_true']);
-        $this->assertFalse($config['booleans']['test_false']);
+        $this->assertTrue((bool) $config['booleans']['test_true']);
+        $this->assertFalse((bool) $config['booleans']['test_false']);
 
-        $this->assertFalse($config['booleans']['test_null']);
+        $this->assertFalse((bool) $config['booleans']['test_null']);
     }
 
     public function testReadingWithoutSection()

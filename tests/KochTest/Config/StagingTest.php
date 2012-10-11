@@ -35,6 +35,7 @@ class StagingTest extends \PHPUnit_Framework_Testcase
             'error' => array ('development' => '0')
         );
 
+        Staging::setFilename(__DIR__ . '/fixtures/development.php');
         $overloaded_cfg = Staging::overloadWithStagingConfig($array_to_overload);
 
         // new key exists
@@ -61,11 +62,25 @@ class StagingTest extends \PHPUnit_Framework_Testcase
     public function testGetFilename()
     {
         // test that the related development config exists
-        $expected_filename = ROOT . 'Configuration/Staging/' . 'development.php';
-        $this->assertTrue(is_file($expected_filename));
+        $expected_filename = __DIR__ . '/fixtures/development.php';
+        $this->assertFileExists($expected_filename);
 
         $filename = Staging::getFilename();
 
+        $this->assertEquals($filename,$expected_filename);
+    }
+
+    /**
+     * @covers Koch\Config\Staging::setFilename
+     */
+    public function testSetFilename()
+    {
+        $expected_filename = __DIR__ . '/fixtures/development.php';
+
+        Staging::setFilename($expected_filename);
+        $filename = Staging::getFilename();
+
+        $this->assertEquals($filename,$expected_filename);
         $this->assertEquals($filename,$expected_filename);
     }
 }

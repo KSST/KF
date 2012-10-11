@@ -47,17 +47,9 @@ namespace Koch\Config;
  */
 class Config extends AbstractConfig
 {
-    /**
-     * This object is injected via DI.
-     * The depending object needs a version of the config.
-     * We fetch it from Clansuite_CMS.
-     */
-    public function __construct()
+    public function setConfig($config)
     {
-        // if empty get from Clansuite_CMS
-        if (empty($this->config)) {
-            $this->config = \Clansuite\Application::getClansuiteConfig();
-        }
+        $this->config = $config;
     }
 
     /**
@@ -91,7 +83,7 @@ class Config extends AbstractConfig
         $file = APP_MODULES_DIR . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php';
 
         if (is_file($file)) {
-            return Factory::getConfiguration($configfile);
+            return Factory::getConfiguration($file);
         } else { // module has no configuration file
 
             return array();

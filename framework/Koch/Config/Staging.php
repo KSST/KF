@@ -35,9 +35,17 @@ namespace Koch\Config;
 class Staging
 {
     /**
-     * Loads a staging configuration file and overloads the given array
+     * This is the configuration file, which is overloaded.
+     *
+     * @var string
+     */
+    private static $filename = '';
+
+    /**
+     * Loads a staging configuration file and overloads the given array.
      *
      * @param array the array to overload
+     *
      * @return array Merged configuration.
      */
     public static function overloadWithStagingConfig($array_to_overload)
@@ -56,6 +64,10 @@ class Staging
      */
     public static function getFilename()
     {
+        if (isset(self::$filename)) {
+            return self::$filename;
+        }
+
         $filename = '';
 
         switch ($_SERVER['SERVER_NAME']) {
@@ -83,7 +95,12 @@ class Staging
                 $filename = 'production.php';
         }
 
-        // return full path to the staging config file
-        return ROOT_CONFIG . 'Staging/' . $filename;
+        // return staging config filename
+        return $filename;
+    }
+
+    public static function setFilename($filename)
+    {
+        self::$filename = $filename;
     }
 }

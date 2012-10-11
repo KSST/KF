@@ -24,3 +24,5 @@ if (!function_exists('_')) {
 include __DIR__ . '/_autoload.php';
 
 \Koch\Localization\Utf8::initialize();
+
+include __DIR__ . '/constants.php';
