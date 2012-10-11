@@ -41,11 +41,12 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedExceptiom Koch\Exception\Exception
-     * @expectedException JSON Config File not existing or not readable
+     * @expectedExceptiom        Koch\Exception\Exception
+     * @expectedExceptionMessage JSON Config File not existing or not readable.
      */
     public function testReadConfigThrowsExceptionFileNotFound()
     {
+        $this->setExpectedException('Koch\Exception\Exception');
         $this->object->readConfig('not-existant-file.json');
     }
 
@@ -54,6 +55,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     */
     public function testReadConfigThrowsExceptionJsonError()
     {
+        $this->setExpectedException('Koch\Exception\Exception');
+
         $this->object->readConfig('not-existant-file.json');
     }
 
@@ -72,14 +75,14 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteConfig()
     {
-        $array = array( 'section-1' => array( 'key1' => 'value1' ) );
-        $file = dirname(__DIR__) . '/fixtures/writeTest.json';
+        $array = array('section-1' => array('key1' => 'value1'));
+        $file = dirname(__DIR__) . '/fixtures/file.json';
 
         $int_or_bool = $this->object->writeConfig($file, $array);
 
         $this->assertTrue((bool) $int_or_bool);
 
-        unlink($file);
+        //unlink($file);
     }
 
     /**

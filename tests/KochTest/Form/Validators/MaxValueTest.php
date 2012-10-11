@@ -42,16 +42,17 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedException           InvalidArgumentException
-     * @expectedExceptionMessage    Parameter Maxvalue must be numeric (int|float) and not string.
+     * @expectedException        \InvalidArgumentException
+     * @expectedExceptionMessage Parameter Maxvalue must be numeric (int|float) and not string.
      */
     public function testMethod_setMaxvalue()
     {
-         // setter accepts numeric
-         $this->validator->setMaxvalue(19);
+         $this->setExpectedException('InvalidArgumentException');
+         $this->validator->setMaxvalue('19');
          $this->assertEquals(19, $this->validator->getMaxvalue());
 
-         $this->validator->setMaxvalue('19');
+         // setter accepts numeric
+         $this->validator->setMaxvalue(19);
          $this->assertEquals(19, $this->validator->getMaxvalue());
     }
 
@@ -75,6 +76,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
         $this->validator->setMaxvalue(19);
         $this->assertTrue($this->validator->validate(0));
 
+        $this->setExpectedException('InvalidArgumentException');
         $this->validator->setMaxvalue('19');
         $this->assertTrue($this->validator->validate(19));
 

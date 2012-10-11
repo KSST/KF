@@ -51,6 +51,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_setMinvalue()
     {
+        $this->setExpectedException('InvalidArgumentException');
         $this->validator->setMinvalue('1980');
 
         $this->validator->setMinvalue(1980);

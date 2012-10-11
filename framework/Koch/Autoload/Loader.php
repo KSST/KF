@@ -381,7 +381,7 @@ class Loader
     {
         self::$autoloader_map = array_merge((array) self::$autoloader_map, array( $classname => $filename ));
 
-        if (defined('APC') and APC  == true) {
+        if (defined('APC') and APC == true) {
             return self::writeAutoloadingMapApc(self::$autoloader_map);
         } else {
             return self::writeAutoloadingMapFile(self::$autoloader_map);
