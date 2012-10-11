@@ -1,8 +1,16 @@
 <?php
-class Koch_Form_Validator_Range_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Range;
+
+/**
+ * @todo method chaining tests on all setter methods
+ */
+class RangeTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Range
+     * @var Range
      */
     protected $validator;
 
@@ -15,7 +23,7 @@ class Koch_Form_Validator_Range_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Range;
+        $this->validator = new Range;
     }
 
     /**
@@ -34,10 +42,10 @@ class Koch_Form_Validator_Range_Test extends \PHPUnit_Framework_TestCase
         $this->validator->setRange($minimum_length, $maximum_length);
 
         // string != int
-        $this->assertNotIdentical($minimum_length,
+        $this->assertNotSame($minimum_length,
                            $this->validator->options['options']['min_range']);
 
-        $this->assertNotIdentical($maximum_length,
+        $this->assertNotSame($maximum_length,
                            $this->validator->options['options']['max_range']);
 
         // string to int
@@ -74,7 +82,7 @@ class Koch_Form_Validator_Range_Test extends \PHPUnit_Framework_TestCase
         $maximum_length = '1980';
         $this->validator->setRange($minimum_length, $maximum_length);
 
-        $this->assertIdentical('The value is outside the range of 1 <> 1980.',
+        $this->assertSame('The value is outside the range of 1 <> 1980.',
                 $this->validator->getErrorMessage());
     }
 
@@ -84,7 +92,7 @@ class Koch_Form_Validator_Range_Test extends \PHPUnit_Framework_TestCase
         $maximum_length = '1980';
         $this->validator->setRange($minimum_length, $maximum_length);
 
-        $this->assertIdentical('Please enter a value within the range of 1 <> 1980.',
+        $this->assertSame('Please enter a value within the range of 1 <> 1980.',
                 $this->validator->getValidationHint());
 
     }

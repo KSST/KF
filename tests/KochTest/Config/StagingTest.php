@@ -52,7 +52,7 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         // expect that this key is set to 1 (on)
         $this->assertEquals($overloaded_cfg['error']['development'], '1');
         // expect that both values are not equal
-        $this->assertNotEqual($overloaded_cfg['error']['development'], $array_to_overload['error']['development']);
+        $this->assertNotEquals($overloaded_cfg['error']['development'], $array_to_overload['error']['development']);
     }
 
     /**

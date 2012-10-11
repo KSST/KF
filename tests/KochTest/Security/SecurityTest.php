@@ -1,4 +1,9 @@
 <?php
+
+namespace KochTest\Security;
+
+use Koch\Security\Security;
+
 class SecurityTest extends \PHPUnit_Framework_TestCase
 {
     public function setUp()
@@ -12,7 +17,7 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     public function testMethod_generateSalt()
     {
         // generate a salt with length
-        $salt = \Koch\Security\Security::generateSalt(12);
+        $salt = Security::generateSalt(12);
 
         // ensure $salt is a string
         $this->assertTrue(is_string($salt), true);
@@ -25,11 +30,11 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     {
         $hash_md5 = \Koch\Security\Security::generateHash('md5', 'admin');
 
-        $this->assertIdentical('21232f297a57a5a743894a0e4a801fc3', $hash_md5);
+        $this->assertSame('21232f297a57a5a743894a0e4a801fc3', $hash_md5);
 
         $hash_sha1 = \Koch\Security\Security::generateHash('sha1', 'admin');
 
-        $this->assertIdentical('d033e22ae348aeb5660fc2140aec35850c4da997', $hash_sha1);
+        $this->assertSame('d033e22ae348aeb5660fc2140aec35850c4da997', $hash_sha1);
     }
 
     public function testMethod_buildSaltedHash()

@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Locale;
+
+class LocaleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Url
+     * @var Locale
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Url;
+        $this->validator = new Locale;
     }
 
     /**
@@ -32,23 +37,21 @@ class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
-        // IDNA URL based on intl extension
-        if (function_exists('idn_to_ascii')) {
-            $this->assertEquals(idn_to_ascii('url-�sthetik.de'),
-                        $this->validator->validate('url-�sthetik.de'));
-        }
+        $this->assertTrue($this->validator->validate('de'));
 
-        // hmm... this puny doesn't ride...
-        $this->assertFalse($this->validator->validate('http://www.t�st.com'));
+        $this->assertTrue($this->validator->validate('de-DE'));
 
-        // no dash
-        $this->assertTrue($this->validator->validate('http://clansuite.com'));
+        // zh-TW - Chinese Taiwan
+        $this->assertTrue($this->validator->validate('zh-Hant-TW'));
 
-        // 1 dash
-        $this->assertTrue($this->validator->validate('http://clan-cms.com'));
+        // fr-CA Canadian Frenchy
+        $this->assertTrue($this->validator->validate('fr-CA'));
 
-        // 2 dashes
-        $this->assertTrue($this->validator->validate('http://jens-andre-koch.de'));
+        $this->assertTrue($this->validator->validate('en-US'));
+
+        $this->assertTrue($this->validator->validate('no-tt'));
+
+        $this->assertTrue($this->validator->validate('no-No'));
     }
 
     public function testMethod_getErrorMessage()
