@@ -200,7 +200,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
-        var_dump($map);
+       
         $this->assertTrue(true, array_key_exists('addToMappingClass', $map));
         $this->assertTrue($map['addToMappingClass'], __DIR__ . '/fixtures/notloaded/addToMapping.php');
 
