@@ -323,14 +323,14 @@ class Tool
     {
         // build classname
         $extractor = ucfirst($extractor);
-        
+
         // attach namespace
         $class = 'Koch\Localization\Gettext\Extractors\\' . ucfirst($extractor);
 
         // was loaded before?
         if ($this->extractors[$extractor] !== null) {
             return $this->extractors[$extractor];
-        } else {       
+        } else {
             // /framework/Koch/Localization/Adapter/Gettext/Extractors/*NAME*.php
             $file = __DIR__ . '/Adapter/Gettext/Extractors/' . $extractor . '.php';
 

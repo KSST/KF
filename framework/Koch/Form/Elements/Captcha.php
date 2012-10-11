@@ -73,7 +73,7 @@ class Captcha extends FormElement implements FormElementInterface
      */
     public function getCaptcha()
     {
-        
+
     }
 
     /**

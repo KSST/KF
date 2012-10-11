@@ -214,7 +214,7 @@ class Smarty extends AbstractRenderer
          */
 
         $this->renderer->setPluginsDir(
-            array(      
+            array(
                 // smarty plugins in vendors folder
                 dirname(dirname(dirname(__DIR__))) . 'vendors/smarty/plugins',
                 // smarty plugins in framework

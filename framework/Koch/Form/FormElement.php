@@ -170,7 +170,7 @@ class FormElement implements FormElementInterface
     /**
      * Set class of this form.
      *
-     * @param  string           $class Class to set
+     * @param  string                $class Class to set
      * @return Koch\Form\FormElement
      */
     public function setClass($class)
@@ -193,7 +193,7 @@ class FormElement implements FormElementInterface
     /**
      * Sets value for this element
      *
-     * @param  string           $value
+     * @param  string                $value
      * @return Koch\Form\FormElement
      */
     public function setValue($value)
@@ -258,7 +258,7 @@ class FormElement implements FormElementInterface
     /**
      * Set label of this formelement.
      *
-     * @param  string           $label Label of this formelement.
+     * @param  string                $label Label of this formelement.
      * @return Koch\Form\FormElement
      */
     public function setLabel($label)
@@ -313,7 +313,7 @@ class FormElement implements FormElementInterface
      * Set required state for the formelement.
      * A formelement is required, when the user is expected to (must) enter data into the formelement.
      *
-     * @param  boolean          $required Set required state. Defaults to true.
+     * @param  boolean               $required Set required state. Defaults to true.
      * @return Koch\Form\FormElement
      */
     public function setRequired($required = true)
@@ -326,7 +326,7 @@ class FormElement implements FormElementInterface
     /**
      * Set description of this formelement.
      *
-     * @param  string           $description Description of this formelement.
+     * @param  string                $description Description of this formelement.
      * @return Koch\Form\FormElement
      */
     public function setDescription($description)
@@ -349,7 +349,7 @@ class FormElement implements FormElementInterface
     /**
      * Set onclick text of this formelement.
      *
-     * @param  string           $onclick Onclick text of this formelement.
+     * @param  string                $onclick Onclick text of this formelement.
      * @return Koch\Form\FormElement
      */
     public function setOnclick($onclick)
@@ -579,7 +579,7 @@ class FormElement implements FormElementInterface
      * The Validator is stored into the validators array.
      * So a formelement might have multiple validators.
      *
-     * @param  Koch_Validator   $validator Accepts a Validator object.
+     * @param  Koch_Validator        $validator Accepts a Validator object.
      * @return Koch\Form\FormElement
      */
     public function setValidator($validator)
