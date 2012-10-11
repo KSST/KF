@@ -17,13 +17,9 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
      */
-   public function setUp()
+    public function setUp()
     {
         $this->object = new JSON;
-
-        if (is_file($this->getFile())) {
-            unlink($this->getFile());
-        }
     }
 
     /**
@@ -65,8 +61,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $json = $this->object->readConfig($this->getFile());
-        $expected = array();
+        $json = $this->object->readConfig(dirname(__DIR__) . '/fixtures/file.json');
+        $expected = array('section-1' => array('key1' => 'value1'));
         $this->assertEquals($expected, $json);
     }
 
@@ -76,13 +72,13 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     public function testWriteConfig()
     {
         $array = array('section-1' => array('key1' => 'value1'));
-        $file = dirname(__DIR__) . '/fixtures/file.json';
+        $file = dirname(__DIR__) . '/fixtures/writeConfig.json';
 
         $int_or_bool = $this->object->writeConfig($file, $array);
 
         $this->assertTrue((bool) $int_or_bool);
 
-        //unlink($file);
+        unlink($file);
     }
 
     /**
