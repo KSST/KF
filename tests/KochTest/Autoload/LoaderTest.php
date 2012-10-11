@@ -196,16 +196,11 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_addToMapping()
     {
-        if (extension_loaded('apc')) {
-            // test return value true, means it's written
-            $this->assertTrue(Loader::addToMapping(__DIR__ . '/fixtures/notloaded/addToMapping.php', 'addToMappingClass'));
-        } else {
-            // test return value true, means it's written
-            $this->assertTrue(Loader::addToMapping(__DIR__ . '/fixtures/notloaded/addToMapping.php', 'addToMappingClass'));
-        }
+        $this->assertTrue(Loader::addToMapping(__DIR__ . '/fixtures/notloaded/addToMapping.php', 'addToMappingClass'));
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
+        var_dump($map);
         $this->assertTrue(true, array_key_exists('addToMappingClass', $map));
         $this->assertTrue($map['addToMappingClass'], __DIR__ . '/fixtures/notloaded/addToMapping.php');
 

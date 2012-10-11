@@ -291,7 +291,7 @@ namespace "Koch\Form\Element\" + formelement name
         if (isset($this->formdecorators[$decorator]) === true) {
             return $this->formdecorators[$decorator];
         } else {
-            throw new \Exception('The Form does not have a Decorator called "' . $decorator . '".');
+            throw new \InvalidArgumentException('The Form does not have a Decorator called "' . $decorator . '".');
         }
     }
 

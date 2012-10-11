@@ -58,7 +58,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         // set internal url - rebuilds the external url via router
         $this->form->setAction('/news/show');
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
-            $this->assertEquals( WWW_ROOT . 'index.php?mod=news&amp;action=show', $this->form->getAction());
+            $this->assertEquals( WWW_ROOT . 'index.php?mod=news&amp;ctrl=show', $this->form->getAction());
         } else {
             $this->assertEquals( WWW_ROOT . 'news/show', $this->form->getAction());
         }
@@ -168,10 +168,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->copyObjectProperties($from_object_a, $to_object_b);
 
         $this->assertEquals($from_object_a, $to_object_b);
-        $this->assertAttributeSame($to_object_b->attribute_string, 'value_of_attr_a');
-        $this->assertAttributeSame($to_object_b->attribute_int, 9);
-        $this->assertAttributeSame($to_object_b->attribute_bool, true);
-        $this->assertAttributeSame($to_object_b->attribute_array['key'], 'value');
+        $this->assertEquals($to_object_b->attribute_string, 'value_of_attr_a');
+        $this->assertEquals($to_object_b->attribute_int, 9);
+        $this->assertEquals($to_object_b->attribute_bool, true);
+        $this->assertEquals($to_object_b->attribute_array['key'], 'value');
     }
 
     /**
@@ -415,11 +415,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * expectedException        Exception
+     * expectedException        InvalidArgumentException
      * expectedExceptionMessage The Form does not have a Decorator called "not-existing-formdecorator".
      */
     public function testgetDecorator_exception_notfound()
     {
+        $this->setExpectedException('InvalidArgumentException');
         $this->form->getDecorator('not-existing-formdecorator');
     }
 

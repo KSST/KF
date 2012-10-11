@@ -17,7 +17,9 @@ class TracRPCTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        //require_once dirname(dirname(dirname(__DIR__))) . '/framework/Koch/Tools/TracRPC.php';
+        if (false === extension_loaded('curl')) {
+            $this->markTestSkipped('PHP Extension cURL not loaded.');
+        }
     }
 
     /**
