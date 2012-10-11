@@ -58,7 +58,7 @@ class XML extends Koch_Form implements FormGeneratorInterface
      */
     public function generateXMLByArray($array)
     {
-        /* $filename = ROOT_MODULES . $array['modulename'] . DIRECTORY_SEPARATOR . 'forms/';
+        /* $filename = APP_MODULES_DIRULES . $array['modulename'] . DIRECTORY_SEPARATOR . 'forms/';
           $filename .= $array['actionname'] . 'form.xml.php';
 
           Koch\Config_XML::writeConfig($filename, $array);

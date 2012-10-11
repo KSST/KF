@@ -75,7 +75,7 @@ class Config extends AbstractConfig
             $modulename = \Koch\Router\TargetRoute::getModule();
         }
 
-        $file = ROOT_MOD . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php';
+        $file = APP_MODULES_DIR . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php';
 
         if (is_file($file)) {
             return Factory::getConfiguration($configfile);
@@ -101,14 +101,14 @@ class Config extends AbstractConfig
         if (null == $modulename) {
             $modulename = Koch\Router\TargetRoute::getModule();
         }
-        $this->writeConfig(ROOT_MOD . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php', $array);
+        $this->writeConfig(APP_MODULES_DIR . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php', $array);
     }
 
     /**
      * Write a config file
      *
      * @example To write a module cfg for module news:
-     * $config->confighandler->writeConfig( ROOT_MOD . 'news'. DIRECTORY_SEPARATOR .'news.config.php', $data);
+     * $config->confighandler->writeConfig( APP_MODULES_DIR . 'news'. DIRECTORY_SEPARATOR .'news.config.php', $data);
      *
      * @param $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.

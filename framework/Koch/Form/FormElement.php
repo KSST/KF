@@ -67,7 +67,7 @@ class FormElement implements FormElementInterface
      * Set id of this form.
      *
      * @param $id string ID of this form.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setID($id)
     {
@@ -90,7 +90,7 @@ class FormElement implements FormElementInterface
      * Set type of this form.
      *
      * @param $id string Type of this form.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setType($type)
     {
@@ -113,7 +113,7 @@ class FormElement implements FormElementInterface
      * Set name of this form.
      *
      * @param $name string Name of this form.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setName($name)
     {
@@ -158,7 +158,7 @@ class FormElement implements FormElementInterface
      * Set class of this form.
      *
      * @param  string           $class Class to set
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setClass($class)
     {
@@ -181,7 +181,7 @@ class FormElement implements FormElementInterface
      * Sets value for this element
      *
      * @param  string           $value
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setValue($value)
     {
@@ -221,7 +221,7 @@ class FormElement implements FormElementInterface
     /**
      * Disables this formelement.
      *
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function disable()
     {
@@ -233,7 +233,7 @@ class FormElement implements FormElementInterface
     /**
      * Enables this formelement
      *
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function enable()
     {
@@ -246,7 +246,7 @@ class FormElement implements FormElementInterface
      * Set label of this formelement.
      *
      * @param  string           $label Label of this formelement.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setLabel($label)
     {
@@ -301,7 +301,7 @@ class FormElement implements FormElementInterface
      * A formelement is required, when the user is expected to (must) enter data into the formelement.
      *
      * @param  boolean          $required Set required state. Defaults to true.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setRequired($required = true)
     {
@@ -314,7 +314,7 @@ class FormElement implements FormElementInterface
      * Set description of this formelement.
      *
      * @param  string           $description Description of this formelement.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setDescription($description)
     {
@@ -337,7 +337,7 @@ class FormElement implements FormElementInterface
      * Set onclick text of this formelement.
      *
      * @param  string           $onclick Onclick text of this formelement.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setOnclick($onclick)
     {
@@ -540,7 +540,7 @@ class FormElement implements FormElementInterface
      * @param object|string Formelement Validator
      * @param mixed A Validator Property Value.
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @return Koch_Formelement_Validator
+     * @return Koch\Form\FormElement_Validator
      */
     public function addValidator($validator, $properties = null)
     {
@@ -567,7 +567,7 @@ class FormElement implements FormElementInterface
      * So a formelement might have multiple validators.
      *
      * @param  Koch_Validator   $validator Accepts a Validator object.
-     * @return Koch_Formelement
+     * @return Koch\Form\FormElement
      */
     public function setValidator($validator)
     {
@@ -732,7 +732,7 @@ class FormElement implements FormElementInterface
      * @see $this->addDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @return Koch_Formelement_Decorator
+     * @return Koch\Form\FormElement_Decorator
      */
     public function setDecorator($decorators)
     {
@@ -746,7 +746,7 @@ class FormElement implements FormElementInterface
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM OBJECT
-     * @return Koch_Formelement_Decorator
+     * @return Koch\Form\FormElement_Decorator
      */
     public function addDecorator($decorators)
     {
@@ -759,7 +759,7 @@ class FormElement implements FormElementInterface
             // address each one of those decorators
             foreach ($decorators as $decorator) {
                 // and check if it is an object implementing the right interface
-                if ( ($decorator instanceof Koch_Formelement_Decorator_Interface) === true ) {
+                if ( ($decorator instanceof Koch\Form\FormElement_Decorator_Interface) === true ) {
                     // if so, fetch this decorator objects name
                     $decoratorname = $decorator->name;
                 } else {
@@ -806,7 +806,7 @@ class FormElement implements FormElementInterface
      * Getter Method for a decorators of this formelement by it's name..
      *
      * @param  string $decoratorname The formelement decorator to look for in the stack of decorators.
-     * @return array  Returns the object Koch_Formelement_Decorator_$decoratorname if registered.
+     * @return array  Returns the object Koch\Form\FormElement_Decorator_$decoratorname if registered.
      */
     public function getDecoratorByName($decoratorname)
     {
@@ -816,7 +816,7 @@ class FormElement implements FormElementInterface
     /**
      * Getter Method for the decorators of this formelement.
      *
-     * @return array Returns the array of Koch_Formelement_Decorators registered to this formelement.
+     * @return array Returns the array of Koch\Form\FormElement_Decorators registered to this formelement.
      */
     public function getDecorators()
     {
@@ -858,16 +858,16 @@ class FormElement implements FormElementInterface
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Formelement Decorator.
-     * @return Koch_Formelement_Decorator
+     * @return Koch\Form\FormElement_Decorator
      */
     public function decoratorFactory($decorator)
     {
-        // construct Koch_Formelement_Decorator_Name
+        // construct Koch\Form\FormElement_Decorator_Name
         $class = 'Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
 
         // if not already loaded, require forelement file
         if (false == class_exists($class, false)) {
-            $file = KOCH_FRAMEWORK . '/form/decorators/formelement/' . $decorator . '.php';
+            $file = __DIR__ . '/decorators/formelement/' . $decorator . '.php';
 
             if (is_file($file) === true) {
                 include $file;

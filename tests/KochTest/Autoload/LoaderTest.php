@@ -129,7 +129,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addToMapping( KOCH_FRAMEWORK . 'Tools/SysInfo.php', 'Sysinfo' );
+        Loader::addToMapping( dirname(dirname(__DIR__)) . '/framework/Koch/Tools/SysInfo.php', 'Sysinfo' );
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 

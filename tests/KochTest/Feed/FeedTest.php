@@ -12,8 +12,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        // Test Subject
-        require_once KOCH_FRAMEWORK . 'Feed/Feed.php';
+        //require_once dirname(dirname(dirname(__DIR__))) . '/framework/Koch/Feed/Feed.php';
 
         // valid rss feed online source
         #$this->feed_url = 'http://groups.google.com/group/clansuite/feed/rss_v2_0_msgs.xml';

@@ -205,10 +205,10 @@ class Mapper
 
         // compose templates paths in the module dir
         $module_paths = array(
-            ROOT_MOD,
-            ROOT_MOD . $module . DIRECTORY_SEPARATOR,
-            ROOT_MOD . $module . '/View/',
-            ROOT_MOD . $module . '/View/' . ucfirst($renderer) . DIRECTORY_SEPARATOR
+            APP_MODULES_DIR,
+            APP_MODULES_DIR . $module . DIRECTORY_SEPARATOR,
+            APP_MODULES_DIR . $module . '/View/',
+            APP_MODULES_DIR . $module . '/View/' . ucfirst($renderer) . DIRECTORY_SEPARATOR
         );
 
         return $module_paths;

@@ -30,7 +30,7 @@ class Manager
     public function delRoutesOfModule($modulename)
     {
         // @todo
-        $module_routes_file = ROOT_MOD . $modulename . '/' . $modulename . '.routes.php';
+        $module_routes_file = APP_MODULES_DIR . $modulename . '/' . $modulename . '.routes.php';
         $module_routes = $this->loadRoutesFromConfig($module_routes_file);
 
         // load main routes file
@@ -77,7 +77,7 @@ class Manager
 
         foreach ($activated_modules as $modulename) {
             // load module routing file
-            $module_routes_file = ROOT_MOD . $modulename . '/' . $modulename . '.routes.php';
+            $module_routes_file = APP_MODULES_DIR . $modulename . '/' . $modulename . '.routes.php';
             $module_routes = $this->loadRoutesFromConfig($module_routes_file);
 
             // load main routes file
