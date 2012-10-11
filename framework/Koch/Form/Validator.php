@@ -133,10 +133,6 @@ abstract class Validator
      */
     public function validate($value)
     {
-        $valid = false;
-
-        $valid = $this->processValidationLogic($value);
-
-        return ($valid === true) ? true : false;
+        return ($this->processValidationLogic($value) === true) ? true : false;
     }
 }
