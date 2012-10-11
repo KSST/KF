@@ -156,6 +156,8 @@ class Loader
         if (false !== strpos($classname, 'Doctrine') and false === strpos($classname, 'Koch\Doctrine')) {
             return true;
         }
+
+        return false;
     }
 
     /**
