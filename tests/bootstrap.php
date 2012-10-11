@@ -1,18 +1,4 @@
 <?php
-
-/**
- * Clansuite - just an eSports CMS
- * Jens A. Koch © 2005 - onwards
- * http://www.clansuite.com/
- *
- * This file is part of "Clansuite - just an eSports CMS".
-* SPDX-License-Identifier: MIT *
- *
- * *
- * *
- * *
- */
-
 // Error Reporting Level
 error_reporting(E_ALL | E_STRICT);
 
@@ -25,6 +11,8 @@ $paths = array(
     $test,
     get_include_path()
 );
+// attach original include paths
+set_include_path(implode(PATH_SEPARATOR, $paths));
 
 if (!function_exists('_')) {
     function _($msgid)
@@ -32,9 +20,6 @@ if (!function_exists('_')) {
         return $msgid;
     }
 }
-
-// attach original include paths
-set_include_path(implode(PATH_SEPARATOR, $paths));
 
 include __DIR__ . '/_autoload.php';
 
