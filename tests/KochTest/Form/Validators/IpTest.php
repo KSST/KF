@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validators_Ip_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Ip;
+
+class IpTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Ip
+     * @var Ip
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validators_Ip_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Ip;
+        $this->validator = new Ip;
     }
 
     /**

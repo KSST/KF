@@ -1,5 +1,6 @@
 <?php
-#namespace Koch\Test\Autoload;
+
+namespace KochTest\Autoload;
 
 use Koch\Autoload\Loader;
 
@@ -155,12 +156,12 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         }
 
         // file will be created
-        $this->assertIdentical(array(), Loader::readAutoloadingMapFile());
+        $this->assertSame(array(), Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classmap_file));
 
         $array = array('class' => 'file');
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
-        $this->assertIdentical($array, Loader::readAutoloadingMapFile());
+        $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
 
     public function testMethod_readAutoloadingMapFile()
@@ -169,12 +170,12 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             unlink($this->classmap_file);
         }
         // file will be created
-        $this->assertIdentical(array(), Loader::readAutoloadingMapFile());
+        $this->assertSame(array(), Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classmap_file));
 
         $array = array ( 'class' => 'file' );
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
-        $this->assertIdentical($array, Loader::readAutoloadingMapFile());
+        $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
 
     public function testMethod_writeAutoloadingMapApc()
@@ -182,14 +183,14 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         if (extension_loaded('apc')) {
             $array = array ( 'class' => 'file' );
             $this->assertTrue(Loader::writeAutoloadingMapApc($array));
-            $this->assertIdentical($array, Loader::readAutoloadingMapApc());
+            $this->assertSame($array, Loader::readAutoloadingMapApc());
         }
     }
 
     public function testMethod_readAutoloadingMapApc()
     {
         if (extension_loaded('apc')) {
-            $this->assertIdentical(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
+            $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
         }
     }
 

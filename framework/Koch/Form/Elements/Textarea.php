@@ -27,7 +27,7 @@ namespace Koch\Form\Elements;
 
 use Koch\Form\FormElement;
 use Koch\Form\FormElementInterface;
-use \Koch\Functions;
+use Koch\Functions\Functions;
 
 /**
  * This class renders the formelement textarea.

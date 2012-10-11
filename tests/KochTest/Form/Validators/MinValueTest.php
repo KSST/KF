@@ -1,11 +1,16 @@
 <?php
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\MinValue;
+
 /**
  * @todo method chaining tests on all setter methods
  */
-class Koch_Form_Validator_MinValue_Test extends \PHPUnit_Framework_TestCase
+class MinValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Minvalue
+     * @var MinValue
      */
     protected $validator;
 
@@ -37,13 +42,15 @@ class Koch_Form_Validator_MinValue_Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getMinvalue());
 
         // getter returns integer not string
-        $this->assertNotIdentical('1980', $this->validator->getMinvalue());
+        $this->assertNotSame('1980', $this->validator->getMinvalue());
     }
 
+    /*
+     * expectedException        InvalidArgumentException
+     * expectedExceptionMessage Parameter Maxvalue must be numeric (int|float) and not string.
+     */
     public function testMethod_setMinvalue()
     {
-        $this->expectException('InvalidArgumentException',
-            'Parameter Maxvalue must be numeric (int|float) and not string.');
         $this->validator->setMinvalue('1980');
 
         $this->validator->setMinvalue(1980);
