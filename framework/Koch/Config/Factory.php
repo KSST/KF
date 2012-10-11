@@ -108,7 +108,7 @@ class Factory
     public static function getConfigurationHandler($adapter)
     {
         $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
-        
+
         // path to configuration handler classes
         $file = __DIR__ . '/adapter/' . $adapter . '.php';
 

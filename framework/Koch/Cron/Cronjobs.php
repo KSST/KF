@@ -165,17 +165,17 @@ class Cronjobs
 
     /**
      * Constructor
-     * 
+     *
      * @param array $options Array for configuration.
      */
     public function __construct($options)
     {
         $this->cronTabFile = (isset($options['cron']['file']) === true)
-            ? $options['cron']['file'] 
+            ? $options['cron']['file']
             : __DIR__ . '/cronjobs/crontab.txt';
-        
+
         $this->writeDirectory =  (isset($options['cron']['folder']) === true)
-            ? $options['cron']['file'] 
+            ? $options['cron']['file']
             : __DIR__ . 'cronjobs/';
 
         $this->execute();

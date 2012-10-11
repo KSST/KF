@@ -4,7 +4,6 @@ namespace KochTest\Form\Validators;
 
 use Koch\Form\Validators\Equals;
 
-
 class EqualsTest extends \PHPUnit_Framework_TestCase
 {
     /**

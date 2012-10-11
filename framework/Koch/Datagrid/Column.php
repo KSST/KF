@@ -249,7 +249,7 @@ class Column extends Base
         $rendererName = ucfirst($rendererName);
         // special case: camelCase on EditButton
         $rendererName = ($rendererName == 'Editbutton') ? 'EditButton' : '';
-       
+
         $className = 'Koch\Datagrid\ColumnRenderer\\' . $rendererName;
 
         if (false == class_exists($className, false)) {
