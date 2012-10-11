@@ -49,5 +49,4 @@ set_include_path(implode(PATH_SEPARATOR, $paths));
 
 include __DIR__ . '/_autoload.php';
 
-//\Koch\Localization\Utf8::initialize();
-
+\Koch\Localization\Utf8::initialize();

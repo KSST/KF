@@ -97,7 +97,7 @@ class Loader
      */
     public static function loadModuleEvents($modulename)
     {
-        $events = include ROOT_MOD . $modulename . '/'. $modulename . '.events.php';
+        $events = include APP_MODULES_DIR . $modulename . '/'. $modulename . '.events.php';
 
         self::loadEventHandlers($events);
     }

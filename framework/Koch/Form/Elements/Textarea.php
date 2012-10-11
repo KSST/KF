@@ -167,14 +167,15 @@ class Textarea extends FormElement implements FormElementInterface
      */
     private function editorFactory()
     {
-        $name = $this->getEditor();
+        // build classname
+        $name = 'Wysiwyg' . ucfirst($this->getEditor());
 
-        // construct classname
-        $classname = 'Koch_Formelement_Wysiwyg'. $name;
+        // attach namespace
+        $classname = 'Koch\Form\Elements\\'. $name;
 
         // load file
         if (class_exists($classname, false) === false) {
-            include KOCH_FRAMEWORK . 'viewhelper/form/elements/wysiwyg' . $name . '.php';
+            include __DIR__ . '/' . $name . '.php';
         }
 
         // instantiate

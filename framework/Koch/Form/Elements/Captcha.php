@@ -73,8 +73,7 @@ class Captcha extends FormElement implements FormElementInterface
      */
     public function getCaptcha()
     {
-        // cut "captcha" (last 7 chars)
-        return mb_substr($this->captcha, 0, -7);
+        
     }
 
     /**
@@ -107,14 +106,17 @@ class Captcha extends FormElement implements FormElementInterface
      */
     private function captchaFactory()
     {
-        $name = $this->getCaptcha();
+        // camelCase rename
+        // cut the last 7 chars "captcha" (last 7 chars)
+        $name = mb_substr($this->captcha, 0, -7);
+        $name = ucfirst($name) . 'Captcha';
 
         // construct classname
-        $classname = 'Koch_Formelement_'. $name .'Captcha';
+        $classname = 'Koch\Form\Formelements\\'. $name;
 
         // load file
         if (class_exists($classname, false) === false) {
-            include KOCH_FRAMEWORK .'viewhelper/form/formelements/'. $name .'captcha.php';
+            include __DIR__ . '/'. $name . '.php';
         }
 
         // instantiate

@@ -115,16 +115,18 @@ class Factory
     /**
      * getConfiguration
      *
-     * @param  string        $adapter a configuration filename type like "php", "xml", "yaml", "ini"
+     * @param  string        $adapter a configuration filename type like "php", "xml", "yaml", "ini", "native"
      * @return Configuration Handler Object with confighandler and array of configfile.
      */
     public static function getConfigurationHandler($adapter)
     {
+        $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
+        
         // path to configuration handler classes
-        $file = KOCH_FRAMEWORK . 'config' . DIRECTORY_SEPARATOR . strtolower($adapter) . '.config.php';
+        $file = __DIR__ . '/adapter/' . $adapter . '.php';
 
         if (is_file($file) === true) {
-            $class = 'Koch\Config_' . strtoupper($adapter);
+            $class = 'Koch\Config\Adapter\\' . $adapter;
 
             if (false === class_exists($class, false)) {
                 include $file;

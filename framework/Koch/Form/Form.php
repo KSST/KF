@@ -1054,7 +1054,7 @@ class Form implements FormInterface
 
         // if not already loaded, require formelement file
         if (false === class_exists($class, false)) {
-            $file = KOCH_FRAMEWORK . 'form/elements/' . $formelement . '.php';
+            $file = __DIR__ . '/Elements/' . $formelement . '.php';
 
             if (is_file($file) === true) {
                 include $file;
@@ -1342,17 +1342,16 @@ class Form implements FormInterface
      */
     public function decoratorFactory($decorator)
     {
-        // this matches 0-9, when the next char is a-z (lookahead) followed by an [a-z]
-        // html5validation, '5v' is match[0], strtoupper will '5V'
-        // turining html5validation into html5Validation, in the next step a ucfirst is applied
-        $decorator = preg_replace('/([0-9])(?=[a-z])([a-z])/e', 'strtoupper("$0");', $decorator);
-
+        $classmap = array('html5validation' => 'Html5Validation');
+        
+        $decorator = (array_key_exists($decorator, $classmap) === true) ? $classmap[$decorator] : ucfirst($decorator);
+        
         // construct Koch\Form\Decorator\Name
         $class = 'Koch\Form\Decorators\Form\\' . ucfirst($decorator);
 
         // if not already loaded, require forelement file
         if (false === class_exists($class, false)) {
-            $file = KOCH_FRAMEWORK . 'Form/Decorators/Form/' . $decorator . '.php';
+            $file = __DIR__ . '/Decorators/Form/' . $decorator . '.php';
 
             if (is_file($file) === true) {
                 include $file;

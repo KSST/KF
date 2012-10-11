@@ -126,7 +126,7 @@ class ManifestManager
      */
     public static function getModuleDirectories()
     {
-        return glob(ROOT_MOD . '[a-zA-Z]*', GLOB_ONLYDIR);
+        return glob(APP_MODULES_DIR . '[a-zA-Z]*', GLOB_ONLYDIR);
     }
 
     /**
@@ -150,7 +150,7 @@ class ManifestManager
 
         foreach ($module_dirs as $module_path) {
             // strip path off
-            $modulename = str_replace(ROOT_MOD, '', $module_path);
+            $modulename = str_replace(APP_MODULES_DIR, '', $module_path);
 
             if ($only_modulenames === true) {
                 if ($named_array === false) {
@@ -233,7 +233,7 @@ class ManifestManager
     {
         foreach ($module_directories as $module_path) {
             // strip off path info and get the modulename
-            $modulename = str_replace(ROOT_MOD, '', $module_path);
+            $modulename = str_replace(APP_MODULES_DIR, '', $module_path);
         }
 
         self::writeModuleRegistry();
@@ -260,7 +260,7 @@ class ManifestManager
             $module_directories = self::getModuleDirectories();
         } else {
             // cast string to array
-            $module_directories[] = ROOT_MOD . $module;
+            $module_directories[] = APP_MODULES_DIR . $module;
         }
 
         foreach ($module_directories as $modulepath) {
@@ -269,7 +269,7 @@ class ManifestManager
              */
 
             // 1) get the modulename, by stripping off the path info
-            $modulename = str_replace(ROOT_MOD, '', $modulepath);
+            $modulename = str_replace(APP_MODULES_DIR, '', $modulepath);
 
             self::$modulesinfo[$modulename]['name']   = $modulename;
             self::$modulesinfo[$modulename]['id']     = $number_of_modules;
@@ -390,7 +390,7 @@ class ManifestManager
          // if the language definitions are not already loaded, load them
         if (empty(self::$l10n_sys_locales)) {
             // fetch arrays containing locale data
-            require KOCH_FRAMEWORK . 'gettext/locales.gettext.php';
+            require \dirname(__DIR__) . '/Localization/Locales.php';
             self::$l10n_sys_locales = $l10n_sys_locales;
         }
 

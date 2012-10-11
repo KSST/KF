@@ -317,32 +317,35 @@ class Tool
      *
      * @param string $extractor
      *
-     * @return object Extractor Object implementing Koch_Gettext_Extractor_Interface
+     * @return object Extractor Object implementing Koch\Localization\Gettext\Extractor_Interface
      */
     public function getExtractor($extractor)
     {
-        $extractor_classname = 'Koch_Gettext_Extractor_' . $extractor;
+        // build classname
+        $extractor = ucfirst($extractor);
+        
+        // attach namespace
+        $class = 'Koch\Localization\Gettext\Extractors\\' . ucfirst($extractor);
 
+        // was loaded before?
         if ($this->extractors[$extractor] !== null) {
             return $this->extractors[$extractor];
-        }
+        } else {       
+            // /framework/Koch/Localization/Adapter/Gettext/Extractors/*NAME*.php
+            $file = __DIR__ . '/Adapter/Gettext/Extractors/' . $extractor . '.php';
 
-        if (false === class_exists($extractor_classname, false)) {
-            // /framework/Koch/Gettext/Extractors/*NAME*.gettext.php
-            $extractor_file = KOCH_FRAMEWORK . 'Gettext/Extractors/' . $extractor . '.gettext.php';
-
-            if (true === is_file($extractor_file)) {
-                include_once $extractor_file;
+            if (true === is_file($file)) {
+                include_once $file;
             } else {
-                $this->throwException('Extractor file ' . $extractor_file . ' not found.');
+                $this->throwException('Extractor file ' . $file . ' not found.');
             }
 
-            if (false === class_exists($extractor_classname)) {
+            if (false === class_exists($class)) {
                 $this->throwException('File loaded, but Class ' . $extractor . ' not inside.');
             }
         }
 
-        $this->extractors[$extractor] = new $extractor_classname;
+        $this->extractors[$extractor] = new $class;
 
         $this->log('Extractor ' . $extractor . ' loaded.');
 

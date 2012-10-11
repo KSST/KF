@@ -254,16 +254,19 @@ class Column extends Base
      * Load the renderer depending on a string (lowercased)
      * The method uses the folder "datagrid/columns" and loads [$name].php
      *
-     * @param string $rendererName The renderer name
+     * @param string $rendererName The renderer name, e.g. Link, EditButton.
      */
-    private function loadColumnRenderer($rendererName = 'string')
+    private function loadColumnRenderer($rendererName = '')
     {
-        $rendererName = mb_strtolower($rendererName);
-
-        $className = 'Koch\Datagrid\Datagrid_Column_Renderer_' . ucfirst($rendererName);
+        // name to classname
+        $rendererName = ucfirst($rendererName);
+        // special case: camelCase on EditButton
+        $rendererName = ($rendererName == 'Editbutton') ? 'EditButton' : '';
+       
+        $className = 'Koch\Datagrid\ColumnRenderer\\' . $rendererName;
 
         if (false == class_exists($className, false)) {
-            $file = KOCH_FRAMEWORK . 'viewhelper/datagrid/columns/' . $rendererName . '.php';
+            $file = __DIR__ . '/ColumnRenderer/' . $rendererName . '.php';
 
             if ( is_file($file) ) {
                 include $file;

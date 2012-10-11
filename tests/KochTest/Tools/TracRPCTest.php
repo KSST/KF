@@ -17,7 +17,7 @@ class TracRPCTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        //require_once KOCH_FRAMEWORK . 'tools/tracrpc.php';
+        //require_once dirname(dirname(dirname(__DIR__))) . '/framework/Koch/Tools/TracRPC.php';
     }
 
     /**
