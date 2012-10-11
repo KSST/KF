@@ -54,14 +54,6 @@ class Feed
      */
     public static function fetchRSS($feed_url, $number_of_items = null, $cache_duration = null, $cache_location = null)
     {
-        /**
-         * SimplePie is a bunch of crap, and not e_strict, yet. hmpf!
-         * Therefore we have to cheat with the error_reporting toggle.
-         * @link: http://tech.groups.yahoo.com/group/simplepie-support/message/3289
-         */
-        $old_errorlevel = error_reporting();
-        error_reporting(0);
-
         // load simplepie
         include dirname(dirname(__DIR__)) . '/vendor/simplepie/simplepie.inc';
 
@@ -95,9 +87,6 @@ class Feed
         $simplepie->set_stupidly_fast(true);
         $simplepie->init();
         $simplepie->handle_content_type();
-
-        // set old error reporting level
-        error_reporting($old_errorlevel);
 
         return $simplepie;
     }
