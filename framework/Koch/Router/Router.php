@@ -85,12 +85,12 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Constructor.
      */
-    public function __construct(HttpRequestInterface $request)
+    public function __construct(HttpRequestInterface $request, $config)
     {
         $this->request = $request;
 
         // Set config object to the router for later access to config variables.
-        $this->config = \Clansuite\Application::getClansuiteConfig();
+        $this->config = $config;
 
         // get URI from request, clean it and set it as a class property
         $this->uri = self::prepareRequestURI($request->getRequestURI());
@@ -470,6 +470,16 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         return $array;
+    }
+
+    /**
+     * Setter Method for URI. Needed for testing.
+     *
+     * @param string $uri
+     */
+    public function setRequestURI($uri)
+    {
+        $this->uri = $uri;
     }
 
     /**

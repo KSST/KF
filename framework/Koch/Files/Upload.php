@@ -19,7 +19,7 @@ namespace Koch\Files;
  * @package     Core
  * @subpackage  Upload
  */
-class Upload implements ArrayAccess, IteratorAggregate, Countable
+class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
 {
     protected $files = array();
 
