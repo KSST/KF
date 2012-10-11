@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_MaxLength_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\MaxLength;
+
+class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Maxlength
+     * @var Maxlength
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_MaxLength_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new Koch\Form\Validators\MaxLength;
+        $this->validator = new MaxLength;
     }
 
     /**
@@ -33,7 +38,7 @@ class Koch_Form_Validator_MaxLength_Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getMaxlength());
 
         // getter returns integer not string
-        $this->assertNotIdentical('1980', $this->validator->getMaxlength());
+        $this->assertNotSame('1980', $this->validator->getMaxlength());
     }
 
     public function testMethod_setMaxlength()

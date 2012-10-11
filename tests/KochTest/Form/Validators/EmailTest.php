@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_String_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Email;
+
+class EmailTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Url
+     * @var Email
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_String_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\String;
+        $this->validator = new Email;
     }
 
     /**
@@ -32,12 +37,10 @@ class Koch_Form_Validator_String_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
-        $this->assertTrue($this->validator->validate('string'));
+        $this->assertTrue($this->validator->validate('charles@bronson.com'));
 
-        $this->assertTrue($this->validator->validate(1));
-        $this->assertTrue($this->validator->validate(1.01));
-
-        $this->assertFalse($this->validator->validate(true));
+        $this->assertTrue($this->validator->validate('billy@microsoft.com'));
+        $this->assertFalse($this->validator->validate('billy[at]microsoft[dot]com'));
     }
 
     public function testMethod_getErrorMessage()

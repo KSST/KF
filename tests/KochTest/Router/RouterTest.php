@@ -1,5 +1,7 @@
 <?php
 
+namespace KochTest\Router;
+
 use Koch\Router\Router;
 use Koch\Router\TargetRoute;
 use Koch\Http\HttpRequest;
@@ -8,7 +10,7 @@ use Koch\Config\Config;
 class RouterTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Clansuite_Router
+     * @var Router
      */
     protected $router;
 
@@ -168,7 +170,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $segments = array('news', 'edit', '([0-9]+)');
         $requirements = array('controller', 'action', ':num',);
 
-        $this->assertIdentical('#\/news\/?\/edit\/?\/([0-9]+)\/?#',
+        $this->assertSame('#\/news\/?\/edit\/?\/([0-9]+)\/?#',
             $this->router->processSegmentsRegExp($segments, $requirements));
 
         /**
@@ -177,7 +179,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $segments = array(':news');
         $requirements = array('controller');
 
-        $this->assertIdentical('#(?P<news>[a-z_-]+)\/?#',
+        $this->assertSame('#(?P<news>[a-z_-]+)\/?#',
             $this->router->processSegmentsRegExp($segments, $requirements));
     }
 
@@ -267,7 +269,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('News',                  $route->getController());
         $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
         $this->assertEquals('action_edit',           $route->getMethod());
-        $this->assertIdentical(array('id' => '42'), $route->getParameters());
+        $this->assertSame(array('id' => '42'), $route->getParameters());
         $this->assertEquals('GET',                   $route->getRequestMethod());
         $this->router->reset(true);
 

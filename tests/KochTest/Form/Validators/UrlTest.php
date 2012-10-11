@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Url;
+
+class UrlTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Email
+     * @var Url
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Email;
+        $this->validator = new Url;
     }
 
     /**
@@ -32,10 +37,23 @@ class Koch_Form_Validator_Email_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
-        $this->assertTrue($this->validator->validate('charles@bronson.com'));
+        // IDNA URL based on intl extension
+        if (function_exists('idn_to_ascii')) {
+            $this->assertEquals(idn_to_ascii('url-�sthetik.de'),
+                        $this->validator->validate('url-�sthetik.de'));
+        }
 
-        $this->assertTrue($this->validator->validate('billy@microsoft.com'));
-        $this->assertFalse($this->validator->validate('billy[at]microsoft[dot]com'));
+        // hmm... this puny doesn't ride...
+        $this->assertFalse($this->validator->validate('http://www.t�st.com'));
+
+        // no dash
+        $this->assertTrue($this->validator->validate('http://clansuite.com'));
+
+        // 1 dash
+        $this->assertTrue($this->validator->validate('http://clan-cms.com'));
+
+        // 2 dashes
+        $this->assertTrue($this->validator->validate('http://http://a-b-c.de'));
     }
 
     public function testMethod_getErrorMessage()
