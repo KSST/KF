@@ -452,14 +452,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testAddElement()
     {
         $this->form->addElement('Text');
-
-        #$this->form->getElementByPosition('0');
+        // $this->form->getElementByPosition('0');
         $formelements_array = $this->form->getFormelements();
 
         $formelement = new \Koch\Form\Elements\Text;
         $formelement->setID('text-formelement-0');
 
-        $this->assertAttributeContains($formelement->id, $formelements_array[0]);
+        $this->assertEquals($formelement, $formelements_array[0]);
     }
 
     public function testAddElement_withSettingAttributes()
@@ -479,9 +478,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($attributes['id'], $formelement->id);
     }
 
-    /**
-     * @covers regenerateFormelementIdentifiers
-     */
     public function testAddElement_ToCertainPosition()
     {
         // PREPARE:

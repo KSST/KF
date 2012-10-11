@@ -32,7 +32,7 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
      */
     public static function checkDependencies()
     {
-        if (!is_file(ROOT_THEMES_CORE . 'javascript/nicedit/nicedit.js')) {
+        if (!is_file(APPLICATION_PATH . 'themes/core/javascript/nicedit/nicedit.js')) {
             exit('NicEdit Javascript Library missing!');
         }
     }

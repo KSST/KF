@@ -31,23 +31,23 @@ class StartupChecks implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // ensure smarty "tpl_compile" folder exists
-        if (false === is_dir(ROOT_CACHE . 'tpl_compile') and
-            (false === @mkdir(ROOT_CACHE . 'tpl_compile', 0755, true))) {
+        if (false === is_dir(APPLICATION_CACHE_PATH . 'tpl_compile') and
+            (false === @mkdir(APPLICATION_CACHE_PATH . 'tpl_compile', 0755, true))) {
             throw new Exception('Smarty Template Directories not existant.', 9);
         }
 
         // ensure smarty "cache" folder exists
-        if (false === is_dir(ROOT_CACHE . 'tpl_cache') and
-            (false === @mkdir(ROOT_CACHE . 'tpl_cache', 0755, true))) {
+        if (false === is_dir(APPLICATION_CACHE_PATH . 'tpl_cache') and
+            (false === @mkdir(APPLICATION_CACHE_PATH . 'tpl_cache', 0755, true))) {
             throw new Exception('Smarty Template Directories not existant.', 9);
         }
 
         // ensure smarty folders are writable
-        if (false === is_writable(ROOT_CACHE . 'tpl_compile') or
-            (false === is_writable(ROOT_CACHE . 'tpl_cache'))) {
+        if (false === is_writable(APPLICATION_CACHE_PATH . 'tpl_compile') or
+            (false === is_writable(APPLICATION_CACHE_PATH . 'tpl_cache'))) {
             // if not, try to set writeable permission on the folders
-            if ((false === chmod(ROOT_CACHE . 'tpl_compile', 0755)) and
-                (false === chmod(ROOT_CACHE . 'tpl_cache', 0755))) {
+            if ((false === chmod(APPLICATION_CACHE_PATH . 'tpl_compile', 0755)) and
+                (false === chmod(APPLICATION_CACHE_PATH . 'tpl_cache', 0755))) {
                 throw new Exception('Smarty Template Directories not writable.', 10);
             }
         }

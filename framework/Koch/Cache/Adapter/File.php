@@ -148,6 +148,6 @@ class File extends AbstractCache implements CacheInterface
      */
     protected function filesystemKey($key)
     {
-        return ROOT_CACHE . md5($key);
+        return APPLICATION_CACHE_PATH . md5($key);
     }
 }

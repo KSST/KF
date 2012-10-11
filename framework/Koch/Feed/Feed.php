@@ -20,6 +20,8 @@ class Feed
      * @param string $feed_url       This is the URL you want to parse.
      * @param int    $cache_duration This is the number of seconds that you want to store the feedcache file for.
      * @param string $cache_location This is where you want the cached feeds to be stored.
+     *
+     * @return object \SimplePie
      */
     public static function fetchRSS($feed_url, $number_of_items = null, $cache_duration = null, $cache_location = null)
     {
@@ -30,9 +32,9 @@ class Feed
         $simplepie = new \SimplePie();
 
         // if cache_location was not specified manually
-        if ($cache_location == null) {
+        if ($cache_location === null) {
             // we set it to the default cache directory for feeds
-            $cache_location = ROOT_CACHE; // . 'feeds';
+            $cache_location = APPLICATION_CACHE_PATH; // . 'feeds';
         }
 
         // if cache_duration was not specified manually
@@ -64,15 +66,18 @@ class Feed
      * Fetches a feed by URL and caches it.
      * Be advised to use the method fetchRSS() instead.
      *
-     * @param  string  $feed_url This is the URL you want to parse.
-     * @param  boolean $cache    If true caches the content. Default true.
-     * @return string  Feed content.
+     * @param string  $feed_url       This is the URL you want to parse.
+     * @param boolean $cache          If true caches the content. Default true.
+     * @param string  $cache_location This is where you want the cached feeds to be stored.
+     *
+     * @return string Feed content.
      */
-    public static function fetchRawRSS($feed_url, $cache = true)
+    public static function fetchRawRSS($feed_url, $cache = true, $cache_location = null)
     {
         if ($cache === true) {
+
             // Cache Filename and Path
-            $cachefile = ROOT_CACHE . md5($feed_url);
+            $cachefile = ($cache_location == null) ? (APPLICATION_CACHE_PATH . md5($feed_url)) : $cache_location;
 
             // define cache lifetime
             $cachetime = 60*60*3; // 10800min = 3h

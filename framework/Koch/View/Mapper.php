@@ -236,7 +236,7 @@ class Mapper
             $renderer = HttpRequest::getRoute()->getRenderEngine();
 
             // the template with that name is not found on our default paths
-            return ROOT_THEMES_CORE . 'view/' . $renderer . '/template_not_found.tpl';
+            return APPLICATION_PATH . 'themes/core/view/' . $renderer . '/template_not_found.tpl';
         }
     }
 

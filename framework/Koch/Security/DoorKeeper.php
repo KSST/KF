@@ -62,9 +62,9 @@ class DoorKeeper
             // We have to setup some defines here, which are used by parse_ini_file to replace values in config.ini
 
             define('IDS_FILTER_PATH', ROOT_LIBRARIES . 'IDS' . DIRECTORY_SEPARATOR . 'default_filter.xml');
-            define('IDS_TMP_PATH', ROOT_CACHE);
+            define('IDS_TMP_PATH', APPLICATION_CACHE_PATH);
             define('IDS_LOG_PATH', ROOT_LOGS . 'phpids_log.txt');
-            define('IDS_CACHE_PATH', ROOT_CACHE . 'phpids_defaultfilter.cache');
+            define('IDS_CACHE_PATH', APPLICATION_CACHE_PATH . 'phpids_defaultfilter.cache');
 
             // the following lines have to remain, till PHP_IDS team fixes their lib
             // in order to create the cache file automatically

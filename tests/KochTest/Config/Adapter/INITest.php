@@ -45,13 +45,12 @@ class INITest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedException        InvalidArguementException
-     * @expectedExceptionMessage File not found
+     * @expectedException        InvalidArgumentException
+     * @expectedExceptionMessage File not found: not-existant-file.ini
      */
     public function testReadConfigWithException()
     {
         $this->setExpectedException('InvalidArgumentException');
-
         $this->object->readConfig('not-existant-file.ini');
     }
 
@@ -60,7 +59,11 @@ class INITest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteConfig()
     {
-        $ini_array = $this->object->writeConfig($this->getFile(), $this->getIniArray());
+        $written = $this->object->writeConfig($this->getFile(), $this->getIniArray());
+
+        $this->assertTrue($written);
+
+        $ini_array = $this->object->readConfig($this->getFile());
 
         $this->assertEquals($ini_array, $this->getIniArray());
 
@@ -121,6 +124,6 @@ class INITest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals($ini_array, $this->getIniArray());
 
-        $this->assertInternalType('integer', $ini_array['section']['key3-int']);
+        $this->assertInternalType('string', $ini_array['section']['key3-int']);
     }
 }
