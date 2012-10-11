@@ -161,7 +161,7 @@ class CssBuilder
         $builderINI = 'cssbuilder' . $postfix . '.ini';
 
         // Read Core INI-File
-        $coreINI = ROOT_THEMES_CORE . 'css' . DIRECTORY_SEPARATOR . 'csfw' . DIRECTORY_SEPARATOR . $builderINI;
+        $coreINI = APPLICATION_PATH . 'themes/core/css/csfw/' . $builderINI;
         $coreInfo = $this->readCssBuilderIni($coreINI);
         $coreCssName = $coreInfo['cssname'] . $postfix . '.css';
 

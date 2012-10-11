@@ -49,7 +49,7 @@ class INI
             throw new \Koch\Exception\Exception('Parameter $array is not an array.');
         }
 
-        if (empty($file)) {
+        if (empty($file) === true) {
             throw new \Koch\Exception\Exception('Parameter $file is not given.');
         }
 
@@ -82,35 +82,35 @@ class INI
 
         // loop over every array element
         foreach ($config_array as $key => $item) {
-            // checking if it's an array, if so, it's a section heading
-            if (is_array($item)) {
-                // write an comment header block
+            // check if it's an array, if so, it's a section heading
+            if (is_array($item) === true) {
+                // write a comment header block
                 $content .= PHP_EOL;
                 $content .= ';----------------------------------------' . PHP_EOL;
                 $content .= '; ' . $key . PHP_EOL;
                 $content .= ';----------------------------------------' . PHP_EOL;
 
-                // write an parseable [array_header] block
+                // write a parseable [array_header] block
                 $content .= '[' . $key . ']' . PHP_EOL;
 
                 // for every element after that
                 foreach ($item as $key2 => $item2) {
-                    if (is_numeric($item2) || is_bool($item2)) {
+                    if (is_numeric($item2) === true or is_bool($item2) === true) {
                         // write numeric and boolean values without quotes
-                        $content .= $key2 . ' = ' . $item2 . PHP_EOL;
+                        $content .= $key2 . ' = "' . $item2 . '"' . PHP_EOL;
                     } else {
                         // write value with quotes
-                        $content .= $key2 .' = "' . $item2 . '"'.PHP_EOL;
+                        $content .= $key2 . ' = "' . $item2 . '"' . PHP_EOL;
                     }
                 }
             } else {
-                 // if it's not an array, then it's not a section, so it's a value
-                if (is_numeric($item) || is_bool($item)) {
+                // it's a value
+                if (is_numeric($item) === true or is_bool($item) === true) {
                     // write numeric and boolean values without quotes
-                    $content .= $key . ' = ' . $item . PHP_EOL;
+                    $content .= $key . ' = "' . $item . '"' . PHP_EOL;
                 } else {
                     // it's a string - write value with quotes
-                    $content .= $key2 .' = "' . $item2 . '"'.PHP_EOL;
+                    $content .= $key . ' = "' . $item . '"' . PHP_EOL;
                 }
             }
         }
@@ -118,7 +118,7 @@ class INI
         // add php closing tag
         $content .= PHP_EOL . '; DO NOT REMOVE THIS LINE */ ?>';
 
-        if (is_writable($file)) {
+        if (is_writable($file) === true) {
             if (!$filehandle = fopen($file, 'wb')) {
                 echo _('Could not open file: ') . $file;
 
@@ -151,7 +151,7 @@ class INI
     {
         // check ini_filename exists
         if (is_file($file) === false or is_readable($file) === false) {
-            throw new \Exception('File not found: ' . $file, 4);
+            throw new \InvalidArgumentException('File not found: ' . $file, 4);
         }
 
         return parse_ini_file($file, true);
