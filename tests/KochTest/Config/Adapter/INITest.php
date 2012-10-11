@@ -45,12 +45,12 @@ class INITest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-     * @expectedException        Exception
+     * @expectedException        InvalidArguementException
      * @expectedExceptionMessage File not found
      */
     public function testReadConfigWithException()
     {
-        $this->setExpectedException('Exception');
+        $this->setExpectedException('InvalidArgumentException');
 
         $this->object->readConfig('not-existant-file.ini');
     }
