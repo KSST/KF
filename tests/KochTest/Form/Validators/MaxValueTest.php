@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_MaxValue_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\MaxValue;
+
+class MaxValueTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_maxvalue
+     * @var MaxValue
      */
     protected $validator;
 
@@ -33,21 +38,27 @@ class Koch_Form_Validator_MaxValue_Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getMaxvalue());
 
         // getter returns integer not string
-        $this->assertNotIdentical('1980', $this->validator->getMaxvalue());
+        $this->assertNotSame('1980', $this->validator->getMaxvalue());
     }
 
+    /*
+     * @expectedException           InvalidArgumentException
+     * @expectedExceptionMessage    Parameter Maxvalue must be numeric (int|float) and not string.
+     */
     public function testMethod_setMaxvalue()
     {
          // setter accepts numeric
          $this->validator->setMaxvalue(19);
          $this->assertEquals(19, $this->validator->getMaxvalue());
 
-         $this->expectException('InvalidArgumentException',
-            'Parameter Maxvalue must be numeric (int|float) and not string.');
          $this->validator->setMaxvalue('19');
          $this->assertEquals(19, $this->validator->getMaxvalue());
     }
 
+    /*
+     * @expectedException           InvalidArgumentException
+     * @expectedExceptionMessage    Parameter Maxvalue must be numeric (int|float) and not string.
+     */
     public function testMethod_processValidationLogic()
     {
         /**
@@ -64,8 +75,6 @@ class Koch_Form_Validator_MaxValue_Test extends \PHPUnit_Framework_TestCase
         $this->validator->setMaxvalue(19);
         $this->assertTrue($this->validator->validate(0));
 
-        $this->expectException('InvalidArgumentException',
-            'Parameter Maxvalue must be numeric (int|float) and not string.');
         $this->validator->setMaxvalue('19');
         $this->assertTrue($this->validator->validate(19));
 

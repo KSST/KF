@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_Required_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Required;
+
+class RequiredTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Required
+     * @var Required
      */
     protected $validator;
 

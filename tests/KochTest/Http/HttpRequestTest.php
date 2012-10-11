@@ -1,10 +1,13 @@
 <?php
-use \Koch\Http\HttpRequest;
 
-class HttpRequest_Test extends \PHPUnit_Framework_TestCase
+namespace Koch\Http\HttpRequest;
+
+use Koch\Http\HttpRequest;
+
+class HttpRequestTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Clansuite_HttpRequest
+     * @var HttpRequest
      */
     protected $request;
 

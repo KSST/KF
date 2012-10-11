@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\String;
+
+class StringTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Url
+     * @var String
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Url;
+        $this->validator = new String;
     }
 
     /**
@@ -32,23 +37,12 @@ class Koch_Form_Validator_Url_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
-        // IDNA URL based on intl extension
-        if (function_exists('idn_to_ascii')) {
-            $this->assertEquals(idn_to_ascii('url-�sthetik.de'),
-                        $this->validator->validate('url-�sthetik.de'));
-        }
+        $this->assertTrue($this->validator->validate('string'));
 
-        // hmm... this puny doesn't ride...
-        $this->assertFalse($this->validator->validate('http://www.t�st.com'));
+        $this->assertTrue($this->validator->validate(1));
+        $this->assertTrue($this->validator->validate(1.01));
 
-        // no dash
-        $this->assertTrue($this->validator->validate('http://clansuite.com'));
-
-        // 1 dash
-        $this->assertTrue($this->validator->validate('http://clan-cms.com'));
-
-        // 2 dashes
-        $this->assertTrue($this->validator->validate('http://http://a-b-c.de'));
+        $this->assertFalse($this->validator->validate(true));
     }
 
     public function testMethod_getErrorMessage()

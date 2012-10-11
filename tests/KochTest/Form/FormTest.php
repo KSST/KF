@@ -1,8 +1,9 @@
 <?php
 
-#namespace Koch;
+namespace KochTest\Form;
 
 use Koch\Form\Form;
+use Koch\Form\Elements;
 
 /**
  * @todo method chaining tests on all setter methods
@@ -10,7 +11,7 @@ use Koch\Form\Form;
 class FormTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Clansuite_Form
+     * @var Form
      */
     protected $form;
 
@@ -37,7 +38,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setMethod('POST');
 
         // via getter not uppercased
-        $this->assertNotEqual('POST', $this->form->getMethod());
+        $this->assertNotEquals('POST', $this->form->getMethod());
         // via getter lowercased
         $this->assertEquals('post', $this->form->getMethod());
         // via property
@@ -155,18 +156,18 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testCopyObjectProperties()
     {
         // prefilled object
-        $from_object_a = new stdClass();
+        $from_object_a = new \stdClass();
         $from_object_a->attribute_string = 'value_of_attr_a';
         $from_object_a->attribute_int = 9;
         $from_object_a->attribute_bool = true;
         $from_object_a->attribute_array = array('key' => 'value');
 
         // empty target object
-        $to_object_b = new stdClass();
+        $to_object_b = new \stdClass();
 
         $this->form->copyObjectProperties($from_object_a, $to_object_b);
 
-        $this->assertIdentical($from_object_a, $to_object_b);
+        $this->assertSame($from_object_a, $to_object_b);
         $this->assertTrue($to_object_b->attribute_string, 'value_of_attr_a');
         $this->assertTrue($to_object_b->attribute_int, 9);
         $this->assertTrue($to_object_b->attribute_bool, true);
@@ -301,7 +302,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $return_value = $this->form->setLegend('returns form object');
 
-        $this->assertIdentical($this->form, $return_value);
+        $this->assertSame($this->form, $return_value);
     }
 
     public function testGetLegend()
@@ -334,7 +335,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $formelements_from_testobject = $this->form->getFormelements();
         $this->assertFalse( empty($formelements_from_testobject) );
-        $this->assertIdentical($formelements, $this->form->getFormelements());
+        $this->assertSame($formelements, $this->form->getFormelements());
     }
 
     public function testFormHasErrors()
@@ -413,13 +414,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->form->getDecorator('form'));
     }
 
+    /*
+     * expectedException        Exception
+     * expectedExceptionMessage The Formdecorator "not-existing-formdecorator" was not found.
+     */
     public function testgetDecorator_exception_notfound()
     {
-        $this->expectException(
-            'Exception',
-            'The Formdecorator "not-existing-formdecorator" was not found.'
-        );
-
         $this->form->getDecorator('not-existing-formdecorator');
     }
 
@@ -458,7 +458,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formelement = new \Koch\Form\Elements\Text;
         $formelement->setID('text-formelement-0');
 
-        $this->assertIdentical($formelement, $formelements_array[0]);
+        $this->assertSame($formelement, $formelements_array[0]);
     }
 
     public function testAddElement_withSettingAttributes()
@@ -494,23 +494,23 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->addElement('Text', null, 0);
 
         $array = array();
-        $array[] = new Koch\Form\Elements\Text;    // 0 - Text
-        $array[] = new Koch\Form\Elements\File;    // 1 - File
-        $array[] = new Koch\Form\Elements\Captcha; // 2 - Captcha
+        $array[] = new Elements\Text;    // 0 - Text
+        $array[] = new Elements\File;    // 1 - File
+        $array[] = new Elements\Captcha; // 2 - Captcha
 
         // manually reapply formelement identifiers
         $array['0']->setID('text-formelement-0');
         $array['1']->setID('file-formelement-1');
         $array['2']->setID('captcha-formelement-2');
 
-        $this->assertIdentical($array, $this->form->getFormelements());
+        $this->assertSame($array, $this->form->getFormelements());
     }
 
     public function testAddElement_switchEncodingWhenUsingFormelementFile()
     {
         $this->form->addElement('File');
 
-        $this->assertContainsString('enctype="multipart/form-data"', $this->form->render());
+        $this->assertContains('enctype="multipart/form-data"', $this->form->render());
     }
 
     public function testregenerateFormelementIdentifiers()
@@ -535,7 +535,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $array['1']->setID('file-formelement-1');
         $array['2']->setID('captcha-formelement-2');
 
-        $this->assertIdentical($array, $this->form->getFormelements());
+        $this->assertSame($array, $this->form->getFormelements());
     }
 
     public function testDelElementByName()
@@ -552,7 +552,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $formelements_array = $this->form->getFormelements();
 
-        $this->assertIdentical( $formelements_array['0'], $this->form->getElementByPosition(0));
+        $this->assertSame( $formelements_array['0'], $this->form->getElementByPosition(0));
     }
 
     public function testGetElementByName()
@@ -560,7 +560,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->addElement('Button')->setName('myButton1');
 
         $formelement_object = $this->form->getElementByName('myButton1');
-        $this->assertIdentical('myButton1', $formelement_object->getName());
+        $this->assertSame('myButton1', $formelement_object->getName());
     }
 
         public function testGetElement_ByName_or_ByPosition_or_LastElement()
@@ -569,22 +569,22 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         // ByName
         $formelement_object = $this->form->getElement('myButton1');
-        $this->assertIdentical('myButton1', $formelement_object->getName());
+        $this->assertSame('myButton1', $formelement_object->getName());
 
         // ByPosition
         $formelement_object = $this->form->getElement('0');
-        $this->assertIdentical('myButton1', $formelement_object->getName());
+        $this->assertSame('myButton1', $formelement_object->getName());
 
         // Default Value null as param
         $formelement_object = $this->form->getElement();
-        $this->assertIdentical('myButton1', $formelement_object->getName());
+        $this->assertSame('myButton1', $formelement_object->getName());
     }
 
     public function testFormelementFactory()
     {
         $formelement_object = $this->form->formelementFactory('text');
 
-        $this->assertIdentical(new \Koch\Form\Elements\Text, $formelement_object);
+        $this->assertSame(new \Koch\Form\Elements\Text, $formelement_object);
     }
 
     public function testsetValues_DataArrayPassedToMethod()
@@ -600,9 +600,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setValues($data);
 
         $snacks_array = $this->form->getElementByName('Snacks')->getValue();
-        $this->assertIdentical(count($snacks_array), 2);
-        $this->assertIdentical($snacks_array[0], 'cola');
-        $this->assertIdentical($snacks_array[1], 'popcorn');
+        $this->assertSame(count($snacks_array), 2);
+        $this->assertSame($snacks_array[0], 'cola');
+        $this->assertSame($snacks_array[1], 'popcorn');
     }
 
     public function testgetValues()
@@ -613,14 +613,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $values = $this->form->getValues();
 
         $this->assertTrue(is_array($values));
-        $this->assertIdentical(count($values), 2);
+        $this->assertSame(count($values), 2);
 
         $expected_values = array (
             'textarea-formelement-0' => 'Some Text Inside The First Textarea',
             'textarea-formelement-1' => 'More Text Inside The Second Textarea'
         );
 
-        $this->assertIdentical($values, $expected_values);
+        $this->assertSame($values, $expected_values);
     }
 
     public function testSetFormelementDecorator_formelementPositionNull()
@@ -687,7 +687,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $form_decorator_object = $this->form->DecoratorFactory('label');
 
-        $this->assertIdentical(new \Koch\Form\Decorators\Form\Label, $form_decorator_object);
+        $this->assertSame(new \Koch\Form\Decorators\Form\Label, $form_decorator_object);
     }
 
     public function testsetDecoratorAttributesArray()
@@ -695,7 +695,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $attributes = array('attribute1' => 'value1');
         $this->form->setDecoratorAttributesArray($attributes);
 
-        $this->assertIdentical($attributes, $this->form->getDecoratorAttributesArray());
+        $this->assertSame($attributes, $this->form->getDecoratorAttributesArray());
     }
 
     public function testgetDecoratorAttributesArray()
@@ -703,7 +703,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $attributes = array('attribute2' => 'value2');
         $this->form->setDecoratorAttributesArray($attributes);
 
-        $this->assertIdentical($attributes, $this->form->getDecoratorAttributesArray());
+        $this->assertSame($attributes, $this->form->getDecoratorAttributesArray());
     }
 
     public function testapplyDecoratorAttributes()
@@ -724,8 +724,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         $form_decorator_form = $this->form->getDecorator('form');
 
-        $this->assertIdentical('This is the Heading of the form.', $form_decorator_form->heading);
-        $this->assertIdentical('This is a form description text.', $form_decorator_form->description);
+        $this->assertSame('This is the Heading of the form.', $form_decorator_form->heading);
+        $this->assertSame('This is a form description text.', $form_decorator_form->description);
     }
 
     /*public function testAddValidator()
@@ -809,14 +809,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $message = 'message text';
         $this->form->addErrorMessage($message);
         $errormessages = $this->form->getErrorMessages();
-        $this->assertIdentical($message, $errormessages['0']);
+        $this->assertSame($message, $errormessages['0']);
     }
 
     public function testaddErrorMessages()
     {
         $set1 = array('aaa', 'bbb', 'ccc');
         $this->form->addErrorMessages($set1);
-        $this->assertIdentical($set1, $this->form->getErrorMessages());
+        $this->assertSame($set1, $this->form->getErrorMessages());
     }
 
     public function testaddErrorMessages_OverwriteMessages()
@@ -824,9 +824,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $set1 = array('aaa', 'bbb', 'ccc');
         $set2 = array('ddd', 'eee');
         $this->form->addErrorMessages($set1);
-        $this->assertIdentical($set1, $this->form->getErrorMessages());
+        $this->assertSame($set1, $this->form->getErrorMessages());
         $this->form->addErrorMessages($set2);
-        $this->assertIdentical($set2, $this->form->getErrorMessages());
+        $this->assertSame($set2, $this->form->getErrorMessages());
     }
 
     public function testresetErrorMessages()
@@ -842,7 +842,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $set1 = array('aaa', 'bbb', 'ccc');
         $this->form->addErrorMessages($set1);
-        $this->assertIdentical($set1, $this->form->getErrorMessages());
+        $this->assertSame($set1, $this->form->getErrorMessages());
     }
 
     public function test__set()

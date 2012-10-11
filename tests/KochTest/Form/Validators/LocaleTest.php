@@ -1,8 +1,13 @@
 <?php
-class Koch_Form_Validator_RegExp_Test extends \PHPUnit_Framework_TestCase
+
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Locale;
+
+class LocaleTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Url
+     * @var Locale
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validator_RegExp_Test extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\RegExp;
+        $this->validator = new Locale;
     }
 
     /**
@@ -32,6 +37,21 @@ class Koch_Form_Validator_RegExp_Test extends \PHPUnit_Framework_TestCase
          * validate() on the parent class, which then calls processValidationLogic()
          */
 
+        $this->assertTrue($this->validator->validate('de'));
+
+        $this->assertTrue($this->validator->validate('de-DE'));
+
+        // zh-TW - Chinese Taiwan
+        $this->assertTrue($this->validator->validate('zh-Hant-TW'));
+
+        // fr-CA Canadian Frenchy
+        $this->assertTrue($this->validator->validate('fr-CA'));
+
+        $this->assertTrue($this->validator->validate('en-US'));
+
+        $this->assertTrue($this->validator->validate('no-tt'));
+
+        $this->assertTrue($this->validator->validate('no-No'));
     }
 
     public function testMethod_getErrorMessage()

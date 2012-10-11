@@ -1,9 +1,14 @@
 <?php
 
-class Koch_Form_Validators_Equals_Test extends \PHPUnit_Framework_TestCase
+namespace KochTest\Form\Validators;
+
+use Koch\Form\Validators\Equals;
+
+
+class EqualsTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Koch_Form_Validator_Equals
+     * @var Equals
      */
     protected $validator;
 
@@ -13,7 +18,7 @@ class Koch_Form_Validators_Equals_Test extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->validator = new \Koch\Form\Validators\Equals;
+        $this->validator = new Equals;
     }
 
     /**
@@ -33,7 +38,7 @@ class Koch_Form_Validators_Equals_Test extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getEqualsTo());
 
         // getter returns integer not string
-        $this->assertNotIdentical('1980', $this->validator->getEqualsTo());
+        $this->assertNotSame('1980', $this->validator->getEqualsTo());
     }
 
     public function testMethod_setEqualsTo()
