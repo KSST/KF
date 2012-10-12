@@ -200,7 +200,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
-       
+
         $this->assertTrue(true, array_key_exists('addToMappingClass', $map));
         $this->assertTrue($map['addToMappingClass'], __DIR__ . '/fixtures/notloaded/addToMapping.php');
 
@@ -224,19 +224,19 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists('includeFileAndMapClass', false));
     }
 
-    public function testMethod_requireFile()
+    public function testMethod_includeFile()
     {
         // a) include file
-        $this->assertTrue( Loader::requireFile( __DIR__ . '/fixtures/ClassForRequireFile1.php') );
+        $this->assertTrue( Loader::includeFile( __DIR__ . '/fixtures/ClassForRequireFile1.php') );
 
         // b) include class
-        $this->assertTrue( Loader::requireFile( __DIR__ . '/fixtures/ClassForRequireFile2.php', 'ClassForRequireFile2') );
+        $this->assertTrue( Loader::includeFile( __DIR__ . '/fixtures/ClassForRequireFile2.php', 'ClassForRequireFile2') );
 
         // c) include class (second parameter), but class does not exist
-        $this->assertFalse( Loader::requireFile('nonExistantFile.php'), 'ThisClassDoesNotExist' );
+        $this->assertFalse( Loader::includeFile('nonExistantFile.php'), 'ThisClassDoesNotExist' );
 
         // d) file not found returns false
-        $this->assertFalse( Loader::requireFile('nonExistantFile.php') );
+        $this->assertFalse( Loader::includeFile('nonExistantFile.php') );
 
     }
 
