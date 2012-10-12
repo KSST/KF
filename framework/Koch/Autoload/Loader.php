@@ -25,8 +25,9 @@ namespace<br>";
      * This procedure ensures, that the autoload mapping array dataset
      * is increased stepwise resulting in a decreasing number of autoloading tries.
      *
-     * @param  string $filename The file to be required
-     * @return bool   True on success of require, false otherwise.
+     * @param string $filename The file to be required
+     *
+     * @return bool True on success of require, false otherwise.
      */
     public static function includeFileAndMap($filename, $classname)
     {
@@ -42,13 +43,13 @@ namespace<br>";
     }
 
     /**
-     * Require File if file found
+     * Includes a file, if found.
      *
-     * @param  string $filename  The file to be required
-     * @param  string $classname The classname (hopefully) inside this file.
-     * @return bool
+     * @param  string $filename  The file to be included
+     * @param  string $classname (Optional) The classname expected inside this file.
+     * @return bool   True on success of include, false otherwise.
      */
-    public static function requireFile($filename, $classname = null)
+    public static function includeFile($filename, $classname = null)
     {
         $filename = realpath($filename);
 
@@ -150,12 +151,12 @@ namespace<br>";
      */
     public static function addToMapping($filename, $classname)
     {
-        self::$autoloader_map = array_merge((array) self::$autoloader_map, array( $classname => $filename ));
+        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, array($classname => $filename));
 
         if (defined('APC') and APC == true) {
-            return self::writeAutoloadingMapApc(self::$autoloader_map);
+            return self::writeAutoloadingMapApc(self::$autoloaderMap);
         } else {
-            return self::writeAutoloadingMapFile(self::$autoloader_map);
+            return self::writeAutoloadingMapFile(self::$autoloaderMap);
         }
     }
 
@@ -206,7 +207,7 @@ namespace<br>";
             $filename = $map[$classname];
 
             // and include that one
-            if (true === self::requireFile($filename, $classname)) {
+            if (true === self::includeFile($filename, $classname)) {
                 return true;
             } else {
                 return false;
@@ -221,7 +222,7 @@ namespace<br>";
      */
     public static function getAutoloaderClassMap()
     {
-        return self::$autoloader_map;
+        return self::$autoloaderMap;
     }
 
     /**
@@ -241,6 +242,6 @@ namespace<br>";
      */
     public static function setInclusionsClassMap(array $classmap)
     {
-        self::$inclusions_classmap = $classmap;
+        self::$inclusionsClassmap = $classmap;
     }
 }
