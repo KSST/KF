@@ -41,7 +41,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
     {
         // test data
         $array = array( array('title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'),
-                        array('title' => 'modulenameB', 'link' => '/index.php?mod=modulenameB'));
+                        array('title' => 'modulenameB', 'link' => 'index.php?mod=modulenameB'));
 
         $this->object->add($array[0]['title'], $array[0]['link']);
         $this->object->add($array[1]['title'], $array[1]['link']);
@@ -51,12 +51,12 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         // title is uppercased on first char
         $this->assertSame('ModulenameA', $t_array[0]['title']);
         // short url to qualified url
-        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameA', $t_array[0]['link']);
+        $this->assertSame('/index.php?mod=modulenameA', $t_array[0]['link']);
 
         // title is uppercased on first char
         $this->assertSame('ModulenameB', $t_array[1]['title']);
         // slash at the start is removed and shorturl to qualified url
-        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameB', $t_array[1]['link']);
+        $this->assertSame('/index.php?mod=modulenameB', $t_array[1]['link']);
     }
 
     /**
@@ -73,10 +73,10 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         // replace array[0]
         $this->object->replace($array[1]['title'], $array[1]['link'], 0);
 
-        $t_array = $this->object->getTrail(false);
+        $trailArray = $this->object->getTrail(false);
 
-        $this->assertSame('ModulenameC', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=modulenameC', $t_array[0]['link']);
+        $this->assertSame('ModulenameC', $trailArray[0]['title']);
+        $this->assertSame('/index.php?mod=modulenameC', $trailArray[0]['link']);
     }
 
     /**
@@ -99,20 +99,20 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::setAction('action_show');
 
         // fetch with dynamical trail building
-        $t_array = $this->object->getTrail(true);
+        $trailArray = $this->object->getTrail(true);
         #var_dump($t_array);
 
         // Level 1 - expected Home
-        $this->assertSame('Home', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT, $t_array[0]['link']);
+        $this->assertSame('Home', $trailArray[0]['title']);
+        $this->assertSame('/', $trailArray[0]['link']);
 
         // Level 2 - Modulename News
-        $this->assertSame('News', $t_array[1]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
+        $this->assertSame('News', $trailArray[1]['title']);
+        $this->assertSame('/index.php?mod=news', $trailArray[1]['link']);
 
         // Level 3 - Action  Show
-        $this->assertSame('Show', $t_array[2]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $trailArray[2]['title']);
+        $this->assertSame('/index.php?mod=news&amp;action=show', $trailArray[2]['link']);
 
         /**
          * case B -  normal module - backend access => module = news, sub = admin, action =  action_admin_show
@@ -129,20 +129,20 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::setAction('action_show');
 
         // fetch with dynamical trail building
-        $t_array = $this->object->getTrail(true);
+        $trailArray = $this->object->getTrail(true);
         #var_dump($t_array);
 
         // expected values on level 0
-        $this->assertSame('Control Center', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $trailArray[0]['title']);
+        $this->assertSame('/index.php?mod=controlcenter', $trailArray[0]['link']);
 
         // expected values on level 1
-        $this->assertSame('News Admin', $t_array[1]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin', $t_array[1]['link']);
+        $this->assertSame('News Admin', $trailArray[1]['title']);
+        $this->assertSame('/index.php?mod=news&amp;ctrl=admin', $trailArray[1]['link']);
 
         // expected values on level 2
-        $this->assertSame('Show', $t_array[2]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $trailArray[2]['title']);
+        $this->assertSame('/index.php?mod=news&amp;ctrl=admin&amp;action=show', $trailArray[2]['link']);
 
         /**
          * case c -  Control Center => module = controlcenter, action = show
@@ -159,20 +159,20 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::setAction('show');
 
         // fetch with dynamical trail building
-        $t_array = $this->object->getTrail(true);
+        $trailArray = $this->object->getTrail(true);
         #var_dump($t_array);
 
         // Level 1 - expected
-        $this->assertSame('Control Center', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('Control Center', $trailArray[0]['title']);
+        $this->assertSame('/index.php?mod=controlcenter', $trailArray[0]['link']);
 
         // Level 2 - Modulename News
-        $this->assertSame('News', $t_array[1]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news', $t_array[1]['link']);
+        $this->assertSame('News', $trailArray[1]['title']);
+        $this->assertSame('/index.php?mod=news', $trailArray[1]['link']);
 
         // Level 3 - Action  Show
-        $this->assertSame('Show', $t_array[2]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=news&amp;action=show', $t_array[2]['link']);
+        $this->assertSame('Show', $trailArray[2]['title']);
+        $this->assertSame('/index.php?mod=news&amp;action=show', $trailArray[2]['link']);
 
     }
 
@@ -209,7 +209,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $t_array = $this->object->getTrail(false);
 
         $this->assertSame('Home', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT, $t_array[0]['link']);
+        $this->assertSame('/', $t_array[0]['link']);
 
         // case CONTROLCENTER module
 
@@ -219,7 +219,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $t_array = $this->object->getTrail(false);
 
         $this->assertSame('Control Center', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('/index.php?mod=controlcenter', $t_array[0]['link']);
 
         // case ADMIN submodule => the first breadcrumb is also the controlcenter (because backend of module)
 
@@ -229,7 +229,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $t_array = $this->object->getTrail(false);
 
         $this->assertSame('Control Center', $t_array[0]['title']);
-        $this->assertSame(WWW_ROOT . 'index.php?mod=controlcenter', $t_array[0]['link']);
+        $this->assertSame('/index.php?mod=controlcenter', $t_array[0]['link']);
     }
 
     public function testResetBreadcrumbs()

@@ -42,7 +42,7 @@ class Breadcrumb
 
         // set data to breadcrumb
         $breadcrumb['title'] = ucwords($title);
-        $breadcrumb['link']  = WWW_ROOT . ltrim($link, '/ ');
+        $breadcrumb['link']  = '/' . ltrim($link, '/ ');
 
         // replace
         if ($replace_array_position !== null) {
