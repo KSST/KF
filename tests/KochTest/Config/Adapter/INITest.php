@@ -41,7 +41,7 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function getFile()
     {
-        return dirname(__DIR__) . '/fixtures/writeTest.ini';
+        return __DIR__ . '/../fixtures/writeTest.ini';
     }
 
     /*
@@ -84,7 +84,7 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function testReadingBooleanValues()
     {
-        $file = dirname(__DIR__) . '/fixtures/booleans.ini';
+        $file = __DIR__ . '/../fixtures/booleans.ini';
         $config = $this->object->readConfig($file);
 
         $this->assertTrue((bool) $config['booleans']['test_on']);
@@ -101,7 +101,7 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function testReadingWithoutSection()
     {
-        $file = dirname(__DIR__) . '/fixtures/no-section.ini';
+        $file = __DIR__ . '/../fixtures/no-section.ini';
         $config = $this->object->readConfig($file);
 
         $expected = array(

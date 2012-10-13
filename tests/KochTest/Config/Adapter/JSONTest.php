@@ -33,7 +33,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function getFile()
     {
-        return dirname(__DIR__) . '/fixtures/file.json';
+        return __DIR__ . '/../fixtures/file.json';
     }
 
     /*
@@ -61,7 +61,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $json = $this->object->readConfig(dirname(__DIR__) . '/fixtures/file.json');
+        $json = $this->object->readConfig(__DIR__ . '/../fixtures/file.json');
         $expected = array('section-1' => array('key1' => 'value1'));
         $this->assertEquals($expected, $json);
     }
@@ -72,7 +72,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     public function testWriteConfig()
     {
         $array = array('section-1' => array('key1' => 'value1'));
-        $file = dirname(__DIR__) . '/fixtures/writeConfig.json';
+        $file = __DIR__ . '/../fixtures/writeConfig.json';
 
         $int_or_bool = $this->object->writeConfig($file, $array);
 

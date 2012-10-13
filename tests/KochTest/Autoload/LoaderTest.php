@@ -129,7 +129,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addToMapping( dirname(dirname(dirname(__DIR__))) . '/framework/Koch/Tools/SysInfo.php', 'Sysinfo' );
+        Loader::addToMapping(__DIR__ . '/../../../framework/Koch/Tools/SysInfo.php', 'Sysinfo');
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 
@@ -213,13 +213,13 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_includeFileAndMap()
     {
-        Loader::includeFileAndMap( __DIR__ . '/fixtures/includeFileAndMap.php', 'includeFileAndMapClass' );
+        Loader::includeFileAndMap(__DIR__ . '/fixtures/includeFileAndMap.php', 'includeFileAndMapClass');
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
         $this->assertTrue(true, array_key_exists('includeFileAndMapClass', $map));
         $this->assertEquals(
-            $map['includeFileAndMapClass'],
+            $map['includeFileAndMapClass'], 
             __DIR__ . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'includeFileAndMap.php'
         );
 
@@ -230,21 +230,15 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testMethod_includeFile()
     {
         // a) include file
-        $this->assertTrue( Loader::includeFile( __DIR__ . '/fixtures/ClassForRequireFile1.php') );
+        $this->assertTrue(Loader::includeFile(__DIR__ . '/fixtures/ClassForRequireFile1.php'));
 
         // b) include class
-        $this->assertTrue( Loader::includeFile( __DIR__ . '/fixtures/ClassForRequireFile2.php', 'ClassForRequireFile2') );
+        $this->assertTrue(Loader::includeFile(__DIR__ . '/fixtures/ClassForRequireFile2.php', 'ClassForRequireFile2'));
 
         // c) include class (second parameter), but class does not exist
-        $this->assertFalse( Loader::includeFile('nonExistantFile.php'), 'ThisClassDoesNotExist' );
+        $this->assertFalse(Loader::includeFile('nonExistantFile.php'), 'ThisClassDoesNotExist');
 
         // d) file not found returns false
-        $this->assertFalse( Loader::includeFile('nonExistantFile.php') );
-
-    }
-
-    public function testMethod_loadLibrary()
-    {
-        $this->assertTrue(Loader::loadLibrary('snoopy'));
+        $this->assertFalse(Loader::includeFile('nonExistantFile.php'));
     }
 }

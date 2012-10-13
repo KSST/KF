@@ -20,7 +20,7 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $vendor = dirname(dirname(dirname(dirname(__DIR__))));
+        $vendor = __DIR__ . '/../../../../';
 
         if ((extension_loaded('syck') === false) xor (is_file($vendor . '/spyc/Spyc.class.php') === true)) {
             $this->markTestSkipped('The no yaml reader available. Install SYCK extensions or Spyc library.');
@@ -39,7 +39,7 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
 
     public function getFile()
     {
-        return dirname(__DIR__) . '/fixtures/data.yml';
+        return __DIR__ . '/../fixtures/data.yml';
     }
 
     /**
