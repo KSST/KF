@@ -20,6 +20,7 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        $this->markTestIncomplete('No implemented yet.');
         $this->object = new Compositum;
     }
 
