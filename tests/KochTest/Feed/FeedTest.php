@@ -14,13 +14,12 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        require_once __DIR__ . '/../../../framework/Koch/Feed/Feed.php';
-
         // valid rss feed online source
         #$this->feed_url = 'http://groups.google.com/group/clansuite/feed/rss_v2_0_msgs.xml';
         $this->feedUrl = __DIR__ . '/fixtures/clansuite_rss_v2_0_msgs.xml';#
 
-        $this->cachedFile = __DIR__ . '/fixtures/' . md5($this->feedUrl);
+        $this->cacheFolder = __DIR__ . '/fixtures/';
+        $this->cacheFile = $this->cacheFolder . md5($this->feedUrl);
     }
 
     /**
@@ -49,10 +48,10 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_fetchRawRSS_withCaching()
     {
-        $feedcontent = Feed::fetchRawRSS($this->feedUrl, true);
+        $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);
 
         // check for cache file
-        $this->assertTrue($this->cacheFile);
+        $this->assertFileExists($this->cacheFile);
 
         // check for content
         $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
@@ -60,16 +59,5 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         if (is_file($this->cacheFile)) {
             unlink($this->cacheFile);
         }
-    }
-
-    /**
-     * testMethod_getFeedcreator()
-     */
-    public function testMethod_getFeedcreator()
-    {
-        $this->markTestIncomplete('Feedcreator not yet in vendors');
-        //$feedcreator_object = Feed::getFeedcreator();
-        //$this->assertInternalType($feedcreator_object, 'FeedCreator');
-        //$this->assertInstanceOf($feedcreator_object, 'UniversalFeedCreator');
     }
 }
