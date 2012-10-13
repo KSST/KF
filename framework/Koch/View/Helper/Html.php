@@ -27,7 +27,7 @@ class Html /* extends DOMDocument */
      * Renders title tag.
      *
      * @param string $title
-     * @access public
+     *
      * @return string
      */
     public static function title($title)
@@ -40,7 +40,7 @@ class Html /* extends DOMDocument */
      *
      * @param string $name  the meta name
      * @param string $value the meta value
-     * @access public
+     *
      * @return string
      */
     public static function meta($name, $value)
@@ -159,7 +159,7 @@ class Html /* extends DOMDocument */
      * Renders icon tag
      *
      * @param string $url the url of the icon.
-     * @access public
+     *
      * @return string
      */
     public static function icon($url)
