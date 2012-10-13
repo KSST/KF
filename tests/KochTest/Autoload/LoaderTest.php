@@ -129,7 +129,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addMapping('Sysinfo', __DIR__ . '/../../../framework/Koch/Tools/SysInfo.php');
+        Loader::addMapping('Sysinfo', realpath(__DIR__ . '/../../../framework/Koch/Tools/SysInfo.php'));
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 
@@ -211,9 +211,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // file not loaded, just mapped
         #$this->assertFalse(class_exists($class, false));
 
-        var_dump($map);
-
         // triggering autoload via class_exists
+        // Warning: this autoloader needs to be registered before composers autoloader.
         $this->assertTrue(class_exists($class, true));
     }
 
