@@ -21,7 +21,7 @@ use Koch\Exception\Exception;
  * @package     Core
  * @subpackage  Session
  */
-class Session implements SessionInterface, \ArrayAccess
+class Session implements SessionInterface, \ArrayAccess /* 5.4 implements SessionHandlerInterface */
 {
     // stop applications to influcence each other by applying a session_name
     const SESSION_NAME = 'CsuiteSID';
@@ -119,7 +119,9 @@ class Session implements SessionInterface, \ArrayAccess
             array($this, 'sessionDestroy'), // this redefines session_destroy()
             array($this, 'sessionGc')
         );
-
+        
+        // prevents unexpected effects when using objects as save handlers
+        register_shutdown_function('session_write_close');
 
         // Start Session
         self::startSession($this->session_expire_time);
