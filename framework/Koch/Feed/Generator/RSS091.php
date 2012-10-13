@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Koch Framework
+ * Jens A. Koch © 2005 - onwards
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Koch\Feed\Generator;
 
 use Koch\Feed\Generator;
@@ -7,7 +17,7 @@ use Koch\Feed\Generator;
 /**
  * RSSCreator091 is a FeedCreator that implements RSS 0.91 Spec, revision 3.
  *
- * @see http://my.netscape.com/publish/formats/rss-spec-0.91.html
+  * @see http://cyber.law.harvard.edu/rss/rss.html
  */
 class RSS091 extends Generator
 {

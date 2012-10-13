@@ -1,5 +1,15 @@
 <?php
 
+/**
+ * Koch Framework
+ * Jens A. Koch © 2005 - onwards
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
 namespace Koch\Feed\Generator;
 
 use Koch\Feed\Generator;
@@ -14,11 +24,9 @@ use Koch\Feed\Generator;
  * Some elements have not been implemented yet. These are (incomplete list):
  * author URL, item author's email and URL, item contents, alternate links,
  * other link content types than text/html. Some of them may be created with
- * AtomCreator10::additionalElements.
- *
- * @see FeedCreator#additionalElements
+ * Atom10::additionalElements.
  */
-class Atom10 extends FeedCreator
+class Atom10 extends Generator
 {
     public function __construct($identifier = '')
     {

@@ -1,14 +1,20 @@
 <?php
 
-namespace Koch\Feed\Generator;
+/**
+ * Koch Framework
+ * Jens A. Koch © 2005 - onwards
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
 
-use Koch\Feed\Generator;
+namespace Koch\Feed\Generator;
 
 /**
  * JSCreator is a class that writes a js file to a specific
  * location, overriding the createFeed method of the parent HTMLCreator.
- *
- * @author Pascal Van Hecke
  */
 class JS extends HTML
 {
