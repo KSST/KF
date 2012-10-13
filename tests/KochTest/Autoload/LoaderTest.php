@@ -198,15 +198,20 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         $class = 'addToMappingClass';
         $file = realpath(__DIR__ . '/fixtures/notloaded/addToMapping.php');
+
         $this->assertTrue(Loader::addMapping($class, $file));
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
+        // entry exists
         $this->assertTrue(true, array_key_exists($class, $map));
+        // compare entries
         $this->assertEquals($map[$class], $file);
 
         // file not loaded, just mapped
         #$this->assertFalse(class_exists($class, false));
+
+        var_dump($map);
 
         // triggering autoload via class_exists
         $this->assertTrue(class_exists($class, true));
