@@ -387,11 +387,7 @@ class TracRPC
                 $contents = file_get_contents($file, FILE_BINARY);
 
                 if ($contents === true) {
-                    $contents = array(
-                                                                '__jsonclass__' => array(
-                                                                                                            'binary', base64_encode($contents)
-                                                                )
-                    );
+                    $contents = array('__jsonclass__' => array('binary', base64_encode($contents)));
                 }
 
                 $method = 'wiki.putAttachment';
@@ -468,11 +464,7 @@ class TracRPC
                 $contents = file_get_contents($file, FILE_BINARY);
 
                 if ($contents === true) {
-                    $contents = array(
-                                                                '__jsonclass__' => array(
-                                                                                                            'binary', base64_encode($contents)
-                                                                )
-                    );
+                    $contents = array('__jsonclass__' => array('binary', base64_encode($contents)));
                 }
 
                 $method = 'ticket.putAttachment';
@@ -565,19 +557,19 @@ class TracRPC
             default:
                 $method = 'ticket.create';
                 $params = array(
-                                                            0 => ($data['summary'] !== null) ? $data['summary'] : '',
-                                                            1 => ($data['desc'] !== null) ? $data['desc'] : '',
-                                                            2 => ($data['attr'] !== null) ? $data['attr'] : array(),
-                                                            3 => ($data['notify'] !== null) ? $data['notify'] : false
+                    0 => ($data['summary'] !== null) ? $data['summary'] : '',
+                    1 => ($data['desc'] !== null) ? $data['desc'] : '',
+                    2 => ($data['attr'] !== null) ? $data['attr'] : array(),
+                    3 => ($data['notify'] !== null) ? $data['notify'] : false
                 );
                 break;
             case 'update':
                 $method = 'ticket.update';
                 $params = array(
-                                                            0 => $id,
-                                                            1 => ($data['comment'] !== null) ? $data['comment'] : '',
-                                                            2 => ($data['attr'] !== null) ? $data['attr'] : array(),
-                                                            3 => ($data['notify'] !== null) ? $data['notify'] : false
+                    0 => $id,
+                    1 => ($data['comment'] !== null) ? $data['comment'] : '',
+                    2 => ($data['attr'] !== null) ? $data['attr'] : array(),
+                    3 => ($data['notify'] !== null) ? $data['notify'] : false
                 );
                 break;
             case 'delete':
@@ -658,7 +650,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket components, get a specific component, create a component, edit an existing component, or delete a component
+     * Get all ticket components, get a specific component, 
+     * create a component, edit an existing component, or delete a component.
      *
      * @param	string	What action to perform for ticket component.
      * 					Possible values get_all, get, delete, update, or create.
@@ -719,7 +712,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket milestones, get a specific milestone, create a milestone, edit an existing milestone, or delete a milestone
+     * Get all ticket milestones, get a specific milestone, 
+     * create a milestone, edit an existing milestone, or delete a milestone.
      *
      * @param	string	What action to perform for ticket milestone.
      * 					Possible values get_all, get, delete, update, or create.
@@ -780,7 +774,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket prioritys, get a specific priority, create a priority, edit an existing priority, or delete a priority
+     * Get all ticket prioritys, get a specific priority, 
+     * create a priority, edit an existing priority, or delete a priority.
      *
      * @param	string	What action to perform for ticket priority.
      * 					Possible values get_all, get, delete, update, or create.
@@ -841,7 +836,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket resolutions, get a specific resolution, create a resolution, edit an existing resolution, or delete a resolution
+     * Get all ticket resolutions, get a specific resolution,
+     * create a resolution, edit an existing resolution, or delete a resolution.
      *
      * @param	string	What action to perform for ticket resolution.
      * 					Possible values get_all, get, delete, update, or create.
@@ -902,7 +898,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket severitys, get a specific severity, create a severity, edit an existing severity, or delete a severity
+     * Get all ticket severitys, get a specific severity, 
+     * create a severity, edit an existing severity, or delete a severity.
      *
      * @param	string	What action to perform for ticket severity.
      * 					Possible values get_all, get, delete, update, or create.
@@ -1024,7 +1021,8 @@ class TracRPC
     }
 
     /**
-     * Get all ticket versions, get a specific version, create a version, edit an existing version, or delete a version
+     * Get all ticket versions, get a specific version,
+     * create a version, edit an existing version, or delete a version.
      *
      * @param	string	What action to perform for ticket version.
      * 					Possible values get_all, get, delete, update, or create.
@@ -1268,17 +1266,17 @@ class TracRPC
 
         if ($method == 'system.multicall') {
             $request = array(
-                                                        'method' => $method,
-                                                        'params' => $this->request,
-                                                        'id' => $id
+                'method' => $method,
+                'params' => $this->request,
+                'id' => $id
             );
 
             $this->request = array(0 => $request);
         } else {
             $this->request[] = array(
-                                                        'method' => $method,
-                                                        'params' => $args,
-                                                        'id' => $id
+                'method' => $method,
+                'params' => $args,
+                'id' => $id
             );
         }
 
@@ -1314,9 +1312,11 @@ class TracRPC
         curl_setopt($ch, CURLOPT_URL, $this->tracURL);
 
         /**
-         * Set correct HttpHeader Content Type depending on the requested content type via tracURL.
+         * Set correct HttpHeader Content Type 
+         * depending on the requested content type via tracURL.
          *
-         * The JSON-RPC protocol gets used when sending a 'Content-Type': 'application/json' header request to:
+         * The JSON-RPC protocol gets used when sending 
+         * a 'Content-Type': 'application/json' header request to:
          *
          * Anonymous access
          *
@@ -1328,7 +1328,8 @@ class TracRPC
          *      http://trac.example.com/login/rpc
          *      http://trac.example.com/login/jsonrpc
          *
-         * The XML-RPC protocol gets used when sending a 'Content-Type': 'application/xml' or 'text/xml' header request to:
+         * The XML-RPC protocol gets used when sending 
+         * a 'Content-Type': 'application/xml' or 'text/xml' header request to:
          *
          * Anonymous access
          *
@@ -1372,7 +1373,9 @@ class TracRPC
          */
         if (strpos($this->tracURL, 'login') !== false) {
             if (empty($this->username) or empty($this->password)) {
-                throw new \Exception('You are trying an authenticated access without providing username and password.');
+                throw new \Exception(
+                    'You are trying an authenticated access without providing username and password.'
+                );
             } else {
                 curl_setopt($ch, CURLOPT_HTTPAUTH, CURLAUTH_ANY); // CURLAUTH_BASIC | CURLAUTH_DIGEST
                 curl_setopt($ch, CURLOPT_USERPWD, $this->username . ':' . $this->password);
