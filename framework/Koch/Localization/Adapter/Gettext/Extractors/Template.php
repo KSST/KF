@@ -12,8 +12,11 @@
 
 namespace Koch\Localization\Adapter\Gettext\Extractors;
 
+use Koch\Localization\ExtractorBase;
+use Koch\Localization\ExtractorInterface;
+
 /**
- * Gettext_Extractor_Template
+ * Gettext Extractor Template
  *
  * Extracts translation strings from templates by scanning for certain placeholders, like {t}, {_}.
  *
@@ -21,7 +24,7 @@ namespace Koch\Localization\Adapter\Gettext\Extractors;
  * @package     Core
  * @subpackage  Gettext
  */
-class Template extends Base implements Extractor
+class Template extends ExtractorBase implements ExtractorInterface
 {
     const L_DELIMITER = '{';
     const R_DELIMITER = '}';

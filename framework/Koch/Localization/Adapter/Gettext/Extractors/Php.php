@@ -12,8 +12,11 @@
 
 namespace Koch\Localization\Adapter\Gettext\Extractors;
 
+use Koch\Localization\ExtractorBase;
+use Koch\Localization\ExtractorInterface;
+
 /**
- * Gettext_Extractor_PHP
+ * Gettext Extractor PHP
  *
  * Extracts translation strings by scanning for certain functions: translate(), t(), _().
  *
@@ -21,7 +24,7 @@ namespace Koch\Localization\Adapter\Gettext\Extractors;
  * @package     Core
  * @subpackage  Gettext
  */
-class Php extends Base implements Extractor
+class Php extends ExtractorBase implements ExtractorInterface
 {
     /**
      * The function tags to extract translation strings from

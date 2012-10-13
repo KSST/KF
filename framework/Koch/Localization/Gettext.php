@@ -10,251 +10,77 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace
-        $class = 'Koch\Localization\Gettext\Extractors\\' . ucfirst($extractor);
-
-        // was loaded before?
-        if ($this->extractors[$extractor] !== null) {
-            return $this->extractors[$extractor];
-        } else {
-            // /framework/Koch/Localization/Adapter/Gettext/Extractors/*NAME*.php
-            $file = __DIR__ . '/Adapter/Gettext/Extractors/' . $extractor . '.php';
-
-            if (true === is_file($file)) {
-                include_once $file;
-            } else {
-                $this->throwException('Extractor file ' . $file . ' not found.');
-            }
-
-            if (false === class_exists($class)) {
-                $this->throwException('File loaded, but Class ' . $extractor . ' not inside.');
-            }
-        }
-
-        $this->extractors[$extractor] = new $class;
-
-        $this->log('Extractor ' . $extractor . ' loaded.');
-
-        return $this->extractors[$extractor];
-    }
-
-    /**
-     * Assigns an extractor to an extension
-     *
-     * @param string $extension
-     * @param string $extractor
-     *
-     * @return Koch_Gettext_Extractor
-     */
-    public function setExtractor($extension, $extractor)
-    {
-        // not already set
-        if (false === isset($this->extractor[$extension]) and false === in_array($extractor, $this->extractor[$extension])) {
-            $this->extractor[$extension][] = $extractor;
-        } else { // already set
-
-            return $this;
-        }
-    }
-
-    /**
-     * Removes all extractor settings
-     *
-     * @return Koch_Gettext_Extractor
-     */
-    public function removeAllExtractors()
-    {
-        $this->extractor = array();
-
-        return $this;
-    }
-
-    /**
-     * Saves extracted data into gettext file
-     *
-     * @param string $file
-     * @param array  $data
-     *
-     * @return Koch_Gettext_Extractor
-     */
-    public function save($file, $data = null)
-    {
-        if ($data === null) {
-            $data = $this->data;
-        }
-
-        // get dirname and check if dirs exist, else create it
-        $dir = dirname($file);
-        if (false === is_dir($dir) and false === @mkdir($dir, 0777, true)) {
-           $this->throwException('ERROR: make directory failed!');
-        }
-
-        // check file permissions on output file
-        if (true === is_file($file) and false === is_writable($file)) {
-            $this->throwException('ERROR: Output file is not writable!');
-        }
-
-        // write data formatted to file
-        file_put_contents($file, $this->formatData($data));
-
-        $this->log('Output file ' . $file . ' created.');
-
-        return $this;
-    }
-
-    /**
-     * Returns a fileheader for a gettext portable object file.
-     *
-     * @param boolean $return_as_string True, returns a string (default) and false returns an array.
-     *
-     * @return mixed Array or String. Returns string by default.
-     */
-    public static function getPOFileHeader($return_as_string = true)
-    {
-        $output = array();
-        $output[] = '# Gettext Portable Object Translation File.';
-        $output[] = '#';
-        $output[] = '# Koch Framework';
-        $output[] = '# SPDX-FileCopyrightText: 2005-2024 Jens A. Koch';
-        $output[] = '# SPDX-License-Identifier: MIT';
-        $output[] = '#';
-        $output[] = 'msgid ""';
-        $output[] = 'msgstr ""';
-        $output[] = '"Project-Id-Version: Koch Framework ' . CLANSUITE_VERSION . '\n"';
-        $output[] = '"POT-Creation-Date: ' . date('Y-m-d H:iO') . '\n"';
-        $output[] = '"PO-Revision-Date: ' . date('Y-m-d H:iO') . '\n"';
-        $output[] = '"Content-Type: text/plain; charset=UTF-8\n"';
-        // @todo fetch plural form from locale description array
-        $output[] = '"Plural-Forms: nplurals=2; plural=(n != 1);\n"';
-        $output[] = '';
-
-        if ($return_as_string === true) {
-            return implode("\n", $output);
-        } else { // return array
-
-            return $output;
-        }
-    }
-
-    /**
-     * Formats fetched data to gettext portable object syntax
-     *
-     * @param array $data
-     *
-     * @return string
-     */
-    protected function formatData($data)
-    {
-        $pluralMatchRegexp = '#\%([0-9]+\$)*d#';
-
-        $output = array();
-        $output = self::getPOFileHeader(false);
-
-        ksort($data);
-
-        foreach ($data as $key => $files) {
-            ksort($files);
-
-            $slashed_key = self::addSlashes($key);
-
-            foreach ($files as $file) {
-                $output[] = '#: ' . $file; // = reference
-            }
-
-            $output[] = 'msgid "' . $slashed_key . '"';
-
-            // check for plural
-            if (0 < preg_match($pluralMatchRegexp, $key)) {
-                $output[] = 'msgid_plural "' . $slashed_key . '"';
-                $output[] = 'msgstr[0] "' . $slashed_key . '"';
-                $output[] = 'msgstr[1] "' . $slashed_key . '"';
-            } else { // no plural
-                $output[] = 'msgstr "' . $slashed_key . '"';
-            }
-
-            $output[] = '';
-        }
-
-        return join("\n", $output);
-    }
-
-    /**
-     * Escapes a string without breaking gettext syntax.
-     *
-     * @param string $string
-     *
-     * @return string
-     */
-    public static function addSlashes($string)
-    {
-        return addcslashes($string, self::ESCAPE_CHARS);
-    }
-}
+namespace Koch\Localization;
 
 /**
- * Base Class of all Gettext Extractors
+ * Class for handling Gettext Extraction.
+ *
+ * 1. Gettext extraction is normally performed by the "xgettext" tool.
+ *    http://www.gnu.org/software/hello/manual/gettext/xgettext-Invocation.html
+ *
+ * 2. PHP as a platform is still missing essential features of the gettext toolchain.
+ *    You wont' find a PECL extension for extraction NOR native PO/MO writing.
+ *    Basically everything is missing - except the reading of compiled gettext files (--with-gettext).
+ *
+ * 3. The missing parts are implemented in PHP:
+ *    a) gettext extractor basedon preg_matching.
+ *       The extractor matches certain translation functions, like translate('term') or t('term') or _('term')
+ *       and their counterparts in templates, often {t('term')} or {_('term')}.
+ *    b) POT/PO/MO File Handling = reading and writing.
+ *
+ * The Koch_Gettext is based on and inspired by
+ *  - Karel Klima's "GettextExtractor v2" (new BSD)
+ *  - Drupals "translation_extraction" (GPL)
+ *  - Matthias Bauer's work on PO/MO Filehandling for Wordpress during GSoC 2007 (GPL)
+ *  - Heiko Rabe's "Codestyling Localization" Plugin for Wordpress (GPL)
+ *
+ * @category    Koch
+ * @package     Core
+ * @subpackage  Gettext
  */
-class Extractor_Base
+class Gettext extends ExtractorTool
 {
     /**
-     * @var array Definition of all the tags to scan.
+     * Setup mandatory extractors
      */
-    protected $tags_to_scan;
+    public function __construct()
+    {
+        // clean up
+        $this->removeAllExtractors();
+
+        // set basic extractors for php and smarty template files
+        $this->setExtractor('php', 'PHP')
+             ->setExtractor('tpl', 'Template');
+
+        // register the tags/functions to extract
+        $this->getExtractor('PHP')->addTags(array('translate', 't', '_'));
+
+        // register the tags/placeholders to extract
+        $this->getExtractor('Template')->addTags(array('_', 't'));
+    }
 
     /**
-     * Add a tag (placeholder/function) to scan for
+     * Scans given files or directories and extracts gettext keys from the content
      *
-     * @param mixed|array|string $tag String or Array of Tags.
+     * @param string|array $resource
      *
-     * @return Object Koch_Gettext_Extractor
+     * @return Koch_Gettext_Extractor
      */
-    public function addTags($tags)
+    public function multiScan($resource)
     {
-        // multiple tags to add
-        if (is_array($tags) === true) {
-            foreach ($tags as $tag) {
-                if (false === array_key_exists($tag, array_flip($this->tags_to_scan))) {
-                    $this->tags_to_scan[] = $tag;
-                }
-            }
-        } else { // just one element (string)
-            $this->tags_to_scan[] = $tags;
+        $this->inputFiles = array();
+
+        if (false === is_array($resource)) {
+            $resource = array($resource);
         }
 
-        return $this;
-    }
+        foreach ($resource as $item) {
+            $this->log('Scanning ' . $item);
+            $this->scan($item);
+        }
 
-    /**
-     * Excludes a tag from scanning
-     *
-     * @param string $tag
-     *
-     * @return Object Koch_Gettext_Extractor
-     */
-    public function removeTag($tag)
-    {
-        unset($this->tags_to_scan[$tag]);
+        $this->extract($this->inputFiles);
 
         return $this;
     }
-
-    /**
-     * Removes all tags
-     *
-     * @return object Koch_Gettext_Extractor
-     */
-    public function removeAllTags()
-    {
-        $this->tags_to_scan = array();
-
-        return $this;
-    }
-}
-
-/**
- * Gettext_Extractor_Interface
- */
-interface Extractor
-{
-    public function extract($file);
 }

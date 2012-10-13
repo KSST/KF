@@ -13,9 +13,7 @@
 namespace Koch\Localization\Adapter\Gettext;
 
 /**
- * Gettext_MOFile
- *
- * Handling for Gettext "Machine Object" (.mo) Files.
+ * Class for Handling for Gettext "Machine Object" (.mo) files.
  *
  * @category    Koch
  * @package     Core

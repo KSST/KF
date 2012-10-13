@@ -73,7 +73,7 @@ class Localization
          * @link http://www.gnu.org/software/gettext/manual/gettext.html GNU Gettext
          */
         if (function_exists('_get_reader') === false) {
-            include dirname(dirname(__DIR__)) . '/vendor/php-gettext/gettext.inc';
+            include __DIR__ . '/../../vendor/php-gettext/gettext.inc';
         }
 
         // Load Domain
