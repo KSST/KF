@@ -85,7 +85,7 @@ class HTML extends Generator
      * Writes the HTML.
      * @return string the scripts's complete text
      */
-    public function createFeed()
+    public function renderFeed()
     {
         // if there is styleless output, use the content of this variable and ignore the rest
         if ($this->stylelessOutput != '') {

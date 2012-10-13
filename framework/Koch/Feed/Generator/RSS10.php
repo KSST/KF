@@ -40,7 +40,7 @@ class RSS10 extends Generator
      *
      * @return string the feed's complete text
      */
-    public function createFeed()
+    public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();

@@ -212,7 +212,7 @@ abstract class GeneratorAbstract extends ElementBase
      *
      * @return string the feed's complete text
      */
-    abstract public function createFeed();
+    abstract public function renderFeed();
 
     /**
      * Generate a filename for the feed cache file. The result will be $_SERVER['PHP_SELF'] with the extension changed to .xml.
@@ -293,7 +293,7 @@ abstract class GeneratorAbstract extends ElementBase
         }
         $feedFile = fopen($filename, 'w+');
         if ($feedFile) {
-            fputs($feedFile, $this->createFeed());
+            fputs($feedFile, $this->renderFeed());
             fclose($feedFile);
             if ($displayContents) {
                 $this->redirect($filename);
@@ -310,6 +310,6 @@ abstract class GeneratorAbstract extends ElementBase
      */
     public function outputFeed()
     {
-        echo $this->createFeed();
+        echo $this->renderFeed();
     }
 }

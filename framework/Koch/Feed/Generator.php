@@ -150,7 +150,7 @@ class Generator // extends FeedGeneratorAbstract
     {
         $this->setFormat($format);
 
-        return $this->feed->createFeed();
+        return $this->feed->renderFeed();
     }
 
     /**
