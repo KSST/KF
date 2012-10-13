@@ -57,18 +57,21 @@ class Feed
      * Fetches a feed by URL and caches it.
      * Be advised to use the method fetchRSS() instead.
      *
-     * @param string  $feed_url       This is the URL you want to parse.
-     * @param boolean $cache          If true caches the content. Default true.
-     * @param string  $cache_location This is where you want the cached feeds to be stored.
+     * @param string  $feedUrl       This is the URL you want to parse.
+     * @param boolean $cache         If true caches the content. Default true.
+     * @param string  $cacheLocation The path, where you want the cached feeds to be stored.
      *
      * @return string Feed content.
      */
-    public static function fetchRawRSS($feed_url, $cache = true, $cache_location = null)
+    public static function fetchRawRSS($feedUrl, $cache = true, $cacheLocation = null)
     {
         if ($cache === true) {
 
             // Cache Filename and Path
-            $cachefile = ($cache_location == null) ? (APPLICATION_CACHE_PATH . md5($feed_url)) : $cache_location;
+            $cacheLocation = ($cacheLocation == null) ? APPLICATION_CACHE_PATH : $cacheLocation;
+
+            // attach cache filename
+            $cachefile = $cacheLocation . md5($feedUrl);
 
             // define cache lifetime
             $cachetime = 60*60*3; // 10800min = 3h
@@ -85,7 +88,7 @@ class Feed
             }
 
             // get Feed from source
-            $feedcontent = file_get_contents($feed_url, FILE_TEXT);
+            $feedcontent = file_get_contents($feedUrl, FILE_TEXT);
 
             // ensure that we have rss content
             if (strlen($feedcontent) > 0) {
