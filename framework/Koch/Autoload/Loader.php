@@ -161,61 +161,6 @@ namespace<br>";
     }
 
     /**
-     * Includes a certain library classname by using a manually maintained autoloading map.
-     * Functionally the same as self::autoloadInclusions().
-     *
-     * You can load directly:
-     * Snoopy, SimplePie, PclZip, graph, GeSHi, feedcreator, browscap, bbcode
-     *
-     * You can also pass a custom map, like so:
-     * loadLibrary('xtemplate', dirname(dirname(__DIR__)) . '/vendor/xtemplate/xtemplate.class.php' )
-     *
-     * @param  string $classname Library classname to load.
-     * @param  string $path      Path to the class.
-     * @return true   if classname was included
-     */
-    public static function loadLibrary($classname, $path = null)
-    {
-        // check if class was already loaded
-        if (true === class_exists($classname, false)) {
-            return true;
-        }
-
-        $classname = strtolower($classname);
-
-        $vendor_folder = dirname(dirname(__DIR__)) . '/vendor';
-
-        if ($path !== null) {
-            $map = array($classname, $path);
-        } else {
-            // autoloading map - ROOT_LIBRARIES/..
-            $map = array(
-                'snoopy'        => $vendor_folder . 'snoopy/Snoopy.class.php',
-                'simplepie'     => $vendor_folder . 'simplepie/simplepie.inc',
-                'pclzip'        => $vendor_folder . 'pclzip/pclzip.lib.php',
-                'graph'         => $vendor_folder . 'graph/graph.class.php',
-                'geshi'         => $vendor_folder . 'geshi/geshi.php',
-                'feedcreator'   => $vendor_folder . 'feedcreator/feedcreator.class.php',
-                'browscap'      => $vendor_folder . 'browscap/Browscap.php',
-                'bbcode'        => $vendor_folder . 'bbcode/stringparser_bbcode.class.php',
-            );
-        }
-
-        // check if classname is in autoloading map
-        if ($map[$classname] !== null) {
-            // get filename for that classname
-            $filename = $map[$classname];
-
-            // and include that one
-            if (true === self::includeFile($filename, $classname)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    }
-
-    /**
      * Getter for the autoloader classmap.
      *
      * @return array autoloader classmap.
