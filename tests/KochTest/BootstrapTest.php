@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace KochTest;
 
@@ -20,7 +20,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $registered_autoloaders = spl_autoload_functions();
         $this->assertEquals('Koch\Autoload\Loader', $registered_autoloaders[0][0]);
         $this->assertEquals('autoload', $registered_autoloaders[0][1]);
-        
+
         /**
          * b) ensure Koch Framework Constants are set
          */
@@ -29,7 +29,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, defined('APPLICATION_CACHE_PATH'));
         $this->assertEquals(true, defined('APPLICATION_MODULES_PATH'));
         #$this->assertEquals(true, defined('VENDOR_PATH'));
-        
+
         /**
          *  c) ensure /framework and /tests are found on the include path
          */

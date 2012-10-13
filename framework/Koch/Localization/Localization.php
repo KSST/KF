@@ -144,7 +144,7 @@ class Localization
             //  it's the ROOT_LANGUAGES directory
             $domain_directory = ROOT_LANGUAGES;
         } else { // set a specific module directory
-            $domain_directory = APP_MODULES_DIR . $module . DIRECTORY_SEPARATOR . 'languages';
+            $domain_directory = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . 'languages';
         }
 
         // Set the Domain

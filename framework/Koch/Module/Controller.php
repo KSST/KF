@@ -69,7 +69,7 @@ namespace prefix
             $modulename = HttpRequest::getRoute()->getModuleName();
         }
 
-        $module_models_path = APP_MODULES_DIR . mb_strtolower($modulename) . '/model/';
+        $module_models_path = APPLICATION_MODULES_PATH . mb_strtolower($modulename) . '/model/';
 
         // check if the module has a models dir
         if (is_dir($module_models_path) === true) {
@@ -339,7 +339,7 @@ namespace prefix
         // construct formname, classname, filename, load file, instantiate the form
         $classname = 'Koch\Form\\' . $formname;
         $filename  = mb_strtolower($formname) . 'Form.php';
-        $directory = APP_MODULES_DIR . mb_strtolower($module) . '/Form/';
+        $directory = APPLICATION_MODULES_PATH . mb_strtolower($module) . '/Form/';
 
         Loader::requireFile($directory . $filename, $classname);
 

@@ -200,7 +200,7 @@ namespace and path to search in
         $model_dirs = array();
 
         // get all module directories
-        $dirs = glob(APP_MODULES_DIR . '[a-zA-Z]*', GLOB_ONLYDIR);
+        $dirs = glob(APPLICATION_MODULES_PATH . '[a-zA-Z]*', GLOB_ONLYDIR);
 
         foreach ($dirs as $key => $dir_path) {
             /**

@@ -207,7 +207,7 @@ class Smarty extends AbstractRenderer
                 // smarty plugins in framework
                 __DIR__ . '/../Helper/Smarty',
                 // smarty plugins in module
-                APP_MODULES_DIR . TargetRoute::getModule() . '/View/Helper/Smarty'
+                APPLICATION_MODULES_PATH . TargetRoute::getModule() . '/View/Helper/Smarty'
             )
         );
 

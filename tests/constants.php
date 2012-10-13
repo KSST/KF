@@ -11,6 +11,6 @@ defined('REWRITE_ENGINE_ON')        || define('REWRITE_ENGINE_ON', false);
 
 defined('APPLICATION_PATH')         || define('APPLICATION_PATH', '/');
 defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
-defined('APP_MODULES_DIR')          || define('APP_MODULES_DIR', '/');
+defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', '/');
 
 //defined('VENDOR_PATH')            || define('VENDOR_PATH', '');
