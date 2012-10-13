@@ -23,31 +23,22 @@ class Feed
      *
      * @return object \SimplePie
      */
-    public static function fetchRSS($feed_url, $number_of_items = null, $cache_duration = null, $cache_location = null)
+    public static function fetchRSS($feed_url, $numberOfItems = null, $cache_duration = null, $cache_location = null)
     {
         // load simplepie
-        include dirname(dirname(__DIR__)) . '/vendor/simplepie/simplepie.inc';
+        include __DIR__ . '/../../vendor/simplepie/SimplePie.php';
 
         // instantiate simplepie
         $simplepie = new \SimplePie();
 
-        // if cache_location was not specified manually
-        if ($cache_location === null) {
-            // we set it to the default cache directory for feeds
-            $cache_location = APPLICATION_CACHE_PATH; // . 'feeds';
-        }
+        // if cache_location was not specified manually, set it to the default cache directory for feeds
+        $cache_location = ($cache_location === null) ? APPLICATION_CACHE_PATH : $cache_location;
 
-        // if cache_duration was not specified manually
-        if ($cache_duration == null) {
-            // we set it to the default cache duration time of 1800
-            $cache_duration = 1800;
-        }
+        // if cache_duration was not specified manually, set it to the default cache duration time of 1800
+        $cache_duration = ($cache_duration == null) ? 1800 : $cache_duration;
 
-        // if number of items to fetch is null
-        if ($number_of_items == null) {
-            // we set it to the default value of 5 items
-            $number_of_items = 5;
-        }
+        // if number of items to fetch is null, set it to the default value of 5 items
+        $numberOfItems = ($numberOfItems == null) ? 5 : $numberOfItems;
 
         // finally: fetch the feed and cache it!
         $simplepie->set_feed_url($feed_url);
@@ -92,11 +83,13 @@ class Feed
                 touch($cachefile);
                 chmod($cachefile, 0666);
             }
-            // Get Feed from source, Write File
+            
+            // get Feed from source
             $feedcontent = file_get_contents($feed_url, FILE_TEXT);
 
             // ensure that we have rss content
-            if (mb_strlen($feedcontent) > 0) {
+            if (strlen($feedcontent) > 0) {
+                // write cache file
                 if ($cache === true) {
                     $fp = fopen($cachefile, 'w');
                     fwrite($fp, $feedcontent);
@@ -108,17 +101,5 @@ class Feed
                 return null;
             }
         }
-    }
-
-    /**
-     * Returns UniversalFeedCreator Object
-     *
-     * @return object UniversalFeedCreator
-     */
-    public static function getFeedcreator()
-    {
-        \Koch\Autoload\Loader::loadLibrary('feedcreator');
-
-        return new \UniversalFeedCreator();
     }
 }
