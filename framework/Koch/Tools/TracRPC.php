@@ -663,7 +663,7 @@ class TracRPC
     }
 
     /**
-     * Get all ticket components, get a specific component, 
+     * Get all ticket components, get a specific component,
      * create a component, edit an existing component, or delete a component.
      *
      * @param	string	What action to perform for ticket component.
@@ -725,7 +725,7 @@ class TracRPC
     }
 
     /**
-     * Get all ticket milestones, get a specific milestone, 
+     * Get all ticket milestones, get a specific milestone,
      * create a milestone, edit an existing milestone, or delete a milestone.
      *
      * @param	string	What action to perform for ticket milestone.
@@ -787,7 +787,7 @@ class TracRPC
     }
 
     /**
-     * Get all ticket prioritys, get a specific priority, 
+     * Get all ticket prioritys, get a specific priority,
      * create a priority, edit an existing priority, or delete a priority.
      *
      * @param	string	What action to perform for ticket priority.
@@ -911,7 +911,7 @@ class TracRPC
     }
 
     /**
-     * Get all ticket severitys, get a specific severity, 
+     * Get all ticket severitys, get a specific severity,
      * create a severity, edit an existing severity, or delete a severity.
      *
      * @param	string	What action to perform for ticket severity.
@@ -1325,10 +1325,10 @@ class TracRPC
         curl_setopt($ch, CURLOPT_URL, $this->tracURL);
 
         /**
-         * Set correct HttpHeader Content Type 
+         * Set correct HttpHeader Content Type
          * depending on the requested content type via tracURL.
          *
-         * The JSON-RPC protocol gets used when sending 
+         * The JSON-RPC protocol gets used when sending
          * a 'Content-Type': 'application/json' header request to:
          *
          * Anonymous access
@@ -1341,7 +1341,7 @@ class TracRPC
          *      http://trac.example.com/login/rpc
          *      http://trac.example.com/login/jsonrpc
          *
-         * The XML-RPC protocol gets used when sending 
+         * The XML-RPC protocol gets used when sending
          * a 'Content-Type': 'application/xml' or 'text/xml' header request to:
          *
          * Anonymous access

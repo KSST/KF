@@ -18,7 +18,7 @@ class OPML extends Generator
         $this->encoding = "utf-8";
     }
 
-	public function createFeed()
+    public function createFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();
@@ -53,6 +53,7 @@ class OPML extends Generator
         }
         $feed.= "    </body>\n";
         $feed.= "</opml>\n";
+
         return $feed;
     }
 }

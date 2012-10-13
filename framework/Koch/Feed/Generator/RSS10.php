@@ -9,15 +9,15 @@ use Koch\Feed\Generator;
  *
  * @see http://www.purl.org/rss/1.0/
  */
-class RSS10 extends Generator {
-
-	/**
-	 * Builds the RSS feed's text. The feed will be compliant to RDF Site Summary (RSS) 1.0.
-	 * The feed will contain all items previously added in the same order.
-     * 
-	 * @return    string    the feed's complete text
-	 */
-	public function createFeed()
+class RSS10 extends Generator
+{
+    /**
+     * Builds the RSS feed's text. The feed will be compliant to RDF Site Summary (RSS) 1.0.
+     * The feed will contain all items previously added in the same order.
+     *
+     * @return string the feed's complete text
+     */
+    public function createFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();

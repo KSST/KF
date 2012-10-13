@@ -8,15 +8,15 @@ use Koch\Feed\Generator;
  * PIECreator01 is a FeedCreator that implements the emerging PIE specification,
  * as in http://intertwingly.net/wiki/pie/Syntax.
  */
-class PIE01 extends Generator {
-
+class PIE01 extends Generator
+{
     public function __construct($identifier = '')
     {
         parent::__construct($identifier);
         $this->encoding = "utf-8";
     }
 
-	public function createFeed()
+    public function createFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createStylesheetReferences();
@@ -48,7 +48,7 @@ class PIE01 extends Generator {
             $feed.= "    </entry>\n";
         }
         $feed.= "</feed>\n";
-        
+
         return $feed;
     }
 }

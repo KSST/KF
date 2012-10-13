@@ -27,7 +27,7 @@ namespace Koch\Feed\Element;
 
 use Koch\Feed\ElementBase;
 
-class Enclosure extends ElementBase 
+class Enclosure extends ElementBase
 {
     /**
      * core variables
@@ -36,17 +36,17 @@ class Enclosure extends ElementBase
     public $length;
     public $type;
 
-	/**
-	 * For use with another extension like Yahoo mRSS
-     * 
-	 * Warning : These variables might not show up in later release / not finalize yet!
-	 */
-	public $width; 
-    public $height; 
-    public $title; 
-    public $description; 
-    public $keywords; 
+    /**
+     * For use with another extension like Yahoo mRSS
+     *
+     * Warning : These variables might not show up in later release / not finalize yet!
+     */
+    public $width;
+    public $height;
+    public $title;
+    public $description;
+    public $keywords;
     public $thumburl;
-    
-	public $additionalElements = array();
+
+    public $additionalElements = array();
 }

@@ -26,41 +26,41 @@
 namespace Koch\Feed\Element;
 
 /**
- * An Html describes and generates a feed, item or 
+ * An Html describes and generates a feed, item or
  * image html field (probably a description).
  * Output is generated based on $truncSize, $syndicateHtml properties.
  */
-class Html {
-	/**
-	 * Mandatory attributes of a FeedHtmlField.
-	 */
-	public $rawFieldContent;
+class Html
+{
+    /**
+     * Mandatory attributes of a FeedHtmlField.
+     */
+    public $rawFieldContent;
 
-	/**
-	 * Optional attributes of a FeedHtmlField.
-	 *
-	 */
-	public $truncSize; 
+    /**
+     * Optional attributes of a FeedHtmlField.
+     *
+     */
+    public $truncSize;
     public $syndicateHtml;
 
-	/**
-	 * Creates a new instance of FeedHtmlField.
-	 * @param  $string: if given, sets the rawFieldContent property
-	 */
-	public function FeedHtmlField($rawFieldContent)
+    /**
+     * Creates a new instance of FeedHtmlField.
+     * @param  $string: if given, sets the rawFieldContent property
+     */
+    public function FeedHtmlField($rawFieldContent)
     {
         if ($rawFieldContent) {
             $this->rawFieldContent = $rawFieldContent;
         }
     }
 
-
-	/**
-	 * Creates the right output, depending on $truncSize, $syndicateHtml properties.
-     * 
-	 * @return string    the formatted field
-	 */
-	public function output()
+    /**
+     * Creates the right output, depending on $truncSize, $syndicateHtml properties.
+     *
+     * @return string the formatted field
+     */
+    public function output()
     {
         // when field available and syndicated in html we assume
         // - valid html in $rawFieldContent and we enclose in CDATA tags
@@ -76,6 +76,7 @@ class Html {
                 $result = htmlspecialchars($this->rawFieldContent);
             }
         }
+
         return $result;
     }
 }
