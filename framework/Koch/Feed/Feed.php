@@ -26,18 +26,12 @@
 namespace Koch\Feed;
 
 /**
- * Koch Framework - Class for Feed Handling
+ * Koch Framework - Class for reading feeds via SimplePie (wrapper).
  *
- * This is a Dual-Wrapper for SimplePie and FeedCreator.
- *
- * This is a wrapper for the Feed-Reader Library SimplePie.
- * SimplePie is PHP-Based RSS and Atom Feed Framework.
+ * This is a wrapper for the Feed-Reader library SimplePie, a RSS and Atom Feed Framework.
  * It's written and copyrighted by Ryan Parman and Geoffrey Sneddon, (c) 2004-2008.
  * SimplePie is licensed under the modified BSD (3-clause) license.
- *
- * This is a wrapper for the Feed-Creator Library FeedCreator.
- * It's originally written and copyrighted by Kai Blankenhorn, extended by Scott Reynen, Dirk Clemens, (c).
- * FeedCreator is licensed under LGPL v2.1 or any later version.
+ * @link https://github.com/simplepie/simplepie
  *
  * @category    Koch
  * @package     Core
