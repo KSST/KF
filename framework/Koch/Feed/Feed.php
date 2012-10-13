@@ -4,10 +4,22 @@
  * Koch Framework
  * Jens A. Koch © 2005 - onwards
  *
- * This file is part of https://github.com/KSST/KF
-* SPDX-License-Identifier: MIT *
+ * SPDX-License-Identifier: MIT
  *
- * *
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Koch\Feed;
+
+/**
+ * Class for reading feeds via SimplePie (wrapper).
+ *
+ * This is a wrapper for the Feed-Reader library SimplePie, a RSS and Atom Feed Framework.
+ * It's written and copyrighted by Ryan Parman and Geoffrey Sneddon, (c) 2004-2008.
+ * SimplePie is licensed under the modified BSD (3-clause) license.
+ * @link https://github.com/simplepie/simplepie
+ *
  * @category    Koch
  * @package     Core
  * @subpackage  Feed
