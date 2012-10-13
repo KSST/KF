@@ -35,33 +35,48 @@ namespace Koch\Router;
  */
 class Manager
 {
-    public function addRoutesOfModule($modulename)
+    /**
+     * Add Routes of a Module to the Main Routes Config.
+     *
+     * @param type $module
+     */
+    public function addRoutesOfModule($module)
     {
-        self::updateApplicationRoutes($modulename);
+        self::updateApplicationRoutes($module);
     }
 
-    public function delRoutesOfModule($modulename)
+    /**
+     * Remove Routes of a Module from Main Routes Config.
+     *
+     * @param type $module
+     */
+    public function delRoutesOfModule($module)
     {
-        // @todo
-        $module_routes_file = APP_MODULES_DIR . $modulename . '/' . $modulename . '.routes.php';
-        $module_routes = $this->loadRoutesFromConfig($module_routes_file);
+        // load module routes
+        $moduleRoutes = $this->loadRoutesFromConfig($module);
 
         // load main routes file
-        $application_routes = $this->loadRoutesFromConfig();
+        $applicationRoutes = $this->loadRoutesFromConfig();
 
-        // subtract the $module_routes from $application_routes array
-        $this->deleteRoute($route_name);
+        // @todo subtract the $module_routes from $application_routes array
+        //$this->deleteRoute($route_name);
 
         // update / write merged content to application config
 
     }
 
+    /**
+     * Delete a specific route.
+     *
+     * @param  type  $route_name
+     * @return array Routes.
+     */
     public function deleteRoute($route_name)
     {
-        $routes_count = count($this->routes);
+        $routesCount = count($this->routes);
 
         // loop over all routes
-        for ($i == 0; $i < $routes_count; $i++) {
+        for ($i == 0; $i < $routesCount; $i++) {
             // check if there is a route with the given name
             if ($this->routes[$i]['name'] == $route_name) {
                 // got one? then remove it from the routes array and stop
@@ -74,31 +89,30 @@ class Manager
     }
 
     /**
-     * Registers routing for all activated modules
+     * Registers routing for all activated modules.
      *
-     * @param string $modulename Name of module
+     * @param string $module Name of module
      */
-    public function updateApplicationRoutes($modulename = null)
+    public function updateApplicationRoutes($module = null)
     {
-        $activated_modules = array();
+        $activatedModules = array();
 
-        if ($modulename === null) {
-            $activated_modules[] = array($modulename);
+        if ($module === null) {
+            $activatedModules[] = array($module);
         } else { // get all activated modules
             // $activated_modules =
         }
 
-        foreach ($activated_modules as $modulename) {
+        foreach ($activatedModules as $module) {
             // load module routing file
-            $module_routes_file = APP_MODULES_DIR . $modulename . '/' . $modulename . '.routes.php';
-            $module_routes = $this->loadRoutesFromConfig($module_routes_file);
+            $moduleRoutes = self::loadRoutesFromConfig($module);
 
             // load main routes file
-            $application_routes = $this->loadRoutesFromConfig();
+            $applicationRoutes = self::loadRoutesFromConfig();
 
             // merge the content of modules into application
             // @todo: consider using array_merge_recursive_distinct /unique ?
-            $combined_routes = array_merge_recursive($module_routes, $application_routes);
+            $combinedRoutes = array_merge_recursive($moduleRoutes, $applicationRoutes);
 
             // update / write merged content to application config
         }
@@ -107,21 +121,17 @@ class Manager
     /**
      * Load Routes from any Route Configuration File
      *
-     * @param string Path to a (module) Routing Configuration File.
+     * @param string Name of a module. Default: main routes config.
      * @return array Array of Routes.
      */
-    public static function loadRoutesFromConfig($routes_config_file = null)
+    public static function loadRoutesFromConfig($module = '')
     {
-        $routes = array();
-
-        if ($routes_config_file === null) {
-            // load common routes configuration
-            $routes = include ROOT_CONFIG . 'routes.php';
-        } else {
-            // load specific routes config file
-            $routes = include ROOT . $routes_config_file;
+        // load common routes configuration
+        if ($module === '') {
+            return include APPLICATION_PATH . 'configuration/routes.php';
         }
 
-        return $routes;
+        // load a module specific routes config file
+        return include APP_MODULES_DIR . $module . '/' . $module . '.routes.php';
     }
 }
