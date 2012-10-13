@@ -132,6 +132,6 @@ class Manager
         }
 
         // load a module specific routes config file
-        return include APP_MODULES_DIR . $module . '/' . $module . '.routes.php';
+        return include APPLICATION_MODULES_PATH . $module . '/' . $module . '.routes.php';
     }
 }

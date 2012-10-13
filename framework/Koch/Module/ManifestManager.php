@@ -126,7 +126,7 @@ class ManifestManager
      */
     public static function getModuleDirectories()
     {
-        return glob(APP_MODULES_DIR . '[a-zA-Z]*', GLOB_ONLYDIR);
+        return glob(APPLICATION_MODULES_PATH . '[a-zA-Z]*', GLOB_ONLYDIR);
     }
 
     /**
@@ -150,7 +150,7 @@ class ManifestManager
 
         foreach ($module_dirs as $module_path) {
             // strip path off
-            $modulename = str_replace(APP_MODULES_DIR, '', $module_path);
+            $modulename = str_replace(APPLICATION_MODULES_PATH, '', $module_path);
 
             if ($only_modulenames === true) {
                 if ($named_array === false) {
@@ -233,7 +233,7 @@ class ManifestManager
     {
         foreach ($module_directories as $module_path) {
             // strip off path info and get the modulename
-            $modulename = str_replace(APP_MODULES_DIR, '', $module_path);
+            $modulename = str_replace(APPLICATION_MODULES_PATH, '', $module_path);
         }
 
         self::writeModuleRegistry();
@@ -260,7 +260,7 @@ class ManifestManager
             $module_directories = self::getModuleDirectories();
         } else {
             // cast string to array
-            $module_directories[] = APP_MODULES_DIR . $module;
+            $module_directories[] = APPLICATION_MODULES_PATH . $module;
         }
 
         foreach ($module_directories as $modulepath) {
@@ -269,7 +269,7 @@ class ManifestManager
              */
 
             // 1) get the modulename, by stripping off the path info
-            $modulename = str_replace(APP_MODULES_DIR, '', $modulepath);
+            $modulename = str_replace(APPLICATION_MODULES_PATH, '', $modulepath);
 
             self::$modulesinfo[$modulename]['name']   = $modulename;
             self::$modulesinfo[$modulename]['id']     = $number_of_modules;

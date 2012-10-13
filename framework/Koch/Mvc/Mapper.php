@@ -55,7 +55,7 @@ class Mapper #extends \ArrayObject
 
     public static function getModulePath($module)
     {
-        return APP_MODULES_DIR . $module . DIRECTORY_SEPARATOR;
+        return APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR;
     }
 
     /**
