@@ -26,9 +26,7 @@
 namespace Koch\Localization\Adapter\Gettext;
 
 /**
- * Gettext_POFile
- *
- * Handling for Gettext (.po) Files.
+ * Koch Framework - Class for handling of Gettext (.po) files.
  *
  * Based on php-msgfmt written by
  * @author Matthias Bauer

@@ -26,9 +26,7 @@
 namespace Koch\Localization\Adapter\Gettext;
 
 /**
- * Gettext_MOFile
- *
- * Handling for Gettext "Machine Object" (.mo) Files.
+ * Koch Framework - Class for Handling for Gettext "Machine Object" (.mo) files.
  *
  * Based on php-msgfmt written by
  * @author Matthias Bauer
