@@ -57,7 +57,7 @@ class Smarty extends AbstractRenderer
      */
     public function initializeEngine($template = null)
     {
-        $smarty = dirname(dirname(dirname(__DIR__))) . '/vendor/smarty/Smarty.class.php';
+        $smarty = __DIR__ . '/../../../vendor/smarty/Smarty.class.php';
 
         // prevent redeclaration
         if (class_exists('Smarty', false) === false) {
@@ -203,9 +203,9 @@ class Smarty extends AbstractRenderer
         $this->renderer->setPluginsDir(
             array(
                 // smarty plugins in vendors folder
-                dirname(dirname(dirname(__DIR__))) . 'vendors/smarty/plugins',
+                __DIR__ . '/../../../vendors/smarty/plugins',
                 // smarty plugins in framework
-                dirname(__DIR__) . '/Helper/Smarty',
+                __DIR__ . '/../Helper/Smarty',
                 // smarty plugins in module
                 APP_MODULES_DIR . TargetRoute::getModule() . '/View/Helper/Smarty'
             )
