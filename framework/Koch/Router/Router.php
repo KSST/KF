@@ -503,7 +503,7 @@ class Router implements RouterInterface, \ArrayAccess
          */
         if (true === $this->isRewriteEngineOn() and
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
-            $this->uri_segments = $this->parseUrl_Rewrite($this->uri);
+            $this->uri_segments = $this->parseUrlRewrite($this->uri);
         } else {
             $this->uri_segments = $this->parseUrlNoRewrite($this->uri);
 
