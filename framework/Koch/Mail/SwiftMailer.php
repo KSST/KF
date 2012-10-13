@@ -55,7 +55,7 @@ class SwiftMailer
      */
     private function loadMailer()
     {
-        $vendor = dirname(dirname(__DIR__)) . '/vendor/';
+        $vendor = __DIR__ . '/../../vendor/';
 
         // Include the Swiftmailer Class
         include $vendor . 'swiftmailer/Swift.php';

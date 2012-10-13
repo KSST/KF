@@ -38,7 +38,7 @@ class SelectLocale extends Select implements FormElementInterface
     public function __construct()
     {
         // include locale arrays
-        include dirname(dirname(__DIR__)) . '/Localization/Locales.php';
+        include __DIR__ . '/../../Localization/Locales.php';
 
         /**
          * prepare array structure for dropdown ( key => value )

@@ -153,7 +153,7 @@ class Debug
     {
         // get firephp instance, if class not existant
         if ( class_exists('FirePHP', false) === false ) {
-            include dirname(dirname(__DIR__)) . '/vendor/firephp/FirePHP.class.php';
+            include __DIR__ . '/../../vendor/firephp/FirePHP.class.php';
         }
 
         $firephp = \FirePHP::getInstance(true);

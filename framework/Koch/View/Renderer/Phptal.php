@@ -62,7 +62,7 @@ class Phptal extends Renderer_Base
      */
     public function initializeEngine()
     {
-        $phptal = dirname(dirname(dirname(__DIR__))) . '/vendor/phptal/PHPTAL.php';
+        $phptal = __DIR__ . '/../../../vendor/phptal/PHPTAL.php';
         // prevent redeclaration
         if (class_exists('PHPTAL', false) === false) {
             // check if Smarty library exists

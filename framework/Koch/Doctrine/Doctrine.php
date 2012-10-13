@@ -86,7 +86,7 @@ class Doctrine
     {
         self::checkDataSourceName($config);
 
-        $vendor = dirname(dirname(__DIR__)) . '/vendor/';
+        $vendor = __DIR__ . '/../../vendor/';
 
         // ensure doctrine2 exists in the libraries folder
         if (is_file($vendor . 'Doctrine/Common/ClassLoader.php') === false) {

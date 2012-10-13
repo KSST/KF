@@ -48,7 +48,7 @@ class Xtemplate extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-        $xtpl = dirname(dirname(dirname(__DIR__))) . '/vendor/xtemplate/xtemplate.class.php';
+        $xtpl = __DIR__ . '/../../../vendor/xtemplate/xtemplate.class.php';
 
         // prevent redeclaration
         if (class_exists('XTemplate', false) == false) {

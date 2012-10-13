@@ -390,7 +390,7 @@ class ManifestManager
          // if the language definitions are not already loaded, load them
         if (empty(self::$l10n_sys_locales)) {
             // fetch arrays containing locale data
-            require \dirname(__DIR__) . '/Localization/Locales.php';
+            require __DIR__ . '/../Localization/Locales.php';
             self::$l10n_sys_locales = $l10n_sys_locales;
         }
 
