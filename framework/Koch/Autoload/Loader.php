@@ -290,7 +290,7 @@ class Loader
         include_once $filename;
 
         // add class and filename to the mapping array
-        self::addToMapping($filename, $classname);
+        self::addMapping($classname, $filename);
 
         return true;
     }
@@ -398,13 +398,13 @@ class Loader
      * Adds a new $classname to $filename mapping to the map array.
      * The new map array is written to apc or file.
      *
-     * @param $filename  Filename is the file to load.
-     * @param $classname Classname is the lookup key for $filename.
+     * @param $class Classname is the lookup key for $filename.
+     * @param $file  Filename is the file to load.
      * @return boolean True if added to map.
      */
-    public static function addToMapping($filename, $classname)
+    public static function addMapping($class, $file)
     {
-        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, array($classname => $filename));
+        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, array($class => $file));
 
         if (defined('APC') and APC == true) {
             return self::writeAutoloadingMapApc(self::$autoloaderMap);

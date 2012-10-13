@@ -129,7 +129,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addToMapping(__DIR__ . '/../../../framework/Koch/Tools/SysInfo.php', 'Sysinfo');
+        Loader::addMapping('Sysinfo', __DIR__ . '/../../../framework/Koch/Tools/SysInfo.php');
         $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
     }
 
@@ -194,39 +194,40 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         }
     }
 
-    public function testMethod_addToMapping()
+    public function testMethod_addMapping()
     {
-        $this->assertTrue(Loader::addToMapping(__DIR__ . '/fixtures/notloaded/addToMapping.php', 'addToMappingClass'));
+        $class = 'addToMappingClass';
+        $file = realpath(__DIR__ . '/fixtures/notloaded/addToMapping.php');
+        $this->assertTrue(Loader::addMapping($class, $file));
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
-
-        $this->assertTrue(true, array_key_exists('addToMappingClass', $map));
-        $this->assertEquals($map['addToMappingClass'], __DIR__ . '/fixtures/notloaded/addToMapping.php');
+        $this->assertTrue(true, array_key_exists($class, $map));
+        $this->assertEquals($map[$class], $file);
 
         // file not loaded, just mapped
-        #$this->assertFalse(class_exists('addToMappingClass', false));
+        #$this->assertFalse(class_exists($class, false));
 
         // triggering autoload via class_exists
-        $this->assertTrue(class_exists('addToMappingClass', true));
+        $this->assertTrue(class_exists($class, true));
     }
 
     public function testMethod_includeFileAndMap()
     {
-        Loader::includeFileAndMap(__DIR__ . '/fixtures/includeFileAndMap.php', 'includeFileAndMapClass');
+        $file = realpath(__DIR__ . '/fixtures/includeFileAndMap.php');
+        $class = 'includeFileAndMapClass';
+
+        Loader::includeFileAndMap($file, $class);
 
         // test if the entry was added to the autoloader class map array
         $map = Loader::getAutoloaderClassMap();
 
-        $this->assertTrue(true, array_key_exists('includeFileAndMapClass', $map));
+        $this->assertTrue(true, array_key_exists($class, $map));
 
-        $this->assertEquals(
-            $map['includeFileAndMapClass'],
-            realpath(__DIR__ . '/fixtures/includeFileAndMap.php')
-        );
+        $this->assertEquals($map[$class],$file);
 
         // file already loaded
-        $this->assertTrue(class_exists('includeFileAndMapClass', false));
+        $this->assertTrue(class_exists($class, false));
     }
 
     public function testMethod_includeFile()
