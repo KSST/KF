@@ -26,5 +26,40 @@ namespace Koch\Cache;
  */
 class Compositum
 {
-    // @todo
+    /**
+     * Compositum stack.
+     *
+     * @var array
+     */
+    private $stack = array();
+
+    /**
+     * Adds an cache adapter to the compositum.
+     *
+     * @param object $adapter
+     */
+    public function addCache(CacheInterface $adapter)
+    {
+        $this->stack[] = $adapter;
+    }
+
+    /**
+     * Removes an cache adapter from the compositum.
+     *
+     * @param string $adapter
+     */
+    public function removeCache($adapter)
+    {
+        if (array_key_exists($adapter, $this->stack)) {
+            unset($this->stack[$adapter]);
+        }
+    }
+
+    /**
+     * Fires the compositum.
+     */
+    public function cache()
+    {
+
+    }
 }
