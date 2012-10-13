@@ -29,7 +29,7 @@ namespace Koch\Feed;
  * FeedCreator is the abstract base implementation for concrete
  * implementations of specific formats of syndication.
  */
-abstract class GeneratorAbstract extends FeedElementBase
+abstract class GeneratorAbstract extends ElementBase
 {
     /**
      * An identifier to be used to create the name for a cache file
