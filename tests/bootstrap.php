@@ -14,6 +14,7 @@ $paths = array(
 // attach original include paths
 set_include_path(implode(PATH_SEPARATOR, $paths));
 
+// gettext fall through
 if (!function_exists('_')) {
     function _($msgid)
     {
