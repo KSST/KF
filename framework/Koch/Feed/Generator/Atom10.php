@@ -35,7 +35,7 @@ class Atom10 extends Generator
         $this->encoding = "utf-8";
     }
 
-    public function createFeed()
+    public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();

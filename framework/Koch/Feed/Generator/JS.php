@@ -29,7 +29,7 @@ class JS extends HTML
      * writes the javascript
      * @return string the scripts's complete text
      */
-    public function createFeed()
+    public function renderFeed()
     {
         $feed = parent::createFeed();
         $feedArray = explode("\n",$feed);

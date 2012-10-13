@@ -46,7 +46,7 @@ class RSS091 extends Generator
      * The feed will contain all items previously added in the same order.
      * @return string the feed's complete text
      */
-    public function createFeed()
+    public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();

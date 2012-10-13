@@ -68,7 +68,7 @@ class MBox extends Generator
      * Builds the MBOX contents.
      * @return string the feed's complete text
      */
-    public function createFeed()
+    public function renderFeed()
     {
         for ($i=0;$i<count($this->items);$i++) {
             if ($this->items[$i]->author!="") {
