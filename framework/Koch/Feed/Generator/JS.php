@@ -12,37 +12,40 @@ use Koch\Feed\Generator;
  */
 class JS extends HTML
 {
-	public $contentType = "text/javascript";
+    public $contentType = "text/javascript";
 
-	/**
-	 * The file extension to be used in the cache file
-	 */
-	protected $suffix = 'js';
+    /**
+     * The file extension to be used in the cache file
+     */
+    protected $suffix = 'js';
 
-	/**
-	 * writes the javascript
-	 * @return    string    the scripts's complete text
-	 */
-	public function createFeed()
-	{
-		$feed = parent::createFeed();
-		$feedArray = explode("\n",$feed);
+    /**
+     * writes the javascript
+     * @return string the scripts's complete text
+     */
+    public function createFeed()
+    {
+        $feed = parent::createFeed();
+        $feedArray = explode("\n",$feed);
 
-		$jsFeed = "";
-		foreach ($feedArray as $value) {
-			$jsFeed .= "document.write('".trim(addslashes($value))."');\n";
-		}
-		return $jsFeed;
-	}
+        $jsFeed = "";
+        foreach ($feedArray as $value) {
+            $jsFeed .= "document.write('".trim(addslashes($value))."');\n";
+        }
 
-	/**
-	 * Overrrides parent to produce .js extensions
-	 *
-	 * @return string the feed cache filename
-	 */
-	protected function generateFilename() {
-		$fileInfo = pathinfo($_SERVER['PHP_SELF']);
-		return substr($fileInfo["basename"],0,-(strlen($fileInfo["extension"])+1)).".js";
-	}
+        return $jsFeed;
+    }
+
+    /**
+     * Overrrides parent to produce .js extensions
+     *
+     * @return string the feed cache filename
+     */
+    protected function generateFilename()
+    {
+        $fileInfo = pathinfo($_SERVER['PHP_SELF']);
+
+        return substr($fileInfo["basename"],0,-(strlen($fileInfo["extension"])+1)).".js";
+    }
 
 }

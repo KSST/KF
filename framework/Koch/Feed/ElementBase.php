@@ -13,7 +13,7 @@
 namespace Koch\Feed;
 
 /**
- * An HtmlDescribable is an item within a feed 
+ * An HtmlDescribable is an item within a feed
  * that can have a description that may include HTML markup.
  */
 class ElementBase
@@ -31,14 +31,15 @@ class ElementBase
     /**
      * Returns a formatted description field, depending on descriptionHtmlSyndicated and
      * $descriptionTruncSize properties
-     * 
-     * @return    string    the formatted description
+     *
+     * @return string the formatted description
      */
     public function getDescription()
     {
         $descriptionField = new FeedHtmlElement($this->description);
         $descriptionField->syndicateHtml = $this->descriptionHtmlSyndicated;
         $descriptionField->truncSize = $this->descriptionTruncSize;
+
         return $descriptionField->output();
     }
 }

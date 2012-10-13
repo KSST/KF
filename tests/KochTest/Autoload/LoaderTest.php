@@ -219,7 +219,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $map = Loader::getAutoloaderClassMap();
         $this->assertTrue(true, array_key_exists('includeFileAndMapClass', $map));
         $this->assertEquals(
-            $map['includeFileAndMapClass'], 
+            $map['includeFileAndMapClass'],
             __DIR__ . DIRECTORY_SEPARATOR . 'fixtures' . DIRECTORY_SEPARATOR . 'includeFileAndMap.php'
         );
 

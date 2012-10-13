@@ -12,42 +12,42 @@ use Koch\Feed\Generator;
  * All output by this class is embedded in <div></div> tags to enable formatting
  * using CSS.
  */
-class HTML extends Generator {
+class HTML extends Generator
+{
+    /**
+     * The file extension to be used in the cache file
+     */
+    protected $suffix = 'html';
+    public $contentType = 'text/html';
 
-	/**
-	 * The file extension to be used in the cache file
-	 */
-	protected $suffix = 'html';
-	public $contentType = 'text/html';
+    /**
+     * Contains HTML to be output at the start of the feed's html representation.
+     */
+    public $header;
 
-	/**
-	 * Contains HTML to be output at the start of the feed's html representation.
-	 */
-	public $header;
+    /**
+     * Contains HTML to be output at the end of the feed's html representation.
+     */
+    public $footer ;
 
-	/**
-	 * Contains HTML to be output at the end of the feed's html representation.
-	 */
-	public $footer ;
+    /**
+     * Contains HTML to be output between entries. A separator is only used in
+     * case of multiple entries.
+     */
+    public $separator;
 
-	/**
-	 * Contains HTML to be output between entries. A separator is only used in
-	 * case of multiple entries.
-	 */
-	public $separator;
+    /**
+     * Used to prefix the stylenames to make sure they are unique
+     * and do not clash with stylenames on the users' page.
+     */
+    public $stylePrefix;
 
-	/**
-	 * Used to prefix the stylenames to make sure they are unique
-	 * and do not clash with stylenames on the users' page.
-	 */
-	public $stylePrefix;
+    /**
+     * Determines whether the links open in a new window or not.
+     */
+    public $openInNewWindow = true;
 
-	/**
-	 * Determines whether the links open in a new window or not.
-	 */
-	public $openInNewWindow = true;
-
-	public $imageAlign = 'right';
+    public $imageAlign = 'right';
 
     /**
      * In case of very simple output you may want to get rid of the style tags,
@@ -58,11 +58,11 @@ class HTML extends Generator {
      */
     public $stylelessOutput = '';
 
-	/**
-	 * Writes the HTML.
-	 * @return    string    the scripts's complete text
-	 */
-	public function createFeed()
+    /**
+     * Writes the HTML.
+     * @return string the scripts's complete text
+     */
+    public function createFeed()
     {
         // if there is styleless output, use the content of this variable and ignore the rest
         if ($this->stylelessOutput != '') {
@@ -97,7 +97,7 @@ class HTML extends Generator {
         }
 
         if ($this->title) {
-            $feedArray[] = "<div class='" . $this->stylePrefix . "title'><a href='" . 
+            $feedArray[] = "<div class='" . $this->stylePrefix . "title'><a href='" .
                 $this->link . "' " . $targetInsert . " class='" . $this->stylePrefix . "title'>" .
                 FeedCreator::iTrunc(htmlspecialchars($this->title), 100) . "</a></div>";
         }
@@ -119,9 +119,9 @@ class HTML extends Generator {
             if ($this->items[$i]->title) {
                 if ($this->items[$i]->link) {
                     $feedArray[] =
-                        "<div class='" . $this->stylePrefix . "item_title'><a href='" . 
+                        "<div class='" . $this->stylePrefix . "item_title'><a href='" .
                         $this->items[$i]->link . "' class='" . $this->stylePrefix .
-                        "item_title'" . $targetInsert . ">" . 
+                        "item_title'" . $targetInsert . ">" .
                         FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) .
                         "</a></div>";
                 } else {
@@ -143,17 +143,19 @@ class HTML extends Generator {
         }
 
         $feed = "" . join($feedArray, "\r\n");
+
         return $feed;
     }
 
-	/**
-	 * Overrrides parent to produce .html extensions
-	 *
-	 * @return string the feed cache filename
-	 */
-	protected function generateFilename()
+    /**
+     * Overrrides parent to produce .html extensions
+     *
+     * @return string the feed cache filename
+     */
+    protected function generateFilename()
     {
         $fileInfo = pathinfo($_SERVER['PHP_SELF']);
+
         return substr($fileInfo["basename"], 0, -(strlen($fileInfo["extension"]) + 1)) . ".html";
     }
 }

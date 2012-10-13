@@ -27,7 +27,7 @@ class Atom10 extends FeedCreator
         $this->encoding = "utf-8";
     }
 
-	public function createFeed()
+    public function createFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();
@@ -82,6 +82,7 @@ class Atom10 extends FeedCreator
             $feed.= "    </entry>\n";
         }
         $feed.= "</feed>\n";
+
         return $feed;
     }
 }

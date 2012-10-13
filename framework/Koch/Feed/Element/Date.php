@@ -23,8 +23,8 @@ class Date
     /**
      * Creates a new instance of FeedDate representing a given date.
      * Accepts RFC 822, ISO 8601 date formats as well as unix time stamps.
-     * 
-     * @param mixed $dateString optional the date this FeedDate will represent. 
+     *
+     * @param mixed $dateString optional the date this FeedDate will represent.
      *              If not specified, the current date and time is used.
      */
     public function __construct($dateString = '')
@@ -35,14 +35,15 @@ class Date
 
         if (is_numeric($dateString)) {
             $this->unix = $dateString;
+
             return;
         }
-        
+
         $regexp = "~(?:(?:Mon|Tue|Wed|Thu|Fri|Sat|Sun),\\s+)"
             . "?(\\d{1,2})\\s+([a-zA-Z]{3})\\s+(\\d{4})\\s+(\\d{2}):(\\d{2}):(\\d{2})\\s+(.*)~";
-        
+
         $matches = array();
-        
+
         if (preg_match($regexp, $dateString, $matches)) {
             $months = array(
                 'Jan' => 1, 'Feb' => 2, 'Mar' => 3, 'Apr' => 4, 'May' => 5, 'Jun' => 6,
@@ -69,6 +70,7 @@ class Date
                 }
             }
             $this->unix += $tzOffset;
+
             return;
         }
         if (preg_match("~(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})(.*)~", $dateString, $matches)) {
@@ -81,6 +83,7 @@ class Date
                 }
             }
             $this->unix += $tzOffset;
+
             return;
         }
         $this->unix = 0;
@@ -110,11 +113,11 @@ class Date
     public function iso8601()
     {
         $date = gmdate("Y-m-d\TH:i:sO", $this->unix);
-        $date = substr($date, 0, 22) . ':' . substr($date, -2);        
+        $date = substr($date, 0, 22) . ':' . substr($date, -2);
         if (TIME_ZONE != '') {
             $date = str_replace("+00:00", TIME_ZONE, $date);
         }
-        
+
         return $date;
     }
 

@@ -22,8 +22,7 @@ class Generator // extends FeedGeneratorAbstract
 
     protected function setMIME($format)
     {
-        switch (strtoupper($format))
-        {
+        switch (strtoupper($format)) {
             case '2.0':
             // fall through
             case 'RSS2.0':
@@ -70,8 +69,7 @@ class Generator // extends FeedGeneratorAbstract
 
     protected function setFormat($format)
     {
-        switch (strtoupper($format))
-        {
+        switch (strtoupper($format)) {
             case "2.0":
                 $this->format = 'RSS2.0';
             // fall through
@@ -133,11 +131,12 @@ class Generator // extends FeedGeneratorAbstract
      * @see        FeedCreator::addItem()
      * @param    string    format    format the feed should comply to. Valid values are:
      * 			"PIE0.1", "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
-     * @return    string    the contents of the feed.
+     * @return string the contents of the feed.
      */
     public function createFeed($format = 'RSS0.91')
     {
         $this->setFormat($format);
+
         return $this->feed->createFeed();
     }
 
@@ -147,7 +146,7 @@ class Generator // extends FeedGeneratorAbstract
      *
      * @param	string	format	format the feed should comply to. Valid values are:
      * 			"PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
-     * @param	string	filename	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
+     * @param string	filename	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
      * @param	boolean	displayContents	optional	send the content of the file or not. If true, the file will be sent in the body of the response.
      */
     public function saveFeed($format = 'RSS0.91', $filename = '', $displayContents = true)

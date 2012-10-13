@@ -83,7 +83,7 @@ class Feed
                 touch($cachefile);
                 chmod($cachefile, 0666);
             }
-            
+
             // get Feed from source
             $feedcontent = file_get_contents($feed_url, FILE_TEXT);
 

@@ -119,7 +119,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
             array($this, 'sessionDestroy'), // this redefines session_destroy()
             array($this, 'sessionGc')
         );
-        
+
         // prevents unexpected effects when using objects as save handlers
         register_shutdown_function('session_write_close');
 

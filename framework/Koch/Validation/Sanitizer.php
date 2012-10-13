@@ -324,8 +324,8 @@ class Sanitizer
     /**
      * Remove dangerous HTML tags
      *
-     * @param  string $str html code
-     * 
+     * @param string $str html code
+     *
      * @return string filtered url
      */
     protected function removeEvilTags($str)

@@ -9,34 +9,34 @@ use Koch\Feed\Generator;
  *
  * @see http://my.netscape.com/publish/formats/rss-spec-0.91.html
  */
-class RSS091 extends Generator {
+class RSS091 extends Generator
+{
+    /**
+     * Stores this RSS feed's version number.
+     */
+    protected $RSSVersion;
 
-	/**
-	 * Stores this RSS feed's version number.
-	 */
-	protected $RSSVersion;
-
-	public function __construct($identifier = '')
+    public function __construct($identifier = '')
     {
         parent::__construct($identifier);
         $this->_setRSSVersion("0.91");
         $this->contentType = 'application/rss+xml';
     }
 
-	/**
-	 * Sets this RSS feed's version number.
-	 */
-	protected function _setRSSVersion($version)
+    /**
+     * Sets this RSS feed's version number.
+     */
+    protected function _setRSSVersion($version)
     {
         $this->RSSVersion = $version;
     }
 
-	/**
-	 * Builds the RSS feed's text. The feed will be compliant to RDF Site Summary (RSS) 1.0.
-	 * The feed will contain all items previously added in the same order.
-	 * @return    string    the feed's complete text
-	 */
-	public function createFeed()
+    /**
+     * Builds the RSS feed's text. The feed will be compliant to RDF Site Summary (RSS) 1.0.
+     * The feed will contain all items previously added in the same order.
+     * @return string the feed's complete text
+     */
+    public function createFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();
@@ -135,7 +135,7 @@ class RSS091 extends Generator {
                 $feed.= '            <guid>' . htmlspecialchars($this->items[$i]->guid) . "</guid>\n";
             }
             $feed.= $this->_createAdditionalElements($this->items[$i]->additionalElements, "        ");
-            if ('2.0' == substr($this->RSSVersion, 0, 3) 
+            if ('2.0' == substr($this->RSSVersion, 0, 3)
                 AND !empty($this->syndicationURL) AND $this->items[$i]->enclosure != null) {
                 $feed.= '            <enclosure url="';
                 $feed.= $this->items[$i]->enclosure->url;
@@ -149,6 +149,7 @@ class RSS091 extends Generator {
         }
         $feed.= "    </channel>\n";
         $feed.= "</rss>\n";
+
         return $feed;
     }
 }
