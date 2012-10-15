@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="Koch Framework" default="build" basedir=".">
 
-    <property name="sourcedir" value="${basedir}" />
+    <property name="sourcedir" value="${basedir}/framework" />
     <property name="builddir" value="${basedir}/build" />
 
     <condition property="executableExtension" value=".bat" else="">
