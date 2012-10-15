@@ -26,10 +26,10 @@
     </target>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete includeemptydirs="true">
+        <delete includeemptydirs="true" quiet="true">
             <fileset dir="${builddir}" includes="**/*"/>
         </delete>
-        <delete dir="${basedir}/vendor"/>
+        <delete dir="${basedir}/vendor" quiet="true" />
         <delete file="${basedir}/composer.lock"/>
     </target>
 
