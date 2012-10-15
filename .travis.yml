@@ -16,7 +16,6 @@ before_install:
   - git submodule update --init --recursive
 
 script:
-  - php tests/runTests.php
   #
   # run php-cs-fixer
   #
@@ -32,7 +31,7 @@ script:
   #
   # run unit-tests
   #
-  # php ./tests/runTests.php
+  php ./tests/runTests.php
 
 notifications:
   irc: "irc.freenode.org#koch"
