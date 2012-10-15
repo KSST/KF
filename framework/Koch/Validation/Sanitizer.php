@@ -426,38 +426,3 @@ class Sanitizer
         return $html;
     }
 }
-
-/**
- * Sanitize HTML code
- *
- * @param   string $str html code
- * @return  string sanitized code
- */
-function html_sanitize_all($str)
-{
-    public static $san = null;
-
-    if (empty($san)) {
-        $san = new Koch_Html_Sanitizer;
-    }
-
-    return $san->sanitize($str);
-}
-
-/**
- * Sanitize HTML code, but allowObjects for editor
- *
- * @param   string $str html code
- * @return  string sanitized code
- */
-function html_sanitize_editor($str)
-{
-    public static $san = null;
-
-    if (empty($san)) {
-        $san = new Koch_Html_Sanitizer;
-        $san->allowObjects();
-    }
-
-    return $san->sanitize($str);
-}
