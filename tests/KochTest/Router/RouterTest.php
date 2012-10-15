@@ -142,16 +142,16 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMethod_prepareRequestURI()
     {
         // prepends slash
-        $request_uri = 'news';
-        $this->assertEquals('/news', $this->router->prepareRequestURI($request_uri));
+        $requestUri = 'news';
+        $this->assertEquals('/news', $this->router->prepareRequestURI($requestUri));
 
         // prepends slash and removes any trailing slashes
-        $request_uri = 'news///';
-        $this->assertEquals('/news', $this->router->prepareRequestURI($request_uri));
+        $requestUri = 'news///';
+        $this->assertEquals('/news', $this->router->prepareRequestURI($requestUri));
 
         // prepends slash
-        $request_uri = 'news/edit';
-        $this->assertEquals('/news/edit', $this->router->prepareRequestURI($request_uri));
+        $requestUri = 'news/edit';
+        $this->assertEquals('/news/edit', $this->router->prepareRequestURI($requestUri));
     }
 
     public function testMethod_placeholdersToRegexp()
@@ -199,7 +199,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_match_RestRoutes()
     {
-        $this->router->reset(); //->loadDefaultRoutes();
+        $this->router->reset()->loadDefaultRoutes();
 
         // http://example.com/news
         // routes to
@@ -397,7 +397,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('User',                      $route->getModule());
         $this->assertEquals('Account',                   $route->getController());
         $this->assertEquals('Clansuite\Modules\User\Controller\AccountController',  $route->getClassname());
-        $this->assertEquals('action_login',              $route->getMethod());
+        $this->assertEquals('actionLogin',              $route->getMethod());
         $this->assertEquals(array(),                     $route->getParameters());
         $this->assertEquals('GET',                       $route->getRequestMethod());
         unset($route);
@@ -415,7 +415,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Index',                     $route->getModule());
         $this->assertEquals('Index',                     $route->getController());
         $this->assertEquals('Clansuite\Modules\Index\Controller\IndexController',    $route->getClassname());
-        $this->assertEquals('action_about',              $route->getMethod());
+        $this->assertEquals('actionAbout',              $route->getMethod());
         $this->assertEquals(array(),                     $route->getParameters());
         $this->assertEquals('GET',                       $route->getRequestMethod());
         $r->reset(true);

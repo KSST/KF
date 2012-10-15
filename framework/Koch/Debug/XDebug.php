@@ -90,8 +90,8 @@ class XDebug
             // tracing
             #ini_set('xdebug.auto_trace', 'On');
             #ini_set('xdebug.trace_output_dir', ROOT_LOGS);
-            #ini_set('xdebug.trace_output_name', 'clansuite_trace%u');
-            #xdebug_start_trace(ROOT_LOGS . 'clansuite_trace', XDEBUG_TRACE_HTML);
+            #ini_set('xdebug.trace_output_name', 'framework_trace%u');
+            #xdebug_start_trace(APPLICATION_PATH . 'logs/framework_trace', XDEBUG_TRACE_HTML);
 
             // stop tracing and display infos
             register_shutdown_function('\Koch\Debug\XDebug::shutdown');

@@ -5,8 +5,8 @@
  */
 
 defined('CR')                       || define('CR', chr(13));                       // Carriage Return (\n)
-defined('WWW_ROOT')                 || define('WWW_ROOT', '');                      // http://application
-defined('WWW_ROOT_THEMES_CORE')     || define('WWW_ROOT_THEMES_CORE', '');          // http://application/themes/core
+defined('WWW_ROOT')                 || define('WWW_ROOT', 'http://');               // http://application
+defined('WWW_ROOT_THEMES_CORE')     || define('WWW_ROOT_THEMES_CORE', 'http://');   // http://application/themes/core
 defined('REWRITE_ENGINE_ON')        || define('REWRITE_ENGINE_ON', false);
 
 defined('APPLICATION_PATH')         || define('APPLICATION_PATH', '/');

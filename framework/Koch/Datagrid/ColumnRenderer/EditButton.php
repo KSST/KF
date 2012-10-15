@@ -13,6 +13,7 @@
 namespace Koch\Datagrid\ColumnRenderer;
 
 use Koch\Datagrid\ColumnRenderer;
+use Koch\Form\Elements\ImageButton;
 
 /**
  * Datagrid Column Renderer for Edit Button Cells
@@ -29,7 +30,7 @@ class EditButton extends ColumnRenderer implements ColumnRendererInterface
     */
     public function renderCell($oCell)
     {
-        $oImagebutton = new Clansuite_Formelement_Imagebutton();
+        $oImagebutton = new ImageButton();
         $oImagebutton->setName('Editbutton');
         $oImagebutton->setID('Editbutton-' . $oCell->getValue());
         $oImagebutton->setClass('DatagridEditbutton-' . $oCell->getColumn()->getAlias());

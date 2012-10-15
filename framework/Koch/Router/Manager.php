@@ -113,12 +113,16 @@ class Manager
      */
     public static function loadRoutesFromConfig($module = '')
     {
-        // load common routes configuration
+        // load application wide routes configuration file
         if ($module === '') {
-            return include APPLICATION_PATH . 'configuration/routes.php';
+            $file = APPLICATION_PATH . 'configuration/routes.php';
+        } else {
+            // load module specific routes config file
+            $file = APPLICATION_MODULES_PATH . $module . '/' . $module . '.routes.php';
         }
 
-        // load a module specific routes config file
-        return include APPLICATION_MODULES_PATH . $module . '/' . $module . '.routes.php';
+        if (is_file($file) === true) {
+            return include $file;
+        }
     }
 }

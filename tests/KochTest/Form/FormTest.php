@@ -708,7 +708,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         // decorator type will be form
         // this is just another way of setting attributes to the form itself
         $attributes = array('form' =>
-            array('form' => // this is Clansuite_Form_Decorator_Form
+            array('form' => // this is Koch\Form\Decorator\Form
                 array('heading' => 'This is the Heading of the form.',
                       'description' => 'This is a form description text.')
         ));

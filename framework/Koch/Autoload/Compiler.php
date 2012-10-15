@@ -27,15 +27,21 @@ namespace Koch\Autoload;
  */
 class Compiler
 {
-    protected $monolith_filename = 'clansuite_monolith.php';
+    protected static $monolithFile = '';
+
+    public static function getMonolithFile()
+    {
+        self::$monolithFile = __DIR__ . '/../monolith.php';
+    }
 
     /**
      * Wraps php tags around the content of the monolith
      */
     public static function empowerMonolith()
     {
-        $content = '<?php ' . file_get_contents(self::$monolith_filename) . '?>';
-        file_put_contents(self::$monolith_filename, $content);
+        $content = '<?php ' . file_get_contents(self::getMonolithFile()) . '?>';
+
+        file_put_contents(self::getMonolithFile(), $content);
     }
 
     /**
@@ -46,8 +52,8 @@ class Compiler
     public static function build()
     {
         // remove existing monolith
-        if (is_file(self::$monolith_file) === true) {
-            unlink(self::$monolith_file);
+        if (is_file(self::getMonolithFile()) === true) {
+            unlink(self::getMonolithFile());
         }
 
         // this directory
@@ -60,11 +66,11 @@ class Compiler
             if ($phpfile->isDot() === false and
                $phpfile->isDir() === false and
                $phpfile->getFilename() != basename($_SERVER['PHP_SELF']) and
-               $phpfile->getFilename() != self::$monolith_file) {
+               $phpfile->getFilename() != self::getMonolithFile()) {
                 //echo 'Processing: ' . $phpfile . '<br>';
 
                 // get file content
-                $content = file_get_contents(self::$monolith_file);
+                $content = file_get_contents(self::getMonolithFile());
 
                 // apply string modification (strips unnessecary things off)
                 $new_content = self::removeCommentsFromString($content);
@@ -72,7 +78,7 @@ class Compiler
                 //$new_content = self::strip_empty_lines($new_content);
 
                 // write the modified content to the monolith file
-                file_put_contents(self::$monolith_file, $new_content, FILE_APPEND);
+                file_put_contents(self::getMonolithFile(), $new_content, FILE_APPEND);
             }
         }
 

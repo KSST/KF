@@ -194,19 +194,17 @@ class Smarty extends AbstractRenderer
          * Smarty Plugins
          *
          * Configure Smarty Viewhelper Directories
-         * 1) original smarty plugins               => libraries\smarty\plugins\
-         * 2) core                                  => core\view\helper\smarty
-         * 3) clansuite application smarty plugins  => application\core\viewhelper\smarty\
-         * 4) clansuite module smarty plugins       => application\modules\module_name\viewhelper\smarty\
+         * 1) original smarty plugins           => vendor folder \smarty\plugins\
+         * 2) framework                         => framework folder \view\helper\smarty
+         * 3) application core smarty plugins   => application folder \core\view\helper\smarty\
+         * 4) application module smarty plugins => application module \app\modules\(modulename)\view\helper\smarty\
          */
 
         $this->renderer->setPluginsDir(
             array(
-                // smarty plugins in vendors folder
                 __DIR__ . '/../../../vendors/smarty/plugins',
-                // smarty plugins in framework
                 __DIR__ . '/../Helper/Smarty',
-                // smarty plugins in module
+                APPLICATION_PATH . '/Core/View/Helper/Smarty',
                 APPLICATION_MODULES_PATH . TargetRoute::getModule() . '/View/Helper/Smarty'
             )
         );
