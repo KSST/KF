@@ -32,7 +32,7 @@ script:
   #
   # run unit-tests
   #
-  # ./tests/runTests.sh
+  # php ./tests/runTests.php
 
 notifications:
   irc: "irc.freenode.org#koch"
