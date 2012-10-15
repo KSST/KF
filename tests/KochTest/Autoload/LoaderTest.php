@@ -146,7 +146,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         set_include_path($path . PATH_SEPARATOR . get_include_path());
 
         // try to load existing namespaced class
-        $this->assertTrue(Loader::autoloadIncludePath('\Clansuite\NamespacedClass'));
+        $this->assertTrue(Loader::autoloadIncludePath('\Application\NamespacedClass'));
    }
 
    public function testMethod_writeAutoloadingMapFile()

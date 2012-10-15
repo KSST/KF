@@ -1,5 +1,5 @@
 <?php
-namespace Clansuite;
+namespace Application;
 class NamespacedClass
 {
 

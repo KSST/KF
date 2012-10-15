@@ -28,34 +28,25 @@ namespace Koch\Datagrid;
 use DoctrineExtensions\Paginate\Paginate;
 
 /**
- * Clansuite Datagrid
+ * Koch Framework - Class for rendering tabular data in form of a Datagrid.
  *
  * Purpose:
- * Automatic datagrid generation from doctrine records/tables.
+ * Automatic datagrid generation from array input.
  * Doctrine_Table => Doctrine_Query => Koch\Datagrid\Datagrid
  *
  * Datagrid builds a table with the following structure:
  *
- * #--------------------------------------------------#
- * // Caption             (<caption>Caption</caption>) #
- * #--------------------------------------------------#
- * // Pagination        (<tr><td>Pagination</td></tr>) #
- * #--------------------------------------------------#
- * // Header     (<tr><th>Col1</th><th>Col2</th></tr>) #
- * #--------------------------------------------------#
- * // Rows            (<tr><td>DataField</td>...</tr>) #
- * #--------------------------------------------------#
- * // Pagination        (<tr><td>Pagination</td></tr>) #
- * #--------------------------------------------------#
- * // Footer                (<tr><td>Footer</td></tr>) #
- * #--------------------------------------------------#
+ * //<table>
+ * // Caption             (<caption>Caption</caption>)
+ * // Pagination        (<tr><td>Pagination</td></tr>)
+ * // Header            (<tr><th>Columns</th>...</tr>)
+ * // Rows            (<tr><td>DataField</td>...</tr>)
+ * // Pagination        (<tr><td>Pagination</td></tr>)
+ * // Footer                (<tr><td>Footer</td></tr>)
+ * //</table>
  */
 class Datagrid extends Base
 {
-    //--------------------
-    // Class properties
-    //--------------------
-
     /**
      * Associative Array for the configuration of columns.
      *

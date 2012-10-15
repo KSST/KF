@@ -840,7 +840,6 @@ class Form implements FormInterface
      * You don't know the formelements available? Then take a look at
      * a) the directory core\viewhelper\form\formelements\*
      * b) the manual
-     * @link http://docs.clansuite.com/developer/manual/de/#_clansuite_form
      *
      * @param $formelement string|object Name of formelement or Object implementing the Koch_Form_Interface
      * @param $attributes array Attributes for the formelement.

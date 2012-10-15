@@ -199,9 +199,9 @@ class Theme
         return $this->theme_info['theme_version'];
     }
 
-    public function getRequiredClansuiteVersion()
+    public function getRequiredVersion()
     {
-        return $this->theme_info['required_clansuite_version'];
+        return $this->theme_info['required_version'];
     }
 
     public function getDate()

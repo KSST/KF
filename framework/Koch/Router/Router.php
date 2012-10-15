@@ -144,13 +144,13 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // subtract PHP_SELF from uri
-        if (defined('REWRITE_ENGINE_ON') === true and REWRITE_ENGINE_ON == false) {
+        /*if (defined('REWRITE_ENGINE_ON') === true and REWRITE_ENGINE_ON == false) {
             $url_directory_prefix_length = strlen(dirname($_SERVER['PHP_SELF']));
             $uri = substr($uri, $url_directory_prefix_length);
-        }
-
-        $url_directory_prefix_length = strlen($_SERVER['SCRIPT_NAME']);
-        $uri = substr($uri, $url_directory_prefix_length);
+        } else {
+            $url_directory_prefix_length = strlen($_SERVER['SCRIPT_NAME']);
+            $uri = substr($uri, $url_directory_prefix_length);
+        }*/
 
         // add slash in front + remove slash at the end
         if ($uri !== "/") {
@@ -357,7 +357,7 @@ class Router implements RouterInterface, \ArrayAccess
 
         // only the http prefix is missing
         if (false !== strpos($urlstring, 'index.php?')) {
-            return WWW_ROOT . $urlstring;
+            return "http://" . $urlstring;
         }
 
         // cleanup: remove all double slashes
@@ -881,7 +881,10 @@ class Router implements RouterInterface, \ArrayAccess
 
         // Load Routes from Config "routes.config.php"
         if (true === empty($this->routes)) {
-            $this->addRoutes(Manager::loadRoutesFromConfig());
+            $routes = Manager::loadRoutesFromConfig();
+            if ($routes) {
+                $this->addRoutes($routes);
+            }
 
             // and save these routes to cache
             if (true === self::$use_cache) {
