@@ -90,9 +90,11 @@
 
     <target name="phpcs" description="Find coding standard violations using PHP_CodeSniffer">
         <exec executable="phpcs${executableExtension}">
-            <arg value="--standard=${builddir}/phpcs.xml" />
+            <!-- <arg value="--standard=${builddir}/phpcs.xml" /> -->
+            <arg value="--standard=PSR2" />
             <arg value="--tab-width=4" />
             <arg value="--encoding=utf-8" />
+            <arg value="--extensions=php" />
             <arg value="--report=checkstyle" />
             <arg value="--report-file=${builddir}/logs/checkstyle.xml" />
             <arg value="--ignore=Cache" />
