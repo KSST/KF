@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  * @package Smarty
@@ -14,28 +15,16 @@
  * @param array parameters (cid, html, selected_class, id, asc_image, desc_image)
  * @param Smarty
  * @return string|null
- * @author XML compliance patch by Vaccafoeda on the Smarty forum
- * @author TGKnIght - Modified to allow for unique ids and store in $_SESSION scope
  */
-/**
- *   modified for clansuite.com by Jens A. Koch ( 06-Feb-2007 )
- *
- *   line 29+30: imagepath hardcoded
- *   and
- *   line 76-84: asc_image and desc_image parameterdetection disabled
- */
-function Smarty_function_columnsort($params, $smarty)
+function smarty_function_columnsort($params, $smarty)
 {
-    public static $selected_class = null;
-    public static $current_id = 0;
-
+    $selected_class = null;
+    $current_id = 0;
+    $SMCS_id = 'default';
     //static $sort_asc_image = null;
     //static $sort_desc_image = null;
-
-    $sort_asc_image  = WWW_ROOT_THEMES_CORE . 'images/icons/asc.png';
+    $sort_asc_image = WWW_ROOT_THEMES_CORE . 'images/icons/asc.png';
     $sort_desc_image = WWW_ROOT_THEMES_CORE . 'images/icons/desc.png';
-
-    public static $SMCS_id = 'default';
 
     if ($params['cid'] !== null) {
         if ($SMCS_id != $params['cid']) {
@@ -61,9 +50,9 @@ function Smarty_function_columnsort($params, $smarty)
     }
 
     /*
-    if ($params['translate'] != 0) {
-       $params['html'] = _($params['html']);
-    }*/
+      if ($params['translate'] != 0) {
+      $params['html'] = _($params['html']);
+      } */
     $html = $params['html'];
 
     // selected_class
@@ -82,14 +71,14 @@ function Smarty_function_columnsort($params, $smarty)
     }
 
     /* disabled
-    if (($params['asc_image'] !== null) && ($params['desc_image'] !== null)) {
-        // Set asc and desc sort images (will be placed after the sorted column)
-        $sort_asc_image = $params['asc_image'];
-        $sort_desc_image = $params['desc_image'];
-    } elseif ($params['asc_image']) || isset($params['desc_image'] !== null) {
-        trigger_error('columnsort: Both "asc_image" and "desc_image" needs to be present, or none of them.');
-    }
-    */
+      if (($params['asc_image'] !== null) && ($params['desc_image'] !== null)) {
+      // Set asc and desc sort images (will be placed after the sorted column)
+      $sort_asc_image = $params['asc_image'];
+      $sort_desc_image = $params['desc_image'];
+      } elseif ($params['asc_image']) || isset($params['desc_image'] !== null) {
+      trigger_error('columnsort: Both "asc_image" and "desc_image" needs to be present, or none of them.');
+      }
+     */
 
     // alt for image
     if ($params['img_alt'] !== null) {
@@ -111,11 +100,12 @@ function Smarty_function_columnsort($params, $smarty)
     // if the get vars does not exist and the current column is default.
     if ($columnsort['current_column'] !== null and $columnsort['current_column'] == $id) {
         $selected = true;
+    }
 
-        // Reverse sort order for the output.
-        if($columnsort['current_sort'])
-            $sort_order = mb_strtolower($columnsort['current_sort']) == 'asc' ? 'desc' : 'asc';
-    } else { if($columnsort['current_column'] === null and $id == $columnsort['default_column'])
+    // Reverse sort order for the output.
+    if ($columnsort['current_sort']) {
+        $sort_order = mb_strtolower($columnsort['current_sort']) == 'asc' ? 'desc' : 'asc';
+    } elseif ($columnsort['current_column'] === null and $id == $columnsort['default_column']) {
         $selected = true;
 
         // Reverse sort order for the output.
@@ -131,8 +121,6 @@ function Smarty_function_columnsort($params, $smarty)
     // XML compliance patch by Vaccafoeda
     $url = str_replace('&', '&amp;', $url);
 
-    $class = $selected && $selected_class ? "class=\"$selected_class\"" : '';
-
     // If asc/desc image exists, append it.
     if ($selected && $sort_asc_image !== null) {
         $image_src = $sort_order == 'asc' ? $sort_desc_image : $sort_asc_image;
@@ -141,14 +129,24 @@ function Smarty_function_columnsort($params, $smarty)
         $image = '';
     }
 
-    return '<a '.$class.' href="'.$url.'.><span style="width:100%;padding:0px;margin:0px;text-align:center;">'.$html.' '.$image.'</span></a>';
+    $class = $selected && $selected_class ? "class=\"$selected_class\"" : '';
+
+    $result = '<a ' . $class . ' href="' . $url . '>' .
+        '<span style="width:100%;padding:0px;margin:0px;text-align:center;">' .
+        $html . ' ' . $image . '</span></a>';
+
+    return $result;
 }
 
 function _smarty_columnsort_sort_order($id, $columns, $default_sort, $smarty)
 {
-    if(!isset($columns[$id])) return false;
+    if (!isset($columns[$id])) {
+        return false;
+    }
 
-    if(!is_array($columns[$id])) return $default_sort;
+    if (!is_array($columns[$id])) {
+        return $default_sort;
+    }
 
     if (count($columns[$id]) != 2) {
         trigger_error('columnsort: column array must be array("value", "asc|desc")');

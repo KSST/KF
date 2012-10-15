@@ -37,8 +37,8 @@
  *  mb_strtoupper
  *  mb_substr
  *  mb_substr_count
- * 
- *  Note: The function_exists() checks are needed to prevent redeclaration 
+ *
+ *  Note: The function_exists() checks are needed to prevent redeclaration
  *        errors, which would occur during linting.
  */
 
