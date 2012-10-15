@@ -27,21 +27,23 @@ class Xslt extends AbstractRenderer
 {
     /**
      * holds instance of XSLT Render Engine (object)
+     *
      * @var object xslt
      */
     protected $xslt = null;
 
     /**
-     * @var filepath to the XSL StyleSheet file
+     * Absolute path to the XSL StyleSheet file.
+     *
+     * @var string
      */
     public $xslfile = null;
 
     /**
-     * holds the abs path to the xsl stylesheet
-     * @var string
+     * Constructor.
+     *
+     * @param \Koch\View\Renderer\Koch\Config $config
      */
-    protected $xslfile = null;
-
     public function __construct(Koch\Config $config)
     {
         parent::__construct($config);
