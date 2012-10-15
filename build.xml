@@ -118,7 +118,7 @@
     <target name="phpunit" description="Run unit tests using PHPUnit">
         <exec executable="phpunit${executableExtension}" failonerror="true">
             <arg value="--configuration" />
-            <arg path="${builddir}/tests/phpunit.xml.dist" />
+            <arg path="${sourcedir}/tests/phpunit.xml.dist" />
         </exec>
     </target>
 
