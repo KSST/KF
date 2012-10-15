@@ -26,12 +26,9 @@
     </target>
 
     <target name="clean" description="Cleanup build artifacts">
-        <delete dir="${basedir}/build/api"/>
-        <delete dir="${basedir}/build/code-browser"/>
-        <delete dir="${basedir}/build/coverage"/>
-        <delete dir="${basedir}/build/doc"/>
-        <delete dir="${basedir}/build/logs"/>
-        <delete dir="${basedir}/build/pdepend"/>
+        <delete includeemptydirs="true">
+            <fileset dir="${builddir}" includes="**/*"/>
+        </delete>
         <delete dir="${basedir}/vendor"/>
         <delete file="${basedir}/composer.lock"/>
     </target>
