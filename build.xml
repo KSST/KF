@@ -66,7 +66,7 @@
         <exec executable="phpmd${executableExtension}">
             <arg path="${sourcedir}" />
             <arg value="xml" />
-            <arg path="${builddir}/phpmd.xml" />
+            <arg path="${basedir}/phpmd.xml" />
             <arg value="--reportfile" />
             <arg path="${builddir}/logs/pmd.xml" />
         </exec>
@@ -118,7 +118,7 @@
     <target name="phpunit" description="Run unit tests using PHPUnit">
         <exec executable="phpunit${executableExtension}" failonerror="true">
             <arg value="--configuration" />
-            <arg path="${sourcedir}/tests/phpunit.xml.dist" />
+            <arg path="${basedir}/tests/phpunit.xml.dist" />
         </exec>
     </target>
 
