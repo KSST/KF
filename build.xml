@@ -8,7 +8,7 @@
         <os family="windows" />
     </condition>
 
-    <target name="build" depends="prepare,phplint,pdepend,phpmd,phpcpd,phploc,phpcs,apigen,phpunit,phpcb" />
+    <target name="build" depends="prepare,phplint,pdepend,phpmd,phpcpd,phploc,phpcs,phpcb,apigen,phpunit" />
 
     <target name="fetch-composer" description="Installing dependencies">
         <exec executable="wget" failonerror="true">
