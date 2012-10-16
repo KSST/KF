@@ -24,7 +24,7 @@ use Koch\Form\FormElementDecorator;
  * @package Koch_Form
  * @subpackage Koch_Form_Decorator
  */
-class Description extends FormelementDecorator
+class Description extends FormElementDecorator
 {
     /**
      * @var string Name of this decorator

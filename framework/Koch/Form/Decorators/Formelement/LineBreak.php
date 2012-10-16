@@ -24,7 +24,7 @@ use Koch\Form\FormElementDecorator;
  * @package Koch_Form
  * @subpackage Koch_Form_Decorator
  */
-class None extends FormelementDecorator
+class LineBreak extends FormElementDecorator
 {
     public $name = 'none';
 

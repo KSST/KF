@@ -12,7 +12,7 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormelementDecorator;
+use Koch\Form\FormElementDecorator;
 
 /**
  * Formelement_Decorator_Label
@@ -23,7 +23,7 @@ use Koch\Form\FormelementDecorator;
  * @package Koch\Form
  * @subpackage Koch\Form\Decorators
  */
-class Label extends FormelementDecorator
+class Label extends FormElementDecorator
 {
     /**
      * @var string Name of this decorator
