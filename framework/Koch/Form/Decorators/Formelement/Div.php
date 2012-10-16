@@ -36,7 +36,7 @@ use Koch\Form\FormElementDecorator;
  * @package Koch_Form
  * @subpackage Koch_Form_Decorator
  */
-class Div extends FormelementDecorator
+class Div extends FormElementDecorator
 {
     /**
      * @var string Name of this decorator
