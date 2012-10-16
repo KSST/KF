@@ -220,7 +220,9 @@ class Form implements FormInterface
     public function __construct($name_or_attributes = null, $method = null, $action = null)
     {
         if (null === $name_or_attributes) {
-            throw new Exception('Missing argument 1 - has to be string (Name of Form) or array (Form Description Array).');
+            throw new Exception(
+                'Missing argument 1 - has to be string (Name of Form) or array (Form Description Array).'
+            );
         }
 
         // case 1: $name is a string, the name of the form
@@ -732,7 +734,10 @@ class Form implements FormInterface
         #\Koch\Debug::printR($formelements);
         // developer hint: when $form->render() was triggered, but no formelement was added before
         if (count($formelements) == 0) {
-            throw new \Koch\Exception\Exception('Formelement rendering failure. No formelements on form object. Consider adding some formelements using addElement().');
+            throw new \Koch\Exception\Exception(
+                'Formelement rendering failure. ' 
+                . 'No formelements on form object. Consider adding some formelements using addElement().'
+            );
         }
 
         // sort formelements by index
@@ -843,7 +848,7 @@ class Form implements FormInterface
      *
      * @param $formelement string|object Name of formelement or Object implementing the Koch_Form_Interface
      * @param $attributes array Attributes for the formelement.
-     * @param $position integer The position number of this formelement (ordering) in the formelements stack. 0 is first element!
+     * @param $position integer The position of this formelement in the formelements stack.
      *
      * @return Koch_Form $this Form Object
      */
@@ -892,7 +897,7 @@ class Form implements FormInterface
             // hmpf, there is already an element at this position
             if ($this->formelements[$position] !== null) {
                 // insert the new element to the requested position and reorder
-                $this->formelements = $this->array_insert($formelement, $position, $this->formelements);
+                $this->formelements = $this->arrayInsert($formelement, $position, $this->formelements);
 
                 // after repositioning we need to recalculate the formelement ids
                 $this->regenerateFormelementIdentifiers();
@@ -951,7 +956,7 @@ class Form implements FormInterface
      *
      * @return array $array with $value at position $index.
      */
-    private function array_insert($value, $index, &$array)
+    private function arrayInsert($value, $index, &$array)
     {
         return array_merge(array_slice($array, 0, $index), array($value), array_slice($array, $index));
     }

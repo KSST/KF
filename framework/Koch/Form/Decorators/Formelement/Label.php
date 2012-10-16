@@ -25,7 +25,7 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\FormelementDecorator;
 
 /**
  * Formelement_Decorator_Label
@@ -33,8 +33,8 @@ use Koch\Form\FormElementDecorator;
  * Adds a <label> element containing the formelement label in-front of html_fromelement_content.
  *
  * @category Koch
- * @package Koch_Form
- * @subpackage Koch_Form_Decorator
+ * @package Koch\Form
+ * @subpackage Koch\Form\Decorators
  */
 class Label extends FormelementDecorator
 {
@@ -51,9 +51,11 @@ class Label extends FormelementDecorator
     public function render($html_formelement)
     {
         // add label
-        if ( $this->formelement->hasLabel() == true) {
+        if ($this->formelement->hasLabel() == true) {
             // for attribute points to formelements id tag
-            $html_formelement = CR . '<label for="'. $this->formelement->getId() .'">' . $this->formelement->getLabel() . '</label>'. CR . $html_formelement;
+            $html_formelement = CR . '<label for="' . $this->formelement->getId() . '">'
+                . $this->formelement->getLabel()
+                . '</label>' . CR . $html_formelement;
         }
 
         return $html_formelement;

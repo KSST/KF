@@ -154,7 +154,9 @@ class Gravatar
           }
 
           if ($size < 16 || $size > 512) {
-          throw new \OutOfRangeException('Value of $size should be between 16 and 512 (size of image in pixels), given: '.$size);
+          throw new \OutOfRangeException(
+              'Value of $size should be between 16 and 512 (size of image in pixels), given: ' . $size
+          );
           } */
 
         $this->size = $size;

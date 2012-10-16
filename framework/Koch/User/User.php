@@ -34,6 +34,7 @@ namespace Koch\User;
  */
 class User
 {
+
     /**
      * @var object User Object
      */
@@ -70,10 +71,10 @@ class User
         }
 
         $userdata = Doctrine_Query::create()
-                        ->from('CsUsers u')
-                        ->leftJoin('CsProfiles')
-                        ->where('u.user_id = ?')
-                        ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+            ->from('CsUsers u')
+            ->leftJoin('CsProfiles')
+            ->where('u.user_id = ?')
+            ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
 
         if (is_array($userdata)) {
             return $userdata;
@@ -101,35 +102,33 @@ class User
          * 2) email
          * 3) nick
          */
-
-        if ( empty($user_id) === false ) {
+        if (empty($user_id) === false) {
             // Get the user from the user_id
             $this->user = Doctrine_Query::create()
-                    #->select('u.*,g.*,o.*')
-                    ->from('CsUsers u')
-                    ->leftJoin('u.CsOptions o')
-                    #->leftJoin('u.CsGroups g')
-                    ->where('u.user_id = ?')
-                    ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
-        } elseif ( empty($email) === false ) {
+                #->select('u.*,g.*,o.*')
+                ->from('CsUsers u')
+                ->leftJoin('u.CsOptions o')
+                #->leftJoin('u.CsGroups g')
+                ->where('u.user_id = ?')
+                ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+        } elseif (empty($email) === false) {
             // Get the user from the email
             $this->user = Doctrine_Query::create()
-                    #->select('u.*,g.*,o.*')
-                    ->from('CsUsers u')
-                    ->leftJoin('u.CsOptions o')
-                    #->leftJoin('u.CsGroups g')
-                    ->where('u.email = ?')
-                    ->fetchOne(array($email), Doctrine::HYDRATE_ARRAY);
-        } elseif ( empty($nick) === false ) {
+                #->select('u.*,g.*,o.*')
+                ->from('CsUsers u')
+                ->leftJoin('u.CsOptions o')
+                #->leftJoin('u.CsGroups g')
+                ->where('u.email = ?')
+                ->fetchOne(array($email), Doctrine::HYDRATE_ARRAY);
+        } elseif (empty($nick) === false) {
             // Get the user from the nick
             $this->user = Doctrine_Query::create()
-                    #->select('u.*,g.*,o.*')
-                    ->from('CsUsers u')
-                    ->leftJoin('u.CsOptions o')
-                    #->leftJoin('u.CsGroups g')
-                    ->where('u.nick = ?')
-                    ->fetchOne(array($nick), Doctrine::HYDRATE_ARRAY);
-
+                #->select('u.*,g.*,o.*')
+                ->from('CsUsers u')
+                ->leftJoin('u.CsOptions o')
+                #->leftJoin('u.CsGroups g')
+                ->where('u.nick = ?')
+                ->fetchOne(array($nick), Doctrine::HYDRATE_ARRAY);
         }
 
         /**
@@ -141,8 +140,8 @@ class User
 
             // redirect
             Clansuite_CMS::getInjector()
-                    ->instantiate('Koch_HttpResponse')
-                    ->redirect('/account/activation_email', 5, 403, _('Your account is not yet activated.'));
+                ->instantiate('Koch_HttpResponse')
+                ->redirect('/account/activation_email', 5, 403, _('Your account is not yet activated.'));
         }
 
         /**
@@ -155,15 +154,15 @@ class User
             #\Koch\Debug\Debug::firebug($_SESSION);
             #\Koch\Debug\Debug::firebug($this->config);
 
-            $_SESSION['user']['authed']         = 1;
-            $_SESSION['user']['user_id']        = $this->user['user_id'];
+            $_SESSION['user']['authed'] = 1;
+            $_SESSION['user']['user_id'] = $this->user['user_id'];
 
-            $_SESSION['user']['passwordhash']   = $this->user['passwordhash'];
-            $_SESSION['user']['email']          = $this->user['email'];
-            $_SESSION['user']['nick']           = $this->user['nick'];
+            $_SESSION['user']['passwordhash'] = $this->user['passwordhash'];
+            $_SESSION['user']['email'] = $this->user['email'];
+            $_SESSION['user']['nick'] = $this->user['nick'];
 
-            $_SESSION['user']['disabled']       = $this->user['disabled'];
-            $_SESSION['user']['activated']      = $this->user['activated'];
+            $_SESSION['user']['disabled'] = $this->user['disabled'];
+            $_SESSION['user']['activated'] = $this->user['activated'];
 
             /**
              * SetLanguage
@@ -177,11 +176,9 @@ class User
              * b) standard language / fallback as defined by $this->config['locale']['locale']
              */
             if (false === isset($_SESSION['user']['language_via_url'])) {
-                if (false === empty($this->user['language'])) {
-                    $_SESSION['user']['language'] = $this->user['language'];
-                } else {
-                    $_SESSION['user']['language'] = $this->config['locale']['default'];
-                }
+                $_SESSION['user']['language'] = (false === empty($this->user['language']))
+                ? $this->user['language']
+                : $this->config['locale']['default'];
             }
 
             /**
@@ -191,7 +188,9 @@ class User
              * @todo remove $_REQUEST, frontend theme is selectable via frontend
              */
             if (false === isset($_REQUEST['theme'])) {
-                $_SESSION['user']['frontend_theme'] = (!empty($this->user['frontend_theme']) ? $this->user['frontend_theme'] : $this->config['template']['frontend_theme']);
+                $_SESSION['user']['frontend_theme'] = (!empty($this->user['frontend_theme'])) 
+                ? $this->user['frontend_theme'] 
+                : $this->config['template']['frontend_theme'];
             }
 
             /**
@@ -208,31 +207,29 @@ class User
              *
              * Get Group & Rights of user_id
              */
-
             /**
-                User-Datensatz beinhaltet ein CsGroups-Array
-                user => Array (
-                    [user_id] => 1
-                    ...
-                    [CsGroups] => Array (
-                        [0] => Array (
-                                [group_id] => 3
-                                ...
-                                [role_id] => 5
-                        )
-                    )
-                )
+              User-Datensatz beinhaltet ein CsGroups-Array
+              user => Array (
+              [user_id] => 1
+              ...
+              [CsGroups] => Array (
+              [0] => Array (
+              [group_id] => 3
+              ...
+              [role_id] => 5
+              )
+              )
+              )
              */
             // Initialize User Session Arrays
             $_SESSION['user']['group'] = '';
             $_SESSION['user']['rights'] = '';
 
             if (false === empty($this->user['CsGroups'])) {
-                $_SESSION['user']['group']  = $this->user['CsGroups'][0]['group_id'];
-                $_SESSION['user']['role']   = $this->user['CsGroups'][0]['role_id'];
+                $_SESSION['user']['group'] = $this->user['CsGroups'][0]['group_id'];
+                $_SESSION['user']['role'] = $this->user['CsGroups'][0]['role_id'];
                 $_SESSION['user']['rights'] = Koch\ACL::createRightSession(
-                                                $_SESSION['user']['role'],
-                                                $this->user['user_id'] );
+                        $_SESSION['user']['role'], $this->user['user_id']);
             }
 
             #\Koch\Debug\Debug::firebug($_SESSION);
@@ -267,31 +264,28 @@ class User
         if ($login_method == 'nick') {
             // get user_id and passwordhash with the nick
             $user = Doctrine_Query::create()
-                    ->select('u.user_id, u.passwordhash, u.salt')
-                    ->from('CsUsers u')
-                    ->where('u.nick = ?')
-                    ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
+                ->select('u.user_id, u.passwordhash, u.salt')
+                ->from('CsUsers u')
+                ->where('u.nick = ?')
+                ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
         }
 
         // check if a given email exists
         if ($login_method == 'email') {
             // get user_id and passwordhash with the email
             $user = Doctrine_Query::create()
-                    ->select('u.user_id, u.passwordhash, u.salt')
-                    ->from('CsUsers u')
-                    ->where('u.email = ?')
-                    ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
+                ->select('u.user_id, u.passwordhash, u.salt')
+                ->from('CsUsers u')
+                ->where('u.email = ?')
+                ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
         }
 
         $this->moduleconfig = $this->config->readModuleConfig('account');
 
         // if user was found, check if passwords match each other
-        if( true === (bool) $user and
+        if (true === (bool) $user and
             true === Koch\Security::check_salted_hash(
-            $passwordhash,
-            $user['passwordhash'], $user['salt'],
-            $this->moduleconfig['login']['hash_algorithm']))
-        {
+                $passwordhash, $user['passwordhash'], $user['salt'], $this->moduleconfig['login']['hash_algorithm'])) {
             // ok, the user with nick or email exists and the passwords matched, then return the user_id
             return $user['user_id'];
         } else {
@@ -348,8 +342,8 @@ class User
     private function setRememberMeCookie($user_id, $passwordhash)
     {
         // calculate cookie lifetime and combine cookie string
-        $cookie_lifetime = time() + round($this->moduleconfig['login']['remember_me_time']*24*60*60);
-        $cookie_string = $user_id.'#'.$passwordhash;
+        $cookie_lifetime = time() + round($this->moduleconfig['login']['remember_me_time'] * 24 * 60 * 60);
+        $cookie_string = $user_id . '#' . $passwordhash;
 
         setcookie('cs_cookie', $cookie_string, $cookie_lifetime);
 
@@ -365,7 +359,7 @@ class User
         session_regenerate_id(true);
 
         // Delete cookie
-        setcookie('cs_cookie', false );
+        setcookie('cs_cookie', false);
     }
 
     /**
@@ -374,7 +368,7 @@ class User
     public function checkLoginCookie()
     {
         // Check for login cookie
-        if ( isset($_COOKIE['cs_cookie']) ) {
+        if (isset($_COOKIE['cs_cookie'])) {
             $cookie_array = explode('#', $_COOKIE['cs_cookie']);
             $cookie_user_id = (int) $cookie_array['0'];
             $cookie_password = (string) $cookie_array['1'];
@@ -382,16 +376,16 @@ class User
             #Koch_Module_Controller::initModel('users');
 
             $this->user = Doctrine_Query::create()
-                    ->select('u.user_id, u.passwordhash, u.salt')
-                    ->from('CsUsers u')
-                    ->where('u.user_id = ?')
-                    ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+                ->select('u.user_id, u.passwordhash, u.salt')
+                ->from('CsUsers u')
+                ->where('u.user_id = ?')
+                ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
 
             $this->moduleconfig = $this->config->readModuleConfig('account');
 
             $hash_ok = Koch\Security::checkSaltedHash(
-                $_COOKIE['cs_cookie_password'],
-                $this->user['passwordhash'],
+                $_COOKIE['cs_cookie_password'], 
+                $this->user['passwordhash'], 
                 $this->user['salt'],
                 $this->moduleconfig['login']['hash_algorithm']
             );
@@ -407,8 +401,8 @@ class User
                 $this->sessionSetUserId($this->user['user_id']);
             } else {
                 // Delete cookies, if no match
-                setcookie('cs_cookie_user_id', false );
-                setcookie('cs_cookie_password', false );
+                setcookie('cs_cookie_user_id', false);
+                setcookie('cs_cookie_password', false);
             }
         }
     }
@@ -421,10 +415,10 @@ class User
     public function sessionSetUserId($user_id)
     {
         $result = Doctrine_Query::create()
-                         ->select('user_id')
-                         ->from('CsSession')
-                         ->where('session_id = ?')
-                         ->fetchOne(array( session_id() ));
+            ->select('user_id')
+            ->from('CsSession')
+            ->where('session_id = ?')
+            ->fetchOne(array(session_id()));
 
         /**
          * Update Session, because we know that session_id already exists
@@ -463,10 +457,10 @@ class User
     public function deleteJoinedButNotActivitatedUsers()
     {
         Doctrine_Query::create()
-                ->delete('CsUsers')
-                ->from('CsUsers')
-                ->where('activated = ? AND joined < ?')
-                ->execute(array(0, time() - 259200));
+            ->delete('CsUsers')
+            ->from('CsUsers')
+            ->where('activated = ? AND joined < ?')
+            ->execute(array(0, time() - 259200));
     }
 
     /**

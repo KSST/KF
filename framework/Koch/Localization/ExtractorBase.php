@@ -23,6 +23,8 @@
  *
  */
 
+namespace Koch\Localization;
+
 /**
  * Base Class of all Gettext Extractors
  */

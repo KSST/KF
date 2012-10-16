@@ -230,7 +230,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             }
         } else { // when array is defined issetParameter will search the given array
             if (false === $this->issetParameter($parameter, $arrayname)) {
-                throw new \Koch\Exception\Exception('Incoming Parameter missing: "' . $parameter . '" in Array "' . $arrayname . '".');
+                throw new \Koch\Exception\Exception(
+                    'Incoming Parameter missing: "' . $parameter . '" in Array "' . $arrayname . '".'
+                );
             }
         }
     }
@@ -238,24 +240,34 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * isset, checks if a certain parameter exists in the parameters array
      *
-     * @param  string               $name      Name of the Parameter
-     * @param  string               $arrayname GET, POST, COOKIE. Default = GET.
-     * @param  boolean              $where     If set to true, method will return the name of the array the parameter was found in.
-     * @return mixed|boolean|string arrayname
+     * @param  string $name Name of the Parameter
+     * @param  string $arrayname GET, POST, COOKIE. Default = GET.
+     * @param  boolean $where If set to true, method will return the name of the array the parameter was found in.
+     * @return mixed boolean string arrayname
      *
      */
     public function issetParameter($name, $arrayname = 'GET', $where = false)
     {
         $arrayname = mb_strtoupper($arrayname);
 
-        if ( ($arrayname === 'GET' and isset($this->get_parameters[$name])) or isset($this->get_parameters[$name])) {
-            return ($where === false) ? true : 'get';
-        } elseif ( ($arrayname === 'POST' and isset($this->post_parameters[$name])) or isset($this->post_parameters[$name])) {
-            return ($where === false) ? true : 'post';
-        } elseif ( ($arrayname === 'COOKIE' and isset($this->cookie_parameters[$name])) or isset($this->cookie_parameters[$name])) {
-            return ($where === false) ? true : 'cookie';
-        } else {
-            return false;
+        switch ($arrayname) {
+            case 'GET':
+                if (isset($this->get_parameters[$name])) {
+                    return ($where === false) ? true : 'get';
+                }
+                break;
+            case 'POST':
+                if (isset($this->post_parameters[$name])) {
+                    return ($where === false) ? true : 'post';
+                }
+                break;
+            case 'COOKIE':
+                if (isset($this->cookie_parameters[$name])) {
+                    return ($where === false) ? true : 'cookie';
+                }
+            default:
+                return false;
+                break;
         }
     }
 
@@ -588,7 +600,11 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         if (true === $ipv6) {
             return (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
         } else {
-            return (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4);
+            return (bool) filter_var(
+                $ip, 
+                FILTER_VALIDATE_IP, 
+                FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4
+            );
         }
     }
 
@@ -619,8 +635,10 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * REST Tunneling Detection
      *
-     * This method takes care for REST (Representational State Transfer) by tunneling PUT, DELETE through POST (principal of least power).
-     * Ok, this is faked or spoofed REST, but lowers the power of POST and it's short and nice in html forms.
+     * This method takes care for REST (Representational State Transfer) 
+     * by tunneling PUT, DELETE through POST (principal of least power).
+     * Ok, this is faked or spoofed REST, but lowers the power of POST 
+     * and it's short and nice in html forms.
      * @todo consider allowing 'GET' through POST?
      *
      * @see https://wiki.nbic.nl/index.php/REST.inc
@@ -631,8 +649,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         $allowed_rest_methodnames = array('DELETE', 'PUT');
 
         // request_method has to be POST AND GET has to to have the method GET
-        if (isset($_SERVER['REQUEST_METHOD']) === true
-            and $_SERVER['REQUEST_METHOD'] == 'POST'
+        if (isset($_SERVER['REQUEST_METHOD']) === true and $_SERVER['REQUEST_METHOD'] == 'POST'
             and $this->issetParameter('GET', 'method')) {
             // check for allowed rest commands
             if (in_array(mb_strtoupper($_GET['method']), $allowed_rest_methodnames)) {
@@ -653,13 +670,18 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
                     $_SERVER['REQUEST_URI'] .= '?' . $_SERVER['QUERY_STRING'];
                 }
             } else {
-                throw new \Koch\Exception\Exception('Request Method failure. You tried to tunnel a '.$this->getParameter('method','GET').' request through an HTTP POST request.');
+                throw new \Koch\Exception\Exception(
+                    'Request Method failure. You tried to tunnel a ' . $this->getParameter('method', 'GET')
+                    . ' request through an HTTP POST request.'
+                );
             }
-        } elseif (isset($_SERVER['REQUEST_METHOD']) === true
-            and $_SERVER['REQUEST_METHOD'] == 'GET'
+        } elseif (isset($_SERVER['REQUEST_METHOD']) === true and $_SERVER['REQUEST_METHOD'] == 'GET'
             and $this->issetParameter('GET', 'method')) {
             // NOPE, there's no tunneling through GET!
-            throw new \Koch\Exception\Exception('Request Method failure. You tried to tunnel a '.$this->getParameter('method','GET').' request through an HTTP GET request.');
+            throw new \Koch\Exception\Exception(
+                'Request Method failure. You tried to tunnel a ' . $this->getParameter('method', 'GET')
+                . ' request through an HTTP GET request.'
+            );
         }
     }
 

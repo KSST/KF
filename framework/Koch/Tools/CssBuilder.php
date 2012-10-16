@@ -92,37 +92,37 @@ class CssBuilder
      *
      * @var array
      */
-    private static $_configuration = array();
+    private static $configuration = array();
 
     /**
      * Contains the Browser informations
      * @var array
      */
-    private static $_browsers = array();
+    private static $browsers = array();
 
     /**
      * frontend theme
      * @var string
      */
-    private static $_frontendTheme;
+    private static $frontendTheme;
 
     /**
      * backend theme
      * @var string
      */
-    private static $_backendTheme;
+    private static $backendTheme;
 
     /**
      * path to the frontend directory
      * @var string
      */
-    private static $_frontendPath;
+    private static $frontendPath;
 
     /**
      * path to the backend directory
      * @var string
      */
-    private static $_backendPath;
+    private static $backendPath;
 
     /**
      * Constructor
@@ -144,10 +144,6 @@ class CssBuilder
      */
     public function build($index)
     {
-
-        /**
-         * Configuration
-         */
         $config = self::getConfiguration();
 
         $coreadditionalFiles = $themeadditionalFiles = $themeBackadditionalFiles = array();
@@ -180,13 +176,16 @@ class CssBuilder
          */
         if (true === $config['compileThemeFrontend']) {
             if(mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '/' ||
-                    mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '\/')
-            {
-                $config['themeFrontendPath'] = mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1);
+               mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '\/') {
+                $config['themeFrontendPath'] = mb_substr(
+                    $config['themeFrontendPath'], 
+                    strlen($config['themeFrontendPath']) - 1
+                );
             }
 
             // Read INI-File
-            $themeINI = $config['themeFrontendPath'] . DIRECTORY_SEPARATOR . $config['themeFrontend'] . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $builderINI;
+            $themeINI = $config['themeFrontendPath'] . DIRECTORY_SEPARATOR 
+                . $config['themeFrontend'] .  '/css/' . $builderINI;
             $themeInfo = $this->readCssBuilderIni($themeINI);
             $themeInfo['path'] = str_replace("{theme}", $config['themeFrontend'], $themeInfo['path']);
 
@@ -210,10 +209,14 @@ class CssBuilder
             if(mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '/' ||
                     mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '\/')
             {
-                $config['themeBackendPath'] = mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1);
+                $config['themeBackendPath'] = mb_substr(
+                    $config['themeBackendPath'], 
+                    strlen($config['themeBackendPath']) - 1
+                );
             }
             // Read INI-File
-            $themeBackINI = $config['themeBackendPath'] . DIRECTORY_SEPARATOR . $config['themeBackend'] . DIRECTORY_SEPARATOR . 'css' . DIRECTORY_SEPARATOR . $builderINI;
+            $themeBackINI = $config['themeBackendPath'] . DIRECTORY_SEPARATOR 
+                . $config['themeBackend'] . '/css/' . $builderINI;
             $themeBackInfo = $this->readCssBuilderIni($themeBackINI);
             $themeBackInfo['path'] = str_replace("{theme}", $config['themeBackend'], $themeBackInfo['path']);
 
@@ -294,7 +297,9 @@ class CssBuilder
 
             $html .= '<p class="cmBoxMessage" style="padding-left:50px;"><b>Frontend Theme Import File:</b>';
             $html .= '&nbsp;&nbsp;' . $themePath;
-            $html .= '<span class="cmSuccessFilenameColor"><b>' . $themeCssName . '</b></span> wurde generiert' . $coreImp . '</p>';
+            $html .= '<span class="cmSuccessFilenameColor">';
+            $html .= '<b>' . $themeCssName . '</b>';
+            $html .= '</span> wurde generiert' . $coreImp . '</p>';
         }
 
         /**
@@ -359,7 +364,7 @@ class CssBuilder
         // replacements
         $search = array(' ', "\t", "\r\n", "\r", CR);
         $replace = array('', '', '', '', '', '');
-        $iniArray['files'] = str_replace( $search, $replace, $iniArray['files']);
+        $iniArray['files'] = str_replace($search, $replace, $iniArray['files']);
 
         if (mb_substr($iniArray['files'], strlen($iniArray['files']) - 1) == ',') {
             $iniArray['files'] = mb_substr($iniArray['files'], 0, strlen($iniArray['files']) - 1);
@@ -376,28 +381,24 @@ class CssBuilder
      */
     protected function getCssFileHeader($browserInfo = '')
     {
-        $header  = '';
-        $header  = '/**' . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------------' . CR;
-        $header .= ' * Koch CSS Framework' . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------------' . CR;
-        $header .= ' * This file has been auto-generated by the Koch Framework CSS Framework.' . CR;
-        $header .= ' * Its a compilation of several css files. Do not edit manually. Use the CssBuilder Module instead!' . CR;
-        $header .= ' * Last Updated:  ' . date('Y-m-d H:i:s', time()) . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------------' . CR;
-        $header .= ' * @package      CSFW' . CR;
-        $header .= ' * @subpackage   Core' . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------------' . CR;
-        $header .= ' * @description  Created for - ' . $browserInfo . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------------' . CR;
-        $header .= ' * @generated' . CR;
-        $header .= ' */' . CR;
-        $header .= CR;
-        $header .= '@charset "UTF-8";';
-        $header .= CR;
-        $header .= CR;
+        $h  = '';
+        $h .= '/**' . CR;
+        $h .=  ' * --------------------------------------------------------------------------------' . CR;
+        $h .=  ' * Koch CSS Framework' . CR;
+        $h .=  ' * --------------------------------------------------------------------------------' . CR;
+        $h .=  ' * This file has been auto-generated. Its a compilation of several css files.' . CR;
+        $h .=  ' * Do not edit manually. Use the CssBuilder instead!' . CR;
+        $h .=  ' * Last Updated:  ' . date('Y-m-d H:i:s', time()) . CR;
+        $h .=  ' * --------------------------------------------------------------------------------' . CR;
+        $h .=  ' * @description  Created for - ' . $browserInfo . CR;
+        $h .=  ' * --------------------------------------------------------------------------------' . CR;
+        $h .=  ' */' . CR;
+        $h .=  CR;
+        $h .=  '@charset "UTF-8";' . CR;
+        $h .=  CR;
+        $h .=  CR;
 
-        return $header;
+        return $h;
     }
 
     /**
@@ -410,16 +411,16 @@ class CssBuilder
     {
         $header  = '';
         $header  = '/**' . CR;
-        $header .= ' * This file has been auto-generated by the Koch CSS Framework.' . CR;
-        $header .= ' * Its a compilation of several css files. Do not edit manually. Use the CssBuilder!' . CR;
+        $header .= ' * This file has been auto-generated. Its a compilation of several css files.' . CR;
+        $header .= ' * Do not edit manually. Use the CssBuilder!' . CR;
         $header .= ' * Last Update:  ' . date('Y-m-d H:i:s', time()) . CR;
-        $header .= ' * ----------------------------------------------------------------------------------------------' . CR;
+        $header .= ' * --------------------------------------------------------------------------------' . CR;
         $header .= ' * Framework:    ' . $coreInfo['framework'] . CR;
         $header .= ' * Description:  ' . $coreInfo['description'] . CR;
         $header .= ' * Author:       ' . $coreInfo['author'] . CR;
         $header .= ' * Version:      ' . $coreInfo['version'] . CR;
         $header .= ' * Version-Date: ' . $coreInfo['date'] . CR;
-        $header .= ' * ----------------------------------------------------------------------------------------------' . CR;
+        $header .= ' * --------------------------------------------------------------------------------' . CR;
         $header .= ' * @generated' . CR;
         $header .= ' */' . CR;
 
@@ -436,16 +437,16 @@ class CssBuilder
     {
         $header  = '';
         $header  = '/**' . CR;
-        $header .= ' * This file has been auto-generated by the KochC CSS Framework.' . CR;
-        $header .= ' * Its a compilation of several css files. Do not edit manually. Use CssBuilder!' . CR;
+        $header .= ' * This file has been auto-generated. Its a compilation of several css files. ' . CR;
+        $header .= ' * Do not edit manually. Use CssBuilder!' . CR;
         $header .= ' * Last Update:  ' . date('Y-m-d H:i:s', time()) . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------' . CR;
+        $header .= ' * --------------------------------------------------------------------------------' . CR;
         $header .= ' * Framework:    ' . $themeInfo['framework'] . CR;
         $header .= ' * Description:  ' . $themeInfo['description'] . CR;
         $header .= ' * Author:       ' . $themeInfo['author'] . CR;
         $header .= ' * Version:      ' . $themeInfo['version'] . CR;
         $header .= ' * Version-Date: ' . $themeInfo['date'] . CR;
-        $header .= ' * ---------------------------------------------------------------------------------------------' . CR;
+        $header .= ' * --------------------------------------------------------------------------------' . CR;
         $header .= ' * @generated' . CR;
         $header .= ' */' . CR;
 
@@ -532,7 +533,7 @@ class CssBuilder
             $single_quot = "'[^'\\\\]*(?:\\\\.[^'\\\\]*)*'";
             // Strip all comment blocks, but keep double/single quoted strings.
             $contents = preg_replace(
-                    "<($double_quot|$single_quot)|$comment>Ss", "$1", $contents
+                "<($double_quot|$single_quot)|$comment>Ss", "$1", $contents
             );
             // Remove certain whitespace.
             // There are different conditions for removing leading and trailing
@@ -547,12 +548,11 @@ class CssBuilder
               // Strip only trailing whitespace from:
               // - Opening parenthesis: Retain "@media (bar) and foo".
               // - Colon: Retain :pseudo-selectors.
-              | ([\(:])\s+
-            >xS',
-                    // Only one of the three capturing groups will match, so its reference
-                    // will contain the wanted value and the references for the
-                    // two non-matching groups will be replaced with empty strings.
-                    '$1$2$3', $contents
+              | ([\(:])\s+>xS',
+                // Only one of the three capturing groups will match, so its reference
+                // will contain the wanted value and the references for the
+                // two non-matching groups will be replaced with empty strings.
+                '$1$2$3', $contents
             );
 
             // End the file with a new line.
@@ -561,8 +561,11 @@ class CssBuilder
 
         // Replaces @import commands with the actual stylesheet content.
         // This happens recursively but omits external files.
-        $contents = preg_replace_callback('/@import\s*(?:url\(\s*)?[\'"]?(?![a-z]+:)([^\'"\()]+)[\'"]?\s*\)?\s*;/',
-                'self::load_stylesheet', $contents);
+        $contents = preg_replace_callback(
+            '/@import\s*(?:url\(\s*)?[\'"]?(?![a-z]+:)([^\'"\()]+)[\'"]?\s*\)?\s*;/', 
+            'self::load_stylesheet', 
+            $contents
+        );
 
         return $contents;
     }
@@ -596,32 +599,32 @@ class CssBuilder
      */
     public static function getFrontendPath()
     {
-        return self::$_frontendPath;
+        return self::$frontendPath;
     }
 
     public static function getBackendPath()
     {
-        return self::$_backendPath;
+        return self::$backendPath;
     }
 
     public static function getFrontendTheme()
     {
-        return self::$_frontendTheme;
+        return self::$frontendTheme;
     }
 
     public static function getBackendTheme()
     {
-        return self::$_backendTheme;
+        return self::$backendTheme;
     }
 
     public static function getBrowsers()
     {
-        return self::$_browsers;
+        return self::$browsers;
     }
 
     public static function getConfiguration()
     {
-        return self::$_configuration;
+        return self::$configuration;
     }
 
     /**
@@ -631,27 +634,27 @@ class CssBuilder
      */
     public static function setFrontendPath($value)
     {
-        self::$_frontendPath = $value;
+        self::$frontendPath = $value;
     }
 
     public static function setBackendPath($value)
     {
-        self::$_backendPath = $value;
+        self::$backendPath = $value;
     }
 
     public static function setFrontendTheme($value)
     {
-        self::$_frontendTheme = $value;
+        self::$frontendTheme = $value;
     }
 
     public static function setBackendTheme($value)
     {
-        self::$_backendTheme = $value;
+        self::$backendTheme = $value;
     }
 
     public static function setBrowsers($data)
     {
-        self::$_browsers = $data;
+        self::$browsers = $data;
     }
 
     /**
@@ -680,6 +683,6 @@ class CssBuilder
         $config['info']['generator_version'] = self::$generatorVersion;
         $config['info']['generator_version_date'] = self::$generatorVersionDate;
 
-        self::$_configuration = $config;
+        self::$configuration = $config;
     }
 }

@@ -23,6 +23,8 @@
  *
  */
 
+namespace Koch\Localization;
+
 /**
  * ExtractorInterface
  */

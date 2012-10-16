@@ -188,7 +188,7 @@ abstract class GeneratorAbstract extends ElementBase
     {
         $ae = '';
         if (is_array($elements)) {
-            foreach ($elements AS $key => $value) {
+            foreach ($elements as $key => $value) {
                 $ae.= $indentString . "<$key>$value</$key>\n";
             }
         }
@@ -199,10 +199,14 @@ abstract class GeneratorAbstract extends ElementBase
     protected function createStylesheetReferences()
     {
         $xml = '';
-        if (!empty($this->cssStyleSheet))
+        
+        if (!empty($this->cssStyleSheet)) {
             $xml .= '<?xml-stylesheet href="' . $this->cssStyleSheet . "\" type=\"text/css\"?>\n";
-        if (!empty($this->xslStyleSheet))
+        }
+        
+        if (!empty($this->xslStyleSheet)) {
             $xml .= '<?xml-stylesheet href="' . $this->xslStyleSheet . "\" type=\"text/xsl\"?>\n";
+        }
 
         return $xml;
     }
@@ -215,7 +219,8 @@ abstract class GeneratorAbstract extends ElementBase
     abstract public function renderFeed();
 
     /**
-     * Generate a filename for the feed cache file. The result will be $_SERVER['PHP_SELF'] with the extension changed to .xml.
+     * Generate a filename for the feed cache file.
+     * The result will be $_SERVER['PHP_SELF'] with the extension changed to .xml.
      * For example:
      *
      * echo $_SERVER['PHP_SELF']."\n";
@@ -264,8 +269,10 @@ abstract class GeneratorAbstract extends ElementBase
      * before anything else, especially before you do the time consuming task to build the feed
      * (web fetching, for example).
      *
-     * @param filename	string	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
-     * @param timeout	int		optional	the timeout in seconds before a cached version is refreshed (defaults to 3600 = 1 hour)
+     * @param filename string optional the filename where a recent version of the feed is saved. 
+     * If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml 
+     * (see generateFilename()).
+     * @param timeout int optional the timeout in seconds before a cached version is refreshed (defaults to 3600 = 1h)
      */
     public function useCached($filename = '', $timeout = 3600)
     {
@@ -283,8 +290,11 @@ abstract class GeneratorAbstract extends ElementBase
      * Saves this feed as a file on the local disk. After the file is saved, a redirect
      * header may be sent to redirect the user to the newly created file.
      *
-     * @param filename	string	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
-     * @param redirect	boolean	optional	send an HTTP redirect header or not. If true, the user will be automatically redirected to the created file.
+     * @param filename string optional the filename where a recent version of the feed is saved.
+     * If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml
+     * (see generateFilename()).
+     * @param redirect boolean optional send an HTTP redirect header or not.
+     * If true, the user will be automatically redirected to the created file.
      */
     public function saveFeed($filename = '', $displayContents = true)
     {
