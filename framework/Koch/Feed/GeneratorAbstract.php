@@ -199,11 +199,11 @@ abstract class GeneratorAbstract extends ElementBase
     protected function createStylesheetReferences()
     {
         $xml = '';
-        
+
         if (!empty($this->cssStyleSheet)) {
             $xml .= '<?xml-stylesheet href="' . $this->cssStyleSheet . "\" type=\"text/css\"?>\n";
         }
-        
+
         if (!empty($this->xslStyleSheet)) {
             $xml .= '<?xml-stylesheet href="' . $this->xslStyleSheet . "\" type=\"text/xsl\"?>\n";
         }
@@ -269,8 +269,8 @@ abstract class GeneratorAbstract extends ElementBase
      * before anything else, especially before you do the time consuming task to build the feed
      * (web fetching, for example).
      *
-     * @param filename string optional the filename where a recent version of the feed is saved. 
-     * If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml 
+     * @param filename string optional the filename where a recent version of the feed is saved.
+     * If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml
      * (see generateFilename()).
      * @param timeout int optional the timeout in seconds before a cached version is refreshed (defaults to 3600 = 1h)
      */

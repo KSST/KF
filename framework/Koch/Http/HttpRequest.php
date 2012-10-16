@@ -240,10 +240,10 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * isset, checks if a certain parameter exists in the parameters array
      *
-     * @param  string $name Name of the Parameter
-     * @param  string $arrayname GET, POST, COOKIE. Default = GET.
-     * @param  boolean $where If set to true, method will return the name of the array the parameter was found in.
-     * @return mixed boolean string arrayname
+     * @param  string  $name      Name of the Parameter
+     * @param  string  $arrayname GET, POST, COOKIE. Default = GET.
+     * @param  boolean $where     If set to true, method will return the name of the array the parameter was found in.
+     * @return mixed   boolean string arrayname
      *
      */
     public function issetParameter($name, $arrayname = 'GET', $where = false)
@@ -265,6 +265,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
                 if (isset($this->cookie_parameters[$name])) {
                     return ($where === false) ? true : 'cookie';
                 }
+                break;
             default:
                 return false;
                 break;
@@ -601,8 +602,8 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             return (bool) filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE);
         } else {
             return (bool) filter_var(
-                $ip, 
-                FILTER_VALIDATE_IP, 
+                $ip,
+                FILTER_VALIDATE_IP,
                 FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE | FILTER_FLAG_IPV4
             );
         }
@@ -635,9 +636,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * REST Tunneling Detection
      *
-     * This method takes care for REST (Representational State Transfer) 
+     * This method takes care for REST (Representational State Transfer)
      * by tunneling PUT, DELETE through POST (principal of least power).
-     * Ok, this is faked or spoofed REST, but lowers the power of POST 
+     * Ok, this is faked or spoofed REST, but lowers the power of POST
      * and it's short and nice in html forms.
      * @todo consider allowing 'GET' through POST?
      *

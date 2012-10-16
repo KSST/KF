@@ -188,8 +188,8 @@ class User
              * @todo remove $_REQUEST, frontend theme is selectable via frontend
              */
             if (false === isset($_REQUEST['theme'])) {
-                $_SESSION['user']['frontend_theme'] = (!empty($this->user['frontend_theme'])) 
-                ? $this->user['frontend_theme'] 
+                $_SESSION['user']['frontend_theme'] = (!empty($this->user['frontend_theme']))
+                ? $this->user['frontend_theme']
                 : $this->config['template']['frontend_theme'];
             }
 
@@ -384,8 +384,8 @@ class User
             $this->moduleconfig = $this->config->readModuleConfig('account');
 
             $hash_ok = Koch\Security::checkSaltedHash(
-                $_COOKIE['cs_cookie_password'], 
-                $this->user['passwordhash'], 
+                $_COOKIE['cs_cookie_password'],
+                $this->user['passwordhash'],
                 $this->user['salt'],
                 $this->moduleconfig['login']['hash_algorithm']
             );
