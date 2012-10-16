@@ -107,5 +107,4 @@ class Apc
     {
         return apc_delete(md5($resource_name . $cache_id . $compile_id));
     }
-
 }

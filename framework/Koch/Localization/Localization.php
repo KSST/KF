@@ -24,17 +24,17 @@ use Koch\Config\Config;
 class Localization
 {
     // Locale Variables
-    public $locale    = null;
+    public $locale = null;
 
     /**
-     * @var Set Locale Defaults: the textdomain. 'clansuite' => 'clansuite.mo' filename
+     * @var Set Locale Defaults: the textdomain.
      */
-    private $domain    = null;
+    private $domain = null;
 
     /**
      * @var Sets Encoding.
      */
-    private $encoding  = null;
+    private $encoding = null;
 
     // References
     private static $config    = null;
@@ -152,7 +152,9 @@ class Localization
         T_bind_textdomain_codeset($domain, $this->encoding);
         T_textdomain($domain);
 
-        #\Koch\Debug\Debug::firebug('<p>Textdomain "' .$domain .'" loaded from path "'. $domain_directory .'" for "'. $module .'"</p>');
+        /*\Koch\Debug\Debug::firebug(
+           '<p>Textdomain "' .$domain .'" loaded from path "'. $domain_directory .'" for "'. $module .'"</p>'
+        );*/
 
         return true;
     }

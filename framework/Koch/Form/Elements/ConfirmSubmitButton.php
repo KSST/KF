@@ -24,6 +24,7 @@ class ConfirmSubmitButton extends Input implements FormElementInterface
         $this->type = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
+        if($message != null) { $this->message = $message; }
 
         /**
          * Add the Form Submit Confirmation Javascript.
@@ -31,7 +32,13 @@ class ConfirmSubmitButton extends Input implements FormElementInterface
          * To add the value of specific "form.elements" to the message
          * use: "+ form.elements['email'].value +"
          */
-        $this->setAdditionalAttributeAsText("onclick=\"if (confirm('Are you sure you want to submit this form?\\n\\nClick OK to submit or Cancel to abort.')) { submit(); } else { return false; } \" value=\"Submit\"");
+        $this->setAdditionalAttributeAsText(
+            "onclick=\"if (confirm('Are you sure you want to submit this form?\\n
+                \\nClick OK to submit or Cancel to abort.')) { 
+                submit(); } else { 
+                return false; 
+            } \" value=\"Submit\""
+        );
     }
 
     public function setMessage($message)

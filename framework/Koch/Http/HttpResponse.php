@@ -266,19 +266,19 @@ class HttpResponse implements HttpResponseInterface
         $ob = ini_get('output_buffering');
 
         // Abort the method if headers have already been sent, except when output buffering has been enabled
-        if ( headers_sent() and (bool) $ob === false or mb_strtolower($ob) == 'off' ) {
+        if (headers_sent() and (bool) $ob === false or mb_strtolower($ob) == 'off') {
             return false;
         }
 
-        if (false === empty($domain) ) {
+        if (false === empty($domain)) {
             // Fix the domain to accept domains with and without 'www.'.
-            if ( mb_strtolower( mb_substr($domain, 0, 4) ) === 'www.' ) {
+            if (mb_strtolower(mb_substr($domain, 0, 4)) === 'www.') {
                 $domain = mb_substr($domain, 4);
             }
 
             // Add the dot prefix to ensure compatibility with subdomains
-            if ( mb_substr($domain, 0, 1) !== '.' ) {
-                $domain = '.'.$domain;
+            if (mb_substr($domain, 0, 1) !== '.') {
+                $domain = '.' . $domain;
             }
 
             // Remove port information.
@@ -321,15 +321,14 @@ class HttpResponse implements HttpResponseInterface
     {
         // set nocache via session
         #session_cache_limiter('nocache');
-
         // reset pragma header
-        self::addHeader('Pragma',        'no-cache');
+        self::addHeader('Pragma', 'no-cache');
         // reset cache-control
         self::addHeader('Cache-Control', 'no-store, no-cache, must-revalidate');
         // append cache-control
         self::addHeader('Cache-Control', 'post-check=0, pre-check=0');
         // force immediate expiration
-        self::addHeader('Expires',       '1');
+        self::addHeader('Expires', '1');
         // set date of last modification
         self::addHeader('Last-Modified', gmdate("D, d M Y H:i:s") . ' GMT');
     }

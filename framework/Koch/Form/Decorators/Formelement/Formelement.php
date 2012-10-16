@@ -12,7 +12,7 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\FormelementDecorator;
 
 /**
  * Formelement_Decorator_Formelement
@@ -26,8 +26,8 @@ use Koch\Form\FormElementDecorator;
  * It utilizes the autoloader to get the formelement (B).
  *
  * @category Koch
- * @package Koch_Form
- * @subpackage Koch_Form_Decorator
+ * @package Koch\Form
+ * @subpackage Koch\Form\Decorator
  */
 class Formelement extends FormelementDecorator
 {
