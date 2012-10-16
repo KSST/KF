@@ -26,12 +26,13 @@
     </target>
 
     <target name="php-cs-fixer" description="Check CodingStandard with php-cs-fixer">
-        <exec executable="./bin/fix-codingstyle.sh">
+        <exec executable="./bin/fix-codingstyle.sh" />
     </target>
 
     <target name="utf8-encoding-check" description="Check UTF-8 encoding of files">
         <exec executable="./bin/checkEncodingUTF8.sh">
             <arg value="framework" />
+        </exec>
     </target>
 
     <target name="clean" description="Cleanup build artifacts">
