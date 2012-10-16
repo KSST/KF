@@ -165,13 +165,13 @@ class CssBuilder
             if(mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '/' ||
                mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '\/') {
                 $config['themeFrontendPath'] = mb_substr(
-                    $config['themeFrontendPath'], 
+                    $config['themeFrontendPath'],
                     strlen($config['themeFrontendPath']) - 1
                 );
             }
 
             // Read INI-File
-            $themeINI = $config['themeFrontendPath'] . DIRECTORY_SEPARATOR 
+            $themeINI = $config['themeFrontendPath'] . DIRECTORY_SEPARATOR
                 . $config['themeFrontend'] .  '/css/' . $builderINI;
             $themeInfo = $this->readCssBuilderIni($themeINI);
             $themeInfo['path'] = str_replace("{theme}", $config['themeFrontend'], $themeInfo['path']);
@@ -197,12 +197,12 @@ class CssBuilder
                     mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '\/')
             {
                 $config['themeBackendPath'] = mb_substr(
-                    $config['themeBackendPath'], 
+                    $config['themeBackendPath'],
                     strlen($config['themeBackendPath']) - 1
                 );
             }
             // Read INI-File
-            $themeBackINI = $config['themeBackendPath'] . DIRECTORY_SEPARATOR 
+            $themeBackINI = $config['themeBackendPath'] . DIRECTORY_SEPARATOR
                 . $config['themeBackend'] . '/css/' . $builderINI;
             $themeBackInfo = $this->readCssBuilderIni($themeBackINI);
             $themeBackInfo['path'] = str_replace("{theme}", $config['themeBackend'], $themeBackInfo['path']);
@@ -549,8 +549,8 @@ class CssBuilder
         // Replaces @import commands with the actual stylesheet content.
         // This happens recursively but omits external files.
         $contents = preg_replace_callback(
-            '/@import\s*(?:url\(\s*)?[\'"]?(?![a-z]+:)([^\'"\()]+)[\'"]?\s*\)?\s*;/', 
-            'self::load_stylesheet', 
+            '/@import\s*(?:url\(\s*)?[\'"]?(?![a-z]+:)([^\'"\()]+)[\'"]?\s*\)?\s*;/',
+            'self::load_stylesheet',
             $contents
         );
 
