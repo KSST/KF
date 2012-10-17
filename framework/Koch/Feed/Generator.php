@@ -143,7 +143,7 @@ class Generator // extends FeedGeneratorAbstract
      *
      * @see        FeedCreator::addItem()
      * @param    string    format    format the feed should comply to. Valid values are:
-     * 			"PIE0.1", "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
+     * "PIE0.1", "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
      * @return string the contents of the feed.
      */
     public function createFeed($format = 'RSS0.91')
@@ -185,7 +185,7 @@ class Generator // extends FeedGeneratorAbstract
      * @param filename   string   optional the filename where a recent version of the feed is saved.
      * If not specified, the filename is $_SERVER['PHP_SELF'] with
      * the extension changed to .xml (see _generateFilename()).
-     * @param timeout int      optional the timeout in seconds before a cached version is refreshed (default 3600 = 1h)
+     * @param timeout int optional the timeout in seconds before a cached version is refreshed (default 3600 = 1h)
      */
     public function useCached($format = 'RSS0.91', $filename = '', $timeout = 3600)
     {
