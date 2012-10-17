@@ -46,7 +46,7 @@ function Smarty_function_icon($params)
      * if the src attribute contains a http://SERVER_NAME URL its cutted of
      */
     if (isset($src) and empty($src) == false) {
-        $needle = 'http://'.$_SERVER['SERVER_NAME'].DS;
+        $needle = 'http://'.$_SERVER['SERVER_NAME'].'/';
         $pos = mb_strpos($src, $needle);
         if ($src !== null and is_int($pos)) {
             #\Koch\Debug\Debug::printR($pos);

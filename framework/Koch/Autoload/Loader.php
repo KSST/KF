@@ -255,7 +255,7 @@ class Loader
             $filename  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
         }
 
-        // convert underscore to DS
+        // convert underscore
         $filename .= str_replace('_', DIRECTORY_SEPARATOR, $classname) . '.php';
 
         #echo "$classname => $filename <br>";
