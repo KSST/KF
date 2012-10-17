@@ -45,7 +45,7 @@ class JS extends HTML
     public function renderFeed()
     {
         $feed = parent::createFeed();
-        $feedArray = explode("\n",$feed);
+        $feedArray = explode("\n", $feed);
 
         $jsFeed = "";
         foreach ($feedArray as $value) {
@@ -64,7 +64,6 @@ class JS extends HTML
     {
         $fileInfo = pathinfo($_SERVER['PHP_SELF']);
 
-        return substr($fileInfo["basename"],0,-(strlen($fileInfo["extension"])+1)).".js";
+        return substr($fileInfo["basename"], 0, -(strlen($fileInfo["extension"]) + 1)) . ".js";
     }
-
 }

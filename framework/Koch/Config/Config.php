@@ -93,27 +93,23 @@ class Config extends AbstractConfig
     /**
      * Write module configuration file
      *
-     * @example
-     * $this->writeModuleConfig('news', $data);
-     *
-     * @see writeConfig()
-     *
-     * @param $array the configuration array to write
-     * @param $modulename The Modulename
+     * @param $array The configuration array to write.
+     * @param $module The name of a module.
      */
-    public function writeModuleConfig($array, $modulename = null)
+    public function writeModuleConfig($array, $module = null)
     {
-        if (null == $modulename) {
-            $modulename = Koch\Router\TargetRoute::getModule();
+        if ($module == null) {
+            $module = Koch\Router\TargetRoute::getModule();
         }
-        $this->writeConfig(APPLICATION_MODULES_PATH . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php', $array);
+        
+        $this->writeConfig(
+            APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php',
+            $array
+        );
     }
 
     /**
      * Write a config file
-     *
-     * @example To write a module cfg for module news:
-     * $config->confighandler->writeConfig( APPLICATION_MODULES_PATH . 'news'. DIRECTORY_SEPARATOR .'news.config.php', $data);
      *
      * @param $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.

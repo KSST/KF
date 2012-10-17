@@ -71,8 +71,8 @@ class SwiftMailer
             case 'smtp':
                 include $vendor . 'swiftmailer/Swift/Connection/SMTP.php';
                 $connection = new Swift_Connection_SMTP(
-                    $this->config['email']['mailerhost'], 
-                    $this->config['email']['mailerport'], 
+                    $this->config['email']['mailerhost'],
+                    $this->config['email']['mailerport'],
                     $this->config['email']['mailencryption']
                 );
                 break;

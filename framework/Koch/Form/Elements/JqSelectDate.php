@@ -69,8 +69,8 @@ class JqSelectDate extends FormElement implements FormElementInterface
      */
      // <script type="text/javascript" src="http://jqueryui.com/latest/jquery-1.3.2.js"></script>
      // <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
-    private $javascript_libraries =  '<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
-                                      <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js"></script>';
+    private $jsLibraries =  '<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
+                              <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js"></script>';
 
     public function __construct()
     {
@@ -83,7 +83,7 @@ class JqSelectDate extends FormElement implements FormElementInterface
      */
     public function getJavascript()
     {
-        return $this->javascript_libraries.sprintf($this->sprintf_datepicker_js, $this->getName(), $this->getAttributes());
+        return $this->jsLibraries.sprintf($this->sprintf_datepicker_js, $this->getName(), $this->getAttributes());
     }
 
     /**
@@ -130,17 +130,17 @@ class JqSelectDate extends FormElement implements FormElementInterface
     public function asIcon()
     {
         // define relevat attributes to display the datepicker as an icon
-        $datepicker_attributes = array(
-                                       'firstDay' => '1',
-                                       'format' => 'yy-mm-dd',
-                                       'showOn' => 'button',
-                                       'buttonImage'    => 'themes/core/images/lullacons/calendar.png',
-                                       'buttonImageOnly' => 'true',
-                                       'constrainInput' => 'false',
-                                      );
+        $datepickerAttributes = array(
+            'firstDay' => '1',
+            'format' => 'yy-mm-dd',
+            'showOn' => 'button',
+            'buttonImage' => 'themes/core/images/lullacons/calendar.png',
+            'buttonImageOnly' => 'true',
+            'constrainInput' => 'false',
+        );
 
         // set the relevant attributes
-        $this->setAttributes($datepicker_attributes);
+        $this->setAttributes($datepickerAttributes);
 
         // datepicker icon trigger needs a input element, so we replace the original (div) string
         $this->html = '<input type="text" id="datepicker">';

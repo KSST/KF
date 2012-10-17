@@ -253,7 +253,8 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
                 $msg .= '<br /> Message: ' . $e->getMessage();
             }
 
-            $uri = sprintf('http://%s%s',
+            $uri = sprintf(
+                'http://%s%s',
                 $_SERVER['SERVER_NAME'],
                 dirname($_SERVER['PHP_SELF']) . 'installation/index.php'
             );
@@ -390,9 +391,11 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
             AND s.session_starttime < :time'
         );
 
-        $query->setParameters(array(
-            'name' => self::SESSION_NAME,
-            'time' => (int) $expire_time)
+        $query->setParameters(
+            array(
+                'name' => self::SESSION_NAME,
+                'time' => (int) $expire_time
+            )
         );
 
         $query->execute();
