@@ -130,5 +130,4 @@ class Date
     {
         return $this->unix;
     }
-
 }
