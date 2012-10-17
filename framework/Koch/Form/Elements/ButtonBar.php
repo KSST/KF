@@ -51,7 +51,7 @@ class ButtonBar extends FormElement implements FormElementInterface
         }
 
         // @todo use instanceof Koch_Formelement_Button
-        if (is_object($buttonname) and (!$buttonname instanceof Koch_Formelement_Input)) {
+        if (is_object($buttonname) and (!$buttonname instanceof Koch\Form\FormElement\Input)) {
             throw new \Koch\Exception\Exception('The button must a be formelement object.');
         }
 
@@ -70,7 +70,9 @@ class ButtonBar extends FormElement implements FormElementInterface
     public function getButton($buttonname)
     {
         if ($this->buttons[$buttonname] === null) {
-            throw new \Koch\Exception\Exception(_('This button does not exist, so its not in this buttonbar: ') . $buttonname);
+            throw new \Koch\Exception\Exception(
+                _('This button does not exist, so its not in this buttonbar: ') . $buttonname
+            );
         }
 
         // return the button object
@@ -103,9 +105,9 @@ class ButtonBar extends FormElement implements FormElementInterface
 
     public function setCancelButtonURL($url)
     {
-       $this->getButton('cancelbutton')->setCancelURL($url);
+        $this->getButton('cancelbutton')->setCancelURL($url);
 
-       return $this;
+        return $this;
     }
 
     /**

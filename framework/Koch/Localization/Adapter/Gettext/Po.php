@@ -39,13 +39,8 @@ class Po
             return false;
         }
 
-        // results array
-        $hash = array();
-
-        // temporary array
+        $result = array();
         $temp = array();
-
-        // state
         $state = null;
         $fuzzy = false;
 
@@ -63,6 +58,7 @@ class Po
             switch ($key) {
                 case '#,': // flag...
                     $fuzzy = in_array('fuzzy', preg_split('/,\s*/', $data));
+                    // fall-through
                 case '#':  // translator-comments
                 case '#.': // extracted-comments
                 case '#:': // reference...
@@ -70,7 +66,7 @@ class Po
                     // start a new entry
                     if (count($temp) && array_key_exists('msgid', $temp) && array_key_exists('msgstr', $temp)) {
                         if (false === $fuzzy) {
-                            $hash[] = $temp;
+                            $result[] = $temp;
                         }
 
                         $temp = array();
@@ -88,7 +84,7 @@ class Po
                     $state = 'msgstr';
                     $temp[$state][] = $data;
                     break;
-                default :
+                default:
                     if (strpos($key, 'msgstr[') !== false) {
                         // translated-string-case-n
                         $state = 'msgstr';
@@ -104,7 +100,7 @@ class Po
                             case 'msgstr':
                                 $temp[$state][count($temp[$state]) - 1] .= "\n" . $line;
                                 break;
-                            default :
+                            default:
                                 // parse error
                                 fclose($fh);
 
@@ -119,34 +115,40 @@ class Po
 
         // add final entry
         if ($state === 'msgstr') {
-            $hash[] = $temp;
+            $result[] = $temp;
         }
 
-        // Cleanup data, merge multiline entries, reindex hash for ksort
-        $temp = $hash;
-        $hash = array();
+        // Cleanup data, merge multiline entries, reindex result for ksort
+        $temp = $result;
+        $result = array();
 
         foreach ($temp as $entry) {
             foreach ($entry as & $v) {
-                $v = self::po_clean_helper($v);
+                $v = self::poCleaner($v);
 
                 if ($v === false) {
                     // parse error
                     return false;
                 }
             }
-            $hash[$entry['msgid']]= $entry;
+            $result[$entry['msgid']]= $entry;
         }
 
-        return $hash;
+        return $result;
     }
 
-    private static function po_clean_helper($x)
+    /**
+     * Cleans the po.
+     * 
+     * @param string|array $x
+     * @return string Cleaned PO element.
+     */
+    private static function poCleaner($x)
     {
         if (true === is_array($x)) {
             foreach ($x as $k => $v) {
                 // WATCH IT! RECURSION!
-                $x[$k]= self::po_clean_helper($v);
+                $x[$k]= self::poCleaner($v);
             }
         } else {
             if ($x[0] === '"') {
@@ -155,9 +157,10 @@ class Po
 
             $x = str_replace("\"\n\"", '', $x);
             $x = str_replace('$', '\\$', $x);
+            
+            // #\Koch\Debug\Debug:firebug($x);
 
             // @todo which use case has this eval?
-            // #\Koch\Debug\Debug:firebug($x);
             //$x = @ eval ("return \"$x\";");
         }
 
