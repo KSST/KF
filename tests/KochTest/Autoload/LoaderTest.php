@@ -142,7 +142,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Loader::autoloadIncludePath('\Namespace\Library\SomeUnknownClass'));
 
         // set the include path to our fixtures directory, where a namespaces class exists
-        $path = __DIR__ . '/fixtures';
+        $path = __DIR__ . '/fixtures/Clansuite';
         set_include_path($path . PATH_SEPARATOR . get_include_path());
 
         // try to load existing namespaced class
