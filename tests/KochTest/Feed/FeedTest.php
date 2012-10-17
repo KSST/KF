@@ -27,10 +27,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_fetchRSS()
     {
-        $this->markTestIncomplete('Test fails with exit code 255');
-        //$simplepie_feed_object = Feed::fetchRSS($this->feed_url);
+        $simplepie_feed_object = Feed::fetchRSS($this->feedUrl);
 
-        //$this->assertInternalType($simplepie_feed_object, 'SimplePie');
+        $this->assertInstanceOf('SimplePie', $simplepie_feed_object);
     }
 
     /**
