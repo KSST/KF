@@ -37,21 +37,13 @@ class RSS091 extends Generator
     /**
      * Stores this RSS feed's version number.
      */
-    protected $RSSVersion;
+    protected $rssVersion = '0.91';
 
     public function __construct($identifier = '')
     {
         parent::__construct($identifier);
-        $this->_setRSSVersion("0.91");
-        $this->contentType = 'application/rss+xml';
-    }
 
-    /**
-     * Sets this RSS feed's version number.
-     */
-    protected function _setRSSVersion($version)
-    {
-        $this->RSSVersion = $version;
+        $this->contentType = 'application/rss+xml';
     }
 
     /**
@@ -64,14 +56,14 @@ class RSS091 extends Generator
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
         $feed.= $this->_createGeneratorComment();
         $feed.= $this->_createStylesheetReferences();
-        $feed.= "<rss version=\"" . $this->RSSVersion . "\">\n";
+        $feed.= "<rss version=\"" . $this->rssVersion . "\">\n";
         $feed.= "    <channel>\n";
         $feed.= '        <title>' . FeedCreator::iTrunc(htmlspecialchars($this->title), 100) . "</title>\n";
         $this->descriptionTruncSize = 500;
         $feed.= '        <description>' . $this->getDescription() . "</description>\n";
         $feed.= '        <link>' . $this->link . "</link>\n";
-        if ('2.0' == substr($this->RSSVersion, 0, 3) AND !empty($this->syndicationURL)) {
-            $feed .= "		<atom:link href=\"$this->syndicationURL\" rel=\"self\" type=\"application/rss+xml\" />";
+        if ('2.0' == substr($this->rssVersion, 0, 3) AND !empty($this->syndicationURL)) {
+            $feed .= "    <atom:link href=\"$this->syndicationURL\" rel=\"self\" type=\"application/rss+xml\" />";
         }
         $now = new FeedDate();
         $feed.= '        <lastBuildDate>' . htmlspecialchars($now->rfc822()) . "</lastBuildDate>\n";
@@ -80,7 +72,8 @@ class RSS091 extends Generator
         if ($this->image != null) {
             $feed.= "        <image>\n";
             $feed.= '            <url>' . $this->image->url . "</url>\n";
-            $feed.= '            <title>' . FeedCreator::iTrunc(htmlspecialchars($this->image->title), 100) . "</title>\n";
+            $feed.= '            <title>';
+            $feed.= FeedCreator::iTrunc(htmlspecialchars($this->image->title), 100) . "</title>\n";
             $feed.= '            <link>' . $this->image->link . "</link>\n";
             if ($this->image->width != '') {
                 $feed.= '            <width>' . $this->image->width . "</width>\n";
@@ -97,13 +90,16 @@ class RSS091 extends Generator
             $feed.= '        <language>' . $this->language . "</language>\n";
         }
         if ($this->copyright != '') {
-            $feed.= '        <copyright>' . FeedCreator::iTrunc(htmlspecialchars($this->copyright), 100) . "</copyright>\n";
+            $feed.= '        <copyright>';
+            $feed.= FeedCreator::iTrunc(htmlspecialchars($this->copyright), 100) . "</copyright>\n";
         }
         if ($this->editor != '') {
-            $feed.= '        <managingEditor>' . FeedCreator::iTrunc(htmlspecialchars($this->editor), 100) . "</managingEditor>\n";
+            $feed.= '        <managingEditor>';
+            $feed.= FeedCreator::iTrunc(htmlspecialchars($this->editor), 100) . "</managingEditor>\n";
         }
         if ($this->webmaster != '') {
-            $feed.= '        <webMaster>' . FeedCreator::iTrunc(htmlspecialchars($this->webmaster), 100) . "</webMaster>\n";
+            $feed.= '        <webMaster>';
+            $feed.= FeedCreator::iTrunc(htmlspecialchars($this->webmaster), 100) . "</webMaster>\n";
         }
         if ($this->pubDate != '') {
             $pubDate = new FeedDate($this->pubDate);
@@ -131,7 +127,8 @@ class RSS091 extends Generator
 
         for ($i = 0; $i < count($this->items); $i++) {
             $feed.= "        <item>\n";
-            $feed.= "            <title>" . FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) . "</title>\n";
+            $feed.= "            <title>";
+            $feed.= FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) . "</title>\n";
             $feed.= "            <link>" . htmlspecialchars($this->items[$i]->link) . "</link>\n";
             $feed.= "            <description>" . $this->items[$i]->getDescription() . "</description>\n";
 
@@ -158,7 +155,7 @@ class RSS091 extends Generator
                 $feed.= '            <guid>' . htmlspecialchars($this->items[$i]->guid) . "</guid>\n";
             }
             $feed.= $this->_createAdditionalElements($this->items[$i]->additionalElements, "        ");
-            if ('2.0' == substr($this->RSSVersion, 0, 3)
+            if ('2.0' == substr($this->rssVersion, 0, 3)
                 AND !empty($this->syndicationURL) AND $this->items[$i]->enclosure != null) {
                 $feed.= '            <enclosure url="';
                 $feed.= $this->items[$i]->enclosure->url;

@@ -45,7 +45,7 @@ class Description extends FormElementDecorator
     public $name = 'description';
 
     /**
-     * renders description AFTER formelement
+     * Renders description *after* formelement.
      *
      * @todo if required form field add (*)
      */
@@ -54,7 +54,9 @@ class Description extends FormElementDecorator
         // add description
         if ( isset($this->formelement->description) == true) {
             $html_formelement .= '<br />'. CR;
-            $html_formelement .= '<span class="formdescription">' . $this->formelement->getDescription() . '</span>' . CR;
+            $html_formelement .= '<span class="formdescription">';
+            $html_formelement .= $this->formelement->getDescription();
+            $html_formelement .= '</span>' . CR;
         }
 
         return $html_formelement;

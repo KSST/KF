@@ -37,12 +37,12 @@ class Generator // extends FeedGeneratorAbstract
     {
         switch (strtoupper($format)) {
             case '2.0':
-            // fall through
+                // fall through
             case 'RSS2.0':
                 header('Content-type: text/xml', true);
                 break;
             case '1.0':
-            // fall through
+                // fall through
             case 'RSS1.0':
                 header('Content-type: text/xml', true);
                 break;
@@ -56,7 +56,7 @@ class Generator // extends FeedGeneratorAbstract
                 header('Content-type: text/xml', true);
                 break;
             case 'ATOM':
-            // fall through: always the latest ATOM version
+                // fall through: always the latest ATOM version
             case 'ATOM1.0':
                 header('Content-type: application/xml', true);
                 break;
@@ -67,13 +67,13 @@ class Generator // extends FeedGeneratorAbstract
                 header('Content-type: text/html', true);
                 break;
             case 'JS':
-            // fall through
+                // fall through
             case 'JAVASCRIPT':
                 header('Content-type: text/javascript', true);
                 break;
             default:
             case '0.91':
-            // fall through
+                // fall through
             case 'RSS0.91':
                 header('Content-type: text/xml', true);
                 break;
@@ -85,19 +85,19 @@ class Generator // extends FeedGeneratorAbstract
         switch (strtoupper($format)) {
             case "2.0":
                 $this->format = 'RSS2.0';
-            // fall through
+                // fall through
             case "RSS2.0":
                 $this->feed = new \Koch\Feed\Generator\RSS20();
                 break;
             case "1.0":
                 $this->format = 'RSS1.0';
-            // fall through
+                // fall through
             case "RSS1.0":
                 $this->feed = new \Koch\Feed\Generator\RSS10();
                 break;
             case "0.91":
                 $this->format = 'RSS0.91';
-            // fall through
+                // fall through
             case "RSS0.91":
                 $this->feed = new \Koch\Feed\Generator\RSS091();
                 break;
@@ -111,7 +111,7 @@ class Generator // extends FeedGeneratorAbstract
                 $this->feed = new \Koch\Feed\Generator\OPML();
                 break;
             case "ATOM":
-            // fall through: always the latest ATOM version
+                // fall through: always the latest ATOM version
             case "ATOM1.0":
                 $this->feed = new \Koch\Feed\Generator\Atom10();
                 break;
@@ -120,7 +120,7 @@ class Generator // extends FeedGeneratorAbstract
                 break;
             case "JS":
                 $this->format = 'JAVASCRIPT';
-            // fall through
+                // fall through
             case "JAVASCRIPT":
                 $this->feed = new \Koch\Feed\Generator\JS();
                 break;
@@ -157,10 +157,13 @@ class Generator // extends FeedGeneratorAbstract
      * Saves this feed as a file on the local disk. After the file is saved, an HTTP redirect
      * header may be sent to redirect the use to the newly created file.
      *
-     * @param	string	format	format the feed should comply to. Valid values are:
-     * 			"PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
-     * @param string	filename	optional	the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
-     * @param	boolean	displayContents	optional	send the content of the file or not. If true, the file will be sent in the body of the response.
+     * @param string format format the feed should comply to. Valid values are:
+     * "PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0", "HTML", "JS"
+     * @param string filename optional the filename where a recent version of the feed is saved.
+     * If not specified, the filename is $_SERVER['PHP_SELF'] with
+     * the extension changed to .xml (see _generateFilename()).
+     * @param boolean displayContents optional send the content of the file or not.
+     * If true, the file will be sent in the body of the response.
      */
     public function saveFeed($format = 'RSS0.91', $filename = '', $displayContents = true)
     {
@@ -179,8 +182,10 @@ class Generator // extends FeedGeneratorAbstract
      *
      * @param   string   format   format the feed should comply to. Valid values are:
      *       "PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM1.0".
-     * @param filename   string   optional the filename where a recent version of the feed is saved. If not specified, the filename is $_SERVER['PHP_SELF'] with the extension changed to .xml (see _generateFilename()).
-     * @param timeout int      optional the timeout in seconds before a cached version is refreshed (defaults to 3600 = 1 hour)
+     * @param filename   string   optional the filename where a recent version of the feed is saved.
+     * If not specified, the filename is $_SERVER['PHP_SELF'] with
+     * the extension changed to .xml (see _generateFilename()).
+     * @param timeout int      optional the timeout in seconds before a cached version is refreshed (default 3600 = 1h)
      */
     public function useCached($format = 'RSS0.91', $filename = '', $timeout = 3600)
     {
@@ -193,8 +198,8 @@ class Generator // extends FeedGeneratorAbstract
     /**
      * Outputs feed to the browser - needed for on-the-fly feed generation (like it is done in WordPress, etc.)
      *
-     * @param	format	string	format the feed should comply to. Valid values are:
-     * 							"PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM0.3".
+     * @param format string format the feed should comply to. Valid values are:
+     * "PIE0.1" (deprecated), "mbox", "RSS0.91", "RSS1.0", "RSS2.0", "OPML", "ATOM0.3".
      */
     public function outputFeed($format = 'RSS0.91')
     {

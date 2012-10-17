@@ -128,8 +128,8 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
             array($this, 'sessionOpen'),
             array($this, 'sessionClose'),
             array($this, 'sessionRead'),
-            array($this, 'sessionWrite'), // this redefines session_write_close()
-            array($this, 'sessionDestroy'), // this redefines session_destroy()
+            array($this, 'sessionWrite'),
+            array($this, 'sessionDestroy'),
             array($this, 'sessionGc')
         );
 
@@ -253,7 +253,10 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
                 $msg .= '<br /> Message: ' . $e->getMessage();
             }
 
-            $uri = sprintf('http://%s%s', $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']) . 'installation/index.php');
+            $uri = sprintf('http://%s%s',
+                $_SERVER['SERVER_NAME'],
+                dirname($_SERVER['PHP_SELF']) . 'installation/index.php'
+            );
             $uri = str_replace('\\', '/', $uri);
 
             $msg .= '<p><b><font color="#FF0000">[Koch Framework Error] ';
@@ -262,7 +265,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
             $msg .= _('Please use <a href="%s">Installation</a> to perform a proper installation.');
             $msg .= '</p>';
 
-            throw new Exception( sprintf($msg, $uri) );
+            throw new Exception(sprintf($msg, $uri));
         }
     }
 
@@ -294,14 +297,16 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
                 WHERE s.session_id = :id'
         );
 
-        $query->setParameters(array(
-            'id' => $session_id,
-            'name' => self::SESSION_NAME,
-            'time' => (int) time(),
-            'data' => $data, // @todo serialize($data)
-            'visibility' => '1', // @todo ghost mode
-            'where' => 'session_start',
-            'user_id' => '0')
+        $query->setParameters(
+            array(
+                'id' => $session_id,
+                'name' => self::SESSION_NAME,
+                'time' => (int) time(),
+                'data' => $data, // @todo serialize($data)
+                'visibility' => '1', // @todo ghost mode
+                'where' => 'session_start',
+                'user_id' => '0'
+            )
         );
 
         $query->execute();
@@ -337,9 +342,11 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
             AND s.session_id = :id'
         );
 
-        $query->setParameters(array(
-            'name' => self::SESSION_NAME,
-            'id' => $session_id)
+        $query->setParameters(
+            array(
+                'name' => self::SESSION_NAME,
+                'id' => $session_id
+            )
         );
 
         $query->execute();

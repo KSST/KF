@@ -44,7 +44,7 @@ class SwiftMailer
     /**
      * Constructor.
      */
-    public function __construct( Koch\Config $config )
+    public function __construct(Koch\Config $config)
     {
         $this->config = $config;
         $this->loadMailer();
@@ -70,25 +70,24 @@ class SwiftMailer
         switch ($this->config['email']['mailmethod']) {
             case 'smtp':
                 include $vendor . 'swiftmailer/Swift/Connection/SMTP.php';
-                $connection = new Swift_Connection_SMTP($this->config['email']['mailerhost'], $this->config['email']['mailerport'], $this->config['email']['mailencryption']);
+                $connection = new Swift_Connection_SMTP(
+                    $this->config['email']['mailerhost'], 
+                    $this->config['email']['mailerport'], 
+                    $this->config['email']['mailencryption']
+                );
                 break;
-
             case 'sendmail':
                 $connection = new Swift_Connection_Sendmail;
                 break;
-
             case 'exim':
                 $connection = new Swift_Connection_Sendmail('/usr/sbin/exim -bs');
                 break;
-
             case 'qmail':
                 $connection = new Swift_Connection_Sendmail('/usr/sbin/qmail -bs');
                 break;
-
             case 'postfix':
                 $connection = new Swift_Connection_Sendmail('/usr/sbin/postfix -bs');
                 break;
-
             default:
                 $connection = new Swift_Connection_Sendmail;
         }
@@ -118,9 +117,12 @@ class SwiftMailer
 
             return true;
         } else {
-            trigger_error('The mailer failed to connect.
-                           Errors: <br/>' . '<pre>' . print_r($this->mailer->errors, 1) . '</pre>' . '
-                           Log: <pre>' . print_r($this->mailer->transactions, 1) . '</pre>', E_USER_NOTICE);
+            trigger_error(
+                'The mailer failed to connect.
+                Errors: <br/>' . '<pre>' . print_r($this->mailer->errors, 1) . '</pre>' . '
+                Log: <pre>' . print_r($this->mailer->transactions, 1) . '</pre>',
+                E_USER_NOTICE
+            );
 
             return false;
         }

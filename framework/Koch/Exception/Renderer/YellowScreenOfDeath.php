@@ -219,7 +219,8 @@ class YellowScreenOfDeath
 
         // Add Errorlogo
         $html .= '<div style="float: left; margin: 5px; margin-right: 25px; padding: 20px;">';
-        $html .= '<img src="' . WWW_ROOT_THEMES_CORE . 'images/Clansuite-Toolbar-Icon-64-error.png" style="border: 2px groove #000000;"/></div>';
+        $html .= '<img src="' . WWW_ROOT_THEMES_CORE . 'images/Clansuite-Toolbar-Icon-64-error.png"';
+        $html .= ' style="border: 2px groove #000000;"/></div>';
 
         // Open Error Table
         $html .= '<table width="80%"><tr><td>';
@@ -235,7 +236,8 @@ class YellowScreenOfDeath
         // Panel 2 - Error Context
         $html .= '<div id="panel2" class="panel">';
         $html .= '<h3>Context</h3>';
-        $html .= '<p><span class="small">You are viewing the source code of the file "' . $errfile . '" around line ' . $errline . '.</span></p>';
+        $html .= '<p><span class="small">You are viewing the source code of the file "';
+        $html .= $errfile . '" around line ' . $errline . '.</span></p>';
         $html .= Errorhandler::getErrorContext($errfile, $errline, 8) . '</div>';
 
         // Panel 3 - Debug Backtracing
@@ -248,12 +250,14 @@ class YellowScreenOfDeath
         $html .= '<tr><td colspan="2"></td></tr>';
         $html .= '<tr><td><strong>Date: </strong></td><td>' . date('r') . '</td></tr>';
         $html .= '<tr><td><strong>Remote: </strong></td><td>' . $_SERVER['REMOTE_ADDR'] . '</td></tr>';
-        $html .= '<tr><td><strong>Request: </strong></td><td>' . htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES) . '</td></tr>';
+        $html .= '<tr><td><strong>Request: </strong></td><td>' . htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
+        $html .= '</td></tr>';
         $html .= '<tr><td><strong>PHP: </strong></td><td>' . PHP_VERSION . ' ' . PHP_EXTRA_VERSION . '</td></tr>';
         $html .= '<tr><td><strong>Server: </strong></td><td>' . $_SERVER['SERVER_SOFTWARE'] . '</td></tr>';
         $html .= '<tr><td><strong>Agent: </strong></td><td>' . $_SERVER['HTTP_USER_AGENT'] . '</td></tr>';
-        $html .= '<tr><td><strong>Clansuite: </strong></td><td>' . APPLICATION_VERSION . ' ' . APPLICATION_VERSION_STATE;
-        $html .= ' (' . APPLICATION_VERSION_NAME . ')</td></tr>';
+        $html .= '<tr><td><strong>Clansuite: </strong></td><td>';
+        $html .= APPLICATION_VERSION . ' ' . APPLICATION_VERSION_STATE . ' (' . APPLICATION_VERSION_NAME . ')';
+        $html .= '</td></tr>';
         $html .= '</table></p></div>';
 
         // Panel 5 - Backlink to Bugtracker with Errormessage -> http://trac.clansuite.com/newticket
