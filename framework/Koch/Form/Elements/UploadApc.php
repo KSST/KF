@@ -28,7 +28,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\Elements\File;
 use Koch\Form\FormElementInterface;
 
-class UploadApc extends File implements FormElementInterface
+class UploadApc extends File
 {
     /**
      * This renders a File Upload Form with an APC Progress Bar.
@@ -131,27 +131,41 @@ class UploadApc extends File implements FormElementInterface
          * b) with a unique tracking id for the file
          * c) placed before the input file element.
          */
-        if (false === class_exists('Koch_Formelement_Hidden',false)) {
-            include __DIR__ . '/hidden.form.php';
-        }
         $uniqueID = md5(uniqid(mt_rand(), true));
-        $hidden = new Koch_Formelement_Hidden();
-        $hidden->setName('APC_UPLOAD_PROGRESS')->setID('upload_status')->setValue($uniqueID);
-        $html .= $hidden;
+        $hidden = new Hidden();        
+        $html .= $hidden->setName('APC_UPLOAD_PROGRESS')->setID('upload_status')->setValue($uniqueID);
 
         // add the input element
         $html .= '<input name="uploadfile" size="30" type="file">';
 
         // add a submit button
-        if (false === class_exists('Koch_Formelement_Submitbutton',false)) {
-            include __DIR__ . '/submitbutton.php';
-        }
-        $submit = new Koch_Formelement_Submitbutton();
+        $submit = new Submitbutton();
         $submit->setValue(_('Upload File'));
         $submit->setAdditionalAttributeAsText("onclick=\"this.disabled=true;" .
             "setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" ");
         $html .= $submit;
 
         return $javascript.$html;
+    }
+    
+    public function setValue($value)
+    {
+        $this->value = $value;
+    }
+    
+    public function getValue()
+    {
+        return $this->value;
+    }
+    
+    public function setAttribute($attribute, $value)
+    {
+        // $attribute;
+        // $value;
+    }
+    
+    public function getAttribute($attribute)
+    {
+        // $attribute;
     }
 }

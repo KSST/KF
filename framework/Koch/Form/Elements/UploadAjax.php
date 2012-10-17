@@ -36,7 +36,8 @@ class UploadAjax extends File implements FormElementInterface
     public function render()
     {
         // a) loads the ajaxupload javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/ajaxupload.js'. '" type="text/javascript"></script>';
+        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/ajaxupload.js'. '" '
+            . 'type="text/javascript"></script>';
 
         // b) handler for the ajaxupload
         $javascript .= "
@@ -64,7 +65,9 @@ class UploadAjax extends File implements FormElementInterface
 
                         // add uploaded file to list
                         if (response===\"success\") {
-                            $('<li></li>').appendTo('#files').html('<img src=\"./uploads/'+file+'\" alt=\"\" /><br />'+file).addClass('success');
+                            $('<li></li>').appendTo('#files')
+                            .html('<img src=\"./uploads/'+file+'\" alt=\"\" /><br />'+file)
+                            .addClass('success');
                         } else {
                             $('<li></li>').appendTo('#files').text(file).addClass('error');
                         }
