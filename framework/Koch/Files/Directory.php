@@ -39,8 +39,8 @@ class Directory
     public function setDirectory($directory)
     {
         // slash fix
-        $directory = str_replace('/', DS, $directory);
-        $directory = str_replace('\\', DS, $directory);
+        $directory = str_replace('/', DIRECTORY_SEPARATOR, $directory);
+        $directory = str_replace('\\', DIRECTORY_SEPARATOR, $directory);
 
         // prefix directory with ROOT for security purposes
         if (stristr($directory, ROOT) == false) {
