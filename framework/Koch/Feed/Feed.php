@@ -37,10 +37,6 @@ class Feed
      */
     public static function fetchRSS($feed_url, $numberOfItems = null, $cache_duration = null, $cache_location = null)
     {
-        // load simplepie
-        include __DIR__ . '/../../vendor/simplepie/SimplePie.php';
-
-        // instantiate simplepie
         $simplepie = new \SimplePie();
 
         // if cache_location was not specified manually, set it to the default cache directory for feeds

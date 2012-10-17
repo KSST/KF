@@ -45,7 +45,7 @@ class ResponseEncode
      */
     protected static $compression_level = 7;
 
-    public static function start_outputbuffering()
+    public static function startOutputBuffering()
     {
         // both methods depend on the zlib extension
         if (extension_loaded('zlib')) {
@@ -69,7 +69,10 @@ class ResponseEncode
                 ob_start('ob_gzhandler');
             }
         } else {
-            trigger_error('Function gzcompress() not found. PHP Extension Zlib needs to be installed for ResponseEncode.', E_USER_WARNING);
+            trigger_error(
+                'Function gzcompress() not found. PHP Extension Zlib needs to be installed for ResponseEncode.',
+                E_USER_WARNING
+            );
 
             return;
         }
@@ -84,9 +87,9 @@ class ResponseEncode
     /**
      * Convenience/Proxy method for gzip_encode
      */
-    public static function end_outputbuffering()
+    public static function stopOutputBuffering()
     {
-        self::gzip_encode();
+        self::gzipEncode();
     }
 
     /**
@@ -114,7 +117,7 @@ class ResponseEncode
      * @param boolean debug
      * @param int outputCompressedSizes
      */
-    public static function gzip_encode()
+    public static function gzipEncode()
     {
         if (headers_sent()) {
             return;
@@ -124,7 +127,7 @@ class ResponseEncode
             return;
         }
 
-        $encoding = self::gzip_accepted();
+        $encoding = self::gzipAccepted();
 
         if ($encoding == false) {
             return;
@@ -192,14 +195,18 @@ class ResponseEncode
          *
          * The Content Compression Info Comment was originally added by Kasper Skaarhoj for Typo3.
          * This had the problem of wasting resources by using gzcompress two times.
-         * One time to determine the compressed_content_size and a second time for the compression of the content (gzdata).
-         * This gets rid of the double gzcompression usage. The compression info message is now passed via header to the client.
+         * One time to determine the compressed_content_size and a second time for the 
+         * compression of the content (gzdata). This gets rid of the double gzcompression usage.
+         * The compression info message is now passed via header to the client.
          */
         // calculate compression ratio
         $compression_ratio = round((100 / $original_content_size) * $compressed_content_size);
 
         // construct Content Compression Info Comment
-        $msg = 'Compression Level ' . $level . '. Ratio ' . $compression_ratio . '%. Original size was ' . $original_content_size . ' bytes. New size is ' . $compressed_content_size . ' bytes.';
+        $msg = 'Compression Level ' . $level 
+            . '. Ratio ' . $compression_ratio 
+            . '%. Original size was ' . $original_content_size 
+            . ' bytes. New size is ' . $compressed_content_size . ' bytes.';
 
         // set compression-info header
         header('X-Content-Compression-Info: ' . $msg);
@@ -215,9 +222,10 @@ class ResponseEncode
      * Usage to test if output will be zipped:
      * if (self::gzip_accepted()) { echo "Page will be gziped"; }
      *
-     * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if Accept-Encoding Header is found. False otherwise.
+     * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if 
+     * Accept-Encoding Header is found. False otherwise.
      */
-    public static function gzip_accepted()
+    public static function gzipAccepted()
     {
         // init vars
         $encoding = null;
@@ -235,34 +243,33 @@ class ResponseEncode
 
         // Perform a "qvalue" check. The Accept-Encoding "gzip;q=0" means that gzip is NOT accepted.
         // preg_matches only, if first condition is true.
-        if( (mb_strpos($http_accept_encoding, 'gzip;q=') !== false)
-             and (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
-             and ($match[4] === '' or $match[4] > 0)))
-        {
+        if ((mb_strpos($http_accept_encoding, 'gzip;q=') !== false)
+            and (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
+            and ($match[4] === '' or $match[4] > 0))) {
             $encoding = 'gzip';
         }
 
         /**
          * Determine file type by checking the first bytes of the content buffer.
          */
-        $magic = mb_substr(ob_get_contents(),0,4);
-        if (mb_substr($magic,0,2) === '^_') {
+        $magic = mb_substr(ob_get_contents(), 0, 4);
+        if (mb_substr($magic, 0, 2) === '^_') {
             // gzip data
             $encoding = false;
-        } elseif (mb_substr($magic,0,3) === 'GIF') {
+        } elseif (mb_substr($magic, 0, 3) === 'GIF') {
             // gif images
             $encoding = false;
-        } elseif (mb_substr($magic,0,2) === "\xFF\xD8") {
+        } elseif (mb_substr($magic, 0, 2) === "\xFF\xD8") {
             // jpeg images
             $encoding = false;
-        } elseif (mb_substr($magic,0,4) === "\x89PNG") {
+        } elseif (mb_substr($magic, 0, 4) === "\x89PNG") {
             // png images
             $encoding = false;
-        } elseif (mb_substr($magic,0,3) === 'FWS') {
+        } elseif (mb_substr($magic, 0, 3) === 'FWS') {
             // Don't gzip Shockwave Flash files.
             // Flash on windows incorrectly claims it accepts gzip'd content.
             $encoding = false;
-        } elseif (mb_substr($magic,0,2) === 'PK') {
+        } elseif (mb_substr($magic, 0, 2) === 'PK') {
             // pk zip file
             $encoding = false;
         }

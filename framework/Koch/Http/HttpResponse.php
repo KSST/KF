@@ -196,7 +196,7 @@ class HttpResponse implements HttpResponseInterface
 
         // activateOutputCompression when not in debugging mode
         if (XDEBUG === false and DEBUG === false) {
-            \Koch\Http\ResponseEncode::start_outputbuffering('7');
+            \Koch\Http\ResponseEncode::startOutputBuffering('7');
         }
 
         // Send the status line
@@ -229,7 +229,7 @@ class HttpResponse implements HttpResponseInterface
 
         // Flush Compressed Buffer
         if (XDEBUG === false and DEBUG === false) {
-            \Koch\Http\ResponseEncode::end_outputbuffering();
+            \Koch\Http\ResponseEncode::stopOutputBuffering();
 
             // send response and do some more php processing afterwards
             if (is_callable('fastcgi_finish_request') === true) {

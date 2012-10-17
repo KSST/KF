@@ -28,7 +28,9 @@ namespace Koch\Tools;
  * <code>
  * include 'tracrpc.php';
  *
- * $trac = new TracRPC('http://trac.example.com/login/jsonrpc', array('username' => 'username', 'password' => 'password'));
+ * $trac = new TracRPC(
+ *     'http://trac.example.com/login/jsonrpc', array('username' => 'username', 'password' => 'password')
+ * );
  *
  * // Example single call
  * $result = $trac->getTicket('32');
@@ -112,9 +114,9 @@ class TracRPC
             $date = array('datetime', date("o-m-d\TH:i:s+00:00", $date));
         }
 
-        $this->_addRequest('wiki.getRecentChanges', array(array('__jsonclass__' => $date)));
+        $this->addRequest('wiki.getRecentChanges', array(array('__jsonclass__' => $date)));
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
         if ($this->multiCall === true) {
@@ -140,15 +142,15 @@ class TracRPC
 
         if ($version == 0) {
             if ($raw === true) {
-                $this->_addRequest('wiki.getPage', array($name));
+                $this->addRequest('wiki.getPage', array($name));
             } else {
-                $this->_addRequest('wiki.getPageHTML', array($name));
+                $this->addRequest('wiki.getPageHTML', array($name));
             }
         } else {
             if ($raw === true) {
-                $this->_addRequest('wiki.getPageVersion', array($name, $version));
+                $this->addRequest('wiki.getPageVersion', array($name, $version));
             } else {
-                $this->_addRequest('wiki.getPageHTMLVersion', array($name, $version));
+                $this->addRequest('wiki.getPageHTMLVersion', array($name, $version));
             }
         }
 
@@ -156,7 +158,7 @@ class TracRPC
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -175,16 +177,16 @@ class TracRPC
         }
 
         if ($version == 0) {
-            $this->_addRequest('wiki.getPageInfo', array($name));
+            $this->addRequest('wiki.getPageInfo', array($name));
         } else {
-            $this->_addRequest('wiki.getPageInfoVersion', array($name, $version));
+            $this->addRequest('wiki.getPageInfoVersion', array($name, $version));
         }
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -198,13 +200,13 @@ class TracRPC
      */
     public function getWikiPages()
     {
-        $this->_addRequest('wiki.getAllPages');
+        $this->addRequest('wiki.getAllPages');
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -225,13 +227,13 @@ class TracRPC
             $date = array('datetime', date("o-m-d\TH:i:s+00:00", $date));
         }
 
-        $this->_addRequest('ticket.getRecentChanges', array(array('__jsonclass__' => $date)));
+        $this->addRequest('ticket.getRecentChanges', array(array('__jsonclass__' => $date)));
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -250,13 +252,13 @@ class TracRPC
             return false;
         }
 
-        $this->_addRequest('ticket.get', $id);
+        $this->addRequest('ticket.get', $id);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -270,13 +272,13 @@ class TracRPC
      */
     public function getTicketFields()
     {
-        $this->_addRequest('ticket.getTicketFields');
+        $this->addRequest('ticket.getTicketFields');
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -296,13 +298,13 @@ class TracRPC
             return false;
         }
 
-        $this->_addRequest('ticket.changeLog', array($id, $when));
+        $this->addRequest('ticket.changeLog', array($id, $when));
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -321,13 +323,13 @@ class TracRPC
             return false;
         }
 
-        $this->_addRequest('ticket.getActions', $id);
+        $this->addRequest('ticket.getActions', $id);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -396,13 +398,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -475,13 +477,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -524,13 +526,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -582,13 +584,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -636,13 +638,13 @@ class TracRPC
             return false;
         }
 
-        $this->_addRequest('ticket.query', $query);
+        $this->addRequest('ticket.query', $query);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -698,13 +700,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -760,13 +762,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -822,13 +824,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -884,13 +886,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -946,13 +948,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1007,13 +1009,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1068,13 +1070,13 @@ class TracRPC
                 break;
         }
 
-        $this->_addRequest($method, $params);
+        $this->addRequest($method, $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1088,9 +1090,9 @@ class TracRPC
      */
     public function getTicketStatus()
     {
-        $this->_addRequest('ticket.status.getAll');
+        $this->addRequest('ticket.status.getAll');
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         } elseif ($this->multiCall === true) {
             return $this->request_id;
@@ -1120,13 +1122,13 @@ class TracRPC
             $params[1] = $filter;
         }
 
-        $this->_addRequest('search.getSearchFilters', $params);
+        $this->addRequest('search.getSearchFilters', $params);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1145,13 +1147,13 @@ class TracRPC
             return false;
         }
 
-        $this->_addRequest('wiki.wikiToHTML', $text);
+        $this->addRequest('wiki.wikiToHTML', $text);
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1165,13 +1167,13 @@ class TracRPC
      */
     public function getSearchFilters()
     {
-        $this->_addRequest('search.getSearchFilters');
+        $this->addRequest('search.getSearchFilters');
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1185,13 +1187,13 @@ class TracRPC
      */
     public function getApiVersion()
     {
-        $this->_addRequest('system.getAPIVersion');
+        $this->addRequest('system.getAPIVersion');
 
         if ($this->multiCall === true) {
             return $this->request_id;
         }
 
-        if ($this->_doRequest() === true) {
+        if ($this->doRequest() === true) {
             return $this->getResponse();
         }
 
@@ -1205,10 +1207,10 @@ class TracRPC
      * @param	array	Arguments to pass with the RPC call.
      * @return bool true on a successful request. false on error.
      */
-    public function _doRequest($method = '', $args = array())
+    public function doRequest($method = '', $args = array())
     {
         if ($method != '') {
-            $this->_addRequest($method, $args);
+            $this->addRequest($method, $args);
         }
 
         if (empty($this->request)) {
@@ -1216,7 +1218,7 @@ class TracRPC
         }
 
         if ($this->multiCall === true) {
-            $this->_addRequest('system.multicall');
+            $this->addRequest('system.multicall');
         }
 
         // json_encode $this->_request
@@ -1227,8 +1229,8 @@ class TracRPC
             $this->request = str_replace(',', ', ', $this->request);
         }
 
-        if ($this->_doCurlRequest() === true) {
-            $this->_parse_result();
+        if ($this->doCurlRequest() === true) {
+            $this->parseResult();
 
             return true;
         } else {
@@ -1244,7 +1246,7 @@ class TracRPC
      * @param	string	The id to set to the call.
      * @return bool Always true.
      */
-    private function _addRequest($method = '', $args = array(), $id = '')
+    private function addRequest($method = '', $args = array(), $id = '')
     {
         if ($method == '') {
             return false;
@@ -1261,7 +1263,7 @@ class TracRPC
         }
 
         if (empty($id)) {
-            $id = $this->_incrementRequestId();
+            $id = $this->incrementRequestId();
         }
 
         if ($method == 'system.multicall') {
@@ -1288,7 +1290,7 @@ class TracRPC
      *
      * @return int The incremented request id.
      */
-    private function _incrementRequestId()
+    private function incrementRequestId()
     {
         return $this->request_id + 1;
     }
@@ -1298,7 +1300,7 @@ class TracRPC
      *
      * @return bool true is a successful CURL request. false CURL isn't installed or the url or payload is empty.
      */
-    private function _doCurlRequest()
+    private function doCurlRequest()
     {
         if (empty($this->tracURL)) {
             exit('Provide the URL to the Trac Env you want to query.');
@@ -1409,7 +1411,7 @@ class TracRPC
      *
      * @return bool true on a non-empty result and false if it is empty.
      */
-    public function _parse_result($response = array())
+    public function parseResult($response = array())
     {
         if (empty($response)) {
             $response = $this->getResponse();
@@ -1424,7 +1426,7 @@ class TracRPC
         if (($response->result !== null) and is_array($response->result)) {
             foreach ($response->result as $key => $resp) {
                 if (isset($resp->result) === true) {
-                    $this->_parse_result($resp);
+                    $this->parseResult($resp);
                     continue;
                 }
 
