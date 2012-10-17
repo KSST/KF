@@ -80,7 +80,8 @@ class RSS10 extends Generator
             if ($this->items[$i]->author != "") {
                 $feed.= "        <dc:creator>" . htmlspecialchars($this->items[$i]->author) . "</dc:creator>\n";
             }
-            $feed.= "        <title>" . htmlspecialchars(strip_tags(strtr($this->items[$i]->title, "\n\r", "  "))) . "</title>\n";
+            $feed.= "        <title>" . htmlspecialchars(strip_tags(strtr($this->items[$i]->title, "\n\r", "  ")));
+            $feed.= "</title>\n";
             $feed.= "        <link>" . htmlspecialchars($this->items[$i]->link) . "</link>\n";
             $feed.= "        <description>" . htmlspecialchars($this->items[$i]->description) . "</description>\n";
             $feed.= $this->_createAdditionalElements($this->items[$i]->additionalElements, "        ");
