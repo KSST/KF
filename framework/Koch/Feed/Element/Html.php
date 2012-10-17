@@ -33,12 +33,12 @@ namespace Koch\Feed\Element;
 class Html
 {
     /**
-     * Mandatory attributes of a FeedHtmlField.
+     * Mandatory attributes of a Html field.
      */
     public $rawFieldContent;
 
     /**
-     * Optional attributes of a FeedHtmlField.
+     * Optional attributes of a Html field.
      *
      */
     public $truncSize;
@@ -48,9 +48,9 @@ class Html
      * Creates a new instance of FeedHtmlField.
      * @param  $string: if given, sets the rawFieldContent property
      */
-    public function FeedHtmlField($rawFieldContent)
+    public function newHtmlField($rawFieldContent = null)
     {
-        if ($rawFieldContent) {
+        if ($rawFieldContent != null) {
             $this->rawFieldContent = $rawFieldContent;
         }
     }
