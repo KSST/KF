@@ -43,3 +43,7 @@ cache
 
 # PHP composer related
 composer.lock
+vendor
+
+# php-cs-fixer
+php-cs-fixer*.txt
