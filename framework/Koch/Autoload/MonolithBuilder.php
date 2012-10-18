@@ -38,7 +38,7 @@ namespace Koch\Autoload;
  *
  * 2) APC Compile Files
  */
-class Compiler
+class MonolithBuilder
 {
     protected static $monolithFile = '';
 
@@ -48,13 +48,14 @@ class Compiler
     }
 
     /**
-     * Wraps php tags around the content of the monolith
+     * Wraps php tags around the content of the monolith and writes the monolith file.
      */
     public static function empowerMonolith()
     {
-        $content = '<?php ' . file_get_contents(self::getMonolithFile()) . '?>';
-
-        file_put_contents(self::getMonolithFile(), $content);
+        $file = self::getMonolithFile();
+        $content = '<?php ' . file_get_contents($file) . '?>';
+        
+        file_put_contents($file, $content);
     }
 
     /**
@@ -64,9 +65,11 @@ class Compiler
      */
     public static function build()
     {
+        $file = self::getMonolithFile();
+        
         // remove existing monolith
-        if (is_file(self::getMonolithFile()) === true) {
-            unlink(self::getMonolithFile());
+        if (is_file($file) === true) {
+            unlink($file);
         }
 
         // this directory
@@ -79,11 +82,11 @@ class Compiler
             if ($phpfile->isDot() === false and
                $phpfile->isDir() === false and
                $phpfile->getFilename() != basename($_SERVER['PHP_SELF']) and
-               $phpfile->getFilename() != self::getMonolithFile()) {
+               $phpfile->getFilename() != $file) {
                 //echo 'Processing: ' . $phpfile . '<br>';
 
                 // get file content
-                $content = file_get_contents(self::getMonolithFile());
+                $content = file_get_contents($file);
 
                 // apply string modification (strips unnessecary things off)
                 $new_content = self::removeCommentsFromString($content);
@@ -91,7 +94,7 @@ class Compiler
                 //$new_content = self::strip_empty_lines($new_content);
 
                 // write the modified content to the monolith file
-                file_put_contents(self::getMonolithFile(), $new_content, FILE_APPEND);
+                file_put_contents($file, $new_content, FILE_APPEND);
             }
         }
 
@@ -121,29 +124,29 @@ class Compiler
         $tokens = token_get_all($sourcecode);
 
         // init return var
-        $stripped_sourcecode = '';
+        $strippedSourcecode = '';
 
         // loop over all tokens
         foreach ($tokens as $token) {
             // if token is a string append to sourcecode
             if (is_string($token) === true) {
-                $stripped_sourcecode .= $token;
+                $strippedSourcecode .= $token;
             } else {
-                $token_element = '';
+                $tokenElement = '';
                 $text = '';
 
                 // identify elements
-                list($token_element, $text) = $token;
+                list($tokenElement, $text) = $token;
 
                 // filter out comments
-                if ($token_element != T_COMMENT and $token_element != T_DOC_COMMENT) {
+                if ($tokenElement != T_COMMENT and $tokenElement != T_DOC_COMMENT) {
                     // append only, if not comment or doc_comment
-                    $stripped_sourcecode .= $text;
+                    $strippedSourcecode .= $text;
                 }
             }
         }
 
-        return $stripped_sourcecode;
+        return $strippedSourcecode;
     }
 
     /**
