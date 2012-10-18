@@ -3,7 +3,7 @@
     "description": "Koch Framework",
     "homepage": "http://clansuite.com/",
     "license": "MIT",
-    "keywords": ["cms", "cmf", "framework"],
+    "keywords": ["framework", "full-stack", "cms", "cmf"],
     "type": "library",
     "authors": [
         {
