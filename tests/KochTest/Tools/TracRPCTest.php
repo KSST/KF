@@ -33,24 +33,27 @@ class TracRPCTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_Constructor_setsProperties()
     {
-        $this->trac = new TracRPC('http://trac.clansuite.com/login/jsonrpc',
-                array('username' => 'user',
-                      'password' => 'password',
-                      'multiCall' => '1',
-                      'json_decode' => '1'));
+        $this->trac = new TracRPC(
+            'http://trac.clansuite.com/login/jsonrpc',
+            array(
+                'username' => 'user',
+                'password' => 'password',
+                'multiCall' => '1',
+                'json_decode' => '1'
+            )
+        );
 
         $this->assertEquals('http://trac.clansuite.com/login/jsonrpc', $this->trac->tracURL);
         $this->assertEquals('user', $this->trac->username);
         $this->assertEquals('password', $this->trac->password);
         $this->assertTrue($this->trac->multiCall);
         $this->asserttrue($this->trac->json_decode);
-
     }
 
     /**
      * Not a mock. It's a live request.
      *
-     * @expectedException           Exception
+     * @expectedException           BadFunctionCallException
      * @expectedExceptionMessage    You are trying an authenticated access without providing username and password.
      */
     public function testMethod_Constructor_WithoutCredentials()
