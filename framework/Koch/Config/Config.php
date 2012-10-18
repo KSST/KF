@@ -88,7 +88,7 @@ class Config extends AbstractConfig
         if ($module == null) {
             $module = Koch\Router\TargetRoute::getModule();
         }
-        
+
         $this->writeConfig(
             APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php',
             $array

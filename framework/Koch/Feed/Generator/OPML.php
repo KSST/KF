@@ -31,9 +31,10 @@ class OPML extends Generator
     public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
-        $feed.= $this->_createGeneratorComment();
-        $feed.= $this->_createStylesheetReferences();
-        $feed.= "<opml xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n";
+        $feed.= $this->createGeneratorComment();
+        $feed.= $this->createStylesheetReferences();
+        $feed.= "<opml xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"";
+        $feed.= " xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">\n";
         $feed.= "<head>    \n";
         $feed.= "        <title>" . htmlspecialchars($this->title) . "</title>\n";
         if ($this->pubDate != "") {

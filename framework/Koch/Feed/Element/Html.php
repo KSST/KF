@@ -35,7 +35,7 @@ class Html
      * Creates a new instance of FeedHtmlField.
      * @param  $string: if given, sets the rawFieldContent property
      */
-    public function newHtmlField($rawFieldContent = null)
+    public function __construct($rawFieldContent = null)
     {
         if ($rawFieldContent != null) {
             $this->rawFieldContent = $rawFieldContent;

@@ -49,7 +49,8 @@ namespace
     public function setExtractor($extension, $extractor)
     {
         // not already set
-        if (false === isset($this->extractor[$extension]) and false === in_array($extractor, $this->extractor[$extension])) {
+        if (false === isset($this->extractor[$extension]) and 
+            false === in_array($extractor, $this->extractor[$extension])) {
             $this->extractor[$extension][] = $extractor;
         } else { // already set
 
@@ -86,7 +87,7 @@ namespace
         // get dirname and check if dirs exist, else create it
         $dir = dirname($file);
         if (false === is_dir($dir) and false === @mkdir($dir, 0777, true)) {
-           $this->throwException('ERROR: make directory failed!');
+            $this->throwException('ERROR: make directory failed!');
         }
 
         // check file permissions on output file

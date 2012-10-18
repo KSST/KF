@@ -36,7 +36,7 @@ class ElementBase
      */
     public function getDescription()
     {
-        $descriptionField = new FeedHtmlElement($this->description);
+        $descriptionField = new Koch\Feed\Element\Html($this->description);
         $descriptionField->syndicateHtml = $this->descriptionHtmlSyndicated;
         $descriptionField->truncSize = $this->descriptionTruncSize;
 

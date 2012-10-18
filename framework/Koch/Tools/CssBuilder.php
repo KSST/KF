@@ -162,7 +162,7 @@ class CssBuilder
          * prepare frontend theme
          */
         if (true === $config['compileThemeFrontend']) {
-            if(mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '/' ||
+            if (mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '/' ||
                mb_substr($config['themeFrontendPath'], strlen($config['themeFrontendPath']) - 1) == '\/') {
                 $config['themeFrontendPath'] = mb_substr(
                     $config['themeFrontendPath'],
@@ -193,7 +193,7 @@ class CssBuilder
          * prepare backend theme
          */
         if (true === $config['compileThemeBackend']) {
-            if(mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '/' ||
+            if (mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '/' ||
                     mb_substr($config['themeBackendPath'], strlen($config['themeBackendPath']) - 1) == '\/')
             {
                 $config['themeBackendPath'] = mb_substr(
@@ -235,7 +235,7 @@ class CssBuilder
                 $_comp .= $content . CR;
             }
 
-            $this->save_stylesheet($corePath . $coreCssName, $_comp);
+            $this->saveStylesheet($corePath . $coreCssName, $_comp);
 
             $html .= '<p class="cmBoxMessage" style="padding-left:50px;"><b>Core Import File:</b>';
             $html .= '&nbsp;&nbsp;' . $corePath;
@@ -280,7 +280,7 @@ class CssBuilder
                 $_comp .= $content . CR;
             }
 
-            $this->save_stylesheet($themePath . $themeCssName, $_comp);
+            $this->saveStylesheet($themePath . $themeCssName, $_comp);
 
             $html .= '<p class="cmBoxMessage" style="padding-left:50px;"><b>Frontend Theme Import File:</b>';
             $html .= '&nbsp;&nbsp;' . $themePath;
@@ -328,7 +328,7 @@ class CssBuilder
                 $_comp .= $content . CR;
             }
 
-            $this->save_stylesheet($themeBackPath . $themeBackCssName, $_comp);
+            $this->saveStylesheet($themeBackPath . $themeBackCssName, $_comp);
 
             $html .= '<p class="cmBoxMessage" style="padding-left:50px;"><b>Backend Theme Import File:</b>';
             $html .= '&nbsp;&nbsp;' . $themeBackPath;
@@ -441,12 +441,13 @@ class CssBuilder
     }
 
     /**
-     * -------------------------------------------------------------------------------------------------
-     * save_stylesheet
-     * -------------------------------------------------------------------------------------------------
-     * save new stylesheet import file
+     * Save stylesheet to import file
+     * 
+     * @param type $comp_filename
+     * @param type $_compact
+     * @return boolean
      */
-    protected function save_stylesheet($comp_filename, $_compact)
+    protected function saveStylesheet($comp_filename, $_compact)
     {
         if (!$filehandle = fopen($comp_filename, 'wb')) {
             echo _('Could not open file: ') . $comp_filename;

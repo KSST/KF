@@ -17,7 +17,7 @@ use Koch\Feed\Generator;
 /**
  * RSSCreator10 is a FeedCreator that implements RDF Site Summary (RSS) 1.0.
  *
-  * @see http://cyber.law.harvard.edu/rss/rss.html
+ * @see http://cyber.law.harvard.edu/rss/rss.html
  */
 class RSS10 extends Generator
 {
@@ -30,11 +30,11 @@ class RSS10 extends Generator
     public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
-        $feed.= $this->_createGeneratorComment();
+        $feed.= $this->createGeneratorComment();
         if ($this->cssStyleSheet == "") {
             $cssStyleSheet = "http://www.w3.org/2000/08/w3c-synd/style.css";
         }
-        $feed.= $this->_createStylesheetReferences();
+        $feed.= $this->createStylesheetReferences();
         $feed.= "<rdf:RDF\n";
         $feed.= "    xmlns=\"http://purl.org/rss/1.0/\"\n";
         $feed.= "    xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"\n";
@@ -64,7 +64,7 @@ class RSS10 extends Generator
             $feed.= "        <url>" . $this->image->url . "</url>\n";
             $feed.= "    </image>\n";
         }
-        $feed.= $this->_createAdditionalElements($this->additionalElements, "    ");
+        $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
 
         for ($i = 0; $i < count($this->items); $i++) {
             $feed.= "    <item rdf:about=\"" . htmlspecialchars($this->items[$i]->link) . "\">\n";
@@ -84,7 +84,7 @@ class RSS10 extends Generator
             $feed.= "</title>\n";
             $feed.= "        <link>" . htmlspecialchars($this->items[$i]->link) . "</link>\n";
             $feed.= "        <description>" . htmlspecialchars($this->items[$i]->description) . "</description>\n";
-            $feed.= $this->_createAdditionalElements($this->items[$i]->additionalElements, "        ");
+            $feed.= $this->createAdditionalElements($this->items[$i]->additionalElements, "        ");
             $feed.= "    </item>\n";
         }
         $feed.= "</rdf:RDF>\n";
