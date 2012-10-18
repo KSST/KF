@@ -48,7 +48,6 @@
         <mkdir dir="${builddir}/code-browser" />
         <mkdir dir="${builddir}/coverage" />
         <mkdir dir="${builddir}/logs" />
-        <mkdir dir="${builddir}/logs" />
         <mkdir dir="${builddir}/pdepend" />
         <!-- Notes:
              - the vendor folder is created by composer
