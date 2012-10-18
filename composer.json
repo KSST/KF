@@ -19,9 +19,13 @@
 
     "require": {
         "php": ">=5.3.3",
-        "doctrine/orm" : "2.3.0",
+
+        "doctrine/orm"       : "2.3.0",
+        "doctrine/dbal"      : "2.3.0",
+        "doctrine/common"    : "2.3.0",
         "doctrine/migrations": "dev-master",
         "gedmo/doctrine-extensions": "dev-master",
+
         "smarty/smarty": "v3.1.12",
         "simplepie/simplepie": "dev-master",
         "swiftmailer/swiftmailer": "v4.2.1"
