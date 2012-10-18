@@ -42,11 +42,12 @@ class MBox extends Generator
     public function __construct($identifier = '')
     {
         parent::__construct($identifier);
+        
         $this->contentType = "text/plain";
         $this->encoding = "ISO-8859-15";
     }
 
-    public function qp_enc($input = "", $line_max = 76)
+    public static function qpEnc($input = "", $line_max = 76)
     {
         $hex = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F');
         $lines = preg_split("/(?:\r\n|\r|\n)/", $input);
@@ -95,18 +96,18 @@ class MBox extends Generator
 
             $itemDate = new FeedDate($this->items[$i]->date);
 
-            $feed .= "From " . strtr(MBOXCreator::qp_enc($from), " ", "_") . " ";
+            $feed .= "From " . strtr(self::qpEnc($from), " ", "_") . " ";
             $feed .= date("D M d H:i:s Y", $itemDate->unix()) . "\n";
             $feed .= "Content-Type: text/plain;\n";
             $feed .= "	charset=\"" . $this->encoding . "\"\n";
             $feed .= "Content-Transfer-Encoding: quoted-printable\n";
             $feed .= "Content-Type: text/plain\n";
-            $feed .= "From: \"" . MBOXCreator::qp_enc($from) . "\"\n";
+            $feed .= "From: \"" . self::qpEnc($from) . "\"\n";
             $feed .= "Date: " . $itemDate->rfc822() . "\n";
-            $feed .= "Subject: " . MBOXCreator::qp_enc(FeedCreator::iTrunc($this->items[$i]->title, 100)) . "\n";
+            $feed .= "Subject: " . self::qpEnc(FeedCreator::iTrunc($this->items[$i]->title, 100)) . "\n";
             $feed .= "\n";
 
-            $body = chunk_split(MBOXCreator::qp_enc($this->items[$i]->description));
+            $body = chunk_split(self::qpEnc($this->items[$i]->description));
 
             $feed .= preg_replace("~\nFrom ([^\n]*)(\n?)~", "\n>From $1$2\n", $body);
             $feed .= "\n";
@@ -127,5 +128,4 @@ class MBox extends Generator
 
         return substr($fileInfo["basename"], 0, -(strlen($fileInfo["extension"]) + 1)) . ".mbox";
     }
-
 }

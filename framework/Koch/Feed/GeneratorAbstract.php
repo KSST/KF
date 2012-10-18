@@ -245,7 +245,7 @@ abstract class GeneratorAbstract extends ElementBase
         // attention, heavily-commented-out-area
 
         // maybe use this in addition to file time checking
-        //Header("Expires: ".date("r",time()+$this->_timeout));
+        //Header("Expires: ".date("r",time()+$this->timeout));
 
         /* no caching at all, doesn't seem to work as good:
         Header("Cache-Control: no-cache");

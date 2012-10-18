@@ -64,7 +64,6 @@ class ACL
      * @var array
      */
     private static $perms = array();
-    private static $compress_permissions = false;
 
     /**
      * checkPermission
@@ -89,7 +88,7 @@ class ACL
             $permission = $module_name . '.' . $permission_name;
         }
 
-        $permissions = self::extractRightsFromSession();
+        $permissions = $_SESSION['user']['rights'];
 
         if (count($permissions) > 0) {
             foreach ($permissions as $key => $value) {
@@ -106,54 +105,11 @@ class ACL
 
     /**
      * createRightSession
-     *
-     * Make the Right-String for Session
      */
     public static function createRightSession($roleid, $userid = 0)
     {
-        $permstring = self::getPermissions($roleid, $userid);
-
-        // return compressed permission string
-        if ($permstring !== '' and self::$compress_permissions === true) {
-            return strtr(base64_encode(addslashes(gzcompress(serialize($permstring), 9))), '+/=', '-_,');
-        }
-        // return uncompress permission string
-        elseif ($permstring !== '') {
-            return $permstring;
-        } else {
-            return '';
-        }
-    }
-
-    /**
-     * extractRightsFromSession
-     *
-     * The Permissions/Rights Session value is found in
-     * $_SESSION['user']['rights']
-     * and contains a
-     * - base64_encoded and
-     * - gzcompressed and
-     * - compacted array value.
-     * This method will revert the string to a proper array.
-     *
-     * @return array Permissions array.
-     */
-    public static function extractRightsFromSession()
-    {
-        if (empty($_SESSION['user']['rights'])) {
-            return array();
-        } elseif (self::$compress_permissions === true) {
-
-            // revert the session permission string to a proper array
-            $permstring = unserialize(gzuncompress(stripslashes(base64_decode(strtr($_SESSION['user']['rights'], '-_,', '+/=')))));
-
-            $permstring = explode(',', $permstring);
-
-            return $permstring;
-        } else {
-            return $_SESSION['user']['rights'];
-        }
-    }
+        return self::getPermissions($roleid, $userid);
+    }    
 
     /**
      * getRoleList
@@ -297,5 +253,4 @@ class ACL
 
         return $urules;
     }
-
 }

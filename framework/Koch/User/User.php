@@ -229,7 +229,7 @@ class User
                 $_SESSION['user']['group'] = $this->user['CsGroups'][0]['group_id'];
                 $_SESSION['user']['role'] = $this->user['CsGroups'][0]['role_id'];
                 $_SESSION['user']['rights'] = Koch\ACL::createRightSession(
-                        $_SESSION['user']['role'], $this->user['user_id']);
+                $_SESSION['user']['role'], $this->user['user_id']);
             }
 
             #\Koch\Debug\Debug::firebug($_SESSION);
@@ -283,9 +283,12 @@ class User
         $this->moduleconfig = $this->config->readModuleConfig('account');
 
         // if user was found, check if passwords match each other
-        if (true === (bool) $user and
-            true === Koch\Security::check_salted_hash(
-                $passwordhash, $user['passwordhash'], $user['salt'], $this->moduleconfig['login']['hash_algorithm'])) {
+        if (true === (bool) $user and true === Koch\Security\Security::checkSaltedHash(
+            $passwordhash,
+            $user['passwordhash'],
+            $user['salt'],
+            $this->moduleconfig['login']['hash_algorithm']
+        )) {
             // ok, the user with nick or email exists and the passwords matched, then return the user_id
             return $user['user_id'];
         } else {

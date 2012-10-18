@@ -37,7 +37,9 @@ class ConfirmSubmitButton extends Input implements FormElementInterface
         $this->type = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
-        if ($message != null) { $this->message = $message; }
+        if ($message != null) {
+            $this->message = $message;
+        }
 
         /**
          * Add the Form Submit Confirmation Javascript.

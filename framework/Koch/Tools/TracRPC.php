@@ -98,7 +98,7 @@ class TracRPC
     {
         // CURL extension is required
         if (function_exists('curl_init') === false) {
-            throw new \Exception('CURL extension disabled. Please enable it in "php.ini".');
+            throw new \BadFunctionCallException('CURL extension disabled. Please enable it in "php.ini".');
         }
 
         $this->tracURL = $tracURL;

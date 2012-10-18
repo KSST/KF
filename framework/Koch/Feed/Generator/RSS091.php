@@ -54,8 +54,8 @@ class RSS091 extends Generator
     public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
-        $feed.= $this->_createGeneratorComment();
-        $feed.= $this->_createStylesheetReferences();
+        $feed.= $this->createGeneratorComment();
+        $feed.= $this->createStylesheetReferences();
         $feed.= "<rss version=\"" . $this->rssVersion . "\">\n";
         $feed.= "    <channel>\n";
         $feed.= '        <title>' . FeedCreator::iTrunc(htmlspecialchars($this->title), 100) . "</title>\n";
@@ -123,7 +123,7 @@ class RSS091 extends Generator
         if ($this->skipDays != '') {
             $feed.= '        <skipDays>' . htmlspecialchars($this->skipDays) . "</skipDays>\n";
         }
-        $feed.= $this->_createAdditionalElements($this->additionalElements, "    ");
+        $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
 
         for ($i = 0; $i < count($this->items); $i++) {
             $feed.= "        <item>\n";
@@ -154,7 +154,7 @@ class RSS091 extends Generator
             if ($this->items[$i]->guid != '') {
                 $feed.= '            <guid>' . htmlspecialchars($this->items[$i]->guid) . "</guid>\n";
             }
-            $feed.= $this->_createAdditionalElements($this->items[$i]->additionalElements, "        ");
+            $feed.= $this->createAdditionalElements($this->items[$i]->additionalElements, "        ");
             if ('2.0' == substr($this->rssVersion, 0, 3)
                 AND !empty($this->syndicationURL) AND $this->items[$i]->enclosure != null) {
                 $feed.= '            <enclosure url="';

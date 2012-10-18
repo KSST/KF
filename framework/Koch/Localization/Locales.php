@@ -9,7 +9,8 @@
  */
 $l10n_langs = array(
     'af' => array('af_AF'),
-    'ar' => array('ar_AE','ar_BH','ar_DZ','ar_EG','ar_IQ','ar_JO','ar_KW','ar_LB','ar_LY','ar_MA','ar_OM','ar_QA','ar_SA','ar_SY','ar_TN','ar_YE'),
+    'ar' => array('ar_AE','ar_BH','ar_DZ','ar_EG','ar_IQ','ar_JO','ar_KW','ar_LB',
+        'ar_LY','ar_MA','ar_OM','ar_QA','ar_SA','ar_SY','ar_TN','ar_YE'),
     'az' => array('az_AZ'),
     'be' => array('be_BY'),
     'bg' => array('bg_BG'),
@@ -19,7 +20,8 @@ $l10n_langs = array(
     'de' => array('de_AT','de_CH','de_DE','de_LU'),
     'el' => array('el_CY','el_GR'),
     'en' => array('en_AU','en_CA','en_GB','en_IE','en_NZ','en_PH','en_US','en_ZA'),
-    'es' => array('es_AR','es_BO','es_CL','es_CO','es_CR','es_DO','es_EC','es_ES','es_GT','es_HN','es_MX','es_NI','es_PA','es_PE','es_PR','es_PY','es_SV','es_UY','es_VE'),
+    'es' => array('es_AR','es_BO','es_CL','es_CO','es_CR','es_DO','es_EC','es_ES','es_GT','es_HN','es_MX','es_NI',
+        'es_PA','es_PE','es_PR','es_PY','es_SV','es_UY','es_VE'),
     'et' => array('et_EE'),
     'eo' => array('eo_EO'),
     'eu' => array('eu_ES'),

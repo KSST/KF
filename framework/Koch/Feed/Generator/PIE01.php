@@ -42,7 +42,7 @@ class PIE01 extends Generator
     public function renderFeed()
     {
         $feed = "<?xml version=\"1.0\" encoding=\"" . $this->encoding . "\"?>\n";
-        $feed.= $this->_createStylesheetReferences();
+        $feed.= $this->createStylesheetReferences();
         $feed.= "<feed version=\"0.1\" xmlns=\"http://example.com/newformat#\">\n";
         $feed.= "    <title>" . FeedCreator::iTrunc(htmlspecialchars($this->title), 100) . "</title>\n";
         $this->truncSize = 500;
@@ -50,7 +50,8 @@ class PIE01 extends Generator
         $feed.= "    <link>" . $this->link . "</link>\n";
         for ($i = 0; $i < count($this->items); $i++) {
             $feed.= "    <entry>\n";
-            $feed.= "        <title>" . FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) . "</title>\n";
+            $feed.= "        <title>";
+            $feed.= FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) . "</title>\n";
             $feed.= "        <link>" . htmlspecialchars($this->items[$i]->link) . "</link>\n";
             $itemDate = new FeedDate($this->items[$i]->date);
             $feed.= "        <created>" . htmlspecialchars($itemDate->iso8601()) . "</created>\n";
@@ -66,7 +67,8 @@ class PIE01 extends Generator
                 $feed.="        </author>\n";
             }
             $feed.= "        <content type=\"text/html\" xml:lang=\"en-us\">\n";
-            $feed.= "            <div xmlns=\"http://www.w3.org/1999/xhtml\">" . $this->items[$i]->getDescription() . "</div>\n";
+            $feed.= "            <div xmlns=\"http://www.w3.org/1999/xhtml\">";
+            $feed.= $this->items[$i]->getDescription() . "</div>\n";
             $feed.= "        </content>\n";
             $feed.= "    </entry>\n";
         }
