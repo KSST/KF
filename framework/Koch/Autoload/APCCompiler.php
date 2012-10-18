@@ -53,8 +53,6 @@ class APCCompiler
             define('APC_COMPILE_RECURSIVELY', true);
             define('APC_COMPILE_DIR', '.');
 
-            require 'apc_compile_dir.php';
-
             echo 'APC Directory Compiler ' . gmdate('Y-m-d H:i:s') . PHP_EOL;
             echo PHP_EOL . '-------------------------' . PHP_EOL;
             if (APC_CLEAR_CACHE) {
@@ -63,7 +61,7 @@ class APCCompiler
                 echo PHP_EOL . '-------------------------' . PHP_EOL;
             }
             echo 'Runtime Errors' . PHP_EOL;
-            if (apc_compile_dir(APC_COMPILE_DIR, APC_COMPILE_RECURSIVELY) === true) {
+            if (self::apcCompileDir(APC_COMPILE_DIR, APC_COMPILE_RECURSIVELY) === true) {
                 echo 'Cache Created' . PHP_EOL;
             } else {
                 echo 'Cache Not Created' . PHP_EOL;
