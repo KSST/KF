@@ -23,6 +23,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('code-coverage-settings.dat') // SimpleTest CodeCoverage files
     ->notName('coverage.sqlite')
     ->notName('Utf8FallbackFunctions.php') // bug in php-cs-fixer, adds "public" to global functions
+    ->notName('MbstringWrapper.php') // bug in php-cs-fixer, adds "public" to global functions
     ->exclude('simpletest')
     ->exclude('tests\coverage-report')
     ->exclude('vendor')
