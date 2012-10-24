@@ -24,7 +24,7 @@
                 "version": "1.0.11",
                 "dist": {
                     "url": "http://launchpadlibrarian.net/61225817/php-gettext-1.0.11.tar.gz",
-                    "type": "tar",
+                    "type": "tar"
                 },
                 "autoload": {
                     "classmap": [
