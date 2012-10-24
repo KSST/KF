@@ -73,7 +73,7 @@ class Localization
          * @link http://www.gnu.org/software/gettext/manual/gettext.html GNU Gettext
          */
         if (function_exists('T_setlocale') === false) {
-            include VENDOR_PATH . 'php-gettext/gettext.inc';
+            include VENDOR_PATH . 'php-gettext/php-gettext/gettext.inc';
         }
 
         // Load Domain
