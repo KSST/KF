@@ -19,7 +19,7 @@ namespace . $classname, '\\');
 
     /**
      * Writes the classmap array to file
-     * 
+     *
      * @param array  $classmap Array containing the classname to file relation.
      * @param string $mapfile  Path to the classmap file to be written.
      */

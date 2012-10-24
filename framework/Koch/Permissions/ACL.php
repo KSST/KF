@@ -96,7 +96,7 @@ class ACL
     public static function createRightSession($roleid, $userid = 0)
     {
         return self::getPermissions($roleid, $userid);
-    }    
+    }
 
     /**
      * getRoleList

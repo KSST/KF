@@ -41,7 +41,7 @@ class MonolithBuilder
     {
         $file = self::getMonolithFile();
         $content = '<?php ' . file_get_contents($file) . '?>';
-        
+
         file_put_contents($file, $content);
     }
 
@@ -53,7 +53,7 @@ class MonolithBuilder
     public static function build()
     {
         $file = self::getMonolithFile();
-        
+
         // remove existing monolith
         if (is_file($file) === true) {
             unlink($file);

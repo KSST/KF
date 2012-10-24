@@ -174,6 +174,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
             /*if (defined('DEBUG') === true and DEBUG === true) {
                 throw new \InvalidArgumentException(sprintf('Array Key "%s" is not defined.', $offset));
             } else {*/
+
                 return false;
             //}
         }

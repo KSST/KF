@@ -49,7 +49,7 @@ namespace
     public function setExtractor($extension, $extractor)
     {
         // not already set
-        if (false === isset($this->extractor[$extension]) and 
+        if (false === isset($this->extractor[$extension]) and
             false === in_array($extractor, $this->extractor[$extension])) {
             $this->extractor[$extension][] = $extractor;
         } else { // already set

@@ -108,7 +108,7 @@ namespace and path to search in
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
          */
-        if ($applicationConfig['database']['driver'] !== null 
+        if ($applicationConfig['database']['driver'] !== null
         and $applicationConfig['database']['driver'] == "pdo_mysql") {
             if ($applicationConfig['database']['charset'] !== null) {
                 $event->addEventSubscriber(

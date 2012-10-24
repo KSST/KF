@@ -47,7 +47,7 @@ class Maintenance implements FilterInterface
         /**
          * @todo b) create override of maintenance mode, in case it's an admin user?
          */
-        
+
         // 2. Maintenance check
         /*if( isset(self::$config['maintenance']['enabled']) and
             true === (bool) self::$config['maintenance']['enabled'] )

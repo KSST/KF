@@ -592,4 +592,3 @@ class UserAgent
         return empty($this->browserName);
     }
 }
-

@@ -47,8 +47,8 @@ class JqSelectColor extends FormElement implements FormElementInterface
 
         /**
          * Add the jQuery UI Date Select Dialog.
-         *  
-         * WARNING: the div dialog must be present in the dom, 
+         *
+         * WARNING: the div dialog must be present in the dom,
          *          before you assign a js function to it via $('#datepicker')
          */
         $datepickerJs   = "<script type=\"text/javascript\">

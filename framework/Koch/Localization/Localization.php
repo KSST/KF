@@ -119,9 +119,9 @@ class Localization
      * The mo.file would be looked up in /html/locales/de_DE/LC_MESSAGES/clansuite.mo
      * The $domain string specifies the mo-filename => "$domain.mo"
      * So if $domain = 'clansuite'; => clansuite.mo
-     * 
+     *
      * @link http://www.php.net/function.bindtextdomain
-     * 
+     *
      * @param $category string LC_ALL
      */
     public function loadTextDomain($category, $domain, $locale, $module = null)
