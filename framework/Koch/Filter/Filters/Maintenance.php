@@ -47,6 +47,29 @@ class Maintenance implements FilterInterface
         /**
          * @todo b) create override of maintenance mode, in case it's an admin user?
          */
+        
+        // 2. Maintenance check
+        /*if( isset(self::$config['maintenance']['enabled']) and
+            true === (bool) self::$config['maintenance']['enabled'] )
+        {
+            $token = false;
+
+            // incoming maintenance token via GET
+            if ($_GET['mnt'] !== null) {
+                $tokenstring = $name = filter_var($_GET['mnt'], FILTER_SANITIZE_STRING);
+                $token = Clansuite_Securitytoken::ckeckToken($tokenstring);
+            }
+
+            // if token is false (or not valid) show maintenance
+            if (false === $token) {
+                Clansuite_Maintenance::show(self::$config);
+            } else {
+                self::$config['maintenance']['enabled'] = 0;
+                \Koch\Config\Ini::writeConfig(ROOT . 'Configuration/clansuite.php', self::$config);
+                // redirect to remove the token from url
+                header('Location: ' . SERVER_URL);
+            }
+        }*/
 
         // fetch renderer
         $smarty = new Smarty($this->config);

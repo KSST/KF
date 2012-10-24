@@ -121,7 +121,7 @@ namespace
         $output[] = '#';
         $output[] = 'msgid ""';
         $output[] = 'msgstr ""';
-        $output[] = '"Project-Id-Version: Koch Framework ' . CLANSUITE_VERSION . '\n"';
+        $output[] = '"Project-Id-Version: Koch Framework ' . APPLICATION_VERSION . '\n"';
         $output[] = '"POT-Creation-Date: ' . date('Y-m-d H:iO') . '\n"';
         $output[] = '"PO-Revision-Date: ' . date('Y-m-d H:iO') . '\n"';
         $output[] = '"Content-Type: text/plain; charset=UTF-8\n"';

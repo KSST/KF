@@ -281,7 +281,7 @@ class Errorhandler
                         // type
                         $html .= '<td>'.$data['type'].'</td>';
                         // value
-                        $html .= '<td>'.$data['arg'].' '.$defaultValue.'</td>';
+                        $html .= '<td>'.$data['arg'].'</td>'; // $defaultValue
                     }
                     $html .= '</tr></table>';
                 }
@@ -552,7 +552,7 @@ class Errorhandler
             'description' => $description,
             'type'        => 'defect-bug',
             'milestone'   => 'Triage-Neuzuteilung',
-            'version'     => CLANSUITE_VERSION,
+            'version'     => APPLICATION_VERSION,
             #'component'   => '',
             'author'      => isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : '',
         );

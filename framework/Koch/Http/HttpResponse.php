@@ -203,7 +203,7 @@ class HttpResponse implements HttpResponseInterface
         self::addHeader('HTTP/1.1', self::$statusCode.' '.self::getStatusCodeDescription(self::$statusCode));
 
         // Set X-Powered-By Header to Clansuite Signature
-        $pwd_by = '[ Clansuite - just an eSport CMS ][ Version : '. CLANSUITE_VERSION .' ][ http://clansuite.com/ ]';
+        $pwd_by = '[ Clansuite - just an eSport CMS ][ Version : '. APPLICATION_VERSION .' ][ http://clansuite.com/ ]';
         self::addHeader('X-Powered-By', $pwd_by);
 
         // Suppress Framesets

@@ -56,7 +56,7 @@ class YAML
      */
     public static function writeConfig($file, array $array)
     {
-        $spyc_lib = __DIR__ . '/../../../vendor/spyc/Spyc.class.php';
+        $spyc_lib = VENDOR_PATH . '/spyc/Spyc.class.php';
 
         /**
          * transform PHP Array into YAML Format
