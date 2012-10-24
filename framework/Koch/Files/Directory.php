@@ -44,7 +44,7 @@ class Directory
 
         // prefix directory with ROOT for security purposes
         if (stristr($directory, ROOT) == false) {
-            $directory = ROOT . $directory;
+            $directory = APPLICATION_PATH . $directory;
         }
 
         $this->directory = $directory;
@@ -58,7 +58,7 @@ class Directory
             return $this->directory;
         } else { // default path
 
-            return ROOT . 'uploads/images/gallery';
+            return APPLICATION_PATH . 'uploads/images/gallery';
         }
     }
 
@@ -91,7 +91,7 @@ class Directory
 
             // while iterating
             foreach ($iterator as $file) {
-                $wwwpath = WWW_ROOT . '/' . $this->getDirectory() . '/' . $file->getFilename();
+                $wwwpath = WWW_APPLICATION_PATH . '/' . $this->getDirectory() . '/' . $file->getFilename();
                 $wwwpath = str_replace('//', '/', $wwwpath);
                 $data[$wwwpath] = $file->getFilename();
             }

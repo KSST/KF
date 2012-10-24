@@ -65,7 +65,7 @@ class Maintenance implements FilterInterface
                 Clansuite_Maintenance::show(self::$config);
             } else {
                 self::$config['maintenance']['enabled'] = 0;
-                \Koch\Config\Ini::writeConfig(ROOT . 'Configuration/clansuite.php', self::$config);
+                \Koch\Config\Ini::writeConfig(APPLICATION_PATH . 'Configuration/clansuite.php', self::$config);
                 // redirect to remove the token from url
                 header('Location: ' . SERVER_URL);
             }

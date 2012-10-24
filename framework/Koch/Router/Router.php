@@ -338,7 +338,7 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // return, if urlstring is already a qualified url (http://...)
-        if (false !== strpos($urlstring, WWW_ROOT . 'index.php?')) {
+        if (false !== strpos($urlstring, WWW_APPLICATION_PATH . 'index.php?')) {
             return $urlstring;
         }
 
@@ -360,7 +360,7 @@ class Router implements RouterInterface, \ArrayAccess
          * ROOT/news/2
          */
         if (REWRITE_ENGINE_ON == true and $force_modrewrite_on === true) {
-            return WWW_ROOT . ltrim($urlstring, '/');
+            return WWW_APPLICATION_PATH . ltrim($urlstring, '/');
         } else {
             /**
              * mod_rewrite is off. the requested url style is:
@@ -401,7 +401,7 @@ class Router implements RouterInterface, \ArrayAccess
             $arg_separator = ($encode === true) ? '&amp;' : '&';
 
             // Finally: build and return the url!
-            return WWW_ROOT . 'index.php?' . http_build_query($url_data, '', $arg_separator);
+            return WWW_APPLICATION_PATH . 'index.php?' . http_build_query($url_data, '', $arg_separator);
         }
     }
 
@@ -790,9 +790,9 @@ class Router implements RouterInterface, \ArrayAccess
         // ensure apache has module mod_rewrite active
         if (true === function_exists('apache_get_modules')
             and true === in_array('mod_rewrite', apache_get_modules())) {
-            if (true === is_file(ROOT . '.htaccess')) {
+            if (true === is_file(APPLICATION_PATH . '.htaccess')) {
                 // load htaccess and check if RewriteEngine is enabled
-                $htaccess_content = file_get_contents(ROOT . '.htaccess');
+                $htaccess_content = file_get_contents(APPLICATION_PATH . '.htaccess');
                 $rewriteEngineOn = preg_match('/.*[^#][\t ]+RewriteEngine[\t ]+On/i', $htaccess_content);
 
                 if (true === (bool) $rewriteEngineOn) {

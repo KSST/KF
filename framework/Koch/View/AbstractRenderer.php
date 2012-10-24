@@ -231,8 +231,8 @@ abstract class AbstractRenderer
          *    Watch it! These Paths are relative (based on WWW_ROOT), not absolute!
          */
         $template_constants['www_root']                 = WWW_ROOT;
-        $template_constants['www_root_uploads']         = WWW_ROOT . 'Uploads/';
-        $template_constants['www_APPLICATION_MODULES_PATH']             = WWW_ROOT . 'Modules/' . $modulename . '/';
+        $template_constants['www_root_uploads']         = WWW_APPLICATION_PATH . 'Uploads/';
+        $template_constants['www_APPLICATION_MODULES_PATH']             = WWW_APPLICATION_PATH . 'Modules/' . $modulename . '/';
         $template_constants['www_root_theme']           = $this->getTheme()->getWebPath();
         $template_constants['www_root_themes']          = WWW_ROOT_THEMES;
         $template_constants['WWW_ROOT_THEMES_CORE']     = WWW_ROOT_THEMES_CORE;
