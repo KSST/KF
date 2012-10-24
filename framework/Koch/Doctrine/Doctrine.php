@@ -101,11 +101,11 @@ class Doctrine
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader('Symfony', VENDOR_PATH .  'Doctrine/Symfony');
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Entity', ROOT . 'Doctrine');
+        $classLoader = new \Doctrine\Common\ClassLoader('Entity', APPLICATION_PATH . 'Doctrine');
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Repository', ROOT . 'Doctrine');
+        $classLoader = new \Doctrine\Common\ClassLoader('Repository', APPLICATION_PATH . 'Doctrine');
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Proxy', ROOT . 'Doctrine');
+        $classLoader = new \Doctrine\Common\ClassLoader('Proxy', APPLICATION_PATH . 'Doctrine');
         $classLoader->register();
 
         // include Doctrine Extensions
@@ -139,7 +139,7 @@ class Doctrine
         #\Koch\Debug\Debug::firebug($config->getMetadataDriverImpl()->getAllClassNames());
 
         // set proxy dirs
-        $config->setProxyDir(ROOT . 'Doctrine');
+        $config->setProxyDir(APPLICATION_PATH . 'Doctrine');
         $config->setProxyNamespace('Proxy');
 
         // regenerate proxies only in debug and not in production mode
@@ -309,7 +309,7 @@ class Doctrine
             }
         }
 
-        #$model_dirs[] = ROOT . 'doctrine';
+        #$model_dirs[] = APPLICATION_PATH . 'doctrine';
 
         $model_dirs = array_keys(array_flip($model_dirs));
 
