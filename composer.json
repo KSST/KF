@@ -23,8 +23,8 @@
                 "name": "php-gettext/php-gettext",
                 "version": "1.0.11",
                 "dist": {
+                    "url": "http://launchpadlibrarian.net/61225817/php-gettext-1.0.11.tar.gz",
                     "type": "tar",
-                    "url": "http://launchpadlibrarian.net/61225817/php-gettext-1.0.11.tar.gz"
                 },
                 "autoload": {
                     "classmap": [
