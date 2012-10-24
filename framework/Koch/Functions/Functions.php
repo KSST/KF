@@ -24,9 +24,9 @@ class Functions
     /**
      * @var array This array contains the names of the loaded functions from directory /core/functions.
      */
-    public static $already_loaded = array();
+    public static $alreadyLoaded = array();
 
-    public static function get_server_load()
+    public static function getServerLoad()
     {
         if (stristr(PHP_OS, 'win')) {
             $wmi = new COM("Winmgmts://");
@@ -797,12 +797,12 @@ class Functions
     public static function UTF8_to_HTML($utf8, $encodeTags = false)
     {
         // check if this function was aleady loaded
-        if (isset(self::$already_loaded[__FUNCTION__]) === false) {
+        if (isset(self::$alreadyLoaded[__FUNCTION__]) === false) {
             // if not, load function
             include __DIR__ . '/Pool/' . __FUNCTION__ . '.php';
 
             // function loaded successfully
-            self::$already_loaded[__FUNCTION__] = true;
+            self::$alreadyLoaded[__FUNCTION__] = true;
         }
 
         // calling the loaded function

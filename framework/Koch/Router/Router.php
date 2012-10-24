@@ -50,7 +50,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @var boolean
      */
-    private static $use_cache = false;
+    private static $useCache = false;
 
     /**
      * The Request URI (came in from the HttpRequest object)
@@ -64,7 +64,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @var array
      */
-    public $uri_segments = array();
+    public $uriSegments = array();
 
     /**
      * The "extension" on the URI
@@ -85,12 +85,12 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Constructor.
      */
-    public function __construct(HttpRequestInterface $request, $config)
+    public function __construct(HttpRequestInterface $request)
     {
         $this->request = $request;
 
         // Set config object to the router for later access to config variables.
-        $this->config = $config;
+        //$this->config = 
 
         // get URI from request, clean it and set it as a class property
         $this->uri = self::prepareRequestURI($request->getRequestURI());
@@ -503,15 +503,15 @@ class Router implements RouterInterface, \ArrayAccess
          */
         if (true === $this->isRewriteEngineOn() and
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
-            $this->uri_segments = $this->parseUrlRewrite($this->uri);
+            $this->uriSegments = $this->parseUrlRewrite($this->uri);
         } else {
-            $this->uri_segments = $this->parseUrlNoRewrite($this->uri);
+            $this->uriSegments = $this->parseUrlNoRewrite($this->uri);
 
             /**
              * Handle the noRewrite URL segments by inserting them into a TargetRoute.
              */
-            $this->uri_segments = self::fixNoRewriteShorthands($this->uri_segments);
-            $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uri_segments);
+            $this->uriSegments = self::fixNoRewriteShorthands($this->uriSegments);
+            $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
             if ($targetRoute::dispatchable() === true) {
                 $this->request->setRoute($targetRoute);
 
@@ -523,7 +523,7 @@ class Router implements RouterInterface, \ArrayAccess
          * Reduce the map lookup table, by dropping all routes
          * with more segments than the current requested uri.
          */
-        if (count($this->routes) > 1 and count($this->uri_segments) >= 1) {
+        if (count($this->routes) > 1 and count($this->uriSegments) >= 1) {
             self::removeRoutesBySegmentCount();
         }
 
@@ -837,7 +837,7 @@ class Router implements RouterInterface, \ArrayAccess
     {
         $route_pattern = '';
         $route_values = '';
-        $number_of_uri_segements = count($this->uri_segments);
+        $number_of_uri_segements = count($this->uriSegments);
 
         foreach ($this->routes as $route_pattern => $route_values) {
             if ($route_values['number_of_segments'] === $number_of_uri_segements) {
@@ -857,11 +857,11 @@ class Router implements RouterInterface, \ArrayAccess
     {
         // Is Routes Caching is enabled in config?
         if (isset($this->config['router']['caching']) === true) {
-            self::$use_cache = ($this->config['router']['caching'] === true) ? true : false;
+            self::$useCache = ($this->config['router']['caching'] === true) ? true : false;
         }
 
         // Load Routes from Cache
-        if (true === self::$use_cache and true === empty($this->routes) and
+        if (true === self::$useCache and true === empty($this->routes) and
             Cache::contains('clansuite.routes')) {
             $this->addRoutes(Cache::read('clansuite.routes'));
         }
@@ -874,7 +874,7 @@ class Router implements RouterInterface, \ArrayAccess
             }
 
             // and save these routes to cache
-            if (true === self::$use_cache) {
+            if (true === self::$useCache) {
                 Cache::store('clansuite.routes', $this->getRoutes());
             }
         }

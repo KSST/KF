@@ -131,7 +131,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(3 == count($this->router->getRoutes()));
 
-        $this->router->uri_segments = array('0' => 'news');
+        $this->router->uriSegments = array('0' => 'news');
 
         // this makes all other routes irrelevant for the lookup
         $this->router->removeRoutesBySegmentCount();
