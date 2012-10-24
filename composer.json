@@ -28,7 +28,8 @@
 
         "smarty/smarty": "v3.1.12",
         "simplepie/simplepie": "dev-master",
-        "swiftmailer/swiftmailer": "v4.2.1"
+        "swiftmailer/swiftmailer": "v4.2.1",
+        "firephp/firephp-core": "dev-master"
     },
     "require-dev": {
         "mikey179/vfsStream": "*",
