@@ -40,8 +40,8 @@ class SetModuleLanguage implements FilterInterface
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        $modulename = TargetRoute::getController();
+        $module = TargetRoute::getController();
 
-        $this->locale->loadTextDomain('LC_ALL', $modulename, $this->locale->getLocale(), $modulename);
+        $this->locale->loadTextDomain($module, $this->locale->getLocale(), $module);
     }
 }

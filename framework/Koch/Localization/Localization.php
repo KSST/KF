@@ -77,7 +77,7 @@ class Localization
         }
 
         // Load Domain
-        $this->loadTextDomain('LC_ALL', $this->domain, $locale);
+        $this->loadTextDomain($this->domain, $locale);
     }
 
     /**
@@ -121,10 +121,8 @@ class Localization
      * So if $domain = 'clansuite'; => clansuite.mo
      *
      * @link http://www.php.net/function.bindtextdomain
-     *
-     * @param $category string LC_ALL
      */
-    public function loadTextDomain($category, $domain, $locale, $module = null)
+    public function loadTextDomain($domain, $locale, $module = null)
     {
         // if, $locale string is not over 3 chars long -> $locale = "en", build "en_EN"
         if (isset($locale{3}) == false) {
@@ -134,8 +132,8 @@ class Localization
         // Environment Variable LANGUAGE has priority above any local setting
         putenv('LANGUAGE=' . $locale);
         putenv('LANG=' . $locale);
-        setlocale($category, $locale . '.UTF-8');
-        T_setlocale($category, $locale . '.UTF8', $locale);
+        setlocale(LC_ALL, $locale . '.UTF-8');
+        T_setlocale(LC_ALL, $locale . '.UTF8', $locale);
 
         /**
          * Set the domain_directory (where look for MO files named $domain.po)
