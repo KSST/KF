@@ -78,6 +78,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
     public function __construct(\Koch\Config\Config $config)
     {
         $this->config = $config;
+        var_dump($config);
 
         /**
          * Set the Session Expire Time.

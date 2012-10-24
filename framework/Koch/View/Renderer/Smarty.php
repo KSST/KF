@@ -70,18 +70,6 @@ class Smarty extends AbstractRenderer
      */
     public function initializeEngine($template = null)
     {
-        $smarty = __DIR__ . '/../../../vendor/smarty/Smarty.class.php';
-
-        // prevent redeclaration
-        if (class_exists('Smarty', false) === false) {
-            // check if Smarty library exists
-            if (is_file($smarty) === true) {
-                include $smarty;
-            } else {
-                throw new Exception('Smarty Template Library missing!');
-            }
-        }
-
         // Do it with smarty style > eat like a bird, poop like an elefant!
         $this->renderer = new \Smarty();
     }
@@ -215,7 +203,7 @@ class Smarty extends AbstractRenderer
 
         $this->renderer->setPluginsDir(
             array(
-                __DIR__ . '/../../../vendors/smarty/plugins',
+                VENDOR_PATH . '/smarty/smarty/distribution/libs/plugins',
                 __DIR__ . '/../Helper/Smarty',
                 APPLICATION_PATH . '/Core/View/Helper/Smarty',
                 APPLICATION_MODULES_PATH . TargetRoute::getModule() . '/View/Helper/Smarty'

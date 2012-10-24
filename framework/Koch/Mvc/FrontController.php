@@ -65,29 +65,29 @@ class FrontController implements FrontControllerInterface
     /**
      * @var object \Koch_FilterManager for Prefilters
      */
-    private $pre_filter_manager;
+    private $preFilterManager;
 
     /**
-     * @var object \Koch_FilterManager for Postfilters
+     * @var object \Koch\Filter\FilterManager for Postfilters
      */
-    private $post_filter_manager;
+    private $postFilterManager;
 
     /**
-     * @var object \Koch_EventDispatcher
+     * @var object \Koch\Event\Dispatcher
      */
-    private $event_dispatcher;
+    private $eventDispatcher;
 
     /**
      * Constructor
      */
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        $this->request             = $request;
-        $this->response            = $response;
-        $this->pre_filter_manager  = new \Koch\Filter\FilterManager();
-        $this->post_filter_manager = new \Koch\Filter\FilterManager();
-        $this->event_dispatcher    = \Koch\Event\Dispatcher::instantiate();
-        $this->router              = new \Koch\Router\Router($this->request);
+        $this->request           = $request;
+        $this->response          = $response;
+        $this->preFilterManager  = new \Koch\Filter\FilterManager();
+        $this->postFilterManager = new \Koch\Filter\FilterManager();
+        $this->eventDispatcher   = \Koch\Event\Dispatcher::instantiate();
+        $this->router            = new \Koch\Router\Router($this->request);
     }
 
     /**
@@ -99,7 +99,7 @@ class FrontController implements FrontControllerInterface
      */
     public function addPreFilter(FilterInterface $filter)
     {
-        $this->pre_filter_manager->addFilter($filter);
+        $this->preFilterManager->addFilter($filter);
     }
 
     /**
@@ -111,7 +111,7 @@ class FrontController implements FrontControllerInterface
      */
     public function addPostFilter(FilterInterface $filter)
     {
-        $this->post_filter_manager->addFilter($filter);
+        $this->postFilterManager->addFilter($filter);
     }
 
     /**
@@ -125,15 +125,15 @@ class FrontController implements FrontControllerInterface
     {
         $this->router->route();
 
-        $this->pre_filter_manager->processFilters($this->request, $this->response);
+        $this->preFilterManager->processFilters($this->request, $this->response);
 
-        $this->event_dispatcher->triggerEvent('onBeforeDispatcherForward');
+        $this->eventDispatcher->triggerEvent('onBeforeDispatcherForward');
 
         $this->forward($this->request, $this->response);
 
-        $this->event_dispatcher->triggerEvent('onAfterDispatcherForward');
+        $this->eventDispatcher->triggerEvent('onAfterDispatcherForward');
 
-        $this->post_filter_manager->processFilters($this->request, $this->response);
+        $this->postFilterManager->processFilters($this->request, $this->response);
 
         $this->response->sendResponse();
     }
@@ -167,7 +167,7 @@ class FrontController implements FrontControllerInterface
         #$request_meth = Koch_HttpRequest::getRequestMethod();
         #$renderengine = $route::getRenderEngine();
 
-        #$this->event_dispatcher->addEventHandler('onBeforeControllerMethodCall', new Koch_Event_InitializeModule());
+        #$this->eventDispatcher->addEventHandler('onBeforeControllerMethodCall', new Koch_Event_InitializeModule());
 
         $controllerInstance = new $classname($request, $response);
 
@@ -181,7 +181,6 @@ class FrontController implements FrontControllerInterface
          * This places the method on top in the method navigator of your IDE.
          */
         if (true === method_exists($controllerInstance, '_initializeModule')) {
-
             $controllerInstance->_initializeModule();
         }
 
@@ -197,7 +196,6 @@ class FrontController implements FrontControllerInterface
          * This places the method on top in the method navigator of your IDE.
          */
         if (true === method_exists($controllerInstance, '_beforeFilter')) {
-
             $controllerInstance->_beforeFilter();
         }
 
@@ -208,7 +206,6 @@ class FrontController implements FrontControllerInterface
          * Finally: dispatch to the requested controller method
          */
         if (true === method_exists($controllerInstance, $method)) {
-
             $controllerInstance->$method($parameters);
         } else {
             echo 'Class '.$classname.'->Method '.$method.' not found.';
