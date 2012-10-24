@@ -264,7 +264,7 @@ class ResponseEncode
          *
          * The Content Compression Info Comment was originally added by Kasper Skaarhoj for Typo3.
          * This had the problem of wasting resources by using gzcompress two times.
-         * One time to determine the compressed_content_size and a second time for the 
+         * One time to determine the compressed_content_size and a second time for the
          * compression of the content (gzdata). This gets rid of the double gzcompression usage.
          * The compression info message is now passed via header to the client.
          */
@@ -272,9 +272,9 @@ class ResponseEncode
         $compression_ratio = round((100 / $original_content_size) * $compressed_content_size);
 
         // construct Content Compression Info Comment
-        $msg = 'Compression Level ' . $level 
-            . '. Ratio ' . $compression_ratio 
-            . '%. Original size was ' . $original_content_size 
+        $msg = 'Compression Level ' . $level
+            . '. Ratio ' . $compression_ratio
+            . '%. Original size was ' . $original_content_size
             . ' bytes. New size is ' . $compressed_content_size . ' bytes.';
 
         // set compression-info header
@@ -291,7 +291,7 @@ class ResponseEncode
      * Usage to test if output will be zipped:
      * if (self::gzip_accepted()) { echo "Page will be gziped"; }
      *
-     * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if 
+     * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if
      * Accept-Encoding Header is found. False otherwise.
      */
     public static function gzipAccepted()

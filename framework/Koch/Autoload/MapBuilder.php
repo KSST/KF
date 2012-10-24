@@ -59,9 +59,9 @@ class MapBuilder
     /**
      * Iterates over all PHP files in a directory and returns array with filenames.
      *
-     * @param  array|string $dirs One or multiple directories to scan for PHP files.
-     * 
-     * @return array        Array with PHP files.
+     * @param array|string $dirs One or multiple directories to scan for PHP files.
+     *
+     * @return array Array with PHP files.
      */
     public static function getPHPFiles($dirs)
     {
@@ -101,9 +101,9 @@ class MapBuilder
     /**
      * Extract classname and namespace of the given file.
      *
-     * @param  string $file The file to extract the classname from.
-     * 
-     * @return array  Found classnames.
+     * @param string $file The file to extract the classname from.
+     *
+     * @return array Found classnames.
      */
     public static function extractClassname($file)
     {
@@ -156,7 +156,7 @@ class MapBuilder
 
     /**
      * Writes the classmap array to file
-     * 
+     *
      * @param array  $classmap Array containing the classname to file relation.
      * @param string $mapfile  Path to the classmap file to be written.
      */

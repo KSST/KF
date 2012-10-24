@@ -42,7 +42,7 @@ class MBox extends Generator
     public function __construct($identifier = '')
     {
         parent::__construct($identifier);
-        
+
         $this->contentType = "text/plain";
         $this->encoding = "ISO-8859-15";
     }

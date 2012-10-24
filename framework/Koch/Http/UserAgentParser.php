@@ -262,6 +262,7 @@ class UserAgentParser
             $aList[$name] = $row;
         }
 */
+
         return $aList;
     }
 

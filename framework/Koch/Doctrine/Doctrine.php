@@ -87,7 +87,7 @@ class Doctrine
         self::checkDataSourceName($applicationConfig);
 
         $vendor = VENDOR_PATH . '/doctrine/common/lib/';
-        
+
         // ensure doctrine2 exists in the libraries folder
         if (is_file($vendor . 'Doctrine/Common/ClassLoader.php') === false) {
             throw new \Koch\Exception\Exception('Doctrine2 not found. Check Libraries Folder.', 100);
@@ -194,7 +194,7 @@ class Doctrine
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
          */
-        if ($applicationConfig['database']['driver'] !== null 
+        if ($applicationConfig['database']['driver'] !== null
         and $applicationConfig['database']['driver'] == "pdo_mysql") {
             if ($applicationConfig['database']['charset'] !== null) {
                 $event->addEventSubscriber(

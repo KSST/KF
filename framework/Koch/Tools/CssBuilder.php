@@ -455,9 +455,9 @@ class CssBuilder
 
     /**
      * Save stylesheet to import file
-     * 
-     * @param type $comp_filename
-     * @param type $_compact
+     *
+     * @param  type    $comp_filename
+     * @param  type    $_compact
      * @return boolean
      */
     protected function saveStylesheet($comp_filename, $_compact)

@@ -103,7 +103,7 @@ class Router implements RouterInterface, \ArrayAccess
         $this->request = $request;
 
         // Set config object to the router for later access to config variables.
-        //$this->config = 
+        //$this->config =
 
         // get URI from request, clean it and set it as a class property
         $this->uri = self::prepareRequestURI($request->getRequestURI());

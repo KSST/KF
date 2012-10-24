@@ -158,9 +158,9 @@ class Po
 
     /**
      * Cleans the po.
-     * 
-     * @param string|array $x
-     * @return string Cleaned PO element.
+     *
+     * @param  string|array $x
+     * @return string       Cleaned PO element.
      */
     private static function poCleaner($x)
     {
@@ -176,7 +176,7 @@ class Po
 
             $x = str_replace("\"\n\"", '', $x);
             $x = str_replace('$', '\\$', $x);
-            
+
             // #\Koch\Debug\Debug:firebug($x);
 
             // @todo which use case has this eval?

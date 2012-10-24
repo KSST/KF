@@ -26,7 +26,6 @@
 namespace Koch\Form\Elements;
 
 use Koch\Form\Elements\File;
-use Koch\Form\FormElementInterface;
 
 class UploadApc extends File
 {
@@ -132,7 +131,7 @@ class UploadApc extends File
          * c) placed before the input file element.
          */
         $uniqueID = md5(uniqid(mt_rand(), true));
-        $hidden = new Hidden();        
+        $hidden = new Hidden();
         $html .= $hidden->setName('APC_UPLOAD_PROGRESS')->setID('upload_status')->setValue($uniqueID);
 
         // add the input element
@@ -147,23 +146,23 @@ class UploadApc extends File
 
         return $javascript.$html;
     }
-    
+
     public function setValue($value)
     {
         $this->value = $value;
     }
-    
+
     public function getValue()
     {
         return $this->value;
     }
-    
+
     public function setAttribute($attribute, $value)
     {
         // $attribute;
         // $value;
     }
-    
+
     public function getAttribute($attribute)
     {
         // $attribute;
