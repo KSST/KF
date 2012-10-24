@@ -48,5 +48,6 @@
             "Koch\\": "framework/",
             "KochTest\\": "tests/"
         }
-    }
+    },
+    "minimum-stability": "dev"
 }
