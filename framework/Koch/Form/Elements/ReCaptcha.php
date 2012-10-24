@@ -53,7 +53,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
         $this->request = Clansuite_CMS::getInjector()->instantiate('Koch_HttpRequest');
 
         // Load Recaptcha Library
-        include_once __DIR__ . '/../../../vendor/recaptcha/recaptchalib.php';
+        include_once VENDOR_PATH . '/recaptcha/recaptchalib.php';
 
         /**
          * Fetch publickey from config

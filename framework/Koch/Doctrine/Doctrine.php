@@ -82,12 +82,12 @@ class Doctrine
      *
      * @return Doctrine_Enitity_Manager
      */
-    public static function init($config)
+    public static function init($applicationConfig)
     {
-        self::checkDataSourceName($config);
+        self::checkDataSourceName($applicationConfig);
 
-        $vendor = __DIR__ . '/../../vendor/';
-
+        $vendor = VENDOR_PATH . '/doctrine/common/lib/';
+        
         // ensure doctrine2 exists in the libraries folder
         if (is_file($vendor . 'Doctrine/Common/ClassLoader.php') === false) {
             throw new \Koch\Exception\Exception('Doctrine2 not found. Check Libraries Folder.', 100);
@@ -97,9 +97,9 @@ class Doctrine
         require $vendor . 'Doctrine/Common/ClassLoader.php';
 
         // setup autoloaders with namespace and path to search in
-        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', $vendor);
+        $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', VENDOR_PATH);
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', $vendor .  'Doctrine/Symfony');
+        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', VENDOR_PATH .  'Doctrine/Symfony');
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader('Entity', ROOT . 'Doctrine');
         $classLoader->register();
@@ -109,7 +109,7 @@ class Doctrine
         $classLoader->register();
 
         // include Doctrine Extensions
-        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', $vendor);
+        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', VENDOR_PATH . 'gedmo/doctrine-extensions/lib/Gedmo');
         $classLoader->register();
 
         // fetch doctrine config handler for configuring
@@ -151,14 +151,14 @@ class Doctrine
 
         // use main configuration values for setting up the connection
         $connectionOptions = array(
-            'driver'    => $config['database']['driver'],
-            'user'      => $config['database']['user'],
-            'password'  => $config['database']['password'],
-            'dbname'    => $config['database']['dbname'],
-            'host'      => $config['database']['host'],
-            'charset'   => $config['database']['charset'],
+            'driver'    => $applicationConfig['database']['driver'],
+            'user'      => $applicationConfig['database']['user'],
+            'password'  => $applicationConfig['database']['password'],
+            'dbname'    => $applicationConfig['database']['dbname'],
+            'host'      => $applicationConfig['database']['host'],
+            'charset'   => $applicationConfig['database']['charset'],
             'driverOptions' => array(
-                'charset' => $config['database']['charset']
+                'charset' => $applicationConfig['database']['charset']
             )
         );
 
@@ -179,9 +179,9 @@ class Doctrine
          * The constant definition is for building (raw) sql queries manually.
          * The database prefixing is registered via an event.
          */
-        define('DB_PREFIX', $config['database']['prefix']);
+        define('DB_PREFIX', $applicationConfig['database']['prefix']);
 
-        $tablePrefix = new \DoctrineExtensions\TablePrefix\TablePrefix(DB_PREFIX);
+        $tablePrefix = new TablePrefix(DB_PREFIX);
         $event->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
 
         /**
@@ -194,11 +194,12 @@ class Doctrine
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
          */
-        if ($config['database']['driver'] !== null and $config['database']['driver'] == "pdo_mysql") {
-            if ($config['database']['charset'] !== null) {
+        if ($applicationConfig['database']['driver'] !== null 
+        and $applicationConfig['database']['driver'] == "pdo_mysql") {
+            if ($applicationConfig['database']['charset'] !== null) {
                 $event->addEventSubscriber(
                     new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit(
-                        $config['database']['charset'],
+                        $applicationConfig['database']['charset'],
                         'utf8_unicode_ci'
                     )
                 );
@@ -222,7 +223,7 @@ class Doctrine
         self::$em = $em;
 
         // done with config, remove to safe memory
-        unset($config, $em, $event, $cache, $classLoader, $config);
+        unset($applicationConfig, $em, $event, $cache, $classLoader, $config);
 
         return self::$em;
     }

@@ -151,11 +151,6 @@ class Debug
      */
     public static function firebug($var, $firebugmethod = 'log')
     {
-        // get firephp instance, if class not existant
-        if ( class_exists('FirePHP', false) === false ) {
-            include __DIR__ . '/../../vendor/firephp/FirePHP.class.php';
-        }
-
         $firephp = \FirePHP::getInstance(true);
 
         /**

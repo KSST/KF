@@ -64,7 +64,7 @@ class DoorKeeper
         // prevent redeclaration
         if (false === class_exists('IDS_Monitor', false)) {
             // load ids init
-            include __DIR__ . '/../../vendor/IDS/Init.php';
+            include VENDOR_PATH . 'IDS/Init.php';
 
             // Setup the $_GLOBALS to monitor
 
