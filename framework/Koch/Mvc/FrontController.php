@@ -48,22 +48,22 @@ use Koch\Filter\FilterInterface;
 class FrontController implements FrontControllerInterface
 {
     /**
-     * @var object \Koch_HttpRequest
+     * @var object \Koch\Http\HttpRequest
      */
     private $request;
 
     /**
-     * @var object \Koch_HttpResponse
+     * @var object \Koch\Http\HttpResponse
      */
     private $response;
 
     /**
-     * @var object \Koch_Router
+     * @var object \Koch\Router\Router
      */
     private $router;
 
     /**
-     * @var object \Koch_FilterManager for Prefilters
+     * @var object \Koch\Filter\FilterManager for Prefilters
      */
     private $preFilterManager;
 
@@ -146,7 +146,7 @@ class FrontController implements FrontControllerInterface
      * 1. fetches Route Object
      * 2. extracts info about correct controller, correct method with correct parameters
      * 3. tries to call the method "initializeModule" on the controller
-     * 4. finally tries to call the controller with method(parms)!
+     * 4. finally tries to call the controller with method(params)!
      *
      * The dispatcher forwards to the pagecontroller = modulecontroller + moduleaction.
      */
@@ -156,7 +156,7 @@ class FrontController implements FrontControllerInterface
         $route = $request->getRoute();
 
         if ($route === null) {
-            throw new \Exception('The dispatcher is unable to forward. No route object given.', 99);
+            throw new \Exception('The dispatcher is unable to forward. No route object given.');
         }
 
         //$route::debug();
