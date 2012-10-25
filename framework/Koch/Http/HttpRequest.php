@@ -53,7 +53,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * @var object Object with pieces of informations about the target route.
      */
     private static $route;
-
+    
     /**
      * Construct the Request Object
      *
@@ -104,7 +104,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
          */
         $this->detectRESTTunneling();
     }
-
+    
     /**
      * Returns the raw POST Parameters Array.
      * Raw means: no validation, no filtering, no sanitization.

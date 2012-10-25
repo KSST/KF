@@ -413,10 +413,10 @@ class Errorhandler
                 //$result[$surround_lines] = '<span style="background-color:#BF0000;">'
                 // . $result[$surround_lines] .'</span>';
 
-                // remove 4 space identation
-                foreach($result as $i => $line) {
-                    $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
-                }
+                // @todo remove 4 space identation, still buggy on inline stmts
+                //foreach($result as $i => $line) {
+                //     $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
+                //}
                 
                 // transform the array into html string
                 // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
