@@ -232,12 +232,12 @@ class TargetRoute extends Mapper
 
     public static function getBackendTheme()
     {
-        return ($_SESSION['user']['backend_theme'] !== null) ? $_SESSION['user']['backend_theme'] : 'admin';
+        return isset($_SESSION['user']['backend_theme']) === true ? $_SESSION['user']['backend_theme'] : 'admin';
     }
 
     public static function getFrontendTheme()
     {
-        return ($_SESSION['user']['frontend_theme'] !== null)  ? $_SESSION['user']['frontend_theme'] : 'standard';
+        return isset($_SESSION['user']['frontend_theme']) === true  ? $_SESSION['user']['frontend_theme'] : 'standard';
     }
 
     public static function getThemeName()
