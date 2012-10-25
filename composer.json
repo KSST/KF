@@ -36,31 +36,32 @@
         }
     ],
     "require": {
-        "php": ">=5.3.3",
+        "php"                             : ">=5.3.3",
 
-        "doctrine/orm"       : "2.3.0",
-        "doctrine/dbal"      : "2.3.0",
-        "doctrine/common"    : "2.3.0",
-        "doctrine/migrations": "dev-master",
-        "gedmo/doctrine-extensions": "dev-master",
+        "doctrine/orm"                    : "2.3.0",
+        "doctrine/dbal"                   : "2.3.0",
+        "doctrine/common"                 : "2.3.0",
+        "doctrine/migrations"             : "dev-master",
+        "beberlei/DoctrineExtensions"     : "dev-master",
+        "gedmo/doctrine-extensions"       : "dev-master",
 
-        "smarty/smarty": "v3.1.12",
-        "simplepie/simplepie": "dev-master",
-        "swiftmailer/swiftmailer": "v4.2.1",
-        "firephp/firephp-core": "dev-master",
-        "php-gettext/php-gettext" : "1.0.11"
+        "firephp/firephp-core"            : "dev-master",
+        "php-gettext/php-gettext"         : "1.0.11",
+        "simplepie/simplepie"             : "dev-master",
+        "smarty/smarty"                   : "v3.1.12",
+        "swiftmailer/swiftmailer"         : "v4.2.2"
     },
     "require-dev": {
-        "mikey179/vfsStream": "*",
-        "phpunit/PHPUnit": "3.7.*"
+        "mikey179/vfsStream"              : "*",
+        "phpunit/PHPUnit"                 : "3.7.*"
     },
     "suggest": {
-        "ext-apc" : "*",
-        "ext-gettext" : "*",
-        "ext-intl" : "*",
-        "ext-json" : "*",
-        "ext-mbstring" : "*",
-        "ext-yaml" : "*"
+        "ext-apc"         : "*",
+        "ext-gettext"     : "*",
+        "ext-intl"        : "*",
+        "ext-json"        : "*",
+        "ext-mbstring"    : "*",
+        "ext-yaml"        : "*"
     },
     "autoload": {
         "psr-0": {
