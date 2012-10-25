@@ -36,7 +36,7 @@ class Config extends AbstractConfig
 {
     /**
      * Setter for Config Array.
-     * 
+     *
      * @param array $config
      */
     public function setConfig($config)
@@ -58,14 +58,14 @@ class Config extends AbstractConfig
 
         return $this->config;
     }
-    
+
     public function getApplicationConfig()
     {
         static $config = array();
-           
+
         $appConfigIsCached = false;
-        $apcAppKey = APPLICATION_NAME . '.config';     
-        
+        $apcAppKey = APPLICATION_NAME . '.config';
+
         // load config from APC
         if (APC === true and apc_exists($apcAppKey)) {
             $config = apc_fetch($apcAppKey);
@@ -82,17 +82,17 @@ class Config extends AbstractConfig
                 apc_add($apcAppKey, $config);
             }
         }
-        
+
         unset($appConfigIsCached, $apcAppKey);
 
         // merge config with a staging configuration
         if (true === (bool) $config['config']['staging']) {
             $config = \Koch\Config\Staging::overloadWithStagingConfig($config);
         }
-        
+
         return $config;
     }
-    
+
     /**
      * Reads a configuration file of a module ($modulename . '.config.php')
      *

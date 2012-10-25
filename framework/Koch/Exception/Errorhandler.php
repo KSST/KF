@@ -414,14 +414,14 @@ class Errorhandler
                 // . $result[$surround_lines] .'</span>';
 
                 // @todo remove 4 space identation, still buggy on inline stmts
-                //foreach($result as $i => $line) {
+                //foreach ($result as $i => $line) {
                 //     $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
                 //}
-                
+
                 // transform the array into html string
                 // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
                 $errorcontext_lines  = implode($result, '<br>');
-              
+
                 $sprintf_html = '<table>
                                     <tr>
                                         <td class="num">'.CR.'%s'.CR.'</td>
