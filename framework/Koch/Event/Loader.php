@@ -83,7 +83,7 @@ class Loader
      */
     public static function loadCoreEvents()
     {
-        $events = include ROOT . 'Configuration/events.php';
+        $events = include APPLICATION_PATH . 'Configuration/events.php';
 
         self::loadEventHandlers($events);
     }

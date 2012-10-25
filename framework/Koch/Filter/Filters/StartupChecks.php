@@ -43,6 +43,20 @@ class StartupChecks implements FilterInterface
 {
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
+        /**
+         * Deny service, if the system load is too high.
+         */
+        if (defined('DEBUG') and DEBUG == false) {
+            $maxServerLoad = isset(self::$config['load']['max']) ? (float) self::$config['load']['max'] : 80;
+
+            if (\Koch\Functions\Functions::getServerLoad() > $maxServerLoad) {
+                $retry = (int) mt_rand(45, 90);
+                header ('Retry-After: '.$retry);
+                header('HTTP/1.1 503 Too busy, try again later');
+                die('HTTP/1.1 503 Server too busy. Please try again later.');
+            }
+        }
+        
         // ensure smarty "tpl_compile" folder exists
         if (false === is_dir(APPLICATION_CACHE_PATH . 'tpl_compile') and
             (false === @mkdir(APPLICATION_CACHE_PATH . 'tpl_compile', 0755, true))) {

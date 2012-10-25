@@ -137,8 +137,10 @@ class DependencyInjector
 
     public function instantiateParameter($parameter, $nesting)
     {
-        if (true === isset($this->named_parameters[$parameter->getName()])) {
-            return $this->named_parameters[$parameter->getName()];
+        $name = $parameter->getName();
+        
+        if (true === isset($this->named_parameters[$name])) {
+            return $this->named_parameters[$name];
         }
 
         $value = array();
@@ -147,7 +149,7 @@ class DependencyInjector
             return $value;
         }
 
-        throw new MissingDependency($parameter->getName());
+        throw new MissingDependency($name);
     }
 
     public function repository()

@@ -183,7 +183,7 @@ class Exception extends \Exception
      */
     private static function fetchExceptionTemplate($code)
     {
-        $file = ROOT . 'themes/core/exceptions/exception-' . $code . '.html';
+        $file = APPLICATION_PATH . 'themes/core/exceptions/exception-' . $code . '.html';
 
         if (is_file($file) === true) {
             self::$exception_template = file_get_contents($file);
@@ -208,7 +208,7 @@ class Exception extends \Exception
     private static function fetchExceptionDevelopmentTemplate($code)
     {
         // construct filename with code
-        $file = ROOT . 'themes/core/exceptions/exception-dev-' . $code . '.html';
+        $file = APPLICATION_PATH . 'themes/core/exceptions/exception-dev-' . $code . '.html';
 
         if (is_file($file) === true) {
             self::$exception_dev_template = file_get_contents($file);

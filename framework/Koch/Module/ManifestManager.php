@@ -77,7 +77,7 @@ class ManifestManager
     public static function readModuleRegistry()
     {
         return Clansuite_CMS::getInjector()->instantiate('Koch\Config')
-                ->readConfig(ROOT . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
+                ->readConfig(APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
     }
 
     /**
@@ -88,7 +88,7 @@ class ManifestManager
     public static function writeModuleRegistry($array)
     {
         Clansuite_CMS::getInjector()->instantiate('Koch\Config')
-         ->writeConfig(ROOT . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
+         ->writeConfig(APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
     }
 
     /**

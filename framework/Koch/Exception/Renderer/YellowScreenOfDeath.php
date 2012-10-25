@@ -201,7 +201,7 @@ class YellowScreenOfDeath
     public static function renderError($errno, $errorname, $errstr, $errfile, $errline, $errcontext)
     {
         // shorten errorfile string by removing the root path
-        $errfile_short = str_replace(ROOT, '', $errfile);
+        $errfile_short = str_replace(APPLICATION_PATH, '', $errfile);
         $short_errorstring = \Koch\Functions\Functions::shortenString($errfile, 70, '...');
 
         // Header
