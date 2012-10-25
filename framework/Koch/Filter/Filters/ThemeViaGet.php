@@ -29,7 +29,7 @@ use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 use Koch\Config\Config;
-use Koch\Validation\InputFilter;
+use Koch\Validation\Inputfilter;
 
 /**
  * Koch Framework - Filter for Theme Selection via URL.
