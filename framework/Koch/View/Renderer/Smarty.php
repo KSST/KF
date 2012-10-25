@@ -80,21 +80,17 @@ class Smarty extends AbstractRenderer
      */
     public function configureEngine()
     {
-        /**
-         * Directories
-         */
-        $this->renderer->compile_dir = $this->config['smarty']['cache_dir'] . 'tpl_compile/';
+        // Directories
+        $this->renderer->compile_dir = APPLICATION_CACHE_PATH . 'tpl_compile/';
+        $this->renderer->cache_dir   = APPLICATION_CACHE_PATH . 'tpl_cache/';         
         $this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
-        $this->renderer->cache_dir   = $this->config['smarty']['cache_dir'] . 'tpl_cache/';
-
-        /**
-         * Debugging
-         */
-        $this->renderer->debugging = DEBUG ? true : false; // set smarty debugging, when debug on
+       
+        // Debugging
+        $this->renderer->debugging = DEBUG ? true : false;
+        
         if ($this->renderer->debugging === true) {
-            // set debugging template for smarty
-            $this->renderer->debug_tpl = $this->config['smarty']['debug_template'];
-            // clear compiled tpls in case of debug and clear cache
+            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';
+            #$this->renderer->debug_tpl  = ROOT_LIBRARIES . 'smarty/debug.tpl';
             $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
         }
