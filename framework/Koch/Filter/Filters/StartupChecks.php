@@ -56,7 +56,7 @@ class StartupChecks implements FilterInterface
                 die('HTTP/1.1 503 Server too busy. Please try again later.');
             }
         }
-        
+
         // ensure smarty "tpl_compile" folder exists
         if (false === is_dir(APPLICATION_CACHE_PATH . 'tpl_compile') and
             (false === @mkdir(APPLICATION_CACHE_PATH . 'tpl_compile', 0755, true))) {

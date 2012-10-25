@@ -138,7 +138,7 @@ class DependencyInjector
     public function instantiateParameter($parameter, $nesting)
     {
         $name = $parameter->getName();
-        
+
         if (true === isset($this->named_parameters[$name])) {
             return $this->named_parameters[$name];
         }

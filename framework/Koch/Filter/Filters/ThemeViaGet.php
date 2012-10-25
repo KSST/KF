@@ -50,7 +50,7 @@ class ThemeViaGet implements FilterInterface
     public function __construct(Config $config, InputFilter $input)
     {
         $config = $config->getApplicationConfig();
-   
+
         // reduce array size by selection of the section
         $this->config = $config['prefilter'];
         $this->input  = $input;
