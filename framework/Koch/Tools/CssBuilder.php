@@ -150,7 +150,7 @@ class CssBuilder
 
         /* ----- prepare core ----- */
         /* Core-Info */
-        $corePath = ROOT . $coreInfo['path'];
+        $corePath = APPLICATION_PATH . $coreInfo['path'];
         $coreFiles = explode(',', $coreInfo['files']);
         if (strlen($coreInfo['additionalFiles']) > 0) {
             $coreadditionalFiles = explode(',', $coreInfo['additionalFiles']);
@@ -177,7 +177,7 @@ class CssBuilder
             $themeInfo['path'] = str_replace("{theme}", $config['themeFrontend'], $themeInfo['path']);
 
             /* Theme-Info */
-            $themePath = ROOT . $themeInfo['path'];
+            $themePath = APPLICATION_PATH . $themeInfo['path'];
             $themeCssName = $themeInfo['cssname'] . $postfix . '.css';
             $themeFiles = explode(',', $themeInfo['files']);
             if (strlen($themeInfo['additionalFiles']) > 0) {
@@ -208,7 +208,7 @@ class CssBuilder
             $themeBackInfo['path'] = str_replace("{theme}", $config['themeBackend'], $themeBackInfo['path']);
 
             /* Theme-Info */
-            $themeBackPath = ROOT . $themeBackInfo['path'];
+            $themeBackPath = APPLICATION_PATH . $themeBackInfo['path'];
             $themeBackCssName = $themeBackInfo['cssname'] . $postfix . '.css';
             $themeBackFiles = explode(',', $themeBackInfo['files']);
 

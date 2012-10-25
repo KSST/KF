@@ -34,6 +34,11 @@ namespace Koch\Config;
  */
 class Config extends AbstractConfig
 {
+    /**
+     * Setter for Config Array.
+     * 
+     * @param array $config
+     */
     public function setConfig($config)
     {
         $this->config = $config;
@@ -42,32 +47,66 @@ class Config extends AbstractConfig
     /**
      * Reads a configuration file
      *
-     * @param  string $configfile
+     * @param  string $file
      * @return object $this->config
      */
-    public function readConfig($configfile)
+    public function readConfig($file)
     {
         if (false === is_object($this->config)) {
-            $this->config = Factory::getConfiguration($configfile);
+            $this->config = Factory::getConfiguration($file);
         }
 
         return $this->config;
     }
+    
+    public function getApplicationConfig()
+    {
+        static $config = array();
+           
+        $appConfigIsCached = false;
+        $apcAppKey = APPLICATION_NAME . '.config';     
+        
+        // load config from APC
+        if (APC === true and apc_exists($apcAppKey)) {
+            $config = apc_fetch($apcAppKey);
+            $appConfigIsCached = true;
+        }
 
+        // load config from file
+        if ($appConfigIsCached === false) {
+            $config = \Koch\Config\Adapter\INI::readConfig(
+                APPLICATION_PATH . 'Configuration/clansuite.php'
+            );
+            // set to APC
+            if (APC === true) {
+                apc_add($apcAppKey, $config);
+            }
+        }
+        
+        unset($appConfigIsCached, $apcAppKey);
+
+        // merge config with a staging configuration
+        if (true === (bool) $config['config']['staging']) {
+            $config = \Koch\Config\Staging::overloadWithStagingConfig($config);
+        }
+        
+        return $config;
+    }
+    
     /**
      * Reads a configuration file of a module ($modulename . '.config.php')
      *
-     * @param $modulename Name of Module
+     * @param $module Name of Module
      * @return array Module Configuration Array
      */
-    public function readModuleConfig($modulename = null)
+    public function readModuleConfig($module = null)
     {
         // if no modulename is set, determine the name of the current module
-        if ($modulename === null) {
-            $modulename = \Koch\Router\TargetRoute::getModule();
+        if ($module === null) {
+            $module = \Koch\Router\TargetRoute::getModule();
         }
 
-        $file = APPLICATION_MODULES_PATH . $modulename . DIRECTORY_SEPARATOR . $modulename . '.config.php';
+        $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
 
         if (is_file($file)) {
             return Factory::getConfiguration($file);
@@ -85,7 +124,7 @@ class Config extends AbstractConfig
      */
     public function writeModuleConfig($array, $module = null)
     {
-        if ($module == null) {
+        if ($module === null) {
             $module = Koch\Router\TargetRoute::getModule();
         }
 
@@ -101,12 +140,8 @@ class Config extends AbstractConfig
      * @param $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.
      */
-    public function writeConfig($filename, $array = null)
+    public function writeConfig($file, $array = array())
     {
-        if ($array === null) {
-            $array = array();
-        }
-
-        Factory::getHandler($filename)->writeConfig($filename, $array);
+        Factory::getHandler($file)->writeConfig($file, $array);
     }
 }
