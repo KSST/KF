@@ -409,16 +409,19 @@ class Errorhandler
 
                 $result = array_values($array_content_sliced);
 
-                // now colourize the background of the errorous line RED
-                // $result[$surround_lines] = '<span style="background-color:#BF0000;">'
+                // @todo now colourize the background of the errorous line RED
+                //$result[$surround_lines] = '<span style="background-color:#BF0000;">'
                 // . $result[$surround_lines] .'</span>';
 
-                /**
-                 * transform the array into html string
-                 * enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
-                 */
+                // remove 4 space identation
+                foreach($result as $i => $line) {
+                    $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
+                }
+                
+                // transform the array into html string
+                // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
                 $errorcontext_lines  = implode($result, '<br>');
-
+              
                 $sprintf_html = '<table>
                                     <tr>
                                         <td class="num">'.CR.'%s'.CR.'</td>
