@@ -87,9 +87,6 @@ namespace and path to search in
         // set up Logger
         #$config->setSqlLogger(new \Doctrine\DBAL\Logging\EchoSqlLogger);
 
-        // we need some more functions for mysql
-        $config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
-
         /**
          * Events
          */
@@ -109,7 +106,7 @@ namespace and path to search in
         /**
          * Custom Functions
          *
-         * We need some more functions for mysql, like RAND for random values.
+         * We need some more functions for MySQL, like RAND for random values.
          */
         $config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
 
