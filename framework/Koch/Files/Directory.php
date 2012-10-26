@@ -104,7 +104,7 @@ class Directory
 
             // while iterating
             foreach ($iterator as $file) {
-                $wwwpath = WWW_APPLICATION_PATH . '/' . $this->getDirectory() . '/' . $file->getFilename();
+                $wwwpath = WWW_ROOT . '/' . $this->getDirectory() . '/' . $file->getFilename();
                 $wwwpath = str_replace('//', '/', $wwwpath);
                 $data[$wwwpath] = $file->getFilename();
             }
