@@ -503,7 +503,10 @@ class Smarty extends AbstractRenderer
         }
 
         // 1. assign common template values and Application constants as Smarty Template Variables.
-        $this->renderer->assignGlobal($this->getConstants());
+        $constants = $this->getConstants();
+        foreach($constants as $const => $value) {
+            $this->renderer->assignGlobal($const, $value);
+        }        
 
         /**
          * Assign the original template name and the requested module
