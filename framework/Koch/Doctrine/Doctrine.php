@@ -23,7 +23,15 @@ namespace and path to search in
         $classLoader->register();
 
         // include Doctrine Extensions
-        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', VENDOR_PATH . 'gedmo/doctrine-extensions/lib/Gedmo');
+        $classLoader = new \Doctrine\Common\ClassLoader(
+            'doctrine-extensions', 
+            VENDOR_PATH . 'gedmo/doctrine-extensions/lib'
+        );
+        $classLoader->register();
+        $classLoader = new \Doctrine\Common\ClassLoader(
+            'DoctrineExtensions', 
+            VENDOR_PATH . 'beberlei/DoctrineExtensions/lib'
+        );
         $classLoader->register();
 
         // fetch doctrine config handler for configuring
