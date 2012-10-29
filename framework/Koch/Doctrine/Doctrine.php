@@ -109,8 +109,16 @@ class Doctrine
         $classLoader->register();
 
         // include Doctrine Extensions
-        $classLoader = new \Doctrine\Common\ClassLoader('DoctrineExtensions', VENDOR_PATH . 'gedmo/doctrine-extensions/lib/Gedmo');
+        /*$classLoader = new \Doctrine\Common\ClassLoader(
+            'doctrine-extensions', 
+            VENDOR_PATH . 'gedmo/doctrine-extensions/lib/Gedmo'
+        );
         $classLoader->register();
+        $classLoader = new \Doctrine\Common\ClassLoader(
+            'DoctrineExtensions', 
+            VENDOR_PATH . 'beberlei/DoctrineExtensions/lib/DoctrineExtensions'
+        );
+        $classLoader->register();*/
 
         // fetch doctrine config handler for configuring
         $config = new \Doctrine\ORM\Configuration();
@@ -165,9 +173,6 @@ class Doctrine
         // set up Logger
         #$config->setSqlLogger(new \Doctrine\DBAL\Logging\EchoSqlLogger);
 
-        // we need some more functions for mysql
-        $config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
-
         /**
          * Events
          */
@@ -189,7 +194,7 @@ class Doctrine
          *
          * We need some more functions for mysql, like RAND for random values.
          */
-        $config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
+        #$config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
 
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
