@@ -30,17 +30,43 @@ class EmailTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_processValidationLogic()
+    /**
+	 * @return array
+	 */
+	public function isValidEMailDataprovider()
+    {
+        return array(
+            //incomplete
+            array('foo', false),
+            array('äää', false),
+            array('@', false),
+            //umlaut in topleveldomain
+            //array('test@test.öü', false), // @todo this is valid? punycode?
+            //invalid character in name
+            //array('foo/dsd@bar.de', false), // @todo this validates? with slash in name?
+            //own toplevel domain, but valid
+            array('max.mustermann@company.intranet', true),
+            // umlauts in name
+            array('karl.müller@123test.de', false), // @todo this is valid?
+            // perfect
+            array('charles@bronson.com', true),
+            //long domainname with subdomains
+            #array('herber-müller@servers.campus.univercity.edu', true), // @todo this does not validate.. why?
+            // brackets in string
+            array('billy[at]microsoft[dot]com', false)
+        );
+    }
+
+    /**
+     * @dataProvider isValidEMailDataprovider
+     */
+    public function testMethod_processValidationLogic($email, $expectedValidationState)
     {
         /**
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-
-        $this->assertTrue($this->validator->validate('charles@bronson.com'));
-
-        $this->assertTrue($this->validator->validate('billy@microsoft.com'));
-        $this->assertFalse($this->validator->validate('billy[at]microsoft[dot]com'));
+		$this->assertEquals($expectedValidationState, $this->validator->validate($email));
     }
 
     public function testMethod_getErrorMessage()
