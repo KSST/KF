@@ -87,9 +87,9 @@ class PhpDebugConsole implements FilterInterface
 
             // Renderer specific
             'HTML_DIV_view_source_script_name' => APPLICATION_PATH . 'libraries/phpdebug/PHP_Debug_ShowSource.php',
-            'HTML_DIV_images_path' =>  WWW_APPLICATION_PATH . 'libraries/phpdebug/images',
-            'HTML_DIV_css_path' =>  WWW_APPLICATION_PATH . 'libraries/phpdebug/css',
-            'HTML_DIV_js_path' =>  WWW_APPLICATION_PATH . 'libraries/phpdebug/js',
+            'HTML_DIV_images_path' =>  WWW_ROOT . 'libraries/phpdebug/images',
+            'HTML_DIV_css_path' =>  WWW_ROOT . 'libraries/phpdebug/css',
+            'HTML_DIV_js_path' =>  WWW_ROOT . 'libraries/phpdebug/js',
             'HTML_DIV_remove_templates_pattern' => true,
             #'HTML_DIV_templates_pattern' => array('/var/www-protected/php-debug.com' => '/var/www/php-debug')
         );
