@@ -97,7 +97,7 @@ class UploadApc extends File
 
         // add an iframe, so that the upload happens in there and is not blocking the website
         $html = '<!-- Hidden iframe for performing the Upload -->'.CR.'
-                     <iframe style="display:none" name="hidden_upload" src="'.WWW_APPLICATION_PATH . 'upload-file.php"></iframe>';
+                     <iframe style="display:none" name="hidden_upload" src="'.WWW_ROOT . 'upload-file.php"></iframe>';
 
         // add ajax status (upload_status, uploadFile, uploadSize, progressBar)
         $html .= '<!-- Ajax Upload Status -->

@@ -30,9 +30,9 @@ namespace and path to search in
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader(
             'DoctrineExtensions', 
-            VENDOR_PATH . 'beberlei/DoctrineExtensions/lib/DoctrineExtensions'
+            VENDOR_PATH . 'beberlei/DoctrineExtensions/lib'
         );
-        $classLoader->register();*/
+        $classLoader->register();
 
         // fetch doctrine config handler for configuring
         $config = new \Doctrine\ORM\Configuration();
@@ -106,7 +106,7 @@ namespace and path to search in
         /**
          * Custom Functions
          *
-         * We need some more functions for mysql, like RAND for random values.
+         * We need some more functions for MySQL, like RAND for random values.
          */
         #$config->addCustomNumericFunction('RAND', 'DoctrineExtensions\Query\Mysql\Rand');
 

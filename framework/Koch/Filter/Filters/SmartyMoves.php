@@ -62,8 +62,8 @@ class SmartyMoves implements FilterInterface
          */
         $matches = array();
         $regexp1 = '!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is';
-        preg_match_all($regexp, $content, $matches);
-        $content = preg_replace($regexp, '', $content);
+        preg_match_all($regexp1, $content, $matches);
+        $content = preg_replace($regexp1, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $value) {
             $content = str_replace('</head>', $value."\n".'</head>', $content);

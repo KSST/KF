@@ -73,7 +73,7 @@ abstract class AbstractRenderer
      */
     public function __construct(\Koch\Config\Config $config)
     {
-        $this->config = $config;
+        $this->config = $config->getApplicationConfig();
         $this->viewMapper = new \Koch\View\Mapper();
     }
 
@@ -280,7 +280,7 @@ abstract class AbstractRenderer
         /**
          * Debug Display
          */
-        \Koch\Debug\Debug::printR($templateConstants);
+        #\Koch\Debug\Debug::printR($templateConstants);
 
         return $templateConstants;
     }

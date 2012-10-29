@@ -338,7 +338,7 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // return, if urlstring is already a qualified url (http://...)
-        if (false !== strpos($urlstring, WWW_APPLICATION_PATH . 'index.php?')) {
+        if (false !== strpos($urlstring, WWW_ROOT . 'index.php?')) {
             return $urlstring;
         }
 
@@ -360,7 +360,7 @@ class Router implements RouterInterface, \ArrayAccess
          * ROOT/news/2
          */
         if (REWRITE_ENGINE_ON == true and $force_modrewrite_on === true) {
-            return WWW_APPLICATION_PATH . ltrim($urlstring, '/');
+            return WWW_ROOT . ltrim($urlstring, '/');
         } else {
             /**
              * mod_rewrite is off. the requested url style is:
@@ -401,7 +401,7 @@ class Router implements RouterInterface, \ArrayAccess
             $arg_separator = ($encode === true) ? '&amp;' : '&';
 
             // Finally: build and return the url!
-            return WWW_APPLICATION_PATH . 'index.php?' . http_build_query($url_data, '', $arg_separator);
+            return WWW_ROOT . 'index.php?' . http_build_query($url_data, '', $arg_separator);
         }
     }
 
