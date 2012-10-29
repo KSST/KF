@@ -234,7 +234,7 @@ class Smarty extends AbstractRenderer
             self::initializeEngine();
         }
 
-        // reload the base configuration to have default template paths and debug-settings
+        // reload the base configuration, to have default template paths and debug-settings
         self::configureEngine();
 
         return $this->renderer;
@@ -502,7 +502,7 @@ class Smarty extends AbstractRenderer
             $this->assign($viewdata);
         }
 
-        // 1. assign common template values and Application constants as Smarty Template Variables.
+        // assign common template values and Application constants as Smarty Template Variables.
         $constants = $this->getConstants();
         foreach($constants as $const => $value) {
             $this->renderer->assignGlobal($const, $value);
