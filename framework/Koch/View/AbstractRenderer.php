@@ -57,7 +57,7 @@ abstract class AbstractRenderer
     /**
      * @var object Koch_View_Mapper
      */
-    public $view_mapper = null;
+    public $viewMapper = null;
 
     /**
      * Directive for auto-escaping of template variables before rendering.
@@ -74,7 +74,7 @@ abstract class AbstractRenderer
     public function __construct(\Koch\Config\Config $config)
     {
         $this->config = $config;
-        $this->view_mapper = new \Koch\View\Mapper();
+        $this->viewMapper = new \Koch\View\Mapper();
     }
 
     /**
@@ -177,12 +177,12 @@ abstract class AbstractRenderer
 
     public function getViewMapper()
     {
-        return $this->view_mapper;
+        return $this->viewMapper;
     }
 
     public function setViewMapper(\Koch\View\Mapper $view_mapper)
     {
-        $this->view_mapper = $view_mapper;
+        $this->viewMapper = $view_mapper;
     }
 
     /**
@@ -223,26 +223,26 @@ abstract class AbstractRenderer
     {
         $modulename = HttpRequest::getRoute()->getModule();
 
-        $template_constants = array();
+        $templateConstants = array();
 
         /**
          * a) Assign Web Paths
          *
          *    Watch it! These Paths are relative (based on WWW_ROOT), not absolute!
          */
-        $template_constants['www_root']                 = WWW_ROOT;
-        $template_constants['www_root_uploads']         = WWW_ROOT . 'Uploads/';
-        $template_constants['www_root_modules']         = WWW_ROOT . 'Modules/' . $modulename . '/';
-        $template_constants['www_root_theme']           = $this->getTheme()->getWebPath();
-        $template_constants['www_root_themes']          = WWW_ROOT_THEMES;
-        $template_constants['www_root_themes_core']     = WWW_ROOT_THEMES_CORE;
-        $template_constants['www_root_themes_backend']  = WWW_ROOT_THEMES_BACKEND;
-        $template_constants['www_root_themes_frontend'] = WWW_ROOT_THEMES_FRONTEND;
+        $templateConstants['www_root']                 = WWW_ROOT;
+        $templateConstants['www_root_uploads']         = WWW_ROOT . 'Uploads/';
+        $templateConstants['www_root_modules']         = WWW_ROOT . 'Modules/' . $modulename . '/';
+        $templateConstants['www_root_theme']           = $this->getTheme()->getWebPath();
+        $templateConstants['www_root_themes']          = WWW_ROOT_THEMES;
+        $templateConstants['www_root_themes_core']     = WWW_ROOT_THEMES_CORE;
+        $templateConstants['www_root_themes_backend']  = WWW_ROOT_THEMES_BACKEND;
+        $templateConstants['www_root_themes_frontend'] = WWW_ROOT_THEMES_FRONTEND;
 
         /**
          * b) Meta Informations
          */
-        $template_constants['meta'] = $this->config['meta'];
+        $templateConstants['meta'] = $this->config['meta'];
 
         /**
          * c) Application Version
@@ -250,39 +250,39 @@ abstract class AbstractRenderer
          *    Note: This is doubled functionality.
          *    You can use $smarty.const.APPLICATION_VERSION or $application_version in a template.
          */
-        $template_constants['application_version']       = APPLICATION_VERSION;
-        $template_constants['application_version_state'] = APPLICATION_VERSION_STATE;
-        $template_constants['application_version_name']  = APPLICATION_VERSION_NAME;
-        $template_constants['application_url']           = APPLICATION_URL;
+        $templateConstants['application_version']       = APPLICATION_VERSION;
+        $templateConstants['application_version_state'] = APPLICATION_VERSION_STATE;
+        $templateConstants['application_version_name']  = APPLICATION_VERSION_NAME;
+        $templateConstants['application_url']           = APPLICATION_URL;
 
         /**
          * d) Page related
          */
 
         // Page Title
-        $template_constants['pagetitle'] = $this->config['template']['pagetitle'];
+        $templateConstants['pagetitle'] = $this->config['template']['pagetitle'];
 
         // Normal CSS (mainfile)
-        $template_constants['css'] = $this->getTheme()->getCSSFile();
+        $templateConstants['css'] = $this->getTheme()->getCSSFile();
 
         // Normal Javascript (mainfile)
-        $template_constants['javascript'] = $this->getTheme()->getJSFile();
+        $templateConstants['javascript'] = $this->getTheme()->getJSFile();
 
         // Breadcrumb
-        $template_constants['trail'] = \Koch\View\Helper\Breadcrumb::getTrail();
+        $templateConstants['trail'] = \Koch\View\Helper\Breadcrumb::getTrail();
 
         // Templatename itself
-        $template_constants['templatename'] = $this->getTemplate();
+        $templateConstants['templatename'] = $this->getTemplate();
 
         // Help Tracking
-        $template_constants['helptracking'] = $this->config['help']['tracking'];
+        $templateConstants['helptracking'] = $this->config['help']['tracking'];
 
         /**
          * Debug Display
          */
-        #\Koch\Debug\Debug::printR($template_constants);
+        \Koch\Debug\Debug::printR($templateConstants);
 
-        return $template_constants;
+        return $templateConstants;
     }
 
     /**
@@ -319,9 +319,9 @@ abstract class AbstractRenderer
     public function getTheme()
     {
         if ($this->theme === null) {
-            $themename = HttpRequest::getRoute()->getThemeName();
+            $theme = HttpRequest::getRoute()->getThemeName();
 
-            $this->theme = new \Koch\View\Helper\Theme($themename);
+            $this->theme = new \Koch\View\Helper\Theme($theme);
         }
 
         return $this->theme;
