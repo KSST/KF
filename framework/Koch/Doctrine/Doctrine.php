@@ -109,7 +109,7 @@ class Doctrine
         $classLoader->register();
 
         // include Doctrine Extensions
-        /*$classLoader = new \Doctrine\Common\ClassLoader(
+        $classLoader = new \Doctrine\Common\ClassLoader(
             'doctrine-extensions', 
             VENDOR_PATH . 'gedmo/doctrine-extensions/lib/Gedmo'
         );
