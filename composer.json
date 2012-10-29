@@ -33,6 +33,17 @@
                     ]
                 }
             }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "marijnh/CodeMirror",
+                "version": "2.35",
+                "dist": {
+                    "url": "http://codemirror.net/codemirror-2.35.zip",
+                    "type": "zip"
+                }
+            }
         }
     ],
     "require": {
@@ -49,7 +60,8 @@
         "php-gettext/php-gettext"         : "1.0.11",
         "simplepie/simplepie"             : "dev-master",
         "smarty/smarty"                   : "v3.1.12",
-        "swiftmailer/swiftmailer"         : "v4.2.2"
+        "swiftmailer/swiftmailer"         : "v4.2.2",
+        "marijnh/CodeMirror"              : "2.35"
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
