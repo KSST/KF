@@ -30,5 +30,5 @@ interface ModuleInterface
     public function actionEdit();     // GET     /foos/:foo_id/edit
     public function actionCreate();   // POST    /foos
     public function actionUpdate();   // PUT     /foos/:foo_id
-    public function actionDestroy();  // DELETE  /foos/:foo_id
+    public function actionDelete();   // DELETE  /foos/:foo_id
 }
