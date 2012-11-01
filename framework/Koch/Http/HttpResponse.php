@@ -302,12 +302,15 @@ class HttpResponse implements HttpResponseInterface
             }
         }
 
-        header('Set-Cookie: ' . rawurlencode($name) . '=' . rawurlencode($value)
+        header(
+            'Set-Cookie: ' . rawurlencode($name) . '=' . rawurlencode($value)
             . (true === empty($domain) ? '' : '; Domain=' . $domain)
             . (true === empty($maxage) ? '' : '; Max-Age=' . $maxage)
             . (true === empty($path) ? '' : '; Path=' . $path)
             . (false === $secure ? '' : '; Secure')
-            . (false === $HTTPOnly ? '' : '; HttpOnly'), false);
+            . (false === $HTTPOnly ? '' : '; HttpOnly'),
+            false
+        );
 
         return true;
     }

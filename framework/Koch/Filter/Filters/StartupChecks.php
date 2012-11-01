@@ -51,7 +51,7 @@ class StartupChecks implements FilterInterface
 
             if (\Koch\Functions\Functions::getServerLoad() > $maxServerLoad) {
                 $retry = (int) mt_rand(45, 90);
-                header ('Retry-After: '.$retry);
+                header('Retry-After: ' . $retry);
                 header('HTTP/1.1 503 Too busy, try again later');
                 die('HTTP/1.1 503 Server too busy. Please try again later.');
             }

@@ -112,7 +112,8 @@ class Bbcode
             'img',
             'usecontent',
             array($this, 'do_bbcode_img'),
-            array(), 'image',
+            array(),
+            'image',
             array('listitem', 'block', 'inline','link'),
             array()
         );
@@ -159,8 +160,10 @@ class Bbcode
                 $code['name'],
                 'simple_replace',
                 null,
-                array('start_tag' => $code['start_tag'],'end_tag' => $code['end_tag']),
-                $code['content_type'], $allowed_in, $not_allowed_in
+                array('start_tag' => $code['start_tag'], 'end_tag' => $code['end_tag']),
+                $code['content_type'],
+                $allowed_in,
+                $not_allowed_in
             );
         }
     }
@@ -188,7 +191,7 @@ class Bbcode
      *
      * @todo $params and $node_objects are unuseed check
      */
-    private function do_bbcode_url($action, $attributes, $content, $params, $node_object)
+    private function doBBCodeUrl($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
@@ -207,7 +210,7 @@ class Bbcode
      * @todo comment params
      * @return image string
      */
-    private function do_bbcode_img($action, $attributes, $content, $params, $node_object)
+    private function doBBCodeImg($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
@@ -221,7 +224,7 @@ class Bbcode
      *
      * @return codehighlighted string
      */
-    private function do_bbcode_code($action, $attributes, $content, $params, $node_object)
+    private function doBBCodeCode($action, $attributes, $content, $params, $node_object)
     {
         if ($action == 'validate') {
             return true;
@@ -236,18 +239,4 @@ class Bbcode
 
         return $geshi->parse_code();
     }
-
-    /**
-     * Convert linebreak of different OS
-     *
-     * @param string
-     * @return line_break_converted string
-     *
-     * @todo note by vain: why is this needed? describe problem?
-     */
-    private function convertlinebreaks($text)
-    {
-        return preg_replace("/\015\012|\015|\012/", "\n", $text);
-    }
-
 }

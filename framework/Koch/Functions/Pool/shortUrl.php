@@ -34,7 +34,7 @@ function shortUrl($long_url)
     $long_url = urlencode($long_url);
 
     $handle = '';
-    $handle = fopen('http://tinyurl.com/api-create.php?url=' . $long_url , 'rb');
+    $handle = fopen('http://tinyurl.com/api-create.php?url=' . $long_url, 'rb');
 
     if ($handle) {
         $short_url = '';

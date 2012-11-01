@@ -61,21 +61,23 @@ class JqSelectDate extends FormElement implements FormElementInterface
                                          }); });</script>';
 
     /**
-     * contains the javascripts (html)
-     *
-     * @todo js-queue, duplication check
+     * contains the javascript libraries
      *
      * @var string
      */
-     // <script type="text/javascript" src="http://jqueryui.com/latest/jquery-1.3.2.js"></script>
-     // <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
-    private $jsLibraries =  '<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
-                              <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js"></script>';
+    private $jsLibraries = '';
 
     public function __construct()
     {
         $this->type = 'date';
         $this->name = 'datepicker';
+
+        // dependencies
+        // <script type="text/javascript" src="http://jqueryui.com/latest/jquery-1.3.2.js"></script>
+        // <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
+        $this->jsLibraries = '<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css"'
+            . 'rel="stylesheet" /><script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js">'
+            .'</script>';
     }
 
     /**
@@ -155,7 +157,12 @@ class JqSelectDate extends FormElement implements FormElementInterface
     {
         $html = '';
         $html .= $this->html;
-        // Watch out, that the div dialog is present in the dom, before you assign js function to it via $('#datepicker')
+
+        /**
+         * Watch out!
+         * The div dialog must be present in the dom,
+         * before you assign JS functions to it via $('#datepicker')
+         */
         $html .= $this->getJavascript();
 
         return $html;

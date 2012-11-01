@@ -36,18 +36,22 @@ class Uploadify extends File implements FormElementInterface
     public function render()
     {
         // load the required scripts and styles
-        $javascript = '<link href="'. WWW_ROOT_THEMES_CORE .'cssc/uploadifye/default.css" rel="stylesheet" type="text/css" />
-                        <link href="'. WWW_ROOT_THEMES_CORE .'css/uploadify/uploadify.css" rel="stylesheet" type="text/css" />
-                        <script type="text/javascript" src="'.WWW_ROOT_THEMES_CORE . 'javascript/uploadify/swfobject.js"></script>
-                        <script type="text/javascript" src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.uploadify.v2.1.4.min.js"></script>';
+        $javascript = '<link rel="stylesheet" type="text/css"'
+            . ' href="' . WWW_ROOT_THEMES_CORE . 'cssc/uploadifye/default.css" />'
+            . '<link rel="stylesheet" type="text/css"'
+            . '  href="' . WWW_ROOT_THEMES_CORE . 'css/uploadify/uploadify.css" />'
+            . '<script type="text/javascript"'
+            . ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/uploadify/swfobject.js"></script>'
+            . '<script type="text/javascript"'
+            . ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.uploadify.v2.1.4.min.js"></script>';
 
         // attach the uploadify handler and apply some configuration
         $javascript .= "<script type=\"text/javascript\">// <![CDATA[
                         $(document).ready(function() {
                             $('#uploadify').uploadify({
-                            'uploader'  : '".WWW_ROOT_THEMES_CORE."/javascript/uploadify/uploadify.swf',
-                            'script'    : '".WWW_ROOT_THEMES_CORE."/javascript/uploadify/uploadify.php',
-                            'cancelImg' : '".WWW_ROOT_THEMES_CORE."/images/icons/cancel.png',
+                            'uploader'  : '" . WWW_ROOT_THEMES_CORE . "/javascript/uploadify/uploadify.swf',
+                            'script'    : '" . WWW_ROOT_THEMES_CORE . "/javascript/uploadify/uploadify.php',
+                            'cancelImg' : '" . WWW_ROOT_THEMES_CORE . "/images/icons/cancel.png',
                             'auto'      : true,
                             'removecompleted' : true,
                             'folder'    : '/uploads'

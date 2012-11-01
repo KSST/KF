@@ -82,12 +82,12 @@ class Smarty extends AbstractRenderer
     {
         // Directories
         $this->renderer->compile_dir = APPLICATION_CACHE_PATH . 'tpl_compile/';
-        $this->renderer->cache_dir   = APPLICATION_CACHE_PATH . 'tpl_cache/';         
+        $this->renderer->cache_dir   = APPLICATION_CACHE_PATH . 'tpl_cache/';
         $this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
-       
+
         // Debugging
         $this->renderer->debugging = DEBUG ? true : false;
-        
+
         if ($this->renderer->debugging === true) {
             $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';
             #$this->renderer->debug_tpl  = ROOT_LIBRARIES . 'smarty/debug.tpl';
@@ -504,9 +504,9 @@ class Smarty extends AbstractRenderer
 
         // assign common template values and Application constants as Smarty Template Variables.
         $constants = $this->getConstants();
-        foreach($constants as $const => $value) {
+        foreach ($constants as $const => $value) {
             $this->renderer->assignGlobal($const, $value);
-        }        
+        }
 
         /**
          * Assign the original template name and the requested module
