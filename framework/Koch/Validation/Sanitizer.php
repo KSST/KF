@@ -37,14 +37,14 @@ namespace Koch\Validation;
 class Sanitizer
 {
     // Protected private fields
-    protected $_allowedTags;
-    protected $_allowJavascriptEvents;
-    protected $_allowJavascriptInUrls;
-    protected $_allowObjects;
-    protected $_allowScript;
-    protected $_allowStyle;
-    protected $_allowInlineStyle;
-    protected $_additionalTags;
+    protected $allowedTags;
+    protected $allowJavascriptEvents;
+    protected $allowJavascriptInUrls;
+    protected $allowObjects;
+    protected $allowScript;
+    protected $allowStyle;
+    protected $allowInlineStyle;
+    protected $additionalTags;
 
     /**
      * Constructor
@@ -59,16 +59,16 @@ class Sanitizer
      */
     public function resetAll()
     {
-        $this->_allowDOMEvents = false;
-        $this->_allowJavascriptInUrls = false;
-        $this->_allowStyle = false;
-        $this->_allowScript = false;
-        $this->_allowObjects = false;
-        $this->_allowInlineStyle = false;
+        $this->allowDOMEvents = false;
+        $this->allowJavascriptInUrls = false;
+        $this->allowStyle = false;
+        $this->allowScript = false;
+        $this->allowObjects = false;
+        $this->allowInlineStyle = false;
 
         // HTML5 Tags
         // @link http://www.w3schools.com/html5/html5_reference.asp
-        $this->_allowedTags = '<a><abbr><address><area><article><aside>'        // <audio>
+        $this->allowedTags = '<a><abbr><address><area><article><aside>'        // <audio>
                 . '<b><base><bdo><blockquote><body><br><button>
                    <canvas><caption><cite><code><col><colgroup><command>
                    <datalist><dd><details><del><dfn><div><dl><dt>'
@@ -90,7 +90,7 @@ class Sanitizer
                    <var><video>
                    <wbr>';
 
-        $this->_additionalTags = '';
+        $this->additionalTags = '';
     }
 
     /**
@@ -100,7 +100,7 @@ class Sanitizer
      */
     public function addAdditionalTags($tags)
     {
-        $this->_additionalTags .= $tags;
+        $this->additionalTags .= $tags;
     }
 
     /**
@@ -108,7 +108,7 @@ class Sanitizer
      */
     public function allowObjects()
     {
-        $this->_allowObjects = true;
+        $this->allowObjects = true;
     }
 
     /**
@@ -116,7 +116,7 @@ class Sanitizer
      */
     public function allowDOMEvents()
     {
-        $this->_allowDOMEvents = true;
+        $this->allowDOMEvents = true;
     }
 
     /**
@@ -124,7 +124,7 @@ class Sanitizer
      */
     public function allowScript()
     {
-        $this->_allowScript = true;
+        $this->allowScript = true;
     }
 
     /**
@@ -132,7 +132,7 @@ class Sanitizer
      */
     public function allowJavascriptInUrls()
     {
-        $this->_allowJavascriptInUrls = true;
+        $this->allowJavascriptInUrls = true;
     }
 
     /**
@@ -140,7 +140,7 @@ class Sanitizer
      */
     public function allowStyle()
     {
-        $this->_allowStyle = true;
+        $this->allowStyle = true;
     }
 
     /**
@@ -199,7 +199,7 @@ class Sanitizer
      */
     protected function sanitizeURL($url)
     {
-        if (!$this->_allowJavascriptInUrls) {
+        if (!$this->allowJavascriptInUrls) {
             $url = $this->removeJavascriptURL($url);
         }
 
@@ -266,11 +266,11 @@ class Sanitizer
      */
     protected function removeEvilAttributes($str)
     {
-        if (!$this->_allowDOMEvents) {
+        if (!$this->allowDOMEvents) {
             $str = preg_replace_callback('/<(.*?)>/i', array(&$this, '_removeDOMEventsCallback'), $str);
         }
 
-        if (!$this->_allowStyle) {
+        if (!$this->allowStyle) {
             $str = preg_replace_callback('/<(.*?)>/i' , array(&$this, '_removeStyleCallback'), $str);
         }
 
@@ -333,7 +333,7 @@ class Sanitizer
      * @return string
      * @see     removeStyle
      */
-    protected function _removeStyleCallback($matches)
+    protected function removeStyleCallback($matches)
     {
         return '<' . $this->removeStyle($matches[1]) . '>';
     }
@@ -347,25 +347,25 @@ class Sanitizer
      */
     protected function removeEvilTags($str)
     {
-        $allowedTags = $this->_allowedTags;
+        $allowedTags = $this->allowedTags;
 
-        if ($this->_allowScript) {
+        if ($this->allowScript) {
             $allowedTags .= '<script>';
         }
 
-        if ($this->_allowStyle) {
+        if ($this->allowStyle) {
             $allowedTags .= '<style>';
         }
 
-        if ($this->_allowObjects) {
+        if ($this->allowObjects) {
             $allowedTags .= '<object><embed><applet><param>';
         }
 
-        $allowedTags .= $this->_additionalTags;
+        $allowedTags .= $this->additionalTags;
 
         // $str = strip_tags($str, $allowedTags );
 
-        $str = $this->_stripTags($str, $allowedTags);
+        $str = $this->stripTags($str, $allowedTags);
 
         return $str;
     }
@@ -376,12 +376,12 @@ class Sanitizer
      * @param string $str     html
      * @param string $tagList allowed tag list
      */
-    protected function _stripTags($str, $tagList)
+    protected function stripTags($str, $tagList)
     {
         // 1. prepare allowed tags list
-        $tagList = str_replace('<', ''
-                , str_replace('>', ''
-                        , str_replace('><', '|', $tagList)));
+        $search = array('<', '>', '><');
+        $replace = array('', '', '|');
+        $tagList = str_replace($search, $replace, $tagList);
 
         // 2. replace </tag> by [[/tag]] in close tags for allowed tags
         $closeTags = '~' . '\</(' . $tagList . ')([^\>\<]*)\>' . '~'; // close tag
