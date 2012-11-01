@@ -216,7 +216,9 @@ class User
                 $_SESSION['user']['group'] = $this->user['CsGroups'][0]['group_id'];
                 $_SESSION['user']['role'] = $this->user['CsGroups'][0]['role_id'];
                 $_SESSION['user']['rights'] = Koch\ACL::createRightSession(
-                $_SESSION['user']['role'], $this->user['user_id']);
+                    $_SESSION['user']['role'],
+                    $this->user['user_id']
+                );
             }
 
             #\Koch\Debug\Debug::firebug($_SESSION);

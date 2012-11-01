@@ -132,7 +132,7 @@ class InputFilter
         $r_bool  = false;
         $bools   = array();
         $a_types = array();
-        $a_types = mb_split('[|]' ,$types);
+        $a_types = mb_split('[|]', $types);
 
         if (count($a_types) > 1) {
             $reg_exp = '/^[';
@@ -212,7 +212,8 @@ class InputFilter
 
                 // Is url?
                 case 'is_url':
-                    $reg_exp = '/^(http:\/\/|https:\/\/|ftp:\/\/|ftps:\/\/)([a-z]{1,}[\w-.]{0,}).([a-z]{2,6})(\/{1}[\w_]{1}[\/\w-&?=_%]{0,}(.{1}[\/\w-&?=_%]{0,})*)*$/i';
+                    $reg_exp = '/^(http:\/\/|https:\/\/|ftp:\/\/|ftps:\/\/)([a-z]{1,}[\w-.]{0,}).'
+                        .'([a-z]{2,6})(\/{1}[\w_]{1}[\/\w-&?=_%]{0,}(.{1}[\/\w-&?=_%]{0,})*)*$/i';
                     break;
 
                 // Is Steam ID ?
@@ -249,7 +250,7 @@ class InputFilter
         }
 
         if ($r_bool == false and $a_types[0] != 'is_violent') {
-            $error->error_log['security']['checked_false'] = _('A variable is checked as "false":') . 'Type: ' . $a_types[0];
+            echo _('A variable is checked as "false":') . 'Type: ' . $a_types[0];
         }
 
         return $r_bool;

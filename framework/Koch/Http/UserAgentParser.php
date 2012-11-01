@@ -113,13 +113,13 @@ class UserAgentParser
                     if ($elements['vparam'] !== null) {
                         $pattern = '';
                         $pv = $elements['vparam'];
-                        $pattern = '|.+\s'.$pv.'([0-9a-z\+\-\.]+).*|';
+                        $pattern = '|.+\s' . $pv . '([0-9a-z\+\-\.]+).*|';
                         $userAgent['browser_version'] = preg_replace($pattern, '$1', $userAgent['string']);
                         $tVer = preg_split("/\./", $userAgent['browser_version']);
                         $userAgent['browser_version_major'] = $tVer[0];
                         $userAgent['browser_version_minor'] = $tVer[1];
-                        if( isset($tVer[2])) $userAgent['browser_version_release'] = $tVer[2];
-                        if( isset($tVer[3])) $userAgent['browser_version_build'] = $tVer[3];
+                        $userAgent['browser_version_release'] = isset($tVer[2]) ? $tVer[2] : null;
+                        $userAgent['browser_version_build'] = isset($tVer[3]) ? $tVer[3] : null;
                     } else {
                         $userAgent['browser_version'] = self::TYPE_UNKNOW;
                     }
@@ -135,7 +135,7 @@ class UserAgentParser
                     $pattern = '';
                     if ($elements['eparam'] !== null) {
                         $pe = $elements['eparam'];
-                        $pattern = '|.+\s'.$pe.'([0-9\.]+)(.*).*|';
+                        $pattern = '|.+\s' . $pe . '([0-9\.]+)(.*).*|';
                         $userAgent['engine_version'] = preg_replace($pattern, '$1', $userAgent['string']);
                     } else {
                         $userAgent['engine_version'] = self::TYPE_UNKNOW;
@@ -228,27 +228,27 @@ class UserAgentParser
 
         include __DIR__ . '/UserAgents/Bot.php';
 
-        foreach ($bot as $name =>$row) {
+        foreach ($bot as $name => $row) {
             $aList[$name] = $row;
         }
 
         include __DIR__ . '/UserAgents/Browser.php';
 
-        foreach ($browser as $name =>$row) {
+        foreach ($browser as $name => $row) {
             $aList[$name] = $row;
         }
 
-/*
+        /*
         include __DIR__ . '/UserAgents/Mobile.php';
-        foreach ($mobile as $name =>$row) {
+        foreach ($mobile as $name => $row) {
             $aList[$name] = $row;
         }
 
         include __DIR__ . '/UserAgents/Console.php';
-        foreach ($console as $name =>$row) {
+        foreach ($console as $name => $row) {
             $aList[$name] = $row;
         }
-*/
+        */
 
         return $aList;
     }
@@ -264,7 +264,7 @@ class UserAgentParser
 
         include __DIR__ . '/UserAgents/Os.php';
 
-        foreach ($os as $name =>$row) {
+        foreach ($os as $name => $row) {
             $aList[$name] = $row;
         }
 

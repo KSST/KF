@@ -127,8 +127,10 @@ class UploadApc extends File
         // add a submit button
         $submit = new Submitbutton();
         $submit->setValue(_('Upload File'));
-        $submit->setAdditionalAttributeAsText("onclick=\"this.disabled=true;" .
-            "setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" ");
+        $submit->setAdditionalAttributeAsText(
+            "onclick=\"this.disabled=true;" .
+            "setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" "
+        );
         $html .= $submit;
 
         return $javascript.$html;
