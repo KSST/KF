@@ -230,7 +230,7 @@ class CssBuilder
             $_comp .= $core_compact;
 
             foreach ($coreFiles as $filename) {
-                $content = self::load_stylesheet($corePath . $filename, true);
+                $content = self::loadStylesheet($corePath . $filename, true);
                 $_comp .= "/* [" . basename($filename) . "] */" . CR;
                 $_comp .= $content . CR;
             }
@@ -275,7 +275,7 @@ class CssBuilder
             $_comp .= $theme_compact;
 
             foreach ($themeFiles as $filename) {
-                $content = self::load_stylesheet($themePath . $filename, true);
+                $content = self::loadStylesheet($themePath . $filename, true);
                 $_comp .= "/* [" . basename($filename) . "] */" . CR;
                 $_comp .= $content . CR;
             }
@@ -323,7 +323,7 @@ class CssBuilder
             $_comp .= $themeBack_compact;
 
             foreach ($themeBackFiles as $filename) {
-                $content = self::load_stylesheet($themeBackPath . $filename, true);
+                $content = self::loadStylesheet($themeBackPath . $filename, true);
                 $_comp .= "/* [" . basename($filename) . "] */" . CR;
                 $_comp .= $content . CR;
             }
@@ -469,7 +469,7 @@ class CssBuilder
      * @param $file The css file with the contents of the stylesheet.
      * @param $optimize (optional) Boolean whether CSS contents should be minified. Defaults to FALSE
      */
-    protected static function load_stylesheet($file, $optimize = true)
+    protected static function loadStylesheet($file, $optimize = true)
     {
         $contents = '';
 
@@ -486,7 +486,7 @@ class CssBuilder
             chdir(dirname($file));
 
             // Process the stylesheet.
-            $contents = self::load_stylesheet_content($contents, $optimize);
+            $contents = self::loadStylesheetContent($contents, $optimize);
 
             // Change back directory.
             chdir($cwd);
@@ -506,7 +506,7 @@ class CssBuilder
      * @param $contents The contents of the stylesheet.
      * @param $optimize (optional) Boolean whether CSS contents should be minified. Defaults to FALSE
      */
-    protected static function load_stylesheet_content($contents, $optimize = false)
+    protected static function loadStylesheetContent($contents, $optimize = false)
     {
         // Remove multiple charset declarations for standards compliance (and fixing Safari problems).
         $contents = preg_replace('/^@charset\s+[\'"](\S*)\b[\'"];/i', '', $contents);
