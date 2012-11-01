@@ -31,7 +31,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Mvc\Registry::set
+     * @covers Koch\Registry\Registry::set
      */
     public function testSet()
     {
@@ -55,7 +55,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Mvc\Registry::has
+     * @covers Koch\Registry\Registry::has
      */
     public function testHas()
     {
@@ -67,7 +67,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Mvc\Registry::get
+     * @covers Koch\Registry\Registry::get
      */
     public function testGet()
     {
