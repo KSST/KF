@@ -329,7 +329,7 @@ class FTP
      */
     public function isFile($filename)
     {
-        $this->fileSize($filename);
+        return $this->fileSize($filename);
     }
 
     /**
@@ -345,9 +345,9 @@ class FTP
             return false;
         }
 
-        $file_size = @ftp_size($this->connection, $filename);
+        $fileSize = @ftp_size($this->connection, $filename);
 
-        if ($file_size === false or $file_size == -1) {
+        if ($fileSize === false or $fileSize == -1) {
             $this->errors[] = 'Unable to find remote file.';
             $this->closeConnection();
 
@@ -356,7 +356,7 @@ class FTP
 
         $this->closeConnection();
 
-        return $file_size;
+        return $fileSize;
     }
 
     /**
