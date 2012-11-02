@@ -125,21 +125,7 @@ final class Security
             return skein_hash($string, 512);
         }
 
-        // check, if we can use hash()
-        if (function_exists('hash')) {
-            return hash($hash_algorithm, $string);
-        } else {
-            // when hash() not available, do hashing the old way
-            switch ($hash_algorithm) {
-                case 'md5':
-                    return md5($string);
-                    break;
-                default:
-                case 'sha1':
-                    return sha1($string);
-                    break;
-            }
-        }
+        return hash($hash_algorithm, $string);
     }
 
     /**
