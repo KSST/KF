@@ -45,7 +45,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Form\Validators\RegExp::setRegexp
      * @covers Koch\Form\Validators\RegExp::validate
-     * @covers Koch\Form\Validator::processValidationLogic
+     * @covers Koch\Form\Validators\RegExp::processValidationLogic
      */
     public function testMethod_processValidationLogic()
     {

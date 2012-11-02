@@ -59,6 +59,8 @@ class EmailTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider isValidEMailDataprovider
+     * @covers Koch\Form\Validators\Regexp::processValidationLogic
+     * @covers Koch\Form\Validator::processValidationLogic
      */
     public function testMethod_processValidationLogic($email, $expectedValidationState)
     {
@@ -69,11 +71,19 @@ class EmailTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expectedValidationState, $this->validator->validate($email));
     }
 
+    /**
+     * @covers Koch\Form\Validators\Regexp::getErrorMessage
+     * @covers Koch\Form\Validator::getErrorMessage
+     */
     public function testMethod_getErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
 
+    /**
+     * @covers Koch\Form\Validators\Regexp::getValidationHint
+     * @covers Koch\Form\Validator::getValidationHint
+     */
     public function testMethod_getValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
