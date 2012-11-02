@@ -54,7 +54,7 @@ class Reflection
      *
      * @param string $classname
      */
-    protected function setClassName($classname)
+    public function setClassName($classname)
     {
         $this->classname = $classname;
     }
@@ -83,8 +83,8 @@ class Reflection
         $exclude_classnames = (array) $exclude_classnames;
 
         // check if the class to reflect is available
-        if (class_exists($this->getClassName())) {
-            $class = new ReflectionClass($this->getClassName());
+        if (class_exists($this->classname)) {
+            $class = new \ReflectionClass($this->classname);
         } else {
             echo 'Class not existing.';
         }

@@ -27,7 +27,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-
+        unset($this->object);
     }
 
     /**
@@ -64,6 +64,17 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->object->set('A', $a);
 
         $this->assertTrue($this->object->has('A'));
+    }
+
+    /**
+     * @covers Koch\Registry\Registry::get
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage No resolver found for "AB". Register a resolver.
+     */
+    public function testGetThrowsException()
+    {
+        // throws exception on trying to fetch non existing class from registry
+        $this->object->get('AB');
     }
 
     /**
