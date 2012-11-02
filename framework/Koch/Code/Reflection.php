@@ -73,7 +73,7 @@ class Reflection
         if (class_exists($this->classname)) {
             $class = new \ReflectionClass($this->classname);
         } else {
-            echo 'Class not existing.';
+            throw new \RuntimeException(_('Class not existing: ' . $this->classname));
         }
 
         // get all methods of that class
