@@ -11,7 +11,7 @@
 .travis.yml export-ignore
 phpmd.xml export-ignore
 phpunit.xml.dist export-ignore
-/tests
+/tests export-ignore
 
 # Mac OS X Finder and whatnot
 .DS_Store
