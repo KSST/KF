@@ -102,26 +102,26 @@ class Feed
         if (true === $cache and is_file($cachefile) and (time() - filemtime($cachefile)) < $cachetime) {
             return file_get_contents($cachefile);
         } else { // get the feed from the source
-            if ($cache === true) {
-                // ensure cachefile exists, before we write
-                touch($cachefile);
-                chmod($cachefile, 0666);
-            }
+            try {
+                // to get feed from source
+                $feedcontent = file_get_contents($feedUrl, FILE_TEXT);
 
-            // get Feed from source
-            $feedcontent = file_get_contents($feedUrl, FILE_TEXT);
+               // ensure that we have rss content
+               if (strlen($feedcontent) > 0) {
+                   // write cache file
+                   if ($cache === true) {
+                       // re-create cachefile
+                       touch($cachefile);
+                       chmod($cachefile, 0666);
+                       // write content
+                       $fp = fopen($cachefile, 'w');
+                       fwrite($fp, $feedcontent);
+                       fclose($fp);
+                   }
+               }
 
-            // ensure that we have rss content
-            if (strlen($feedcontent) > 0) {
-                // write cache file
-                if ($cache === true) {
-                    $fp = fopen($cachefile, 'w');
-                    fwrite($fp, $feedcontent);
-                    fclose($fp);
-                }
-
-                return $feedcontent;
-            } else {
+               return $feedcontent;
+            } catch (\Exception $e) {
                 return null;
             }
         }

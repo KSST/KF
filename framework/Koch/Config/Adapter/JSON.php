@@ -59,7 +59,7 @@ class JSON
         if (($json === null) or ($json_error_type != JSON_ERROR_NONE)) {
             $json_error_message = self::getJsonErrorMessage($json_error_type);
 
-            $msg = _('JSON Error in file %s : $s');
+            $msg = _('JSON Error in file %s - %s');
 
             throw new \Koch\Exception\Exception(sprintf($msg, $filename, $json_error_message));
         }
