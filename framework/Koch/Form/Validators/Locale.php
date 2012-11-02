@@ -34,24 +34,41 @@ class Locale extends Validator
         // fetch data table(s) with "Locales"
         require __DIR__ . '/../../Localization/Locales.php';
 
-        // turns "de_DE" into "de"
-        $short_code = mb_substr($locale, 0, 2);
+        if(strlen($locale) === 2) {
+            $short_code = $locale;
+        } else {
+            // 1) transform "de-DE" into "de_DE" (underscore is a valid sublocale separator)
+            $locale = str_replace('-', '_', $locale);
 
-        if (($l10n_langs[$short_code] !== null) or (array_key_exists($short_code, $l10n_langs) === true)) {
-            // looks in "de" array, returns "de_AT", "de_CH", "de_DE"...
+            // 2) turn lowercase sublocale into uppercase sublocale, split first
+            $locale = explode('_', $locale);
+
+            // key 0 returns "de" from "de_DE" as the locale short_code
+            $short_code = $locale[0];
+
+            // finally the lowercase fix, turns "de_de" into "de_DE" ()
+            $locale[1] = strtoupper($locale[1]);
+            $locale = implode('_', $locale);
+        }
+
+        if (array_key_exists($short_code, $l10n_langs) === true) {
+            // return if locale is just short_code, e.g. "de"
+            if(strlen($locale) == 2) {
+                return true;
+            }
+             // fetch sublocales (looks in "de" array, returns "de_AT", "de_CH", "de_DE"...)
             $sublocales = $l10n_langs[$short_code];
         } else {
             // there are no sublocales for this locale short code
             return false;
         }
 
-        if (true === in_array($locale, array_flip($sublocales))) {
+        // is valid sublocale, e.g. de has de_DE?
+        if (array_key_exists($locale, array_flip($sublocales))) {
             return true;
         } else {
             return false;
         }
-
-        unset($l10n_langs);
     }
 
     protected function processValidationLogic($value)

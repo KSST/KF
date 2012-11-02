@@ -99,7 +99,7 @@ if (!function_exists('mb_stristr')) {
  */
 if (!function_exists('mb_strlen')) {
 
-    function mb_strlen($str)
+    function mb_strlen($str, $encoding = '')
     {
         return utf8_strlen($str);
     }
