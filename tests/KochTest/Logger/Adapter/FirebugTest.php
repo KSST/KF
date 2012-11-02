@@ -20,8 +20,6 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestSkipped('Missing vendor FirePHP.class.php');
-
         $this->object = new Firebug;
     }
 

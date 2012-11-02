@@ -78,6 +78,7 @@ class Registry
         // instantiate the className
         if (true === is_string(static::$registry[$name])) {
             $class = static::$registry[$name];
+
             return new $class($parameters);
         }
 

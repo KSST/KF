@@ -31,9 +31,9 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-	 * @return array
-	 */
-	public function isValidEMailDataprovider()
+     * @return array
+     */
+    public function isValidEMailDataprovider()
     {
         return array(
             //incomplete
@@ -66,7 +66,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-		$this->assertEquals($expectedValidationState, $this->validator->validate($email));
+        $this->assertEquals($expectedValidationState, $this->validator->validate($email));
     }
 
     public function testMethod_getErrorMessage()
