@@ -419,20 +419,20 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function route()
     {
-        /**
-         * If there are no uri segments, loading routes and matching is pointless.
-         *
-         * Dispatch to the default route, which is defined in configuration.
-         */
+        // If there are no uri segments, loading routes and matching is pointless.
         if (empty($this->uri) or $this->uri === '/') {
+            // dispatch to the default route, defined in the TargetRoute object.
             return $this->dispatchToDefaultRoute();
         }
 
         // initalize Routes
         $this->loadDefaultRoutes();
 
-        // map match uri
-        // results: route is "dispatchable" or no target route found
+        /**
+         * Now we map match the uri.
+         * The result is a "dispatchable target route object" or "No target route found.".
+         */
+
         return $this->match();
     }
 

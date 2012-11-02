@@ -211,8 +211,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news');
         $route = $this->router->route();
 
-        $this->markTestSkipped('Call to a member function getModule() on a non-object');
-
         $this->assertEquals('News',                  $route->getModule());
         $this->assertEquals('News',                  $route->getController());
         $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());

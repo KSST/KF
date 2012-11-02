@@ -79,7 +79,6 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
         $this->assertInstanceOf('StdClass', $resultA);
 
-
         // set classname to registry
         $this->object->set('B', 'KochTest\Registry\B');
 
@@ -99,6 +98,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     }
 }
 
-class B {
-
+class B
+{
+    // nothing
 }
