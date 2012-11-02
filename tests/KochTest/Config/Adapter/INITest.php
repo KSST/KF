@@ -28,7 +28,7 @@ class INITest extends \PHPUnit_Framework_TestCase
     {
         unset($this->object);
 
-        if(is_file($this->getFile())) {
+        if (is_file($this->getFile())) {
             unlink($this->getFile());
         }
     }

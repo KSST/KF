@@ -92,7 +92,6 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         $_SERVER['SERVER_NAME'] = 'clansuite-intern.com';
         $this->assertEquals(Staging::getFilename(), 'intern.php');
 
-
     }
 
     /**

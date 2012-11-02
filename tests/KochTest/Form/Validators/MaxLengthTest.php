@@ -54,7 +54,7 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
 
      public function testMethod_getStringLength_mbstring()
     {
-        if(!function_exists('mb_strlen')) {
+        if (!function_exists('mb_strlen')) {
             Koch\Localization\Utf8::initialize();
         }
         $this->assertEquals(36, $this->validator->getStringLength('äöü-öäü-äöü-german-umlauts-ûúéáóâôéê'));
