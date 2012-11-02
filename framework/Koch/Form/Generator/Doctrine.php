@@ -10,7 +10,10 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Form\Generators;
+namespace Koch\Form\Generator;
+
+use Koch\Form\Form;
+use Koch\Form\FormGeneratorInterface;
 
 /**
  * Koch Framework - Form Generator via Doctrine Record

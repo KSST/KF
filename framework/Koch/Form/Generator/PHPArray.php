@@ -10,9 +10,11 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Form\Generators;
+namespace Koch\Form\Generator;
 
-use \Koch\Functions;
+use Koch\Form\Form;
+use Koch\Form\FormGeneratorInterface;
+use Koch\Functions;
 
 /**
  * Form Generator from a PHP Array description.
@@ -25,7 +27,7 @@ class PHPArray extends Form implements FormGeneratorInterface
     {
         if (null != $form_array) {
             if ($form_object === null) {
-                // init parent Koch_Form with name, method and action
+                // init parent Koch\Form\Form with name, method and action
                 parent::__construct(
                     $form_array['form']['name'],
                     $form_array['form']['method'],
