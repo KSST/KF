@@ -47,13 +47,23 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     }
 
     /*
-    * @expectedException JsonError
-    */
+     * @expectedException JsonError
+     */
     public function testReadConfigThrowsExceptionJsonError()
     {
         $this->setExpectedException('Koch\Exception\Exception');
 
         $this->object->readConfig('not-existant-file.json');
+    }
+
+    /*
+     * @expectedException JsonError
+     */
+    public function testReadConfigInvalidThrowsExceptionJsonError()
+    {
+        $this->setExpectedException('Koch\Exception\Exception');
+
+        $this->object->readConfig('invalid.json');
     }
 
     /**
