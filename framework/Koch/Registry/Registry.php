@@ -52,8 +52,8 @@ class Registry
     public static function get($name, $parameters = null)
     {
         if (false === isset(static::$registry[$name])) {
-            throw new \Exception(
-                _('Error resolving "' . $name . '" No resolver found. Register a resolver first.')
+            throw new \InvalidArgumentException(
+                _('No resolver found for "' . $name . '". Register a resolver.')
             );
         }
 

@@ -37,9 +37,13 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_fetchRawRSS_withoutCaching()
     {
+        // read feed
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, false);
-
         $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
+
+        // return null, if feed not found
+        $feedcontent = Feed::fetchRawRSS('non-existant-feed-URL', false);
+        $this->assertNull($feedcontent);
     }
 
     /**
@@ -47,16 +51,24 @@ class FeedTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_fetchRawRSS_withCaching()
     {
+        // fetch and cache
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);
-
         // check for cache file
         $this->assertFileExists($this->cacheFile);
-
         // check for content
+        $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
+
+        // fetch from cache
+        $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);
         $this->assertContains('title>clansuite.com Google Group</title>', $feedcontent);
 
         if (is_file($this->cacheFile)) {
             unlink($this->cacheFile);
         }
+
+        // re-create cache - fetch and cache
+        $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);
+        // check for cache file
+        $this->assertFileExists($this->cacheFile);
     }
 }

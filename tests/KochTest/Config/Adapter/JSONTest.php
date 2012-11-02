@@ -46,24 +46,15 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $this->object->readConfig('not-existant-file.json');
     }
 
-    /*
-     * @expectedException JsonError
+    /**
+     * @covers Koch\Config\Adapter\JSON::readConfig
+     * @expectedException Koch\Exception\Exception
+     * @expectedExceptionMessage
+     * JSON Error in file I:\0.Github\KSST\KF\tests\KochTest\Config\Adapter/../fixtures/invalid.json - Syntax Error.
      */
     public function testReadConfigThrowsExceptionJsonError()
     {
-        $this->setExpectedException('Koch\Exception\Exception');
-
-        $this->object->readConfig('not-existant-file.json');
-    }
-
-    /*
-     * @expectedException JsonError
-     */
-    public function testReadConfigInvalidThrowsExceptionJsonError()
-    {
-        $this->setExpectedException('Koch\Exception\Exception');
-
-        $this->object->readConfig('invalid.json');
+        $this->object->readConfig(__DIR__ . '/../fixtures/invalid.json');
     }
 
     /**

@@ -23,6 +23,11 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         $_SERVER['SERVER_NAME'] = 'www.clansuite-dev.com';
     }
 
+    public function tearDown()
+    {
+        unset($_SERVER['DOCUMENT_ROOT']);
+    }
+
     /**
      * @covers Koch\Config\Staging::overloadWithStagingConfig
      */
@@ -35,6 +40,7 @@ class StagingTest extends \PHPUnit_Framework_Testcase
             'error' => array ('development' => '0')
         );
 
+        // manually set the config for overloading
         Staging::setFilename(__DIR__ . '/fixtures/development.php');
         $overloaded_cfg = Staging::overloadWithStagingConfig($array_to_overload);
 
@@ -67,7 +73,26 @@ class StagingTest extends \PHPUnit_Framework_Testcase
 
         $filename = Staging::getFilename();
 
-        $this->assertEquals($filename,$expected_filename);
+        $this->assertEquals($filename, $expected_filename);
+
+        // automatically determine the config for overloading from SERVER_NAME
+        Staging::setFilename(null);
+        $_SERVER['SERVER_NAME'] = 'blabla';
+        $this->assertEquals(Staging::getFilename(), 'production.php');  // default is production
+
+        Staging::setFilename(null);
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $this->assertEquals(Staging::getFilename(), 'development.php');
+
+        Staging::setFilename(null);
+        $_SERVER['SERVER_NAME'] = 'clansuite-stage.com';
+        $this->assertEquals(Staging::getFilename(), 'staging.php');
+
+        Staging::setFilename(null);
+        $_SERVER['SERVER_NAME'] = 'clansuite-intern.com';
+        $this->assertEquals(Staging::getFilename(), 'intern.php');
+
+
     }
 
     /**
