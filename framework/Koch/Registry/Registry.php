@@ -47,7 +47,7 @@ class Registry
      * @param type $name Name of instance.
      * @param type $parameters
      * @return object
-     * @throws \Exception
+     * @throws \InvalidArgumentException
      */
     public static function get($name, $parameters = null)
     {
