@@ -52,8 +52,16 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(1980, $this->validator->getMinlength());
 
-        // property
-        $this->assertEquals('1980', $this->validator->minlength);
+        // getter returns integer not string
+        $this->assertNotSame('1980', $this->validator->getMinlength());
+    }
+
+    public function testMethod_getStringLength_mbstring()
+    {
+        if(!function_exists('mb_strlen')) {
+            Koch\Localization\Utf8::initialize();
+        }
+        $this->assertEquals(36, $this->validator->getStringLength('äöü-öäü-äöü-german-umlauts-ûúéáóâôéê'));
     }
 
     public function testMethod_processValidationLogic()
