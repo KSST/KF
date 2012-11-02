@@ -204,7 +204,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testSetAttributesContainsFormKey()
     {
         $this->markTestSkipped('Depends on Form\Generator\PHPArray');
-        
+
         $attributes = array(
             'attr1' => 'val1',
             'attr2' => true,
@@ -394,15 +394,11 @@ class FormTest extends \PHPUnit_Framework_TestCase
        $this->assertEquals(array(), $this->form->getFormelements()); ;
     }
 
-    public function testSetFormelements()
+    public function testsetFormelements()
     {
-        $formelements = array();
-        $formelements[] = $this->form->addElement('ButtonBar');
-        $formelements[] = $this->form->addElement('Textarea');
-
-        $formelements_from_testobject = $this->form->getFormelements();
-        $this->assertFalse( empty($formelements_from_testobject) );
-        $this->assertSame($formelements, $this->form->getFormelements());
+        $formelements = array('formelements');
+        $this->form->setFormelements($formelements);
+        $this->assertEquals($formelements, $this->form->getFormelements());
     }
 
     public function testFormHasErrors()
@@ -435,6 +431,15 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formelements_html = $this->form->renderAllFormelements();
         $this->assertFalse(empty($formelements_html));
         $this->assertEquals($formelements_html, $formelements_html_expected);
+    }
+
+    /**
+     * @expectedException Koch\Exception\Exception
+     * @expectedExceptionMessage Error rendering formelements. No formelements on form object. Consider adding some formelements using addElement().
+     */
+    public function testRenderAllFormelements_throwsException()
+    {
+        $this->form->renderAllFormelements();
     }
 
     public function testuseDefaultFormDecorators_disable_via_constructor()
@@ -528,13 +533,46 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($formelement, $formelements_array[0]);
     }
 
+    public function testAddElement_addingFileElementSetsEncoding()
+    {
+        $this->form->addElement('file');
+        $this->assertEquals('multipart/form-data', $this->form->getEncoding());
+    }
+
+    public function testAddElement_toSpecificPositions()
+    {
+        $this->form->addElement('textarea', array(), 'Position1');
+        $this->form->addElement('checkbox', array(), 'Position2');
+        $this->form->addElement('submitbutton', array(), 'Position3');
+
+        $formelements = $this->form->getFormelements();
+        $this->assertArrayHasKey('Position1', $formelements);
+        $this->assertArrayHasKey('Position2', $formelements);
+        $this->assertArrayHasKey('Position3', $formelements);
+    }
+
+    public function testAddElement_withMultipleElements()
+    {
+        $formelements = array();
+        $formelements[] = $this->form->addElement('ButtonBar');
+        $formelements[] = $this->form->addElement('Textarea');
+        $formelements[] = $this->form->addElement('Checkbox');
+
+        $formelements_from_testobject = $this->form->getFormelements();
+
+        $this->assertNotEmpty($formelements_from_testobject);
+        $this->assertSame($formelements, $this->form->getFormelements());
+    }
+
     public function testAddElement_withSettingAttributes()
     {
         // test element
-        $attributes = array('class' => 'myFormelementClass',
-                            'maxlength' => '20',
-                            'label' => 'myFormelementLabel',
-                            'id' => 'text-formelement-0');
+        $attributes = array(
+            'class' => 'myFormelementClass',
+            'maxlength' => '20',
+            'label' => 'myFormelementLabel',
+            'id' => 'text-formelement-0'
+        );
 
         $this->form->addElement('Text', $attributes);
         $formelement = $this->form->getElementByPosition('0');
@@ -608,6 +646,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->delElementByName('myTextareaElement');
 
         $this->assertNull($this->form->getElementByName('myTextareaElement'));
+
+        // delete of non existing element returns false
+        $this->assertFalse($this->form->delElementByName('a-not-existing-formelement'));
     }
 
     public function testGetElementByPosition()
@@ -617,6 +658,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $formelements_array = $this->form->getFormelements();
 
         $this->assertSame( $formelements_array['0'], $this->form->getElementByPosition(0));
+
+        // not existing position returns null
+        $this->assertNull($this->form->getElementByPosition(1));
     }
 
     public function testGetElementByName()
@@ -646,9 +690,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testFormelementFactory()
     {
-        $formelement_object = $this->form->formelementFactory('text');
+        $formelement_object = $this->form->formelementFactory('Url');
 
-        $this->assertInstanceof('\Koch\Form\Elements\Text', $formelement_object);
+        $this->assertInstanceof('\Koch\Form\Elements\Url', $formelement_object);
+    }
+
+    public function testMethod_processForm()
+    {
+        $this->markTestIncomplete();
     }
 
     public function testsetValues_DataArrayPassedToMethod()
@@ -714,6 +763,20 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(is_array($decorators));
         $this->assertEquals(1, count($decorators));
         $this->assertTrue(isset($decorators['label']));
+    }
+
+    /**
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage No Formelements found. Add the formelement(s) first, then decorate!
+     */
+    public function testAddFormelementDecorator_ThrowsExceptionWhenNoFormelementsFound()
+    {
+        $this->form->addFormelementDecorator('label', 1);
+    }
+
+    public function testRemoveFormelementDecorator()
+    {
+        $this->form->removeFormelementDecorator('label');
     }
 
     public function testSetDecorator()
@@ -792,13 +855,13 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('This is a form description text.', $form_decorator_form->description);
     }
 
-    /*public function testAddValidator()
+    public function testAddValidator()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
                 'This test has not been implemented yet.'
         );
-    }*/
+    }
 
     public function testValidateForm_false()
     {

@@ -449,8 +449,8 @@ namespace "Koch\Form\Element\" + formelement name
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
-        if (is_array($this->formelements) === false) {
-            throw new \Exception('No Formelements found. Add the formelement first, then decorate it!');
+        if (true === empty($this->formelements)) {
+            throw new \RuntimeException('No Formelements found. Add the formelement(s) first, then decorate!');
         }
 
         $formelement_object = '';
@@ -469,8 +469,8 @@ namespace "Koch\Form\Element\" + formelement name
         $formelement_object = '';
         $formelement_object = $this->getElement($formelement_position);
 
-        if ($formelement_object->formelementdecorators[$decorator] !== null) {
-            return $formelement_object->formelementdecorators[$decorator];
+        if (isset($formelement_object->formelementdecorators[$decorator]) === true) {
+            unset($formelement_object->formelementdecorators[$decorator]);
         }
     }
 
