@@ -34,7 +34,7 @@ class Locale extends Validator
         // fetch data table(s) with "Locales"
         require __DIR__ . '/../../Localization/Locales.php';
 
-        if(strlen($locale) === 2) {
+        if (strlen($locale) === 2) {
             $short_code = $locale;
         } else {
             // 1) transform "de-DE" into "de_DE" (underscore is a valid sublocale separator)
@@ -53,7 +53,7 @@ class Locale extends Validator
 
         if (array_key_exists($short_code, $l10n_langs) === true) {
             // return if locale is just short_code, e.g. "de"
-            if(strlen($locale) == 2) {
+            if (strlen($locale) == 2) {
                 return true;
             }
              // fetch sublocales (looks in "de" array, returns "de_AT", "de_CH", "de_DE"...)
