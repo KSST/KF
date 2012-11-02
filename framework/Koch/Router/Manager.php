@@ -50,7 +50,7 @@ class Manager
      *
      * @param type $module
      */
-    public function delRoutesOfModule($module)
+    public function deleteRoutesOfModule($module)
     {
         // load module routes
         $moduleRoutes = $this->loadRoutesFromConfig($module);

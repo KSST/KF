@@ -741,7 +741,7 @@ class Form implements FormInterface
         // developer hint: when $form->render() was triggered, but no formelement was added before
         if (count($formelements) == 0) {
             throw new \Koch\Exception\Exception(
-                'Formelement rendering failure. '
+                'Error rendering formelements. '
                 . 'No formelements on form object. Consider adding some formelements using addElement().'
             );
         }
@@ -907,11 +907,11 @@ class Form implements FormInterface
 
                 // after repositioning we need to recalculate the formelement ids
                 $this->regenerateFormelementIdentifiers();
-            } else { // just add to the requested position
-                $this->formelements[$position] = $formelement;
             }
+        } else {
+            // just add to the requested position
+            $this->formelements[$position] = $formelement;
         }
-
         // return object -> fluent interface / method chaining
         return $formelement;
     }
@@ -995,7 +995,7 @@ class Form implements FormInterface
      */
     public function getElementByPosition($position)
     {
-        if (is_numeric($position) and $this->formelements[$position] !== null) {
+        if (is_numeric($position) and isset($this->formelements[$position])) {
             return $this->formelements[$position];
         }
 
@@ -1498,8 +1498,8 @@ class Form implements FormInterface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
-        if (is_array($this->formelements) === false) {
-            throw new \Exception('No Formelements found. Add the formelement first, then decorate it!');
+        if (true === empty($this->formelements)) {
+            throw new \RuntimeException('No Formelements found. Add the formelement(s) first, then decorate!');
         }
 
         $formelement_object = '';
@@ -1518,8 +1518,8 @@ class Form implements FormInterface
         $formelement_object = '';
         $formelement_object = $this->getElement($formelement_position);
 
-        if ($formelement_object->formelementdecorators[$decorator] !== null) {
-            return $formelement_object->formelementdecorators[$decorator];
+        if (isset($formelement_object->formelementdecorators[$decorator]) === true) {
+            unset($formelement_object->formelementdecorators[$decorator]);
         }
     }
 

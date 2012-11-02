@@ -284,29 +284,27 @@ class TargetRoute extends Mapper
      */
     public static function dispatchable()
     {
-        $filename = self::getFilename();
-        $classname = self::getClassname();
+        $file = self::getFilename();
+        $class = self::getClassname();
         $method = self::getMethod();
 
         // was the class loaded before?
-        if (false === class_exists($classname, false)) {
-            // loading manually
-            if (is_file($filename) === true) {
-                include_once $filename;
-                // @todo position for log command
-                #echo 'Loaded Controller: ' . $filename;
+        if (false === class_exists($class, false)) {
+            // not... then try loading manually
+            if (is_file($file) === true) {
+                include_once $file;
             }
         }
 
-        if (class_exists($classname, false) === true) {
-            #if (method_exists($classname, $method) === true) {
+        // class is loaded, check if method exists
+        if (true === class_exists($class, false) and true === method_exists($class, $method)) {
                 return true;
-            #}
         }
 
         // this shows how many routes were tried
         //echo '<br><strong>Route failure.<br>';
         //echo 'Not found ' . $filename .' ### '. $classname .' ### '. $method . '</strong><br>';
+
         return false;
     }
 
