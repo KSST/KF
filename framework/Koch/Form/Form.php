@@ -220,7 +220,7 @@ class Form implements FormInterface
     public function __construct($name_or_attributes = null, $method = null, $action = null)
     {
         if (null === $name_or_attributes) {
-            throw new Exception(
+            throw new \InvalidArgumentException(
                 'Missing argument 1 - has to be string (Name of Form) or array (Form Description Array).'
             );
         }
@@ -253,7 +253,7 @@ class Form implements FormInterface
         if ($method == 'post' or $method == 'get') {
             $this->method = $method;
         } else {
-            throw new \Exception('The parameter "' . $method . '" of the form has to be GET or POST.');
+            throw new \InvalidArgumentException('The method parameter is "' . $method . '", but has to be GET or POST.');
         }
 
         return $this;
@@ -344,7 +344,13 @@ class Form implements FormInterface
      */
     public function setTarget($target)
     {
-        $this->target = $target;
+        if ($target === '_blank' or $target === '_self' or $target === '_parent' or $target === '_top') {
+            $this->target = $target;
+        } else {
+            throw new \InvalidArgumentException(
+                'The target parameter is "' . $target . '", but has to be one of _blank, _self, _parent, _top.'
+            );
+        }
 
         return $this;
     }
@@ -414,7 +420,7 @@ class Form implements FormInterface
              */
             if (isset($attributes['form']) === true) {
                 // generate a form with the formgenerator by passing the attributes array in
-                $form = new Koch\Form\Generator\AssocArray($attributes);
+                $form = new \Koch\Form\Generator\PHPArray($attributes);
                 // and copy all properties of the inner form object to ($this) outer form object =)
                 $this->copyObjectProperties($form, $this);
                 // unset inner form

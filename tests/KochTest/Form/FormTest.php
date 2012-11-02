@@ -33,6 +33,36 @@ class FormTest extends \PHPUnit_Framework_TestCase
         unset($this->form);
     }
 
+    /**
+     * @covers Koch\Form\Form::__construct
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage
+     */
+    public function testConstructorThrowsExceptionWhenFirstArgumentMissing()
+    {
+        $this->form = new Form();
+    }
+
+    /**
+     * @covers Koch\Form\Form::__construct
+     */
+    public function testConstructorArgsAreSet()
+    {
+        $this->form = new Form('Form', 'GET', 'someActionName');
+
+        $this->assertEquals('get', $this->form->getMethod());
+        $this->assertEquals('http://index.php?mod=someActionName', $this->form->getAction());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage The method parameter is "abc", but has to be GET or POST.
+     */
+    public function testSetMethodThrowsInvalidArgumentException()
+    {
+        $this->form->setMethod('abc');
+    }
+
     public function testSetMethod()
     {
         $this->form->setMethod('POST');
@@ -78,6 +108,26 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $url = WWW_ROOT . 'index.php?mod=news&action=show';
         $this->form->setAction( $url );
         $this->assertEquals( $url, $this->form->getAction());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage The target parameter is "abc", but has to be one of _blank, _self, _parent, _top.
+     */
+    public function testMethod_setTargetThrowsException()
+    {
+        $this->form->setTarget('abc');
+    }
+
+    /**
+     * @covers Koch\Form\Form::getTarget
+     * @covers Koch\Form\Form::setTarget
+     */
+    public function testMethod_setTarget()
+    {
+        $this->form->setTarget('_self');
+
+        $this->assertEquals('_self', $this->form->getTarget());
     }
 
     public function testGetAutocomplete()
@@ -149,8 +199,25 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true,  $this->form->getAttribute('attr2'));
 
         unset($array);
+    }
 
-        // @todo $attributes['form'] = array contains ['form']
+    public function testSetAttributesContainsFormKey()
+    {
+        $this->markTestSkipped('Depends on Form\Generator\PHPArray');
+        
+        $attributes = array(
+            'attr1' => 'val1',
+            'attr2' => true,
+            'form'  => array(
+                'name' => 'formname',
+                'action' => 'someAction',
+                'method' => 'POST',
+                'key-a' => 'value-a',
+                'key-b' => 'value-b'
+            )
+        );
+
+        $this->form->setAttributes($attributes);
     }
 
     public function testCopyObjectProperties()
