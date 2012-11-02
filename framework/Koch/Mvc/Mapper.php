@@ -116,10 +116,10 @@ class Mapper #extends \ArrayObject
      * @param  string $action the action
      * @return string the mapped method name
      */
-    public static function mapActionToMethodname($action)
+    public static function mapActionToMethodname($action = null)
     {
         // set default value for action, when not set by URL
-        if (false === isset($action)) {
+        if ($action === null) {
             $action = self::DEFAULT_ACTION;
         }
 

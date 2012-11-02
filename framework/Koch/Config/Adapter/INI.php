@@ -44,11 +44,6 @@ class INI
      */
     public static function writeConfig($file, array $array)
     {
-        // ensure we got an array
-        if (is_array($array) === false) {
-            throw new \Koch\Exception\Exception('Parameter $array is not an array.');
-        }
-
         if (empty($file) === true) {
             throw new \Koch\Exception\Exception('Parameter $file is not given.');
         }

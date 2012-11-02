@@ -27,6 +27,10 @@ class INITest extends \PHPUnit_Framework_TestCase
     public function tearDown()
     {
         unset($this->object);
+
+        if(is_file($this->getFile())) {
+            unlink($this->getFile());
+        }
     }
 
     public function getIniArray()
@@ -37,6 +41,18 @@ class INITest extends \PHPUnit_Framework_TestCase
                 'key2' => 'value2',
                 'key3-int' => 123
         ));
+    }
+
+    public function getIniArrayOverloaded()
+    {
+        return array (
+            'section' => array (
+                'key1' => 'value1',
+                'key2' => 'value2',
+                'key3-int' => 123,
+                'newKey' => 'newValue'
+            )
+        );
     }
 
     public function getFile()
@@ -60,26 +76,31 @@ class INITest extends \PHPUnit_Framework_TestCase
     public function testWriteConfig()
     {
         $written = $this->object->writeConfig($this->getFile(), $this->getIniArray());
-
         $this->assertTrue($written);
-
         $ini_array = $this->object->readConfig($this->getFile());
-
         $this->assertEquals($ini_array, $this->getIniArray());
+    }
 
-        unlink($this->getFile());
+    public function testWriteConfigAddValuesToExistingConfig()
+    {
+        // now test appending to the just written config
+        $writtenOne = $this->object->writeConfig($this->getFile(), $this->getIniArray());
+        $this->assertTrue($writtenOne);
+        $writtenTwo = $this->object->writeConfig($this->getFile(), array('newKey' => 'newValue'));
+        $this->assertTrue($writtenTwo);
+        $ini_array = $this->object->readConfig($this->getFile());
+        $this->assertEquals($ini_array, $this->getIniArrayOverloaded());
+
     }
 
     /**
      * @covers Koch\Config\Adapter\INI::writeConfig
-     *
-     * @expectedException PHPUnit_Framework_Error
-     * @expectedException FileNotFound
+     * @expectedException Koch\Exception\Exception
+     * @expectedExceptionMessage Parameter $file is not given.
      */
-    public function testWriteConfigSecondParameterMustBeArray()
+    public function testWriteConfigFirstParameterGiven()
     {
-        // from "array" type hint
-        $this->object->writeConfig($this->getFile(), 'string');
+        $this->object->writeConfig(null, array());
     }
 
     public function testReadingBooleanValues()

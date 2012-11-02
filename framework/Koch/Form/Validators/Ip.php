@@ -52,7 +52,7 @@ class Ip extends Validator
         /**
          * Note: filter_var() does not support IDNA.
          * The INTL extension provides the method idn_to_ascii().
-         * It converts a mbyte URL to a punycode ASCII string.
+         * It converts a multibyte URL to a punycode ASCII string.
          */
         if (function_exists('idn_to_ascii')) {
             $value = idn_to_ascii($value);

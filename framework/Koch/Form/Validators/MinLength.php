@@ -77,7 +77,7 @@ class MinLength extends Validator
         }
 
         if (function_exists('mb_strlen')) {
-            return mb_strlen($string, 'utf8');
+            return mb_strlen($string, 'UTF-8');
         }
 
         return strlen(utf8_decode($string));

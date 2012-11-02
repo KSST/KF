@@ -46,16 +46,16 @@ class Div extends FormDecorator
     public function render($html_form_content)
     {
         // open opening div tag (unclosed first tag)
-        $html_deco = CR . '<div ';
+        $html_deco = CR . '<div';
 
         // add class
         if ( mb_strlen($this->getClass()) > 0 ) {
-             $html_deco .= 'class="' . $this->getClass() .'" ';
+             $html_deco .= ' class="' . $this->getClass() .'"';
         }
 
         // add class
         if ( mb_strlen($this->getId()) > 0 ) {
-             $html_deco .= 'id="' . $this->getId() .'" ';
+             $html_deco .= ' id="' . $this->getId() .'"';
         }
 
         // close opening div tag (close unclosed first tag)
