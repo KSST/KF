@@ -23,7 +23,10 @@
  *
  */
 
-namespace Koch\Form\Generators;
+namespace Koch\Form\Generator;
+
+use Koch\Form\Form;
+use Koch\Form\FormGeneratorInterface;
 
 /**
  * Koch Framework - Form Generator from and to YAML form description file.
@@ -31,7 +34,7 @@ namespace Koch\Form\Generators;
  * 1) Form generation (html representation) from an yaml description file (html = $this->generate(yaml))
  * 2) YAML form description generation from an array description of the form (form(array) ->xml).
  */
-class YAML extends Koch_Form implements FormGeneratorInterface
+class YAML extends Form implements FormGeneratorInterface
 {
     // @todo
 }
