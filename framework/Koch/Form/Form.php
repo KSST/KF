@@ -11,7 +11,7 @@
  */
 
 namespace "Koch\Form\Element\" + formelement name
-        $class = 'Koch\Form\Elements\\' . ucfirst($formelement);
+        $class = '\Koch\Form\Elements\\' . $classname;
 
         // if not already loaded, require formelement file
         if (false === class_exists($class, false)) {
