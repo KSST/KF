@@ -1,7 +1,6 @@
 {
     "name": "ksst/kf",
     "description": "Koch Framework",
-    "homepage": "http://clansuite.com/",
     "license": "GPL-2.0+",
     "keywords": ["framework", "full-stack", "cms", "cmf"],
     "type": "library",
