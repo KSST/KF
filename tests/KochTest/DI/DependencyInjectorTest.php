@@ -35,6 +35,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::willUse
      * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::register
      */
     public function testWillUse()
     {
@@ -45,18 +46,6 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(
             $this->injector->create('KochTest\DI\CreateMeOnce'),
             $this->injector->create('KochTest\DI\CreateMeOnce')
-        );
-    }
-
-    /**
-     * @covers Koch\DI\DependencyInjector::register
-     * @todo   Implement testRegister().
-     */
-    public function testRegister()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
         );
     }
 
@@ -158,6 +147,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\DI\DependencyInjector::instantiate
      * @covers Koch\DI\DependencyInjector::create
      * @covers Koch\DI\DependencyInjector::willUse
      * @covers Koch\DI\DependencyInjector::forVariable
@@ -269,18 +259,6 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     public function testCreate_creatingNonExistingClassThrowsException()
     {
         $this->injector->create('NonExistingClass');
-    }
-
-    /**
-     * @covers Koch\DI\DependencyInjector::instantiate
-     * @todo   Implement testInstantiate().
-     */
-    public function testInstantiate()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
     }
 
     /**
