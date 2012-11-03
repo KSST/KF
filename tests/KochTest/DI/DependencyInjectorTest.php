@@ -91,7 +91,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::forType
-     * @covers Koch\DI\DependencyInjector::call
+     * @covers Koch\DI\Engine\Type::call
      * @covers Koch\DI\DependencyInjector::create
      */
     public function testForType()
@@ -152,7 +152,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\DI\DependencyInjector::willUse
      * @covers Koch\DI\DependencyInjector::forVariable
      * @covers Koch\DI\DependencyInjector::forType
-     * @covers Koch\DI\DependencyInjector::call
+     * @covers Koch\DI\Engine\Type::call
      */
     public function testCreate()
     {
