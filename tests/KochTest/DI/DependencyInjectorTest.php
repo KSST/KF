@@ -34,7 +34,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::willUse
-     * @todo   Implement testWillUse().
+     * @covers Koch\DI\DependencyInjector::create
      */
     public function testWillUse()
     {
@@ -121,6 +121,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::with
+     * @covers Koch\DI\DependencyInjector::fill
      * @covers Koch\DI\DependencyInjector::create
      */
     public function testWith()
@@ -142,6 +143,10 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::willUse
+     * @covers Koch\DI\DependencyInjector::forVariable
+     * @covers Koch\DI\DependencyInjector::forType
+     * @covers Koch\DI\DependencyInjector::call
      */
     public function testCreate()
     {
