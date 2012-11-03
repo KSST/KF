@@ -870,7 +870,7 @@ class Form implements FormInterface
          * objects provide the __toString() method.
          */
         if (($formelement instanceof \Koch\Form\FormelementInterface) === false) {
-            $formelement = '\Koch\Form\Elements\\' . $formelement;
+            $formelement = '\Koch\Form\Elements\\' . ucfirst($formelement);
             $formelement = new $formelement;
         }
 
