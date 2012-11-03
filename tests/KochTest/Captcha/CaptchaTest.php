@@ -35,6 +35,21 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     {
     }
 
+    public function testSetFontFolder()
+    {
+        // accepts string
+        $folder = 'folder';
+        $this->object->setFontFolder($folders);
+
+        $this->assertEquals($folder, $this->object->font_folders);
+
+        // accepts array
+        $folder = array('folder/A', 'folder/B');
+        $this->object->setFontFolder($folders);
+
+        $this->assertEquals($folder, $this->object->font_folders);
+    }
+
     /**
      * @covers Koch\Captcha\Captcha::getRandomFont
      * @todo   Implement testGetRandomFont().
