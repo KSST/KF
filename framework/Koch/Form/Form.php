@@ -15,13 +15,7 @@ namespace "Koch\Form\Element\" + formelement name
 
         // if not already loaded, require formelement file
         if (false === class_exists($class, false)) {
-            $file = __DIR__ . '/Elements/' . $formelement . '.php';
-
-            if (is_file($file) === true) {
-                include $file;
-            } else {
-                throw new \Exception('The Formelement "' . $class . '" does not exist.');
-            }
+            include $file;
         }
 
         // instantiate the new formelement and return
