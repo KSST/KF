@@ -62,13 +62,22 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::forVariable
-     * @todo   Implement testForVariable().
+     * @covers Koch\DI\DependencyInjector::willUse
+     * @covers Koch\DI\DependencyInjector::create
      */
     public function testForVariable()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        include_once __DIR__ . '/fixtures/ClassesForInjectionOfVariablesTest.php';
+
+        // test variable injection
+        $this->injector->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
+        $this->injector->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
+        $this->assertEquals(
+                $this->injector->create('KochTest\DI\VariablesInConstructor'),
+                new VariablesInConstructor(
+                    new NeededForFirst(),
+                    new NeededForSecond()
+                )
         );
     }
 
@@ -93,13 +102,20 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::forType
-     * @todo   Implement testForType().
+     * @covers Koch\DI\DependencyInjector::call
+     * @covers Koch\DI\DependencyInjector::create
      */
     public function testForType()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        include_once __DIR__ . '/fixtures/ClassesForSetterInjectionTest.php';
+
+        // test can call setters to complete initialisation
+        $this->injector->forType('KochTest\DI\NeedsInitToCompleteConstruction')->call('init');
+        $expected = new NeedsInitToCompleteConstruction();
+        $expected->init(new NotWithoutMe()); // <-- setter injection
+        $this->assertEquals(
+            $this->injector->create('KochTest\DI\NeedsInitToCompleteConstruction'),
+            $expected
         );
     }
 
@@ -168,19 +184,6 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        include_once __DIR__ . '/fixtures/ClassesForInjectionOfVariablesTest.php';
-
-        // test variable injection
-        $this->injector->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
-        $this->injector->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
-        $this->assertEquals(
-                $this->injector->create('KochTest\DI\VariablesInConstructor'),
-                new VariablesInConstructor(
-                    new NeededForFirst(),
-                    new NeededForSecond()
-                )
-        );
-
         include_once __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
 
         // test create with parameters
@@ -243,17 +246,6 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf(
             'KochTest\DI\SecondImplementation',
             $this->injector->create('KochTest\DI\InterfaceWithManyImplementations')
-        );
-
-        include_once __DIR__ . '/fixtures/ClassesForSetterInjectionTest.php';
-
-        // test can call setters to complete initialisation
-        $this->injector->forType('KochTest\DI\NeedsInitToCompleteConstruction')->call('init');
-        $expected = new NeedsInitToCompleteConstruction();
-        $expected->init(new NotWithoutMe()); // <-- setter injection
-        $this->assertEquals(
-            $this->injector->create('KochTest\DI\NeedsInitToCompleteConstruction'),
-            $expected
         );
     }
 
