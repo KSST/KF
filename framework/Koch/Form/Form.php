@@ -1085,21 +1085,21 @@ class Form implements FormInterface
         // case-insensitve file in folder check to get filename, which is the classname
         // thanks to PSR-0
         $file = self::fileExists(__DIR__ . '/Elements/' . $formelement);
+
+        if($file === false) {
+            throw new \Exception('The Formelement "' . $class . '" does not exist.');
+        }
+
+        // get PSR-0 classname from file
         $pi = pathinfo($file);
         $classname = $pi['filename'];
 
-         // class = namespace "Koch\Form\Element\" + formelement name
+        // class = namespace "Koch\Form\Element\" + formelement name
         $class = '\Koch\Form\Elements\\' . $classname;
 
         // if not already loaded, require formelement file
         if (false === class_exists($class, false)) {
-            $file = __DIR__ . '/Elements/' . $formelement . '.php';
-
-            if (is_file($file) === true) {
-                include $file;
-            } else {
-                throw new \Exception('The Formelement "' . $class . '" does not exist.');
-            }
+            include $file;
         }
 
         // instantiate the new formelement and return
