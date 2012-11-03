@@ -31,88 +31,85 @@ class SwiftMailer
     /**
      * Constructor.
      */
-    public function __construct(Koch\Config $config)
+    public function __construct(\Koch\Config\Config $config)
     {
         $this->config = $config;
-        $this->loadMailer();
+
+        //require_once VENDOR_PATH . 'swiftmailer/swiftmailer/lib/swift_required.php';
+
+        \Swift::init('Koch\Mail\SwiftMailer::swiftmailerLazyConfiguration');
+
+        $this->initalizeMailer();
     }
 
     /**
-     * Loads and instantiates Swift Mailer
+     * Configure SwiftMailer
      */
-    private function loadMailer()
+    public static function swiftmailerLazyConfiguration()
     {
-        $vendor = VENDOR_PATH;
+        // = $this->config[];
+        //Swift_DependencyContainer::getInstance()->...
+        //Swift_Preferences::getInstance()->...
+    }
 
-        // Include the Swiftmailer Class
-        include $vendor . 'swiftmailer/Swift.php';
-
-        /**
-         * Include the Swiftmailer Connection Class and Set $connection
-         */
-        if ($this->config['email']['mailmethod'] != 'smtp') {
-            include $vendor . 'swiftmailer/Swift/Connection/Sendmail.php';
-        }
-
+    /**
+     * Instantiates and configures Swift Mailer
+     */
+    private function initalizeMailer()
+    {
         switch ($this->config['email']['mailmethod']) {
             case 'smtp':
-                include $vendor . 'swiftmailer/Swift/Connection/SMTP.php';
-                $connection = new Swift_Connection_SMTP(
-                    $this->config['email']['mailerhost'],
-                    $this->config['email']['mailerport'],
-                    $this->config['email']['mailencryption']
+                $transport = \Swift_SmtpTransport::newInstance(
+                    $this->config['email']['mailerhost'], // 'smtp.gmail.com'
+                    $this->config['email']['mailerport'], // 465
+                    $this->config['email']['mailencryption'] // tls or ssl
                 );
+                //->setUsername('me@ff.com')->setPassword('pass');
                 break;
             case 'sendmail':
-                $connection = new Swift_Connection_Sendmail;
+                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
                 break;
             case 'exim':
-                $connection = new Swift_Connection_Sendmail('/usr/sbin/exim -bs');
+                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/exim -bs');
                 break;
             case 'qmail':
-                $connection = new Swift_Connection_Sendmail('/usr/sbin/qmail -bs');
+                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/qmail -bs');
                 break;
             case 'postfix':
-                $connection = new Swift_Connection_Sendmail('/usr/sbin/postfix -bs');
+                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/postfix -bs');
                 break;
+            case 'mail':
             default:
-                $connection = new Swift_Connection_Sendmail;
+                $transport = \Swift_MailTransport::newInstance();
         }
 
-        //  This globalizes $this->mailer and initialize the class
-        $this->mailer = new Swift($connection, $this->config['email']['mailerhost']);
+        $this->mailer = \Swift_Mailer::newInstance($transport);
     }
 
     /**
      * This is the sendmail command, it's a shortcut method to swiftmailer
      * Return true or false if successfully
      *
-     * @param  string  $to      Recipient email
-     * @param  string  $from    Sender email
+     * @param  string  $to      Recipient email ('email => 'name')
+     * @param  string  $from    Sender email ('email' => 'name')
      * @param  string  $subject Message subject (headline)
-     * @param  string  $body    Message body
+     * @param  string  $body    Message body ('text, 'text/html')
      * @return boolean true|false
      */
     public function send($to, $from, $subject, $body)
     {
-        if ($this->mailer->isConnected()) {
-            // sends a simple email via the instantiated mailer
-            $this->mailer->send($to, $from, $subject, $body);
+        $message = Swift_Message::newInstance($subject)
+            ->setFrom($from)
+            ->setTo($to)
+            ->setBody($body);
 
-            // close mailer
-            $this->mailer->close();
+      // @todo attachments
+      //$attachment = Swift_Attachment::newInstance(file_get_contents('path/logo.png'), 'logo.png');
+      //$message->attach($attachment);
 
-            return true;
-        } else {
-            trigger_error(
-                'The mailer failed to connect.
-                Errors: <br/>' . '<pre>' . print_r($this->mailer->errors, 1) . '</pre>' . '
-                Log: <pre>' . print_r($this->mailer->transactions, 1) . '</pre>',
-                E_USER_NOTICE
-            );
+      $numMailsSent = $this->mailer->send($message); /*batchSend*/
 
-            return false;
-        }
+      return sprintf("Sent %d messages\n", $numMailsSent);
     }
 
     /**
@@ -123,7 +120,7 @@ class SwiftMailer
     public function getMailer()
     {
         if ($this->mailer === null) {
-            $this->loadMailer();
+            $this->initalizeMailer();
         }
 
         return $this->mailer;
