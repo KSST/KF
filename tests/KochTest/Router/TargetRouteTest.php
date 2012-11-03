@@ -26,7 +26,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->object);
+        // static instance
+        $this->object->reset();
     }
 
     /**
@@ -103,9 +104,11 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::getController
+     * @covers Koch\Router\TargetRoute::setController
      */
     public function testGetController()
     {
+        // if controller not set, it will be the default module name
         $this->assertEquals('Index', $this->object->getController());
 
         $this->object->setController('aController');
@@ -113,27 +116,14 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Router\TargetRoute::getModule
-     * @todo   Implement testGetModule().
-     */
-    public function testGetModule()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\Router\TargetRoute::setModule
-     * @todo   Implement testSetModule().
+     * @covers Koch\Router\TargetRoute::getModule
      */
     public function testSetModule()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $module = 'ABCModule';
+       $this->object->setModule($module);
+       $this->assertEquals($module, $this->object->getModule());
     }
 
     /**
@@ -174,7 +164,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::setId
-     * @todo   Implement testSetId().
+     * @covers Koch\Router\TargetRoute::getId
      */
     public function testSetId()
     {
@@ -182,31 +172,22 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Router\TargetRoute::getId
-     * @todo   Implement testGetId().
-     */
-    public function testGetId()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
+     * @covers Koch\Router\TargetRoute::setAction
      * @covers Koch\Router\TargetRoute::getActionName
-     * @todo   Implement testGetActionName().
+     * @covers Koch\Router\TargetRoute::getMethod
      */
     public function testGetActionName()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->setAction('MyAction');
+
+        $this->assertEquals('action_MyAction', $this->object->getMethod());
+        $this->assertEquals('action_MyAction', $this->object->getActionName());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::setMethod
+     * @covers Koch\Router\TargetRoute::getMethod
+     * @covers Koch\Router\TargetRoute::getActionName
      */
     public function testSetMethod()
     {
@@ -214,7 +195,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setMethod('a-method');
         $this->assertEquals('a-method', $this->object->getActionName());
-
     }
 
     /**
@@ -231,14 +211,15 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::setParameters
-     * @todo   Implement testSetParameters().
+     * @covers Koch\Router\TargetRoute::getParameters
      */
     public function testSetParameters()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+
+        $this->object->setParameters(array('param1' => 'p1-value'));
+
+        $this->assertArrayHasKey('param1', $this->object->getParameters());
     }
 
     /**
@@ -266,18 +247,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Router\TargetRoute::setRequestMethod
-     * @todo   Implement testSetRequestMethod().
-     */
-    public function testSetRequestMethod()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\Router\TargetRoute::getRequestMethod
      * @todo   Implement testGetRequestMethod().
      */
@@ -291,86 +260,76 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::getLayoutMode
-     * @todo   Implement testGetLayoutMode().
      */
     public function testGetLayoutMode()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->setParameters(array('layout' => true));
+        $this->assertTrue($this->object->getLayoutMode());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::getAjaxMode
-     * @todo   Implement testGetAjaxMode().
+     * @depend Koch\Http\HttpRequest::isAjax
      */
     public function testGetAjaxMode()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Router\TargetRoute::getRenderEngine
-     * @todo   Implement testGetRenderEngine().
-     */
-    public function testGetRenderEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->assertFalse($this->object->getAjaxMode());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::setRenderEngine
-     * @todo   Implement testSetRenderEngine().
+     * @covers Koch\Router\TargetRoute::getRenderEngine
      */
     public function testSetRenderEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $renderEngine = 'CopyCat';
+        $this->object->setRenderEngine($renderEngine);
+        $this->assertEquals($renderEngine, $this->object->getRenderEngine());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::getBackendTheme
-     * @todo   Implement testGetBackendTheme().
      */
     public function testGetBackendTheme()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->assertEquals('admin', $this->object->getBackendTheme());
+
+       $theme = 'A-Backend-Theme';
+       $_SESSION['user']['backend_theme'] = $theme;
+       $this->assertEquals($theme, $this->object->getBackendTheme());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::getFrontendTheme
-     * @todo   Implement testGetFrontendTheme().
      */
     public function testGetFrontendTheme()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->assertEquals('standard', $this->object->getFrontendTheme());
+
+       $theme = 'A-Frontend-Theme';
+       $_SESSION['user']['frontend_theme'] = $theme;
+       $this->assertEquals($theme, $this->object->getFrontendTheme());
     }
 
     /**
      * @covers Koch\Router\TargetRoute::getThemeName
-     * @todo   Implement testGetThemeName().
      */
     public function testGetThemeName()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // default
+        $this->assertEquals('standard', $this->object->getThemeName());
+
+        // explicitly set
+        $theme = 'MyTheme';
+        $this->object->setThemeName($theme);
+        $this->assertEquals($theme, $this->object->getThemeName());
+        $this->object->reset();
+
+        $this->object->setModule('controlcenter');
+        $this->assertEquals('admin', $this->object->getThemeName());
+
+        $this->object->setController('NewsAdminController');
+        $this->assertEquals('admin', $this->object->getThemeName());
     }
 
     /**
@@ -450,30 +409,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      * @todo   Implement testDebug().
      */
     public function testDebug()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Router\TargetRoute::set
-     * @todo   Implement testSet().
-     */
-    public function testSet()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Router\TargetRoute::get
-     * @todo   Implement testGet().
-     */
-    public function testGet()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
