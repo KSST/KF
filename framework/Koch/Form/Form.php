@@ -846,6 +846,30 @@ class Form implements FormInterface
      */
 
     /**
+     * PSR-0 is idiotic! Inventors should shit theirs pants and attend PHP conferences wearing them.
+     *
+     * This is a case-insensitive file exists check.
+     * This allows checking for names/file, which are not only ucfirst(), e.g. "SubmitButton".
+     */
+    public static function fileExists($fileName)
+    {
+        if (is_file($fileName)) {
+            return $fileName;
+        }
+
+        // handle case insensitive requests
+        $directoryName = dirname($fileName);
+        $fileArray = glob($directoryName . '/*', GLOB_NOSORT);
+        foreach ($fileArray as $file) {
+            if (false !== stripos($file, $fileName)) {
+                return realpath($file);
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Adds a formelement to the form
      *
      * You don't know the formelements available? Then take a look at
@@ -870,8 +894,7 @@ class Form implements FormInterface
          * objects provide the __toString() method.
          */
         if (($formelement instanceof \Koch\Form\FormelementInterface) === false) {
-            $formelement = '\Koch\Form\Elements\\' . ucfirst($formelement);
-            $formelement = new $formelement;
+            $formelement = self::formelementFactory($formelement);
         }
 
         // little helper for easier use of the formelement "file"
@@ -1059,8 +1082,14 @@ class Form implements FormInterface
      */
     public static function formelementFactory($formelement)
     {
-        // class = namespace "Koch\Form\Element\" + formelement name
-        $class = 'Koch\Form\Elements\\' . ucfirst($formelement);
+        // case-insensitve file in folder check to get filename, which is the classname
+        // thanks to PSR-0
+        $file = self::fileExists(__DIR__ . '/Elements/' . $formelement);
+        $pi = pathinfo($file);
+        $classname = $pi['filename'];
+
+         // class = namespace "Koch\Form\Element\" + formelement name
+        $class = '\Koch\Form\Elements\\' . $classname;
 
         // if not already loaded, require formelement file
         if (false === class_exists($class, false)) {
