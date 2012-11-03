@@ -12,6 +12,8 @@
 
 namespace Koch\DI\Engine;
 
+use Koch\DI\Lifecycle\Value;
+
 class Variable
 {
     public $preference;
