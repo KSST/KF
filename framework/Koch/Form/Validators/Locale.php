@@ -34,10 +34,15 @@ class Locale extends Validator
         // fetch data table(s) with "Locales"
         require __DIR__ . '/../../Localization/Locales.php';
 
+        // @todo try to skip str_replace, explode, implode and use sscanf
+        // list($short_code, $sublocale) = sscanf($locale, '%s-%s');
+
         if (strlen($locale) === 2) {
             $short_code = $locale;
         } else {
-            // 1) transform "de-DE" into "de_DE" (underscore is a valid sublocale separator)
+            // 1) transform "de-DE" into "de_DE"
+            // Transform RFC 4646 language tags which use hyphen (minus) instead of underscore,
+            // into the more traditional underscore-using identifiers.
             $locale = str_replace('-', '_', $locale);
 
             // 2) turn lowercase sublocale into uppercase sublocale, split first
