@@ -29,18 +29,15 @@ class NativeTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Config\Adapter\Native::readConfig
-     * @todo   Implement testReadConfig().
      */
     public function testReadConfig()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->readConfig($file);
     }
 
     /**
@@ -49,9 +46,6 @@ class NativeTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteConfig()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->writeConfig($file, $array);
     }
 }

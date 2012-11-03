@@ -6,7 +6,7 @@ class NotWithoutMe
 
 class NeedsInitToCompleteConstruction
 {
-    function init(NotWithoutMe $me)
+    public function init(NotWithoutMe $me)
     {
         $this->me = $me;
     }
