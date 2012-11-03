@@ -110,7 +110,7 @@ class Context
 
     public function pickFactory($type, $candidates)
     {
-        if (count($candidates) == 0) {
+        if (count($candidates) === 0) {
             throw new CannotFindImplementation($type);
         }
 
@@ -119,7 +119,7 @@ class Context
             return $preference;
         }
 
-        if (count($candidates) == 1) {
+        if (count($candidates) === 1) {
             return new Factory($candidates[0]);
         }
 
