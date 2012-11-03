@@ -1086,7 +1086,7 @@ class Form implements FormInterface
         // thanks to PSR-0
         $file = self::fileExists(__DIR__ . '/Elements/' . $formelement);
 
-        if($file === false) {
+        if ($file === false) {
             throw new \Exception('The Formelement "' . $class . '" does not exist.');
         }
 

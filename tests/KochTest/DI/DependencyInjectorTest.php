@@ -38,7 +38,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWillUse()
     {
-        include  __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
+        include __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
 
         // instantiate as singleton
         $this->injector->willUse(new Reused('KochTest\DI\CreateMeOnce'));
@@ -79,7 +79,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWhenCreating()
     {
-        include  __DIR__ . '/fixtures/ClassesForWhenCreatingTest.php';
+        include __DIR__ . '/fixtures/ClassesForWhenCreatingTest.php';
 
         // 1) create concrete implemenation BareImplemenation via interface Bare
         // and 2) do a constructor injection of Bare into WrapperForBare
@@ -125,7 +125,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWith()
     {
-        include_once  __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
+        include_once __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
 
         // 1) can fill missing parameters with explicit values
         $this->assertEquals(
@@ -145,7 +145,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate()
     {
-        include_once  __DIR__ . '/fixtures/ClassesForInjectionOfTypeHintsTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForInjectionOfTypeHintsTest.php';
 
         // test injection of simple dependencies
         $this->assertEquals(
@@ -163,7 +163,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
             )
         );
 
-        include_once  __DIR__ . '/fixtures/ClassesForInjectionOfVariablesTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForInjectionOfVariablesTest.php';
 
         // test variable injection
         $this->injector->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
@@ -176,7 +176,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
                 )
         );
 
-        include_once  __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
+        include_once __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
 
         // test create with parameters
         // this is a short syntax form of the test #1 in testWith()
@@ -185,7 +185,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
             new ClassWithParameters(3, 5)
         );
 
-        include_once  __DIR__ . '/fixtures/ClassForInjectionOfSpecificValuesTest.php';
+        include_once __DIR__ . '/fixtures/ClassForInjectionOfSpecificValuesTest.php';
 
         // test inject specific instance
         $this->injector->willUse(new Thing());
@@ -214,7 +214,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
             $this->injector->create('KochTest\DI\WrapAnything'), new WrapAnything('100')
         );*/
 
-        include_once  __DIR__ . '/fixtures/ClassesForAutoInstantiationTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForAutoInstantiationTest.php';
 
         // test named class instantiated automatically
         $this->assertInstanceOf('KochTest\DI\LoneClass', $this->injector->create('KochTest\DI\LoneClass'));
@@ -226,7 +226,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->injector->willUse('KochTest\DI\SecondSubclass');
         $this->assertInstanceOf('KochTest\DI\SecondSubclass', $this->injector->create('KochTest\DI\ClassWithManySubclasses'));
 
-        include_once  __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
         $this->assertInstanceOf(
             'KochTest\DI\OnlyImplementation',
@@ -240,7 +240,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
             $this->injector->create('KochTest\DI\InterfaceWithManyImplementations')
         );
 
-        include_once  __DIR__ . '/fixtures/ClassesForSetterInjectionTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForSetterInjectionTest.php';
 
         // test can call setters to complete initialisation
         $this->injector->forType('KochTest\DI\NeedsInitToCompleteConstruction')->call('init');
@@ -259,7 +259,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate_creatingInterfaceWithManyImplementationsThrowsException()
     {
-        include_once  __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
         $this->injector->create('InterfaceWithManyImplementations');
     }
@@ -358,8 +358,4 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-
-
-
 }
-
