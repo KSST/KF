@@ -38,7 +38,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWillUse()
     {
-        include __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
+        include_once __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
 
         // instantiate as singleton
         $this->injector->willUse(new Reused('KochTest\DI\CreateMeOnce'));
@@ -79,7 +79,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWhenCreating()
     {
-        include __DIR__ . '/fixtures/ClassesForWhenCreatingTest.php';
+        include_once __DIR__ . '/fixtures/ClassesForWhenCreatingTest.php';
 
         // 1) create concrete implemenation BareImplemenation via interface Bare
         // and 2) do a constructor injection of Bare into WrapperForBare
@@ -110,7 +110,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testFill()
     {
-       include __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
+       include_once __DIR__ . '/fixtures/ClassForParameterInjectionTest.php';
 
        // can fill missing parameters with explicit values
        $this->assertEquals(
