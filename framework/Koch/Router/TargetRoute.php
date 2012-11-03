@@ -39,7 +39,7 @@ class TargetRoute extends Mapper
         'classname'     => null,
         // Call
         'module'        => 'index',
-        'controller'    => 'index',
+        'controller'    => null,
         'action'        => 'list',
         'method'        => null,
         'params'        => null,
@@ -118,7 +118,7 @@ class TargetRoute extends Mapper
     {
         // the default "controller" name is the "module" name
         // this is the case if a route "/:module" is used
-        if (isset(self::$parameters['controller']) === false) {
+        if (null === self::$parameters['controller']) {
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
@@ -127,12 +127,12 @@ class TargetRoute extends Mapper
 
     public static function getModule()
     {
-        return ucfirst(self::$parameters['module']);
+        return self::$parameters['module'];
     }
 
     public static function setModule($module)
     {
-        return self::$parameters['module'] = $module;
+        return self::$parameters['module'] = ucfirst($module);
     }
 
     public static function setAction($action)
@@ -195,7 +195,7 @@ class TargetRoute extends Mapper
     public static function getParameters()
     {
         // transfer parameters from HttpRequest Object to TargetRoute
-        if (self::getRequestMethod() === 'POST') {
+        if (HttpRequest::getRequestMethod() === 'POST') {
             // php5.4
             // $params = (new HttpRequest())->getPost();
 
@@ -211,11 +211,6 @@ class TargetRoute extends Mapper
     public static function getFormat()
     {
         return self::$parameters['format'];
-    }
-
-    public static function setRequestMethod()
-    {
-        self::$parameters['request'];
     }
 
     public static function getRequestMethod()
@@ -255,8 +250,9 @@ class TargetRoute extends Mapper
 
     public static function getThemeName()
     {
-        if (empty(self::$parameters['themename'])) {
-            if (self::getModule() == 'controlcenter' or self::getController() == 'admin') {
+        if (null === self::$parameters['themename']) {
+            // set theme automatically for "main backend module" or "backend controllers"
+            if (self::getModule() == 'Controlcenter' or self::getController() == 'admin') {
                 self::setThemeName(self::getBackendTheme());
             } else {
                 self::setThemeName(self::getFrontendTheme());
@@ -435,32 +431,6 @@ class TargetRoute extends Mapper
     public static function debug()
     {
         \Koch\Debug\Debug::printR(self::$parameters);
-    }
-
-    /**
-     * Sets the given key
-     *
-     * @param  mixed       $key
-     * @param  mixed       $value
-     * @return TargetRoute
-     */
-    public function set($key, $value)
-    {
-        $this[$key] = $value;
-
-        return $this;
-    }
-
-    /**
-     * Returns the value of the given key, if the key is not set, returns the default.
-     *
-     * @param  mixed $key     Key.
-     * @param  mixed $default Default Value.
-     * @return mixed
-     */
-    public function get($key, $default = null)
-    {
-        return isset($this[$key]) ? $this[$key] : $default;
     }
 
     public function toArray()
