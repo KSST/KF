@@ -26,6 +26,7 @@
 namespace Koch\DI;
 
 use Koch\DI\Engine\Context;
+use Koch\DI\Engine\IncomingParameters;
 use Koch\DI\Storage\ClassRepository;
 use Koch\DI\Exception\CannotDetermineImplementation;
 use Koch\DI\Exception\MissingDependency;
