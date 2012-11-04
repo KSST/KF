@@ -39,7 +39,7 @@ class Conversion
         $xml->startElement('root');
 
         // add the $array data in between
-        $this->writeArray($xml, $array);
+        self::writeArray($xml, $array);
 
         // close with </root>
         $xml->endElement();
@@ -57,7 +57,7 @@ class Conversion
      * @param $xml XMLWriter Object
      * @param $array PHP Array
      */
-    public static function writeArray(XMLWriter $xml, array $array)
+    public static function writeArray(\XMLWriter $xml, array $array)
     {
         foreach ($array as $key => $value) {
             if (is_array($value)) {
