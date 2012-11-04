@@ -72,8 +72,11 @@ class Captcha
         }
 
         // set frameworks font folder as default
-        self::$font_folders[] = __DIR__ . '/fonts';
+        self::$font_folders[] = realpath(__DIR__ . '/fonts');
+    }
 
+    public static function setup()
+    {
         // pick a random font from the fonts dir
         self::$font = self::getRandomFont(self::$font_folders);
     }
@@ -91,6 +94,11 @@ class Captcha
         foreach ($folders as $folder) {
             self::$font_folders[] = $folder;
         }
+    }
+
+    public static function getFontFolders()
+    {
+        return self::$font_folders;
     }
 
     /**
