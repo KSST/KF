@@ -3,6 +3,9 @@
 namespace KochTest\Config\Adapter;
 
 use Koch\Config\Adapter\INI;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 class INITest extends \PHPUnit_Framework_TestCase
 {
@@ -11,53 +14,24 @@ class INITest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     public function setUp()
     {
         $this->object = new INI;
+
+        vfsStreamWrapper::register();
+        $this->configFileURL = vfsStream::url('root/config.ini');
+        $this->booleanConfigFileURL = vfsStream::url('root/booleans.ini');
+        $this->file1 = vfsStream::newFile('config.ini', 0777)->withContent($this->getConfigFileContent());
+        $this->file2 = vfsStream::newFile('booleans.ini', 0777)->withContent($this->getBooleanConfigFileContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file1);
+        $this->root->addChild($this->file2);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
     public function tearDown()
     {
         unset($this->object);
-
-        if (is_file($this->getFile())) {
-            unlink($this->getFile());
-        }
-    }
-
-    public function getIniArray()
-    {
-        return array(
-            'section' => array (
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3-int' => 123
-        ));
-    }
-
-    public function getIniArrayOverloaded()
-    {
-        return array (
-            'section' => array (
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3-int' => 123,
-                'newKey' => 'newValue'
-            )
-        );
-    }
-
-    public function getFile()
-    {
-        return __DIR__ . '/../fixtures/writeTest.ini';
     }
 
     /*
@@ -75,22 +49,21 @@ class INITest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteConfig()
     {
-        $written = $this->object->writeConfig($this->getFile(), $this->getIniArray());
+        $written = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($written);
-        $ini_array = $this->object->readConfig($this->getFile());
-        $this->assertEquals($ini_array, $this->getIniArray());
+        $this->assertEquals($this->getContentArray(), $this->object->readConfig($this->configFileURL));
     }
 
     public function testWriteConfigAddValuesToExistingConfig()
     {
-        // now test appending to the just written config
-        $writtenOne = $this->object->writeConfig($this->getFile(), $this->getIniArray());
+        // write config
+        $writtenOne = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($writtenOne);
-        $writtenTwo = $this->object->writeConfig($this->getFile(), array('newKey' => 'newValue'));
-        $this->assertTrue($writtenTwo);
-        $ini_array = $this->object->readConfig($this->getFile());
-        $this->assertEquals($ini_array, $this->getIniArrayOverloaded());
 
+        // now test appending to the just written config
+        $writtenTwo = $this->object->writeConfig($this->configFileURL, array('newKey' => 'newValue'));
+        $this->assertTrue($writtenTwo);
+        $this->assertEquals($this->object->readConfig($this->configFileURL), $this->getConfigArrayOverloaded());
     }
 
     /**
@@ -105,8 +78,7 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function testReadingBooleanValues()
     {
-        $file = __DIR__ . '/../fixtures/booleans.ini';
-        $config = $this->object->readConfig($file);
+        $config = $this->object->readConfig($this->booleanConfigFileURL);
 
         $this->assertTrue((bool) $config['booleans']['test_on']);
         $this->assertFalse((bool) $config['booleans']['test_off']);
@@ -139,12 +111,72 @@ class INITest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $this->object->writeConfig($this->getFile(), $this->getIniArray());
+        $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
 
-        $ini_array = $this->object->readConfig($this->getFile());
+        $ini_array = $this->object->readConfig($this->configFileURL);
 
-        $this->assertEquals($ini_array, $this->getIniArray());
+        $this->assertEquals($ini_array, $this->getConfigArray());
 
         $this->assertInternalType('string', $ini_array['section']['key3-int']);
+    }
+
+    public function getConfigFileContent()
+    {
+        return <<<EOF
+; <?php die('Access forbidden.'); /* DO NOT MODIFY THIS LINE! ?>
+;
+; Koch Framework Configuration File :
+; I:\0.Github\KSST\KF\tests\KochTest\Config\Adapter\..\fixtures\writeTest.ini
+;
+; This file was generated on 04-11-2012 19:37
+;
+
+
+;----------------------------------------
+; section
+;----------------------------------------
+[section]
+key1 = "value1"
+key2 = "value2"
+key3-int = "123"
+newKey = "newValue"
+
+; DO NOT REMOVE THIS LINE */ ?>
+EOF;
+    }
+
+     public function getBooleanConfigFileContent()
+    {
+        return <<<EOF
+[booleans]
+test_on = on
+test_off = off
+test_yes = yes
+test_no = no
+test_true = true
+test_false = false
+test_null = null
+EOF;
+    }
+    public function getConfigArray()
+    {
+        return array(
+            'section' => array (
+                'key1' => 'value1',
+                'key2' => 'value2',
+                'key3-int' => 123
+        ));
+    }
+
+    public function getConfigArrayOverloaded()
+    {
+        return array (
+            'section' => array (
+                'key1' => 'value1',
+                'key2' => 'value2',
+                'key3-int' => 123,
+                'newKey' => 'newValue'
+            )
+        );
     }
 }
