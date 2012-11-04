@@ -40,10 +40,7 @@ class INI
             $old_config_array = self::readConfig($file);
 
             // array merge: overwrite the array to the left, with the array to the right, when keys identical
-            $config_array = array_replace_recursive($old_config_array, $array);
-        } else {
-            // the config array = the incoming assoc_array
-            $config_array = $array;
+            $array = array_replace_recursive($old_config_array, $array);
         }
 
         // attach an security header at the top of the ini file
@@ -57,7 +54,7 @@ class INI
         $content .= ";\n\n";
 
         // loop over every array element
-        foreach ($config_array as $key => $item) {
+        foreach ($array as $key => $item) {
             // check if it's an array, if so, it's a section heading
             if (is_array($item) === true) {
                 // write a comment header block
