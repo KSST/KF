@@ -25,6 +25,8 @@
 
 namespace Koch\Config\Adapter;
 
+use Koch\Datatype\Conversion;
+
 /**
  * Koch Framework - Config Handler for XML Format (via SimpleXML).
  *
@@ -44,10 +46,10 @@ class XML
     public static function writeConfig($file, $array)
     {
         // transform associative PHP array to XML
-        $xml = \Koch\Datatype\Conversion::arrayToXML($array);
+        $xml = Conversion::arrayToXML($array);
 
         // write xml into the file
-        file_put_contents($file, $xml);
+        return (bool) file_put_contents($file, $xml);
     }
 
     /**
