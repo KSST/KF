@@ -106,21 +106,13 @@ class Feed
                 // to get feed from source
                 $feedcontent = file_get_contents($feedUrl, FILE_TEXT);
 
-               // ensure that we have rss content
-               if (strlen($feedcontent) > 0) {
-                   // write cache file
-                   if ($cache === true) {
-                       // re-create cachefile
-                       touch($cachefile);
-                       chmod($cachefile, 0666);
-                       // write content
-                       $fp = fopen($cachefile, 'w');
-                       fwrite($fp, $feedcontent);
-                       fclose($fp);
-                   }
-               }
+                // ensure that we have rss content, before writing cache file
+                if ((strlen($feedcontent) > 0) and ($cache === true)) {
+                    // write cache file
+                    file_put_contents($cachefile, $feedcontent);
+                }
 
-               return $feedcontent;
+                return $feedcontent;
             } catch (\Exception $e) {
                 return null;
             }
