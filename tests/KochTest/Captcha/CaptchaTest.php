@@ -38,7 +38,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     public function testSetFontFolder()
     {
         // accepts string
-        $folder = 'folder';
+        $folders = 'folder';
         $this->object->setFontFolder($folders);
 
         $this->assertEquals($folder, $this->object->font_folders);
@@ -64,14 +64,20 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Captcha\Captcha::generateRandomString
-     * @todo   Implement testGenerateRandomString().
      */
     public function testGenerateRandomString()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $length = 5;
+        $randomString = $this->object->generateRandomString($length);
+
+        // test that excluded chars are never in string
+        $this->assertNotContains(array('0', '1', '7', 'I', 'O'), $randomString);
+
+        // test length
+        $this->assertCount($length, $randomString);
+
+        // silly random test
+        $this->assertNotEquals($randomString, $this->object->generateRandomString($length));
     }
 
     /**
