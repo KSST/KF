@@ -2,6 +2,9 @@
 namespace KochTest\Config\Adapter;
 
 use Koch\Config\Adapter\JSON;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 class JSONTest extends \PHPUnit_Framework_TestCase
 {
@@ -10,27 +13,24 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     public function setUp()
     {
         $this->object = new JSON;
+
+        vfsStreamWrapper::register();
+        $this->configFileURL = vfsStream::url('root/config.json');
+        $this->invalidConfigFileURL = vfsStream::url('root/invalid-config.json');
+        $this->file = vfsStream::newFile('config.json', 0777)->withContent($this->getConfigFileContent());
+        $this->invalidFile = vfsStream::newFile('invalid-config.json', 0777)->withContent($this->getInvalidConfigFileContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        $this->root->addChild($this->invalidFile);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
     public function tearDown()
     {
         unset($this->object);
-    }
-
-    public function getFile()
-    {
-        return __DIR__ . '/../fixtures/file.json';
     }
 
     /*
@@ -46,12 +46,10 @@ class JSONTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Config\Adapter\JSON::readConfig
      * @expectedException Koch\Exception\Exception
-     * @expectedExceptionMessage
-     * JSON Error in file I:\0.Github\KSST\KF\tests\KochTest\Config\Adapter/../fixtures/invalid.json - Syntax Error.
      */
     public function testReadConfigThrowsExceptionJsonError()
     {
-        $this->object->readConfig(__DIR__ . '/../fixtures/invalid.json');
+        $this->object->readConfig($this->invalidConfigFileURL);
     }
 
     /**
@@ -59,9 +57,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $json = $this->object->readConfig(__DIR__ . '/../fixtures/file.json');
-        $expected = array('section-1' => array('key1' => 'value1'));
-        $this->assertEquals($expected, $json);
+        $array = $this->object->readConfig($this->configFileURL);
+        $this->assertEquals($array, $this->getConfigArray());
     }
 
     /**
@@ -69,14 +66,8 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteConfig()
     {
-        $array = array('section-1' => array('key1' => 'value1'));
-        $file = __DIR__ . '/../fixtures/writeConfig.json';
-
-        $int_or_bool = $this->object->writeConfig($file, $array);
-
-        $this->assertTrue((bool) $int_or_bool);
-
-        unlink($file);
+        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $this->assertTrue($result);
     }
 
     /**
@@ -87,5 +78,28 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $errmsg = $this->object->getJsonErrorMessage(JSON_ERROR_DEPTH);
         $expected = 'The maximum stack depth has been exceeded.';
         $this->assertEquals($expected, $errmsg);
+    }
+
+    public function getConfigFileContent()
+    {
+        return '{
+            "section-1" : {
+                "key1": "value1"
+            }
+        }';
+    }
+
+    public function getConfigArray()
+    {
+        return array('section-1' => array('key1' => 'value1'));
+    }
+
+    public function getInvalidConfigFileContent()
+    {
+        return '{
+            "section-1" :
+                "key1" "value1"
+            }
+        }';
     }
 }
