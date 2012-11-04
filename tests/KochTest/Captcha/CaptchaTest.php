@@ -41,13 +41,13 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         $folders = 'folder';
         $this->object->setFontFolder($folders);
 
-        $this->assertEquals($folder, $this->object->font_folders);
+        $this->assertEquals($folders, $this->object->font_folders);
 
         // accepts array
-        $folder = array('folder/A', 'folder/B');
+        $folders = array('folder/A', 'folder/B');
         $this->object->setFontFolder($folders);
 
-        $this->assertEquals($folder, $this->object->font_folders);
+        $this->assertEquals($folders, $this->object->font_folders);
     }
 
     /**
