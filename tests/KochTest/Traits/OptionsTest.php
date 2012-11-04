@@ -36,6 +36,15 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Option firstname does not exist.
+     */
+    public function testGetOptionThrowsException()
+    {
+        $this->getOption('firstname');
+    }
+
+    /**
      * @covers Koch\Traits\Options::setOptions
      * @covers Koch\Traits\Options::getOptions
      */
