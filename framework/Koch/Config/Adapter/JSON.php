@@ -68,7 +68,7 @@ class JSON
         $json_content = json_encode($array);
 
         // write to json to file
-        return file_put_contents($file, $json_content);
+        return (bool) file_put_contents($file, $json_content);
     }
 
     /**
