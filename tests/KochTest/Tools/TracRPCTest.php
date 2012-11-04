@@ -53,8 +53,8 @@ class TracRPCTest extends \PHPUnit_Framework_TestCase
     /**
      * Not a mock. It's a live request.
      *
-     * @expectedException           BadFunctionCallException
-     * @expectedExceptionMessage    You are trying an authenticated access without providing username and password.
+     * @expectedException Exception
+     * @expectedExceptionMessage You are trying an authenticated access without providing username and password.
      */
     public function testMethod_Constructor_WithoutCredentials()
     {
