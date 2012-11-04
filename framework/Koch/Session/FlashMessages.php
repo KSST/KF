@@ -73,24 +73,19 @@ class FlashMessages /* extends Koch_Session */
     /**
      * Returns the whole array of flashmessages.
      *
+     * If unset is true, returns the flashmessages and removes them from the session.
+     *
      * @return array Flashmessages array
      */
-    public static function getMessages($type = null)
-    {
-        return self::$flashmessages;
-    }
-
-    /**
-     * Load all flashmessages from the session to this object and remove the flashmessages from the session.
-     */
-    private static function getMessagesFromSessionAndUnset()
+    public static function getMessages($type = null, $unset = true)
     {
         if (isset($_SESSION['user']['flashmessages']) === true) {
             self::$flashmessages = $_SESSION['user']['flashmessages'];
-            unset($_SESSION['user']['flashmessages']);
-
-            return self::$flashmessages;
+            if($unset === true) {
+                unset($_SESSION['user']['flashmessages']);
+            }
         }
+        return self::$flashmessages;
     }
 
     /**
@@ -108,7 +103,7 @@ class FlashMessages /* extends Koch_Session */
      */
     public static function render($type = null)
     {
-        $flashmessages = self::getMessagesFromSessionAndUnset();
+        $flashmessages = self::getMessages($type, true);
 
         if ($flashmessages !== null) {
             $html = '';
