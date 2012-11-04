@@ -24,19 +24,26 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     {
         $this->object = new Native;
 
-        include_once 'vfsStream/vfsStream.php';
-
         if (!class_exists('vfsStreamWrapper')) {
             $this->markTestSkipped('vfsStream is not available - skipping');
         }
 
         // setup vfsStream
-        vfsStream::setup('root');
+        vfsStreamWrapper::register();
+
+        // create root folder
+        $root = new vfsStreamDirectory('root');
+        vfsStream::setRoot($root);
 
         // create virtual config file with content
         $file = vfsStream::newFile($this->file)
-            ->withContent($this->getConfigContent())->chmod(777);
-        vfsStream::setup()->addChild($file);
+            ->withContent($this->getConfigContent())
+            ->chmod(777)
+            ->at($root);
+
+        // lets test vfsStream
+        $url = vfsStream::url('root/'.$this->file);
+        $this->assertFileExists($url);
     }
 
     /**
@@ -53,21 +60,23 @@ class NativeTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
-        $file = vfsStream::url($this->file);
+        $file = vfsStream::url('root/'.$this->file);
         $this->object->readConfig($file);
     }
 
     /**
      * @covers Koch\Config\Adapter\Native::writeConfig
-     * @todo   Implement testWriteConfig().
      */
     public function testWriteConfig()
     {
-        $this->object->writeConfig($file, $array);
+        $file = vfsStream::url('root/'.$this->file);
+        $this->object->writeConfig($file, $this->getConfigContent());
     }
 
     public function getConfigContent()
     {
-
+        return array(
+            'test' => 'value'
+        );
     }
 }
