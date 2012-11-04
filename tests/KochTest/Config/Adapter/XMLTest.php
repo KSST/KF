@@ -48,6 +48,15 @@ class XMLTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($array, $this->getConfigArray());
     }
 
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage XML File non-existant.xml not existing or not readable.
+     */
+    public function testReadConfig_throwsExceptionFileNotFound()
+    {
+        $this->object->readConfig('non-existant.xml');
+    }
+
     public function getConfigArray()
     {
         return array(
