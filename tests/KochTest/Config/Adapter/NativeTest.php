@@ -21,8 +21,13 @@ class NativeTest extends \PHPUnit_Framework_TestCase
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.php');
         $this->file = vfsStream::newFile('config.php', 0777)->withContent($this->getConfigFileContent());
+
+        $this->configFileURL2 = vfsStream::url('root/config2.php');
+        $this->file2 = vfsStream::newFile('config2.php', 0777)->withContent('File contains string instead of array.');
+
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
+        $this->root->addChild($this->file2);
         vfsStreamWrapper::setRoot($this->root);
     }
 
@@ -38,6 +43,26 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     {
         $array = $this->object->readConfig($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage PHP Array Config File non-existant.file not existing or not readable.
+     */
+    public function testReadConfig_throwsExceptionFileNotFound()
+    {
+        $this->object->readConfig('non-existant.file');
+    }
+
+    /**
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage PHP Array Config File vfs://root/config2.php does not contain array.
+     */
+    public function testReadConfig_throwsExceptionIfFileContentNotArray()
+    {
+        // Sry, i'm too blind to find the output line... vfsStreamXY->__toString() on include???
+        $this->markTestSkipped('This test printed output: File contains string instead of array.');
+        $this->object->readConfig($this->configFileURL2);
     }
 
     /**
