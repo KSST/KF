@@ -100,7 +100,7 @@ class YAML
          */
 
         // write YAML content to file
-        file_put_contents($file, $yaml);
+        return (bool) file_put_contents($file, $yaml);
     }
 
     /**
