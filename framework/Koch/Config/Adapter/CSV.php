@@ -51,7 +51,6 @@ class CSV
                 $key++;
             }
 
-            // close the File.
             fclose($handle);
         }
 
@@ -72,11 +71,12 @@ class CSV
                 if (is_string($value)) {
                     $value = explode(',', $value);
                     $value = array_map('trim', $value);
+                    // write to csv to file
+                    fputcsv($handle, $value, ',', '"');
                 }
             }
 
-            // write to csv to file
-            return (bool) fputcsv($handle, $value, ',', '"');
+            return fclose($handle);
         }
     }
 }
