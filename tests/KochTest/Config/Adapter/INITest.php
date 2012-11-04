@@ -19,13 +19,16 @@ class INITest extends \PHPUnit_Framework_TestCase
         $this->object = new INI;
 
         vfsStreamWrapper::register();
+
         $this->configFileURL = vfsStream::url('root/config.ini');
+        $this->file = vfsStream::newFile('config.ini', 0777)->withContent($this->getConfigFileContent());
+
         $this->booleanConfigFileURL = vfsStream::url('root/booleans.ini');
-        $this->file1 = vfsStream::newFile('config.ini', 0777)->withContent($this->getConfigFileContent());
-        $this->file2 = vfsStream::newFile('booleans.ini', 0777)->withContent($this->getBooleanConfigFileContent());
+        $this->fileB = vfsStream::newFile('booleans.ini', 0777)->withContent($this->getBooleanConfigFileContent());
+
         $this->root = new vfsStreamDirectory('root');
-        $this->root->addChild($this->file1);
-        $this->root->addChild($this->file2);
+        $this->root->addChild($this->file);
+        $this->root->addChild($this->fileB);
         vfsStreamWrapper::setRoot($this->root);
     }
 
@@ -45,22 +48,26 @@ class INITest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Config\Adapter\INI::readConfig
+     */
+    public function testReadConfig()
+    {
+        $array = $this->object->readConfig($this->configFileURL);
+        $this->assertEquals($array, $this->getConfigArray());
+    }
+
+    /**
      * @covers Koch\Config\Adapter\INI::writeConfig
      */
     public function testWriteConfig()
     {
-        $written = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
-        $this->assertTrue($written);
-        $this->assertEquals($this->getContentArray(), $this->object->readConfig($this->configFileURL));
+        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $this->assertTrue($result);
     }
 
     public function testWriteConfigAddValuesToExistingConfig()
     {
-        // write config
-        $writtenOne = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
-        $this->assertTrue($writtenOne);
-
-        // now test appending to the just written config
+        // test appending to the just written config
         $writtenTwo = $this->object->writeConfig($this->configFileURL, array('newKey' => 'newValue'));
         $this->assertTrue($writtenTwo);
         $this->assertEquals($this->object->readConfig($this->configFileURL), $this->getConfigArrayOverloaded());
@@ -105,28 +112,13 @@ class INITest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $config);
     }
 
-    /**
-     * @covers Koch\Config\Adapter\INI::writeConfig
-     * @covers Koch\Config\Adapter\INI::readConfig
-     */
-    public function testReadConfig()
-    {
-        $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
-
-        $ini_array = $this->object->readConfig($this->configFileURL);
-
-        $this->assertEquals($ini_array, $this->getConfigArray());
-
-        $this->assertInternalType('string', $ini_array['section']['key3-int']);
-    }
-
     public function getConfigFileContent()
     {
         return <<<EOF
 ; <?php die('Access forbidden.'); /* DO NOT MODIFY THIS LINE! ?>
 ;
 ; Koch Framework Configuration File :
-; I:\0.Github\KSST\KF\tests\KochTest\Config\Adapter\..\fixtures\writeTest.ini
+; writeTest.ini
 ;
 ; This file was generated on 04-11-2012 19:37
 ;
@@ -138,8 +130,7 @@ class INITest extends \PHPUnit_Framework_TestCase
 [section]
 key1 = "value1"
 key2 = "value2"
-key3-int = "123"
-newKey = "newValue"
+key3-int = 123
 
 ; DO NOT REMOVE THIS LINE */ ?>
 EOF;
@@ -158,6 +149,7 @@ test_false = false
 test_null = null
 EOF;
     }
+
     public function getConfigArray()
     {
         return array(
