@@ -42,9 +42,6 @@ class INI
             // array merge: overwrite the array to the left, with the array to the right, when keys identical
             $config_array = array_replace_recursive($old_config_array, $array);
         } else {
-            // create file
-            touch($file);
-
             // the config array = the incoming assoc_array
             $config_array = $array;
         }
