@@ -53,16 +53,6 @@ class FlashMessages /* extends Koch_Session */
     );
 
     /**
-     * Returns all flashmessages types
-     *
-     * @return array types of flashmessages (whitelist)
-     */
-    public static function getFlashMessageTypes()
-    {
-        return self::$flashmessagetypes;
-    }
-
-    /**
      * Sets a message to the session
      *
      * Supported Messagetypes are error, warning, notice, success, debug
@@ -74,7 +64,7 @@ class FlashMessages /* extends Koch_Session */
     public static function setMessage($type, $message)
     {
         if (in_array($type, self::$flashmessagetypes) === true) {
-            self::$flashmessages[] = array($type => $message);
+            self::$flashmessages[$type][] = $message;
         }
 
         $_SESSION['user']['flashmessages'] = self::$flashmessages;
@@ -95,7 +85,7 @@ class FlashMessages /* extends Koch_Session */
      */
     private static function getMessagesFromSessionAndUnset()
     {
-        if ($_SESSION['user']['flashmessages'] !== null) {
+        if (isset($_SESSION['user']['flashmessages']) === true) {
             self::$flashmessages = $_SESSION['user']['flashmessages'];
             unset($_SESSION['user']['flashmessages']);
 
