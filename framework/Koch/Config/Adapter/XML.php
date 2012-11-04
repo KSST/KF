@@ -61,7 +61,7 @@ class XML
     public static function readConfig($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
-            throw new \Exception('XML File not existing or not readable.');
+            throw new \InvalidArgumentException('XML File ' . $file . ' not existing or not readable.');
         }
 
         // read file
