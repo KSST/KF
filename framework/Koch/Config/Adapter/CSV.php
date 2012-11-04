@@ -76,7 +76,7 @@ class CSV
             }
 
             // write to csv to file
-            return fputcsv($handle, $value, ',', '"');
+            return (bool) fputcsv($handle, $value, ',', '"');
         }
     }
 }
