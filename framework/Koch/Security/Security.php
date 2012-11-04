@@ -145,10 +145,10 @@ final class Security
             // generate a pseudo-random string of bytes
             $bytes = openssl_random_pseudo_bytes($length);
 
-            // encode bytes
-            $string = base64_encode($bytes);
+            // bytes to hexadecimal to decimal
+            $string = hexdec(bin2hex($bytes));
 
-            // truncate the base64 string to correct length
+            // truncate the string to correct length
             $salt = substr($string, 0, $length);
 
             return $salt;
