@@ -91,8 +91,10 @@ class Loader
      */
     public static function autoload($classname)
     {
-        // stop early, if class or interface already loaded
-        if (true === class_exists($classname, false) or true === interface_exists($classname, false)) {
+        // stop early, if class or interface or trait already loaded
+        if (true === class_exists($classname, false) or
+            true === interface_exists($classname, false) or
+            true === trait_exists($classname, false)) {
             return false;
         }
 
