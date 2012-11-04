@@ -53,14 +53,6 @@ namespace Koch\Config\Adapter;
 class YAML
 {
     /**
-     * Constructor
-     */
-    public function __construct($file = null)
-    {
-        return self::readConfig($file);
-    }
-
-    /**
      * Write the config array to a yaml file
      *
      * @param   string  The filename
