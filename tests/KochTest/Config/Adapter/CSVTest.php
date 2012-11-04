@@ -44,6 +44,15 @@ class CSVTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @expectedException Koch\Exception\Exception
+     * @expectedExceptionMessage CSV Config File non-existant.file not existing or not readable.
+     */
+    public function testReadConfigThrowsException()
+    {
+        $this->object->readConfig('non-existant.file');
+    }
+
+    /**
      * @covers Koch\Config\Adapter\CSV::writeConfig
      */
     public function testWriteConfig()
