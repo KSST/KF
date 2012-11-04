@@ -38,16 +38,21 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     public function testSetFontFolder()
     {
         // accepts string
-        $folders = 'folder';
-        $this->object->setFontFolder($folders);
+        $this->object->setFontFolder('folder');
 
-        $this->assertEquals($folders, $this->object->font_folders);
+        $expected_folders = array(
+             realpath('..\..\..\framework\Koch\Captcha\fonts'),
+             'folder'
+        );
+        $this->assertEquals($expected_folders, $this->object->getFontFolders());
 
         // accepts array
         $folders = array('folder/A', 'folder/B');
+
         $this->object->setFontFolder($folders);
 
-        $this->assertEquals($folders, $this->object->font_folders);
+        $expected_folders = array_merge($expected_folders, $folders);
+        $this->assertEquals($expected_folders, $this->object->getFontFolders());
     }
 
     /**
@@ -70,11 +75,15 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         $length = 5;
         $randomString = $this->object->generateRandomString($length);
 
-        // test that excluded chars are never in string
-        $this->assertNotContains(array('0', '1', '7', 'I', 'O'), $randomString);
-
-        // test length
-        $this->assertCount($length, $randomString);
+        // test valid chars, length, excluded chars
+        $constraint = $this->logicalAnd(
+             $this->isType('string'),
+             $this->matchesRegularExpression('/[a-zA-Z0-9]{5}/i'),
+             $this->logicalNot(
+                $this->matchesRegularExpression('/[017IO]/i')
+            )
+        );
+        $this->assertThat($randomString, $constraint);
 
         // silly random test
         $this->assertNotEquals($randomString, $this->object->generateRandomString($length));
