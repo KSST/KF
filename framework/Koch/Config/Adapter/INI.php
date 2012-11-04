@@ -48,7 +48,7 @@ class INI
             throw new \Koch\Exception\Exception('Parameter $file is not given.');
         }
 
-        // when ini_filename exists, get old config array
+        // when ini file exists, get old config array
         if (is_file($file) === true) {
             $old_config_array = self::readConfig($file);
 
@@ -61,9 +61,6 @@ class INI
             // the config array = the incoming assoc_array
             $config_array = $array;
         }
-
-        // slash fix
-        $file = str_replace('/', DIRECTORY_SEPARATOR, $file);
 
         // attach an security header at the top of the ini file
         $content = '';
@@ -113,27 +110,8 @@ class INI
         // add php closing tag
         $content .= PHP_EOL . '; DO NOT REMOVE THIS LINE */ ?>';
 
-        if (is_writable($file) === true) {
-            if (!$filehandle = fopen($file, 'wb')) {
-                echo _('Could not open file: ') . $file;
-
-                return false;
-            }
-
-            if (fwrite($filehandle, $content) == false) {
-                echo _('Could not write to file: ') . $file;
-
-                return false;
-
-            }
-            fclose($filehandle);
-
-            return true;
-        } else {
-            printf(_('File %s is not writeable. Set correct file and directory permissions.'), $file);
-
-            return false;
-        }
+        // write to file
+        return (bool) file_put_contents($file, $content);
     }
 
     /**
