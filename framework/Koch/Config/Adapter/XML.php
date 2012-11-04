@@ -35,16 +35,6 @@ namespace Koch\Config\Adapter;
 class XML
 {
     /**
-     * Constructor.
-     *
-     * @param string $file XML Config file to read.
-     */
-    public function __construct($file = null)
-    {
-        return self::readConfig($file);
-    }
-
-    /**
      * Write the configarray to the xml file
      *
      * @param string The filename
