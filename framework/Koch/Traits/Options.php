@@ -15,7 +15,7 @@ trait Options
     public function getOption($key)
     {
         if (false === isset($this->options[$key])) {
-            throw new InvalidArgumentException("Option {$key} does not exist.");
+            throw new \InvalidArgumentException("Option {$key} does not exist.");
         }
 
         return $this->options[$key];
