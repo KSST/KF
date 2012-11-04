@@ -14,6 +14,8 @@ class NativeTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
+    private $file = 'nativeConfig.php';
+
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
@@ -21,6 +23,20 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->object = new Native;
+
+        include_once 'vfsStream/vfsStream.php';
+
+        if (!class_exists('vfsStreamWrapper')) {
+            $this->markTestSkipped('vfsStream is not available - skipping');
+        }
+
+        // setup vfsStream
+        vfsStream::setup('root');
+
+        // create virtual config file with content
+        $file = vfsStream::newFile($this->file)
+            ->withContent($this->getConfigContent())->chmod(777);
+        vfsStream::setup()->addChild($file);
     }
 
     /**
@@ -37,6 +53,7 @@ class NativeTest extends \PHPUnit_Framework_TestCase
      */
     public function testReadConfig()
     {
+        $file = vfsStream::url($this->file);
         $this->object->readConfig($file);
     }
 
@@ -47,5 +64,10 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     public function testWriteConfig()
     {
         $this->object->writeConfig($file, $array);
+    }
+
+    public function getConfigContent()
+    {
+
     }
 }
