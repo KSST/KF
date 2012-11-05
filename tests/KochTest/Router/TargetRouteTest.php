@@ -177,8 +177,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setAction('MyAction');
 
-        $this->assertEquals('action_MyAction', $this->object->getMethod());
-        $this->assertEquals('action_MyAction', $this->object->getActionName());
+        $this->assertEquals('actionMyAction', $this->object->getMethod());
+        $this->assertEquals('actionMyAction', $this->object->getActionName());
     }
 
     /**
@@ -188,7 +188,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetMethod()
     {
-        $this->assertEquals('action_list', $this->object->getMethod());
+        $this->assertEquals('actionList', $this->object->getMethod());
 
         $this->object->setMethod('a-method');
         $this->assertEquals('a-method', $this->object->getActionName());
