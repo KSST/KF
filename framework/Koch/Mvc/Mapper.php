@@ -11,10 +11,10 @@
  */
 
 namespace) is used for all actions.
-     * Example: A action named "show" will be mapped to "action_show()"
+     * Example: A action named "show" will be mapped to "actionShow()"
      * This is also a way to ensure some kind of whitelisting via namespacing.
      *
-     * The convention is action_<action> !
+     * The convention is action<action> !
      *
      *
      * @param  string $action the action
@@ -27,8 +27,8 @@ namespace) is used for all actions.
             $action = self::DEFAULT_ACTION;
         }
 
-        // all clansuite actions are prefixed with 'action_'
+        // all clansuite actions are prefixed with 'action'
         // e.g. action_<login>
-        return self::ACTION_PREFIX . '_' . $action;
+        return self::ACTION_PREFIX . ucfrist($action);
     }
 }
