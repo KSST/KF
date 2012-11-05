@@ -708,7 +708,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function setRequestMethod($method)
     {
-        self::$request_method = mb_strtoupper($method);
+        self::$request_method = strtoupper($method);
     }
 
     /**
