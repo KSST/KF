@@ -37,8 +37,10 @@ namespace Koch\Mail;
  */
 class SwiftMailer
 {
+    /* @var \Swift_Mailer */
     public $mailer = null;
 
+    /* @var \Koch\Config\Config */
     private $config = null;
 
     /**
