@@ -28,25 +28,28 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Mvc\Mapper::getModulePath
-     * @todo   Implement testGetModulePath().
      */
     public function testGetModulePath()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('/Modules/ModuleABC/', $this->object->getModulePath('ModuleABC'));
     }
 
     /**
      * @covers Koch\Mvc\Mapper::mapControllerToFilename
-     * @todo   Implement testMapControllerToFilename().
      */
     public function testMapControllerToFilename()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        $module_path = '/Modules/ModuleA';
+        $this->assertEquals(
+            '/Modules/ModuleAController/Controller.php',
+            $this->object->mapControllerToFilename($module_path)
+        );
+
+        $module_path = '/Modules/ModuleB';
+        $controller = 'Admin';
+        $this->assertEquals(
+            '/Modules/ModuleBController/AdminController.php',
+            $this->object->mapControllerToFilename($module_path, $controller)
         );
     }
 
