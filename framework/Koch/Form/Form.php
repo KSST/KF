@@ -248,8 +248,6 @@ class Form implements FormInterface
      */
     public function setMethod($method)
     {
-        $method = mb_strtolower($method);
-
         if ($method === 'POST' or $method === 'GET') {
             $this->method = $method;
         } else {
@@ -267,7 +265,7 @@ class Form implements FormInterface
     public function getMethod()
     {
         // defaults to post
-        if ($this->method == '') {
+        if ($this->method === null) {
             $this->method = 'POST';
         }
 

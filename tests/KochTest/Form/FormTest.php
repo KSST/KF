@@ -50,7 +50,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->form = new Form('Form', 'GET', 'someActionName');
 
-        $this->assertEquals('get', $this->form->getMethod());
+        $this->assertEquals('GET', $this->form->getMethod());
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON) {
             $expectedURL = WWW_ROOT . 'someActionName';
         } else {
@@ -70,22 +70,25 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testSetMethod()
     {
-        $this->form->setMethod('POST');
+        $this->form->setMethod('GET');
 
-        // via getter not uppercased
-        $this->assertNotEquals('POST', $this->form->getMethod());
-        // via getter lowercased
-        $this->assertEquals('post', $this->form->getMethod());
+        // via getter
+        $this->assertNotEquals('get', $this->form->getMethod());
+        // via getter
+        $this->assertEquals('GET', $this->form->getMethod());
         // via property
-        $this->assertEquals('post', $this->form->method);
+        $this->assertEquals('GET', $this->form->method);
     }
 
     public function testGetMethod()
     {
-        $this->form->setMethod('GET');
+        // defaults to POST
+        $this->assertEquals('POST', $this->form->getMethod());
 
-        // via getter lowercased
-        $this->assertEquals('get', $this->form->getMethod());
+
+        $this->form->setMethod('GET');
+        // via getter
+        $this->assertEquals('GET', $this->form->getMethod());
     }
 
     public function testSetAction()
