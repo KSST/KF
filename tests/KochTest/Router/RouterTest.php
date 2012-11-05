@@ -204,7 +204,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // http://example.com/news
         // routes to
         // Controller: News
-        // Action: action_news_list()
+        // Action: action_list()
         // Type: GET [REST Route]
 
         HttpRequest::setRequestMethod('GET');
@@ -223,7 +223,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // http://example.com/news/42
         // routes to
         // Controller: News
-        // Action: action_news_show()
+        // Action: action_show()
         // Id: 42
         // Type: GET [REST Route]
 
