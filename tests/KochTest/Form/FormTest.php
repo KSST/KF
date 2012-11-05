@@ -51,7 +51,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form = new Form('Form', 'GET', 'someActionName');
 
         $this->assertEquals('get', $this->form->getMethod());
-        $this->assertEquals('http://index.php?mod=someActionName', $this->form->getAction());
+        if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON) {
+            $expectedURL = WWW_ROOT . 'someActionName';
+        } else {
+            $expectedURL = WWW_ROOT . 'index.php?mod=someActionName';
+        }
+        $this->assertEquals($expectedURL, $this->form->getAction());
     }
 
     /**
@@ -87,11 +92,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         // set internal url - rebuilds the external url via router
         $this->form->setAction('/news/show');
-        if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
-            $this->assertEquals( WWW_ROOT . 'index.php?mod=news&amp;ctrl=show', $this->form->getAction());
+        if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON) {
+            $expectedURL = WWW_ROOT . 'news/show';
         } else {
-            $this->assertEquals( WWW_ROOT . 'news/show', $this->form->getAction());
+            $expectedURL = WWW_ROOT . 'index.php?mod=news&amp;ctrl=show';
         }
+        $this->assertEquals($expectedURL, $this->form->getAction());
 
         // set external url
         $this->form->setAction(WWW_ROOT .'index.php?mod=news&action=show');
