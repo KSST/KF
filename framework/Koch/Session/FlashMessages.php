@@ -65,9 +65,8 @@ class FlashMessages /* extends Koch_Session */
     {
         if (in_array($type, self::$flashmessagetypes) === true) {
             self::$flashmessages[$type][] = $message;
+            $_SESSION['user']['flashmessages'] = self::$flashmessages;
         }
-
-        $_SESSION['user']['flashmessages'] = self::$flashmessages;
     }
 
     /**
@@ -81,9 +80,14 @@ class FlashMessages /* extends Koch_Session */
     {
         if (isset($_SESSION['user']['flashmessages']) === true) {
             self::$flashmessages = $_SESSION['user']['flashmessages'];
+
             if($unset === true) {
                 unset($_SESSION['user']['flashmessages']);
             }
+        }
+
+        if($type !== null) {
+            return self::$flashmessages[$type];
         }
         return self::$flashmessages;
     }
@@ -103,10 +107,10 @@ class FlashMessages /* extends Koch_Session */
      */
     public static function render($type = null)
     {
+        $html = '';
         $flashmessages = self::getMessages($type, true);
 
         if ($flashmessages !== null) {
-            $html = '';
             foreach ($flashmessages as $flashmessage) {
                 foreach ($flashmessage as $type => $message) {
                     $html .= '<link rel="stylesheet" type="text/css"';
@@ -116,8 +120,8 @@ class FlashMessages /* extends Koch_Session */
             }
 
             self::reset();
-
-            return $html;
         }
+
+        return $html;
     }
 }

@@ -22,9 +22,18 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
+        // get message without type and unset
         $this->assertTrue(is_array(FlashMessages::getMessages()));
         $this->assertCount(1, FlashMessages::getMessages());
-        $this->assertTrue(is_array(FlashMessages::getMessages('error')));
+
+        // get messages by type and no unset
+        FlashMessages::setMessage('notice', 'NoticeMessage');
+        FlashMessages::setMessage('debug', 'DebugMessage');
+        FlashMessages::setMessage('debug', 'DebugMessage2');
+        $r = FlashMessages::getMessages('debug');
+        $this->assertCount(2, $r);
+        $this->assertEquals('DebugMessage', $r[0]);
+        $this->assertEquals('DebugMessage2', $r[1]);
     }
 
     /**
