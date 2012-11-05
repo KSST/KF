@@ -163,6 +163,7 @@ class FrontController implements FrontControllerInterface
          *
          * by calling the "_initializeModule" method on the controller.
          * A module might(!) implement this method for initialization of helper objects.
+         * Basically it's a constructor! Keep it lightweight!
          *
          * Note the underscore! The method name is intentionally underscored.
          * This places the method on top in the method navigator of your IDE.
@@ -174,7 +175,6 @@ class FrontController implements FrontControllerInterface
         /**
          * "Before Module Filter" is a prefilter on the module controller level.
          *
-         *
          * It calls the "_beforeFilter" method on the module controller.
          * A module might(!) implement this method for initialization of helper objects.
          * Example usage: login_required.
@@ -185,6 +185,8 @@ class FrontController implements FrontControllerInterface
         if (true === method_exists($controllerInstance, '_beforeFilter')) {
             $controllerInstance->_beforeFilter();
         }
+
+        // @todo auto-attach a Module::onBootstrap method as event
 
         // @todo move into a prefilter / and consider the request being ajax :) = no breadcrumbs
         Breadcrumb::initialize($route->getModule(), $route->getController());
@@ -212,5 +214,7 @@ class FrontController implements FrontControllerInterface
 
             $controllerInstance->_afterFilter();
         }
+
+        // @todo auto-attach a Module::onShutdown method as event
     }
 }
