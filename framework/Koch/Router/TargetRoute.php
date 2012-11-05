@@ -147,8 +147,8 @@ class TargetRoute extends Mapper
 
     public static function getActionNameWithoutPrefix()
     {
-        $action = str_replace('action_', '', self::$parameters['action']);
-        $action = str_replace('admin_', '', $action);
+        $action = str_replace('action', '', self::$parameters['action']);
+        $action = str_replace('admin', '', $action);
 
         return $action;
     }

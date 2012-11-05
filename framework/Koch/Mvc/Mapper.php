@@ -39,7 +39,7 @@ namespace Koch\Mvc;
 class Mapper
 {
     /* @const string Classname prefix for modules = Namespace */
-    const MODULE_NAMESPACE = 'Clansuite\Modules';
+    const MODULE_NAMESPACE = '__NAMESPACE__\Modules';
 
     /* @const string suffix for module controller files */
     const MODULE_CLASS_SUFFIX = 'Controller.php';
@@ -106,11 +106,11 @@ class Mapper
     /**
      * Maps the action to it's method name taking controller into account.
      *
-     * The prefix 'action_' (pseudo-namespace) is used for all actions.
-     * Example: A action named "show" will be mapped to "action_show()"
+     * The prefix 'action' (pseudo-namespace) is used for all actions.
+     * Example: A action named "show" will be mapped to "actionShow()"
      * This is also a way to ensure some kind of whitelisting via namespacing.
      *
-     * The convention is action_<action> !
+     * The convention is action<action> !
      *
      *
      * @param  string $action the action
@@ -123,8 +123,8 @@ class Mapper
             $action = self::DEFAULT_ACTION;
         }
 
-        // all clansuite actions are prefixed with 'action_'
+        // all clansuite actions are prefixed with 'action'
         // e.g. action_<login>
-        return self::ACTION_PREFIX . '_' . $action;
+        return self::ACTION_PREFIX . ucfrist($action);
     }
 }
