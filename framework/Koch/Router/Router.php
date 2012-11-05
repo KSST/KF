@@ -770,10 +770,8 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         if (isset($this->config['router']['mod_rewrite']) === true) {
-            $bool = (true === (bool) $this->config['router']['mod_rewrite']) ? true : false;
-
+            $bool = (bool) $this->config['router']['mod_rewrite'];
             define('REWRITE_ENGINE_ON', $bool);
-
             return $bool;
         }
     }
