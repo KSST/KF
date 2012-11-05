@@ -339,6 +339,7 @@ class Loader
     public static function writeAutoloadingMapFile($array)
     {
         if (is_writable(self::$mapfile) === false) {
+            // create map file first
             self::readAutoloadingMapFile();
         }
 
