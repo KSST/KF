@@ -62,6 +62,7 @@ namespace<br>";
             } elseif (class_exists($classname, false) === true) {
                 return true;
             } else {
+                // file included, but class not found
                 return false;
             }
         } else {
@@ -84,15 +85,9 @@ namespace<br>";
         }
 
         if (is_writable(self::$mapfile) === true) {
-            $bytes_written = file_put_contents(self::$mapfile, serialize($array), LOCK_EX);
-
-            if ($bytes_written === false) {
-                trigger_error('Autoloader could not write the map cache file: ' . self::$mapfile, E_USER_ERROR);
-            } else {
-                return true;
-            }
+            return (bool) file_put_contents(self::$mapfile, serialize($array), LOCK_EX);
         } else {
-            trigger_error('Autoload cache file not writable: ' . self::$mapfile, E_USER_ERROR);
+            throw new \RuntimeException('Autoload cache file not writable: ' . self::$mapfile);
         }
     }
 
