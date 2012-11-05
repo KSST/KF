@@ -183,6 +183,16 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
 
+    /**
+     * @expectedException RuntimeException
+     * @expectedExceptionMessage No classmap file set. Use method ->setClassMapFile() to set one.
+     */
+    public function testMethod_readAutoloadingMapFile_throwsExceptionIfMapFileNotSet()
+    {
+        Loader::setClassMapFile(null);
+        Loader::readAutoloadingMapFile();
+    }
+
     public function testMethod_writeAutoloadingMapApc()
     {
         if (extension_loaded('apc')) {
@@ -253,5 +263,12 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // d) file not found returns false
         $this->assertFalse(Loader::includeFile('nonExistantFile.php'));
+    }
+
+    public function testsetInclusionMap()
+    {
+        $classmap = array('class' => 'file');
+        Loader::setInclusionsClassMap($classmap);
+        $this->assertEquals(Loader::$inclusionsClassmap, $classmap);
     }
 }
