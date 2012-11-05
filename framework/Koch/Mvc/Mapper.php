@@ -36,7 +36,7 @@ namespace Koch\Mvc;
  * @package     Core
  * @subpackage  Mapper
  */
-class Mapper #extends \ArrayObject
+class Mapper
 {
     /* @const string Classname prefix for modules = Namespace */
     const MODULE_NAMESPACE = 'Clansuite\Modules';
@@ -48,14 +48,14 @@ class Mapper #extends \ArrayObject
     const ACTION_PREFIX = 'action';
 
     /* @const string Name of the Default Module */
-    const DEFAULT_MODULE = 'news';
+    const DEFAULT_MODULE = 'index';
 
     /* @const string Name of the Default Action */
     const DEFAULT_ACTION = 'index';
 
     public static function getModulePath($module)
     {
-        return APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR;
+        return APPLICATION_MODULES_PATH . $module . '/';
     }
 
     /**

@@ -127,12 +127,12 @@ class TargetRoute extends Mapper
 
     public static function getModule()
     {
-        return self::$parameters['module'];
+        return ucfirst(self::$parameters['module']);
     }
 
     public static function setModule($module)
     {
-        return self::$parameters['module'] = ucfirst($module);
+        self::$parameters['module'] = $module;
     }
 
     public static function setAction($action)
@@ -273,8 +273,8 @@ class TargetRoute extends Mapper
     }
 
     /**
-     * Method to check if the TargetRoute relates to correct file, controller and action.
-     * Ensures route is valid.
+     * Dispatchable ensures that the "logical" route is "physically" valid.
+     * The method checks, if the TargetRoute relates to correct file, controller and action.
      *
      * @return boolean True if TargetRoute is dispatchable, false otherwise.
      */
@@ -298,8 +298,8 @@ class TargetRoute extends Mapper
         }
 
         // this shows how many routes were tried
-        //echo '<br><strong>Route failure.<br>';
-        //echo 'Not found ' . $filename .' ### '. $classname .' ### '. $method . '</strong><br>';
+        echo '<br><strong>Route failure.<br>'.CR;
+        echo 'Not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong><br>'.CR;
         return false;
     }
 

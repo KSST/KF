@@ -199,7 +199,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_match_RestRoutes()
     {
-        $this->router->reset()->loadDefaultRoutes();
+        $this->router->reset(true);
 
         // http://example.com/news
         // routes to
