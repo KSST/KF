@@ -58,38 +58,38 @@ class INI
             // check if it's an array, if so, it's a section heading
             if (is_array($item) === true) {
                 // write a comment header block
-                $content .= PHP_EOL;
-                $content .= ';----------------------------------------' . PHP_EOL;
-                $content .= '; ' . $key . PHP_EOL;
-                $content .= ';----------------------------------------' . PHP_EOL;
+                $content .= "\n";
+                $content .= ';----------------------------------------' . "\n";
+                $content .= '; ' . $key . "\n";
+                $content .= ';----------------------------------------' . "\n";
 
                 // write a parseable [array_header] block
-                $content .= '[' . $key . ']' . PHP_EOL;
+                $content .= '[' . $key . ']' . "\n";
 
                 // for every element after that
                 foreach ($item as $key2 => $item2) {
                     if (is_numeric($item2) === true or is_bool($item2) === true) {
                         // write numeric and boolean values without quotes
-                        $content .= $key2 . ' = ' . $item2 . PHP_EOL;
+                        $content .= $key2 . ' = ' . $item2 . "\n";
                     } else {
                         // write value with quotes
-                        $content .= $key2 . ' = "' . $item2 . '"' . PHP_EOL;
+                        $content .= $key2 . ' = "' . $item2 . '"' . "\n";
                     }
                 }
             } else {
                 // it's a value
                 if (is_numeric($item) === true or is_bool($item) === true) {
                     // write numeric and boolean values without quotes
-                    $content .= $key . ' = ' . $item . PHP_EOL;
+                    $content .= $key . ' = ' . $item . "\n";
                 } else {
                     // it's a string - write value with quotes
-                    $content .= $key . ' = "' . $item . '"' . PHP_EOL;
+                    $content .= $key . ' = "' . $item . '"' . "\n";
                 }
             }
         }
 
         // add php closing tag
-        $content .= PHP_EOL . '; DO NOT REMOVE THIS LINE */ ?>';
+        $content .=  "\n ; DO NOT REMOVE THIS LINE */ ?>";
 
         // write to file
         return (bool) file_put_contents($file, $content);
