@@ -33,58 +33,53 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
          * The APC user cache needs a reset, so that the map is generated freshly each run.
          * APC is used by readAutoloadingMapApc() / writeAutoloadingMapApc().
          */
-        if (extension_loaded('apc') === true and ini_get('apc.enabled') and ini_get('apc.enable_cli')) {
-            apc_clear_cache('user');
-        }
+        self::apcClearCache();
 
-        Loader::setClassMapFile('autoloader.classmap.php');
+        Loader::setClassMapFile($this->classMapFile);
     }
 
     public function tearDown()
     {
-        if (ini_get('apc.enabled') and ini_get('apc.enable_cli')) {
+        self::apcClearCache();
+    }
+
+    public static function apcClearCache()
+    {
+        if (extension_loaded('apc') and ini_get('apc.enabled') and ini_get('apc.enable_cli')) {
             apc_clear_cache('user');
         }
     }
 
     /**
-     *  Highly experimental:
-     *  - object creation on the fly after session start: works
-     *  - what about interface creation on the fly @todo
-    public function createClass($name)
-    {
-        ini_set('unserialize_callback_func', 'Loader_Test::unserialize_callback_method_class');
-
-        $this->object = unserialize(sprintf('O:%d:"%s":0:{}', strlen($name), $name));
-
-        return $this->object;
-    }
-
-    public static function unserialize_callback_method_class($classname)
-    {
-        eval ('class ' . $classname . '() {}');
-    }
-
-    public function testUnitTestHelper_createClass()
-    {
-        $class = $this->createClass('MyClass');
-        $this->assertInternalType($class, 'MyClass');
-        unset($class);
-    }
-    */
-
-     /**
      * testMethod_autoload()
      */
     public function testMethod_autoload()
     {
         // workflow of autoloading
 
-        // 1. testMethod_autoloadExclusions()
-        // 2. testMethod_autoloadInclusions()
-        // 3. testMethod_autoloadByApcOrFileMap()
-        // 4. testMethod_autoloadIncludePath()
-        // 5. testMethod_autoloadTryPathsAndMap()
+        // 1. existing class
+        // 2. existing interface
+        // 3. existing trait
+
+        // 1. autoloadExclusions()
+        // 2. autoloadInclusions()
+        // 3. autoloadByApcOrFileMap()
+        // 4. autoloadIncludePath()
+        // 5. autoloadTryPathsAndMap()
+    }
+
+    public function testMethod__construct()
+    {
+        // unregister first (autoloader was registered during test setup)
+        $r = spl_autoload_unregister(array('Koch\Autoload\Loader', 'autoload'));
+
+        // registers autoloader via constructor
+        new Loader;
+
+         // test Koch Framework Autoloader is registered in the spl_autoloader_stack at first place
+        $registered_autoloaders = spl_autoload_functions();
+        $this->assertEquals('Koch\Autoload\Loader', $registered_autoloaders[0][0]);
+        $this->assertEquals('autoload', $registered_autoloaders[0][1]);
     }
 
     /**
@@ -212,7 +207,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         #$this->assertFalse(class_exists($class, false));
 
         // triggering autoload via class_exists
-        // Warning: this autoloader needs to be registered before composers autoloader.
+        // --- WARNING ---
+        // The "Koch Framework Autoloader" needs to be registered BEFORE "Composers Autoloader".
         $this->assertTrue(class_exists($class, true));
     }
 

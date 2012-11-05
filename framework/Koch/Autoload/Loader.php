@@ -97,7 +97,7 @@ class Loader
         }
 
         // stop early, if trait already loaded (PHP 5.4)
-        if (true === function_exists('trait_exsits') and true === trait_exists($classname, false)) {
+        if (true === function_exists('trait_exists') and true === trait_exists($classname, false)) {
             return false;
         }
 
