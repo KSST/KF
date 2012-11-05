@@ -49,7 +49,7 @@ class Firebug implements LoggerInterface
 
     /**
      * geFirePHPLoglevel
-     * translates the system errorlevel to the loglevel known by firephp
+     * Translates the system error level to a log level known by firephp.
      *
      * @param string $level (comming from $data['level'] of the $data array to log)
      */
@@ -57,25 +57,25 @@ class Firebug implements LoggerInterface
     {
         switch (strtoupper($level)) {
             case 'LOG':
-                return FirePHP::LOG;
+                return \FirePHP::LOG;
             case 'INFO':
-                return FirePHP::INFO;
+                return \FirePHP::INFO;
             case 'WARNING':
-                return FirePHP::WARN;
+                return \FirePHP::WARN;
             case 'ERROR':
-                return FirePHP::ERROR;
+                return \FirePHP::ERROR;
             case 'NOTICE':
-                return FirePHP::NOTICE;
+                return \FirePHP::NOTICE;
             case 'DEBUG':
-                return FirePHP::DEBUG;
+                return \FirePHP::DEBUG;
             case 'TABLE':
-                return FirePHP::TABLE;
+                return \FirePHP::TABLE;
             case 'TRACE':
-                return FirePHP::TRACE; // backtracing
+                return \FirePHP::TRACE; // backtracing
             case 'DUMP':
-                return FirePHP::DUMP; // variable dumps
+                return \FirePHP::DUMP; // variable dumps
             default:
-                return FirePHP::ERROR;
+                return \FirePHP::ERROR;
         }
     }
 
@@ -89,6 +89,7 @@ class Firebug implements LoggerInterface
      */
     public function writeLog($data)
     {
-        self::$firephp->fb($data['message'], $data['label'], $this->getFirePHPLoglevel($data['level']));
+        $loglevel = $this->getFirePHPLoglevel($data['level']);
+        self::$firephp->fb($data['message'], $data['label'], $loglevel);
     }
 }

@@ -69,7 +69,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Logger\Adapter\File::returnEntriesFromLogfile
      * @todo   Implement testReturnEntriesFromLogfile().
      */
-    public function testReturnEntriesFromLogfile()
+    public function testGetEntriesFromLogfile()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(

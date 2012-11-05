@@ -26,8 +26,14 @@ use Koch\Logger\LoggerInterface;
  */
 class Email implements LoggerInterface
 {
+    /**
+     * @var \Koch\Config\Config
+     */
     private $config;
 
+    /**
+     * @var \Koch\Mail\SwiftMailer
+     */
     private $mailer = null;
 
     public function __construct(\Koch\Config\Config $config)
@@ -41,8 +47,7 @@ class Email implements LoggerInterface
     }
 
     /**
-     * writeLog
-     * sends an email with the errormessage
+     * writeLog - Sends an Email with the message.
      *
      * @param array $data array('message', 'label', 'priority')
      */
@@ -54,6 +59,6 @@ class Email implements LoggerInterface
         $subject      = '[' . date(DATE_FORMAT, mktime()) . '] ' . $data['label'];
         $body         = var_export($data);
 
-        $this->sendmail($to_address, $from_address, $subject, $body);
+        $this->mailer->send($to_address, $from_address, $subject, $body);
     }
 }
