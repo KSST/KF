@@ -102,16 +102,8 @@ class Router implements RouterInterface, \ArrayAccess
     {
         $this->request = $request;
 
-        // Set config object to the router for later access to config variables.
-        //$this->config =
-
         // get URI from request, clean it and set it as a class property
         $this->uri = self::prepareRequestURI($request->getRequestURI());
-
-        //$this->abspath   = dirname($_SERVER['SCRIPT_FILENAME']);
-        //$this->url       = str_replace($_SERVER['DOCUMENT_ROOT'], '', $this->abspath);
-        //$this->fragments = explode('/', $_SERVER['REQUEST_URI']);
-        //$this->domain    = explode('.', $_SERVER['SERVER_NAME']);
     }
 
     /**
@@ -136,21 +128,12 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function prepareRequestURI($uri)
     {
-        // if Xdebug loaded, remove xdebug_session_start parameter from routing process
+        // remove xdebug_session_start parameter from uri
         if (function_exists('xdebug_break') === true) {
             $uri = str_replace('xdebug_session_start=netbeans-xdebug', '', $uri);
             // remove trailing '?' or '&'
             $uri = rtrim($uri, '?&');
         }
-
-        // subtract PHP_SELF from uri
-        /*if (defined('REWRITE_ENGINE_ON') === true and REWRITE_ENGINE_ON == false) {
-            $url_directory_prefix_length = strlen(dirname($_SERVER['PHP_SELF']));
-            $uri = substr($uri, $url_directory_prefix_length);
-        } else {
-            $url_directory_prefix_length = strlen($_SERVER['SCRIPT_NAME']);
-            $uri = substr($uri, $url_directory_prefix_length);
-        }*/
 
         // add slash in front + remove slash at the end
         if ($uri !== "/") {
@@ -202,7 +185,7 @@ class Router implements RouterInterface, \ArrayAccess
         );
 
         /**
-         * 2) Finally add the *now preprocessed* Route.
+         * 2) Finally add the now *preprocessed* Route.
          */
         $this->routes['/'.$url_pattern] = $options;
     }
@@ -226,10 +209,10 @@ class Router implements RouterInterface, \ArrayAccess
         foreach ($segments as $segment) {
 
             /**
-             * process static named parameters, like ":contoller"
+             * Process "Static Named Parameters".
              *
-             * The name has to start with a ":".
-             * Then this is a name of an index variable.
+             * Static named parameters starts with a ":".
+             * Example: ":contoller".
              */
             if (strpos($segment, ':') !== false) {
                 $name = substr($segment, 1); // remove :
@@ -238,17 +221,22 @@ class Router implements RouterInterface, \ArrayAccess
                 if (isset($requirements[$name]) === true) {
                     // add it to the regex
                     $regexp .= '(?P<' . $name . '>' . $requirements[$name] . ')';
-                    // and remove the requirement
+                    // and remove the now processed requirement
                     unset($requirements[$name]);
                 } else { // no requirement
                     $regexp .= '(?P<' . $name . '>[a-z_-]+)';
                 }
             } else {
-                // process static parameter = string => "/index" or "/news"
+                /**
+                 * Process "Static Parameter".
+                 *
+                 * Static parameters starts with a "/".
+                 * Example: "/index" or "/news".
+                 */
                 $regexp .= '\\/' . $segment;
             }
 
-            // regexp between segments
+            // regexp between segments (regexp combiner)
             $regexp .= '\/?';
         }
 
@@ -293,15 +281,16 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Resets the routes array.
      *
+     * @param bool Load the default routes. Defaults to false.
      * @return object Koch_Router
      */
-    public function reset($load_default_routes = false)
+    public function reset($loadDefaultRoutes = false)
     {
         $this->routes = array();
 
         TargetRoute::reset();
 
-        if ($load_default_routes === true) {
+        if ($loadDefaultRoutes === true) {
             $this->loadDefaultRoutes();
         }
 
@@ -339,67 +328,71 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Builds a url string
      *
-     * @param $urlstring String to build the url from (e.g. '/news/admin/show')
+     * @param $url Array or String to build the url from (e.g. '/news/admin/show')
      * @param $encode bool True (default) encodes the "&" in the url (amp).
      */
-    public static function buildURL($urlstring, $encode = true, $force_modrewrite_on = true)
+    public static function buildURL($url, $encode = true, $force_modrewrite_on = true)
     {
         // if urlstring is array, then a relation (urlstring => parameter_order) is given
-        if (is_array($urlstring)) {
-            $parameter_order = '';
-            list($urlstring, $parameter_order) = each($urlstring);
+        if (is_array($url)) {
+            $parameterOrder = '';
+            list($url, $parameterOrder) = each($url);
         }
 
         // return, if urlstring is already a qualified url (http://...)
-        if (false !== strpos($urlstring, WWW_ROOT . 'index.php?')) {
-            return $urlstring;
+        if (false !== strpos($url, WWW_ROOT . 'index.php?')) {
+            return $url;
         }
 
         // only the http prefix is missing
-        if (false !== strpos($urlstring, 'index.php?')) {
-            return "http://" . $urlstring;
+        if (false !== strpos($url, 'index.php?')) {
+            return "http://" . $url;
         }
 
         // cleanup: remove all double slashes
-        while (false !== strpos($urlstring, '//')) {
-            $urlstring = str_replace('//', '/', $urlstring);
+        while (false !== strpos($url, '//')) {
+            $url = str_replace('//', '/', $url);
         }
 
         // cleanup: remove space and slashes from begin and end of string
-        $urlstring = trim($urlstring, ' /');
+        $url = trim($url, ' /');
 
         /**
-         * mod_rewirte is on. the requested url style is:
+         * Mod_Rewrite is ON.
+         *
+         * The requested url style is:
          * ROOT/news/2
          */
-        if (REWRITE_ENGINE_ON == true and $force_modrewrite_on === true) {
-            return WWW_ROOT . ltrim($urlstring, '/');
+        if (REWRITE_ENGINE_ON == true or $force_modrewrite_on === true) {
+            return WWW_ROOT . ltrim($url, '/');
         } else {
             /**
-             * mod_rewrite is off. the requested url style is:
+             * Mod_Rewrite is OFF.
+             *
+             * The requested url style is:
              * ROOT/index.php?mod=new&ctrl=admin&action=show&id=2
              */
 
             // get only the part after "index.php?"
-            if (false !== strpos($urlstring, 'index.php?')) {
-                $urlstring = strstr($urlstring, 'index.php?');
+            if (false !== strpos($url, 'index.php?')) {
+                $url = strstr($url, 'index.php?');
             }
 
             // $urlstring contains something like "/news/show/2"
             // explode the string into an indexed array
-            $url_parameters = explode('/', $urlstring);
+            $urlParameters = explode('/', $url);
 
             // do we have a parameter_order given?
-            if (isset($parameter_order)) {
+            if (isset($parameterOrder)) {
                 // replace parameter names with shorthands used in the url
                 $search = array('module', 'controller', 'action');
                 $replace = array('mod', 'ctrl', 'action');
-                $parameter_order = str_replace($search, $replace, $parameter_order);
+                $parameterOrder = str_replace($search, $replace, $parameterOrder);
 
-                $url_keys = explode('/', $parameter_order);
+                $urlKeys = explode('/', $parameterOrder);
             } else {
                 // default static whitelist for url parameter keys
-                $url_keys = array('mod', 'ctrl', 'action', 'id', 'type');
+                $urlKeys = array('mod', 'ctrl', 'action', 'id', 'type');
             }
 
             /**
@@ -408,13 +401,13 @@ class Router implements RouterInterface, \ArrayAccess
              * [1]=> "show"  to  [action] => "show"
              * [2]=> "2"     to  [id]     => "2"
              */
-            $url_data = \Koch\Functions\Functions::array_unequal_combine($url_keys, $url_parameters);
+            $urlData = \Koch\Functions\Functions::array_unequal_combine($urlKeys, $urlParameters);
 
             // determine the separator. it defaults to "&amp;" for internal usage in html documents
-            $arg_separator = ($encode === true) ? '&amp;' : '&';
+            $argSeparator = ($encode === true) ? '&amp;' : '&';
 
             // Finally: build and return the url!
-            return WWW_ROOT . 'index.php?' . http_build_query($url_data, '', $arg_separator);
+            return WWW_ROOT . 'index.php?' . http_build_query($urlData, '', $argSeparator);
         }
     }
 
@@ -429,12 +422,16 @@ class Router implements RouterInterface, \ArrayAccess
      * 4. try to find a route/map matching with the uri_segments
      * 5. if no mapping applies, then set default values from config and fallback to a static routing
      * 6. always! -> found_route -> call!
+     *
+     * @return Koch\Router\TargetRoute
      */
     public function route()
     {
-        // If there are no uri segments, loading routes and matching is pointless.
+        /**
+         * If there are no uri segments, loading routes and matching is pointless.
+         * Instead dispatch to the default route and return the according TargetRoute object.
+         */
         if (empty($this->uri) or $this->uri === '/') {
-            // dispatch to the default route, defined in the TargetRoute object.
             return $this->dispatchToDefaultRoute();
         }
 
@@ -442,28 +439,40 @@ class Router implements RouterInterface, \ArrayAccess
         $this->loadDefaultRoutes();
 
         /**
-         * Now we map match the uri.
-         * The result is a "dispatchable target route object" or "No target route found.".
+         * Now match the URI against the Routes.
+         * The result is either a "dispatchable target route object" or "No target route found.".
          */
+        $targetRoute = $this->match();
 
-        return $this->match();
+       /**
+         * Inject the target route object back to the request.
+         * Thereby the request gains full knowledge about the URL mapping (external to internal).
+         * We might ask the request object later, where the requests maps to.
+         */
+        $this->request->setRoute($targetRoute);
+
+        return $targetRoute;
     }
 
     public function dispatchToDefaultRoute()
     {
         $targetRoute = TargetRoute::instantiate();
-        if ($targetRoute::dispatchable() === true) {
-            $this->request->setRoute($targetRoute);
-
-            return $targetRoute;
-        }
+        // was the default route configured correctly
+        // @todo this is only possible if set from config to target route
+        //if ($targetRoute::dispatchable() === true) {
+        // default route is dispatchable, set it to the request
+        $this->request->setRoute($targetRoute);
+        return $targetRoute;
+        // } else {
+        // an undispatchable route was configured
+        //    self::dispatchTo404();
+        //}
     }
 
     public static function dispatchTo404()
     {
-        #TargetRoute::setController('error');
-        #TargetRoute::setAction('routenotfound');
-        #TargetRoute::setParameters('');
+        TargetRoute::setController('error');
+        TargetRoute::setAction('routenotfound');
     }
 
     /**
@@ -496,12 +505,11 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Matches the URI against the Routes Mapping Table
-     * taking static, dynamic and regexp routings into account.
-     *
+     * Matches the URI against the Routes Mapping Table.
+     * Taking static, dynamic and regexp routings into account.
      * In other words, it "map matches the URI".
      *
-     * @return object TargetRoute
+     * @return Koch\Router\TargetRoute
      */
     public function match()
     {
@@ -526,8 +534,6 @@ class Router implements RouterInterface, \ArrayAccess
             $this->uriSegments = self::fixNoRewriteShorthands($this->uriSegments);
             $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
             if ($targetRoute::dispatchable() === true) {
-                $this->request->setRoute($targetRoute);
-
                 return $targetRoute;
             }
         }
@@ -611,8 +617,6 @@ class Router implements RouterInterface, \ArrayAccess
                     TargetRoute::setSegmentsToTargetRoute($matches);
                 }
 
-                #TargetRoute::_debug();
-
                 if (TargetRoute::dispatchable() === true) {
                     // route found, stop foreach
                     break;
@@ -627,13 +631,6 @@ class Router implements RouterInterface, \ArrayAccess
          * Finally: fetch our Target Route Object.
          */
         $targetRoute = TargetRoute::instantiate();
-
-        /**
-         * Inject the target route object back to the request.
-         * Thereby the request gains full knowledge about the URL mapping (external to internal).
-         * We might ask the request object later, where the requests maps to.
-         */
-        $this->request->setRoute($targetRoute);
 
         return $targetRoute;
         // Clansuite_CMS::triggerEvent('onAfterInitializeRoutes', $this);
