@@ -37,10 +37,10 @@ class INI
 
         // when ini file exists, get old config array
         if (is_file($file) === true) {
-            $old_config_array = self::readConfig($file);
+            $oldArray = self::readConfig($file);
 
             // array merge: overwrite the array to the left, with the array to the right, when keys identical
-            $array = array_replace_recursive($old_config_array, $array);
+            $array = array_replace_recursive($oldArray, $array);
         }
 
         // attach an security header at the top of the ini file
@@ -70,7 +70,7 @@ class INI
                 foreach ($item as $key2 => $item2) {
                     if (is_numeric($item2) === true or is_bool($item2) === true) {
                         // write numeric and boolean values without quotes
-                        $content .= $key2 . ' = "' . $item2 . '"' . PHP_EOL;
+                        $content .= $key2 . ' = ' . $item2 . PHP_EOL;
                     } else {
                         // write value with quotes
                         $content .= $key2 . ' = "' . $item2 . '"' . PHP_EOL;
@@ -80,7 +80,7 @@ class INI
                 // it's a value
                 if (is_numeric($item) === true or is_bool($item) === true) {
                     // write numeric and boolean values without quotes
-                    $content .= $key . ' = "' . $item . '"' . PHP_EOL;
+                    $content .= $key . ' = ' . $item . PHP_EOL;
                 } else {
                     // it's a string - write value with quotes
                     $content .= $key . ' = "' . $item . '"' . PHP_EOL;
@@ -105,7 +105,7 @@ class INI
     {
         // check ini_filename exists
         if (is_file($file) === false or is_readable($file) === false) {
-            throw new \InvalidArgumentException('File not found: ' . $file, 4);
+            throw new \InvalidArgumentException('File not found: ' . $file);
         }
 
         return parse_ini_file($file, true);
