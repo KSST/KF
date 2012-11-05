@@ -394,7 +394,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('User',                      $route->getModule());
         $this->assertEquals('Account',                   $route->getController());
-        $this->assertEquals('Clansuite\Modules\User\Controller\AccountController',  $route->getClassname());
+        $this->assertEquals('__NAMESPACE__\Modules\User\Controller\AccountController',  $route->getClassname());
         $this->assertEquals('actionLogin',              $route->getMethod());
         $this->assertEquals(array(),                     $route->getParameters());
         $this->assertEquals('GET',                       $route->getRequestMethod());
@@ -412,7 +412,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Index',                     $route->getModule());
         $this->assertEquals('Index',                     $route->getController());
-        $this->assertEquals('Clansuite\Modules\Index\Controller\IndexController',    $route->getClassname());
+        $this->assertEquals('__NAMESPACE__\Modules\Index\Controller\IndexController',    $route->getClassname());
         $this->assertEquals('actionAbout',              $route->getMethod());
         $this->assertEquals(array(),                     $route->getParameters());
         $this->assertEquals('GET',                       $route->getRequestMethod());

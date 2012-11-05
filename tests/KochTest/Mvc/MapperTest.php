@@ -60,14 +60,14 @@ class MapperTest extends \PHPUnit_Framework_TestCase
     {
         $module = 'SomeModuleA';
         $this->assertEquals(
-            'Clansuite\Modules\SomeModuleA\Controller\SomeModuleAController',
+            '__NAMESPACE__\Modules\SomeModuleA\Controller\SomeModuleAController',
             $this->object->mapControllerToClassname($module)
         );
 
         $module = 'SomeModuleB';
         $controller = 'SomeControllerA';
         $this->assertEquals(
-            'Clansuite\Modules\SomeModuleB\Controller\SomeControllerAController',
+            '__NAMESPACE__\Modules\SomeModuleB\Controller\SomeControllerAController',
             $this->object->mapControllerToClassname($module, $controller)
         );
     }
@@ -78,9 +78,9 @@ class MapperTest extends \PHPUnit_Framework_TestCase
     public function testMapActionToMethodname()
     {
         // default action
-        $this->assertEquals('action_index', $this->object->mapActionToMethodname());
+        $this->assertEquals('actionIndex', $this->object->mapActionToMethodname());
 
         // custom action
-        $this->assertEquals('action_someActionName', $this->object->mapActionToMethodname('someActionName'));
+        $this->assertEquals('actionSomeActionName', $this->object->mapActionToMethodname('someActionName'));
     }
 }

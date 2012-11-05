@@ -122,7 +122,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::reset();
         TargetRoute::setModule('news');
         TargetRoute::setController('admin');
-        TargetRoute::setAction('action_show');
+        TargetRoute::setAction('actionShow');
 
         // fetch with dynamical trail building
         $trailArray = $this->object->getTrail(true);
