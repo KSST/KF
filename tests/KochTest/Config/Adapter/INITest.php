@@ -89,14 +89,13 @@ class INITest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue((bool) $config['booleans']['test_on']);
         $this->assertFalse((bool) $config['booleans']['test_off']);
-
         $this->assertTrue((bool) $config['booleans']['test_yes']);
         $this->assertFalse((bool) $config['booleans']['test_no']);
-
         $this->assertTrue((bool) $config['booleans']['test_true']);
         $this->assertFalse((bool) $config['booleans']['test_false']);
-
         $this->assertFalse((bool) $config['booleans']['test_null']);
+        $this->assertTrue((bool) $config['booleans']['test_numeric_on']);
+        $this->assertFalse((bool) $config['booleans']['test_numeric_off']);
     }
 
     public function testReadingWithoutSection()
@@ -147,6 +146,8 @@ test_no = no
 test_true = true
 test_false = false
 test_null = null
+test_numeric_on = 1
+test_numeric_off = 0
 EOF;
     }
 
