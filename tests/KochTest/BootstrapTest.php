@@ -4,15 +4,7 @@ namespace KochTest;
 
 class BootstrapTest extends \PHPUnit_Framework_TestCase
 {
-    protected function setUp()
-    {
-    }
-
-    protected function tearDown()
-    {
-    }
-
-    public function testSettings()
+    public function testSetup()
     {
         /**
          * a) ensure Koch Framework Autoloader is registered in the spl_autoloader_stack
