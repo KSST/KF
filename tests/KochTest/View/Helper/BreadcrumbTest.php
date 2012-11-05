@@ -92,7 +92,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::reset();
         TargetRoute::setModule('news');
         TargetRoute::setController('news');
-        TargetRoute::setAction('action_show');
+        TargetRoute::setAction('show');
 
         // fetch with dynamical trail building
         $trailArray = $this->object->getTrail(true);
@@ -111,7 +111,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('/index.php?mod=news&amp;action=show', $trailArray[2]['link']);
 
         /**
-         * case B -  normal module - backend access => module = news, sub = admin, action =  action_admin_show
+         * case B -  normal module - backend access => module = news, ctrl = admin, action = show
          *
          * expected path = Controlcenter >> News Admin >> Show
          */
@@ -122,7 +122,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         TargetRoute::reset();
         TargetRoute::setModule('news');
         TargetRoute::setController('admin');
-        TargetRoute::setAction('actionShow');
+        TargetRoute::setAction('show');
 
         // fetch with dynamical trail building
         $trailArray = $this->object->getTrail(true);
