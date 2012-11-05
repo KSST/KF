@@ -62,12 +62,14 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // workflow of autoloading
 
         // 1. existing class
+        $this->assertFalse(Loader::autoload('ThisClassExists'));
         // 2. existing interface
+        $this->assertFalse(Loader::autoload('ThisInterfaceExists'));
         // 3. existing trait
-        //Loader::autoload('ClassADefinesTraitA');
-        //Loader::autoload('ClassBDefinesTraitA');
+        $this->assertTrue(Loader::autoload('ClassADefinesTraitA'));
         // PHP 5.4.6 Bug... trait_exists does not return anything (true|false|null).
         // So a "cannot redeclare class TraitA" fatal error is thrown.
+        //$this->assertFalse(Loader::autoload('ClassBDefinesTraitA'));
 
         // 1. autoloadExclusions()
         // 2. autoloadInclusions()
