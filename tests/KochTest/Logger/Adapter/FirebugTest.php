@@ -26,29 +26,27 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Logger\Adapter\Firebug::getFirePHPLoglevel
-     * @todo   Implement testGetFirePHPLoglevel().
      */
     public function testGetFirePHPLoglevel()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals('LOG', $this->object->getFirePHPLoglevel('log'));
+        $this->assertEquals('LOG', $this->object->getFirePHPLoglevel('LOG'));
     }
 
     /**
      * @covers Koch\Logger\Adapter\Firebug::writeLog
-     * @todo   Implement testWriteLog().
+     * @expectedException Exception
+     * @expectedExceptionMessage Headers already sent
      */
     public function testWriteLog()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $data = array('message' => 'Message', 'label' => 'Label', 'level' => 'error');
+        $this->object->writeLog($data);
+        // @todo assert that headers are sent?
     }
 }

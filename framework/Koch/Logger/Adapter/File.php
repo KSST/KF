@@ -38,6 +38,9 @@ use Koch\Logger\LoggerInterface;
  */
 class File implements LoggerInterface
 {
+    /**
+     * @var \Koch\Config\Config
+     */
     private $config;
 
     public function __construct(\Koch\Config\Config $config)
@@ -46,11 +49,9 @@ class File implements LoggerInterface
     }
 
     /**
-     * writeLog
+     * writeLog - Writes a string to the logfile.
      *
-     * writes a string to the logfile.
-     *
-     * @param $logfilename The name of the Logfile to append to.
+     * @param $logfile The name of the Logfile to append to.
      * @param $string The string to append to the logfile.
      */
     public function writeLog($string)
@@ -62,26 +63,26 @@ class File implements LoggerInterface
     /**
      * readLog returns the content of a logfile
      *
-     * @param $logfilename The name of the logfile to read.
+     * @param $logfile The name of the logfile to read.
      * @return $string Content of the logfile.
      */
-    public static function readLog($logfilename = null)
+    public static function readLog($logfile = null)
     {
         // errorlog filename as set bei ini_set('error_log')
-        #$logfilename = ini_get('error_log');
+        #$logfile = ini_get('error_log');
 
-        if ($logfilename == null) {
+        if ($logfile == null) {
             // hardcoded errorlog filename
-            $logfilename = 'logs/clansuite_errorlog.txt';
+            $logfile = 'logs/clansuite_errorlog.txt';
         }
 
         // determine size of file
-        $logfilesize = filesize($logfilename);
+        $logfilesize = filesize($logfile);
 
         // size greater zero, means we have entries in that file
         if ($logfilesize > 0) {
             // so open and read till eof
-            $logfile = fopen($logfilename, 'r');
+            $logfile = fopen($logfile, 'r');
             $logfile_content = fread($logfile, $logfilesize);
 
             // @todo: split or explode logfile_content into an array
@@ -102,66 +103,66 @@ class File implements LoggerInterface
      */
     public function getErrorLogFilename()
     {
-        $filename = ROOT_LOGS . 'error';
+        $file = ROOT_LOGS . 'error';
 
         // if rotation is active we add a date to the filename
         if ($this->config['log']['rotation'] == true) {
             // construct name of the log file ( FILENAME_log_DATE.txt )
-            $filename =  $filename . '_log_' . date('m-d-y') . '.txt';
+            $file =  $file . '_log_' . date('m-d-y') . '.txt';
         } else {
             // construct name of the log file ( FILENAME_log.txt )
-            $filename = $filename . '_log.txt';
+            $file = $file . '_log.txt';
         }
 
-        return $filename;
+        return $file;
     }
 
     /**
      * Returns a specific number of logfile entries (last ones first)
      *
      * @param  int    $entriesToFetch
-     * @param  string $logfilename
+     * @param  string $logfile
      * @return string HTML representation of logfile entries
      */
-    public static function returnEntriesFromLogfile($entriesToFetch = 5, $logfilename = null)
+    public static function getEntriesFromLogfile($entriesToFetch = 5, $logfile = null)
     {
         // setup default logfilename
-        if ($logfilename == null) {
-            $logfilename = ROOT_LOGS . 'clansuite_errorlog.txt.php';
+        if ($logfile == null) {
+            $logfile = ROOT_LOGS . 'clansuite_errorlog.txt.php';
         }
 
-         $logEntries = '';
+         $entries = '';
 
-        if (true === is_file($logfilename)) {
+        if (true === is_file($logfile)) {
             // get logfile as array
-            $logfile_array = file($logfilename);
-            $logfile_cnt = count($logfile_array);
+            $logfileArray = file($logfile);
+            $logfile_cnt = count($logfileArray);
 
             if ($logfile_cnt > 0) {
                 // count array elements = total number of logfile entries
                 $i = $logfile_cnt - 1;
 
                 // subtract from total number of logfile entries the number to fetch
-                $max_entries = max(0, $i - $entriesToFetch);
+                $maxEntries = max(0, $i - $entriesToFetch);
 
                 // reverse for loop over the logfile_array
-                for ($i; $i > $max_entries; $i--) {
+                for ($i; $i > $maxEntries; $i--) {
                     // remove linebreaks
-                    $entry = str_replace(array('\r', '\n'), '', $logfile_array[$i]);
+                    $entry = str_replace(array('\r', '\n'), '', $logfileArray[$i]);
 
-                    $logEntries .= '<b>Entry ' . $i . '</b>';
-                    $logEntries .= '<br />' . htmlentities($entry) . '<br />';
+                    $entries .= '<b>Entry ' . $i . '</b>';
+                    $entries .= '<br />' . htmlentities($entry) . '<br />';
                 }
 
                 // cleanup
-                unset($logfilename, $logfile_array, $i, $max_entries, $entry);
+                unset($logfile, $logfileArray, $i, $maxEntries, $entry);
             } else {
-                $logEntries .= '<b>No Entries</b>';
+                $entries .= '<b>No Entries</b>';
             }
         } else {
-            $logEntries .= '<b>No Logfile found. No entries yet.</b>';
+            $entries .= '<b>No Logfile found. No entries yet.</b>';
         }
 
-        return $logEntries;
+        return $entries;
     }
 }

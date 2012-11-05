@@ -35,9 +35,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteLog()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $data = array('message', 'label', 'priority');
+        $this->object->writeLog($data);
     }
 }
