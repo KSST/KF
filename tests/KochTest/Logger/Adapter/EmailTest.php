@@ -35,6 +35,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteLog()
     {
+        $this->markTestIncomplete();
         $data = array('message', 'label', 'priority');
         $this->object->writeLog($data);
     }
