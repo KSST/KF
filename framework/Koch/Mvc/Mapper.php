@@ -29,6 +29,6 @@ namespace) is used for all actions.
 
         // all clansuite actions are prefixed with 'action'
         // e.g. action_<login>
-        return self::ACTION_PREFIX . ucfrist($action);
+        return self::ACTION_PREFIX . ucfirst($action);
     }
 }
