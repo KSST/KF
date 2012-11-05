@@ -250,7 +250,7 @@ class Form implements FormInterface
     {
         $method = mb_strtolower($method);
 
-        if ($method == 'post' or $method == 'get') {
+        if ($method === 'POST' or $method === 'GET') {
             $this->method = $method;
         } else {
             throw new \InvalidArgumentException('The method parameter is "' . $method . '", but has to be GET or POST.');
@@ -268,7 +268,7 @@ class Form implements FormInterface
     {
         // defaults to post
         if ($this->method == '') {
-            $this->method = 'post';
+            $this->method = 'POST';
         }
 
         return $this->method;
