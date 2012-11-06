@@ -70,7 +70,7 @@ class Loader
      *
      * @var string
      */
-    public static $mapfile = null;
+    public static $mapfile = '';
 
     /**
      * Constructor.
@@ -357,7 +357,7 @@ class Loader
      */
     public static function readAutoloadingMapFile()
     {
-        if (false === self::$mapfile) {
+        if (self::$mapfile === '') {
             throw new \RuntimeException('No classmap file set. Use method ->setClassMapFile() to set one.');
         }
 
