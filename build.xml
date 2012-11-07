@@ -131,6 +131,13 @@
         </exec>
     </target>
 
+    <target name="phpunit-local" description="Run unit tests using PHPUnit">
+        <exec executable="phpunit${executableExtension}" failonerror="true">
+            <arg value="--configuration" />
+            <arg path="${basedir}/tests/phpunit.xml.local" />
+        </exec>
+    </target>
+
     <target name="phpcb" description="Aggregate tool output using PHP_CodeBrowser">
         <exec executable="phpcb${executableExtension}">
             <arg value="--log" />

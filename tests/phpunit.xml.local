@@ -10,7 +10,7 @@
     stopOnFailure="false"
     strict="true"
     syntaxCheck="false"
-    verbose="false"
+    verbose="true"
     bootstrap="./bootstrap.php">
 
     <testsuite name="Koch Framework Test Suite">
@@ -25,5 +25,8 @@
 
     <logging>
         <log type="coverage-text"   target="php://stdout" />
+        <log type="coverage-clover" target="../build/logs/clover.xml" />
+        <log type="coverage-html"   target="../build/coverage" title="Koch Framework" />
+        <log type="junit"           target="../build/logs/junit.xml" />
     </logging>
 </phpunit>
