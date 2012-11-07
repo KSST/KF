@@ -75,7 +75,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
              $this->isType('string'),
              $this->matchesRegularExpression('/[a-zA-Z0-9]{5}/i'),
              $this->logicalNot(
-                $this->matchesRegularExpression('/[017IO]/i')
+                $this->matchesRegularExpression('/[017IO]/') // not case-[i]nsensitve
             )
         );
         $this->assertThat($randomString, $constraint);
