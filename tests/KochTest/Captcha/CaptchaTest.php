@@ -37,12 +37,9 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         // accepts string
         $this->object->setFontFolder('folder');
 
-        $expected_folders = array(
-             '..\..\..\framework\Koch\Captcha\fonts',
-             'folder'
-        );
-        var_dump($this->object->getFontFolders());
-        $this->assertEquals($expected_folders, $this->object->getFontFolders());
+        $expected_folders = $this->object->getFontFolders();
+        // note:  $expected_folders[0] is the path to the framework's font folder
+        $this->assertEquals('folder', $expected_folders[1]);
 
         // accepts array
         $folders = array('folder/A', 'folder/B');
