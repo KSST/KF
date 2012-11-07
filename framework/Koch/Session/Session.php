@@ -404,6 +404,10 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      */
     public function set($key, $value)
     {
+        if (is_resource($value) === true) {
+            throw new \LogicException('Do not store resources in the SESSION! Keep it light!');
+        }
+
         $_SESSION[$key] = $value;
     }
 
