@@ -36,28 +36,22 @@ class ApcTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Cache\Adapter\Apc::contains
      * @covers Koch\Cache\Adapter\Apc::store
      * @covers Koch\Cache\Adapter\Apc::fetch
+     * @covers Koch\Cache\Adapter\Apc::delete
      */
     public function testFetch()
     {
+        // key does not exist before
         $this->assertFalse($this->object->contains('key1'));
+        // add key with value
         $this->object->store('key1', 'value1');
+        // get that value by key
         $this->assertEquals('value1', $this->object->fetch('key1'));
+        // just check if such a key is set
         $this->assertTrue($this->object->contains('key1'));
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Apc::delete
-     */
-    public function testDelete()
-    {
-        $this->assertFalse($this->object->contains('key2'));
-        $this->object->store('key2', 'value2');
-        $this->assertEquals('value2', $this->object->fetch('key2'));
-        $this->assertTrue($this->object->contains('key2'));
-
-        $this->object->delete('key2');
-
-        $this->assertFalse($this->object->contains('key2'));
+        // now delete the key
+        $this->object->delete('key1');
+        // check that it's gone
+        $this->assertFalse($this->object->contains('key1'));
     }
 
     /**
