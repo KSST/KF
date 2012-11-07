@@ -97,7 +97,7 @@ class GuestUser
         }
 
         // @todo remove this line, when user login is reactivated
-        $_SESSION['user']['backendend_theme'] = 'admin';
+        $_SESSION['user']['backend_theme'] = 'admin';
 
         /**
          * Permissions for Guests
