@@ -66,7 +66,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // 2. existing interface
         $this->assertFalse(Loader::autoload('ThisInterfaceExists'));
         // 3. existing trait
-        $this->assertTrue(Loader::autoload('ClassADefinesTraitA'));
+        if (version_compare(PHP_VERSION, '5.4.0', '<=') === false) {
+            $this->assertTrue(Loader::autoload('ClassADefinesTraitA'));
+        }
         // PHP 5.4.6 Bug... trait_exists does not return anything (true|false|null).
         // So a "cannot redeclare class TraitA" fatal error is thrown.
         //$this->assertFalse(Loader::autoload('ClassBDefinesTraitA'));
@@ -199,7 +201,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         if (!extension_loaded('apc')) {
             $this->markTestSkipped('APC extensions required.');
         }
-        
+
         $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
     }
 
