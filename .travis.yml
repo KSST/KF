@@ -5,13 +5,16 @@
 #
 language: php
 
+env:
+  - OPCODE_CACHE=apc
+
 php:
   - 5.3
   - 5.4
 
+before_script: before_script: php ./bin/travis-setup.php $OPCODE_CACHE
+
 before_install:
-  # - pear install pear/PHP_CodeSniffer-1.4.0
-  # - phpenv rehash
   - composer install --dev
   - git submodule update --init --recursive
 
@@ -20,6 +23,7 @@ script:
   # ant utf8-encoding-check
   # ant phpcs
   - ant phpunit
+  - php ./bin/coverage-check.php clover.xml 70
 
 notifications:
   irc: "irc.freenode.org#koch"
