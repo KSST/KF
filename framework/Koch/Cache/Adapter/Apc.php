@@ -240,42 +240,4 @@ class Apc extends AbstractCache implements CacheInterface
 
         return $info;
     }
-
-    /**
-     * Stores a file in the bytecode cache, bypassing all filters
-     *
-     * @link http://www.php.net/manual/en/function.apc-compile-file.php
-     * @param  string $filename
-     * @return bool   success
-     */
-    public function compileFile($filename)
-    {
-        return apc_compile_file($filename);
-    }
-
-    /**
-     * Stores a directory in the bytecode cache, bypassing all filters
-     *
-     * @param  string $root
-     * @param  bool   $recursively
-     * @return bool   success
-     */
-    public function compileDir($root, $recursively = true)
-    {
-        $compiled = true;
-
-        if (true === $recursively) {
-            // compile files in subdirectories
-            // WATCH OUT ! RECURSION
-            foreach (glob($root . DIRECTORY_SEPARATOR . '*', GLOB_ONLYDIR) as $dir) {
-                $compiled = $compiled && $this->compile_dir($dir, $recursively);
-            }
-        }
-        // compile files in root directory
-        foreach (glob($root . DIRECTORY_SEPARATOR . '*.php') as $filename) {
-            $compiled = $compiled && $this->compile_file($filename);
-        }
-
-        return $compiled;
-    }
 }
