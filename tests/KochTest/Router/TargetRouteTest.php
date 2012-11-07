@@ -25,6 +25,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         // static instance
         $this->object->reset();
+        unset($_SESSION);
     }
 
     /**
@@ -301,11 +302,11 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFrontendTheme()
     {
-       $this->assertEquals('standard', $this->object->getFrontendTheme());
+        $this->assertEquals('standard', $this->object->getFrontendTheme());
 
-       $theme = 'A-Frontend-Theme';
-       $_SESSION['user']['frontend_theme'] = $theme;
-       $this->assertEquals($theme, $this->object->getFrontendTheme());
+        $theme = 'A-Frontend-Theme';
+        $_SESSION['user']['frontend_theme'] = $theme;
+        $this->assertEquals($theme, $this->object->getFrontendTheme());
     }
 
     /**
