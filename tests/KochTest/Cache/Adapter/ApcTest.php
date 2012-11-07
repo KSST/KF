@@ -33,41 +33,31 @@ class ApcTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Cache\Adapter\Apc::contains
+     * @covers Koch\Cache\Adapter\Apc::store
      * @covers Koch\Cache\Adapter\Apc::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
         $this->assertFalse($this->object->contains('key1'));
         $this->object->store('key1', 'value1');
         $this->assertEquals('value1', $this->object->fetch('key1'));
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Apc::store
-     * @todo   Implement testStore().
-     */
-    public function testStore()
-    {
-        $this->assertFalse($this->object->contains('key1'));
-        $this->object->store('key1', 'value1');
-        $this->assertEquals('value1', $this->object->fetch('key1'));
+        $this->assertTrue($this->object->contains('key1'));
     }
 
     /**
      * @covers Koch\Cache\Adapter\Apc::delete
-     * @todo   Implement testDelete().
      */
     public function testDelete()
     {
-        $this->assertFalse($this->object->contains('key1'));
-        $this->object->store('key1', 'value1');
-        $this->assertEquals('value1', $this->object->fetch('key1'));
-        $this->assertTrue($this->object->contains('key1'));
+        $this->assertFalse($this->object->contains('key2'));
+        $this->object->store('key2', 'value2');
+        $this->assertEquals('value2', $this->object->fetch('key2'));
+        $this->assertTrue($this->object->contains('key2'));
 
-        $this->object->delete('key1');
+        $this->object->delete('key2');
 
-        $this->assertFalse($this->object->contains('key1'));
+        $this->assertFalse($this->object->contains('key2'));
     }
 
     /**
@@ -83,46 +73,10 @@ class ApcTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Cache\Adapter\Apc::contains
-     * @todo   Implement testContains().
-     */
-    public function testContains()
-    {
-        $this->assertFalse($this->object->contains('key1'));
-        $this->object->store('key1', 'value1');
-        $this->assertEquals('value1', $this->object->fetch('key1'));
-        $this->assertTrue($this->object->contains('key1'));
-    }
-
-    /**
      * @covers Koch\Cache\Adapter\Apc::stats
      * @todo   Implement testStats().
      */
     public function testStats()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Apc::compile_file
-     * @todo   Implement testCompile_file().
-     */
-    public function testCompile_file()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Apc::compile_dir
-     * @todo   Implement testCompile_dir().
-     */
-    public function testCompile_dir()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
