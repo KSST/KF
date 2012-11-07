@@ -71,15 +71,25 @@ class FlashMessages /* extends Koch_Session */
      * Supported Messagetypes are error, warning, notice, success, debug
      * @see self::$flashmessagetypes
      *
-     * @param $type string type of the message, usable for formatting.
-     * @param $message object the actual message
+     * @param $message the actual message
+     * @param $type string Type of the message, usable for formatting. Defaults to notice.
      */
-    public static function setMessage($type, $message)
+    public static function setMessage($message, $type = 'notice')
     {
         if (in_array($type, self::$flashmessagetypes) === true) {
             self::$flashmessages[$type][] = $message;
             $_SESSION['user']['flashmessages'] = self::$flashmessages;
         }
+    }
+
+    /**
+     * Sets an error flash message
+     *
+     * @param string $message
+     */
+    public static function setErrorMessage($message)
+    {
+        self::setMessage($message, 'error');
     }
 
     /**

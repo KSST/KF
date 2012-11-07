@@ -6,15 +6,31 @@ namespace Koch\Session;
  */
 class FlashMessagesTest extends \PHPUnit_Framework_TestCase
 {
+    public function tearDown()
+    {
+        Flashmessages::reset();
+    }
+
     /**
      * @covers Koch\Session\FlashMessages::setMessage
      */
     public function testSetMessage()
     {
-        FlashMessages::setMessage('error', 'ErrorMessage');
+        FlashMessages::setMessage('MyMessage', 'error');
 
         $this->assertArrayHasKey('error', $_SESSION['user']['flashmessages']);
-        $this->assertEquals('ErrorMessage', $_SESSION['user']['flashmessages']['error'][0]);
+        $this->assertEquals('MyMessage', $_SESSION['user']['flashmessages']['error'][0]);
+    }
+
+     /**
+     * @covers Koch\Session\FlashMessages::setErrorMessage
+     */
+    public function testSetErrorMessage()
+    {
+        FlashMessages::setErrorMessage('OneErrorMessage');
+
+        $this->assertArrayHasKey('error', $_SESSION['user']['flashmessages']);
+        $this->assertEquals('OneErrorMessage', $_SESSION['user']['flashmessages']['error'][0]);
     }
 
     /**
@@ -22,14 +38,15 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
+         FlashMessages::setMessage('NoticeMessage', 'notice');
         // get message without type and unset
         $this->assertTrue(is_array(FlashMessages::getMessages()));
         $this->assertCount(1, FlashMessages::getMessages());
 
         // get messages by type and no unset
-        FlashMessages::setMessage('notice', 'NoticeMessage');
-        FlashMessages::setMessage('debug', 'DebugMessage');
-        FlashMessages::setMessage('debug', 'DebugMessage2');
+        FlashMessages::setMessage('NoticeMessage', 'notice');
+        FlashMessages::setMessage('DebugMessage', 'debug');
+        FlashMessages::setMessage('DebugMessage2', 'debug');
         $r = FlashMessages::getMessages('debug');
         $this->assertCount(2, $r);
         $this->assertEquals('DebugMessage', $r[0]);
@@ -52,7 +69,7 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        FlashMessages::setMessage('error', 'ErrorMessage');
+        FlashMessages::setMessage('ErrorMessage', 'error');
         $this->assertEquals(
             $this->getFlashMessageRenderContent(),
             FlashMessages::render()
