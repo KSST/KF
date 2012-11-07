@@ -99,10 +99,6 @@ namespace<br>";
      */
     public static function readAutoloadingMapFile()
     {
-        if (self::$mapfile === '') {
-            throw new \RuntimeException('No classmap file set. Use method ->setClassMapFile() to set one.');
-        }
-
         // create file, if not existant
         if (is_file(self::$mapfile) === false) {
             $file_resource = fopen(self::$mapfile, 'a', false);
