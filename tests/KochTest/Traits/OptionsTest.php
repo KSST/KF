@@ -3,8 +3,6 @@ namespace KochTest\Traits;
 
 class OptionsTest extends \PHPUnit_Framework_TestCase
 {
-    use \Koch\Traits\Options;
-
     protected function setUp()
     {
         $PHP_FEATURE = 'Traits';
@@ -15,6 +13,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
                 . ' Your PHP Version is ' . PHP_VERSION . '.'
             );
         }
+
+        $this->object = new AClassUsingTraits;
     }
 
     public static function getArrayData()
@@ -31,8 +31,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOption()
     {
-        $this->setOption('firstname', 'Jens');
-        $this->assertEquals('Jens', $this->getOption('firstname'));
+        $this->object->setOption('firstname', 'Jens');
+        $this->assertEquals('Jens', $this->object->getOption('firstname'));
     }
 
     /**
@@ -41,7 +41,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetOptionThrowsException()
     {
-        $this->getOption('firstname');
+        $this->object->getOption('firstname');
     }
 
     /**
@@ -51,8 +51,8 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
     public function testSetOptions()
     {
         $options = self::getArrayData();
-        $this->setOptions($options);
+        $this->object->setOptions($options);
 
-        $this->assertEquals($options, $this->getOptions());
+        $this->assertEquals($options, $this->object->getOptions());
     }
 }
