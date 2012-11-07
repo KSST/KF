@@ -22,8 +22,4 @@
             <directory suffix=".php">../framework/</directory>
         </whitelist>
     </filter>
-
-    <logging>
-        <log type="coverage-text"   target="php://stdout" />
-    </logging>
 </phpunit>
