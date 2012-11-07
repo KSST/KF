@@ -185,18 +185,22 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_writeAutoloadingMapApc()
     {
-        if (extension_loaded('apc')) {
-            $array = array ( 'class' => 'file' );
-            $this->assertTrue(Loader::writeAutoloadingMapApc($array));
-            $this->assertSame($array, Loader::readAutoloadingMapApc());
+        if (!extension_loaded('apc')) {
+            $this->markTestSkipped('APC extensions required.');
         }
+
+        $array = array ( 'class' => 'file' );
+        $this->assertTrue(Loader::writeAutoloadingMapApc($array));
+        $this->assertSame($array, Loader::readAutoloadingMapApc());
     }
 
     public function testMethod_readAutoloadingMapApc()
     {
-        if (extension_loaded('apc')) {
-            $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
+        if (!extension_loaded('apc')) {
+            $this->markTestSkipped('APC extensions required.');
         }
+        
+        $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
     }
 
     public function testMethod_addMapping()
