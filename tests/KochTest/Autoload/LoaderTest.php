@@ -189,7 +189,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_readAutoloadingMapFile_throwsExceptionIfMapFileNotSet()
     {
-        Loader::setClassMapFile(null);
+        Loader::setClassMapFile('');
         Loader::readAutoloadingMapFile();
     }
 
