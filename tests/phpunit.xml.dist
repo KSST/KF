@@ -22,4 +22,9 @@
             <directory suffix=".php">../framework/</directory>
         </whitelist>
     </filter>
+
+    <logging>
+    <!-- clover report is used by ./bin/coverage-checker.php -->
+    <log type="coverage-clover" target="./clover.xml"/>
+    </logging>
 </phpunit>
