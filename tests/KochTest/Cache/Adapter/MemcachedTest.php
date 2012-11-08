@@ -24,84 +24,31 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
         $this->object = new Memcached;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
     public function tearDown()
     {
+        $this->object = null;
     }
 
     /**
      * @covers Koch\Cache\Adapter\Memcached::contains
-     * @todo   Implement testContains().
+     * @covers Koch\Cache\Adapter\Memcached::store
+     * @covers Koch\Cache\Adapter\Memcached::fetch
+     * @covers Koch\Cache\Adapter\Memcached::delete
      */
     public function testContains()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::get
-     * @todo   Implement testGet().
-     */
-    public function testGet()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::fetch
-     * @todo   Implement testFetch().
-     */
-    public function testFetch()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::set
-     * @todo   Implement testSet().
-     */
-    public function testSet()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::store
-     * @todo   Implement testStore().
-     */
-    public function testStore()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::delete
-     * @todo   Implement testDelete().
-     */
-    public function testDelete()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // key does not exist before
+        $this->assertFalse($this->object->contains('key1'));
+        // add key with value
+        $this->object->store('key1', 'value1');
+        // get that value by key
+        $this->assertEquals('value1', $this->object->fetch('key1'));
+        // just check if such a key is set
+        $this->assertTrue($this->object->contains('key1'));
+        // now delete the key
+        $this->object->delete('key1');
+        // check that it's gone
+        $this->assertFalse($this->object->contains('key1'));
     }
 
     /**

@@ -79,7 +79,7 @@ class Memcached extends AbstractCache implements CacheInterface
 
         // instantiate object und set to class
         $this->memcached = new \Memcached;
-        $this->memcached->addServer(self::SERVER_HOST, self::SERVER_PORT, self::SERVER_WEIGTH);
+        $this->memcached->addServer(self::SERVER_HOST, self::SERVER_PORT, self::SERVER_WEIGHT);
 
         $this->memcached->setOption(Memcached::OPT_COMPRESSION, true);
         // LIBKETAMA compatibility will implicitly declare the following two things:
@@ -101,17 +101,6 @@ class Memcached extends AbstractCache implements CacheInterface
         } else {
             return false;
         }
-    }
-
-    /**
-     * Convenience/shortcut method for fetch
-     *
-     * @param  string $key Identifier for the data
-     * @return mixed  boolean FALSE if the data was not fetched from the cache, DATA on success
-     */
-    public function get($key)
-    {
-        return $this->fetch($key);
     }
 
     /**
@@ -137,24 +126,11 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Convenience/shortcut method for storing data by key into cache
-     *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
-     * @param  integer $cache_lifetime How long to cache the data, in minutes
-     * @return boolean True if the data was successfully cached, false on failure
-     */
-    public function set($key, $data, $cache_lifetime = 0)
-    {
-        return $this->store($key, $data, $cache_lifetime * 60);
-    }
-
-    /**
      * Stores data by key into cache
      *
      * @param  string  $key            Identifier for the data
      * @param  mixed   $data           Data to be cached
-     * @param  integer $cache_lifetime How long to cache the data, in minutes
+     * @param  integer $cache_lifetime How long to cache the data (in minutes).
      * @return boolean True if the data was successfully cached, false on failure.
      */
     public function store($key, $data, $cache_lifetime = 0)
