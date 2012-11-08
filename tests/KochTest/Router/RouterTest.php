@@ -47,22 +47,19 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(2, $routes['/news/([0-9]+)']['number_of_segments']);
         $this->assertEquals('#\/news\/?\/([0-9]+)\/?#', $routes['/news/([0-9]+)']['regexp']);
 
-        /*$this->routes[] = array(
-                '/:controller/:action/(\d+)/:name',
-         array( 'controller' => '',
-                'action' => 'show',
-                'id' => '',
-                'name' => '')
-        );*/
         $this->router->reset();
     }
 
     public function testMethod_delRoute()
     {
+        // static controller with dynamic id
         $this->router->addRoute('/news/(:id)', array(':controller', 'id'));
 
         $this->assertTrue(1 == count($this->router->getRoutes()));
 
+        // @todo this is odd, because the string to delete the route
+        // does not match the string, when adding the route,
+        // due to preplacing with regexps
         $this->router->delRoute('/news/([0-9]+)');
 
         $this->assertTrue(0 == count($this->router->getRoutes()));
@@ -131,10 +128,11 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(3 == count($this->router->getRoutes()));
 
+        // add only one segment
         $this->router->uriSegments = array('0' => 'news');
 
         // this makes all other routes irrelevant for the lookup
-        $this->router->removeRoutesBySegmentCount();
+        $this->router->reduceRoutesToSegmentCount();
 
         $this->assertTrue(1 == count($this->router->getRoutes()));
     }
@@ -142,16 +140,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMethod_prepareRequestURI()
     {
         // prepends slash
-        $requestUri = 'news';
-        $this->assertEquals('/news', $this->router->prepareRequestURI($requestUri));
+        $this->assertEquals('/news', $this->router->prepareRequestURI('news'));
 
         // prepends slash and removes any trailing slashes
-        $requestUri = 'news///';
-        $this->assertEquals('/news', $this->router->prepareRequestURI($requestUri));
+        $this->assertEquals('/news', $this->router->prepareRequestURI('news///'));
 
         // prepends slash
-        $requestUri = 'news/edit';
-        $this->assertEquals('/news/edit', $this->router->prepareRequestURI($requestUri));
+        $this->assertEquals('/news/edit', $this->router->prepareRequestURI('news/edit'));
     }
 
     public function testMethod_placeholdersToRegexp()
@@ -172,8 +167,10 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $segments = array('news', 'edit', '([0-9]+)');
         $requirements = array('controller', 'action', ':num',);
 
-        $this->assertSame('#\/news\/?\/edit\/?\/([0-9]+)\/?#',
-            $this->router->processSegmentsRegExp($segments, $requirements));
+        $this->assertSame(
+            '#\/news\/?\/edit\/?\/([0-9]+)\/?#',
+            $this->router->processSegmentsRegExp($segments, $requirements)
+        );
 
         /**
          * Static Named Route
@@ -181,21 +178,11 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $segments = array(':news');
         $requirements = array('controller');
 
-        $this->assertSame('#(?P<news>[a-z_-]+)\/?#',
-            $this->router->processSegmentsRegExp($segments, $requirements));
+        $this->assertSame(
+            '#(?P<news>[a-z_-]+)\/?#',
+            $this->router->processSegmentsRegExp($segments, $requirements)
+        );
     }
-
-    /*function testMethod_match_DualRoute()
-    {
-        // on 1st position: controller
-        // on 2nd position: id or action
-        // on 3nd position: id or action
-        // a) controller/id/action, like news/42/edit
-        // b) controller/action/id, like news/edit/42
-        $this->addRoute('/:controller/(:action|:id)/(:action|:id)');
-
-        // id will match if numeric
-    }*/
 
     public function testMethod_match_RestRoutes()
     {
