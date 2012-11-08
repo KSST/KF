@@ -166,9 +166,9 @@ class Memcached extends AbstractCache implements CacheInterface
      */
     public function stats()
     {
-        $version    = $this->memcached->getversion();
-        $stats      = $this->memcached->getstats();
-        $serverlist = $this->memcached->getserverlist();
+        $version    = $this->memcached->getVersion();
+        $stats      = $this->memcached->getStats();
+        $serverlist = $this->memcached->getServerList();
 
         // combine arrays
         return compact($version, $stats, $serverlist);
@@ -182,17 +182,5 @@ class Memcached extends AbstractCache implements CacheInterface
     public function getEngine()
     {
         return $this->memcached;
-    }
-
-    /**
-     * The connection, which was opened using Memcache::connect()
-     * will be automatically closed at the end of the script execution.
-     * We are nice and close it on object destruction.
-     */
-    public function __destruct()
-    {
-        if ($this->memcached !== null) {
-            $this->memcached->close();
-        }
     }
 }
