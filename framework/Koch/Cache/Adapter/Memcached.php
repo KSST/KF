@@ -81,11 +81,11 @@ class Memcached extends AbstractCache implements CacheInterface
         $this->memcached = new \Memcached;
         $this->memcached->addServer(self::SERVER_HOST, self::SERVER_PORT, self::SERVER_WEIGHT);
 
-        $this->memcached->setOption(Memcached::OPT_COMPRESSION, true);
+        $this->memcached->setOption(\Memcached::OPT_COMPRESSION, true);
         // LIBKETAMA compatibility will implicitly declare the following two things:
         #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
         #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
-        $this->memcached->setOption(Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+        $this->memcached->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
     }
 
     /**
