@@ -841,7 +841,7 @@ class Router implements RouterInterface, \ArrayAccess
      * This unsets all Routes of Routing Table ($this->routes)
      * which have more segments then the request uri.
      */
-    public function removeRoutesBySegmentCount()
+    public function reduceRoutesToSegmentCount()
     {
         $route_pattern = '';
         $route_values = '';
