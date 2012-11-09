@@ -24,8 +24,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         // static instance
-        $this->object->reset();
-        unset($_SESSION);
+        //$this->object->reset();
+        //unset($_SESSION);
     }
 
     /**
