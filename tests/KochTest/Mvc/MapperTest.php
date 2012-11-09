@@ -1,5 +1,7 @@
 <?php
-namespace Koch\Mvc;
+namespace KochTest\Mvc;
+
+use Koch\Mvc\Mapper;
 
 class MapperTest extends \PHPUnit_Framework_TestCase
 {
@@ -24,6 +26,15 @@ class MapperTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->object);
+    }
+
+    /**
+     * @covers Koch\Mvc\Mapper::setApplicationNamespace
+     */
+    public function testSetApplicationNamespace()
+    {
+        $this->object->setApplicationNamespace(__NAMESPACE__);
+        $this->assertEquals('KochTest\Mvc', Mapper::$applicationNamespace);
     }
 
     /**
@@ -58,16 +69,18 @@ class MapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testMapControllerToClassname()
     {
+        $this->object->setApplicationNamespace('Application');
+
         $module = 'SomeModuleA';
         $this->assertEquals(
-            '__NAMESPACE__\Modules\SomeModuleA\Controller\SomeModuleAController',
+            'Application\Modules\SomeModuleA\Controller\SomeModuleAController',
             $this->object->mapControllerToClassname($module)
         );
 
         $module = 'SomeModuleB';
         $controller = 'SomeControllerA';
         $this->assertEquals(
-            '__NAMESPACE__\Modules\SomeModuleB\Controller\SomeControllerAController',
+            'Application\Modules\SomeModuleB\Controller\SomeControllerAController',
             $this->object->mapControllerToClassname($module, $controller)
         );
     }
