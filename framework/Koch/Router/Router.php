@@ -510,13 +510,15 @@ class Router implements RouterInterface, \ArrayAccess
          * Detects if Mod_Rewrite engine is active and
          * calls the proper URL Parser/Segmentizer method for the extraction of uri segments.
          */
-        if (true === $this->isRewriteEngineOn() and
+        if ((true === $this->isRewriteEngineOn() or $_ENV['FORCE_MOD_REWRITE_ON']) and
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
             $this->uriSegments = $this->parseUrlRewrite($this->uri);
+
         } else {
             $this->uriSegments = $this->parseUrlNoRewrite($this->uri);
 
             $this->uriSegments = self::fixNoRewriteShorthands($this->uriSegments);
+            var_dump($this->uriSegments);
 
             $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
 
@@ -530,7 +532,7 @@ class Router implements RouterInterface, \ArrayAccess
          * with more segments than the current requested uri.
          */
         if (count($this->routes) > 1 and count($this->uriSegments) >= 1) {
-            self::removeRoutesBySegmentCount();
+            self::reduceRoutesToSegmentCount();
         }
 
         /**
@@ -735,9 +737,9 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Check if Apache mod_rewrite is activated in configuration.
+     * Check if Apache "mod_rewrite" is activated in configuration.
      *
-     * @return bool True, if "config['router']['mod_rewrite']" true. False otherwise.
+     * @return boolean True, if "mod_rewrite" enabled. False otherwise.
      */
     public function isRewriteEngineOn()
     {
@@ -752,7 +754,7 @@ class Router implements RouterInterface, \ArrayAccess
             return $bool;
         }
 
-        return $this->checkEnvForModRewrite();
+        return false; # $this->checkEnvForModRewrite();
     }
 
     /**
@@ -764,8 +766,8 @@ class Router implements RouterInterface, \ArrayAccess
     public function checkEnvForModRewrite()
     {
         // ensure apache has module mod_rewrite active
-        if (true === function_exists('apache_get_modules')
-            and true === in_array('mod_rewrite', apache_get_modules())) {
+        if (true === function_exists('apache_get_modules') and
+            true === in_array('mod_rewrite', apache_get_modules())) {
             if (true === is_file(APPLICATION_PATH . '.htaccess')) {
                 // load htaccess and check if RewriteEngine is enabled
                 $htaccess_content = file_get_contents(APPLICATION_PATH . '.htaccess');

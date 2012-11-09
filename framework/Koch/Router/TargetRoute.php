@@ -29,7 +29,7 @@ class TargetRoute extends Mapper
         'controller'    => null,
         'action'        => 'list',
         'method'        => null,
-        'params'        => null,
+        'params'        => array(),
         // Output
         'format'        => 'html',
         'language'      => 'en',
@@ -57,6 +57,11 @@ class TargetRoute extends Mapper
         return $instance;
     }
 
+    public static function getApplicationNamespace()
+    {
+        return Mapper::getApplicationNamespace();
+    }
+
     public static function setFilename($filename)
     {
         self::$parameters['filename'] = $filename;
@@ -65,7 +70,7 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::mapControllerToFilename(
+            $filename = self::getApplicationNamespace() . self::mapControllerToFilename(
                 self::getModulePath(self::getModule()),
                 self::getController()
             );
@@ -84,7 +89,6 @@ class TargetRoute extends Mapper
     {
         if (empty(self::$parameters['classname'])) {
             $classname = self::mapControllerToClassname(self::getModule(), self::getController());
-
             self::setClassname($classname);
         }
 
@@ -266,12 +270,13 @@ class TargetRoute extends Mapper
      */
     public static function dispatchable()
     {
-        $file = self::getFilename();
         $class = self::getClassname();
+        $file = realpath(self::getFilename());
         $method = self::getMethod();
 
         // was the class loaded before?
         if (false === class_exists($class, false)) {
+
             // not... then try loading manually
             if (is_file($file) === true) {
                 include_once $file;
@@ -280,12 +285,11 @@ class TargetRoute extends Mapper
 
         // class is loaded, check if method exists
         if (true === class_exists($class, false) and true === method_exists($class, $method)) {
-                return true;
+            return true;
+        } else {
+            // LEAVE THIS - It shows how many routes were tried before a match happens!
+            //echo 'Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
         }
-
-        // this shows how many routes were tried
-        #echo '<br><strong>Route failure.<br>'.CR;
-        #echo 'Not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong><br>'.CR;
 
         return false;
     }
@@ -394,7 +398,7 @@ class TargetRoute extends Mapper
             'controller' => 'index',
             'action' => 'list',
             'method' => 'actionList',
-            'params' => null,
+            'params' => array(),
             // Output
             'format' => 'html',
             'language' => 'en',
