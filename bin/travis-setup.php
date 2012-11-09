@@ -103,7 +103,6 @@ class PhpExtensions
         if (array_key_exists($name, $this->extensions)) {
             $extension = $this->extensions[$name];
 
-
             echo "== extension: $name ==\n";
 
             foreach ($extension['php_version'] as $version) {
