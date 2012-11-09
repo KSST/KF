@@ -38,8 +38,8 @@ namespace Koch\Mvc;
  */
 class Mapper
 {
-    /* @const string Classname prefix for modules = Namespace */
-    const MODULE_NAMESPACE = '__NAMESPACE__\Modules';
+    /* @const string Classname prefix for modules */
+    const MODULE_NAMESPACE = '\Modules';
 
     /* @const string suffix for module controller files */
     const MODULE_CLASS_SUFFIX = 'Controller.php';
@@ -52,6 +52,19 @@ class Mapper
 
     /* @const string Name of the Default Action */
     const DEFAULT_ACTION = 'index';
+
+    public static $applicationNamespace = '';
+
+    /**
+     * Set the application namespace.
+     * Usage: setApplicationNamespace(__NAMESPACE__);
+     *
+     * @param string $namespace
+     */
+    public static function setApplicationNamespace($namespace)
+    {
+        self::$applicationNamespace = $namespace;
+    }
 
     public static function getModulePath($module)
     {
@@ -99,8 +112,8 @@ class Mapper
          */
         $classname .= $module . '\Controller\\' . $controller . 'Controller';
 
-        // "Clansuite\Modules + \News\Controller\NewsController"
-        return self::MODULE_NAMESPACE . $classname;
+        // "Application" + "\Modules" + "\News\Controller\NewsController"
+        return self::$applicationNamespace . self::MODULE_NAMESPACE . $classname;
     }
 
     /**
