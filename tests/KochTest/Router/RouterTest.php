@@ -4,6 +4,7 @@ namespace KochTest\Router;
 
 use Koch\Router\Router;
 use Koch\Router\TargetRoute;
+use Koch\Mvc\Mapper;
 use Koch\Http\HttpRequest;
 use Koch\Config\Config;
 
@@ -186,6 +187,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_match_RestRoutes()
     {
+        Mapper::setApplicationNamespace('Application');
         $this->router->reset(true);
 
         // http://example.com/news
@@ -198,13 +200,16 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('list',                  $route->getAction());
-        $this->assertEquals('actionList',           $route->getMethod());
-        $this->assertEquals(array(),                 $route->getParameters());
-        $this->assertEquals('GET',                   $route->getRequestMethod());
+        $this->assertEquals(
+             'Application\Modules\News\Controller\NewsController',
+            $route->getClassname()
+        );
+        $this->assertEquals('News',       $route->getModule());
+        $this->assertEquals('News',       $route->getController());
+        $this->assertEquals('list',       $route->getAction());
+        $this->assertEquals('actionList', $route->getMethod());
+        $this->assertEquals(array(),      $route->getParameters());
+        $this->assertEquals('GET',        $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -218,12 +223,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/42');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionShow',           $route->getMethod());
-        $this->assertEquals(array('id' => '42'),     $route->getParameters());
-        $this->assertEquals('GET',                   $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',              $route->getModule());
+        $this->assertEquals('News',              $route->getController());
+        $this->assertEquals('actionShow',        $route->getMethod());
+        $this->assertEquals(array('id' => '42'), $route->getParameters());
+        $this->assertEquals('GET',               $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/new
@@ -236,11 +241,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/new');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionNew',            $route->getMethod());
-        $this->assertEquals('GET',                   $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+
+        $this->assertEquals('News',      $route->getModule());
+        $this->assertEquals('News',      $route->getController());
+        $this->assertEquals('actionNew', $route->getMethod());
+        $this->assertEquals('GET',       $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42/edit
@@ -254,12 +260,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/42/edit');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionEdit',           $route->getMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',            $route->getModule());
+        $this->assertEquals('News',            $route->getController());
+        $this->assertEquals('actionEdit',      $route->getMethod());
         $this->assertSame(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('GET',                   $route->getRequestMethod());
+        $this->assertEquals('GET',             $route->getRequestMethod());
         $this->router->reset(true);
 
         // same as above with reversed last segements
@@ -274,12 +280,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/edit/42');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionEdit',           $route->getMethod());
-        $this->assertEquals(array('id' => '42'),     $route->getParameters());
-        $this->assertEquals('GET',                   $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',              $route->getModule());
+        $this->assertEquals('News',              $route->getController());
+        $this->assertEquals('actionEdit',        $route->getMethod());
+        $this->assertEquals(array('id' => '42'), $route->getParameters());
+        $this->assertEquals('GET',               $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -294,12 +300,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/42');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionUpdate',         $route->getMethod());
-        $this->assertEquals(array('id' => '42'),     $route->getParameters());
-        $this->assertEquals('PUT',                   $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',              $route->getModule());
+        $this->assertEquals('News',              $route->getController());
+        $this->assertEquals('actionUpdate',      $route->getMethod());
+        $this->assertEquals(array('id' => '42'), $route->getParameters());
+        $this->assertEquals('PUT',               $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news
@@ -316,12 +322,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionInsert',         $route->getMethod());
-        $this->assertEquals(array('id' => '42', 'article_text' => 'blabla'),     $route->getParameters());
-        $this->assertEquals('POST',                  $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',         $route->getModule());
+        $this->assertEquals('News',         $route->getController());
+        $this->assertEquals('actionInsert', $route->getMethod());
+        $this->assertEquals(array('id' => '42', 'article_text' => 'blabla'), $route->getParameters());
+        $this->assertEquals('POST',         $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -335,12 +341,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/42');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionDelete',         $route->getMethod());
-        $this->assertEquals(array('id' => '42'),     $route->getParameters());
-        $this->assertEquals('DELETE',                $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',              $route->getModule());
+        $this->assertEquals('News',              $route->getController());
+        $this->assertEquals('actionDelete',      $route->getMethod());
+        $this->assertEquals(array('id' => '42'), $route->getParameters());
+        $this->assertEquals('DELETE',            $route->getRequestMethod());
         $this->router->reset(true);
 
         // same as above, web route
@@ -355,17 +361,19 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->prepareRequestURI('/news/delete/42');
         $route = $this->router->route();
 
-        $this->assertEquals('News',                  $route->getModule());
-        $this->assertEquals('News',                  $route->getController());
-        $this->assertEquals('Clansuite\Modules\News\Controller\NewsController', $route->getClassname());
-        $this->assertEquals('actionDelete',         $route->getMethod());
-        $this->assertEquals(array('id' => '42'),     $route->getParameters());
-        $this->assertEquals('DELETE',                $route->getRequestMethod());
+        $this->assertEquals('Application\Modules\News\Controller\NewsController', $route->getClassname());
+        $this->assertEquals('News',              $route->getModule());
+        $this->assertEquals('News',              $route->getController());
+        $this->assertEquals('actionDelete',      $route->getMethod());
+        $this->assertEquals(array('id' => '42'), $route->getParameters());
+        $this->assertEquals('DELETE',            $route->getRequestMethod());
         $this->router->reset(true);
     }
 
      public function testMethod_match_StaticRoute()
     {
+        Mapper::setApplicationNamespace('Application');
+
         // http://example.com/login
 
         $this->router->addRoute('/:controller');
@@ -379,12 +387,16 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         HttpRequest::setRequestMethod('GET');
         $route = $this->router->route();
 
-        $this->assertEquals('User',                      $route->getModule());
-        $this->assertEquals('Account',                   $route->getController());
-        $this->assertEquals('__NAMESPACE__\Modules\User\Controller\AccountController',  $route->getClassname());
-        $this->assertEquals('actionLogin',              $route->getMethod());
-        $this->assertEquals(array(),                     $route->getParameters());
-        $this->assertEquals('GET',                       $route->getRequestMethod());
+        $this->assertEquals(
+            'Application\Modules\User\Controller\AccountController',
+            $route->getClassname()
+        );
+        $this->assertEquals('User',        $route->getModule());
+        $this->assertEquals('Account',     $route->getController());
+        $this->assertEquals('actionLogin', $route->getMethod());
+        $this->assertEquals(array(),       $route->getParameters());
+        $this->assertEquals('GET',         $route->getRequestMethod());
+
         unset($route);
         $r->reset(true);
 
@@ -397,12 +409,17 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         HttpRequest::setRequestMethod('GET');
         $route = $this->router->route();
 
-        $this->assertEquals('Index',                     $route->getModule());
-        $this->assertEquals('Index',                     $route->getController());
-        $this->assertEquals('__NAMESPACE__\Modules\Index\Controller\IndexController',    $route->getClassname());
-        $this->assertEquals('actionAbout',              $route->getMethod());
-        $this->assertEquals(array(),                     $route->getParameters());
-        $this->assertEquals('GET',                       $route->getRequestMethod());
+        $this->assertEquals(
+            '__NAMESPACE__\Modules\Index\Controller\IndexController',
+            $route->getClassname()
+        );
+        $this->assertEquals('Index',       $route->getModule());
+        $this->assertEquals('Index',       $route->getController());
+        $this->assertEquals('actionAbout', $route->getMethod());
+        $this->assertEquals(array(),       $route->getParameters());
+        $this->assertEquals('GET',         $route->getRequestMethod());
+
+        unset($route);
         $r->reset(true);
     }
 
