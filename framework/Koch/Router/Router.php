@@ -529,11 +529,10 @@ class Router implements RouterInterface, \ArrayAccess
         } else {
             $this->uriSegments = $this->parseUrlNoRewrite($this->uri);
 
-            /**
-             * Handle the noRewrite URL segments by inserting them into a TargetRoute.
-             */
             $this->uriSegments = self::fixNoRewriteShorthands($this->uriSegments);
+
             $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
+
             if ($targetRoute::dispatchable() === true) {
                 return $targetRoute;
             }
@@ -628,13 +627,7 @@ class Router implements RouterInterface, \ArrayAccess
             }
         }
 
-        /**
-         * Finally: fetch our Target Route Object.
-         */
-        $targetRoute = TargetRoute::instantiate();
-
-        return $targetRoute;
-        // Clansuite_CMS::triggerEvent('onAfterInitializeRoutes', $this);
+        return TargetRoute::instantiate();
     }
 
     /**
@@ -643,12 +636,7 @@ class Router implements RouterInterface, \ArrayAccess
      * URL Parser for Apache Mod_Rewrite URL/URIs.
      * Think of it as a ModRewrite_Request_Resolver.
      *
-     * This is based on htaccess rewriting with [QSA,L].
-     * QSA = Query Append String.
-     *
-     * Maybe rewriting with [E] would allow a much faster url parsing by string splitting,
-     * because of a fixed url style (think of @ or ___ as separators).
-     * @todo consider using rewriting with [E] in htaccess and string splitting
+     * This is based on htaccess rewriting with [QSA,L] (Query Append String).
      *
      * @param  string $url The Request URL
      * @return array  Array with URI segments.
@@ -776,17 +764,8 @@ class Router implements RouterInterface, \ArrayAccess
 
             return $bool;
         }
-    }
 
-    /**
-     * Determine if URL was rewritten.
-     */
-    public function urlWasRewritten()
-    {
-        $realScriptName = $_SERVER['SCRIPT_NAME'];
-        $virtualScriptName = reset(explode("?", $_SERVER['REQUEST_URI']));
-
-        return !($realScriptName == $virtualScriptName);
+        return $this->checkEnvForModRewrite();
     }
 
     /**
