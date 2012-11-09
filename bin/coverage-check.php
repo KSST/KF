@@ -39,8 +39,8 @@ $coverage = ($checkedElements / $totalElements) * 100;
 $coverage = round($coverage, 2);
 
 if ($coverage < $acceptedPercentage) {
-    echo $cliColor['green'] . 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $acceptedPercentage . '%' . $cliColor['reset'] . PHP_EOL;
+    echo $cliColor['red'] . 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $acceptedPercentage . '%' . $cliColor['reset'] . PHP_EOL;
     exit(1);
 }
 
-echo $cliColor['red'] . 'Code coverage is ' . $coverage . '% - OK!' . $cliColor['reset'] . PHP_EOL;
+echo $cliColor['green'] . 'Code coverage is ' . $coverage . '% - OK!' . $cliColor['reset'] . PHP_EOL;
