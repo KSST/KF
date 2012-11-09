@@ -122,11 +122,6 @@ class Memcached extends AbstractCache implements CacheInterface
      */
     public function store($key, $data, $cache_lifetime = 0)
     {
-        // typecast $data to array
-        if (is_array($data) === false) {
-            $data = (array) $data;
-        }
-
         if ( $this->memcached->set($key, $data, $cache_lifetime * 60) === true ) {
             return true;
         }
@@ -137,18 +132,11 @@ class Memcached extends AbstractCache implements CacheInterface
     /**
      * Deletes a $key or an array of $keys from the Memcache
      *
-     * @param $key string or array
+     * @param $key string
      */
-    public function delete($keys)
+    public function delete($key)
     {
-        // typecast $keys to array
-        if (is_array($keys) === false) {
-            $keys = (array) $keys;
-        }
-
-        foreach ($keys as $key) {
-            return $this->memcached->delete($key);
-        }
+        return $this->memcached->delete($key);
     }
 
     /**
