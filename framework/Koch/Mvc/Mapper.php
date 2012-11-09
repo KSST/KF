@@ -66,6 +66,11 @@ class Mapper
         self::$applicationNamespace = $namespace;
     }
 
+    public static function getApplicationNamespace()
+    {
+        return self::$applicationNamespace;
+    }
+
     public static function getModulePath($module)
     {
         return APPLICATION_MODULES_PATH . $module . '/';
@@ -80,12 +85,12 @@ class Mapper
      */
     public static function mapControllerToFilename($module_path, $controller = null)
     {
-        // append module_path, e.g. "/clansuite/modules/news/" + "Controller/"
+        // append module_path, e.g. "/modules/news/" + "Controller/"
         $module_path .= 'Controller/';
 
         // Mapping Example:
-        // "/clansuite/modules/news/" + "Controller/" + "Index" + "Controller.php"
-        // "/clansuite/modules/news/" + "Controller/" + "Sub" + "Controller.php"
+        // "/modules/news/" + "Controller/" + "Index" + "Controller.php"
+        // "/modules/news/" + "Controller/" + "Sub" + "Controller.php"
         return $module_path . ucfirst($controller) . self::MODULE_CLASS_SUFFIX;
     }
 
