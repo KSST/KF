@@ -9,15 +9,21 @@
  * Usage: "php coverage-checker.php clover.xml 70"
  */
 $inputFile = $argv[1];
-$percentage = min(100, max(0, (int) $argv[2]));
+$acceptedPercentage = min(100, max(0, (int) $argv[2]));
 
 if (!file_exists($inputFile)) {
     throw new InvalidArgumentException('Invalid input file provided');
 }
 
-if (!$percentage) {
+if (!$acceptedPercentage) {
     throw new InvalidArgumentException('An integer checked percentage must be given as second parameter');
 }
+
+$cliColor = array(
+      'green' => "\x1b[30;42m",
+      'red' => "\x1b[37;41m",
+      'reset' => "\x1b[0m",
+);
 
 $xml = new SimpleXMLElement(file_get_contents($inputFile));
 $metrics = $xml->xpath('//metrics');
@@ -32,9 +38,9 @@ foreach ($metrics as $metric) {
 $coverage = ($checkedElements / $totalElements) * 100;
 $coverage = round($coverage, 2);
 
-if ($coverage > $percentage) {
-    echo 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $percentage . '%' . PHP_EOL;
+if ($coverage > $acceptedPercentage) {
+    echo $cliColor['green'] . 'Code coverage is ' . $coverage . '%, which is below the accepted ' . $acceptedPercentage . '%' . $cliColor['reset'] . PHP_EOL;
     exit(1);
 }
 
-echo 'Code coverage is ' . $coverage . '% - OK!' . PHP_EOL;
+echo $cliColor['red'] . 'Code coverage is ' . $coverage . '% - OK!' . $cliColor['reset'] . PHP_EOL;
