@@ -449,6 +449,7 @@ class Router implements RouterInterface, \ArrayAccess
         //if ($targetRoute::dispatchable() === true) {
         // default route is dispatchable, set it to the request
         $this->request->setRoute($targetRoute);
+
         return $targetRoute;
         // } else {
         // an undispatchable route was configured
@@ -759,6 +760,7 @@ class Router implements RouterInterface, \ArrayAccess
         if (isset($this->config['router']['mod_rewrite']) === true) {
             $bool = (bool) $this->config['router']['mod_rewrite'];
             define('REWRITE_ENGINE_ON', $bool);
+
             return $bool;
         }
     }

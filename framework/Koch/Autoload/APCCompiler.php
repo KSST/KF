@@ -16,7 +16,7 @@ class APCCompiler
 {
     public static function compileDir($root, $recursively = true)
     {
-        if(extension_loaded('apc') === false) {
+        if (extension_loaded('apc') === false) {
             throw new \RuntimeException('APC Extensions not loaded.');
         }
 

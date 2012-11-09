@@ -91,14 +91,15 @@ class FlashMessages /* extends Koch_Session */
         if (isset($_SESSION['user']['flashmessages']) === true) {
             self::$flashmessages = $_SESSION['user']['flashmessages'];
 
-            if($unset === true) {
+            if ($unset === true) {
                 unset($_SESSION['user']['flashmessages']);
             }
         }
 
-        if($type !== null) {
+        if ($type !== null) {
             return self::$flashmessages[$type];
         }
+
         return self::$flashmessages;
     }
 

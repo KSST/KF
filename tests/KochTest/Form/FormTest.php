@@ -85,7 +85,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
         // defaults to POST
         $this->assertEquals('POST', $this->form->getMethod());
 
-
         $this->form->setMethod('GET');
         // via getter
         $this->assertEquals('GET', $this->form->getMethod());
