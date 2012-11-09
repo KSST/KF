@@ -96,11 +96,7 @@ class Memcached extends AbstractCache implements CacheInterface
      */
     public function contains($key)
     {
-        if ( true === $this->memcached->get($key)) {
-            return true;
-        } else {
-            return false;
-        }
+        return (true === $this->memcached->get($key)) ? true : false;
     }
 
     /**
@@ -113,16 +109,7 @@ class Memcached extends AbstractCache implements CacheInterface
     {
         $result = $this->memcached->get($key);
 
-        if ($result === false) {
-            return false;
-        } else {
-            // typecast $key to array
-            if (is_array($result) === false) {
-                $result = (array) $result;
-            }
-
-            return $result;
-        }
+        return ($result === false) ? false : $result;
     }
 
     /**
