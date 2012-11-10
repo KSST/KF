@@ -405,7 +405,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $applicationNamespace = 'KochTest\Router\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
 
-
         // http://example.com/login
 
         $this->router->addRoute('/:controller');
