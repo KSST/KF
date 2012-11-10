@@ -270,7 +270,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::dispatchable
-     * @todo   Implement testDispatchable().
      */
     public function testDispatchable()
     {
@@ -280,7 +279,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::setSegmentsToTargetRoute
-     * @todo   Implement testSetSegmentsToTargetRoute().
      */
     public function testSetSegmentsToTargetRoute()
     {
