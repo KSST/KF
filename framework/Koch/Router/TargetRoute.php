@@ -271,26 +271,23 @@ class TargetRoute extends Mapper
     public static function dispatchable()
     {
         $class = self::getClassname();
-        $file = realpath(self::getFilename());
+        $file = self::getFilename();
         $method = self::getMethod();
 
-        // was the class loaded before?
+        // load the file, if the class does not exist, yet
         if (false === class_exists($class, false)) {
-
-            // not... then try loading manually
             if (is_file($file) === true) {
                 include_once $file;
             }
         }
 
-        // class is loaded, check if method exists
+        // check again for class in file and check if method exists
         if (true === class_exists($class, false) and true === method_exists($class, $method)) {
             return true;
-        } else {
-            // LEAVE THIS - It shows how many routes were tried before a match happens!
-            //echo 'Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
         }
 
+        // LEAVE THIS - It shows how many routes were tried before a match happens!
+        //echo 'Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
         return false;
     }
 
@@ -417,11 +414,6 @@ class TargetRoute extends Mapper
     public static function getRoute()
     {
         return self::$parameters;
-    }
-
-    public static function debug()
-    {
-        \Koch\Debug\Debug::printR(self::$parameters);
     }
 
     public function toArray()
