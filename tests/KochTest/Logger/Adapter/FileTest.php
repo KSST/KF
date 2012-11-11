@@ -2,6 +2,11 @@
 
 namespace KochTest\Logger\Adapter;
 
+use Koch\Logger\Adapter\File;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
+
 class FileTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -15,11 +20,14 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->markTestIncomplete();
-        // config is needed for log rotation setting
-        //$config = new Config();
+        $this->object = new File($config);
 
-       // $this->object = new File($config);
+        vfsStreamWrapper::register();
+        $this->configFileURL = vfsStream::url('root/file.txt');
+        $this->file = vfsStream::newFile('file.txt', 0777);//->withContent($this->getConfigFileContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
     /**
@@ -28,53 +36,39 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Logger\Adapter\File::writeLog
-     * @todo   Implement testWriteLog().
+     * @covers Koch\Logger\Adapter\File::readLog
      */
     public function testWriteLog()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $string = 'String to log';
+        $this->object->writeLog($string);
+
+        $this->assertEquals($string, $this->object->readLog());
     }
 
-    /**
-     * @covers Koch\Logger\Adapter\File::readLog
-     * @todo   Implement testReadLog().
-     */
-    public function testReadLog()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
+      /**
      * @covers Koch\Logger\Adapter\File::getErrorLogFilename
-     * @todo   Implement testGetErrorLogFilename().
+     * @covers Koch\Logger\Adapter\File::setErrorLogFilename
      */
     public function testGetErrorLogFilename()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertContains('errorlog', $this->object->getErrorLogFilename());
+
+        $this->object->setErrorLogFilename('ABC');
+        $this->assertEquals('ABC', $this->object->getErrorLogFilename());
     }
 
     /**
-     * @covers Koch\Logger\Adapter\File::returnEntriesFromLogfile
-     * @todo   Implement testReturnEntriesFromLogfile().
+     * @covers Koch\Logger\Adapter\File::getEntriesFromLogfile
      */
     public function testGetEntriesFromLogfile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $e = $this->object->getEntriesFromLogfile('5');
+        $this->assertEquals('', $e);;
     }
 }
