@@ -97,24 +97,12 @@ class File implements LoggerInterface
 
     /**
      * This method gives back the filename for logging
-     * If rotation is active it will add a date, if seperation is active it will
      *
      * @return $filename string
      */
     public function getErrorLogFilename()
     {
-        $file = ROOT_LOGS . 'error';
-
-        // if rotation is active we add a date to the filename
-        if ($this->config['log']['rotation'] == true) {
-            // construct name of the log file ( FILENAME_log_DATE.txt )
-            $file =  $file . '_log_' . date('m-d-y') . '.txt';
-        } else {
-            // construct name of the log file ( FILENAME_log.txt )
-            $file = $file . '_log.txt';
-        }
-
-        return $file;
+        return ROOT_LOGS . 'error_log_' . date('m-d-y') . '.txt';
     }
 
     /**
