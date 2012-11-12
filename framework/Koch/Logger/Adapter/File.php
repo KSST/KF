@@ -64,11 +64,6 @@ class File implements LoggerInterface
      */
     public function writeLog($string)
     {
-        // append string to file
-        if (is_dir(APPLICATION_PATH . 'logs') === false) {
-            mkdir(APPLICATION_PATH . 'logs');
-        }
-
         file_put_contents($this->getErrorLogFilename(), $string, FILE_APPEND & LOCK_EX);
     }
 
@@ -126,19 +121,19 @@ class File implements LoggerInterface
             $logfile_cnt = count($logfileArray);
 
             if ($logfile_cnt > 0) {
+                // subtract from total number of logfile entries the number to fetch
+                $maxEntries = max(1, $logfile_cnt - $entriesToFetch);
                 // count array elements = total number of logfile entries
                 $i = $logfile_cnt - 1;
 
-                // subtract from total number of logfile entries the number to fetch
-                $maxEntries = max(0, $i - $entriesToFetch);
-
-                // reverse for loop over the logfile_array
-                for ($i; $i > $maxEntries; $i--) {
+                // reverse for loop over the logfile_array to get the last few (new ones) log entries
+                for ($i; $i >= $maxEntries; $i--) {
                     // remove linebreaks
                     $entry = str_replace(array('\r', '\n'), '', $logfileArray[$i]);
+                    $entry = htmlentities($entry);
 
-                    $entries .= '<b>Entry ' . $i . '</b>';
-                    $entries .= '<br />' . htmlentities($entry) . '<br />';
+                    $tpl = '<span class="log-id">Entry %s</span><span class="log-entry">%s</span>' . "\n";
+                    $entries .= sprintf($tpl, $i+1, $entry);
                 }
 
                 // cleanup
