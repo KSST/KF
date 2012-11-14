@@ -66,23 +66,23 @@ class File extends AbstractCache implements CacheInterface
         $file = $this->filesystemKey($key);
 
         // try to open file, read-only
-        if ((is_file($file)) and fopen($file, 'r')) {
+        if ((is_file($file)) and $r = fopen($file, 'r')) {
             // get the expiration time stamp
-            $expires = (int) fread($file, 10);
+            $expires = (int) fread($r, 10);
             // if expiration time exceeds the current time, return the cache
             if (!$expires || $expires > time()) {
-                $realsize = filesize($block) - 10;
+                $realsize = filesize($r) - 10;
                 $cache = '';
                 // read in a loop, because fread returns after 8192 bytes
                 while ($chunk = fread($file, $realsize)) {
                     $cache .= $chunk;
                 }
-                fclose($block);
+                fclose($r);
 
                 return unserialize($cache);
             } else {
                 // close and delete the expired cache
-                fclose($block);
+                fclose($r);
                 $this->delete($key);
             }
         }
@@ -106,11 +106,11 @@ class File extends AbstractCache implements CacheInterface
         $cache_lifetime = str_pad((int) $cache_lifetime, 10, '0', STR_PAD_LEFT);
 
         // write key file
-        $success = (bool) file_put_contents($file, $cache_lifetime * 60, FILE_EX);
+        $success = (bool) file_put_contents($file, $cache_lifetime * 60, LOCK_EX);
 
         // append serialized value to file
         if ($success) {
-            return (bool) file_put_contents($file, serialize($data), FILE_EX | FILE_APPEND);
+            return (bool) file_put_contents($file, serialize($data), FILE_APPEND | LOCK_EX);
         }
 
         return false;

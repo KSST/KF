@@ -30,6 +30,8 @@ namespace Koch\Cache;
  */
 class Cache
 {
+    private static $cacheAdapter;
+
     /**
      * Instantiates a cache adapter
      *
@@ -38,13 +40,11 @@ class Cache
      */
     public static function instantiate($adapter = 'apc')
     {
-        static $cacheObject = null;
-
-        if ($cacheObject === null) {
-            $cacheObject = self::factory($adapter);
+        if (self::$cacheAdapter === null) {
+            self::$cacheAdapter = self::factory($adapter);
         }
 
-        return $cacheObject;
+        return self::$cacheAdapter;
     }
 
     /**
@@ -60,7 +60,6 @@ class Cache
         }
         $class = '\Koch\Cache\Adapter\\' . ucfirst($adapter);
         $obj = new $class;
-
         return $obj;
     }
 
@@ -72,7 +71,7 @@ class Cache
      */
     public static function contains($key)
     {
-        return self::$cacheObject->contains($key);
+        return self::$cacheAdapter->contains($key);
     }
 
     /**
@@ -83,13 +82,9 @@ class Cache
      */
     public static function fetch($key = null)
     {
-        $data = self::$cacheObject->fetch($key);
+        $data = self::$cacheAdapter->fetch($key);
 
-        if (!$data) {
-            return null;
-        }
-
-        return $data;
+        return ($data) ? $data : null;
     }
 
     /**
@@ -102,7 +97,7 @@ class Cache
      */
     public static function store($key, $data, $cache_lifetime = 10)
     {
-        return self::$cacheObject->set($key, $data, $cache_lifetime);
+        return self::$cacheAdapter->store($key, $data, $cache_lifetime);
     }
 
     /**
@@ -113,7 +108,7 @@ class Cache
      */
     public static function delete($key)
     {
-        return self::$cacheObject->delete($key);
+        return self::$cacheAdapter->delete($key);
     }
 
     /**
@@ -123,7 +118,7 @@ class Cache
      */
     public static function clear()
     {
-        return self::$cacheObject->clear();
+        return self::$cacheAdapter->clear();
     }
 
     /**
@@ -133,7 +128,7 @@ class Cache
      */
     public static function fetchObject($key = null)
     {
-        $object = self::$cacheObject->get($key);
+        $object = self::$cacheAdapter->get($key);
 
         if (is_string($object)) {
             return unserialize($object);
@@ -152,6 +147,6 @@ class Cache
      */
     public static function storeObject($key, $object, $cache_lifetime = 10)
     {
-        return self::$cacheObject->set($key, serialize($object), $cache_lifetime);
+        return self::$cacheAdapter->set($key, serialize($object), $cache_lifetime);
     }
 }

@@ -30,14 +30,11 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Cache::instantiate
-     * @todo   Implement testInstantiate().
      */
     public function testInstantiate()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $cache = Cache::instantiate('file');
+        $this->assertTrue(is_object($cache));
     }
 
     /**
@@ -53,27 +50,14 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Cache\Cache::fetch
-     * @todo   Implement testFetch().
-     */
-    public function testFetch()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\Cache\Cache::store
-     * @todo   Implement testStore().
+     * @covers Koch\Cache\Cache::fetch
      */
     public function testStore()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        Cache::store('key1', 'value1');
+        $er = Cache::fetch('key1');
+        $this->assertEquals('value1', $er);
     }
 
     /**
