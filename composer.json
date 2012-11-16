@@ -67,7 +67,8 @@
     "require-dev": {
         "mikey179/vfsStream"              : "*",
         "phpunit/PHPUnit"                 : "dev-master",
-        "phpunit/phpunit-mock-objects"    : "dev-master"
+        "phpunit/phpunit-mock-objects"    : "dev-master",
+        "phpunit/php-code-coverage"       : "dev-master"
     },
     "suggest": {
         "ext-apc"         : "*",
