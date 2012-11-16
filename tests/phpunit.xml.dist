@@ -26,6 +26,8 @@
     <logging>
     <!-- clover report is used by ./bin/coverage-checker.php -->
     <log type="coverage-clover" target="./clover.xml"/>
+    <!-- available on phpunit 3.8
     <log type="coverage-text" target="php://stdout" showOnlySummary="true" />
+    -->
     </logging>
 </phpunit>
