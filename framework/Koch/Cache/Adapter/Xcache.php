@@ -53,7 +53,7 @@ class Xcache extends AbstractCache implements CacheInterface
      */
     public function fetch($key)
     {
-        return xcache_get($key);
+        return $this->contains($key) ? unserialize(xcache_get($key)) : false;
     }
 
     /**
@@ -61,12 +61,12 @@ class Xcache extends AbstractCache implements CacheInterface
      *
      * @param  string  $key            Identifier for the data
      * @param  mixed   $data           Data to be cached
-     * @param  int $cache_lifetime How long to cache the data, in minutes
+     * @param  int $lifetime How long to cache the data, in minutes
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $cache_lifetime = 0)
+    public function store($key, $data, $lifetime = 0)
     {
-        return xcache_set($key, $data, $cache_lifetime * 60);
+        return xcache_set($key, serialize($data), (int) $lifetime * 60);
     }
 
     /**
@@ -80,19 +80,48 @@ class Xcache extends AbstractCache implements CacheInterface
         return xcache_unset($key);
     }
 
+    /**
+     * Clears the cache
+     *
+     * @return boolean
+     */
     public function clear()
     {
-        return xcache_clear_cache();
+        $this->checkAuthorizationIsOff();
+
+        return xcache_clear_cache(XC_TYPE_VAR, 0);
     }
 
     /**
-     * Get stats and usage Informations for display
+     * Returns an array with stats and usage informations for display.
      *
-     * Seems the XCache API does not provide infos. Are there any cache infos available?
-     * @link http://xcache.lighttpd.net/wiki/XcacheApi
-     * @todo implement statistics for xcache usage
+     * @return array
      */
-    public function stats()
+    protected function stats()
     {
+        $this->checkAuthorizationIsOff();
+
+        $info = xcache_info(XC_TYPE_VAR, 0);
+        return array(
+            Cache::STATS_HITS => $info['hits'],
+            Cache::STATS_MISSES => $info['misses'],
+            Cache::STATS_UPTIME => null,
+            Cache::STATS_MEMORY_USAGE => $info['size'],
+            Cache::STATS_MEMORY_AVAILABLE => $info['avail'],
+        );
+    }
+
+    /**
+     * Checks that xcache.admin.enable_auth is Off
+     *
+     * @throws \BadMethodCallException When xcache.admin.enable_auth is On
+     */
+    protected function checkAuthorizationIsOff()
+    {
+        if (ini_get('xcache.admin.enable_auth')) {
+            throw new \BadMethodCallException(
+                _('Feature disabled. Please set "xcache.admin.enable_auth" to "Off" in your php.ini.')
+            );
+        }
     }
 }

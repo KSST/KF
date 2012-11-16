@@ -65,9 +65,9 @@ class Wincache extends AbstractCache implements CacheInterface
      * @param  int $cache_lifetime How long to cache the data, in minutes.
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $cache_lifetime = 0)
+    public function store($key, $data, $lifetime = 0)
     {
-        return wincache_ucache_set($key, $data, $cache_lifetime * 60);
+        return (bool) wincache_ucache_set($key, $data, (int) $lifetime * 60);
     }
 
     /**
@@ -81,19 +81,32 @@ class Wincache extends AbstractCache implements CacheInterface
         return xcache_unset($key);
     }
 
+    /**
+     * Clears the cache
+     *
+     * @return boolean
+     */
     public function clear()
     {
-        wincache_ucache_clear();
+        return wincache_ucache_clear();
     }
 
     /**
-     * Get stats and usage Informations for display
+     * Returns an array with stats and usage informations for display.
      *
-     * @todo if you want the feature, implement it ;)
-     * Combine info array by taking a look at ucache_meminfo() and additional functions.
-     * @link http://www.php.net/manual/en/function.wincache-ucache-meminfo.php
+     * @return array
      */
     public function stats()
     {
+        $info = wincache_ucache_info();
+        $meminfo = wincache_ucache_meminfo();
+
+        return array(
+            Cache::STATS_HITS => $info['total_hit_count'],
+            Cache::STATS_MISSES => $info['total_miss_count'],
+            Cache::STATS_UPTIME => $info['total_cache_uptime'],
+            Cache::STATS_MEMORY_USAGE => $meminfo['memory_total'],
+            Cache::STATS_MEMORY_AVAILIABLE => $meminfo['memory_free'],
+        );
     }
 }
