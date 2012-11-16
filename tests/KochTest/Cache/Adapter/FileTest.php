@@ -30,10 +30,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-        // assert that, cache is reset - nothing to delete
-        $this->assertFalse($this->object->clear());
         // key does not exist before
-        var_dump($this->object->contains('key1'));
+        $this->object->delete('key1');
         $this->assertFalse($this->object->contains('key1'));
         // add key with value
         $this->object->store('key1', 'value1');
@@ -51,13 +49,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\File::stats
-     * @todo   Implement testStats().
      */
     public function testStats()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(is_array($this->object->stats()));
     }
 }

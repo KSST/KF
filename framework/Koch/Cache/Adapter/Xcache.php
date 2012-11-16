@@ -116,11 +116,11 @@ class Xcache extends AbstractCache implements CacheInterface
 
         $info = xcache_info(XC_TYPE_VAR, 0);
         return array(
-            Cache::STATS_HITS => $info['hits'],
-            Cache::STATS_MISSES => $info['misses'],
-            Cache::STATS_UPTIME => null,
-            Cache::STATS_MEMORY_USAGE => $info['size'],
-            Cache::STATS_MEMORY_AVAILABLE => $info['avail'],
+            CacheInterface::STATS_HITS => $info['hits'],
+            CacheInterface::STATS_MISSES => $info['misses'],
+            CacheInterface::STATS_UPTIME => null,
+            CacheInterface::STATS_MEMORY_USAGE => $info['size'],
+            CacheInterface::STATS_MEMORY_AVAILABLE => $info['avail'],
         );
     }
 
