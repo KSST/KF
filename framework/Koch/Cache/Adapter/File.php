@@ -102,7 +102,7 @@ class File extends AbstractCache implements CacheInterface
     {
         // do not write a cache file, if lifetime is 0
         if($lifetime === 0) {
-            return true;
+            return false;
         } else {
             // calculate lifetime based on current time
             $lifetime = time() + $lifetime;
