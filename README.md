@@ -19,3 +19,15 @@ Read the [step by step guide](https://github.com/KSST/KF/Contributing.md).
 Any contributions, large or small, major features, bug fixes, additional
 language translations, unit/integration tests are welcomed and appreciated
 but will be thoroughly reviewed and discussed.
+
+## Installation
+
+Please use [Composer](http://getcomposer.org/) to download and install Koch Framework as well as all of its dependencies.
+To add Koch Framework as a local, per-project dependency to your project,
+you simply add the following line to your project's `composer.json` file.
+
+    {
+        "require": {
+            "KSST/KF": "dev-master"
+        }
+    }
