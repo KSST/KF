@@ -30,22 +30,22 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-        // key does not exist before
+        // assert that, key does not exist before
         $this->assertFalse($this->object->delete('key1'));
         $this->assertFalse($this->object->contains('key1'));
-        // not possible to add key with value without a TTL
+        // assert that, it's not possible to add key with value without a TTL
         $this->assertFalse($this->object->store('key1', 'value1'));
-        // add key with value
+        // assert that, we can add key with value with ttl
         $this->assertTrue($this->object->store('key1', 'value1', 120));
-        // get that value by key
+        // assert that, we can get that value by key
         $this->assertEquals('value1', $this->object->fetch('key1'));
-        // just check if such a key is set
+        // assert that, we can check, if such a key is set
         $this->assertTrue($this->object->contains('key1'));
-        // now delete the key
+        // assert that, we can delete the key
         $this->assertTrue($this->object->delete('key1'));
-        // check that it's gone
+        // assert that, we can check that the key is gone
         $this->assertFalse($this->object->contains('key1'));
-        // assert that, cache clearing works
+        // assert that, clearing the whole cache works
         $this->assertTrue($this->object->clear());
     }
 
@@ -54,6 +54,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testStats()
     {
+        // currently the array is empty
         $this->assertTrue(is_array($this->object->stats()));
     }
 
