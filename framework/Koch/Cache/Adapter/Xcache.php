@@ -110,7 +110,7 @@ class Xcache extends AbstractCache implements CacheInterface
      *
      * @return array
      */
-    protected function stats()
+    public function stats()
     {
         $this->checkAuthorizationIsOff();
 
