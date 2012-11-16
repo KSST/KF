@@ -168,7 +168,13 @@ class File extends AbstractCache implements CacheInterface
         // @todo implement statistics for file cache usage
         // usage 'filecache_' prefix to identify files
         // return number of files and total size of files, disk space left
-        return;
+        return array(
+            Cache::STATS_HITS => null,
+            Cache::STATS_MISSES => null,
+            Cache::STATS_UPTIME => null,
+            Cache::STATS_MEMORY_USAGE => null,
+            Cache::STATS_MEMORY_AVAILABLE => null
+        );
     }
 
     /**
