@@ -119,7 +119,7 @@ class File extends AbstractCache implements CacheInterface
             mkdir($filepath, 0777, true);
         }
 
-        return file_put_contents($file, $content);
+        return (bool) file_put_contents($file, $content);
     }
 
     /**

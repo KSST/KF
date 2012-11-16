@@ -31,18 +31,18 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testFetch()
     {
         // key does not exist before
-        $this->object->delete('key1');
+        $this->assertFalse($this->object->delete('key1'));
         $this->assertFalse($this->object->contains('key1'));
         // not possible to add key with value without a TTL
         $this->assertFalse($this->object->store('key1', 'value1'));
         // add key with value
-        $this->object->store('key1', 'value1', 120);
+        $this->assertTrue($this->object->store('key1', 'value1', 120));
         // get that value by key
         $this->assertEquals('value1', $this->object->fetch('key1'));
         // just check if such a key is set
         $this->assertTrue($this->object->contains('key1'));
         // now delete the key
-        $this->object->delete('key1');
+        $this->assertTrue($this->object->delete('key1'));
         // check that it's gone
         $this->assertFalse($this->object->contains('key1'));
         // assert that, cache clearing works
