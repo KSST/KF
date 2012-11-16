@@ -34,6 +34,13 @@ namespace Koch\Cache;
  */
 interface CacheInterface
 {
+    // keys of the statistic array, returned by stats()
+    const STATS_HITS = 'hits';
+    const STATS_MISSES = 'misses';
+    const STATS_UPTIME = 'uptime';
+    const STATS_MEMORY_USAGE = 'memory_usage';
+    const STATS_MEMORY_AVAILABLE = 'memory_available';
+
     // Checks cache for a stored variable
     public function contains($key);
 

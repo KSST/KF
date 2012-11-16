@@ -47,12 +47,23 @@ class File extends AbstractCache implements CacheInterface
      */
     public function contains($key)
     {
-        $filepath = $this->filesystemKey($key);
-        if (is_file($filepath)) {
-            return true;
+        $lifetime = -1;
+        $file = $this->filesystemKey($key);
+        echo $file;
+
+        if (false === is_file($file)) {
+            return false;
         }
 
-        return false;
+        $resource = fopen($file, "r");
+
+        if (false !== ($line = fgets($resource))) {
+            $lifetime = (integer) $line;
+        }
+
+        fclose($resource);
+
+        return (bool) $lifetime === 0 || $lifetime > time();
     }
 
     /**
@@ -65,55 +76,60 @@ class File extends AbstractCache implements CacheInterface
     {
         $file = $this->filesystemKey($key);
 
-        // try to open file, read-only
-        if ((is_file($file)) and $r = fopen($file, 'r')) {
-            // get the expiration time stamp
-            $expires = (int) fread($r, 10);
-            // if expiration time exceeds the current time, return the cache
-            if (!$expires || $expires > time()) {
-                $realsize = filesize($r) - 10;
-                $cache = '';
-                // read in a loop, because fread returns after 8192 bytes
-                while ($chunk = fread($file, $realsize)) {
-                    $cache .= $chunk;
-                }
-                fclose($r);
-
-                return unserialize($cache);
-            } else {
-                // close and delete the expired cache
-                fclose($r);
-                $this->delete($key);
-            }
+        if(!is_file($file)) {
+            return false;
         }
 
-        return false;
+        $resource = fopen($file, 'r');
+
+        if (false !== ($line = fgets($resource))) {
+            $lifetime = (integer) $line;
+        }
+
+        if ($lifetime !== 0 && $lifetime < time()) {
+            fclose($resource);
+
+            return false;
+        }
+
+        $data = '';
+        while (false !== ($line = fgets($resource))) {
+            $data .= $line;
+        }
+
+        fclose($resource);
+
+        return unserialize($data);
     }
 
     /**
      * Stores data by key into cache
      *
-     * @param string  $key            Identifier for the data
-     * @param mixed   $data           Data to be cached
-     * @param integer $cache_lifetime How long to cache the data, in minutes
+     * @param string  $key  Identifier for the data
+     * @param mixed   $data Data to be cached
+     * @param integer $lifetime  How long to cache the data, in minutes
      *
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $cache_lifetime = 0)
+    public function store($key, $data, $lifetime = 0)
     {
-        // get name and lifetime
         $file = $this->filesystemKey($key);
-        $cache_lifetime = str_pad((int) $cache_lifetime, 10, '0', STR_PAD_LEFT);
 
-        // write key file
-        $success = (bool) file_put_contents($file, $cache_lifetime * 60, LOCK_EX);
+        $data = serialize($data);
 
-        // append serialized value to file
-        if ($success) {
-            return (bool) file_put_contents($file, serialize($data), FILE_APPEND | LOCK_EX);
+        if ($lifetime > 0) {
+            $lifetime = time() + $lifetime;
         }
 
-        return false;
+        $content = $lifetime . PHP_EOL . $data;
+
+        // create folder, if not existing
+        $filepath = pathinfo($file, PATHINFO_DIRNAME);
+        if ( ! is_dir($filepath)) {
+            mkdir($filepath, 0777, true);
+        }
+
+        return file_put_contents($file, $content);
     }
 
     /**
@@ -125,9 +141,10 @@ class File extends AbstractCache implements CacheInterface
      */
     public function delete($key)
     {
-        $filepath = $this->filesystemKey($key);
-        if (is_file($filepath)) {
-            return unlink($filepath);
+        $file = $this->filesystemKey($key);
+
+        if (is_file($file) === true) {
+            return unlink($file);
         }
 
         return true;
@@ -140,7 +157,7 @@ class File extends AbstractCache implements CacheInterface
      */
     public function clear()
     {
-        return false;
+        return (bool) array_map('unlink', glob(APPLICATION_CACHE_PATH . '*.kf.cache'));
     }
 
     /**
@@ -149,6 +166,8 @@ class File extends AbstractCache implements CacheInterface
     public function stats()
     {
         // @todo implement statistics for file cache usage
+        // usage 'filecache_' prefix to identify files
+        // return number of files and total size of files, disk space left
         return;
     }
 
@@ -161,6 +180,8 @@ class File extends AbstractCache implements CacheInterface
      */
     protected function filesystemKey($key)
     {
-        return APPLICATION_CACHE_PATH . md5($key);
+        $id = implode(str_split(md5($key), 10), DIRECTORY_SEPARATOR);
+
+        return APPLICATION_CACHE_PATH . $id . '.kf.cache';
     }
 }
