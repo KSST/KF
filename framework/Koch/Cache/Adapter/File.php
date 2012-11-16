@@ -49,7 +49,6 @@ class File extends AbstractCache implements CacheInterface
     {
         $lifetime = -1;
         $file = $this->filesystemKey($key);
-        echo $file;
 
         if (is_file($file) === false) {
             return false;
@@ -186,7 +185,7 @@ class File extends AbstractCache implements CacheInterface
      */
     protected function filesystemKey($key)
     {
-        $id = implode(str_split(md5($key), 12), DIRECTORY_SEPARATOR);
+        $id = implode(str_split(md5($key), 12), '/');
 
         return APPLICATION_CACHE_PATH . $id . '.kf.cache';
     }
