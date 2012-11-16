@@ -156,11 +156,11 @@ class File extends AbstractCache implements CacheInterface
         // usage 'filecache_' prefix to identify files
         // return number of files and total size of files, disk space left
         return array(
-            Cache::STATS_HITS => null,
-            Cache::STATS_MISSES => null,
-            Cache::STATS_UPTIME => null,
-            Cache::STATS_MEMORY_USAGE => null,
-            Cache::STATS_MEMORY_AVAILABLE => null
+            CacheInterface::STATS_HITS => null,
+            CacheInterface::STATS_MISSES => null,
+            CacheInterface::STATS_UPTIME => null,
+            CacheInterface::STATS_MEMORY_USAGE => null,
+            CacheInterface::STATS_MEMORY_AVAILABLE => null
         );
     }
 
@@ -173,7 +173,7 @@ class File extends AbstractCache implements CacheInterface
      */
     protected function filesystemKey($key)
     {
-        $id = implode(str_split(md5($key), 10), DIRECTORY_SEPARATOR);
+        $id = implode(str_split(md5($key), 12), DIRECTORY_SEPARATOR);
 
         return APPLICATION_CACHE_PATH . $id . '.kf.cache';
     }
