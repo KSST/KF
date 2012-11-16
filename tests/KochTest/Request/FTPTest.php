@@ -30,7 +30,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         //$this->object = new FTP($this->config['server'], $this->config['username'], $this->config['password']);
-        $this->generator = new PHPUnit_Framework_MockObject_Generator;
+        $this->generator = new \PHPUnit_Framework_MockObject_Generator;
         $mock = $this->generator->getMock(
             // classname
             'FTPMock',
