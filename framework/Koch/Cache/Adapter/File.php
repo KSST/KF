@@ -38,7 +38,7 @@ class File extends AbstractCache implements CacheInterface
         $file = $this->filesystemKey($key);
         echo $file;
 
-        if (false === is_file($file)) {
+        if (is_file($file) === false) {
             return false;
         }
 
@@ -63,7 +63,7 @@ class File extends AbstractCache implements CacheInterface
     {
         $file = $this->filesystemKey($key);
 
-        if(!is_file($file)) {
+        if(is_file($file) === false) {
             return false;
         }
 
@@ -112,7 +112,7 @@ class File extends AbstractCache implements CacheInterface
 
         // create folder, if not existing
         $filepath = pathinfo($file, PATHINFO_DIRNAME);
-        if ( ! is_dir($filepath)) {
+        if (is_dir($filepath) === false) {
             mkdir($filepath, 0777, true);
         }
 
