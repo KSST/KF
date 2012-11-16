@@ -34,7 +34,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $this->object->delete('key1');
         $this->assertFalse($this->object->contains('key1'));
         // add key with value
-        $this->object->store('key1', 'value1');
+        $this->object->store('key1', 'value1', 120);
         // get that value by key
         $this->assertEquals('value1', $this->object->fetch('key1'));
         // just check if such a key is set
@@ -53,5 +53,17 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function testStats()
     {
         $this->assertTrue(is_array($this->object->stats()));
+    }
+
+    /**
+     * @covers Koch\Cache\Adapter\File::stats
+     */
+    public function testCreateFilenameFromKey()
+    {
+       $key = 'ABC';
+       $er = $this->object->createFilenameFromKey($key);
+       // not testing the actual middle part (composed of dir/dir/filename)
+       $this->assertContains(APPLICATION_CACHE_PATH, $er);
+       $this->assertContains('.kf.cache', $er);
     }
 }
