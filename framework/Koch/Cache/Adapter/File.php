@@ -35,7 +35,7 @@ class File extends AbstractCache implements CacheInterface
     public function contains($key)
     {
         $lifetime = -1;
-        $file = $this->filesystemKey($key);
+        $file = realpath($this->createFilenameFromKey($key));
 
         if (is_file($file) === false) {
             return false;
@@ -49,7 +49,7 @@ class File extends AbstractCache implements CacheInterface
 
         fclose($resource);
 
-        return (bool) $lifetime === 0 || $lifetime > time();
+        return ($lifetime > time()) ? true : false;
     }
 
     /**
@@ -60,7 +60,7 @@ class File extends AbstractCache implements CacheInterface
      */
     public function fetch($key)
     {
-        $file = $this->filesystemKey($key);
+        $file = $this->createFilenameFromKey($key);
 
         if(is_file($file) === false) {
             return false;
@@ -72,7 +72,8 @@ class File extends AbstractCache implements CacheInterface
             $lifetime = (int) $line;
         }
 
-        if ($lifetime !== 0 && $lifetime < time()) {
+        // if liftime is lower then current time, the cache has become invalid
+        if ($lifetime < time()) {
             fclose($resource);
 
             return false;
@@ -99,13 +100,17 @@ class File extends AbstractCache implements CacheInterface
      */
     public function store($key, $data, $lifetime = 0)
     {
-        $file = $this->filesystemKey($key);
-
-        $data = serialize($data);
-
-        if ($lifetime > 0) {
+        // do not write a cache file, if lifetime is 0
+        if($lifetime === 0) {
+            return true;
+        } else {
+            // calculate lifetime based on current time
             $lifetime = time() + $lifetime;
         }
+
+        $file = $this->createFilenameFromKey($key);
+
+        $data = serialize($data);
 
         $content = $lifetime . PHP_EOL . $data;
 
@@ -127,13 +132,9 @@ class File extends AbstractCache implements CacheInterface
      */
     public function delete($key)
     {
-        $file = $this->filesystemKey($key);
+        $file = $this->createFilenameFromKey($key);
 
-        if (is_file($file) === true) {
-            return unlink($file);
-        }
-
-        return true;
+        return @unlink($file);
     }
 
     /**
@@ -143,7 +144,9 @@ class File extends AbstractCache implements CacheInterface
      */
     public function clear()
     {
-        return (bool) array_map('unlink', glob(APPLICATION_CACHE_PATH . '*.kf.cache'));
+        array_map('unlink', glob(APPLICATION_CACHE_PATH . '*.kf.cache'));
+
+        return true;
     }
 
     /**
@@ -170,9 +173,9 @@ class File extends AbstractCache implements CacheInterface
      *
      * @return string A filesystem cache key.
      */
-    protected function filesystemKey($key)
+    public function createFilenameFromKey($key)
     {
-        $id = implode(str_split(md5($key), 12), '/');
+        $id = implode(str_split(md5($key), 16), '/');
 
         return APPLICATION_CACHE_PATH . $id . '.kf.cache';
     }
