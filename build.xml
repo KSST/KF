@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+﻿<?xml version="1.0" encoding="UTF-8"?>
 <project name="Koch Framework" default="build" basedir=".">
 
     <property name="sourcedir" value="${basedir}/framework" />
@@ -133,7 +133,7 @@
     </target>
 
     <target name="phpunit-local" description="Run unit tests using PHPUnit">
-        <exec executable="phpunit${executableExtension}" failonerror="true">
+        <exec executable="${basedir}/vendor/bin/phpunit${executableExtension}" failonerror="true">
             <arg value="--configuration" />
             <arg path="${basedir}/tests/phpunit.xml.local" />
         </exec>
