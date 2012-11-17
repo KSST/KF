@@ -35,6 +35,7 @@ use Koch\Cache\CacheInterface;
  * It is often referred to as a data structure server since
  * keys can contain strings, hashes, lists, sets and sorted sets.
  *
+ * composer.json > require { "predis/service-provider": "dev-master" }
  * @link http://redis.io/
  * @link https://github.com/nicolasff/phpredis
  *
