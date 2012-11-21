@@ -34,8 +34,16 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFirePHPLoglevel()
     {
-        $this->assertEquals('LOG', $this->object->getFirePHPLoglevel('log'));
-        $this->assertEquals('LOG', $this->object->getFirePHPLoglevel('LOG'));
+        $loglevels = array('LOG', 'INFO', 'WARN', 'ERROR', 'TABLE', 'TRACE', 'DUMP');
+        foreach($loglevels as $loglevel) {
+            // lowercased
+            $this->assertEquals($loglevel, $this->object->getFirePHPLoglevel(strtolower($loglevel)));
+            // uppercased
+            $this->assertEquals($loglevel, $this->object->getFirePHPLoglevel($loglevel));
+        }
+
+        // testing default loglevel
+        $this->assertEquals('ERROR', $this->object->getFirePHPLoglevel());
     }
 
     /**
@@ -46,7 +54,6 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     public function testWriteLog()
     {
         $data = array('message' => 'Message', 'label' => 'Label', 'level' => 'error');
-        $this->object->writeLog($data);
-        // @todo assert that headers are sent?
+        $this->assertTrue($this->object->writeLog($data));
     }
 }

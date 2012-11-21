@@ -66,21 +66,17 @@ class Firebug implements LoggerInterface
      *
      * @param string $level (comming from $data['level'] of the $data array to log)
      */
-    public function getFirePHPLoglevel($level)
+    public function getFirePHPLoglevel($level = '')
     {
         switch (strtoupper($level)) {
             case 'LOG':
                 return \FirePHP::LOG;
             case 'INFO':
                 return \FirePHP::INFO;
-            case 'WARNING':
+            case 'WARN':
                 return \FirePHP::WARN;
             case 'ERROR':
                 return \FirePHP::ERROR;
-            case 'NOTICE':
-                return \FirePHP::NOTICE;
-            case 'DEBUG':
-                return \FirePHP::DEBUG;
             case 'TABLE':
                 return \FirePHP::TABLE;
             case 'TRACE':
@@ -103,6 +99,6 @@ class Firebug implements LoggerInterface
     public function writeLog($data)
     {
         $loglevel = $this->getFirePHPLoglevel($data['level']);
-        self::$firephp->fb($data['message'], $data['label'], $loglevel);
+        return self::$firephp->fb($data['message'], $data['label'], $loglevel);
     }
 }
