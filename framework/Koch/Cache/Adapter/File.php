@@ -133,7 +133,7 @@ class File extends AbstractCache implements CacheInterface
     {
         $file = $this->createFilenameFromKey($key);
 
-        return @unlink($file);
+        return (bool) @unlink($file);
     }
 
     /**
