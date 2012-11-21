@@ -22,7 +22,7 @@ abstract class AbstractCache
      *
      * @var mixed Defaults to 'kf_'.
      */
-    protected $prefix = 'kf_';
+    //protected $prefix = 'kf_';
 
     /**
      * Set Prefix for the cache key.
@@ -30,24 +30,24 @@ abstract class AbstractCache
      * @param  string                   $prefix The prefix for all cache keys.
      * @throws InvalidArgumentException if prefix is empty
      */
-    public function setPrefix($prefix)
+    /*public function setPrefix($prefix)
     {
         if (empty($prefix) === true) {
             throw new \InvalidArgumentException('Prefix must not be empty.');
         }
 
         $this->prefix = $prefix;
-    }
+    }*/
 
     /**
      * Get Prefix for the cache key.
      *
      * @return string The cache prefix
      */
-    public function getPrefix()
+    /*public function getPrefix()
     {
         return $this->prefix;
-    }
+    }*/
 
     /**
      * Prepends key with prefix.
@@ -55,8 +55,8 @@ abstract class AbstractCache
      * @param string $key Cache Key.
      * @return string Prefixed Cache Key.
      */
-    public function applyPrefix($key)
+    /*public function applyPrefix($key)
     {
         return $this->prefix . $key;
-    }
+    }*/
 }
