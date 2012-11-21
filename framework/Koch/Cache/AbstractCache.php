@@ -33,9 +33,9 @@ abstract class AbstractCache
     /**
      * Prefix for the cache key.
      *
-     * @var mixed Defaults to 'cs'.
+     * @var mixed Defaults to 'kf_'.
      */
-    protected $prefix = 'cs';
+    protected $prefix = 'kf_';
 
     /**
      * Set Prefix for the cache key.
@@ -45,7 +45,7 @@ abstract class AbstractCache
      */
     public function setPrefix($prefix)
     {
-        if (empty($prefix)) {
+        if (empty($prefix) === true) {
             throw new \InvalidArgumentException('Prefix must not be empty.');
         }
 
@@ -60,5 +60,16 @@ abstract class AbstractCache
     public function getPrefix()
     {
         return $this->prefix;
+    }
+
+    /**
+     * Prepends key with prefix.
+     *
+     * @param string $key Cache Key.
+     * @return string Prefixed Cache Key.
+     */
+    public function applyPrefix($key)
+    {
+        return $this->prefix . $key;
     }
 }
