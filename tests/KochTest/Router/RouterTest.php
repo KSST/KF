@@ -470,6 +470,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
          */
     //}
 
+    /* Feature not implemented yet.
     public function testMethod_match_SEO_Dynamic_Routes()
     {
         HttpRequest::setRequestMethod('GET');
@@ -485,7 +486,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->markTestIncomplete('Test not implemented yet.');
-    }
+    }*/
 
     /**
      * @expectedException OutOfBoundsException
@@ -511,8 +512,6 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_buildURL_ModRewrite_OFF()
     {
-        $force_modrewrite_on = false;
-
         /**
          * Do not build an URL, if FQDN is passed and mod_rewrite is off.
          * like http://clansuite-dev.com/tests/index.php?mod=news&action=show
@@ -520,12 +519,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
          */
         $urlstring = WWW_ROOT . 'index.php?mod=news&action=show';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, false, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, false);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
         $urlstring = WWW_ROOT . 'index.php?mod=news&action=show';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
         /**
@@ -542,19 +541,19 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // removes crappy slashes - test 1
         $urlstring = '////news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         // removes crappy slashes - test 2
         $urlstring = '/news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         // route to module
         $urlstring = '/news';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         /**
@@ -563,13 +562,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // route to module/action
         $urlstring = array('/news/show' => 'module/action');
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
         // route to module/action/id
         $urlstring = array('/news/show/42' => 'module/action/id');
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&amp;action=show&amp;id=42', $url);
 
         // STANDARD PARAMETER ROUTING when MODREWRITE is OFF
@@ -577,12 +576,19 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // route to module/controller/action/id
         $urlstring = '/news/admin/edit/1';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url, $force_modrewrite_on);
+        $url = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=edit&amp;id=1', $url);
     }
 
     public function testMethod_buildURL_ModRewrite_ON()
     {
+        // precondition
+        if(defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
+            $this->markTestSkipped('The Test depends on MOD_REWRITE.');
+        } else {
+             $this->assertTrue(REWRITE_ENGINE_ON);
+        }
+
         /**
          * Build URL from internal slashed URLs, like
          * /news
