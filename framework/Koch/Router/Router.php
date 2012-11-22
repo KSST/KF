@@ -318,7 +318,7 @@ class Router implements RouterInterface, \ArrayAccess
      * @param $url Array or String to build the url from (e.g. '/news/admin/show')
      * @param $encode bool True (default) encodes the "&" in the url (amp).
      */
-    public static function buildURL($url, $encode = true, $force_modrewrite_on = true)
+    public static function buildURL($url, $encode = true)
     {
         // if urlstring is array, then a relation (urlstring => parameter_order) is given
         if (is_array($url)) {
@@ -350,7 +350,7 @@ class Router implements RouterInterface, \ArrayAccess
          * The requested url style is:
          * ROOT/news/2
          */
-        if (REWRITE_ENGINE_ON == true or $force_modrewrite_on === true) {
+        if (self::isRewriteEngineOn() == true) { /* self::checkEnvForModRewrite() */
             return WWW_ROOT . ltrim($url, '/');
         } else {
             /**
@@ -741,18 +741,20 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @return boolean True, if "mod_rewrite" enabled. False otherwise.
      */
-    public function isRewriteEngineOn()
+    public static function isRewriteEngineOn()
     {
+        // via constant
         if (defined('REWRITE_ENGINE_ON') === true and REWRITE_ENGINE_ON == true) {
             return true;
         }
 
-        if (isset($this->config['router']['mod_rewrite']) === true) {
+        // via config
+        /*if (isset($this->config['router']['mod_rewrite']) === true) {
             $bool = (bool) $this->config['router']['mod_rewrite'];
             define('REWRITE_ENGINE_ON', $bool);
 
             return $bool;
-        }
+        }*/
 
         return false; # $this->checkEnvForModRewrite();
     }
@@ -763,7 +765,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @return boolean True, if mod_rewrite on.
      */
-    public function checkEnvForModRewrite()
+    public static function checkEnvForModRewrite()
     {
         // ensure apache has module mod_rewrite active
         if (true === function_exists('apache_get_modules') and
