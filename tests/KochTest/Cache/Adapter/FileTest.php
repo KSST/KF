@@ -14,6 +14,8 @@ class FileTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->object = new File;
+
+        @unlink($this->object->createFilenameFromKey('key1'));
     }
 
 
