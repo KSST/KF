@@ -64,7 +64,7 @@ class File implements LoggerInterface
      */
     public function writeLog($string)
     {
-        file_put_contents($this->getErrorLogFilename(), $string, FILE_APPEND & LOCK_EX);
+        return (bool) file_put_contents($this->getErrorLogFilename(), $string, FILE_APPEND & LOCK_EX);
     }
 
     /**

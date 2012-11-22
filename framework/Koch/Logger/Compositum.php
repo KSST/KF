@@ -47,7 +47,7 @@ class Compositum implements LoggerInterface
     /**
      * Iterates over all registered loggers and writes the log entry.
      *
-     * @param mixed|array|string $data  array('message', 'label', 'priority') or message
+     * @param mixed|array|string $data  array(message, label, level) or message
      * @param string             $label label
      * @param string             $level priority level (LOG, INFO, WARNING, ERROR...)
      */
@@ -55,12 +55,11 @@ class Compositum implements LoggerInterface
     {
         $data = array();
 
-        // first parameter might be an array or an string
-        if (is_array($data_or_msg)) {
-            $data = $data_or_msg;
-            $data['message'] = $data['0'];
-            $data['label'] = $data['1'];
-            $data['level'] = $data['2'];
+        if (is_array($data_or_msg) === true) {
+            // first parameter is array
+            $data['message'] = $data_or_msg[0];
+            $data['label'] = $data_or_msg[1];
+            $data['level'] = $data_or_msg[2];
         } else {
             // first parameter is string
             $data['message'] = $data_or_msg;
@@ -68,43 +67,44 @@ class Compositum implements LoggerInterface
             $data['level'] = $level;
         }
 
+        // combined boolean return value
+        $bool = true;
         foreach ($this->loggers as $logger) {
-            $logger->writeLog($data);
+            $bool = $bool && $logger->writeLog($data);
         }
+        return $bool;
     }
 
     /**
-     * Registers new logger(s) as composite element(s)
+     * Registers a logger as composite element
      *
-     * @param array $logger One or several loggers to add
+     * @param array $logger Logger to add
      */
-    public function addLogger($loggers)
+    public function addLogger($logger)
     {
-        // loggers might be an object, so it's typecasted to array, because of foreach
-        $loggers = array($loggers);
-
-        foreach ($loggers as $logger) {
-            if ((in_array($logger, $this->loggers) == false) and ($logger instanceof LoggerInterface)) {
-                $this->loggers[] = $logger;
-            }
+        if ((in_array($logger, $this->loggers) === false)) {
+            $this->loggers[] = $logger;
         }
+
+        return true;
     }
 
     /**
-     * Removes logger(s) from the compositum
+     * Remove a logger from the compositum
      *
-     * @param array $logger One or several loggers to remove
+     * @param array $logger Logger to remove
      */
-    public function removeLogger($loggers)
+    public function removeLogger($logger)
     {
-        foreach ($loggers as $logger) {
-            if ((in_array($logger, $this->loggers) == true)) {
+        $logger = 'Koch\Logger\Adapter\\' . ucfirst($logger);
+
+        foreach($this->loggers as $compositeLogger)
+        {
+            if($compositeLogger instanceof $logger) {
                 unset($this->loggers[$logger]);
-
-                return true;
-            } else {
-                return false;
             }
         }
+
+        return false;
     }
 }
