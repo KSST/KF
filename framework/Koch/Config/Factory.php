@@ -27,7 +27,7 @@ class Factory
     /**
      * Instantiates the correct subclass determined by the fileextension
      *
-     * Possible Extensions of the Configuration Files
+     * Configuration Files must have one of the following extensions:
      *  .config.php
      *  .config.xml
      *  .config.yaml
@@ -47,20 +47,23 @@ class Factory
         #$extension = strtolower(pathinfo($configfile, PATHINFO_EXTENSION));
 
         $configfile = basename($configfile);
-        preg_match('^(.config.php|.config.xml|.config.yaml|.info.php)$^', $configfile, $extension);
+        preg_match('^(.config.php|.config.ini|.config.xml|.config.yaml|.info.php)$^', $configfile, $extension);
+        if (empty($extension)) {
+            throw new \Koch\Exception\Exception(_('Unknown file extension.'));
+        }
         $extension = $extension[0];
 
-        // the fileextensions .config.php means it's an .ini file
-        // the content of the file IS NOT a php-array as you might think
-        if ($extension == '.config.php' or $extension == '.info.php') {
-            $adapter = 'ini'; // @todo change this to 'php' (read/write of php-array)
+       if ($extension == '.config.php' or $extension == '.info.php') {
+            $adapter = 'php';
+       } elseif ($extension == '.config.ini') {
+            $adapter = 'ini';
         } elseif ($extension == '.config.xml') {
             $adapter = 'xml';
         } elseif ($extension == '.config.yaml') {
             $adapter = 'yaml';
         } else {
             throw new \Koch\Exception\Exception(
-                'No handler for that type of configuration file found (' . $extension .')'
+                _('No handler for that type of configuration file found (' . $extension .')')
             );
         }
 
@@ -81,7 +84,7 @@ class Factory
     {
         $handler = self::getHandler($configfile);
 
-        return $handler->readConfig($configfile);
+        return $handler::readConfig($configfile);
     }
 
     /**
@@ -121,7 +124,7 @@ class Factory
 
             if (true === class_exists($class, false)) {
                 // instantiate and return the specific confighandler with the $configfile to read
-                return $class::getInstance();
+                return $class;
             } else {
                 throw new \Koch\Exception\Exception('Config_Factory -> Class not found: ' . $class, 40);
             }
