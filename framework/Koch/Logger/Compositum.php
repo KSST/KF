@@ -98,10 +98,11 @@ class Compositum implements LoggerInterface
     {
         $logger = 'Koch\Logger\Adapter\\' . ucfirst($logger);
 
-        foreach($this->loggers as $compositeLogger)
+        foreach($this->loggers as $key => $compositeLogger)
         {
-            if($compositeLogger instanceof $logger) {
-                unset($this->loggers[$logger]);
+            // compare classnames
+            if(get_class($compositeLogger) === $logger) {
+                unset($this->loggers[$key]);
             }
         }
 
