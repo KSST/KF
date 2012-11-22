@@ -14,6 +14,7 @@ class OptionsTest extends \PHPUnit_Framework_TestCase
             );
         }
 
+        /* @todo use getObjectForTrait() , drop proxy object using the trait */
         $this->object = new AClassUsingTraits;
     }
 
