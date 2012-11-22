@@ -52,4 +52,16 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
           'This test has not been implemented yet.'
         );
     }
+
+    /**
+     * @covers Koch\Cache\AbstractCache::applyPrefix
+     * @todo   Implement testApplyPrefix().
+     */
+    public function testApplyPrefix()
+    {
+        // Remove the following lines when you implement this test.
+        $this->markTestIncomplete(
+          'This test has not been implemented yet.'
+        );
+    }
 }
