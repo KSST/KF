@@ -59,6 +59,6 @@ class Email implements LoggerInterface
         $subject      = '[' . date(DATE_FORMAT, mktime()) . '] ' . $data['label'];
         $body         = var_export($data);
 
-        $this->mailer->send($to_address, $from_address, $subject, $body);
+        return (bool) $this->mailer->send($to_address, $from_address, $subject, $body);
     }
 }
