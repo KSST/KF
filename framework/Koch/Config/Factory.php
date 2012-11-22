@@ -107,18 +107,18 @@ class Factory
     {
         $type = self::determineConfigurationHandlerTypeBy($configfile);
 
-        $handler = self::getConfigurationHandler($type);
+        $handler = self::getAdapter($type);
 
         return $handler;
     }
 
     /**
-     * getConfiguration
+     * getAdapter()
      *
      * @param  string        $adapter a configuration filename type like "php", "xml", "yaml", "ini", "native"
      * @return Configuration Handler Object with confighandler and array of configfile.
      */
-    public static function getConfigurationHandler($adapter)
+    public static function getAdapter($adapter)
     {
         $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
 
