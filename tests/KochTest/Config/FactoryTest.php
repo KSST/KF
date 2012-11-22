@@ -30,49 +30,66 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Config\Factory::determineConfigurationHandlerTypeBy
-     * @todo   Implement testDetermineConfigurationHandlerTypeBy().
+     * @expectedException \Koch\Exception\Exception
+     * @expectedExceptionMessage Unknown file extension.
+     */
+    public function testDetermineConfigurationHandlerTypeBy_throwsExceptionOnInvalidFileExtension()
+    {
+        $configfile = 'file.with.unknown.extension';
+        $this->object->determineConfigurationHandlerTypeBy($configfile);
+    }
+
+    /**
+     * @covers Koch\Config\Factory::determineConfigurationHandlerTypeBy
      */
     public function testDetermineConfigurationHandlerTypeBy()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $configfile = 'file.config.php';
+        $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
+        $this->assertEquals($er, 'php');
+
+        $configfile = 'file.config.ini';
+        $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
+        $this->assertEquals($er, 'ini');
+
+        $configfile = 'file.config.xml';
+        $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
+        $this->assertEquals($er, 'xml');
+
+        $configfile = 'file.config.yaml';
+        $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
+        $this->assertEquals($er, 'yaml');
     }
 
     /**
      * @covers Koch\Config\Factory::getConfiguration
-     * @todo   Implement testGetConfiguration().
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage XML File file.config.xml not existing or not readable.
      */
     public function testGetConfiguration()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $configfile = 'file.config.xml';
+        $er = $this->object->getConfiguration($configfile);
+        $this->assertEquals($er, '');
     }
 
     /**
      * @covers Koch\Config\Factory::getHandler
-     * @todo   Implement testGetHandler().
      */
     public function testGetHandler()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $configfile = 'file.config.xml';
+        $er = $this->object->getHandler($configfile);
+        $this->assertEquals($er, 'Koch\Config\Adapter\XML');
     }
 
     /**
-     * @covers Koch\Config\Factory::getConfigurationHandler
-     * @todo   Implement testGetConfigurationHandler().
+     * @covers Koch\Config\Factory::getAdapter
      */
-    public function testGetConfigurationHandler()
+    public function testGetAdapter()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $adapter = 'xml';
+       $er = $this->object->getAdapter($adapter);
+       $this->assertEquals($er, 'Koch\Config\Adapter\XML');
     }
 }
