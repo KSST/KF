@@ -65,7 +65,7 @@ abstract class AbstractCache
     /**
      * Prepends key with prefix.
      *
-     * @param string $key Cache Key.
+     * @param  string $key Cache Key.
      * @return string Prefixed Cache Key.
      */
     /*public function applyPrefix($key)

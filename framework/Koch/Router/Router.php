@@ -364,6 +364,7 @@ class Router implements RouterInterface, \ArrayAccess
          * ROOT/news/2
          */
         if (self::isRewriteEngineOn() == true) { /* self::checkEnvForModRewrite() */
+
             return WWW_ROOT . ltrim($url, '/');
         } else {
             /**

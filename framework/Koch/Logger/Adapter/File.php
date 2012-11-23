@@ -48,6 +48,7 @@ class File implements LoggerInterface
     public function getErrorLogFilename()
     {
         $file = APPLICATION_PATH . 'logs/errorlog-' . date('m-d-y') . '.txt';
+
         return (empty($this->logfile)) ? $file : $this->logfile;
     }
 

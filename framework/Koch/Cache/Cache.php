@@ -60,6 +60,7 @@ class Cache
         }
         $class = '\Koch\Cache\Adapter\\' . ucfirst($adapter);
         $obj = new $class;
+
         return $obj;
     }
 
