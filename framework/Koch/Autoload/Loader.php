@@ -181,4 +181,20 @@ namespace<br>";
     {
         self::$inclusionsClassmap = $classmap;
     }
+
+    /**
+     * Registers the autoloader.
+     */
+    public static function register()
+    {
+        spl_autoload_register(array(__CLASS__, 'autoload'), true, true);
+    }
+
+    /**
+     * Unregisters the autoloader
+     */
+    public static function unregister()
+    {
+        spl_autoload_unregister(array(__CLASS__, 'autoload'));
+    }
 }
