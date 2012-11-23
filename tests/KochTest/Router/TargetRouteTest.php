@@ -273,8 +273,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatchable()
     {
-        // for now assertFalse :)
-        $this->assertFalse($this->object->dispatchable());
+        $this->assertTrue($this->object->dispatchable());
     }
 
     /**
