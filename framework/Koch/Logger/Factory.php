@@ -25,6 +25,7 @@ class Factory
         if (false === class_exists($class, false)) {
             include $file;
         }
+
         return new $class;
     }
 }

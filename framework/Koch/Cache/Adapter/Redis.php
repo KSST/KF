@@ -30,7 +30,7 @@ use Koch\Cache\CacheInterface;
  * @package     Core
  * @subpackage  Cache
  */
-class RedisCache extends AbstractCache implements CacheInterface
+class Redis extends AbstractCache implements CacheInterface
 {
     /**
      * @var Redis
@@ -48,7 +48,7 @@ class RedisCache extends AbstractCache implements CacheInterface
         $this->redis = new \Redis();
 
         // connect to redis instance
-        if($this->redis->connect('127.0.0.1') === false) {
+        if ($this->redis->connect('127.0.0.1') === false) {
             throw new RuntimeException('Connection to Redis database failed. Check configuration.');
         }
 
@@ -82,24 +82,25 @@ class RedisCache extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
+     * @param  string  $key      Identifier for the data
+     * @param  mixed   $data     Data to be cached
      * @param  int $lifetime How long to cache the data, in minutes
      * @return boolean True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 0)
     {
-        if($lifetime === 0) {
+        if ($lifetime === 0) {
             return false;
         }
+
         return $this->redis->set($key, $data, $lifetime);
     }
 
     /**
      * Remove specified keys.
      *
-     * @param array|string $key The key(s) to delete.
-     * @return boolean True, if one or more keys deleted. False otherwise.
+     * @param  array|string $key The key(s) to delete.
+     * @return boolean      True, if one or more keys deleted. False otherwise.
      */
     public function delete($key)
     {
@@ -119,6 +120,7 @@ class RedisCache extends AbstractCache implements CacheInterface
     public function stats()
     {
         $info = $this->redis->info();
+
         return array(
             Cache::STATS_HITS   => false,
             Cache::STATS_MISSES => false,

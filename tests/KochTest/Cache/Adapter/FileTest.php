@@ -18,7 +18,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
         @unlink($this->object->createFilenameFromKey('key1'));
     }
 
-
     public function tearDown()
     {
         unset($this->object);

@@ -35,7 +35,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     public function testGetFirePHPLoglevel()
     {
         $loglevels = array('LOG', 'INFO', 'WARN', 'ERROR', 'TABLE', 'TRACE', 'DUMP');
-        foreach($loglevels as $loglevel) {
+        foreach ($loglevels as $loglevel) {
             // lowercased
             $this->assertEquals($loglevel, $this->object->getFirePHPLoglevel(strtolower($loglevel)));
             // uppercased

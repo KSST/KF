@@ -59,8 +59,8 @@ class Xcache extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
+     * @param  string  $key      Identifier for the data
+     * @param  mixed   $data     Data to be cached
      * @param  int $lifetime How long to cache the data, in minutes
      * @return boolean True if the data was successfully cached, false on failure
      */
@@ -102,6 +102,7 @@ class Xcache extends AbstractCache implements CacheInterface
         $this->checkAuthorizationIsOff();
 
         $info = xcache_info(XC_TYPE_VAR, 0);
+
         return array(
             CacheInterface::STATS_HITS => $info['hits'],
             CacheInterface::STATS_MISSES => $info['misses'],

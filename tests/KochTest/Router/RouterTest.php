@@ -583,7 +583,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMethod_buildURL_ModRewrite_ON()
     {
         // precondition
-        if(defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
+        if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
             $this->markTestSkipped('The Test depends on MOD_REWRITE.');
         } else {
              $this->assertTrue(REWRITE_ENGINE_ON);
