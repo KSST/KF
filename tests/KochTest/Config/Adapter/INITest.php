@@ -100,8 +100,17 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function testReadingWithoutSection()
     {
-        $file = __DIR__ . '/../fixtures/no-section.ini';
-        $config = $this->object->readConfig($file);
+        $this->fileCURL = vfsStream::url('root/no-section.ini');
+        $this->fileC = vfsStream::newFile('no-section.ini', 0777)->withContent(
+            'string_key = string_value
+             bool_key = 1'
+        );
+
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->fileC);
+        vfsStreamWrapper::setRoot($this->root);
+
+        $config = $this->object->readConfig($this->fileCURL);
 
         $expected = array(
             'string_key' => 'string_value',
