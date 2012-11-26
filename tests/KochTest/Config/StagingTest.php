@@ -3,6 +3,9 @@
 namespace KochTest\Config;
 
 use Koch\Config\Staging;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 class StagingTest extends \PHPUnit_Framework_Testcase
 {
@@ -21,6 +24,14 @@ class StagingTest extends \PHPUnit_Framework_Testcase
 
         // set faked server name to environment to test getFilename()
         $_SERVER['SERVER_NAME'] = 'www.clansuite-dev.com';
+
+         vfsStreamWrapper::register();
+
+        $this->fileURL = vfsStream::url('root/development.ini.php');
+        $this->file = vfsStream::newFile('development.ini.php', 0777)->withContent($this->getDevConfigFileContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
     public function tearDown()
@@ -41,7 +52,7 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         );
 
         // manually set the config for overloading
-        Staging::setFilename(__DIR__ . '/fixtures/development.php');
+        Staging::setFilename($this->fileURL);
         $overloaded_cfg = Staging::overloadWithStagingConfig($array_to_overload);
 
         // new key exists
@@ -68,12 +79,9 @@ class StagingTest extends \PHPUnit_Framework_Testcase
     public function testGetFilename()
     {
         // test that the related development config exists
-        $expected_filename = __DIR__ . '/fixtures/development.php';
+        $expected_filename = $this->fileURL;
         $this->assertFileExists($expected_filename);
-
-        $filename = Staging::getFilename();
-
-        $this->assertEquals($filename, $expected_filename);
+        $this->assertEquals(Staging::getFilename(), 'vfs://root/development.ini.php');
 
         // automatically determine the config for overloading from SERVER_NAME
         Staging::setFilename(null);
@@ -106,5 +114,42 @@ class StagingTest extends \PHPUnit_Framework_Testcase
 
         $this->assertEquals($filename,$expected_filename);
         $this->assertEquals($filename,$expected_filename);
+    }
+
+        public function getDevConfigFileContent()
+    {
+        return <<<EOF
+; <?php die( 'Access forbidden.' ); /* DO NOT MODIFY THIS LINE! ?>
+;
+; Koch Framework Configuration File : Development
+; This file was generated on 26-08-2012 13:58
+;
+
+;----------------------------------------
+; database
+;----------------------------------------
+[database]
+host = "localhost"
+driver = "pdo_mysql"
+user = "root"
+password = 123
+dbname = "clansuitetest"
+prefix = "cs_"
+charset = "UTF8"
+
+;----------------------------------------
+; error
+;----------------------------------------
+[error]
+debug = 1
+xdebug = 0
+development = 1
+debug_popup = 0
+webdebug = 0
+help_edit_mode = 0
+compression = 0
+
+; DO NOT REMOVE THIS LINE */ ?>
+EOF;
     }
 }
