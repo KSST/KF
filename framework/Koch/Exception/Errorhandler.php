@@ -365,6 +365,11 @@ class Errorhandler
                 break;
             case 'resource':
                 $type .= '<span>resource</span>';
+                if($type === 'stream') {
+                    $type .= '(stream)';
+                    $meta = stream_get_meta_data($backtraceArgument);
+                    $type .= (isset($meta['uri']) ? htmlspecialchars($meta['uri'], ENT_NOQUOTES, 'UTF-8') : '';
+                }
                 $arg .= mb_strstr($backtraceArgument, '#').' - '. get_resource_type($backtraceArgument);
                 break;
             case 'NULL':
