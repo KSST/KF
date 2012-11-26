@@ -126,7 +126,7 @@ class Factory
         $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
 
         // path to configuration handler classes
-        $file = __DIR__ . '/adapter/' . $adapter . '.php';
+        $file = __DIR__ . '/Adapter/' . $adapter . '.php';
 
         if (is_file($file) === true) {
             $class = 'Koch\Config\Adapter\\' . $adapter;
@@ -139,10 +139,10 @@ class Factory
                 // instantiate and return the specific confighandler with the $configfile to read
                 return $class;
             } else {
-                throw new \Koch\Exception\Exception('Config_Factory -> Class not found: ' . $class, 40);
+                throw new \Koch\Exception\Exception(__CLASS__ . __METHOD__ . ' -> Class not found: ' . $class);
             }
         } else {
-            throw new \Koch\Exception\Exception('Config_Factory -> File not found: ' . $file, 41);
+            throw new \Koch\Exception\Exception(__CLASS__ . __METHOD__ . ' -> File not found: ' . $file);
         }
     }
 }
