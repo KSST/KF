@@ -74,7 +74,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
         // via getter
         $this->assertNotEquals('get', $this->form->getMethod());
-        // via getter
         $this->assertEquals('GET', $this->form->getMethod());
         // via property
         $this->assertEquals('GET', $this->form->method);
@@ -141,29 +140,21 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetAutocomplete()
     {
         $this->form->setAutocomplete(false);
-
-        // via getter
         $this->assertEquals('off', $this->form->getAutocomplete());
     }
 
     public function testSetAutocomplete()
     {
         $this->form->setAutocomplete(false);
-
-        // via getter
         $this->assertEquals('off', $this->form->getAutocomplete());
 
         $this->form->setAutocomplete(true);
-
-        // via getter
         $this->assertEquals('on', $this->form->getAutocomplete());
     }
 
     public function testGetNoValidation()
     {
         $this->form->setNoValidation(true);
-
-        // via getter
         $this->assertEquals('novalidate', $this->form->getNoValidation());
     }
 
@@ -250,48 +241,29 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @todo Implement testSetID().
+     * @covers Koch\Form\Form->setID()
+     * @covers Koch\Form\Form->getID()
      */
     public function testSetID()
     {
         $this->form->setId('identifier1');
-
-        // via getter - returns string
         $this->assertEquals('identifier1', $this->form->getId());
     }
 
-    public function testGetID()
-    {
-        $this->form->setId('identifier2');
-
-        // via getter - returns string
-        $this->assertEquals('identifier2', $this->form->getId());
-    }
-
+    /**
+     * @covers Koch\Form\Form->setName()
+     * @covers Koch\Form\Form->getName()
+     */
     public function testSetName()
     {
         $this->form->setName('name1');
-
-        // via getter - returns string
         $this->assertEquals('name1', $this->form->getName());
     }
 
-    public function testGetName()
-    {
-        $this->form->setName('name2');
-
-        // via getter - returns string
-        $this->assertEquals('name2', $this->form->getName());
-    }
-
-    public function testSetAcceptCharset()
-    {
-        $this->form->setAcceptCharset('iso-8859-1');
-
-        // via getter - returns string
-        $this->assertEquals('iso-8859-1', $this->form->getAcceptCharset());
-    }
-
+    /**
+     * @covers Koch\Form\Form->setAcceptCharset()
+     * @covers Koch\Form\Form->getAcceptCharset()
+     */
     public function testGetAcceptCharset()
     {
         // via getter - returns default value utf-8 as string
@@ -303,6 +275,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('iso-8859-1', $this->form->getAcceptCharset());
     }
 
+    /**
+     * @covers Koch\Form\Form->setClass()
+     * @covers Koch\Form\Form->getClass()
+     */
     public function testSetClass()
     {
         $this->form->setClass('cssclassname1');
@@ -311,14 +287,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('cssclassname1', $this->form->getClass());
     }
 
-    public function testGetClass()
-    {
-        $this->form->setClass('cssclassname2');
-
-        // via getter - returns string
-        $this->assertEquals('cssclassname2', $this->form->getClass());
-    }
-
+    /**
+     * @covers Koch\Form\Form->setDescription()
+     * @covers Koch\Form\Form->getDescription()
+     */
     public function testSetDescription()
     {
         $this->form->setDescription('description1');
@@ -327,14 +299,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('description1', $this->form->getDescription());
     }
 
-    public function testGetDescription()
-    {
-        $this->form->setDescription('description2');
-
-        // via getter - returns string
-        $this->assertEquals('description2', $this->form->getDescription());
-    }
-
+    /**
+     * @covers Koch\Form\Form->setHeading()
+     * @covers Koch\Form\Form->getHeading()
+     */
     public function testSetHeading()
     {
         $this->form->setHeading('heading2');
@@ -343,14 +311,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('heading2', $this->form->getHeading());
     }
 
-    public function testGetHeading()
-    {
-        $this->form->setHeading('heading2');
-
-        // via getter - returns string
-        $this->assertEquals('heading2', $this->form->getHeading());
-    }
-
+    /**
+     * @covers Koch\Form\Form->setEncoding()
+     * @covers Koch\Form\Form->getEncoding()
+     */
     public function testGetEncoding()
     {
         // via getter - returns default value as string
@@ -362,6 +326,10 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('text/plain', $this->form->getEncoding());
     }
 
+    /**
+     * @covers Koch\Form\Form->setLegend()
+     * @covers Koch\Form\Form->getLegend()
+     */
     public function testSetLegend()
     {
         $this->form->setLegend('legend-set');
@@ -380,30 +348,15 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->form, $return_value);
     }
 
-    public function testGetLegend()
+    /**
+     * @covers Koch\Form\Form->setFormelements()
+     * @covers Koch\Form\Form->getFormelements()
+     */
+    public function testSetFormelements()
     {
-        $this->form->setLegend('legend-get');
+        // via getter - returns inital empty array
+        $this->assertEquals(array(), $this->form->getFormelements());
 
-        // via getter - returns string
-        $this->assertEquals('legend-get', $this->form->getLegend());
-    }
-
-    public function testSetEncoding()
-    {
-        $this->form->setEncoding('text/plain');
-
-        // via getter - returns string
-        $this->assertEquals('text/plain', $this->form->getEncoding());
-    }
-
-    public function testGetFormelements()
-    {
-       // via getter - returns inital empty array
-       $this->assertEquals(array(), $this->form->getFormelements()); ;
-    }
-
-    public function testsetFormelements()
-    {
         $formelements = array('formelements');
         $this->form->setFormelements($formelements);
         $this->assertEquals($formelements, $this->form->getFormelements());
@@ -825,17 +778,14 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Koch\Form\Decorators\Form\Label', $form_decorator_object);
     }
 
+
+    /**
+     * @covers Koch\Form\Form->setDecoratorAttributesArray()
+     * @covers Koch\Form\Form->getDecoratorAttributesArray()
+     */
     public function testsetDecoratorAttributesArray()
     {
         $attributes = array('attribute1' => 'value1');
-        $this->form->setDecoratorAttributesArray($attributes);
-
-        $this->assertSame($attributes, $this->form->getDecoratorAttributesArray());
-    }
-
-    public function testgetDecoratorAttributesArray()
-    {
-        $attributes = array('attribute2' => 'value2');
         $this->form->setDecoratorAttributesArray($attributes);
 
         $this->assertSame($attributes, $this->form->getDecoratorAttributesArray());
