@@ -3,6 +3,9 @@
 namespace KochTest\Logger;
 
 use Koch\Logger\Compositum;
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
 
 class CompositumTest extends \PHPUnit_Framework_TestCase
 {
@@ -26,8 +29,17 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteLog()
     {
-        // add one logger
+        // create a virtual error log file
+        vfsStreamWrapper::register();
+        $this->configFile = vfsStream::url('root/errorlog.txt');
+        $this->file = vfsStream::newFile('errorlog.txt', 0777)->withContent('someContent');
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        vfsStreamWrapper::setRoot($this->root);
+
+        // add file logger and add virtual log file
         $logger = new \Koch\Logger\Adapter\File;
+        $logger->setErrorLogFilename($this->configFile);
         $this->object->addLogger($logger);
 
         // setup message to log
