@@ -28,15 +28,7 @@ namespace Koch\Exception;
 use Koch\Exception\Renderer\YellowScreenOfDeath;
 
 /**
- * Exception
- *
- * Sets up a custom Exceptionhandler.
- * @see Clansuite_CMS::initialize_Errorhandling()
- *
- * Developer Notice:
- * The "Fatal error: Exception thrown without a stack frame in Unknown on line 0"
- * is of PHP dying when an exception is thrown when running INSIDE an error or exception handler.
- * Avoid stacking Exceptions, e.g. try/catch Exception($e) and then throwing a \Koch\Exception\Exception().
+ * Koch Framework - Exception. Sets up a custom Exceptionhandler.
  *
  * @see http://php.net/manual/de/class.exception.php
  * @see http://php.net/manual/de/function.set-exception-handler.php
@@ -116,10 +108,7 @@ class Exception extends \Exception
         // if no errorcode is set, say that it's an rethrow
         if ($this->code === '0') {
             $this->code = '0 (This exception is uncatched and rethrown.)';
-        }
-
-        // fetch exceptionTemplates, but not for $code = 0
-        if ($this->code > 0) {
+        } else {
             self::fetchExceptionTemplates($this->code);
         }
 
@@ -139,7 +128,6 @@ class Exception extends \Exception
          * 2. provide link to templatefilemanager (module:file)
          */
 
-        include_once __DIR__ . '/Renderer/YellowScreenOfDeath.php';
         echo \Koch\Exception\Renderer\YellowScreenOfDeath::renderException(
             $this->message,
             $this->string,
