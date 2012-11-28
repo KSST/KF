@@ -241,8 +241,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setID()
-     * @covers Koch\Form\Form->getID()
+     * @covers Koch\Form\Form::setID()
+     * @covers Koch\Form\Form::getID()
      */
     public function testSetID()
     {
@@ -251,8 +251,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setName()
-     * @covers Koch\Form\Form->getName()
+     * @covers Koch\Form\Form::setName()
+     * @covers Koch\Form\Form::getName()
      */
     public function testSetName()
     {
@@ -261,8 +261,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setAcceptCharset()
-     * @covers Koch\Form\Form->getAcceptCharset()
+     * @covers Koch\Form\Form::setAcceptCharset()
+     * @covers Koch\Form\Form::getAcceptCharset()
      */
     public function testGetAcceptCharset()
     {
@@ -276,8 +276,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setClass()
-     * @covers Koch\Form\Form->getClass()
+     * @covers Koch\Form\Form::setClass()
+     * @covers Koch\Form\Form::getClass()
      */
     public function testSetClass()
     {
@@ -288,8 +288,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setDescription()
-     * @covers Koch\Form\Form->getDescription()
+     * @covers Koch\Form\Form::setDescription()
+     * @covers Koch\Form\Form::getDescription()
      */
     public function testSetDescription()
     {
@@ -300,8 +300,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setHeading()
-     * @covers Koch\Form\Form->getHeading()
+     * @covers Koch\Form\Form::setHeading()
+     * @covers Koch\Form\Form::getHeading()
      */
     public function testSetHeading()
     {
@@ -312,8 +312,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setEncoding()
-     * @covers Koch\Form\Form->getEncoding()
+     * @covers Koch\Form\Form::setEncoding()
+     * @covers Koch\Form\Form::getEncoding()
      */
     public function testGetEncoding()
     {
@@ -327,8 +327,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setLegend()
-     * @covers Koch\Form\Form->getLegend()
+     * @covers Koch\Form\Form::setLegend()
+     * @covers Koch\Form\Form::getLegend()
      */
     public function testSetLegend()
     {
@@ -349,8 +349,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\Form->setFormelements()
-     * @covers Koch\Form\Form->getFormelements()
+     * @covers Koch\Form\Form::setFormelements()
+     * @covers Koch\Form\Form::getFormelements()
      */
     public function testSetFormelements()
     {
@@ -780,8 +780,8 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
 
     /**
-     * @covers Koch\Form\Form->setDecoratorAttributesArray()
-     * @covers Koch\Form\Form->getDecoratorAttributesArray()
+     * @covers Koch\Form\Form::setDecoratorAttributesArray()
+     * @covers Koch\Form\Form::getDecoratorAttributesArray()
      */
     public function testsetDecoratorAttributesArray()
     {
