@@ -859,7 +859,7 @@ class Form implements FormInterface
         $directoryName = dirname($fileName);
         $fileArray = glob($directoryName . '/*', GLOB_NOSORT);
         foreach ($fileArray as $file) {
-            if (0 == strcasecmp($file, $fileName)) {
+            if (false !== stripos($file, $fileName . '.')) {
                 return realpath($file);
             }
         }
@@ -1085,7 +1085,7 @@ class Form implements FormInterface
         $file = self::fileExists(__DIR__ . '/Elements/' . $formelement);
 
         if ($file === false) {
-            throw new \Exception('The Formelement "' . $class . '" does not exist.');
+            throw new \Exception('The Formelement "' . $formelement . '" does not exist.');
         }
 
         // get PSR-0 classname from file
