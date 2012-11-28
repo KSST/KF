@@ -42,6 +42,7 @@
         </delete>
         <delete dir="${basedir}/vendor" quiet="true" />
         <delete file="${basedir}/composer.lock"/>
+        <delete file="${basedir}/tests/autoloader.classmap.php"/>
     </target>
 
     <target name="prepare" description="Prepare build" depends="clean, composer-install">
@@ -54,6 +55,8 @@
              - the vendor folder is created by composer
              - composer resides in /bin/composer/composer.phar
         -->
+        <touch file="${basedir}/tests/autoloader.classmap.php" />
+        <chmod perm="+rw" file="${basedir}/tests/autoloader.classmap.php"/>
     </target>
 
     <target name="phplint">
