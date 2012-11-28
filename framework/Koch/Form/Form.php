@@ -460,7 +460,7 @@ class Form implements FormInterface
      * Set id of this form.
      *
      * @param  string    $id ID of this form.
-     * @return Koch_Form
+     * @return Koch\Form\Form
      */
     public function setID($id)
     {
@@ -859,7 +859,7 @@ class Form implements FormInterface
         $directoryName = dirname($fileName);
         $fileArray = glob($directoryName . '/*', GLOB_NOSORT);
         foreach ($fileArray as $file) {
-            if (false !== stripos($file, $fileName)) {
+            if (0 == strcasecmp($file, $fileName)) {
                 return realpath($file);
             }
         }
