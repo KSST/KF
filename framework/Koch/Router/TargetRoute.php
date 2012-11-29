@@ -83,7 +83,7 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::getApplicationNamespace() . self::mapControllerToFilename(
+            $filename = self::mapControllerToFilename(
                 self::getModulePath(self::getModule()),
                 self::getController()
             );
