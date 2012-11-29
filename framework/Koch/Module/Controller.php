@@ -433,7 +433,7 @@ abstract class Controller
         }
 
         if (null === $formname) {
-            // construct formname like "news"_"action_admin_show"
+            // construct form name like "news"_"action_show"
             $formname = ucfirst($module) . '_' . ucfirst($action); // @todo adjust to PSR0
         }
 
