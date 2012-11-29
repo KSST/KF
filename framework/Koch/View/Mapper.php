@@ -241,6 +241,7 @@ class Mapper
 
         // check if template exists in one of the defined paths
         $module_template = self::findFileInPaths($paths, $template);
+        //\Koch\Debug\Debug::firebug('Module Template: ' . $module_template . '<br />');
 
         if ($module_template != null) {
             return $module_template;
@@ -265,7 +266,7 @@ class Mapper
         // check if the file exists in one of the defined paths
         foreach ($paths as $path) {
             $file = $path . $filename;
-            #\Koch\Debug\Debug::dump($file, false);
+            //\Koch\Debug\Debug::dump($file, false);
             if (is_file($file) === true) {
                 // file found
                 return $file;
