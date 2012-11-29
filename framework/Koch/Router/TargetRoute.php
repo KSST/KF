@@ -429,9 +429,4 @@ class TargetRoute extends Mapper
     {
         return self::$parameters;
     }
-
-    public function toArray()
-    {
-        return $this->getArrayCopy();
-    }
 }
