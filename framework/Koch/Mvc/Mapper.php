@@ -63,7 +63,7 @@ class Mapper extends \ArrayObject
      */
     public static function setApplicationNamespace($namespace)
     {
-        self::$applicationNamespace = $namespace;
+        self::$applicationNamespace = '\\'.$namespace;
     }
 
     public static function getApplicationNamespace()
@@ -90,7 +90,6 @@ class Mapper extends \ArrayObject
 
         // Mapping Example:
         // "/modules/news/" + "Controller/" + "Index" + "Controller.php"
-        // "/modules/news/" + "Controller/" + "Sub" + "Controller.php"
         return $module_path . ucfirst($controller) . self::MODULE_CLASS_SUFFIX;
     }
 
