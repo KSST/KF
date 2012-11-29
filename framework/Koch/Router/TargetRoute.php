@@ -83,7 +83,7 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::getApplicationNamespace() . self::mapControllerToFilename(
+            $filename = self::mapControllerToFilename(
                 self::getModulePath(self::getModule()),
                 self::getController()
             );
@@ -290,6 +290,7 @@ class TargetRoute extends Mapper
         // load the file, if the class does not exist, yet
         if (false === class_exists($class, false)) {
             if (is_file($file) === true) {
+                //\Koch\Debug\Debug::firebug($file);
                 include_once $file;
             }
         }
@@ -300,7 +301,7 @@ class TargetRoute extends Mapper
         }
 
         // LEAVE THIS - It shows how many routes were tried before a match happens!
-        //echo 'Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
+        //\Koch\Debug\Debug::firebug('Route not found : [ ' . $file .' | '. $class .' | '. $method . ']');
         return false;
     }
 
@@ -427,10 +428,5 @@ class TargetRoute extends Mapper
     public static function getRoute()
     {
         return self::$parameters;
-    }
-
-    public function toArray()
-    {
-        return $this->getArrayCopy();
     }
 }

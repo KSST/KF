@@ -524,7 +524,7 @@ class Router implements RouterInterface, \ArrayAccess
          * Detects if Mod_Rewrite engine is active and
          * calls the proper URL Parser/Segmentizer method for the extraction of uri segments.
          */
-        if ((true === $this->isRewriteEngineOn() or $_ENV['FORCE_MOD_REWRITE_ON']) and
+        if ((true === $this->isRewriteEngineOn() or isset($_ENV['FORCE_MOD_REWRITE_ON'])) and
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
             $this->uriSegments = $this->parseUrlRewrite($this->uri);
 
