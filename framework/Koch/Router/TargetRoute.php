@@ -277,7 +277,7 @@ class TargetRoute extends Mapper
         // load the file, if the class does not exist, yet
         if (false === class_exists($class, false)) {
             if (is_file($file) === true) {
-                echo 'included';
+                //\Koch\Debug\Debug::firebug($file);
                 include_once $file;
             }
         }
@@ -288,7 +288,7 @@ class TargetRoute extends Mapper
         }
 
         // LEAVE THIS - It shows how many routes were tried before a match happens!
-        echo '<br>Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
+        //\Koch\Debug\Debug::firebug('Route not found : [ ' . $file .' | '. $class .' | '. $method . ']');
         return false;
     }
 

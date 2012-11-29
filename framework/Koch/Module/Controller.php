@@ -292,17 +292,17 @@ namespace prefix
             }
         }
 
-        // only the "content template" is set
+        // only the "content template" was set
         if (is_string($templates)) {
             $view_mapper->setTemplate($templates);
         }
 
-        // get the templatename
+        // get templatename
         $template = $view_mapper->getTemplateName();
 
         // Debug display of Layout Template and Content Template
-        #\Koch\Debug\Debug::firebug('Layout/Wrapper Template: ' . $this->view->getLayoutTemplate() . '<br />');
-        #\Koch\Debug\Debug::firebug('Template Name: ' . $template . '<br />');
+        //\Koch\Debug\Debug::firebug('Layout/Wrapper Template: ' . $this->view->getLayoutTemplate() . '<br />');
+        //\Koch\Debug\Debug::firebug('Template Name: ' . $template . '<br />');
 
         // render the content / template
         $content = $this->view->render($template);
