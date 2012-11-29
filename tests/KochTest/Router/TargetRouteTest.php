@@ -311,13 +311,4 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $er = $this->object->getRoute();
         $this->assertTrue(is_array($er));
     }
-
-    /**
-     * @covers Koch\Router\TargetRoute::toArray
-     */
-    public function testToArray()
-    {
-        $er = $this->object->toArray();
-        $this->assertTrue(is_array($er));
-    }
 }
