@@ -290,6 +290,7 @@ class TargetRoute extends Mapper
         // load the file, if the class does not exist, yet
         if (false === class_exists($class, false)) {
             if (is_file($file) === true) {
+                echo 'included';
                 include_once $file;
             }
         }
@@ -300,7 +301,7 @@ class TargetRoute extends Mapper
         }
 
         // LEAVE THIS - It shows how many routes were tried before a match happens!
-        //echo 'Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
+        echo '<br>Route not found [ ' . $file .' | '. $class .' | '. $method . ' ]</strong>'.CR;
         return false;
     }
 
