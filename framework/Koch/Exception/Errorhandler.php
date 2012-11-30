@@ -61,7 +61,7 @@ class Errorhandler
      * @param string  $errline    contains the line of error.
      * @param string  $errcontext (optional) array with variables from error context.
      */
-    public static function errorhandler($errno, $errstr, $errfile, $errline, $errcontext = null)
+    public static function handle($errno, $errstr, $errfile, $errline, $errcontext = null)
     {
         /**
          * do just return, if the error is suppressed,
@@ -602,7 +602,7 @@ class Errorhandler
         );
 
         if (isset($fatals[$err['type']])) {
-            self::errorhandler($err['type'], $err['message'], $err['file'], $err['line']);
+            self::handle($err['type'], $err['message'], $err['file'], $err['line']);
         }
     }
 }

@@ -95,7 +95,7 @@ class Exception extends \Exception
      * @see http://php.net/manual/de/function.set-exception-handler.php
      * @param $exception PHP Exception Objects are valid (Type Hint).
      */
-    public function exceptionHandler(\Exception $exception)
+    public function handle(\Exception $exception)
     {
         // re/assign variables from an uncatched exception to this exception object
         $this->message = $exception->getMessage();
