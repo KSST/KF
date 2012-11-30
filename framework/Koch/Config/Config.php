@@ -75,7 +75,7 @@ class Config extends AbstractConfig
         // load config from file
         if ($appConfigIsCached === false) {
             $config = \Koch\Config\Adapter\INI::readConfig(
-                APPLICATION_PATH . 'Configuration/clansuite.php'
+                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
             // set to APC
             if (APC === true) {
@@ -108,12 +108,9 @@ class Config extends AbstractConfig
 
         $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
 
-        if (is_file($file)) {
-            return Factory::getConfiguration($file);
-        } else { // module has no configuration file
+        $result = (is_file($file) === true) ? Factory::getConfiguration($file) : array();
 
-            return array();
-        }
+        return $result;
     }
 
     /**
