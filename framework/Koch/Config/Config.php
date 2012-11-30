@@ -63,17 +63,14 @@ class Config extends AbstractConfig
     {
         static $config = array();
 
-        $appConfigIsCached = false;
         $apcAppKey = APPLICATION_NAME . '.config';
 
         // load config from APC
         if (APC === true and apc_exists($apcAppKey)) {
             $config = apc_fetch($apcAppKey);
-            $appConfigIsCached = true;
-        }
 
-        // load config from file
-        if ($appConfigIsCached === false) {
+        } else {
+            // load config from file
             $config = \Koch\Config\Adapter\INI::readConfig(
                     APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
@@ -83,7 +80,7 @@ class Config extends AbstractConfig
             }
         }
 
-        unset($appConfigIsCached, $apcAppKey);
+        unset($apcAppKey);
 
         // merge config with a staging configuration
         if (true === (bool) $config['config']['staging']) {
