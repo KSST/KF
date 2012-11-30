@@ -13,6 +13,7 @@
 namespace Koch\View\Renderer;
 
 use Koch\View\AbstractRenderer;
+use Koch\View\CacheableInterface;
 use Koch\View\Mapper;
 use Koch\Router\TargetRoute;
 
@@ -28,7 +29,7 @@ use Koch\Router\TargetRoute;
  * @package     View
  * @subpackage  Renderer
  */
-class Smarty extends AbstractRenderer
+class Smarty extends AbstractRenderer implements CacheableInterface
 {
     /**
      * RenderEngineConstructor
@@ -439,7 +440,7 @@ class Smarty extends AbstractRenderer
      *
      * @param bool $boolean
      */
-    public function setCaching($boolean = 'true')
+    public function activeCaching($boolean = 'true')
     {
         $this->renderer->caching = $boolean;
 
