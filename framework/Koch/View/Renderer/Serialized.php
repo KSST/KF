@@ -49,7 +49,7 @@ class Serialized extends AbstractRenderer
     public function render($template, $viewdata = null)
     {
         if ($viewdata !== null) {
-            $this->assign($viewdata);
+            $this->viewdata = $viewdata;
         }
 
         return serialize($this->viewdata);
