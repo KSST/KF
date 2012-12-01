@@ -96,7 +96,7 @@ class Config extends AbstractConfig
         unset($apcAppKey);
 
         // merge config with a staging configuration
-        if (true === (bool) $config['config']['staging']) {
+        if (isset($config['config']['staging']) === true and true === (bool) $config['config']['staging']) {
             $config = \Koch\Config\Staging::overloadWithStagingConfig($config);
         }
 
