@@ -8,9 +8,9 @@
  */
 
 /**
- * Name:         loadmodule
- * Type:         function
- * Purpose: This TAG inserts the a certain module and its widget.
+ * Name:    loadmodule
+ * Type:    function
+ * Purpose: This smarty function loads a certain module action and inserts it's content.
  *
  * Static Function to Call variable Methods from templates via
  * {load_module name= sub= params=}
@@ -25,23 +25,17 @@
  */
 function Smarty_function_load_module($params, $smarty)
 {
-    // debug display for the incomming parameters of a specific load_module request
-    if ($params['name'] == 'news') {
-        // \Koch\Debug\Debug::firebug($params);
-    }
-
-    // Init incomming Variables
+    // init incomming variables
     $module = isset($params['name']) ? (string) $params['name'] : '';
     $controller = isset($params['ctrl']) ? (string) $params['ctrl'] : '';
     $action = isset($params['action']) ? (string) $params['action'] : '';
     $items = isset($params['items']) ? (int) $params['items'] : null;
 
     // Load Module/Controller in order to get access to the widget method
-    $module_path = \Koch\Mvc\Mapper::getModulePath($module);
-    #echo $module_path . '<br>';
+    //$module_path = \Koch\Mvc\Mapper::getModulePath($module);
+    //echo $module_path . '<br>';
 
     $classname = \Koch\Mvc\Mapper::mapControllerToClassname($module, $controller);
-    #echo $classname . '<br>';
 
     if (class_exists($classname) === false) {
         return '<br/>Widget Loading Error.<br/>Module missing or misspelled? <strong>' . $module .' ' . $controller . '</strong>';
@@ -74,7 +68,7 @@ function Smarty_function_load_module($params, $smarty)
         }
 
         // Call the Action on the Module
-        $module_controller->$action($items);
+        //$module_controller->$action($items);
 
         /**
          * Output the template of a widget
@@ -92,12 +86,12 @@ function Smarty_function_load_module($params, $smarty)
         $viewMapper = new Koch\View\Mapper();
         $template = $viewMapper->getModuleTemplatePath($template, $module);
 
-        \Koch\Debug\Debug::printR($template);
-
         if(is_file($template)) {
             return $smarty->fetch($template);
         } else {
             return trigger_error('Widget Template not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
         }
+    } else {
+        return trigger_error('Module Action not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
     }
 }
