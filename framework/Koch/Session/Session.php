@@ -112,12 +112,12 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
          * Userspace Session Storage
          */
         session_set_save_handler(
-            array($this, 'sessionOpen'),
-            array($this, 'sessionClose'),
-            array($this, 'sessionRead'),
-            array($this, 'sessionWrite'),
-            array($this, 'sessionDestroy'),
-            array($this, 'sessionGc')
+            array($this, 'open'),
+            array($this, 'close'),
+            array($this, 'read'),
+            array($this, 'write'),
+            array($this, 'destroy'),
+            array($this, 'gc')
         );
 
         // prevents unexpected effects when using objects as save handlers
@@ -193,7 +193,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      *
      * @return true
      */
-    public function sessionOpen()
+    public function open($path = null, $name = null)
     {
         return true;
     }
@@ -203,7 +203,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      *
      * @return true
      */
-    public function sessionClose()
+    public function close()
     {
         session_write_close();
 
@@ -216,7 +216,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      * @param  int $session_id contains the session_id
      * @return string  string of the session data
      */
-    public function sessionRead($session_id)
+    public function read($session_id)
     {
         try {
             $em = \Clansuite\Application::getEntityManager();
@@ -266,7 +266,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      * @param  array   $data       contains session_data
      * @return bool
      */
-    public function sessionWrite($session_id, $data)
+    public function write($session_id, $data)
     {
         /**
          * Try to INSERT Session Data or REPLACE Session Data in case session_id already exists
@@ -309,7 +309,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      *
      * @param string $session_id
      */
-    public function sessionDestroy($session_id)
+    public function destroy($session_id)
     {
         // Unset all of the session variables.
         $_SESSION = array();
@@ -354,7 +354,7 @@ class Session implements SessionInterface, \ArrayAccess /* 5.4 implements Sessio
      * @param int session life time (mins)
      * @return boolean
      */
-    public function sessionGc($maxlifetime = 30)
+    public function gc($maxlifetime = 30)
     {
         if ($maxlifetime == 0) {
             return;
