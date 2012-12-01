@@ -40,7 +40,16 @@ use Koch\View\AbstractRenderer;
  */
 class Pdf extends AbstractRenderer
 {
-    public function initializeEngine()
+    public function __construct()
+    {
+        // composer autoload not working, due to missing autoload section in mpdfs composer.json
+        include_once VENDOR_PATH . '/mpdf/mpdf/mpdf.php';
+        $mpdf = new \mPDF();
+        $mpdf->WriteHTML('<p>Your first taste of creating PDF from HTML</p>');
+        $mpdf->Output();
+    }
+
+    public function initializeEngine($template = null)
     {
 
     }
@@ -50,7 +59,27 @@ class Pdf extends AbstractRenderer
 
     }
 
-    public function render()
+    public function render($template, $viewdata)
+    {
+
+    }
+
+    public function assign($tpl_parameter, $value = null)
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
+    public function getEngine()
     {
 
     }

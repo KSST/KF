@@ -25,6 +25,8 @@
 
 namespace Koch\View\Renderer;
 
+use Koch\View\AbstractRenderer;
+
 /**
  * Koch Framework - View Renderer for JSON data.
  *
@@ -44,9 +46,9 @@ namespace Koch\View\Renderer;
  * @package     Core
  * @subpackage  View
  */
-class Json extends AbstractRenderere
+class Json extends AbstractRenderer
 {
-    public function initializeEngine()
+    public function initializeEngine($template = null)
     {
     }
 
@@ -91,8 +93,12 @@ class Json extends AbstractRenderere
      * @param $data array
      * @return $json_encoded_data
      */
-    public function render($data)
+    public function render($template, $viewdata = null)
     {
+        if ($viewdata !== null) {
+            $this->assign($viewdata);
+        }
+
         /**
          * The MIME media type for JSON text is application/json.
          * @see http://www.ietf.org/rfc/rfc4627
@@ -102,6 +108,26 @@ class Json extends AbstractRenderere
             'application/json; charset='.$this->config['locale']['outputcharset']
         );
 
-        return $this->jsonEncode($data);
+        return $this->jsonEncode($this->viewdata);
+    }
+
+    public function assign($tpl_parameter, $value = null)
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
+    public function getEngine()
+    {
+
     }
 }

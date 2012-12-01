@@ -42,7 +42,7 @@ class Csv extends AbstractRenderer
     private $data = array();
     private $header = array();
 
-    public function initializeEngine()
+    public function initializeEngine($template = null)
     {
         return;
     }
@@ -150,5 +150,20 @@ class Csv extends AbstractRenderer
         }
 
         return true;
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
+    public function getEngine()
+    {
+
     }
 }

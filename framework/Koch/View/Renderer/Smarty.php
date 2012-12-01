@@ -453,7 +453,7 @@ class Smarty extends AbstractRenderer implements CacheableInterface
      *
      * @param bool $boolean
      */
-    public function activeCaching($boolean = 'true')
+    public function activateCaching($boolean = 'true')
     {
         $this->renderer->caching = $boolean;
 

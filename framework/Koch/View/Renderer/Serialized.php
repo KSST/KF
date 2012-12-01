@@ -46,8 +46,42 @@ class Serialized extends AbstractRenderer
      *
      * @return string Serialized data.
      */
-    public function render($template, $viewdata)
+    public function render($template, $viewdata = null)
     {
+        if ($viewdata !== null) {
+            $this->assign($viewdata);
+        }
+
         return serialize($this->viewdata);
+    }
+
+    public function assign($tpl_parameter, $value = null)
+    {
+
+    }
+
+    public function configureEngine()
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
+    public function getEngine()
+    {
+
+    }
+
+    public function initializeEngine($template = null)
+    {
+
     }
 }
