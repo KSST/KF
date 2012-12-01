@@ -83,31 +83,21 @@ function Smarty_function_load_module($params, $smarty)
          * You can also set an alternative widgettemplate inside the widget itself
          * via setTemplate() method.
          *
-         * The order of template detection is determined by the $smarty->template_dir array.
-         * @see $smarty->template_dir
+         * For the order of template detection   method.
+         * @see \Koch\View\Mapper->getModuleTemplatePaths()
          */
         // build template name
         $template = $action . '.tpl';
 
-        // for a look at the detection order uncomment the next line
-        #\Koch\Debug\Debug::printR($smarty->template_dir);
+        $viewMapper = new Koch\View\Mapper();
+        $template = $viewMapper->getModuleTemplatePath($template, $module);
 
-        if ($smarty->templateExists('Modules/' . $module . DIRECTORY_SEPARATOR . $action . '.tpl')) {
-            // $smarty->template_dir[s]..Modules\news\widget_news.tpl
-            return $smarty->fetch('Modules/' . $module . DIRECTORY_SEPARATOR . $action . '.tpl');
-        } elseif ($smarty->templateExists('Modules/' . $module . '/View/Smarty/' . $action . '.tpl')) {
-            // $smarty->template_dir[s]..Modules\news\View\widget_news.tpl
-            return $smarty->fetch('Modules/' . $module . '/View/Smarty/' . $action . '.tpl');
-        } elseif ($smarty->templateExists($module . '/View/Smarty/' . $action . '.tpl')) {
-            // $smarty->template_dir[s]..\news\View\Smarty\widget_news.tpl
-            return $smarty->fetch($module . '/View/Smarty/' . $action . '.tpl');
-        } elseif ($smarty->templateExists($template)) {
-            // $smarty->template_dir[s].. $template
+        \Koch\Debug\Debug::printR($template);
+
+        if(is_file($template)) {
             return $smarty->fetch($template);
         } else {
-            return trigger_error('Error! Failed to load Widget-Template for <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
+            return trigger_error('Widget Template not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
         }
-    } else {
-        return trigger_error('Error! Failed to load Widget: <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
     }
 }
