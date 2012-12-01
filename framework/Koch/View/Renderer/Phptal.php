@@ -37,7 +37,7 @@ class Phptal extends AbstractRenderer
      * 3) Configure the RenderEngine with it's specific settings = self::configureEngine();
      * 4) Eventlog
      */
-    public function __construct(Koch\Config $config)
+    public function __construct(\Koch\Config\Config $config)
     {
         parent::__construct($config);
         $this->initializeEngine();
@@ -54,11 +54,11 @@ class Phptal extends AbstractRenderer
         $phptal = VENDOR_PATH . 'phptal/PHPTAL.php';
         // prevent redeclaration
         if (class_exists('PHPTAL', false) === false) {
-            // check if Smarty library exists
+            // check if library exists
             if (is_file($phptal) === true) {
                 include $phptal;
             } else {
-                throw new \Koch\Exception\Exception('PHPTal Library missing!');
+                throw new \Koch\Exception\Exception('The vendor library "PHPTal" is missing!');
             }
         }
 

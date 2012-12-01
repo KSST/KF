@@ -28,7 +28,7 @@ use Koch\View\AbstractRenderer;
  */
 class Xtemplate extends AbstractRenderer
 {
-    public function __construct(Koch\Config $config)
+    public function __construct(\Koch\Config\Config $config)
     {
         parent::__construct($config);
     }
