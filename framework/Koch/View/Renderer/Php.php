@@ -12,6 +12,8 @@
 
 namespace Koch\View\Renderer;
 
+use Koch\View\AbstractRenderer;
+
 /**
  * View Renderer for native PHP Templates.
  *
@@ -21,7 +23,7 @@ namespace Koch\View\Renderer;
  * @package     View
  * @subpackage  Renderer
  */
-class Php extends Renderer_Base
+class Php extends AbstractRenderer
 {
     private $file;
 
@@ -34,7 +36,7 @@ class Php extends Renderer_Base
      * @param  array  $data     Data to extract to the local scope.
      * @return string
      */
-    public function fetch($filename = null, array $data = array())
+    public function fetch($template, $data = null)
     {
         if (is_array($data)) {
             $this->data = $data;
@@ -42,8 +44,8 @@ class Php extends Renderer_Base
 
         $file = '';
 
-        if ($filename === null) {
-            $file = $filename . '.tpl';
+        if ($template === null) {
+            $file = $template . '.tpl';
         } else {
             $file = $this->file;
         }
@@ -113,5 +115,25 @@ class Php extends Renderer_Base
     public function __toString()
     {
         return $this->render();
+    }
+
+    public function configureEngine()
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function getEngine()
+    {
+
+    }
+
+    public function initializeEngine($template = null)
+    {
+
     }
 }

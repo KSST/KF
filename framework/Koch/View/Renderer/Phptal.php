@@ -12,6 +12,8 @@
 
 namespace Koch\View\Renderer;
 
+use Koch\View\AbstractRenderer;
+
 /**
  * View Renderer for PHPTAL templates.
  *
@@ -24,7 +26,7 @@ namespace Koch\View\Renderer;
  * @package     View
  * @subpackage  Renderer
  */
-class Phptal extends Renderer_Base
+class Phptal extends AbstractRenderer
 {
     /**
      * RenderEngineConstructor
@@ -47,7 +49,7 @@ class Phptal extends Renderer_Base
      *
      * @return PHPTAL Object
      */
-    public function initializeEngine()
+    public function initializeEngine($template = null)
     {
         $phptal = VENDOR_PATH . 'phptal/PHPTAL.php';
         // prevent redeclaration
@@ -61,7 +63,7 @@ class Phptal extends Renderer_Base
         }
 
         // Do it with phptal style > eat like a bird, poop like an elefant!
-        $this->renderer = new PHPTAL();
+        $this->renderer = new PHPTAL($template);
     }
 
     /**
@@ -135,31 +137,56 @@ class Phptal extends Renderer_Base
     }
 
     /**
-     * Display template
+     * Renders a template and returns the content.
      *
      * @param $template
      * @param $returnOutput
      * @return string Rendered Template Content
      */
-    protected function render($template = null, $returnContent = false)
+    public function render($template, $viewdata = null)
     {
         // get the template from the parent class
         if ($template === null) {
             $template = $this->getTemplate();
         }
 
+        if ($viewdata !== null) {
+            $this->assign($viewdata);
+        }
+
         $this->renderer->setTemplate($template);
 
         try {
             // let PHPTAL process the template
-            $output = $this->renderer->execute();
+            return $this->renderer->execute();
+        } catch (Exception $e) {
+            throw new \Koch\Exception\Exception($e);
+        }
+    }
 
-            // return or echo the content
-            if ($returnContent === true) {
-                return $content;
-            } else {
-                echo $content;
-            }
+    /**
+     * Renders a template and displays the content.
+     *
+     * @param $template
+     * @param $returnOutput
+     * @return string Rendered Template Content
+     */
+    public function display($template, $viewdata = null)
+    {
+        // get the template from the parent class
+        if ($template === null) {
+            $template = $this->getTemplate();
+        }
+
+        if ($viewdata !== null) {
+            $this->assign($viewdata);
+        }
+
+        $this->renderer->setTemplate($template);
+
+        try {
+            // let PHPTAL process the template
+            echo $this->renderer->execute();
         } catch (Exception $e) {
             throw new \Koch\Exception\Exception($e);
         }
@@ -171,7 +198,7 @@ class Phptal extends Renderer_Base
      * @param $template Template
      * @return string Rendered Template Content.
      */
-    protected function fetch($template)
+    public function fetch($template, $data = null)
     {
         return $this->render($template, true);
     }
@@ -248,16 +275,4 @@ class Phptal extends Renderer_Base
             unset($this->renderer->$key);
         }
     }
-
-    /**
-     * Clone PHPTAL object
-     *
-     * @todo Check if clone is needed to work with several instances of phptal for widgets?
-     */
-    /*
-    public function __clone()
-    {
-        $this->phptal = clone $this->phptal;
-    }
-    */
 }

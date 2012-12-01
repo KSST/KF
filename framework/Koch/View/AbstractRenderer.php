@@ -107,13 +107,6 @@ abstract class AbstractRenderer
     abstract public function render($template, $viewdata);
 
     /**
-     * Renders the given Template with renderMode unwrapped (without Layout)
-     *
-     * @return string
-     */
-    abstract public function renderPartial($template);
-
-    /**
      * Assigns a value to a template parameter.
      *
      * @param string $tpl_parameter The template parameter name
@@ -128,7 +121,7 @@ abstract class AbstractRenderer
      * @param  mixed  $data     Additional data to process
      * @return string
      */
-    abstract public function fetch($template, $data = null);
+    abstract public function fetch($template, $viewdata = null);
 
     /**
      * Executes the template rendering and displays the result.
@@ -137,26 +130,32 @@ abstract class AbstractRenderer
      * @param  mixed  $data     Additional data to process
      * @return string
      */
-    abstract public function display($template, $data = null);
+    abstract public function display($template, $viewdata = null);
 
     /**
      * Clear all assigned Variables
      */
-    abstract public function clearVars();
+    public function clearVars()
+    {
+        $this->viewdata = null;
+    }
 
     /**
      * Returns all assigned template variables.
      */
-    abstract public function getVars();
+    public function getVars()
+    {
+        return $this->viewdata;
+    }
 
     public function getViewMapper()
     {
         return $this->viewMapper;
     }
 
-    public function setViewMapper(\Koch\View\Mapper $view_mapper)
+    public function setViewMapper(\Koch\View\Mapper $viewMapper)
     {
-        $this->viewMapper = $view_mapper;
+        $this->viewMapper = $viewMapper;
     }
 
     /**

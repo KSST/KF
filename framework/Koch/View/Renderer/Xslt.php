@@ -85,18 +85,50 @@ class Xslt extends AbstractRenderer
     /**
      * This renders the xml $data array.
      *
+     * @param $template The XSL Stylesheet.
      * @param $data XML Data to render
      */
-    public function render($data)
+    public function render($template, $data)
     {
         // $this->response()->setContentType('text/html');
 
+        if($template != '') {
+            $stylesheet = $template;
+        } else {
+            $stylesheet = $this->getXSLStyleSheet();
+        }
+
         // import the stylesheet for later transformation
-        $this->xslt->importStyleSheet(\DOMDocument::load($this->getXSLStyleSheet()));
+        $this->xslt->importStyleSheet(\DOMDocument::load($stylesheet));
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform
         $dom = $this->xslt->transformToXML(\DOMDocument::load($data));
 
         return $dom;
+    }
+
+    public function assign($tpl_parameter, $value = null)
+    {
+
+    }
+
+    public function configureEngine()
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
+    public function initializeEngine($template = null)
+    {
+
     }
 }
