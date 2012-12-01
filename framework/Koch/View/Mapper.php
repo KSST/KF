@@ -208,10 +208,12 @@ class Mapper
      *
      * @return array Module Template Paths
      */
-    public static function getModuleTemplatePaths()
+    public static function getModuleTemplatePaths($module = null)
     {
         // fetch modulename for template path construction
-        $module = TargetRoute::getModule();
+        if($module === null) {
+            $module = TargetRoute::getModule();
+        }
 
         // fetch renderer name for template path construction
         $renderer = HttpRequest::getRoute()->getRenderEngine();
@@ -233,9 +235,9 @@ class Mapper
      * @param  string $template Template Filename
      * @return string
      */
-    public static function getModuleTemplatePath($template)
+    public static function getModuleTemplatePath($template, $module = null)
     {
-        $paths = self::getModuleTemplatePaths();
+        $paths = self::getModuleTemplatePaths($module);
 
         $module_template = null;
 
@@ -250,6 +252,7 @@ class Mapper
             $renderer = HttpRequest::getRoute()->getRenderEngine();
 
             // the template with that name is not found on our default paths
+            // @todo if this would be a html template, we could skip determining the render engine
             return APPLICATION_PATH . 'themes/core/view/' . $renderer . '/template_not_found.tpl';
         }
     }
