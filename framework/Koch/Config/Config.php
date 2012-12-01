@@ -61,7 +61,7 @@ class Config extends AbstractConfig
 
     public function getApplicationConfig()
     {
-        static $config = array();
+        $config = array();
 
         $apcAppKey = APPLICATION_NAME . '.config';
 
