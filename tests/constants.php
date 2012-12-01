@@ -10,7 +10,7 @@ defined('WWW_ROOT_THEMES_CORE')     || define('WWW_ROOT_THEMES_CORE', 'http://')
 defined('REWRITE_ENGINE_ON')        || define('REWRITE_ENGINE_ON', false);
 
 defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'TESTAPPLICATION');
-defined('APPLICATION_PATH')         || define('APPLICATION_PATH', '/fixtures/APP/');
+defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/fixtures/APP/');
 defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
 defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', '/Modules/');
 
