@@ -303,18 +303,13 @@ class ManifestManager
                 self::$modulesinfo[$modulename]['config'] = $config[$modulename];
 
                 // properties
-                if ( isset($config['properties'])) {
+                if (isset($config['properties'])) {
                     self::$modulesinfo[$modulename]['settings'] = $config['properties'];
                 }
-
-                // acl
-                if ( isset($config['properties_acl'])) {
-                    self::$modulesinfo[$modulename]['acl'] = $config['properties_acl'];
-                }
             }
-            /*else {
-                $modules[$modulename]['config'] = $config;
-            }*/
+            /* else {
+              $modules[$modulename]['config'] = $config;
+              } */
 
             // hasLanguages
             self::$modulesinfo[$modulename]['languages'] = self::getLanguageInfosForModule($modulepath);
