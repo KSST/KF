@@ -104,13 +104,11 @@ abstract class Controller
      */
     public function getEntityNameFromClassname()
     {
-        // classname e.g. "Clansuite\Modules\News\Controller\NewsController"
-        // will fetch this part as doctrine entity name ---------------> ^^^^
+        // takes classname e.g. "Clansuite\Modules\News\Controller\NewsController"
         $classname = get_called_class();
-        $classname = str_replace('Controller', '', $classname);
-        $segments = explode('\\', $classname);
-        $entityName = array_pop($segments);
-
+        preg_match('/Controller\\(.*)Controller/i', $classname, $matches);
+        $entityName = $matches[1];
+       
         // add entities namespace prefix
         $this->entityName = 'Entity\\' . $entityName;
 
