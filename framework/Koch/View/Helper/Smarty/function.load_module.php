@@ -68,7 +68,7 @@ function Smarty_function_load_module($params, $smarty)
         }
 
         // Call the Action on the Module
-        //$module_controller->$action($items);
+        $module_controller->$action($items);
 
         /**
          * Output the template of a widget
