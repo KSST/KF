@@ -190,7 +190,7 @@ class HttpResponse implements HttpResponseInterface
         }
 
         // activateOutputCompression when not in debugging mode
-        if (XDEBUG === false and DEBUG === false) {
+        if (defined('DEBUG') and DEBUG === false) {
             \Koch\Http\ResponseEncode::startOutputBuffering('7');
         }
 
@@ -223,26 +223,27 @@ class HttpResponse implements HttpResponseInterface
         echo self::getContent();
 
         // Flush Compressed Buffer
-        if (XDEBUG === false and DEBUG === false) {
+        if (defined('DEBUG') and DEBUG === false) {
             \Koch\Http\ResponseEncode::stopOutputBuffering();
-
-            // send response and do some more php processing afterwards
-            if (is_callable('fastcgi_finish_request') === true) {
-                fastcgi_finish_request();
-            }
         }
 
         // OK, Reset -> Package delivered! Return to Base!
         self::clearHeaders();
+
+        return true;
     }
 
     /**
-     * Resets the Headers and the Data
+     * Resets the headers and content.
+     *
+     * @return bool true.
      */
     public static function clearHeaders()
     {
         self::$headers = array();
         self::$content = null;
+
+        return true;
     }
     /**
      * A better alternative (RFC 2109 compatible) to the php setcookie() function
