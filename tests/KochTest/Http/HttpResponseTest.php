@@ -134,9 +134,33 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
         HttpResponse::addHeader('SomeHeader', 'SomeValue');
         HttpResponse::setContent('Some Content.');
 
-        HttpResponse::clearHeaders();
+        $this->assertTrue(HttpResponse::clearHeaders());
 
         $this->assertArrayNotHasKey('SomeHeader',  self::reflectProperty('headers')->getValue());
         $this->assertNull(HttpResponse::getContent());
+    }
+
+    public function testSetNoCacheHeader()
+    {
+         HttpResponse::setNoCacheHeader();
+
+         $this->assertArrayHasKey('Pragma', self::reflectProperty('headers')->getValue());
+         $this->assertArrayHasKey('Cache-Control', self::reflectProperty('headers')->getValue());
+         $this->assertArrayHasKey('Expires',  self::reflectProperty('headers')->getValue());
+         $this->assertArrayHasKey('Last-Modified', self::reflectProperty('headers')->getValue());
+    }
+
+    public function testSendResponse()
+    {
+        $content = 'Some Body';
+        HttpResponse::setContent($content);
+        HttpResponse::addHeader('Header', 'Content');
+        HttpResponse::addHeader('Header2', 'Content2');
+
+        ob_start();
+        HttpResponse::sendResponse();
+        $result = ob_get_clean();
+
+        $this->assertEquals($content, $result);
     }
 }
