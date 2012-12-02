@@ -1,6 +1,6 @@
 <?php
 
-namespace Koch\Http\HttpRequest;
+namespace Koch\Http;
 
 use Koch\Http\HttpRequest;
 
