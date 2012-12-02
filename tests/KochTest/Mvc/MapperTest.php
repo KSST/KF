@@ -34,7 +34,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
     public function testSetApplicationNamespace()
     {
         $this->object->setApplicationNamespace(__NAMESPACE__);
-        $this->assertEquals('KochTest\Mvc', Mapper::$applicationNamespace);
+        $this->assertEquals('\KochTest\Mvc', Mapper::$applicationNamespace);
     }
 
     /**
@@ -73,14 +73,14 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
         $module = 'SomeModuleA';
         $this->assertEquals(
-            'Application\Modules\SomeModuleA\Controller\SomeModuleAController',
+            '\Application\Modules\SomeModuleA\Controller\SomeModuleAController',
             $this->object->mapControllerToClassname($module)
         );
 
         $module = 'SomeModuleB';
         $controller = 'SomeControllerA';
         $this->assertEquals(
-            'Application\Modules\SomeModuleB\Controller\SomeControllerAController',
+            '\Application\Modules\SomeModuleB\Controller\SomeControllerAController',
             $this->object->mapControllerToClassname($module, $controller)
         );
     }

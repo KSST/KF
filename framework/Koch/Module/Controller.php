@@ -95,24 +95,21 @@ abstract class Controller
     }
 
     /**
-     * The name of the entity extracted from the classname
-     *
-     * @todo isn't this the pure "mod" name?
+     * The name of the entity extracted from the classname.
      *
      * @param string Classname
      * @return string The name of the entity extracted from classname
      */
     public function getEntityNameFromClassname()
     {
-        // classname e.g. "Clansuite\Modules\News\Controller\NewsController"
-        // will fetch this part as doctrine entity name ---------------> ^^^^
-        $classname = get_called_class();
-        $classname = str_replace('Controller', '', $classname);
-        $segments = explode('\\', $classname);
-        $entityName = array_pop($segments);
+        $matches = array();
 
-        // add entities namespace prefix
-        $this->entityName = 'Entity\\' . $entityName;
+        // takes a classname, e.g. "Clansuite\Modules\News\Controller\NewsController"
+        $classname = get_called_class();
+        preg_match("~Controller\\\(.*)Controller~is", $classname, $matches);
+
+        // and returns the entity name, e.g. "Entity\News"
+        $this->entityName = 'Entity\\' . $matches[1];
 
         return $this->entityName;
     }
