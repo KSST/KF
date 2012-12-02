@@ -13,7 +13,9 @@ defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'TESTAPPLICATI
 defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/fixtures/APP/');
 defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
 defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', '/Modules/');
+defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
 
 defined('VENDOR_PATH')              || define('VENDOR_PATH', __DIR__ . '/../vendor/');
 
 defined('APC')                      || define('APC', extension_loaded('apc'));
+defined('DEBUG')                    || define('DEBUG', true);
