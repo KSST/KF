@@ -10,8 +10,93 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace prefix
-        $this->entityName = 'Entity\\' . $entityName;
+namespace Koch\Module;
+
+use Koch\Http\HttpRequest;
+use Koch\Http\HttpRequestInterface;
+use Koch\Http\HttpResponseInterface;
+
+/**
+ * ModuleController
+ *
+ * Is an abstract class (parent class) to share some common features for all (Module/Action)-Controllers.
+ * You could call it ModuleController and ActionController.
+ * It`s abstract because it should only be extended, not instantiated.
+ *
+ * @category    Koch
+ * @package     Core
+ * @subpackage  Module
+ */
+abstract class Controller
+{
+    /**
+     * @var object The rendering engine / view object
+     */
+    public $view = null;
+
+    /**
+     * @var string Name of the rendering engine
+     */
+    public $renderEngineName = null;
+
+    /**
+     * @var string The name of the template to render
+     */
+    public $template = null;
+
+    /**
+     * @var \Koch\Http\HttpResponse
+     */
+    public $response = null;
+
+    /**
+     * @var \Koch\Http\HttpRequest
+     */
+    public $request = null;
+
+    /**
+     * @var \Doctrine\ORM\EntityManager
+     */
+    public $doctrine_em = null;
+
+    /**
+     * @var array The Module Configuration Array
+     */
+    public static $moduleconfig = null;
+
+    public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
+    {
+        $this->request = $request;
+        $this->response = $response;
+        $this->doctrine_em = \Clansuite\Application::getEntityManager();
+    }
+
+    /**
+     * Returns the Doctrine Entity Manager
+     *
+     * @return \Doctrine\ORM\EntityManager
+     */
+    public function getDoctrineEntityManager()
+    {
+        return $this->doctrine_em;
+    }
+
+    /**
+     * The name of the entity extracted from the classname.
+     *
+     * @param string Classname
+     * @return string The name of the entity extracted from classname
+     */
+    public function getEntityNameFromClassname()
+    {
+        $matches = array();
+
+        // takes a classname, e.g. "Clansuite\Modules\News\Controller\NewsController"
+        $classname = get_called_class();
+        preg_match("~Controller\\\(.*)Controller~is", $classname, $matches);
+
+        // and returns the entity name, e.g. "Entity\News"
+        $this->entityName = 'Entity\\' . $matches[1];
 
         return $this->entityName;
     }

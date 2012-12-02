@@ -59,7 +59,8 @@ class Smarty extends AbstractRenderer implements CacheableInterface
     public function initializeEngine($template = null)
     {
         // Do it with smarty style > eat like a bird, poop like an elefant!
-        $this->renderer = new Smarty();
+        /* @var Smarty */
+        $this->renderer = new \Smarty();
     }
 
     /**
