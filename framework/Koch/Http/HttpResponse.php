@@ -104,7 +104,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
      /**
-      * add a header to the response array, which is send to the browser
+      * Adds a header to the response array, which is send to the browser
       *
       * @param  string $name the name of the header
       * @param  string $value the value of the header
@@ -115,8 +115,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * setContent appends or replaces the content of the
-     * http response buffer.
+     * setContent appends or replaces the content of the http response buffer.
      *
      * appends content to the response body.
      * when $replace is true, the bodycontent is replaced.
@@ -373,15 +372,13 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * Redirect
-     *
-     * Redirects to the URL.
+     * Redirect, redirects to an URL.
      * This redirects automatically, when headers are not already sent,
      * else it provides a link to the target URL for manual redirection.
      *
      * Time defines how long the redirect screen will be displayed.
-     * Statuscode defines a http status code. The default value is 302.
-     * Text is a messagestring for the htmlbody of the redirect screen.
+     * Statuscode defines a http status code. The default value is 303.
+     * Text is a message string for the html body of the redirect screen.
      *
      * @param string Redirect to this URL
      * @param int    seconds before redirecting (for the html tag "meta refresh")
