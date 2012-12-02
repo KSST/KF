@@ -219,7 +219,11 @@ class Errorhandler
         // if a trace is incoming, then this trace comes from an exception
         if (isset($trace) === false) {
             // else (normally) the errorhandler has to fetch the backtrace
-            $trace = debug_backtrace();
+            if(function_exists('xdebug_get_function_stack') === true) {
+                $trace = xdebug_get_function_stack();
+            } else {
+                $trace = debug_backtrace();
+            }
 
             /**
              * Now we get rid of several last calls in the backtrace stack,
