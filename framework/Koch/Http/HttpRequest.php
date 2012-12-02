@@ -136,7 +136,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function getPostRaw()
     {
-        return file_get_contents('php://input');
+        $src = (php_sapi_name() === 'cli') ? 'php://stdin' : 'php://input';
+
+        return file_get_contents($src);
     }
 
     /**
@@ -423,14 +425,19 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
 
     /**
      * Determine Port Number for Webpaths (http/https)
-     * Get for $_SERVER['SERER_PORT'] and $_SERVER['SSL_PROTOCOL']
+     * Get for $_SERVER['SERVER_PORT'] and $_SERVER['SSL_PROTOCOL']
      * @return string
      */
     private static function getServerPort()
     {
-        if (isset($_SERVER['HTTPS']) == false and $_SERVER['SERVER_PORT'] != 80
-            or isset($_SERVER['HTTPS']) and $_SERVER['SERVER_PORT'] != 443) {
-            return ':'.$_SERVER['SERVER_PORT'];
+        // custom port
+        if(self::isSecure() === false and $_SERVER['SERVER_PORT'] != 80) {
+            return ':' . $_SERVER['SERVER_PORT'];
+        }
+
+        // custom ssl port
+        if(self::isSecure() === true and $_SERVER['SERVER_PORT'] != 443) {
+            return ':' . $_SERVER['SERVER_PORT'];
         }
     }
 
@@ -705,7 +712,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
 
         // get method from "http method override" header
         if (isset($_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE']) === true) {
-            $method = $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
+            return $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'];
         }
 
         // add support for HEAD requests, which are GET requests
@@ -804,12 +811,12 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     // not setting request vars
     public function offsetSet($offset, $value)
     {
-        return;
+        return false;
     }
 
     // not unsetting request vars
     public function offsetUnset($offset)
     {
-        return;
+        return false;
     }
 }
