@@ -189,10 +189,6 @@ class HttpResponse implements HttpResponseInterface
      */
     public static function getContentType()
     {
-        if (empty(self::$content_type) === true) {
-            self::setContentType('html');
-        }
-
         return self::$content_type;
     }
 

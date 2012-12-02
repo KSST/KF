@@ -1,6 +1,6 @@
 <?php
 
-namespace KochTest\Http\HttpResponse;
+namespace KochTest\Http;
 
 use Koch\Http\HttpResponse;
 
@@ -17,7 +17,7 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->response = new HttpResponse;
+        //$this->response = new HttpResponse;
     }
 
     /**
@@ -26,7 +26,7 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($this->response);
+        //unset($this->response);
     }
 
     public function testProperty_DefaultStatusIs200()
@@ -35,8 +35,8 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers HttpResponse::setStatusCode
-     * @covers HttpResponse::getStatusCode
+     * @covers Koch\Http\HttpResponse::setStatusCode
+     * @covers Koch\Http\HttpResponse::getStatusCode
      */
     public function testSetAndGetStatusCode()
     {
@@ -52,8 +52,8 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers HttpResponse::setContent
-     * @covers HttpResponse::getContent
+     * @covers Koch\Http\HttpResponse::setContent
+     * @covers Koch\Http\HttpResponse::getContent
      */
     public function testSetContent()
     {
@@ -67,27 +67,26 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($content . $content2, HttpResponse::getContent());
 
         // replace content
-        $content3 = ' This new Content replaces the old content.'
+        $content3 = ' This new Content replaces the old content.';
         HttpResponse::setContent($content3, true);
         $this->assertEquals($content3, HttpResponse::getContent());
     }
 
     /**
-     * @covers HttpResponse::setContentType
-     * @covers HttpResponse::getContentType
+     * @covers Koch\Http\HttpResponse::setContentType
+     * @covers Koch\Http\HttpResponse::getContentType
      */
     public function testSetAndGetContentType()
     {
         // default type
-        $this->assertEquals('html', HttpResponse::getContentType());
+        $this->assertEquals('text/html', HttpResponse::getContentType());
 
-        $type = 'xml';
         HttpResponse::setContentType('xml');
-        $this->assertEquals($type, HttpResponse::getContentType());
+        $this->assertEquals('application/xml', HttpResponse::getContentType());
     }
 
     /**
-     * @covers HttpResponse::setContentType
+     * @covers Koch\Http\HttpResponse::setContentType
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Specified type not valid. Use: html, txt, xml or json.
      */
@@ -96,5 +95,48 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
         HttpResponse::setContentType('SomeInvalidType');
     }
 
+    /**
+     * @covers Koch\Http\HttpResponse::addHeader
+     */
+    public function testAddHeader()
+    {
+        $name = 'TestName';
+        $value = 'TestValue';
+        HttpResponse::addHeader($name, $value);
 
+        $this->assertArrayHasKey($name,  self::reflectProperty('headers')->getValue());
+    }
+
+    /**
+     * ReflectProperty reflects a class property,
+     * changing its scope to public.
+     * This is used to access and test private properties
+     * for which no getters are implemented in the public api.
+     *
+     * @param string $name Property name.
+     * @return \ReflectionClass
+     */
+    protected static function reflectProperty($name) {
+        $class = new \ReflectionClass('Koch\Http\HttpResponse');
+        $method = $class->getProperty($name);
+        $method->setAccessible(true);
+        return $method;
+    }
+
+    /**
+     * @covers Koch\Http\HttpResponse::addHeader
+     * @covers Koch\Http\HttpResponse::setContent
+     * @covers Koch\Http\HttpResponse::clearHeaders
+     * @covers Koch\Http\HttpResponse::getContent
+     */
+    public function testClearHeaders()
+    {
+        HttpResponse::addHeader('SomeHeader', 'SomeValue');
+        HttpResponse::setContent('Some Content.');
+
+        HttpResponse::clearHeaders();
+
+        $this->assertArrayNotHasKey('SomeHeader',  self::reflectProperty('headers')->getValue());
+        $this->assertNull(HttpResponse::getContent());
+    }
 }
