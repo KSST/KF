@@ -12,8 +12,8 @@
 
 namespace Koch\View;
 
-interface CacheableInterface {
-
+interface CacheableInterface
+{
     /**
      * Enables / disables the caching of templates.
      */

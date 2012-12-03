@@ -778,7 +778,6 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Koch\Form\Decorators\Form\Label', $form_decorator_object);
     }
 
-
     /**
      * @covers Koch\Form\Form::setDecoratorAttributesArray()
      * @covers Koch\Form\Form::getDecoratorAttributesArray()

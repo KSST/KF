@@ -73,8 +73,8 @@ class ReCaptcha extends Captcha implements FormElementInterface
         $response = recaptcha_check_answer(
             $this->privateKey,
             $this->request->getRemoteAddress(),
-            $this->request->getParameterFromPost('recaptcha_challenge_field'),
-            $this->request->getParameterFromPost('recaptcha_response_field')
+            $this->request->getPost('recaptcha_challenge_field'),
+            $this->request->getPost('recaptcha_response_field')
         );
 
         if ($response->is_valid == false) {

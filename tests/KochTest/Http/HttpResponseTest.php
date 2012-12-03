@@ -113,13 +113,15 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      * This is used to access and test private properties
      * for which no getters are implemented in the public api.
      *
-     * @param string $name Property name.
+     * @param  string           $name Property name.
      * @return \ReflectionClass
      */
-    protected static function reflectProperty($name) {
+    protected static function reflectProperty($name)
+    {
         $class = new \ReflectionClass('Koch\Http\HttpResponse');
         $method = $class->getProperty($name);
         $method->setAccessible(true);
+
         return $method;
     }
 

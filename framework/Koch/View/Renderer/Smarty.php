@@ -72,7 +72,7 @@ class Smarty extends AbstractRenderer implements CacheableInterface
         // Directories
         $this->renderer->compile_dir = APPLICATION_CACHE_PATH . 'tpl_compile/';
         $this->renderer->cache_dir   = APPLICATION_CACHE_PATH . 'tpl_cache/';
-        $this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
+        //$this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
 
         // Debugging
         $this->renderer->debugging = DEBUG ? true : false;
