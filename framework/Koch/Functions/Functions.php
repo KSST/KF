@@ -39,6 +39,29 @@ class Functions
      */
     public static $alreadyLoaded = array();
 
+    /**
+     * Recursive glob
+     *
+     * @param type $pattern
+     * @param type $flags
+     * @return type
+     */
+    public static function globRecursive($pattern, $flags = 0)
+    {
+        $files = glob($pattern, $flags);
+
+        foreach (glob(dirname($pattern).'/*', GLOB_ONLYDIR|GLOB_NOSORT) as $dir) {
+            $files = array_merge($files, self::globRecursive($dir.'/'.basename($pattern), $flags));
+        }
+
+        // slash fix
+        foreach($files as $key => $value) {
+            $files[$key] = realpath($value);
+        }
+
+        return $files;
+    }
+
     public static function getServerLoad()
     {
         if (stristr(PHP_OS, 'win')) {
@@ -837,7 +860,7 @@ class Functions
 
         // Debug message for Method Overloading
         // Making it easier to see which static method is called magically
-        \Koch\Debug\Debug::fbg('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
+        \Koch\Debug\Debug::firebug('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
         // construct the filename of the command
         $filename = __DIR__  . '/Pool/' . $method . '.php';
 
