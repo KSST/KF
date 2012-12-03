@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-Andrï¿½ Koch ï¿½ 2005 - onwards
+ * Jens-André Koch © 2005 - onwards
  *
  * This file is part of "Koch Framework".
  *
@@ -164,6 +164,21 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         }
 
         return $this->getParameter($parameter, 'COOKIE');
+    }
+
+    /**
+     * Shortcut to get a Parameter from $_SERVER
+     *
+     * @param  string $parameter Name of the Parameter
+     * @return mixed  data | null
+     */
+    public function getServer($parameter)
+    {
+        if (in_array($parameter, array_keys($_SERVER))) {
+            return $_SERVER[$parameter];
+        } else {
+            return null;
+        }
     }
 
     /**
@@ -333,34 +348,6 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             return $this->{mb_strtolower($array).'_parameters'}[$parameter];
         } else {
             return null;
-        }
-    }
-
-    /**
-     * Shortcut to get a Parameter from $_SERVER
-     *
-     * @param  string $parameter Name of the Parameter
-     * @return mixed  data | null
-     */
-    public function getParameterFromServer($parameter)
-    {
-        if (in_array($parameter, array_keys($_SERVER))) {
-            return $_SERVER[$parameter];
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Get previously set cookies.
-     *
-     * @param  string  $parameter Name of the Cookie
-     * @return Returns an associative array containing any previously set cookies.
-     */
-    public function getParameterFromCookie($parameter)
-    {
-        if (isset($this->cookie_parameters[$parameter]) == true) {
-            return $this->cookie_parameters($parameter);
         }
     }
 
