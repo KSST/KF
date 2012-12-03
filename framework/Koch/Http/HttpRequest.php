@@ -109,11 +109,48 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * Returns the raw POST Parameters Array.
      * Raw means: no validation, no filtering, no sanitization.
      *
-     * @return array POST Parameters Array.
+     * @param  string $parameter Name of the Parameter
+     * @return array  POST Parameters Array.
      */
-    public function getPost()
+    public function getPost($parameter = null)
     {
-        return $this->post_parameters;
+        if ($parameter === null) {
+            return $this->post_parameters;
+        }
+
+        return $this->getParameter($parameter, 'POST');
+    }
+
+    /**
+     * Returns the raw GET Parameters Array.
+     * Raw means: no validation, no filtering, no sanitization.
+     *
+     * @param  string $parameter Name of the Parameter
+     * @return array  GET Parameters Array.
+     */
+    public function getGet($parameter = null)
+    {
+        if ($parameter === null) {
+            return $this->get_parameters;
+        }
+
+        return $this->getParameter($parameter, 'GET');
+    }
+
+    /**
+     * Returns the COOKIES Parameters Array.
+     * Raw means: no validation, no filtering, no sanitization.
+     *
+     * @param  string $parameter Name of the Parameter
+     * @return array  COOKIES Parameters Array.
+     */
+    public function getCookie($parameter = null)
+    {
+        if ($parameter === null) {
+            return $this->cookie_parameters;
+        }
+
+        return $this->getParameter($parameter, 'COOKIE');
     }
 
     /**
@@ -126,28 +163,6 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         $src = (php_sapi_name() === 'cli') ? 'php://stdin' : 'php://input';
 
         return file_get_contents($src);
-    }
-
-    /**
-     * Returns the raw GET Parameters Array.
-     * Raw means: no validation, no filtering, no sanitization.
-     *
-     * @return array GET Parameters Array.
-     */
-    public function getGet()
-    {
-        return $this->get_parameters;
-    }
-
-    /**
-     * Returns the COOKIES Parameters Array.
-     * Raw means: no validation, no filtering, no sanitization.
-     *
-     * @return array COOKIES Parameters Array.
-     */
-    public function getCookies()
-    {
-        return $this->cookie_parameters;
     }
 
     /**
@@ -208,19 +223,19 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * b) exception throwing  -  if parameter is not incomming, but expected
      *
      * @param string $parameter
-     * @param string $arrayname (GET|POST|COOKIE)
+     * @param string $array     (GET|POST|COOKIE)
      */
-    public function expectParameter($parameter, $arrayname = '')
+    public function expectParameter($parameter, $array = '')
     {
         // when array is not defined issetParameter will searches (POST|GET|COOKIE)
-        if (is_string($arrayname) === true) {
+        if (is_string($array) === true) {
             if (false === $this->issetParameter($parameter)) {
                 throw new \Koch\Exception\Exception('Incoming Parameter missing: "' . $parameter . '".');
             }
         } else { // when array is defined issetParameter will search the given array
-            if (false === $this->issetParameter($parameter, $arrayname)) {
+            if (false === $this->issetParameter($parameter, $array)) {
                 throw new \Koch\Exception\Exception(
-                    'Incoming Parameter missing: "' . $parameter . '" in Array "' . $arrayname . '".'
+                    'Incoming Parameter missing: "' . $parameter . '" in Array "' . $array . '".'
                 );
             }
         }
@@ -229,29 +244,29 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * isset, checks if a certain parameter exists in the parameters array
      *
-     * @param  string  $name      Name of the Parameter
-     * @param  string  $arrayname GET, POST, COOKIE. Default = GET.
+     * @param  string  $parameter Name of the Parameter
+     * @param  string  $array     GET, POST, COOKIE. Default = GET.
      * @param  boolean $where     If set to true, method will return the name of the array the parameter was found in.
      * @return mixed   boolean string arrayname
      *
      */
-    public function issetParameter($name, $arrayname = 'GET', $where = false)
+    public function issetParameter($parameter, $array = 'GET', $where = false)
     {
-        $arrayname = mb_strtoupper($arrayname);
+        $array = mb_strtoupper($array);
 
-        switch ($arrayname) {
+        switch ($array) {
             case 'GET':
-                if (isset($this->get_parameters[$name])) {
+                if (isset($this->get_parameters[$parameter])) {
                     return ($where === false) ? true : 'get';
                 }
                 break;
             case 'POST':
-                if (isset($this->post_parameters[$name])) {
+                if (isset($this->post_parameters[$parameter])) {
                     return ($where === false) ? true : 'post';
                 }
                 break;
             case 'COOKIE':
-                if (isset($this->cookie_parameters[$name])) {
+                if (isset($this->cookie_parameters[$parameter])) {
                     return ($where === false) ? true : 'cookie';
                 }
                 break;
@@ -264,26 +279,26 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * get, returns a certain parameter if existing
      *
-     * @param string $name      Name of the Parameter
-     * @param string $arrayname GET, POST, COOKIE. Default = POST.
+     * @param string $parameter Name of the Parameter
+     * @param string $array     GET, POST, COOKIE. Default = POST.
      * @param string $default   You can set a default value. It's returned if parametername was not found.
      *
      * @return mixed data | null
      */
-    public function getParameter($name, $arrayname = 'POST', $default = null)
+    public function getParameter($parameter, $array = 'POST', $default = null)
     {
         /**
-         * check if the parameter exists in $arrayname
+         * check if the parameter exists in $array
          * the third property of issetParameter is set to true, so that we get the full and correct array name back
          */
-        $parameter_array = $this->issetParameter($name, $arrayname, true);
+        $parameter_array = $this->issetParameter($parameter, $array, true);
 
         /**
          * we use type hinting here to cast the string with array name to boolean
          */
         if ((bool) $parameter_array === true) {
             // this returns a value from the parameterarray
-            return $this->{mb_strtolower($parameter_array).'_parameters'}[$name];
+            return $this->{mb_strtolower($parameter_array).'_parameters'}[$parameter];
         } elseif ($default !== null) {
             // this returns the default value,incomming via method property $default
             return $default;
@@ -295,51 +310,29 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * set, returns a certain parameter if existing
      *
-     * @param  string $name      Name of the Parameter
-     * @param  string $arrayname G, P, C. Default = POST.
+     * @param  string $parameter Name of the Parameter
+     * @param  string $array     G, P, C. Default = POST.
      * @return mixed  data | null
      */
-    public function setParameter($name, $arrayname = 'POST')
+    public function setParameter($parameter, $array = 'POST')
     {
-        if (true == $this->issetParameter($name, $arrayname)) {
-            return $this->{mb_strtolower($arrayname).'_parameters'}[$name];
+        if (true == $this->issetParameter($parameter, $array)) {
+            return $this->{mb_strtolower($array).'_parameters'}[$parameter];
         } else {
             return null;
         }
     }
 
     /**
-     * Shortcut to get a Parameter from $_POST
-     *
-     * @param  string $name Name of the Parameter
-     * @return mixed  data | null
-     */
-    public function getParameterFromPost($name)
-    {
-        return $this->getParameter($name, 'POST');
-    }
-
-    /**
-     * Shortcut to get a Parameter from $_GET
-     *
-     * @param  string $name Name of the Parameter
-     * @return mixed  data | null
-     */
-    public function getParameterFromGet($name)
-    {
-        return $this->getParameter($name, 'GET');
-    }
-
-    /**
      * Shortcut to get a Parameter from $_SERVER
      *
-     * @param  string $name Name of the Parameter
+     * @param  string $parameter Name of the Parameter
      * @return mixed  data | null
      */
-    public function getParameterFromServer($name)
+    public function getParameterFromServer($parameter)
     {
-        if (in_array($name, array_keys($_SERVER))) {
-            return $_SERVER[$name];
+        if (in_array($parameter, array_keys($_SERVER))) {
+            return $_SERVER[$parameter];
         } else {
             return null;
         }
@@ -348,28 +341,28 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * Get previously set cookies.
      *
-     * @param  string  $name Name of the Cookie
+     * @param  string  $parameter Name of the Cookie
      * @return Returns an associative array containing any previously set cookies.
      */
-    public function getParameterFromCookie($name)
+    public function getParameterFromCookie($parameter)
     {
-        if (isset($this->cookie_parameters[$name]) == true) {
-            return $this->cookie_parameters($name);
+        if (isset($this->cookie_parameters[$parameter]) == true) {
+            return $this->cookie_parameters($parameter);
         }
     }
 
     /**
      * Get Value of a specific http-header
      *
-     * @param  string $name Name of the Parameter
+     * @param  string $parameter Name of the Parameter
      * @return string
      */
-    public static function getHeader($name)
+    public static function getHeader($parameter)
     {
-        $name = 'HTTP_' . mb_strtoupper(str_replace('-', '_', $name));
+        $parameter = 'HTTP_' . mb_strtoupper(str_replace('-', '_', $parameter));
 
-        if ($_SERVER[$name] !== null) {
-            return $_SERVER[$name];
+        if ($_SERVER[$parameter] !== null) {
+            return $_SERVER[$parameter];
         }
 
         return null;
@@ -418,12 +411,12 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     private static function getServerPort()
     {
         // custom port
-        if(self::isSecure() === false and $_SERVER['SERVER_PORT'] != 80) {
+        if (self::isSecure() === false and $_SERVER['SERVER_PORT'] != 80) {
             return ':' . $_SERVER['SERVER_PORT'];
         }
 
         // custom ssl port
-        if(self::isSecure() === true and $_SERVER['SERVER_PORT'] != 443) {
+        if (self::isSecure() === true and $_SERVER['SERVER_PORT'] != 443) {
             return ':' . $_SERVER['SERVER_PORT'];
         }
     }

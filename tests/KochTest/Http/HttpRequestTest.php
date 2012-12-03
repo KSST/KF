@@ -85,15 +85,15 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
     public function testMethod_isAjax()
     {
         $isAjax = $this->request->isAjax();
-		$this->assertFalse($isAjax);
+        $this->assertFalse($isAjax);
 
         $_SERVER['X-Requested-With'] = 'XMLHttpRequest';
-		$isAjax = $this->request->isAjax();
-		$this->assertTrue($isAjax);
+        $isAjax = $this->request->isAjax();
+        $this->assertTrue($isAjax);
 
-		$_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
-		$isAjax = $this->request->isAjax();
-		$this->assertTrue($isAjax);
+        $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
+        $isAjax = $this->request->isAjax();
+        $this->assertTrue($isAjax);
     }
 
     /*public function testMethod_getPost()
@@ -115,37 +115,37 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_getServerProtocol()
     {
-		$this->assertEquals($this->request->getServerProtocol(), 'http://');
+        $this->assertEquals($this->request->getServerProtocol(), 'http://');
 
-		$_SERVER['HTTPS'] = 'on';
-		$this->assertEquals($this->request->getServerProtocol(), 'https://');
-	}
+        $_SERVER['HTTPS'] = 'on';
+        $this->assertEquals($this->request->getServerProtocol(), 'https://');
+    }
 
     public function testMethod_IsSecure()
     {
         $_SERVER['HTTPS'] = 'NO';
-		$this->assertFalse($this->request->isSecure());
+        $this->assertFalse($this->request->isSecure());
 
         $_SERVER['HTTPS'] = '1';
-		$this->assertTrue($this->request->isSecure());
-	}
+        $this->assertTrue($this->request->isSecure());
+    }
 
     public function testMethod_getBaseURL()
     {
         $_SERVER['HTTPS'] = 'off';
-		$_SERVER['SERVER_NAME'] = 'localhost';
-		$_SERVER['SERVER_PORT'] = 80;
-		$this->assertEquals($this->request->getBaseURL(), 'http://localhost');
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = 80;
+        $this->assertEquals($this->request->getBaseURL(), 'http://localhost');
 
-		/*$_SERVER['HTTPS'] = 'on';
-		$_SERVER['SERVER_NAME'] = 'localhost';
-		$_SERVER['SERVER_PORT'] = 123;
-		$this->assertEquals($this->request->getBaseURL(), 'https://localhost:123');
+        /*$_SERVER['HTTPS'] = 'on';
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = 123;
+        $this->assertEquals($this->request->getBaseURL(), 'https://localhost:123');
 
-		$_SERVER['HTTPS'] = 'on';
-		$_SERVER['SERVER_NAME'] = 'localhost';
-		$_SERVER['SERVER_PORT'] = 443;
-		$this->assertEquals($this->request->getBaseURL(), 'https://localhost');*/
+        $_SERVER['HTTPS'] = 'on';
+        $_SERVER['SERVER_NAME'] = 'localhost';
+        $_SERVER['SERVER_PORT'] = 443;
+        $this->assertEquals($this->request->getBaseURL(), 'https://localhost');*/
     }
 
     public function testMethod_getServerName()
