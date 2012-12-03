@@ -32,6 +32,7 @@ interface HttpRequestInterface
     public function getGet($parameter);
     public function getPost($parameter);
     public function getCookie($parameter);
+    public function getServer($parameter);
 
     // Request Method
     public static function getRequestMethod();
