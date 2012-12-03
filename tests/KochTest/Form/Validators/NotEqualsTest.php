@@ -36,11 +36,11 @@ class NotEqualsTest extends \PHPUnit_Framework_TestCase
     {
          // setter accepts numeric
          $this->validator->setNotEqualsTo(19);
-         $this->assertNotEquals(19, $this->validator->getNotEqualsTo());
+         $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
 
          // setter accepts string
          $this->validator->setNotEqualsTo('19');
-         $this->assertNotEquals(19, $this->validator->getNotEqualsTo());
+         $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
     }
 
     public function testMethod_processValidationLogic()
@@ -49,9 +49,9 @@ class NotEqualsTest extends \PHPUnit_Framework_TestCase
         $this->validator->setNotEqualsTo('1981');
         $this->assertTrue($this->validator->validate('1980'));
 
-        // !NotEquals
+        // Equals
         $this->validator->setNotEqualsTo('1980');
-        $this->assertFalse($this->validator->validate('19801980'));
+        $this->assertFalse($this->validator->validate('1980'));
     }
 
     public function testMethod_getErrorMessage()

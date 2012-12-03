@@ -27,7 +27,7 @@ namespace Koch\Form\Validators;
 
 use Koch\Form\Validator;
 
-class Equals extends Validator
+class NotEquals extends Validator
 {
     /**
      * The not equals to field
