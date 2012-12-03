@@ -30,10 +30,10 @@ class Pdf extends AbstractRenderer
     public function __construct()
     {
         // composer autoload not working, due to missing autoload section in mpdfs composer.json
-        include_once VENDOR_PATH . '/mpdf/mpdf/mpdf.php';
+        /*include_once VENDOR_PATH . '/mpdf/mpdf/mpdf.php';
         $mpdf = new \mPDF();
         $mpdf->WriteHTML('<p>Your first taste of creating PDF from HTML</p>');
-        $mpdf->Output();
+        $mpdf->Output();*/
     }
 
     public function initializeEngine($template = null)
