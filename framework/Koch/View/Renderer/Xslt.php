@@ -44,11 +44,19 @@ class Xslt extends AbstractRenderer
      *
      * @param \Koch\View\Renderer\Koch\Config $config
      */
-    public function __construct(Koch\Config $config)
+    public function __construct(\Koch\Config\Config $config)
     {
+        if (extension_loaded('libxml') === false or
+            extension_loaded('xsl') === false) {
+            throw new Exception(
+                'The PHP extension libxml is not loaded. You may enable it in "php.ini" (extension=php_xsl.dll)!'
+            );
+        }
+
         parent::__construct($config);
 
         // instantiate the render engine
+        // @link http://php.net/manual/en/class.xsltprocessor.php
         $this->xslt = new \XSLTProcessor;
     }
 
@@ -92,7 +100,7 @@ class Xslt extends AbstractRenderer
     {
         // $this->response()->setContentType('text/html');
 
-        if($template != '') {
+        if ($template != '') {
             $stylesheet = $template;
         } else {
             $stylesheet = $this->getXSLStyleSheet();
