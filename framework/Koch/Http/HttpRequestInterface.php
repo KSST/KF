@@ -35,17 +35,16 @@ namespace Koch\Http;
 interface HttpRequestInterface
 {
     // Parameters
-    public function issetParameter($name, $arrayname = 'POST');
-    public function getParameter($name, $arrayname = 'POST');
-    public function expectParameter($parameter, $arrayname);
+    public function issetParameter($parameter, $array = 'POST');
+    public function getParameter($parameter, $array = 'POST');
+    public function expectParameter($parameter, $array);
     public function expectParameters(array $parameters);
-    public static function getHeader($name);
+    public static function getHeader($parameter);
 
     // Direct Access to individual Parameters Arrays
-    public function getParameterFromCookie($name);
-    public function getParameterFromGet($name);
-    public function getParameterFromPost($name);
-    public function getParameterFromServer($name);
+    public function getGet($parameter);
+    public function getPost($parameter);
+    public function getCookie($parameter);
 
     // Request Method
     public static function getRequestMethod();
