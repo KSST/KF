@@ -86,7 +86,7 @@ function Smarty_function_load_module($params, $smarty)
         $viewMapper = new Koch\View\Mapper();
         $template = $viewMapper->getModuleTemplatePath($template, $module);
 
-        if(is_file($template)) {
+        if (is_file($template)) {
             return $smarty->fetch($template);
         } else {
             return trigger_error('Widget Template not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');

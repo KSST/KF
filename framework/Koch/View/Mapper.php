@@ -211,7 +211,7 @@ class Mapper
     public static function getModuleTemplatePaths($module = null)
     {
         // fetch modulename for template path construction
-        if($module === null) {
+        if ($module === null) {
             $module = TargetRoute::getModule();
         }
 

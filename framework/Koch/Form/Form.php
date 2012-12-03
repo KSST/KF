@@ -459,7 +459,7 @@ class Form implements FormInterface
     /**
      * Set id of this form.
      *
-     * @param  string    $id ID of this form.
+     * @param  string         $id ID of this form.
      * @return Koch\Form\Form
      */
     public function setID($id)

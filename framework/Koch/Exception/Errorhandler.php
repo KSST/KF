@@ -219,7 +219,7 @@ class Errorhandler
         // if a trace is incoming, then this trace comes from an exception
         if (isset($trace) === false) {
             // else (normally) the errorhandler has to fetch the backtrace
-            if(function_exists('xdebug_get_function_stack') === true) {
+            if (function_exists('xdebug_get_function_stack') === true) {
                 $trace = xdebug_get_function_stack();
             } else {
                 $trace = debug_backtrace();
@@ -369,10 +369,10 @@ class Errorhandler
                 break;
             case 'resource':
                 $type .= '<span>resource</span>';
-                if($type === 'stream') {
+                if ($type === 'stream') {
                     $type .= '(stream)';
                     $meta = stream_get_meta_data($backtraceArgument);
-                    if(isset($meta['uri'])) {
+                    if (isset($meta['uri'])) {
                        $type .= htmlspecialchars($meta['uri'], ENT_NOQUOTES, 'UTF-8');
                     }
                 }
