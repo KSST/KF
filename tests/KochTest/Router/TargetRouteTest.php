@@ -46,15 +46,19 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFilename()
     {
-       // test filename construction, if empty filename
-       $e = '';
-       $this->object->setFilename($e);
-       /* filename without application namespace */
-       $this->assertEquals('/Modules/Index/Controller/IndexController.php', $this->object->getFilename());
+       $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
 
-       $e = 'abc';
-       $this->object->setFilename($e);
-       $this->assertEquals($e, $this->object->getFilename());
+       // test filename construction, if empty filename
+       $file = '';
+       $this->object->setFilename($file);
+       $this->assertEquals(
+           '/KochTest/Router/Fixtures/Application/Modules/Index/Controller/IndexController.php',
+           $this->object->getFilename()
+       );
+
+       $file = 'abc';
+       $this->object->setFilename($file);
+       $this->assertEquals($file, $this->object->getFilename());
     }
 
     /**
@@ -63,15 +67,19 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetClassname()
     {
-       // test filename construction, if empty filename
-       $e = '';
-       $this->object->setClassname($e);
-       /* classname without application namespace */
-       $this->assertEquals('\Modules\Index\Controller\IndexController', $this->object->getClassname());
+        $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
 
-        $e = 'abc';
-        $this->object->setClassname($e);
-        $this->assertEquals($e, $this->object->getClassname());
+        // test filename construction, if empty filename
+        $class = '';
+        $this->object->setClassname($class);
+        $this->assertEquals(
+            '\KochTest\Router\Fixtures\Application\Modules\Index\Controller\IndexController',
+            $this->object->getClassname()
+        );
+
+        $class = 'abc';
+        $this->object->setClassname($class);
+        $this->assertEquals($class, $this->object->getClassname());
     }
 
     /**
@@ -80,8 +88,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetController()
     {
-        $c = '';
-        $this->object->setController($c);
+        $class = '';
+        $this->object->setController($class);
         // if controller not set, it will be the default module name
         $this->assertEquals('Index', $this->object->getController());
 
