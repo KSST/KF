@@ -43,7 +43,8 @@ class UrlTest extends \PHPUnit_Framework_TestCase
             $this->assertEquals(idn_to_ascii('url-ästhetik.de'), 'xn--url-sthetik-o8a.de');
 
             // test punycode urls
-            $this->assertTrue($this->validator->validate('url-ästhetik.de'));
+            $this->assertFalse($this->validator->validate('url-ästhetik.de'));
+            $this->assertTrue($this->validator->validate('http://url-ästhetik.de'));
             $this->assertTrue($this->validator->validate('http://www.täst.com'));
         }
 
