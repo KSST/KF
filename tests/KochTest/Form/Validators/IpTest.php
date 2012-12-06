@@ -48,8 +48,8 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
         // IDNA URL based on intl extension
         if (extension_loaded('intl') === true) {
-            $this->assertEquals(idn_to_ascii('url-ästhetik.de'),
-                        $this->validator->validate('url-ästhetik.de'));
+            $this->assertEquals(idn_to_ascii('url-ästhetik.de'), 'xn--url-sthetik-o8a.de');
+            $this->assertTrue($this->validator->validate('url-ästhetik.de'));
         }
 
         // does not accept URLs
