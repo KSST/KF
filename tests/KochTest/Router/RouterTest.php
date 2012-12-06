@@ -232,7 +232,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\\Modules\News\Controller\NewsController',
+            $applicationNamespace . '\Modules\News\Controller\NewsController',
             $route->getClassname()
         );
         $this->assertEquals('News',              $route->getModule());
@@ -403,7 +403,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
      public function testMethod_match_StaticRoute()
     {
-        $applicationNamespace = 'KochTest\Router\Fixtures\Application';
+        $applicationNamespace = '\KochTest\Router\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
 
         // http://example.com/login
