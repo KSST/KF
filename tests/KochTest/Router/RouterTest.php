@@ -190,8 +190,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_match_RestRoutes()
     {
-        $applicationNamespace = 'KochTest\Router\Fixtures\Application';
+        $applicationNamespace = '\KochTest\Router\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
+
         define('MOD_REWRITE_ON', true);
         $_ENV['FORCE_MOD_REWRITE_ON'] = true;
 
