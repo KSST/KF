@@ -119,20 +119,6 @@ class Phptal extends AbstractRenderer
     }
 
     /**
-     * Plug in PHPTAL object into View
-     *
-     * @param object PHPTAL $phptal
-     */
-    public function setEngine(PHPTAL $phptal)
-    {
-        $this->renderer = $phptal;
-        // @todo check, if $this should be injected into phptal?
-        #$this->renderer->set('this', $this);
-
-        return $this;
-    }
-
-    /**
      * Returns a clean Smarty Object
      *
      * @return Smarty Object

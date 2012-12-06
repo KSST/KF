@@ -82,18 +82,6 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\View\Renderer\Phptal::setEngine
-     * @todo   Implement testSetEngine().
-     */
-    public function testSetEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\View\Renderer\Phptal::getEngine
      * @todo   Implement testGetEngine().
      */
