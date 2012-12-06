@@ -11,8 +11,13 @@ namespace KochTest\Router\Fixtures\Application\Modules\News\Controller;
 
 use Koch\Module\ModuleInterface;
 
-class NewsController //implements ModuleInterface
+class NewsController implements ModuleInterface
 {
+    public function actionList()
+    {
+
+    }
+
     public function actionShow()
     {
 
@@ -43,10 +48,7 @@ class NewsController //implements ModuleInterface
 
     }
 
-    public function actionList()
-    {
 
-    }
 
     public function carefullyHandcrafted()
     {

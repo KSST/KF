@@ -28,7 +28,7 @@ interface ModuleInterface
     public function actionShow();     // GET     /foos/:foo_id
     public function actionNew();      // GET     /foos/new
     public function actionEdit();     // GET     /foos/:foo_id/edit
-    public function actionCreate();   // POST    /foos
+    public function actionInsert();   // POST    /foos
     public function actionUpdate();   // PUT     /foos/:foo_id
     public function actionDelete();   // DELETE  /foos/:foo_id
 }
