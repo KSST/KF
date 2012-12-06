@@ -38,13 +38,14 @@ class UrlTest extends \PHPUnit_Framework_TestCase
          */
 
         // IDNA URL based on intl extension
-        if (function_exists('idn_to_ascii')) {
-            $this->assertEquals(idn_to_ascii('url-�sthetik.de'),
-                        $this->validator->validate('url-�sthetik.de'));
-        }
+        if (extension_loaded('intl') === true) {
+            // converting works
+            $this->assertEquals(idn_to_ascii('url-ästhetik.de'), 'xn--url-sthetik-o8a.de');
 
-        // hmm... this puny doesn't ride...
-        $this->assertFalse($this->validator->validate('http://www.t�st.com'));
+            // test punycode urls
+            $this->assertTrue($this->validator->validate('url-ästhetik.de'));
+            $this->assertTrue($this->validator->validate('http://www.täst.com'));
+        }
 
         // no dash
         $this->assertTrue($this->validator->validate('http://clansuite.com'));
