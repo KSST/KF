@@ -26,7 +26,6 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-        unset($_SERVER);
         unset($this->request);
     }
 
@@ -51,6 +50,8 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
 
         $this->request->setRequestMethod('BEAVIS');
         $this->assertEquals('BEAVIS', HttpRequest::getRequestMethod());
+
+        unset($_SERVER['REQUEST_METHOD']);
     }
 
     public function testMethod_setRequestMethod()
@@ -95,6 +96,9 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
         $isAjax = $this->request->isAjax();
         $this->assertTrue($isAjax);
+
+        unset($_SERVER['X-Requested-With']);
+        unset($_SERVER['HTTP_X_REQUESTED_WITH']);
     }
 
     /*public function testMethod_getPost()
