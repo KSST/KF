@@ -83,7 +83,7 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::mapControllerToFilename(
+            $filename = self::getApplicationNamespace() . self::mapControllerToFilename(
                 self::getModulePath(self::getModule()),
                 self::getController()
             );
@@ -287,22 +287,19 @@ class TargetRoute extends Mapper
         $file = self::getFilename();
         $method = self::getMethod();
 
-        // load the file, if the class does not exist, yet
-        if (false === class_exists($class, false)) {
-            if (is_file($file) === true) {
-                //\Koch\Debug\Debug::firebug($file);
-                include_once $file;
-            }
+        //\Koch\Debug\Debug::firebug($file);
+
+        // trigger autoload
+        if(false === class_exists($class)) {
+            // LEAVE THIS - It shows how many routes were tried before a match happens!
+            echo 'Route not found : [ ' . $file .' | '. $class .' | '. $method . ']';
+            return false;
         }
 
-        // check again for class in file and check if method exists
+        // check for "class in file / PSR-0" and "method in class"
         if (true === class_exists($class, false) and true === method_exists($class, $method)) {
             return true;
         }
-
-        // LEAVE THIS - It shows how many routes were tried before a match happens!
-        //\Koch\Debug\Debug::firebug('Route not found : [ ' . $file .' | '. $class .' | '. $method . ']');
-        return false;
     }
 
     /**

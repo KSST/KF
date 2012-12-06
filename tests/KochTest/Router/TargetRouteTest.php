@@ -239,6 +239,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Router\TargetRoute::getThemeName
+     * @covers Koch\Router\TargetRoute::setThemeName
      */
     public function testGetThemeName()
     {
@@ -273,6 +274,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatchable()
     {
+        $this->object->setApplicationNamespace('KochTest\Router\Fixtures\Application');
+
         $this->assertTrue($this->object->dispatchable());
     }
 
