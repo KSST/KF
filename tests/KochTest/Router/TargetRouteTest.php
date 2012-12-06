@@ -199,6 +199,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
 
        $er = $this->object->getParameters();
        $this->assertTrue(is_array($er));
+       var_dump($er);
        $this->assertArrayHasKey('KEY1', $er);
 
        unset($_SERVER['REQUEST_METHOD']);

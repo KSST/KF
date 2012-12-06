@@ -64,7 +64,7 @@ class Mapper extends \ArrayObject
     public static function setApplicationNamespace($namespace)
     {
         $namespace = ltrim($namespace, '\\');
-        self::$applicationNamespace = '\\'.$namespace;
+        self::$applicationNamespace = '\\' . $namespace;
     }
 
     public static function getApplicationNamespace()
