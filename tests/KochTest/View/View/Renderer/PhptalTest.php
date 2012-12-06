@@ -18,6 +18,10 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        if (class_exists('PHPTAL') === false) {
+           $this->markTestSkipped('Vendor library "PHPTal" not found.');
+        }
+
         $this->object = new Phptal(new Config);
     }
 

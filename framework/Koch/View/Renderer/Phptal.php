@@ -64,19 +64,12 @@ class Phptal extends AbstractRenderer
      */
     public function initializeEngine($template = null)
     {
-        $phptal = VENDOR_PATH . 'phptal/PHPTAL.php';
-        // prevent redeclaration
-        if (class_exists('PHPTAL', false) === false) {
-            // check if library exists
-            if (is_file($phptal) === true) {
-                include $phptal;
-            } else {
-                throw new \Koch\Exception\Exception('The vendor library "PHPTal" is missing!');
-            }
+        if (class_exists('PHPTAL') === false) {
+            throw new \Koch\Exception\Exception('The vendor library "PHPTal" is missing!');
         }
 
         // Do it with phptal style > eat like a bird, poop like an elefant!
-        $this->renderer = new PHPTAL($template);
+        $this->renderer = new \PHPTAL($template);
     }
 
     /**
