@@ -46,6 +46,12 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFilename()
     {
+       // test filename construction, if empty filename
+       $e = '';
+       $this->object->setFilename($e);
+       /* filename without application namespace */
+       $this->assertEquals('/Modules/Index/Controller/IndexController.php', $this->object->getFilename());
+
        $e = 'abc';
        $this->object->setFilename($e);
        $this->assertEquals($e, $this->object->getFilename());
@@ -57,6 +63,12 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetClassname()
     {
+       // test filename construction, if empty filename
+       $e = '';
+       $this->object->setClassname($e);
+       /* classname without application namespace */
+       $this->assertEquals('\Modules\Index\Controller\IndexController', $this->object->getClassname());
+
         $e = 'abc';
         $this->object->setClassname($e);
         $this->assertEquals($e, $this->object->getClassname());
@@ -68,6 +80,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetController()
     {
+        $c = '';
+        $this->object->setController($c);
         // if controller not set, it will be the default module name
         $this->assertEquals('Index', $this->object->getController());
 
@@ -155,6 +169,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $this->object->setParameters(array('param1' => 'p1-value'));
 
         $this->assertArrayHasKey('param1', $this->object->getParameters());
+
+        unset($_SERVER['REQUEST_METHOD']);
     }
 
     /**
@@ -162,8 +178,23 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParameters()
     {
+       $_SERVER['REQUEST_METHOD'] = 'GET';
+
+       // test for default array
        $er = $this->object->getParameters();
        $this->assertTrue(is_array($er));
+
+
+       // test if values from $_POST array are automatically populated
+       $_SERVER['REQUEST_METHOD'] = 'POST';
+       $_POST['KEY1'] = 'VALUE1';
+
+       $er = $this->object->getParameters();
+       $this->assertTrue(is_array($er));
+       $this->assertArrayHasKey('KEY1', $er);
+
+       unset($_SERVER['REQUEST_METHOD']);
+       unset($_POST['KEY1']);
     }
 
     /**
@@ -180,8 +211,12 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRequestMethod()
     {
+       $_SERVER['REQUEST_METHOD'] = 'GET';
+
        $er = $this->object->getRequestMethod();
        $this->assertEquals($er, 'GET');
+
+       unset($_SERVER['REQUEST_METHOD']);
     }
 
     /**
@@ -274,7 +309,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatchable()
     {
-        $this->object->setApplicationNamespace('KochTest\Router\Fixtures\Application');
+        $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
 
         $this->assertTrue($this->object->dispatchable());
     }
@@ -284,10 +319,14 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetSegmentsToTargetRoute()
     {
+        $_SERVER['REQUEST_METHOD'] = 'GET';
+
         $segments = array();
         $er = $this->object->setSegmentsToTargetRoute($segments);
 
         $this->assertTrue(is_object($er));
+
+        unset($_SERVER['REQUEST_METHOD']);
     }
 
     /**

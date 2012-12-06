@@ -70,11 +70,6 @@ class TargetRoute extends Mapper
         return $instance;
     }
 
-    public static function getApplicationNamespace()
-    {
-        return Mapper::getApplicationNamespace();
-    }
-
     public static function setFilename($filename)
     {
         self::$parameters['filename'] = $filename;
@@ -122,7 +117,7 @@ class TargetRoute extends Mapper
     {
         // the default "controller" name is the "module" name
         // this is the case if a route "/:module" is used
-        if (null === self::$parameters['controller']) {
+        if (empty(self::$parameters['controller'])) {
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
@@ -287,19 +282,20 @@ class TargetRoute extends Mapper
         $file = self::getFilename();
         $method = self::getMethod();
 
-        //\Koch\Debug\Debug::firebug($file);
-
-        // trigger autoload
-        if(false === class_exists($class)) {
-            // LEAVE THIS - It shows how many routes were tried before a match happens!
-            echo 'Route not found : [ ' . $file .' | '. $class .' | '. $method . ']';
-            return false;
-        }
-
-        // check for "class in file / PSR-0" and "method in class"
-        if (true === class_exists($class, false) and true === method_exists($class, $method)) {
+        // prevent redeclaration, by checking "method in class" (implicit class_exist())
+        if (method_exists($class, $method)) {
             return true;
         }
+
+        // trigger autoload & check for "class in file / PSR-0" and "method in class"
+        if (true === class_exists($class) and true === method_exists($class, $method)) {
+            return true;
+        }
+
+        // LEAVE THIS - It shows how many routes were tried before a match happens!
+        //echo 'Route not found : [ ' . $file .' | '. $class .' | '. $method . ']';
+
+        return false;
     }
 
     /**
