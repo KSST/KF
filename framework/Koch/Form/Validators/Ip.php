@@ -36,15 +36,6 @@ class Ip extends Validator
 
     protected function processValidationLogic($value)
     {
-        /**
-         * Note: filter_var() does not support IDNA.
-         * The INTL extension provides the method idn_to_ascii().
-         * It converts a multibyte URL to a punycode ASCII string.
-         */
-        if (extension_loaded('intl') === true) {
-            $value = idn_to_ascii($value);
-        }
-
         if (true === (bool) filter_var($value, FILTER_VALIDATE_IP, $this->getOptions())) {
             return true;
         } else {

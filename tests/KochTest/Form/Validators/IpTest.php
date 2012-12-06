@@ -46,13 +46,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
         $ipv6 = '2001:0db8:85a3:08d3:1319:8a2e:0370:7344';
         $this->assertTrue($this->validator->validate($ipv6));
 
-        // IDNA URL based on intl extension
-        if (extension_loaded('intl') === true) {
-            $this->assertEquals(idn_to_ascii('url-ästhetik.de'), 'xn--url-sthetik-o8a.de');
-            $this->assertTrue($this->validator->validate('url-ästhetik.de'));
-        }
-
-        // does not accept URLs
+        // does not accept URLs -> use URL Validator
         $this->assertFalse($this->validator->validate('clansuite.com'));
     }
 
