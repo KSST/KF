@@ -91,7 +91,7 @@ class Smarty extends AbstractRenderer implements CacheableInterface
         $this->renderer->debugging = DEBUG ? true : false;
 
         if ($this->renderer->debugging === true) {
-            $this->renderer->debug_tpl = ROOT_THEMES_CORE . 'view/smarty/debug.tpl';
+            $this->renderer->debug_tpl = APPLICATION_THEMES_CORE . 'view/smarty/debug.tpl';
             $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
         }
