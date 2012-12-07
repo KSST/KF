@@ -158,7 +158,7 @@ class Mapper
          * 1. BACKEND THEME
          * when controlcenter or admin is requested, it has to be a BACKEND theme
          */
-        if ($module == 'controlcenter' or $controller == 'admin') {
+        if ($module === 'controlcenter' or $controller === 'admin') {
             // get backend theme from session for path construction
             $backendtheme = HttpRequest::getRoute()->getBackendTheme();
 
