@@ -180,7 +180,7 @@ class Smarty extends AbstractRenderer implements CacheableInterface
             Mapper::getThemeTemplatePaths(), // 1 + 2
             Mapper::getModuleTemplatePaths(), // 3 + 4
             APPLICATION_PATH . 'themes/core/view/smarty', // 5
-            ROOT_THEMES // 6
+            APPLICATION_THEMES // 6
         );
 
         // flatten that thing

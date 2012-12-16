@@ -32,7 +32,7 @@ function Smarty_function_help($params, $smarty)
         return $smarty->fetch( $modulename. '/view/smarty/help.tpl');
     }
     /*elseif (DEBUG == true and DEVELOPMENT == true) {
-        return $smarty->fetch( ROOT_THEMES . 'core/view/help_not_found.tpl');
+        return $smarty->fetch( APPLICATION_THEMES . 'core/view/help_not_found.tpl');
     }*/
     else {
         return 'Help Template not found.';

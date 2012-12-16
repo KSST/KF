@@ -90,17 +90,13 @@ class ACL
 
         $permissions = $_SESSION['user']['rights'];
 
-        if (count($permissions) > 0) {
-            foreach ($permissions as $key => $value) {
-                if ($value == $permission) {
-                    return true;
-                }
+        foreach ($permissions as $key => $value) {
+            if ($value == $permission) {
+                return true;
             }
-
-            return false;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**

@@ -73,13 +73,13 @@ class Json extends AbstractRenderer
     }
 
     /**
-     * Render PHP data as JSON (through HEADER)
+     * Render PHP data as X-JSON HEADER.
      * This method does not return the json encoded string for rendering,
      * instead it applies it directly to the header.
      *
      * @param $data array php-array
      */
-    public function renderByHeader($data)
+    public function renderAsHeader($data)
     {
         $this->response->addHeader('X-JSON', '('.$this->jsonEncode($data).')');
 
@@ -105,7 +105,7 @@ class Json extends AbstractRenderer
          */
         $this->response->addHeader(
             'Content-Type',
-            'application/json; charset='.$this->config['locale']['outputcharset']
+            'application/json; charset=' . $this->config['locale']['outputcharset']
         );
 
         return $this->jsonEncode($this->viewdata);
