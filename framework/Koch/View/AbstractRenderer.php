@@ -334,9 +334,9 @@ abstract class AbstractRenderer
      * Magic Method __call / Overloading.
      *
      * This is basically a simple passthrough (aggregation)
-     * of a method and its arguments to the renderingEngine!
-     * Purpose: We don't have to rebuild all methods in the specific renderEngine Wrapper/Adapter
-     * or pull out the renderEngine Object itself. We just pass things to it.
+     * of a method and its arguments to the rendering engine!
+     * Purpose: We don't have to rebuild all methods in the specific render engine adapter
+     * or pull out the render engine object itself. We just pass things to it.
      *
      * @param string $method    Name of the Method
      * @param array  $arguments Array with Arguments
@@ -345,8 +345,7 @@ abstract class AbstractRenderer
      */
     public function __call($method, $arguments)
     {
-        #echo'Magic used for Loading Method = '. $method . ' with Arguments = '. var_dump($arguments);
-        if (method_exists($this->renderer, $method)) {
+        if (method_exists($this->renderer, $method) === true) {
             return call_user_func_array(array($this->renderer, $method), $arguments);
         } else {
             throw new Exception(
