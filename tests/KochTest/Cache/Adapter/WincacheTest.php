@@ -17,7 +17,11 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new Wincache;
+        if (!extension_loaded('wincache')) {
+            $this->markTestSkipped('The wincache extension is not available.');
+        }
+
+        $this->object = new \Wincache;
     }
 
     /**
