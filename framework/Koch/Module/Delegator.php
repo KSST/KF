@@ -1,6 +1,6 @@
 <?php
 
-namespace Claroline\CommonBundle\Library\Utils;
+namespace Koch\Module;
 
 use \ReflectionClass;
 
