@@ -38,7 +38,7 @@ class Cache
      * Factory method for instantiation of cache adapters.
      *
      * @param  string                    $adapter Name of cache adapter, defaults to 'apc'.
-     * @param array $options
+     * @param  array                     $options
      * @return \Koch\Cache\Adapter\Class
      */
     public static function factory($adapter = 'apc', $options = array())
