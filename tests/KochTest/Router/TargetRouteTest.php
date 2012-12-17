@@ -192,7 +192,6 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
        $er = $this->object->getParameters();
        $this->assertTrue(is_array($er));
 
-
        // test if values from $_POST array are automatically populated
        // POST array is not populated on linux???
        /*$_SERVER['REQUEST_METHOD'] = 'POST';

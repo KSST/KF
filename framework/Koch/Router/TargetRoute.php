@@ -292,7 +292,6 @@ class TargetRoute extends Mapper
 
         // LEAVE THIS - It shows how many routes were tried before a match happens!
         //echo 'Route not found : [ ' . $file .' | '. $class .' | '. $method . ']';
-
         return false;
     }
 
