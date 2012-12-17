@@ -26,6 +26,16 @@ use Koch\View\AbstractRenderer;
 class Serialized extends AbstractRenderer
 {
     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        parent::__construct($options);
+    }
+
+    /**
      * Render serialized PHP data
      *
      * @param $template Unused.

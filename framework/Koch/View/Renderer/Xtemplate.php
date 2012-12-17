@@ -28,9 +28,14 @@ use Koch\View\AbstractRenderer;
  */
 class Xtemplate extends AbstractRenderer
 {
-    public function __construct(\Koch\Config\Config $config)
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
     {
-        parent::__construct($config);
+        parent::__construct($options);
     }
 
     public function initializeEngine($template = null)

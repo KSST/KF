@@ -32,16 +32,13 @@ use Koch\Router\TargetRoute;
 class Smarty extends AbstractRenderer implements CacheableInterface
 {
     /**
-     * RenderEngineConstructor
+     * Constructor
      *
-     * parent::__construct does the following:
-     * 1) Apply instances of Koch\Config to the RenderBase
-     * 2) Initialize the RenderEngine via parent class constructor call = self::initializeEngine()
-     * 3) Configure the RenderEngine with it's specific settings = self::configureEngine();
+     * @param array $options
      */
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct($options = array())
     {
-        parent::__construct($config);
+        parent::__construct($options);
 
         $this->initializeEngine();
 
