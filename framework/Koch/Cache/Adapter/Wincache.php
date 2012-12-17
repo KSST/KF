@@ -48,6 +48,22 @@ use Koch\Cache\CacheInterface;
  */
 class Wincache extends AbstractCache implements CacheInterface
 {
+     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        if (extension_loaded('wincache') === false) {
+            throw new Exception(
+                'The PHP extension wincache is not loaded! You may enable it in "php.ini"!'
+            );
+        }
+
+        parent::__construct($options);
+    }
+
     /**
      * Contains checks if a key exists in the cache
      *
@@ -73,9 +89,9 @@ class Wincache extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
-     * @param  integer $cache_lifetime How long to cache the data, in minutes.
+     * @param  string  $key  Identifier for the data
+     * @param  mixed   $data Data to be cached
+     * @param  integer $ttl  How long to cache the data, in minutes.
      * @return boolean True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 0)

@@ -46,10 +46,12 @@ use Koch\Exception\Exception;
  */
 class EAccelerator extends AbstractCache implements CacheInterface
 {
-    /**
-     * Constructor.
+     /**
+     * Constructor
+     *
+     * @param array $options
      */
-    public function __construct()
+    public function __construct($options = array())
     {
         if (extension_loaded('eaccelerator') === false) {
             throw new Exception(
@@ -59,12 +61,14 @@ class EAccelerator extends AbstractCache implements CacheInterface
 
         // @todo ensure eaccelerator 0.9.5 is in use
         // from 0.9.6 the user cache functions are removed
-        if (false === function_exists('eaccelerator_info')) {
+        /*if (false === function_exists('eaccelerator_info')) {
             die('eAccelerator isn\'t compiled with info support!');
         } else {
             $info = eaccelerator_info();
             $version = $info['name'];
-        }
+        }*/
+
+        parent::__construct($options);
     }
 
     /**
@@ -101,16 +105,20 @@ class EAccelerator extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
-     * @param  integer $cache_lifetime How long to cache the data, in minutes
+     * @param  string  $key  Identifier for the data
+     * @param  mixed   $data Data to be cached
+     * @param  integer $ttl  How long to cache the data, in minutes
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $cache_lifetime = 0)
+    public function store($key, $data, $ttl = null)
     {
+        if (null === $ttl) {
+            $ttl = $this->options['ttl'];
+        }
+
         $data = serialize($data);
 
-        return eaccelerator_put($key, $data, $cache_lifetime * 60);
+        return eaccelerator_put($key, $data, $ttl);
     }
 
     /**

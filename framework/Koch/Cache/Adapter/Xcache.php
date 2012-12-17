@@ -48,6 +48,20 @@ use Koch\Cache\CacheInterface;
 class Xcache extends AbstractCache implements CacheInterface
 {
     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        if (!extension_loaded('xcache')) {
+            throw new Exception('The PHP extension "xcache" is not loaded. You may enable it in "php.ini"!');
+        }
+
+        parent::__construct($options);
+    }
+
+    /**
      * Contains checks if a key exists in the cache
      *
      * @param  string  $key Identifier for the data
@@ -72,14 +86,18 @@ class Xcache extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key      Identifier for the data
-     * @param  mixed   $data     Data to be cached
-     * @param  integer $lifetime How long to cache the data, in minutes
+     * @param  string  $key  Identifier for the data
+     * @param  mixed   $data Data to be cached
+     * @param  integer $ttl  How long to cache the data, in minutes
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $lifetime = 0)
+    public function store($key, $data, $ttl = 0)
     {
-        return xcache_set($key, serialize($data), (int) $lifetime * 60);
+        if (null === $ttl) {
+            $ttl = $this->_options['ttl'];
+        }
+
+        return xcache_set($key, serialize($data), $ttl);
     }
 
     /**

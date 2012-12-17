@@ -48,7 +48,7 @@ interface CacheInterface
     public function fetch($key);
 
     // Cache a variable in the data store
-    public function store($key, $data, $cache_lifetime = 0);
+    public function store($key, $data, $ttl = 0);
 
     // Removes a stored variable from the cache
     public function delete($key);
