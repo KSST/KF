@@ -29,8 +29,8 @@ class Functions
     /**
      * Recursive glob
      *
-     * @param type $pattern
-     * @param type $flags
+     * @param  type $pattern
+     * @param  type $flags
      * @return type
      */
     public static function globRecursive($pattern, $flags = 0)
@@ -42,7 +42,7 @@ class Functions
         }
 
         // slash fix
-        foreach($files as $key => $value) {
+        foreach ($files as $key => $value) {
             $files[$key] = realpath($value);
         }
 

@@ -48,8 +48,6 @@ class NewsController implements ModuleInterface
 
     }
 
-
-
     public function carefullyHandcrafted()
     {
         return false;
