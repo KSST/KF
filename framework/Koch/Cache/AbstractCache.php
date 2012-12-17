@@ -17,12 +17,22 @@ namespace Koch\Cache;
  */
 abstract class AbstractCache
 {
+    protected $options = array(
+        'ttl' => 900,
+        'prefix' => '_kf'
+    );
+
     /**
-     * Prefix for the cache key.
+     * Constructor
      *
-     * @var mixed Defaults to 'kf_'.
+     * @param array $options
      */
-    //protected $prefix = 'kf_';
+    public function __construct($options = array())
+    {
+        foreach ($options as $key => $value) {
+            $this->options[$key] = $value;
+        }
+    }
 
     /**
      * Set Prefix for the cache key.
@@ -30,24 +40,24 @@ abstract class AbstractCache
      * @param  string                   $prefix The prefix for all cache keys.
      * @throws InvalidArgumentException if prefix is empty
      */
-    /*public function setPrefix($prefix)
+    public function setPrefix($prefix)
     {
         if (empty($prefix) === true) {
             throw new \InvalidArgumentException('Prefix must not be empty.');
         }
 
-        $this->prefix = $prefix;
-    }*/
+        $this->options['prefix'] = $prefix;
+    }
 
     /**
      * Get Prefix for the cache key.
      *
      * @return string The cache prefix
      */
-    /*public function getPrefix()
+    public function getPrefix()
     {
-        return $this->prefix;
-    }*/
+        return $this->options['prefix'];
+    }
 
     /**
      * Prepends key with prefix.
@@ -55,8 +65,43 @@ abstract class AbstractCache
      * @param  string $key Cache Key.
      * @return string Prefixed Cache Key.
      */
-    /*public function applyPrefix($key)
+    public function applyPrefix($key)
     {
-        return $this->prefix . $key;
-    }*/
+        return $this->options['prefix'] . $key;
+    }
+
+    /**
+     * Set cache (magic)
+     * If value is null, the key is deleted.
+     *
+     * @param  string  $key
+     * @param  mixed   $value
+     * @return boolean
+     */
+    public function __set($key, $value)
+    {
+        return null === $value ? $this->delete($key) : $this->store($key, $value);
+    }
+
+    /**
+     * Get cache (magic)
+     *
+     * @param  string $key
+     * @return mixed
+     */
+    public function __get($key)
+    {
+        return $this->fetch($key);
+    }
+
+    /**
+     * Delete cache (magic)
+     *
+     * @param  string  $key
+     * @return boolean
+     */
+    public function __unset($key)
+    {
+        return $this->delete($key);
+    }
 }

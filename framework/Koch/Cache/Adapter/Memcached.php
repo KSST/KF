@@ -40,13 +40,6 @@ use Koch\Exception\Exception;
 class Memcached extends AbstractCache implements CacheInterface
 {
     /**
-     * Memcached Server
-     */
-    const SERVER_HOST = '127.0.0.1';
-    const SERVER_PORT =  11211;
-    const SERVER_WEIGHT  = 1;
-
-    /**
      * @var object PHP Memcached instance
      */
     protected $memcached = null;
@@ -55,8 +48,9 @@ class Memcached extends AbstractCache implements CacheInterface
      * Constructor.
      *
      * Instantiate and connect to Memcache Server
+     * @param array $options
      */
-    public function __construct()
+    public function __construct($options = array())
     {
         if (extension_loaded('memcached') === false) {
             throw new Exception(
@@ -66,6 +60,14 @@ class Memcached extends AbstractCache implements CacheInterface
 
         // instantiate object und set to class
         $this->memcached = new \Memcached;
+
+        parent::__construct($options);
+
+        foreach ($this->options['servers'] as $server) {
+            $server += array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true);
+            $this->memcached->addServer($server['host'], $server['port'], $server['persistent']);
+        }
+
         $this->memcached->addServer(self::SERVER_HOST, self::SERVER_PORT, self::SERVER_WEIGHT);
 
         $this->memcached->setOption(\Memcached::OPT_COMPRESSION, true);
@@ -102,14 +104,18 @@ class Memcached extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
-     * @param  int $cache_lifetime How long to cache the data (in minutes).
+     * @param  string  $key  Identifier for the data
+     * @param  mixed   $data Data to be cached
+     * @param  int $ttl  How long to cache the data (in minutes).
      * @return boolean True if the data was successfully cached, false on failure.
      */
-    public function store($key, $data, $cache_lifetime = 0)
+    public function store($key, $data, $ttl = null)
     {
-        if ( $this->memcached->set($key, $data, $cache_lifetime * 60) === true ) {
+        if (null === $ttl) {
+            $ttl = $this->options['ttl'];
+        }
+
+        if ( $this->memcached->set($key, $data, $ttl) === true ) {
             return true;
         }
 

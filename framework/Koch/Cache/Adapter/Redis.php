@@ -32,12 +32,17 @@ use Koch\Cache\CacheInterface;
  */
 class Redis extends AbstractCache implements CacheInterface
 {
-    /**
-     * @var Redis
+     /**
+     * @var object PHP Redis instance
      */
     private $redis;
 
-    public function __construct()
+     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
     {
         if (extension_loaded('redis') === false) {
             throw new Exception(

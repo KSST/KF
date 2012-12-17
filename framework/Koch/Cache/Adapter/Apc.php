@@ -31,13 +31,20 @@ use Koch\Functions\Functions;
 class Apc extends AbstractCache implements CacheInterface
 {
 
-    public function __construct()
+     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
     {
         if (extension_loaded('apc') === false) {
             throw new Exception(
                 'The PHP extension APC (Alternative PHP Cache) is not loaded. You may enable it in "php.ini"!'
             );
         }
+
+        parent::__construct($options);
     }
 
     /**
@@ -54,21 +61,25 @@ class Apc extends AbstractCache implements CacheInterface
     /**
      * Stores data by key into cache
      *
-     * @param  string  $key            Identifier for the data
-     * @param  mixed   $data           Data to be cached
-     * @param  int $cache_lifetime How long to cache the data, in minutes.
-     * @param  boolean $overwrite      If overwrite true, key will be overwritten.
+     * @param  string  $key       Identifier for the data
+     * @param  mixed   $data      Data to be cached
+     * @param  int $ttl       How long to cache the data, in minutes.
+     * @param  boolean $overwrite If overwrite true, key will be overwritten.
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $cache_lifetime = 0, $overwrite = false)
+    public function store($key, $data, $ttl = null, $overwrite = false)
     {
+        if (null === $ttl) {
+            $ttl = $this->options['ttl'];
+        }
+
         if ($key === null) {
             return false;
         } elseif ($overwrite == false) {
-            return apc_add($key, $data, $cache_lifetime * 60);
+            return apc_add($key, $data, $ttl);
         } else { // overwrite
 
-            return apc_store($key, $data, $cache_lifetime * 60);
+            return apc_store($key, $data, $ttl);
         }
     }
 

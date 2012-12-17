@@ -38,15 +38,16 @@ class Cache
      * Factory method for instantiation of cache adapters.
      *
      * @param  string                    $adapter Name of cache adapter, defaults to 'apc'.
+     * @param array $options
      * @return \Koch\Cache\Adapter\Class
      */
-    public static function factory($adapter = 'apc')
+    public static function factory($adapter = 'apc', $options = array())
     {
         if ($adapter === 'eaccelerator') {
             $adapter = 'EAccelerator';
         }
         $class = '\Koch\Cache\Adapter\\' . ucfirst($adapter);
-        $obj = new $class;
+        $obj = new $class($options);
 
         return $obj;
     }
@@ -78,14 +79,14 @@ class Cache
     /**
      * Stores data by key to the cache.
      *
-     * @param  type $key            The key to retrieve the data form the cache.
-     * @param  type $data           The data to store in the cache.
-     * @param  int  $cache_lifetime Cache lifetime in minutes.
+     * @param  type $key  The key to retrieve the data form the cache.
+     * @param  type $data The data to store in the cache.
+     * @param  int  $ttl  Cache lifetime in minutes.
      * @return bool
      */
-    public static function store($key, $data, $cache_lifetime = 10)
+    public static function store($key, $data, $ttl = 10)
     {
-        return self::$cacheAdapter->store($key, $data, $cache_lifetime);
+        return self::$cacheAdapter->store($key, $data, $ttl);
     }
 
     /**
@@ -128,13 +129,13 @@ class Cache
     /**
      * Stores an object in the cache.
      *
-     * @param  type    $key            The key for retrieving the object.
-     * @param  type    $object         The object to store the cache.
-     * @param  type    $cache_lifetime Cache liftime in minutes.
+     * @param  type    $key    The key for retrieving the object.
+     * @param  type    $object The object to store the cache.
+     * @param  type    $ttl    Cache liftime in minutes.
      * @return boolean True in caching success. False on caching failure.
      */
-    public static function storeObject($key, $object, $cache_lifetime = 10)
+    public static function storeObject($key, $object, $ttl = 10)
     {
-        return self::$cacheAdapter->set($key, serialize($object), $cache_lifetime);
+        return self::$cacheAdapter->set($key, serialize($object), $ttl);
     }
 }
