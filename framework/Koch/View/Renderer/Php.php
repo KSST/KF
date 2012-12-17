@@ -43,6 +43,16 @@ class Php extends AbstractRenderer
     private $data = array();
 
     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        parent::__construct($options);
+    }
+
+    /**
      * Executes the template rendering and returns the result.
      *
      * @param  string $template Template Filename

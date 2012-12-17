@@ -42,6 +42,17 @@ class Csv extends AbstractRenderer
     private $data = array();
     private $header = array();
 
+        /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        parent::__construct($options);
+
+    }
+
     public function initializeEngine($template = null)
     {
         return;

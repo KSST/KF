@@ -48,6 +48,17 @@ use Koch\View\AbstractRenderer;
  */
 class Json extends AbstractRenderer
 {
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        parent::__construct($options);
+
+    }
+
     public function initializeEngine($template = null)
     {
     }

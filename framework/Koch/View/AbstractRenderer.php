@@ -37,6 +37,11 @@ use Koch\Http\HttpRequest;
  */
 abstract class AbstractRenderer
 {
+    protected $options = array(
+        'a' => '',
+        'b' => ''
+    );
+
     /**
      * @var Object Holds instance of the Rendering Engine Object
      */
@@ -80,14 +85,17 @@ abstract class AbstractRenderer
     #public $autoEscape = true;
 
     /**
-     * Construct Renderer
+     * Constructor
      *
-     * @param Koch\Config Object
+     * @param array $options
      */
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct($options = array())
     {
-        $this->config = $config->getApplicationConfig();
-        $this->viewMapper = new \Koch\View\Mapper();
+        foreach ($options as $key => $value) {
+            $this->options[$key] = $value;
+        }
+
+        $this->viewMapper = new \Koch\View\Mapper;
     }
 
     /**

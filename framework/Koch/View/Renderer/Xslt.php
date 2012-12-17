@@ -53,14 +53,13 @@ class Xslt extends AbstractRenderer
     public $xslfile = null;
 
     /**
-     * Constructor.
+     * Constructor
      *
-     * @param \Koch\View\Renderer\Koch\Config $config
+     * @param array $options
      */
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct($options = array())
     {
-        if (extension_loaded('libxml') === false or
-            extension_loaded('xsl') === false) {
+        if (extension_loaded('libxml') === false or extension_loaded('xsl') === false) {
             throw new Exception(
                 'The PHP extension libxml is not loaded. You may enable it in "php.ini" (extension=php_xsl.dll)!'
             );

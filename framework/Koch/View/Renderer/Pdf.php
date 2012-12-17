@@ -40,8 +40,14 @@ use Koch\View\AbstractRenderer;
  */
 class Pdf extends AbstractRenderer
 {
-    public function __construct()
+    /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
     {
+        parent::__construct($options);
         // composer autoload not working, due to missing autoload section in mpdfs composer.json
         /*include_once VENDOR_PATH . '/mpdf/mpdf/mpdf.php';
         $mpdf = new \mPDF();
