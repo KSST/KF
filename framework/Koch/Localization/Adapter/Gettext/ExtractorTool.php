@@ -23,7 +23,7 @@
  *
  */
 
-namespace Koch\Localization\Adapter\Gettext\Extractor;
+namespace Koch\Localization\Adapter\Gettext;
 
 /**
  * Gettext_Extractor_Tool
