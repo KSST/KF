@@ -39,6 +39,16 @@ use Koch\Cache\CacheInterface;
  */
 class File extends AbstractCache implements CacheInterface
 {
+     /**
+     * Constructor
+     *
+     * @param array $options
+     */
+    public function __construct($options = array())
+    {
+        parent::__construct($options);
+    }
+
     /**
      * Contains checks if a key exists in the cache
      *
