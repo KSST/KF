@@ -116,7 +116,7 @@ class Event implements \ArrayAccess
      */
     public function offsetExists($name)
     {
-        return array_key_exists($name, $this->context);
+        return isset($this->context[$name]) || array_key_exists($name, $this->context);
     }
 
     /**
@@ -128,7 +128,7 @@ class Event implements \ArrayAccess
      */
     public function offsetGet($name)
     {
-        if (true === array_key_exists($name, $this->context)) {
+        if (isset($this->context[$name]) === true || true === array_key_exists($name, $this->context)) {
             return $this->context[$name];
         } else {
             throw new \Koch\Exception\Exception(

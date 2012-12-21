@@ -56,7 +56,7 @@ class Locale extends Validator
             $locale = implode('_', $locale);
         }
 
-        if (array_key_exists($short_code, $l10n_langs) === true) {
+        if ((isset($l10n_langs[$short_code]) === true) || (array_key_exists($short_code, $l10n_langs) === true)) {
             // return if locale is just short_code, e.g. "de"
             if (strlen($locale) == 2) {
                 return true;
@@ -69,7 +69,7 @@ class Locale extends Validator
         }
 
         // is valid sublocale, e.g. de has de_DE?
-        if (array_key_exists($locale, array_flip($sublocales))) {
+        if ((isset($sublocales[$locale]) === true) || (array_key_exists($locale, array_flip($sublocales)))) {
             return true;
         } else {
             return false;
