@@ -1357,7 +1357,7 @@ class Form implements FormInterface
         }
 
         // here variable $decorator must be string
-        if (array_key_exists($decorator, $this->formdecorators)) {
+        if (isset($this->formdecorators[$decorator]) === true || array_key_exists($decorator, $this->formdecorators)) {
             unset($this->formdecorators[$decorator]);
         }
     }
@@ -1381,7 +1381,11 @@ class Form implements FormInterface
     {
         $classmap = array('html5validation' => 'Html5Validation');
 
-        $decorator = (array_key_exists($decorator, $classmap) === true) ? $classmap[$decorator] : ucfirst($decorator);
+        if (isset($classmap[$decorator]) === true || array_key_exists($decorator, $classmap) === true) {
+            $decorator = $classmap[$decorator];
+        } else {
+            $decorator = ucfirst($decorator);
+        }
 
         // construct Koch\Form\Decorator\Name
         $class = 'Koch\Form\Decorators\Form\\' . ucfirst($decorator);

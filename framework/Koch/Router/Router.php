@@ -926,7 +926,7 @@ class Router implements RouterInterface, \ArrayAccess
 
     final public function offsetGet($name)
     {
-        if (array_key_exists($name, $this->routes) === true) {
+        if ((isset($this->routes[$name]) === true) || (array_key_exists($name, $this->routes) === true)) {
             return $this->routes[$name];
         } else {
             return null;
@@ -935,7 +935,7 @@ class Router implements RouterInterface, \ArrayAccess
 
     final public function offsetExists($name)
     {
-        return array_key_exists($name, $this->routes);
+        return (isset($this->routes[$name]) === true || array_key_exists($name, $this->routes));
     }
 
     final public function offsetUnset($name)

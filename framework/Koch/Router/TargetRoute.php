@@ -321,7 +321,7 @@ class TargetRoute extends Mapper
          * [requirements] array is relevant. overwriting $array drops the keys
          * [regexp] and [number_of_segments] because they are no longer needed.
          */
-        if (array_key_exists('requirements', $array)) {
+        if ((isset($array['requirements']) === true) || (array_key_exists('requirements', $array))) {
             $array = $array['requirements'];
         }
 
