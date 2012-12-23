@@ -57,6 +57,14 @@ class Memcached extends AbstractCache implements CacheInterface
      */
     protected $memcached = null;
 
+    protected $options = array(
+        'servers' => array(
+            'host' => '127.0.0.1',
+            'port' => 11211,
+            'persistent' => true
+        )
+    );
+
     /**
      * Constructor.
      *
@@ -71,13 +79,11 @@ class Memcached extends AbstractCache implements CacheInterface
             );
         }
 
-        // instantiate object und set to class
         $this->memcached = new \Memcached;
 
         parent::__construct($options);
 
         foreach ($this->options['servers'] as $server) {
-            $server += array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true);
             $this->memcached->addServer($server['host'], $server['port'], $server['persistent']);
         }
 
