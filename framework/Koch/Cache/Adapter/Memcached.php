@@ -74,8 +74,6 @@ class Memcached extends AbstractCache implements CacheInterface
             $this->memcached->addServer($server['host'], $server['port'], $server['persistent']);
         }
 
-        $this->memcached->addServer(self::SERVER_HOST, self::SERVER_PORT, self::SERVER_WEIGHT);
-
         $this->memcached->setOption(\Memcached::OPT_COMPRESSION, true);
         // LIBKETAMA compatibility will implicitly declare the following two things:
         #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
