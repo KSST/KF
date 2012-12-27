@@ -71,28 +71,52 @@ class Memcached extends AbstractCache implements CacheInterface
             );
         }
 
-        $this->memcached = new \Memcached;
-
         $defaultOptions = array(
             'servers' => array(
                 array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true),
             )
         );
-
         $options = array_merge($options, $defaultOptions);
-
         parent::__construct($options);
 
-        $this->memcached->addServers($this->options['servers']);
-
-        $this->memcached->setOption(\Memcached::OPT_COMPRESSION, true);
-        // LIBKETAMA compatibility will implicitly declare the following two things:
-        #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
-        #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
-        $this->memcached->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+        $this->memcached = $this->getMemcachedInstance(); // $options['connectionId']
 
         var_dump($this->memcached);
         var_dump($this->memcached->getServerList());
+    }
+
+    function getMemcachedInstance($connectId = 'mc') {
+
+        // one instantiation (per-connection per-request)
+        static $instances = array();
+
+        // return early, if connection already exists
+        if( array_key_exists($connectId, $instances)) {
+            return $instances[$connectId];
+        }
+
+        // instantiate new connection
+        $memcached = new \Memcached($connectId);
+
+        $memcached->setOption(\Memcached::OPT_PREFIX_KEY, $this->options['prefix']);
+        $memcached->setOption(\Memcached::OPT_COMPRESSION, true);
+        $memcached->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+        // Note: setting LIBKETAMA compatibility will implicitly declare the following two things:
+        #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
+        #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
+
+        if( !count($memcached->getServerList()) ) {
+            if(isset($this->options, $connectId) || array_key_exists($connectId, $this->options['connectId'])) {
+                 $memcached->addServers($this->options['connectId']['servers']); // specific servers per connection
+            } else {
+                 $memcached->addServers($this->options['servers']); // default servers
+            }
+        }
+
+        // add instance to the pool
+        $instances[$connectId] = $memcached;
+
+        return $memcached;
     }
 
     /**

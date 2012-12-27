@@ -32,7 +32,7 @@ abstract class AbstractCache
 {
     protected $options = array(
         'ttl' => 900,
-        'prefix' => '_kf'
+        'prefix' => 'kf_'
     );
 
     /**
