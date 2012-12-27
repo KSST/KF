@@ -92,6 +92,9 @@ class Memcached extends AbstractCache implements CacheInterface
         #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
         #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
         $this->memcached->setOption(\Memcached::OPT_LIBKETAMA_COMPATIBLE, true);
+
+        var_dump($this->memcached);
+        var_dump($this->memcached->getServerList());
     }
 
     /**
@@ -132,13 +135,7 @@ class Memcached extends AbstractCache implements CacheInterface
             $ttl = $this->options['ttl'];
         }
 
-        var_dump(self::stats());
-
-        if ( $this->memcached->set($key, $data, time() + $ttl) === true ) {
-            return true;
-        }
-
-        return false;
+       return $this->memcached->set($key, $data, time() + $ttl);
     }
 
     /**
