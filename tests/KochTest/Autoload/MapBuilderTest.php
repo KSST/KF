@@ -23,7 +23,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->file = vfsStream::newFile('classmap.file', 0777);
 
         $this->vfsFileWithPHPClass = vfsStream::url('root/class.php');
-        $content = '<?php class MyClass(){} ?>';
+        $content = '<?php namespace SomeNamespace; class MyClass(){} ?>';
         $this->file2 = vfsStream::newFile('class.php', 0777)->setContent($content);
 
         $this->root = new vfsStreamDirectory('root');
@@ -63,7 +63,7 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
     {
         $classname = $this->object->extractClassnames($this->vfsFileWithPHPClass);
 
-        $this->assertEquals($classname[0], 'MyClass');
+        $this->assertEquals($classname[0], 'SomeNamespace\MyClass');
     }
 
     /**
