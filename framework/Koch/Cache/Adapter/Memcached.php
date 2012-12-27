@@ -132,7 +132,7 @@ class Memcached extends AbstractCache implements CacheInterface
             $ttl = $this->options['ttl'];
         }
 
-        if ( $this->memcached->set($key, $data, $ttl) === true ) {
+        if ( $this->memcached->set($key, $data, time() + $ttl) === true ) {
             return true;
         }
 
