@@ -114,7 +114,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         ));
         $this->object->assign($array2);
 
-        $this->assertEquals(is_array($this->object->C));
+        $this->assertTrue(is_array($this->object->C));
         $this->assertEquals($this->object->C['D'], 4);
     }
 
