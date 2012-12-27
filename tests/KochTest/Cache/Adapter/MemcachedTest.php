@@ -53,14 +53,20 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Memcached::clear
-     * @todo   Implement testClear().
      */
     public function testClear()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // check that key not exists before
+        $this->assertFalse($this->object->contains('key1'));
+        // add key with value
+        $this->assertTrue($this->object->store('key1', 'value1'));
+        // just check if such a key is set
+        $this->assertTrue($this->object->contains('key1'));
+
+        $this->assertTrue($this->object->clear());
+
+         // check that it's gone
+        $this->assertFalse($this->object->contains('key1'));
     }
 
     /**
@@ -69,33 +75,6 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
      */
     public function testStats()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::getEngine
-     * @todo   Implement testGetEngine().
-     */
-    public function testGetEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Adapter\Memcached::__destruct
-     * @todo   Implement test__destruct().
-     */
-    public function test__destruct()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(is_array($this->object->stats()));
     }
 }
