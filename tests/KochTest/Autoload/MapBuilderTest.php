@@ -22,8 +22,14 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
         $this->vfsFileURL = vfsStream::url('root/classmap.file');
         $this->file = vfsStream::newFile('classmap.file', 0777);
 
+        $this->vfsFileWithPHPClass = vfsStream::url('root/class.php');
+        $content = '<?php class MyClass(){} ?>';
+        $this->file2 = vfsStream::newFile('class.php', 0777)->setContent($content);
+
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
+        $this->root->addChild($this->file2);
+
         vfsStreamWrapper::setRoot($this->root);
     }
 
@@ -51,15 +57,13 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Autoload\MapBuilder::extractClassname
-     * @todo   Implement testExtractClassname().
+     * @covers Koch\Autoload\MapBuilder::extractClassnames
      */
-    public function testExtractClassname()
+    public function testExtractClassnames()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $classname = $this->object->extractClassnames($this->vfsFileWithPHPClass);
+
+        $this->assertEquals($classname[0], 'MyClass');
     }
 
     /**
