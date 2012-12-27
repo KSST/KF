@@ -68,13 +68,12 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Autoload\MapBuilder::writeMapFile
-     * @todo   Implement testWriteMapFile().
      */
     public function testWriteMapFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $classmap = array('classname' => 'filename');
+        $mapfile = $this->vfsFileURL;
+        $res = $this->object->writeMapFile($classmap, $mapfile);
+        $this->assertTrue($res);
     }
 }
