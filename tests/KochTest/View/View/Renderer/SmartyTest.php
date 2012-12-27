@@ -264,9 +264,23 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetRenderMode()
     {
-       $mode = 'NoLayout';
+       // default mode
+       $this->assertEquals('LAYOUT', $this->object->getRenderMode());
+
+       $mode = 'NOLAYOUT';
        $this->object->setRenderMode($mode);
        $this->assertEquals($mode, $this->object->getRenderMode());
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Smarty::setRenderMode
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Use LAYOUT or NOLAYOUT as parameter.
+     */
+    public function testSetRenderMode_throwsException()
+    {
+       $mode = 'BLA';
+       $this->object->setRenderMode($mode);
     }
 
     /**

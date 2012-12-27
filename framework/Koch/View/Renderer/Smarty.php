@@ -451,11 +451,17 @@ class Smarty extends AbstractRenderer
     /**
      * Setter for RenderMode
      *
-     * @param string $mode Set the renderMode (LAYOUT, NOLAYOUT)
+     * @param string $mode Set the renderMode (LAYOUT, NOLAYOUT). Default LAYOUT.
      */
-    public function setRenderMode($mode)
+    public function setRenderMode($mode = 'LAYOUT')
     {
-        $this->renderMode = $mode;
+        $mode = strtoupper($mode);
+        
+        if($mode === 'LAYOUT' or $mode === 'NOLAYOUT') {
+            $this->renderMode = $mode;
+        } else {
+            throw new \InvalidArgumentException('Use LAYOUT or NOLAYOUT as parameter.');
+        }
     }
 
     /**
