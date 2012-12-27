@@ -61,8 +61,8 @@
         "smarty/smarty"                   : "v3.1.12",
         "swiftmailer/swiftmailer"         : "v4.2.2",
         "marijnh/CodeMirror"              : "2.35",
-        "mpdf/mpdf"                       : "dev-master",
-        "tcpdf/tcpdf"                     : "dev-master"
+        "#mpdf/mpdf"                       : "dev-master",
+        "#tcpdf/tcpdf"                     : "dev-master"
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
