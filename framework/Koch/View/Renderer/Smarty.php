@@ -177,18 +177,18 @@ class Smarty extends AbstractRenderer implements CacheableInterface
          * This sets multiple template dirs, with the following detection order:
          * The user-choosen Theme, before Module, before Core/Default/Admin-Theme.
          *
-         * 1) "/themes/[frontend|backend]/theme_of_user_session/"
-         * 2) "/themes/[frontend|backend]/theme_of_user_session/modulename/"
+         * 1) "/themes/[frontend|backend]/theme(from_session)/"
+         * 2) "/themes/[frontend|backend]/theme(from_session)/modulename/"
          * 3) "/modules/"
          * 4) "/modules/modulename/view/"
-         * 5) "/themes/core/view/"
+         * 5) "/themes/core/view/smarty"
          * 6) "/themes/"
          */
         $tpl_array = array(
             $this->viewMapper->getThemeTemplatePaths(), // 1 + 2
             $this->viewMapper->getModuleTemplatePaths(), // 3 + 4
             APPLICATION_PATH . 'themes/core/view/smarty', // 5
-            APPLICATION_THEMES // 6
+            APPLICATION_PATH . 'themes/' // 6
         );
 
         // flatten that thing
