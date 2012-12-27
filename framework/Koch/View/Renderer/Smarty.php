@@ -42,7 +42,7 @@ use Koch\Router\TargetRoute;
  * @package     View
  * @subpackage  Renderer
  */
-class Smarty extends AbstractRenderer implements CacheableInterface
+class Smarty extends AbstractRenderer
 {
     /**
      * Constructor
