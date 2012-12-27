@@ -19,7 +19,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         $options = array();
-        
+
         $this->object = new Smarty($options);
     }
 
@@ -29,6 +29,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
@@ -57,14 +58,12 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::getEngine
-     * @todo   Implement testGetEngine().
      */
     public function testGetEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $smarty = $this->object->getEngine();
+
+        $this->assertInstanceOf('Smarty', $smarty);
     }
 
     /**
@@ -81,14 +80,12 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::getTemplatePaths
-     * @todo   Implement testGetTemplatePaths().
      */
     public function testGetTemplatePaths()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $paths = $this->object->getTemplatePaths();
+
+        $this->assertTrue(is_array($paths));
     }
 
     /**
