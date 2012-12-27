@@ -83,9 +83,6 @@ class Memcached extends AbstractCache implements CacheInterface
         parent::__construct($options);
 
         $this->memcached = $this->getMemcachedInstance($options['useConnection']);
-
-        var_dump($this->memcached);
-        var_dump($this->memcached->getServerList());
     }
 
     function getMemcachedInstance($connection = 'default') {
