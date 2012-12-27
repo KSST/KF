@@ -90,14 +90,32 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::assign
-     * @todo   Implement testAssign().
      */
     public function testAssign()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        /* key - value */
+        $this->object->assign('key1', 'value');
+        $this->assertEquals($this->object->key1, 'value');
+
+        /* array */
+        $array1 = array(
+            'A' => '1',
+            'B' => '2'
         );
+        $this->object->assign($array1);
+
+        $this->assertEquals($this->object->A, 1);
+        $this->assertEquals($this->object->B, 2);
+
+        /* multi-dim array */
+        $array2 = array(
+            'C' => array(
+                'D' => '4'
+        ));
+        $this->object->assign($array2);
+
+        $this->assertEquals(is_array($this->object->C));
+        $this->assertEquals($this->object->C['D'], 4);
     }
 
     /**
@@ -114,50 +132,47 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::__get
-     * @todo   Implement test__get().
      */
     public function test__get()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $value = 'value1';
+        $this->object->templatevar1 = $value;
+
+        $this->assertEquals($this->object->templatevar1, $value);
     }
 
     /**
      * @covers Koch\View\Renderer\Smarty::__set
-     * @todo   Implement test__set().
      */
     public function test__set()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $value = 'value1';
+        $this->object->templatevar1 = $value;
+
+        $vars = $this->object->getVars();
+        $this->assertArrayHasKey('templatevar1', $vars);
+        $this->assertEquals($vars['templatevar1'], $value);
     }
 
     /**
      * @covers Koch\View\Renderer\Smarty::__isset
-     * @todo   Implement test__isset().
      */
     public function test__isset()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->templatevar1 = 'value1';
+
+        $this->assertTrue(isset($this->object->templatevar1));
     }
 
     /**
      * @covers Koch\View\Renderer\Smarty::__unset
-     * @todo   Implement test__unset().
      */
     public function test__unset()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->templatevar1 = 'value1';
+        unset($this->object->templatevar1);
+
+        $this->assertFalse(isset($this->object->templatevar1));
     }
 
     /**
@@ -186,26 +201,37 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::getVars
-     * @todo   Implement testGetVars().
      */
     public function testGetVars()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $value = 'value1';
+        $this->object->templatevar1 = $value;
+
+        $vars = $this->object->getVars();
+
+        $this->assertTrue(is_array($vars));
+        $this->assertArrayHasKey('templatevar1', $vars);
+        $this->assertEquals($vars['templatevar1'], $value);
     }
 
     /**
      * @covers Koch\View\Renderer\Smarty::clearVars
-     * @todo   Implement testClearVars().
      */
     public function testClearVars()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $value = 'value1';
+        $this->object->templatevar1 = $value;
+
+        $vars = $this->object->getVars();
+
+        $this->assertTrue(is_array($vars));
+        $this->assertArrayHasKey('templatevar1', $vars);
+        $this->assertEquals($vars['templatevar1'], $value);
+
+        $this->object->clearVars();
+
+        $vars = $this->object->getVars();
+        $this->assertEquals(1, count($vars));
     }
 
     /**
@@ -246,26 +272,13 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::setRenderMode
-     * @todo   Implement testSetRenderMode().
+     * @covers Koch\View\Renderer\Smarty::getRenderMode
      */
     public function testSetRenderMode()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Smarty::getRenderMode
-     * @todo   Implement testGetRenderMode().
-     */
-    public function testGetRenderMode()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $mode = 'NoLayout';
+       $this->object->setRenderMode($mode);
+       $this->assertEquals($mode, $this->object->getRenderMode());
     }
 
     /**

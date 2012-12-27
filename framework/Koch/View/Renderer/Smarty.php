@@ -271,13 +271,14 @@ class Smarty extends AbstractRenderer implements CacheableInterface
      * @see __set()
      * @param string|array $tpl_parameter Is a Key or an Array.
      * @param mixed        $value         (optional) In case a key-value pair is used, $value is the value.
+     * @return boolean
      */
     public function assign($tpl_parameter, $value = null)
     {
         if (is_array($tpl_parameter) === true or is_object($tpl_parameter) === true ) {
-            $this->renderer->assign($tpl_parameter);
+            return $this->renderer->assign($tpl_parameter);
         } else {
-            $this->renderer->assign($tpl_parameter, $value);
+            return $this->renderer->assign($tpl_parameter, $value);
         }
     }
 
@@ -314,10 +315,11 @@ class Smarty extends AbstractRenderer implements CacheableInterface
      *
      * @param string $key Name of the variable
      * @param mixed  $val Value of variable
+     * @return boolean
      */
     public function __set($key, $value)
     {
-        $this->assign($key, $value);
+        return $this->assign($key, $value);
     }
 
      /**
