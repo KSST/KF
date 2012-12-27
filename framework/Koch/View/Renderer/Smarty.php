@@ -244,9 +244,9 @@ class Smarty extends AbstractRenderer implements CacheableInterface
     public function setTemplatePath($templatepath)
     {
         if (is_dir($templatepath) === true and is_readable($templatepath) === true) {
-            $this->renderer->template_dir[] = $templatepath;
+            $this->renderer->setTemplateDir($templatepath);
         } else {
-            throw new Exception(
+            throw new \InvalidArgumentException(
                 'Invalid Smarty Template path provided: Path not existing or not readable. Path: ' . $templatepath
             );
         }
@@ -411,27 +411,6 @@ class Smarty extends AbstractRenderer implements CacheableInterface
     public function clearVars()
     {
         $this->renderer->clearAllAssign();
-    }
-
-    /**
-     * Empty cache for a specific template
-     *
-     * @param  string  $template_name template name
-     * @param  string  $cache_id      cache id
-     * @param  string  $compile_id    compile id
-     * @param  int $exp_time      expiration time
-     * @param  string  $type          resource type
-     * @return integer number of cache files deleted
-     */
-    public function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
-    {
-        $this->renderer->clearCache(
-            $template_name,
-            $cache_id = null,
-            $compile_id = null,
-            $exp_time = null,
-            $type = null
-        );
     }
 
     /**

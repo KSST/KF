@@ -68,24 +68,24 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::setTemplatePath
-     * @todo   Implement testSetTemplatePath().
+     * @expectedException InvalidArgumentException
+     * @expectedExceptionMessage Invalid Smarty Template path provided: Path not existing or not readable.
      */
-    public function testSetTemplatePath()
+    public function testSetTemplatePath_throwsException()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->object->setTemplatePath('/path/to/where/the/php/flavour/is');
     }
 
     /**
+     * @covers Koch\View\Renderer\Smarty::setTemplatePath
      * @covers Koch\View\Renderer\Smarty::getTemplatePaths
      */
-    public function testGetTemplatePaths()
+    public function testSetTemplatePath()
     {
-        $paths = $this->object->getTemplatePaths();
+       $this->object->setTemplatePath(__DIR__);
+       $paths = $this->object->getTemplatePaths();
 
-        $this->assertTrue(is_array($paths));
+       $this->assertEquals($paths[0], __DIR__ . DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -232,18 +232,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
         $vars = $this->object->getVars();
         $this->assertEquals(1, count($vars));
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Smarty::clearCache
-     * @todo   Implement testClearCache().
-     */
-    public function testClearCache()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
     }
 
     /**
