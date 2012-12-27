@@ -65,7 +65,7 @@ class Xslt extends AbstractRenderer
             );
         }
 
-        parent::__construct($config);
+        parent::__construct($options);
 
         // instantiate the render engine
         // @link http://php.net/manual/en/class.xsltprocessor.php
