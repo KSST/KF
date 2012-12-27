@@ -147,10 +147,12 @@ class Mapper
      */
     public static function getThemeTemplatePaths()
     {
+        $route = HttpRequest::getRoute();
+
         // get module, submodule, renderer names
-        $module = HttpRequest::getRoute()->getModule();
-        $controller = HttpRequest::getRoute()->getController();
-        #$renderer  = HttpRequest::getRoute()->getRenderEngine();
+        $module = $route->getModule();
+        $controller = $route->getController();
+        #$renderer  = $route->getRenderEngine();
 
         $theme_paths = array();
 
@@ -160,7 +162,7 @@ class Mapper
          */
         if ($module === 'controlcenter' or $controller === 'admin') {
             // get backend theme from session for path construction
-            $backendtheme = HttpRequest::getRoute()->getBackendTheme();
+            $backendtheme = $route->getBackendTheme();
 
             // (a) USER BACKENDTHEME - check in the active session backendtheme
             // e.g. /themes/backend/ + admin/template_name.tpl
@@ -173,7 +175,7 @@ class Mapper
             // 2. FRONTEND THEME
 
             // get frontend theme from session for path construction
-            $frontendtheme = HttpRequest::getRoute()->getFrontendTheme();
+            $frontendtheme = $route->getFrontendTheme();
 
             // (a) USER FRONTENDTHEME - check, if template exists in current session user THEME
             $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR;
