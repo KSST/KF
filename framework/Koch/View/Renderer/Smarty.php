@@ -26,7 +26,6 @@
 namespace Koch\View\Renderer;
 
 use Koch\View\AbstractRenderer;
-use Koch\View\CacheableInterface;
 use Koch\View\Mapper;
 use Koch\Router\TargetRoute;
 
@@ -466,7 +465,7 @@ class Smarty extends AbstractRenderer
      */
     public function getRenderMode()
     {
-        if (empty($this->renderMode)) {
+        if ($this->renderMode === null) {
             $this->renderMode = 'LAYOUT';
         }
 
