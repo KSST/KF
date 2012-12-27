@@ -607,7 +607,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function getRoute()
     {
-        return self::$route;
+       return (self::$route == null) ? \Koch\Router\TargetRoute::instantiate() : self::$route;
     }
 
     /**
