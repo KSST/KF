@@ -55,7 +55,7 @@ class MapBuilder
         }
 
         foreach ($files as $file) {
-            $classnames = self::extractClassname($file);
+            $classnames = self::extractClassnames($file);
             foreach ($classnames as $classname) {
                 $classmap[$classname] = $file;
             }
@@ -71,7 +71,7 @@ class MapBuilder
      *
      * @return array Found classnames.
      */
-    public static function extractClassname($file)
+    public static function extractClassnames($file)
     {
         // tokenize the content of the file
         $contents = file_get_contents($file);
