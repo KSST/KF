@@ -62,7 +62,7 @@ class Theme
         foreach ($themepaths as $themepath) {
             $theme_info_file = $themepath . DIRECTORY_SEPARATOR . 'theme_info.xml';
 
-            if (is_file($theme_info_file_path)) {
+            if (is_file($theme_info_file_path) === true) {
                 return $theme_info_file;
             }
         }
@@ -81,11 +81,11 @@ class Theme
             $theme = $this->getName();
         }
 
-        if (is_dir(ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR)) {
+        if (is_dir(ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR) === true) {
             return ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR;
         }
 
-        if (is_dir(ROOT_THEMES_BACKEND . $theme . DIRECTORY_SEPARATOR)) {
+        if (is_dir(ROOT_THEMES_BACKEND . $theme . DIRECTORY_SEPARATOR) === true) {
             return ROOT_THEMES_BACKEND . $theme . DIRECTORY_SEPARATOR;
         }
     }
@@ -104,12 +104,12 @@ class Theme
         }
 
         // check absolute, return www
-        if (is_dir(ROOT_THEMES_FRONTEND . $theme)) {
+        if (is_dir(ROOT_THEMES_FRONTEND . $theme) === true) {
              return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
         }
 
         // check absolute, return www
-        if (is_dir(ROOT_THEMES_BACKEND . $theme)) {
+        if (is_dir(ROOT_THEMES_BACKEND . $theme) === true) {
             return WWW_ROOT_THEMES_BACKEND . $theme . '/';
         }
     }
@@ -125,7 +125,7 @@ class Theme
     {
         $theme_info_file = $this->getPath($theme) . 'theme_info.xml';
 
-        if (is_file($theme_info_file)) {
+        if (is_file($theme_info_file) === true) {
             return $theme_info_file;
         } else {
             throw new \Exception('The Themeinfo file was not found on Theme: '. $theme, '100');
