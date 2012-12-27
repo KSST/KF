@@ -3,7 +3,7 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Smarty;
-use Koch\Config\Config;
+
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,9 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Smarty(new Config);
+        $options = array();
+        
+        $this->object = new Smarty($options);
     }
 
     /**

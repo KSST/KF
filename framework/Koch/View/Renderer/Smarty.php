@@ -51,6 +51,17 @@ class Smarty extends AbstractRenderer implements CacheableInterface
      */
     public function __construct($options = array())
     {
+        // fallback config
+        $this->options = array(
+           'compile_dir' => APPLICATION_CACHE_PATH . 'tpl_compile/',
+           'cache_dir' => APPLICATION_CACHE_PATH . 'tpl_cache/',
+           'config_dir' => '',
+           'debug_tpl' => '', #APPLICATION_THEMES_CORE . 'view/smarty/debug.tpl',
+           'cache_enabled' => 0,
+           'cache_lifetime' => 0
+        );
+
+        // set incoming config
         parent::__construct($options);
 
         $this->initializeEngine();
@@ -80,15 +91,15 @@ class Smarty extends AbstractRenderer implements CacheableInterface
     public function configureEngine()
     {
         // Directories
-        $this->renderer->compile_dir = APPLICATION_CACHE_PATH . 'tpl_compile/';
-        $this->renderer->cache_dir   = APPLICATION_CACHE_PATH . 'tpl_cache/';
-        //$this->renderer->config_dir  = ROOT_LIBRARIES . 'smarty/configs/';
+        $this->renderer->compile_dir = $this->options['compile_dir'];
+        $this->renderer->cache_dir   = $this->options['cache_dir'];
+        $this->renderer->config_dir  = $this->options['config_dir'];
 
         // Debugging
         $this->renderer->debugging = DEBUG ? true : false;
 
         if ($this->renderer->debugging === true) {
-            $this->renderer->debug_tpl = APPLICATION_THEMES_CORE . 'view/smarty/debug.tpl';
+            $this->renderer->debug_tpl = $this->options['debug_tpl'];
             $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
         }
@@ -137,7 +148,7 @@ class Smarty extends AbstractRenderer implements CacheableInterface
         /**
          * CACHING OPTIONS (set these options if caching is enabled)
          */
-        #\Koch\Debug\Debug::printr($this->config['smarty']);
+        #\Koch\Debug\Debug::printr($this->options['smarty']);
         if ($this->renderer->debugging === true) {
             $this->renderer->caching                = 0;
             $this->renderer->cache_lifetime         = 0;       // refresh templates on every load
@@ -145,10 +156,10 @@ class Smarty extends AbstractRenderer implements CacheableInterface
             $this->renderer->cache_modified_check   = 0;       // set to 1 to activate
         } else {
             // $this->renderer->setCaching(true);
-            $this->renderer->caching = (bool) $this->config['smarty']['cache'];
+            $this->renderer->caching = (bool) $this->options['cache_enabled'];
             // -1 ... dont expire, 0 ... refresh everytime
-            if (isset($this->config['smarty']['cache_lifetime']) === true) {
-                $this->renderer->cache_lifetime = $this->config['smarty']['cache_lifetime'];
+            if (isset($this->options['cache_lifetime']) === true) {
+                $this->renderer->cache_lifetime = $this->options['cache_lifetime'];
             } else {
                 $this->renderer->cache_lifetime = 0;
             }
@@ -174,8 +185,8 @@ class Smarty extends AbstractRenderer implements CacheableInterface
          * 6) "/themes/"
          */
         $tpl_array = array(
-            Mapper::getThemeTemplatePaths(), // 1 + 2
-            Mapper::getModuleTemplatePaths(), // 3 + 4
+            $this->viewMapper->getThemeTemplatePaths(), // 1 + 2
+            $this->viewMapper->getModuleTemplatePaths(), // 3 + 4
             APPLICATION_PATH . 'themes/core/view/smarty', // 5
             APPLICATION_THEMES // 6
         );
