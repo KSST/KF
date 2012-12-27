@@ -94,12 +94,12 @@ class Theme
             $theme = $this->getName();
         }
 
-        if (is_dir(ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR) === true) {
-            return ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR;
+        if (is_dir(APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR) === true) {
+            return APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
         }
 
-        if (is_dir(ROOT_THEMES_BACKEND . $theme . DIRECTORY_SEPARATOR) === true) {
-            return ROOT_THEMES_BACKEND . $theme . DIRECTORY_SEPARATOR;
+        if (is_dir(APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR) === true) {
+            return APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR;
         }
     }
 
@@ -117,12 +117,12 @@ class Theme
         }
 
         // check absolute, return www
-        if (is_dir(ROOT_THEMES_FRONTEND . $theme) === true) {
+        if (is_dir(APPLICATION_PATH . 'themes/frontend/' . $theme) === true) {
              return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
         }
 
         // check absolute, return www
-        if (is_dir(ROOT_THEMES_BACKEND . $theme) === true) {
+        if (is_dir(APPLICATION_PATH . 'themes/backend/' . $theme) === true) {
             return WWW_ROOT_THEMES_BACKEND . $theme . '/';
         }
     }
@@ -316,8 +316,8 @@ class Theme
         $themes = array();
 
         $themes = array_merge(
-            self::iterateDir(ROOT_THEMES_FRONTEND, 'frontend'),
-            self::iterateDir(ROOT_THEMES_BACKEND, 'backend')
+            self::iterateDir(APPLICATION_PATH . 'themes/frontend/', 'frontend'),
+            self::iterateDir(APPLICATION_PATH . 'themes/backend/', 'backend')
         );
 
         return $themes;
@@ -326,7 +326,7 @@ class Theme
     /**
      * Iterates over a theme dir (backend / frontend) and fetches some data.
      *
-     * @param  string  $dir             ROOT_THEMES_FRONTEND, ROOT_THEMES_BACKEND
+     * @param  string  $dir             APPLICATION_FRONTEND_THEMES_PATH, APPLICATION_BACKEND_THEMES_PATH
      * @param  string  $type            'frontend' or 'backend'
      * @param  boolean $only_index_name
      * @return string

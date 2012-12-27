@@ -132,8 +132,8 @@ class CssBuilder
         // initializing
         $config = Clansuite_CMS::getClansuiteConfig();
 
-        self::setFrontendPath(ROOT_THEMES_FRONTEND);
-        self::setBackendPath(ROOT_THEMES_BACKEND);
+        self::setFrontendPath(APPLICATION_PATH . 'themes/frontend/');
+        self::setBackendPath(APPLICATION_PATH . 'themes/backend/');
         self::setFrontendTheme($config['template']['frontend_theme']);
         self::setBackendTheme($config['template']['backend_theme']);
         self::addBrowser('default', 'Standard Browser (Mozilla)', true, '');

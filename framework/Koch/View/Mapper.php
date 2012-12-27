@@ -154,7 +154,8 @@ class Mapper
         $controller = $route->getController();
         #$renderer  = $route->getRenderEngine();
 
-        $theme_paths = array();
+        $themePaths = array();
+        $themePath = '';
 
         /**
          * 1. BACKEND THEME
@@ -162,30 +163,34 @@ class Mapper
          */
         if ($module === 'controlcenter' or $controller === 'admin') {
             // get backend theme from session for path construction
-            $backendtheme = $route->getBackendTheme();
+            $theme = $route->getBackendTheme();
 
-            // (a) USER BACKENDTHEME - check in the active session backendtheme
+            $themesPath = APPLICATION_PATH . 'themes/backend/';
+
+            // (a) USER BACKEND THEME - check in the active session backendtheme
             // e.g. /themes/backend/ + admin/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme;
+            $themePaths[] = $themesPath . $theme;
             // e.g. /themes/backend/ + admin/modules/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (b) BACKEND FALLBACK - check the fallback dir: themes/admin
-            $theme_paths[] = ROOT_THEMES_BACKEND . 'admin' . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . 'admin/';
         } else {
             // 2. FRONTEND THEME
 
             // get frontend theme from session for path construction
-            $frontendtheme = $route->getFrontendTheme();
+            $theme = $route->getFrontendTheme();
 
-            // (a) USER FRONTENDTHEME - check, if template exists in current session user THEME
-            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR;
+            $themesPath = APPLICATION_PATH . 'themes/frontend/';
+
+            // (a) USER FRONTEND THEME - check, if template exists in current session user THEME
+            $themePaths[] = $themesPath . $theme . DIRECTORY_SEPARATOR;
             // (b) FRONTEND FALLBACK - check, if template exists in usertheme/modulename/tpl
-            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
-            // (c) FRONTEND FALLBACK - check, if template exists in standard theme
-            $theme_paths[] = ROOT_THEMES_FRONTEND . 'standard' . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            // (c) FRONTEND FALLBACK - check, if template exists in /themes/frontend/standard
+            $themePaths[] = $themesPath . 'standard/';
         }
 
-        return $theme_paths;
+        return $themePaths;
     }
 
     /**

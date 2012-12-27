@@ -79,7 +79,7 @@ class ThemeViaGet implements FilterInterface
 
         // compose theme dir
         $themedir = '';
-        $themedir = ROOT_THEMES_FRONTEND . $theme . DIRECTORY_SEPARATOR;
+        $themedir = APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
 
         // if theme exists, set it as frontend theme to the session
         if (is_dir($themedir) and is_file($themedir . 'theme_info.xml')) {
