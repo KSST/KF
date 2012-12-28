@@ -158,7 +158,7 @@ class Mapper
             // e.g. /themes/backend/ + admin/template_name.tpl
             $themePaths[] = $themesPath . $theme;
             // e.g. /themes/backend/ + admin/modules/template_name.tpl
-            $themePaths[] = $themesPath . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . $theme . '/modules/' . $module . '/';
             // (b) BACKEND FALLBACK - check the fallback dir: themes/admin
             $themePaths[] = $themesPath . 'admin/';
         } else {
@@ -170,9 +170,9 @@ class Mapper
             $themesPath = APPLICATION_PATH . 'themes/frontend/';
 
             // (a) USER FRONTEND THEME - check, if template exists in current session user THEME
-            $themePaths[] = $themesPath . $theme . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . $theme . '/';
             // (b) FRONTEND FALLBACK - check, if template exists in usertheme/modulename/tpl
-            $themePaths[] = $themesPath . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            $themePaths[] = $themesPath . $theme . '/modules/' . $module . '/';
             // (c) FRONTEND FALLBACK - check, if template exists in /themes/frontend/standard
             $themePaths[] = $themesPath . 'standard/';
         }
@@ -215,9 +215,9 @@ class Mapper
         // compose templates paths in the module dir
         $module_paths = array(
             APPLICATION_MODULES_PATH,
-            APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR,
+            APPLICATION_MODULES_PATH . $module .  '/',
             APPLICATION_MODULES_PATH . $module . '/View/',
-            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst($renderer) . DIRECTORY_SEPARATOR
+            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst($renderer) . '/'
         );
 
         return $module_paths;
