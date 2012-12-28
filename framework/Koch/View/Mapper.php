@@ -121,10 +121,10 @@ class Mapper
         // check if template was found there, else it's null
         if ($theme_template != null) {
             return $theme_template;
-        } else {
-            // fetch the template by searching in the Module Template Path
-            return self::getModuleTemplatePath($template);
         }
+
+        // fetch the template by searching in the Module Template Path
+        return self::getModuleTemplatePath($template);
     }
 
     /**

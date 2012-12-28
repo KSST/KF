@@ -334,9 +334,9 @@ class Smarty extends AbstractRenderer
      */
     protected static function createCacheId()
     {
-        $module    = TargetRoute::getModule();
+        $module = TargetRoute::getModule();
         $controller = TargetRoute::getController();
-        $action    = TargetRoute::getMethod();
+        $action = TargetRoute::getMethod();
 
         return md5(strtolower($module . $controller . $action));
     }

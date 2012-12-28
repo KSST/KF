@@ -587,7 +587,7 @@ class Datagrid extends Base
         $this->execute();
 
         // attach Datagrid to renderer
-        $renderer = new Koch\Datagrid\Datagrid_Renderer($this);
+        $renderer = new Koch\Datagrid\Datagrid\Renderer($this);
 
         return $renderer->render();
     }
