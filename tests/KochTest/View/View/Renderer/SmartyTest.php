@@ -33,14 +33,12 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->initializeEngine();
+
+        $this->assertTrue(is_object($this->object->renderer));
     }
 
     /**
@@ -49,10 +47,10 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->configureEngine();
+
+        // lets accept as configured, if template paths are set
+        $this->assertTrue(is_array($this->object->getTemplatePaths()));
     }
 
     /**
@@ -72,7 +70,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetTemplatePath_throwsException()
     {
-       $this->object->setTemplatePath('/path/to/where/the/php/flavour/is');
+       $this->object->setTemplatePath('/path/to/where/the/smarty/flavour/is/not');
     }
 
     /**
@@ -115,18 +113,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(is_array($this->object->C));
         $this->assertEquals($this->object->C['D'], 4);
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Smarty::isCached
-     * @todo   Implement testIsCached().
-     */
-    public function testIsCached()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
     }
 
     /**
