@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Xtemplate;
-use Koch\Config\Config;
 
 class XtemplateTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,9 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Xtemplate(new Config);
+        $options = array();
+
+        $this->object = new Xtemplate($options);
     }
 
     /**

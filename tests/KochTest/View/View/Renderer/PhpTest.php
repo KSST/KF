@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Php;
-use Koch\Config\Config;
 
 class PhpTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,8 +17,9 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        $options = array();
 
-        $this->object = new Php(new Config);
+        $this->object = new Php($options);
     }
 
     /**

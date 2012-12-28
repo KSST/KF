@@ -58,7 +58,7 @@ abstract class AbstractRenderer
     public $layoutTemplate = null;
 
     /**
-     * @var string Variable for the RenderMode (available: WRAPPED)
+     * @var string Variable for the RenderMode (LAYOUT, NOLAYOUT)
      */
     public $renderMode = null;
 

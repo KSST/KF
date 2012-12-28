@@ -21,7 +21,9 @@ class PdfTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The mbstring extension is not available.');
         }
 
-        $this->object = new Pdf;
+        $options = array();
+        
+        $this->object = new Pdf($options);
     }
 
     /**

@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Json;
-use Koch\Config\Config;
 
 class JsonTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,9 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Json(new Config);
+        $options = array();
+
+        $this->object = new Json($options);
     }
 
     /**

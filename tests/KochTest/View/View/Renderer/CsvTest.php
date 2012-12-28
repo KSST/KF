@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Csv;
-use Koch\Config\Config;
 
 class CsvTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,9 @@ class CsvTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Csv(new Config);
+        $options = array();
+
+        $this->object = new Csv($options);
     }
 
     /**

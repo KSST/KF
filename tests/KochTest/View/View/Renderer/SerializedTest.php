@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Serialized;
-use Koch\Config\Config;
 
 class SerializedTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +17,9 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Serialized(new Config);
+        $options = array();
+
+        $this->object = new Serialized($options);
     }
 
     /**
