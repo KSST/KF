@@ -4,7 +4,6 @@ namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Smarty;
 
-
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
     /**

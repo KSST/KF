@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Phptal;
-use Koch\Config\Config;
 
 class PhptalTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +21,9 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
            $this->markTestSkipped('Vendor library "PHPTal" not found.');
         }
 
-        $this->object = new Phptal(new Config);
+        $options = array();
+
+        $this->object = new PHPTAL($options);
     }
 
     /**

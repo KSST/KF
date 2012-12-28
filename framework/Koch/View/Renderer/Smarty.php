@@ -85,77 +85,39 @@ class Smarty extends AbstractRenderer
         $this->renderer->debugging = DEBUG ? true : false;
 
         if ($this->renderer->debugging === true) {
+            
             $this->renderer->debug_tpl = $this->options['debug_tpl'];
+
+            $this->renderer->caching = 0;
+            $this->renderer->cache_lifetime = 0;             // refresh templates on every load
+            // $this->renderer->cache_handler_func   = "";   // Specify your own cache_handler function
+            $this->renderer->cache_modified_check = 0;       // set to 1 to activate
+
             $this->renderer->clearCompiledTemplate();
             $this->renderer->clearAllCache();
-        }
 
-        // auto delimiter of javascript/css (The literal tag of Smarty v2.x)
-        $this->renderer->auto_literal = true;
-
-        /**
-         * SMARTY FILTERS
-         */
-        $autoload_filters = array();
-        if ($this->renderer->debugging === true) {
-            $autoload_filters = array('pre' => array('inserttplnames'));
-        }
-        $this->renderer->autoload_filters = $autoload_filters;
-        #array(       // indicates which filters will be auto-loaded
-        #'pre'    => array('inserttplnames'),
-        #'post'   => array(),
-        #'output' => array('trimwhitespaces')
-        #);
-
-        /**
-         * COMPILER OPTIONS
-         */
-        // defines the compiler class for Smarty ... ONLY FOR ADVANCED USERS
-        // $this->renderer->compiler_class   = "Smarty_Compiler";
-        // set individual compile_id instead of assign compile_ids to function-calls
-        // this is useful with prefilter for different languages
-        // $this->renderer->compile_id       = 0;
-
-        /**
-         * recompile/rewrite templates only in debug mode
-         * @see http://www.smarty.net/manual/de/variable.compile.check.php
-         */
-        if ($this->renderer->debugging === true) {
+            /**
+             * Recompile templates only in debug mode
+             * @see http://www.smarty.net/manual/de/variable.compile.check.php
+             */
             // if a template was changed it would be recompiled,
             // if set to false nothing will be compiled (changes take no effect)
             $this->renderer->compile_check = true;
             // if true compiles each template everytime, overwrites $compile_check
             $this->renderer->force_compile = true;
-        } else {
-            $this->renderer->compile_check = false;
-            $this->renderer->force_compile = false;
         }
 
-        /**
-         * CACHING OPTIONS (set these options if caching is enabled)
-         */
-        #\Koch\Debug\Debug::printr($this->options['smarty']);
-        if ($this->renderer->debugging === true) {
-            $this->renderer->caching                = 0;
-            $this->renderer->cache_lifetime         = 0;       // refresh templates on every load
-            // $this->renderer->cache_handler_func   = "";     // Specify your own cache_handler function
-            $this->renderer->cache_modified_check   = 0;       // set to 1 to activate
-        } else {
-            // $this->renderer->setCaching(true);
-            $this->renderer->caching = (bool) $this->options['cache_enabled'];
-            // -1 ... dont expire, 0 ... refresh everytime
-            if (isset($this->options['cache_lifetime']) === true) {
-                $this->renderer->cache_lifetime = $this->options['cache_lifetime'];
-            } else {
-                $this->renderer->cache_lifetime = 0;
-            }
-            // $this->renderer->cache_handler_func   = "";      // Specify your own cache_handler function
-            $this->renderer->cache_modified_check   = 1;       // set to 1 to activate
-        }
+        // auto delimiter of javascript/css
+        $this->renderer->auto_literal = true;
 
         /**
-         *  ENGINE SETTINGS
+         * Caching
          */
+        $this->renderer->caching = (bool) $this->options['cache_enabled'];
+        // -1 ... dont expire, 0 ... refresh everytime
+        $this->renderer->cache_lifetime = $this->options['cache_lifetime'];
+        // $this->renderer->cache_handler_func = "";      // Specify your own cache_handler function
+        $this->renderer->cache_modified_check = 1;       // set to 1 to activate
 
         /**
          * Smarty Template Directories
@@ -205,6 +167,20 @@ class Smarty extends AbstractRenderer
 
         // $this->renderer->registerPlugin('modifier', 'timemarker',  array('benchmark', 'timemarker'));
 
+        /**
+         * SMARTY FILTERS
+         */
+        $autoload_filters = array();
+        if ($this->renderer->debugging === true) {
+            $autoload_filters = array('pre' => array('inserttplnames'));
+        }
+        $this->renderer->autoload_filters = $autoload_filters;
+        #array(       // indicates which filters will be auto-loaded
+        #'pre'    => array('inserttplnames'),
+        #'post'   => array(),
+        #'output' => array('trimwhitespaces')
+        #);
+        //
         #$this->renderer->registerFilter(Smarty::FILTER_VARIABLE, 'htmlspecialchars');
 
         // Auto-Escape all variables
@@ -443,7 +419,7 @@ class Smarty extends AbstractRenderer
     public function setRenderMode($mode = 'LAYOUT')
     {
         $mode = strtoupper($mode);
-        
+
         if($mode === 'LAYOUT' or $mode === 'NOLAYOUT') {
             $this->renderMode = $mode;
         } else {

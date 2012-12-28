@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Xslt;
-use Koch\Config\Config;
 
 class XsltTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +21,9 @@ class XsltTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('The libxml or php_xsl extension is not available.');
         }
 
-        $this->object = new Xslt(new \Koch\Config\Config);
+        $options = array();
+
+        $this->object = new Xslt($options);
     }
 
     /**
