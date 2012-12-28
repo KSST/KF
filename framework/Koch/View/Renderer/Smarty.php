@@ -94,12 +94,14 @@ class Smarty extends AbstractRenderer
         $this->renderer->cache_dir   = $this->options['cache_dir'];
         $this->renderer->config_dir  = $this->options['config_dir'];
 
-        // Debugging
-        $this->renderer->debugging = DEBUG ? true : false;
+        /**
+         * Debug Mode Settings
+         */
+        if (DEBUG == true) {
 
-        if ($this->renderer->debugging === true) {
-            
-            $this->renderer->debug_tpl = $this->options['debug_tpl'];
+            $this->renderer->debugging = true;
+
+            $this->renderer->debug_tpl = 'file:' . $this->options['debug_tpl'];
 
             $this->renderer->caching = 0;
             $this->renderer->cache_lifetime = 0;             // refresh templates on every load
@@ -241,9 +243,9 @@ class Smarty extends AbstractRenderer
     }
 
     /**
-     * Get the TemplatePaths Array from Smarty
+     * Get all template paths from Smarty
      *
-     * @return array, string
+     * @return array
      */
     public function getTemplatePaths()
     {
@@ -268,23 +270,6 @@ class Smarty extends AbstractRenderer
         } else {
             return $this->renderer->assign($tpl_parameter, $value);
         }
-    }
-
-    /**
-     * Checks if a template is cached.
-     *
-     * @param  string  $template   the resource handle of the template file or template object
-     * @param  mixed   $cache_id   cache id to be used with this template
-     * @param  mixed   $compile_id compile id to be used with this template
-     * @return boolean Returns true in case the template is cached, false otherwise.
-     */
-    public function isCached($template, $cache_id = null, $compile_id = null)
-    {
-        if ($this->renderer->isCached($template, $cache_id, $compile_id)) {
-            return true;
-        }
-
-        return false;
     }
 
     /**
@@ -344,7 +329,7 @@ class Smarty extends AbstractRenderer
      */
     public function fetch($template, $cache_id = null, $compile_id = null, $parent = null, $display = false)
     {
-        // ask the view mapper for the template path
+        // ask the view mapper for the path of the template
         $template = Mapper::getTemplatePath($template);
 
         // create cache_id
