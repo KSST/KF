@@ -2,7 +2,7 @@
 
 namespace KochTest\Cache;
 
-use Koch\Cache\AbstractCache;
+use Koch\Cache\Adapter\File;
 
 class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 {
@@ -17,8 +17,10 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        // cannot instantiate abstract class
-        // $this->object = new AbstractCache;
+        // we are using the cache adapter File here,
+        // it's a class extending the abstract class
+        // abstract classes cannot be instantiated
+        $this->object = new File;
     }
 
     /**
@@ -27,41 +29,28 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Cache\AbstractCache::setPrefix
-     * @todo   Implement testSetPrefix().
+     * @covers Koch\Cache\AbstractCache::getPrefix
      */
     public function testSetPrefix()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $prefix = 'newPrefix';
+        $this->object->setPrefix($prefix);
+        $this->assertEquals($prefix, $this->object->getPrefix());
     }
 
     /**
-     * @covers Koch\Cache\AbstractCache::getPrefix
-     * @todo   Implement testGetPrefix().
-     */
-    public function testGetPrefix()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\AbstractCache::applyPrefix
-     * @todo   Implement testApplyPrefix().
+     * @covers Koch\Cache\AbstractCache::prefixKey
      */
     public function testApplyPrefix()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->setPrefix('newPrefix');
+
+        $key = 'Key';
+        $this->assertEquals('newPrefixKey', $this->object->prefixKey($key));
     }
 }
