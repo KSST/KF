@@ -135,8 +135,6 @@ class Cache
         if (is_string($object)) {
             return unserialize($object);
         }
-
-        return $object;
     }
 
     /**
