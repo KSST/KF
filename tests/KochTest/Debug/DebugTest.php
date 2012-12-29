@@ -37,7 +37,7 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
-$printR_output = <<<'EOD'
+$expectedOutput = <<<'EOD'
 <pre><b>Debugging<font color=red>DebugTest.php</font> on line <font color=red>66</font></b>:
 <div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var, $var2);
 </div>
@@ -59,7 +59,7 @@ $printR_output = <<<'EOD'
 </pre>
 EOD;
 
-        $this->expectOutputString($printR_output);
+        $this->expectOutputString($expectedOutput);
 
         $var = array('Key' => 'Value');
         $var2 = array('Key2' => 'Value2');
@@ -68,14 +68,25 @@ EOD;
 
     /**
      * @covers Koch\Debug\Debug::dump
-     * @todo   Implement testDump().
      */
     public function testDump()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+// NOTE: this is NOWDOC instead of HEREDOC
+// so its without parsing, because of the inlined $var
+$expectedOutput = <<<'EOD'
+<pre><b>Debugging <font color=red>DebugTest.php</font> on line <font color=red>89</font>:</b>
+<div style="background: #f5f5f5; padding: 0.2em 0em;">       \Koch\Debug\Debug::dump($var);
+</div></pre>array(1) {
+  'Key' =>
+  string(5) "Value"
+}
+
+EOD;
+
+       $this->expectOutputString($expectedOutput);
+
+       $var = array('Key' => 'Value');
+       \Koch\Debug\Debug::dump($var);
     }
 
     /**
@@ -92,14 +103,19 @@ EOD;
 
     /**
      * @covers Koch\Debug\Debug::getOriginOfDebugCall
-     * @todo   Implement testGetOriginOfDebugCall().
      */
     public function testGetOriginOfDebugCall()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+// NOTE: this is NOWDOC instead of HEREDOC
+// so its without parsing, because of the inlined $var
+$expectedOutput = <<<'EOD'
+<pre><b>Debugging <font color=red>DebugTest.php</font> on line <font color=red>118</font>:</b>
+<div style="background: #f5f5f5; padding: 0.2em 0em;">        \Koch\Debug\Debug::getOriginOfDebugCall(0);
+</div></pre>
+EOD;
+        $this->expectOutputString($expectedOutput);
+
+        \Koch\Debug\Debug::getOriginOfDebugCall(0);
     }
 
     /**

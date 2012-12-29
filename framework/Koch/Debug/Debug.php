@@ -200,21 +200,21 @@ class Debug
         /**
          * Get the backtrace.
          */
-        $trace  = debug_backtrace();
-        $file     = $trace[$level]['file'];
-        $line     = $trace[$level]['line'];
+        $trace = debug_backtrace();
+        $file = $trace[$level]['file'];
+        $line = $trace[$level]['line'];
         #$function = $trace[$level]['function'];
-        #$class    = $trace[$level]['class'];
+        #$class = $trace[$level]['class'];
 
         /**
          * Get the file, to show the exact origin of the debug call.
          *
          * It's one level below.
          */
-        $file_content = file($trace[$level]['file']);
+        $file_content = file($file);
         $origin_of_call = $file_content[ $trace[$level]['line']-1 ];
 
-        $format = '<pre><b>Debugging <font color=red>%s</font> on line <font color=red>%s</font>:</b>';
+        $format = '<pre><b>Debugging <font color=red>%s</font> on line <font color=red>%s</font>:</b>' . "\n";
         $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
 
         echo sprintf($format, basename($file), $line, htmlspecialchars($origin_of_call));
