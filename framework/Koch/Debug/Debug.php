@@ -141,8 +141,11 @@ class Debug
         // output the content of the buffer
         echo $var_dump;
 
-        if ($exit === true) {
-            exit;
+        // do not exit, if we are inside a test run
+        if(defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
+            if ($exit === true) {
+                exit;
+            }
         }
     }
 
