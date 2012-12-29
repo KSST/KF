@@ -22,7 +22,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
         }
 
         $options = array();
-        
+
         $this->object = new Pdf($options);
     }
 
@@ -32,6 +32,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
