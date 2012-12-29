@@ -130,7 +130,7 @@ class Cache
      */
     public static function fetchObject($key = null)
     {
-        $object = self::$cacheAdapter->get($key);
+        $object = self::$cacheAdapter->fetch($key);
 
         if (is_string($object)) {
             return unserialize($object);
@@ -149,6 +149,6 @@ class Cache
      */
     public static function storeObject($key, $object, $ttl = 10)
     {
-        return self::$cacheAdapter->set($key, serialize($object), $ttl);
+        return self::$cacheAdapter->store($key, serialize($object), $ttl);
     }
 }

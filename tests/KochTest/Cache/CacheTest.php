@@ -31,73 +31,48 @@ class CacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Cache\Cache::store
+     * @covers Koch\Cache\Cache::fetch
      * @covers Koch\Cache\Cache::contains
-     * @todo   Implement testContains().
+     * @covers Koch\Cache\Cache::delete
      */
     public function testContains()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Cache::store
-     * @covers Koch\Cache\Cache::fetch
-     */
-    public function testStore()
-    {
-        Cache::store('key1', 'value1');
-        $er = Cache::fetch('key1');
-        $this->assertEquals('value1', $er);
-    }
-
-    /**
-     * @covers Koch\Cache\Cache::delete
-     * @todo   Implement testDelete().
-     */
-    public function testDelete()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue(Cache::store('key1', 'value1'));
+        $this->assertEquals('value1', Cache::fetch('key1'));
+        $this->assertTrue(Cache::contains('key1'));
+        $this->assertTrue(Cache::delete('key1'));
+        $this->assertFalse(Cache::contains('key1'));
     }
 
     /**
      * @covers Koch\Cache\Cache::clear
-     * @todo   Implement testClear().
      */
     public function testClear()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\Cache\Cache::fetchObject
-     * @todo   Implement testFetchObject().
-     */
-    public function testFetchObject()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        Cache::store('key1', 'value1');
+        $this->assertTrue(Cache::clear());
+        $this->assertFalse(Cache::contains('key1'));
     }
 
     /**
      * @covers Koch\Cache\Cache::storeObject
-     * @todo   Implement testStoreObject().
+     * @covers Koch\Cache\Cache::fetchObject
      */
-    public function testStoreObject()
+    public function testFetchObject()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       // create obj
+       $object = new \stdClass;
+       $object->key = 'value';
+       $object->key2 = 'value2';
+
+       // store in cache
+       $this->assertTrue(Cache::storeObject('stdClass', $object));
+
+       // fetch
+       $cached_object = Cache::fetchObject('stdClass');
+
+       // compare
+       $this->assertEquals($object, $cached_object);
     }
 }
