@@ -65,7 +65,7 @@ abstract class AbstractCache
      * @param  string $key Cache Key.
      * @return string Prefixed Cache Key.
      */
-    public function applyPrefix($key)
+    public function prefixKey($key)
     {
         return $this->options['prefix'] . $key;
     }
