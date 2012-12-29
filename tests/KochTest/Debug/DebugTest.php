@@ -38,14 +38,23 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $printR_output = <<<'EOD'
-<pre><b>Debugging<font color=red>DebugTest.php</font> on line <font color=red>54</font></b>:
-<div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var);
+<pre><b>Debugging<font color=red>DebugTest.php</font> on line <font color=red>66</font></b>:
+<div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var, $var2);
 </div>
 <b>Type</b>: array
-<b>Length</b>: 1
+<b>Length</b>: 2
 <b>Value</b>: Array
 (
-    [Key] =&gt; Value
+    [0] =&gt; Array
+        (
+            [Key] =&gt; Value
+        )
+
+    [1] =&gt; Array
+        (
+            [Key2] =&gt; Value2
+        )
+
 )
 </pre>
 EOD;
@@ -53,7 +62,8 @@ EOD;
         $this->expectOutputString($printR_output);
 
         $var = array('Key' => 'Value');
-        \Koch\Debug\Debug::printR($var);
+        $var2 = array('Key2' => 'Value2');
+        \Koch\Debug\Debug::printR($var, $var2);
     }
 
     /**
