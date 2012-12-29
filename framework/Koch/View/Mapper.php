@@ -36,27 +36,6 @@ class Mapper
     public $template = null;
 
     /**
-     * Ensures the template extension is correct.
-     *
-     * @param string $template The template filename.
-     */
-    public static function checkTemplateExtension($template)
-    {
-        // get extension of template
-        $template_extension = mb_strtolower(pathinfo($template, PATHINFO_EXTENSION));
-
-        // whitelist definition for listing all allowed template filetypes
-        $allowed_extensions = array('html', 'php', 'tpl');
-
-        // check if extension is one of the allowed ones
-        if (false === in_array($template_extension, $allowed_extensions)) {
-            $message = 'Template Extension invalid <strong>' . $template_extension . '</strong>';
-            $message .= ' on <strong>' . $template . '</strong>';
-            trigger_error($message, E_USER_NOTICE);
-        }
-    }
-
-    /**
      * Returns the Template Name
      * Maps the action name to a template.
      *
@@ -82,8 +61,7 @@ class Mapper
      */
     public function setTemplate($template)
     {
-        #self::checkTemplateExtension($template);
-        $this->template = (string) $template;
+        $this->template = $template;
     }
 
     /**
