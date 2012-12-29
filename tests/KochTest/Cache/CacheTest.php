@@ -69,10 +69,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
        // store in cache
        $this->assertTrue(Cache::storeObject('stdClass', $object));
 
-       // fetch
-       $cached_object = Cache::fetchObject('stdClass');
-
-       // compare
-       $this->assertEquals($object, $cached_object);
+       // fetch and compare
+       $this->assertEquals($object, Cache::fetchObject('stdClass'));
     }
 }
