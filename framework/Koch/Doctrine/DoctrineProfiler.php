@@ -10,17 +10,16 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Debug;
+namespace Koch\Doctrine;
 
 /**
- * Koch Framework - Class for the Initialization of the phpDoctrine Profiler
- * Its an debugging utility.
+ * Class for the Initialization of the Profiler for Doctrine.
  *
  * @category    Koch
  * @package     Core
  * @subpackage  Doctrine
  */
-class DoctrineProfiler
+class Profiler
 {
     /**
      * Returns Doctrine's connection profiler
