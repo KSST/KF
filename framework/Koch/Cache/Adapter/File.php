@@ -184,7 +184,7 @@ class File extends AbstractCache implements CacheInterface
      */
     public function createFilenameFromKey($key)
     {
-        $id = implode(str_split(md5($key), 16), '/');
+        $id = md5($key);
 
         return APPLICATION_CACHE_PATH . $id . '.kf.cache';
     }
