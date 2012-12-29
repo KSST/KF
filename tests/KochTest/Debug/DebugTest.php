@@ -26,18 +26,34 @@ class DebugTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Debug\Debug::printR
-     * @todo   Implement testPrintR().
      */
     public function testPrintR()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+
+// NOTE: this is NOWDOC instead of HEREDOC
+// so its without parsing, because of the inlined $var
+$printR_output = <<<'EOD'
+<pre><b>Debugging<font color=red>DebugTest.php</font> on line <font color=red>54</font></b>:
+<div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var);
+</div>
+<b>Type</b>: array
+<b>Length</b>: 1
+<b>Value</b>: Array
+(
+    [Key] =&gt; Value
+)
+</pre>
+EOD;
+
+        $this->expectOutputString($printR_output);
+
+        $var = array('Key' => 'Value');
+        \Koch\Debug\Debug::printR($var);
     }
 
     /**

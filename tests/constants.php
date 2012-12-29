@@ -1,5 +1,7 @@
 <?php
 
+defined('UNIT_TEST_RUN')            || define('UNIT_TEST_RUN', true);
+
 /**
  * Koch Framework - Constants
  */

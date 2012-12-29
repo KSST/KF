@@ -200,7 +200,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         unset($array);
     }
 
-    public function testSetAttributesContainsFormKey()
+    public function testSetAttributes_ContainFormKey()
     {
         $this->markTestSkipped('Depends on Form\Generator\PHPArray');
 

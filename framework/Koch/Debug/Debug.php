@@ -26,13 +26,15 @@ namespace Koch\Debug;
 class Debug
 {
     /**
-     * This is an replacement for the native php function print_r() with an upgraded display.
+     * This is an enhanced version of the native php function print_r().
      *
      * @param mixed/array/object $var Array or Object as Variable to display
-     * @returns Returns a better structured display of an array/object as native print_r
+     * @param bool  $exit Stop execution after dump? Default is true (stops).
+     * @returns Returns a better structured display of an array/object as native print_r().
      */
     public static function printR($var)
     {
+        // this will handle more than one parameter
         if (func_num_args() > 1) {
             $var = func_get_args();
         }
@@ -89,7 +91,10 @@ class Debug
             session_write_close();
         }
 
-        exit;
+        // do not exit, if we are inside a test run
+        if(defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
+            exit;
+        }
     }
 
     /**
@@ -97,9 +102,9 @@ class Debug
      * The content gets escaping and pre tags are applied for better readability.
      *
      * @param mixed $var  The variable to debug.
-     * @param bool  $stop Stop execution after dump? Default is true (stops).
+     * @param bool  $exit Stop execution after dump? Default is true (stops).
      */
-    public static function dump($var, $stop = true)
+    public static function dump($var, $exit = true)
     {
         // var_dump the content into a buffer and store it to variable
         ob_start();
@@ -123,7 +128,7 @@ class Debug
         // output the content of the buffer
         echo $var_dump;
 
-        if ($stop === true) {
+        if ($exit === true) {
             exit;
         }
     }
