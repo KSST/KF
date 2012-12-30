@@ -39,17 +39,17 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
         // assign values to internal var
         $values = $oCell->getValues();
 
+        // validate
+        if (isset($values['name']) === false) {
+            throw new Koch\Exception\Exception(_('A link needs a name. Please define "name" in the Result Keys.'));
+        }
+
+        if (mb_strlen($values['name']) > $this->nameWrapLength) {
+            $values['name'] = mb_substr($values['name'], 0, $this->nameWrapLength - 3) . '...';
+        }
+
         // set internal link
         $this->link = parent::getColumn()->getBaseURL();
-
-        // validate
-        if (false == isset($values['name'])) {
-            throw new Koch\Exception\Exception(_('A link needs a name. Please define "name" in the ResultKeys'));
-        } else {
-            if (mb_strlen($values['name']) > $this->nameWrapLength) {
-                $values['name'] = mb_substr($values['name'], 0, $this->nameWrapLength - 3) . '...';
-            }
-        }
 
         // render a href
         $options = array(
