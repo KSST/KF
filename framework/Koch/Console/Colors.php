@@ -78,7 +78,7 @@ class Colors
     );
 
     // Ansi Modifiers
-    private static $modifiers = array(
+    private static $modifier = array(
         'reset'         => '0',
         'bold'          => '1',
         'italic'        => '3',
@@ -102,7 +102,7 @@ class Colors
      *
      * @return boolean true if colorization is supported, false otherwise.
      */
-    protected function hasColorSupport()
+    protected static function hasColorSupport()
     {
         // @codeCoverageIgnoreStart
 
@@ -124,11 +124,11 @@ class Colors
         }
     }
 
-    public static function write($string, $foreground = null, $background = null, $modifiers = null)
+    public static function write($string, $foreground = null, $background = null, $modifier = null)
     {
-        if (self::hasColorSupport() === false) {
+        /*if (self::hasColorSupport() === false) {
             return $string;
-        }
+        }*/
 
         if (is_array($foreground)) {
              $options = self::options($foreground);
@@ -141,15 +141,15 @@ class Colors
         $escapePrefix = '';
 
         if (null !== $foreground and isset(self::$foreground[$foreground])) {
-            $escapePrefix .= "\033[" . $this->foreground[$foreground] . "m";
+            $escapePrefix .= "\033[" . self::$foreground[$foreground] . "m";
         }
 
         if (null !== $background and isset(self::$background[$background])) {
-            $escapePrefix .= "\033[" . $this->background[$background] . "m";
+            $escapePrefix .= "\033[" . self::$background[$background] . "m";
         }
 
         if (null !== $modifier and isset(self::$modifier[$modifier])) {
-            $escapePrefix .= "\033[" . $this->modifier[$modifier] . "m";
+            $escapePrefix .= "\033[" . self::$modifier[$modifier] . "m";
         }
 
         // Add string and end coloring
@@ -180,9 +180,13 @@ class Colors
     }
 
     /**
-     * Replaces parts of text, matched by regexp, with a color.
+     * Colorizes a specific parts of a text, which are matched by search_regexp.
+     *
+     * @param string
+     * @param string regexp
+     * @param mixed|string|array
      */
-    public static function replace($text, $search_regexp, $color)
+    public static function colorize($text, $search_regexp, $color)
     {
         $ansi_text = preg_replace_callback(
             "/($search_regexp)/",
