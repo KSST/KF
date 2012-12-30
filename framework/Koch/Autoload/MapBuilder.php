@@ -73,6 +73,10 @@ class MapBuilder
      */
     public static function extractClassnames($file)
     {
+        if (is_file($file) === false) {
+            throw new InvalidArgumentException('File ' . $file  . ' does not exist.');
+        }
+
         // tokenize the content of the file
         $contents = file_get_contents($file);
         $tokens = token_get_all($contents);
