@@ -121,13 +121,19 @@ class Apc extends AbstractCache implements CacheInterface
      * Clears the APC cache
      *
      * @link http://php.net/manual/en/function.apc-clear-cache.php
-     * @param string $cache_type [optional] <p>
+     * @param string $cache_type [optional] all, user, opcode <p>
      * If cache_type is "user", the user cache will be cleared;
      * otherwise, the system cache (cached files) will be cleared. </p>
      * @return bool Returns true on success or false on failure.
      */
     public function clear($cache_type = null)
     {
+        if($cache_type === 'all') {
+            apc_clear_cache();
+            apc_clear_cache('user');
+            apc_clear_cache('opcode');
+        }
+
         return apc_clear_cache($cache_type);
     }
 
