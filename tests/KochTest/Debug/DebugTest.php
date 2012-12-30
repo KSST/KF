@@ -115,6 +115,7 @@ $expectedOutput = <<<'EOD'
 EOD;
         $this->expectOutputString($expectedOutput);
 
+        $_SERVER['REMOTE_ADDR'] = null;
         \Koch\Debug\Debug::getOriginOfDebugCall(0);
     }
 
