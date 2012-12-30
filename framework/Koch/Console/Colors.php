@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Cli;
+namespace Koch\Console;
 
 /**
  * Command Line Colors
@@ -78,7 +78,7 @@ class Colors
 
     // Unicode Symbol Name to Octal Escape Sequence
     private static $unicode = array(
-        'check' = '\342\234\223', // check mark, like on check lists.
+        'check' => '\342\234\223', // check mark, like on check lists.
         'x' => '\342\234\227'     // x, like when voting, called "ballot x".
     );
 
@@ -104,19 +104,20 @@ class Colors
         // @codeCoverageIgnoreEnd
     }
 
-    public static function unicodeSymbol($symbol) {
-        if(isset(self::$unicode[$symbol]) {
+    public static function unicodeSymbol($symbol)
+    {
+        if (isset(self::$unicode[$symbol])) {
             return self::$unicode[$symbol];
         }
     }
 
-    public static function print($string, $foreground = null, $background = null, $modifiers = null)
+    public static function write($string, $foreground = null, $background = null, $modifiers = null)
     {
-        if(self::hasColorSupport() === false) {
+        if (self::hasColorSupport() === false) {
             return $string;
         }
 
-        if(is_array($foreground)) {
+        if (is_array($foreground)) {
              $options = self::options($foreground);
 
              $foreground = $options['fg'];
@@ -134,7 +135,7 @@ class Colors
             $escapePrefix .= "\033[" . $this->background[$background] . "m";
         }
 
-        if (null !=== $modifier and isset(self::$modifier[$modifier])) {
+        if (null !== $modifier and isset(self::$modifier[$modifier])) {
             $escapePrefix .= "\033[" . $this->modifier[$modifier] . "m";
         }
 
@@ -150,14 +151,14 @@ class Colors
         $in = is_string($in) ? explode(',', $in) : $in;
 
         // numeric indexed array to named array
-        if(is_array($in) and !isset($in['fg'])) {
-            if(isset($in[0])) {
+        if (is_array($in) and !isset($in['fg'])) {
+            if (isset($in[0])) {
                 $codes['fg'] = $in[0];
             }
-            if(isset($in[1])) {
+            if (isset($in[1])) {
                 $codes['bg'] = $in[1];
             }
-            if(isset($in[2])) {
+            if (isset($in[2])) {
                 $codes['m'] = $in[2];
             }
         }
@@ -173,7 +174,7 @@ class Colors
         $ansi_text = preg_replace_callback(
             "/($search_regexp)/",
             function ($matches) use ($color) {
-                return self::print($matches[1], $color);
+                return self::write($matches[1], $color);
             },
             $text
         );

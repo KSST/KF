@@ -246,8 +246,8 @@ class Smarty extends AbstractRenderer
      * 2. Set a array with multiple Keys and Values
      *
      * @see __set()
-     * @param string|array $tpl_parameter Is a Key or an Array.
-     * @param mixed        $value         (optional) In case a key-value pair is used, $value is the value.
+     * @param  string|array $tpl_parameter Is a Key or an Array.
+     * @param  mixed        $value         (optional) In case a key-value pair is used, $value is the value.
      * @return boolean
      */
     public function assign($tpl_parameter, $value = null)
@@ -273,8 +273,8 @@ class Smarty extends AbstractRenderer
     /**
      * Magic Method to set/assign Variable to Smarty
      *
-     * @param string $key Name of the variable
-     * @param mixed  $val Value of variable
+     * @param  string  $key Name of the variable
+     * @param  mixed   $val Value of variable
      * @return boolean
      */
     public function __set($key, $value)
@@ -405,7 +405,7 @@ class Smarty extends AbstractRenderer
     {
         $mode = strtoupper($mode);
 
-        if($mode === 'LAYOUT' or $mode === 'NOLAYOUT') {
+        if ($mode === 'LAYOUT' or $mode === 'NOLAYOUT') {
             $this->renderMode = $mode;
         } else {
             throw new \InvalidArgumentException('Use LAYOUT or NOLAYOUT as parameter.');
