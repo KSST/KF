@@ -201,8 +201,13 @@ class Debug
         $file_content = file($file);
         $origin_of_call = $file_content[ $trace[$level]['line']-1 ];
 
-        $format = '<pre><b>Debugging <font color=red>%s</font> on line <font color=red>%s</font>:</b>' . "\n";
-        $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
+        // do not use HTML tags on CLI
+        if(php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
+            $format = 'Debugging %s on line <font color=red>%s</font>:</b>' . "\n";
+            $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
+        } else {
+            $format = 'Debugging %s on line %s: %s';
+        }
 
         echo sprintf($format, basename($file), $line, htmlspecialchars($origin_of_call));
     }
