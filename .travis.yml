@@ -18,7 +18,7 @@ services:
 before_script: php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
-  - composer install --dev --quiet
+  - composer install --dev
   - git submodule update --init --recursive
 
 script:
