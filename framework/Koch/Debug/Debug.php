@@ -41,8 +41,8 @@ class Debug
     /**
      * This is an enhanced version of the native php function print_r().
      *
-     * @param mixed/array/object $var Array or Object as Variable to display
-     * @param bool  $exit Stop execution after dump? Default is true (stops).
+     * @param mixed/array/object $var  Array or Object as Variable to display
+     * @param bool               $exit Stop execution after dump? Default is true (stops).
      * @returns Returns a better structured display of an array/object as native print_r().
      */
     public static function printR($var)
@@ -105,7 +105,7 @@ class Debug
         }
 
         // do not exit, if we are inside a test run
-        if(defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
+        if (defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
             exit;
         }
     }
@@ -142,7 +142,7 @@ class Debug
         echo $var_dump;
 
         // do not exit, if we are inside a test run
-        if(defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
+        if (defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
             if ($exit === true) {
                 exit;
             }
@@ -215,7 +215,7 @@ class Debug
         $origin_of_call = $file_content[ $trace[$level]['line']-1 ];
 
         // do not use HTML tags on CLI
-        if(php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
+        if (php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
             $format = 'Debugging %s on line <font color=red>%s</font>:</b>' . "\n";
             $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
         } else {
