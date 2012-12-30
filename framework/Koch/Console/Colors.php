@@ -104,11 +104,13 @@ class Colors
         // @codeCoverageIgnoreEnd
     }
 
-    public static function unicodeSymbol($symbol)
+    public static function unicodeSymbol($symbol, array $options = null)
     {
         if (isset(self::$unicode[$symbol])) {
-            return self::$unicode[$symbol];
+            $symbol =  self::$unicode[$symbol];
         }
+
+        return self::write($symbol, $options);
     }
 
     public static function write($string, $foreground = null, $background = null, $modifier = null)
@@ -143,27 +145,14 @@ class Colors
         return $escapePrefix . $string . self::$reset;
     }
 
-    public static function options($in)
+    public static function setOptions($options)
     {
-        $codes = array();
-
         // string to array
-        $in = is_string($in) ? explode(',', $in) : $in;
-
-        // numeric indexed array to named array
-        if (is_array($in) and !isset($in['fg'])) {
-            if (isset($in[0])) {
-                $codes['fg'] = $in[0];
-            }
-            if (isset($in[1])) {
-                $codes['bg'] = $in[1];
-            }
-            if (isset($in[2])) {
-                $codes['m'] = $in[2];
-            }
+        if(is_string($options) === true) {
+            $options = explode(',', $options);
         }
 
-        return $codes;
+        return $options;
     }
 
     /**
