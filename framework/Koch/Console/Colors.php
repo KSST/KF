@@ -78,14 +78,16 @@ class Colors
 
     // Unicode Symbol Name to Octal Escape Sequence
     private static $unicode = array(
-        'check' => '\342\234\223', // check mark, like on check lists.
-        'x' => '\342\234\227'     // x, like when voting, called "ballot x".
+        'ok' => "✓",        // "check mark" - \u221A
+        'fail' => "✖",      // "ballot x" - \u00D7
+        'big fail' => '✖',
+        'big ok' => '✔'
     );
 
     public static function unicodeSymbol($symbol, array $options = null)
     {
         if (isset(self::$unicode[$symbol])) {
-            $symbol =  self::$unicode[$symbol];
+            $symbol = self::$unicode[$symbol];
         }
 
         return self::write($symbol, $options);
@@ -94,7 +96,7 @@ class Colors
     public static function write($text, $foreground = null, $background = null, $modifiers = null)
     {
         if (is_array($foreground)) {
-             $options = self::options($foreground);
+             $options = self::setOptions($foreground);
 
              $foreground = array_shift($options); // 0
              $background = array_shift($options); // 1
@@ -112,6 +114,10 @@ class Colors
         }
 
         if(null !== $modifiers) {
+            // handle comma separated list of modifiers
+            if(is_string($modifiers)) {
+                $modifiers = explode(',', $modifiers);
+            }
             foreach($modifiers as $modifier) {
                  if (isset(self::$modifier[$modifier])) {
                     $codes[] = self::$modifier[$modifier];
