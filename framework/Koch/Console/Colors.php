@@ -84,10 +84,16 @@ class Colors
         'big ok' => '✔'
     );
 
-    public static function unicodeSymbol($symbol, array $options = null)
+    public static function unicodeSymbol($symbol, $options = null)
     {
-        if (isset(self::$unicode[$symbol])) {
-            $symbol = self::$unicode[$symbol];
+        if (isset(static::$unicode[$symbol])) {
+            $symbol = static::$unicode[$symbol];
+        } else {
+            throw new \InvalidArgumentException(sprintf(
+                'Invalid unicode symbol specified: "%s". Expected one of (%s)',
+                $symbol,
+                implode(', ', array_keys(static::$unicode))
+            ));
         }
 
         return self::write($symbol, $options);
@@ -106,11 +112,11 @@ class Colors
         $codes = array();
 
         if (null !== $foreground and isset(self::$foreground[$foreground])) {
-            $codes[] = self::$foreground[$foreground];
+            $codes[] = static::$foreground[$foreground];
         }
 
         if (null !== $background and isset(self::$background[$background])) {
-            $codes[] = self::$background[$background];
+            $codes[] = static::$background[$background];
         }
 
         if(null !== $modifiers) {
@@ -119,8 +125,8 @@ class Colors
                 $modifiers = explode(',', $modifiers);
             }
             foreach($modifiers as $modifier) {
-                 if (isset(self::$modifier[$modifier])) {
-                    $codes[] = self::$modifier[$modifier];
+                 if (isset(static::$modifier[$modifier])) {
+                    $codes[] = static::$modifier[$modifier];
                 }
             }
         }
