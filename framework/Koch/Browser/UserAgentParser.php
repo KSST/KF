@@ -10,10 +10,10 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Http;
+namespace Koch\Browser;
 
 /**
- * Koch Framework - User Agent Parser
+ * The Class provids a User Agent Parser.
  *
  * @category    Koch
  * @package     Tools

@@ -10,16 +10,16 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Http;
+namespace Koch\Browser;
 
 /**
  * Class for acquiring Browser information.
  *
  * @category    Koch
- * @package     Tools
+ * @package     Core
  * @subpackage  Browser
  */
-class UserAgent
+class Browser
 {
     const BROWSER_IE = 'Internet Explorer';
     const BROWSER_FIREFOX = 'Firefox';
