@@ -95,28 +95,6 @@ class Colors
         'x' => '\342\234\227'     // x, like when voting, called "ballot x".
     );
 
-    private static $reset = "\033[0m";
-
-    /**
-     * Returns true if ANSI colorization is supported.
-     *
-     * @return boolean true if colorization is supported, false otherwise.
-     */
-    protected static function hasColorSupport()
-    {
-        // @codeCoverageIgnoreStart
-
-        // on windows, you need ANSICON or ConEmu
-        if (DIRECTORY_SEPARATOR == '\\') {
-            return false !== getenv('ANSICON') || 'ON' === getenv('ConEmuANSI');
-        }
-
-        // no tty console
-        return function_exists('posix_isatty') && @posix_isatty(STDOUT);
-
-        // @codeCoverageIgnoreEnd
-    }
-
     public static function unicodeSymbol($symbol, array $options = null)
     {
         if (isset(self::$unicode[$symbol])) {
@@ -126,36 +104,35 @@ class Colors
         return self::write($symbol, $options);
     }
 
-    public static function write($string, $foreground = null, $background = null, $modifier = null)
+    public static function write($string, $foreground = null, $background = null, $modifiers = null)
     {
-        /*if (self::hasColorSupport() === false) {
-            return $string;
-        }*/
-
         if (is_array($foreground)) {
              $options = self::options($foreground);
 
-             $foreground = $options['fg'];
-             $background = $options['bg'];
-             $modifier = $options['m'];
+             $foreground = array_shift($options); // 0
+             $background = array_shift($options); // 1
+             $modifiers = $options;
         }
 
-        $escapePrefix = '';
+        $codes = array();
 
         if (null !== $foreground and isset(self::$foreground[$foreground])) {
-            $escapePrefix .= "\033[" . self::$foreground[$foreground] . "m";
+            $codes[] = self::$foreground[$foreground];
         }
 
         if (null !== $background and isset(self::$background[$background])) {
-            $escapePrefix .= "\033[" . self::$background[$background] . "m";
+            $codes[] = self::$background[$background];
         }
 
-        if (null !== $modifier and isset(self::$modifier[$modifier])) {
-            $escapePrefix .= "\033[" . self::$modifier[$modifier] . "m";
+        foreach($modifiers as $modifier) {
+             if (isset(self::$modifier[$modifier])) {
+                $codes[] = self::$modifier[$modifier];
+            }
         }
 
-        // Add string and end coloring
-        return $escapePrefix . $string . self::$reset;
+        $escapeCodes = implode(';', $codes);
+
+        return sprintf("\033[%sm%s\033[0m", $escapeCodes, $text);
     }
 
     public static function setOptions($options)
@@ -188,6 +165,6 @@ class Colors
 
     public function returnValue($value)
     {
-        return ($value == 0) ? self::unicodeSymbol('x') : self::unicodeSymbol('check');
+        return ($value == 0) ? self::unicodeSymbol('x', 'red') : self::unicodeSymbol('check', 'green');
     }
 }
