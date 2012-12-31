@@ -111,9 +111,11 @@ class Colors
             $codes[] = self::$background[$background];
         }
 
-        foreach($modifiers as $modifier) {
-             if (isset(self::$modifier[$modifier])) {
-                $codes[] = self::$modifier[$modifier];
+        if(null !== $modifiers) {
+            foreach($modifiers as $modifier) {
+                 if (isset(self::$modifier[$modifier])) {
+                    $codes[] = self::$modifier[$modifier];
+                }
             }
         }
 
