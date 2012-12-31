@@ -23,16 +23,16 @@
  *
  */
 
-namespace Koch\Http;
+namespace Koch\Browser;
 
 /**
  * Koch Framework - Class for acquiring Browser information.
  *
  * @category    Koch
- * @package     Tools
+ * @package     Core
  * @subpackage  Browser
  */
-class UserAgent
+class Browser
 {
     const BROWSER_IE = 'Internet Explorer';
     const BROWSER_FIREFOX = 'Firefox';

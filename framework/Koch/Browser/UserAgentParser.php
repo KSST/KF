@@ -23,10 +23,10 @@
  *
  */
 
-namespace Koch\Http;
+namespace Koch\Browser;
 
 /**
- * Koch Framework - User Agent Parser
+ * Koch Framework - The Class provids a User Agent Parser.
  *
  * @category    Koch
  * @package     Tools
