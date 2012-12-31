@@ -80,8 +80,8 @@ class Colors
     private static $unicode = array(
         'ok' => "✓",        // "check mark" - \u221A
         'fail' => "✖",      // "ballot x" - \u00D7
-        'big fail' => '✖',
-        'big ok' => '✔'
+        'big fail' => "✖",
+        'big ok' => "✔"
     );
 
     public static function unicodeSymbol($symbol, $options = null)
@@ -96,7 +96,8 @@ class Colors
             ));
         }
 
-        return self::write($symbol, $options);
+        return $symbol;
+        //return self::write($symbol, $options));
     }
 
     public static function write($text, $foreground = null, $background = null, $modifiers = null)
