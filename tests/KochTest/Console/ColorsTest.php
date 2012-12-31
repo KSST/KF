@@ -27,7 +27,8 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
     public function testUnicodeSymbol()
     {
         echo Colors::unicodeSymbol('big fail');
-       
+        echo Colors::unicodeSymbol('big ok');
+
         $this->assertEquals("\342\234\227", Colors::unicodeSymbol('big fail'));
 
         $this->assertEquals("\033[0;31m\342\234\227\033[0m", Colors::unicodeSymbol('big fail', 'red'));
