@@ -212,11 +212,11 @@ class Debug
          * It's one level below.
          */
         $file_content = file($file);
-        $origin_of_call = $file_content[ $trace[$level]['line']-1 ];
+        $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
 
         // do not use HTML tags on CLI
         if (php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
-            $format = 'Debugging %s on line %s: %s';
+            $format = 'Debugging %s on line %s: %s'. "\n";;
         } else {
             $format = '<pre><b>Debugging <font color="red">%s</font> on line <font color="red">%s</font>:</b>' . "\n";
             $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
