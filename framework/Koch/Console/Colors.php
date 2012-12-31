@@ -104,7 +104,7 @@ class Colors
         return self::write($symbol, $options);
     }
 
-    public static function write($string, $foreground = null, $background = null, $modifiers = null)
+    public static function write($text, $foreground = null, $background = null, $modifiers = null)
     {
         if (is_array($foreground)) {
              $options = self::options($foreground);
