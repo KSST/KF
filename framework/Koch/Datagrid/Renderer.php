@@ -303,17 +303,18 @@ class Renderer
 
     public static function renderPageRangeAroundPage($selected_page, $min_page_number, $max_page_number)
     {
-        $currentPageString = '<li class="active">{$page}</span>';
-        $PageInRangeString = '<li><a href="{$url}">{$page}</a></li>';
+        $currentPageString = '<li class="active">%s</span>';
+        $pageInRangeString = '<li><a href="%s">%s</a></li>';
 
         $url = self::getURLForPageInRange($selected_page);
 
         $html = '';
-        for ($p = $min_page_number; $p <= $max_page_number; $p++) {
-            if ($p != $selected_page) {
-                $html .= str_replace(array('{$url}', '{$page}'), array($url, $p), $PageInRangeString);
-            } else { // render the current page
-                $html .= str_replace('{$page}', $p, $currentPageString);
+        for ($page = $min_page_number; $page <= $max_page_number; $page++) {
+            if ($page != $selected_page) {
+                $html .= sprintf($pageInRangeString, $url, $page);
+            } else {
+                // render the current page
+                $html .= sprintf($currentPageString, $page);
             }
         }
 
