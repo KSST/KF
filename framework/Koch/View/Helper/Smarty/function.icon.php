@@ -71,12 +71,12 @@ function Smarty_function_icon($params)
     }
 
     // transform name into a valid image src
-    $src = realpath(APPLICATION_PATH . 'themes/'' . 'core/images/' . $icondir . DIRECTORY_SEPARATOR . $name . '.png');
+    $src = realpath(APPLICATION_PATH . 'themes/' . 'core/images/' . $icondir . DIRECTORY_SEPARATOR . $name . '.png');
 
     // if we got no valid src, set a default image
     if (isset($src) and is_file($src) == false) {
         #$src = WWW_ROOT_THEMES_CORE . 'images/noimage.gif';
-        $src = APPLICATION_PATH . 'themes/'' . 'core/images/noimage.gif';
+        $src = APPLICATION_PATH . 'themes/' . 'core/images/noimage.gif';
         $name = 'No Image found.'.$src;
     }
 
@@ -112,7 +112,7 @@ function Smarty_function_icon($params)
     }
 
     // prepare link: transform absolute path into webpath and apply slashfix
-    $src = str_replace( APPLICATION_PATH . 'themes/'', WWW_ROOT_THEMES, $src );
+    $src = str_replace( APPLICATION_PATH . 'themes/', WWW_ROOT_THEMES, $src );
     $src = str_replace( '\\', '/', $src );
 
     $html = '<img src="'.$src.'" height="'.$height.'" width="'.$width.'" alt="'.$alt.'" '.$extra.' />';
