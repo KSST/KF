@@ -51,7 +51,7 @@ class RSS10 extends Generator
         $feed.= "       <dc:date>" . htmlspecialchars($now->iso8601()) . "</dc:date>\n";
         $feed.= "        <items>\n";
         $feed.= "            <rdf:Seq>\n";
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "                <rdf:li rdf:resource=\"" . htmlspecialchars($this->items[$i]->link) . "\"/>\n";
         }
         $feed.= "            </rdf:Seq>\n";
@@ -66,7 +66,7 @@ class RSS10 extends Generator
         }
         $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
 
-        for ($i = 0; $i < count($this->items); $i++) {
+         for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "    <item rdf:about=\"" . htmlspecialchars($this->items[$i]->link) . "\">\n";
             //$feed.= "        <dc:type>Posting</dc:type>\n";
             $feed.= "        <dc:format>text/html</dc:format>\n";

@@ -40,8 +40,7 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
             if (is_array($fileInfo['name'])) {
                 $this->files[$formId] = array();
 
-                $filecounter = count($files);
-                for ($i = 0; $i < $filecounter; $i++) {
+                for ($i = 0, $filesTotal = count($files); $i < $filesTotal; $i++) {
                     $this->files[$formId][$i] = new Koch_File(
                         $fileInfo['name'][$i],
                         $fileInfo['type'][$i],

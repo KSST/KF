@@ -62,7 +62,7 @@ class Atom10 extends Generator
         $feed.= '    <generator>' . FEEDGENERATOR_VERSION . "</generator>\n";
         $feed.= "<link rel=\"self\" type=\"application/atom+xml\" href=\"" . $this->syndicationURL . "\" />\n";
         $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "    <entry>\n";
             $feed.= '        <title>' . htmlspecialchars(strip_tags($this->items[$i]->title)) . "</title>\n";
             $feed.= "        <link rel=\"alternate\" type=\"text/html\"";

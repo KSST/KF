@@ -112,7 +112,7 @@ class RSS091 extends Generator
         }
         $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
 
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "        <item>\n";
             $feed.= "            <title>";
             $feed.= FeedCreator::iTrunc(htmlspecialchars(strip_tags($this->items[$i]->title)), 100) . "</title>\n";

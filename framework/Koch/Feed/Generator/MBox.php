@@ -43,12 +43,12 @@ class MBox extends Generator
         $output = "";
         while (list(, $line) = each($lines)) {
             //$line = rtrim($line); // remove trailing white space -> no =20\r\n necessary
-            $linlen = strlen($line);
+            $length = strlen($line);
             $newline = "";
-            for ($i = 0; $i < $linlen; $i++) {
+            for ($i = 0; $i < $length; $i++) {
                 $c = substr($line, $i, 1);
                 $dec = ord($c);
-                if (($dec == 32) && ($i == ($linlen - 1))) { // convert space at eol only
+                if (($dec == 32) && ($i == ($length - 1))) { // convert space at eol only
                     $c = "=20";
                 } elseif (($dec == 61) || ($dec < 32 ) || ($dec > 126)) { // always encode "\t", which is *not* required
                     $h2 = floor($dec / 16);
@@ -73,7 +73,7 @@ class MBox extends Generator
      */
     public function renderFeed()
     {
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
 
             if ($this->items[$i]->author != "") {
                 $from = $this->items[$i]->author;

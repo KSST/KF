@@ -53,7 +53,7 @@ class OPML extends Generator
         }
         $feed.= "    </head>\n";
         $feed.= "    <body>\n";
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "    <outline type=\"rss\" ";
             $title = htmlspecialchars(strip_tags(strtr($this->items[$i]->title, "\n\r", "  ")));
             $feed.= " title=\"" . $title . "\"";
