@@ -120,12 +120,12 @@ class Colors
             $codes[] = static::$background[$background];
         }
 
-        if(null !== $modifiers) {
+        if (null !== $modifiers) {
             // handle comma separated list of modifiers
-            if(is_string($modifiers)) {
+            if (is_string($modifiers)) {
                 $modifiers = explode(',', $modifiers);
             }
-            foreach($modifiers as $modifier) {
+            foreach ($modifiers as $modifier) {
                  if (isset(static::$modifier[$modifier])) {
                     $codes[] = static::$modifier[$modifier];
                 }
@@ -140,7 +140,7 @@ class Colors
     public static function setOptions($options)
     {
         // string to array
-        if(is_string($options) === true) {
+        if (is_string($options) === true) {
             $options = explode(',', $options);
         }
 
