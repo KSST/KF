@@ -134,7 +134,7 @@ class HTML extends Generator
             $feedArray[] = "<div class='" . $this->stylePrefix . "header'>" . $this->header . "</div>";
         }
 
-        for ($i = 0; $i < count($this->items); $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             if ($this->separator and $i > 0) {
                 $feedArray[] = "<div class='" . $this->stylePrefix . "separator'>" . $this->separator . "</div>";
             }
