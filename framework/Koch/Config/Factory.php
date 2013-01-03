@@ -67,7 +67,7 @@ class Factory
         $extension = $extension[0];
 
        if ($extension == '.config.php' or $extension == '.info.php') {
-            $adapter = 'php';
+            $adapter = 'native';
        } elseif ($extension == '.config.ini') {
             $adapter = 'ini';
         } elseif ($extension == '.config.xml') {
@@ -142,7 +142,8 @@ class Factory
                 throw new \Koch\Exception\Exception(__CLASS__ . __METHOD__ . ' -> Class not found: ' . $class);
             }
         } else {
-            throw new \Koch\Exception\Exception(__CLASS__ . __METHOD__ . ' -> File not found: ' . $file);
+            throw new \Koch\Exception\Exception(
+                __CLASS__ . __METHOD__ . ' -> Adapter "' .$adapter . '" not found. File not found: ' . $file);
         }
     }
 }

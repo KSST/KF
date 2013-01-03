@@ -47,16 +47,16 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * On "unset = true" the array is returned and unset to save memory
      * and to avoid duplication of the config array.
      *
-     * @param  boolean $unset If unset is true, $this->config array will be unset. Defaults to false.
+     * @param  boolean $reset If reset is true, $this->config array will be reset. Defaults to false.
      * @return config  array
      */
-    public function toArray($unset = false)
+    public function toArray($reset = false)
     {
         $array = array();
         $array = $this->config;
 
-        if ($unset === true) {
-            unset($this->config);
+        if ($reset === true) {
+            $this->config = array();
         }
 
         return $array;
@@ -94,7 +94,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     public function getConfigValue($keyname, $default_one = null, $default_two = null)
     {
         // try a lookup of the value by keyname
-        $value = Clansuite_Functions::array_find_element_by_key($keyname, $this->config);
+        $value = \Koch\Functions\Functions::findKeyInArray($keyname, $this->config);
 
         // return value or default
         if (empty($value) === false) {
@@ -114,12 +114,10 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * @param    string    the config item key
      * @return void
      */
-    public function __get($configkey)
+    public function __get($key)
     {
-        if ($this->config[$configkey] !== null) {
-            return $this->config[$configkey];
-        } else {
-            return null;
+        if (isset($this->config[$key]) || array_key_exists($key, $this->config)) {
+            return $this->config[$key];
         }
     }
 
@@ -128,13 +126,10 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      *
      * @param string the config item key
      * @param string the config item value
-     * @return void
      */
     public function __set($key, $value)
     {
         $this->config[$key] = $value;
-
-        return true;
     }
 
     /**
