@@ -21,7 +21,7 @@ defined('APPLICATION_VERSION_NAME') || define('APPLICATION_VERSION_NAME', 'Aguil
 
 defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/fixtures/APP/');
 defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
-defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', '/Modules/');
+defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', APPLICATION_PATH . '/Modules/');
 
 defined('VENDOR_PATH')              || define('VENDOR_PATH', __DIR__ . '/../vendor/');
 
