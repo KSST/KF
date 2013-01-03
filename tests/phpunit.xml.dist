@@ -10,7 +10,7 @@
     stopOnFailure="false"
     strict="true"
     syntaxCheck="false"
-    verbose="false"
+    verbose="true"
     bootstrap="./bootstrap.php">
 
     <testsuite name="Koch Framework Test Suite">
@@ -26,7 +26,7 @@
     <logging>
     <!-- clover report is used by ./bin/coverage-checker.php -->
     <log type="coverage-clover" target="./clover.xml"/>
-    <!-- available on phpunit 3.8
+    <!-- If you are ready to use PHPUnit 3.8, you might use showOnlySummary instead -->
     <log type="coverage-text" target="php://stdout" showOnlySummary="true" />
     -->
     </logging>
