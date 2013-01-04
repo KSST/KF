@@ -65,12 +65,9 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::getApplicationNamespace() . self::mapControllerToFilename(
-                self::getModulePath(self::getModule()),
-                self::getController()
-            );
-            //$filename = str_replace('\\', '/', $filename); // slash fix
-            self::setFilename(realpath($filename));
+            $filename = self::getClassname() . '.php';
+            $filename = str_replace('\\', '/', $filename); // slash fix
+            self::setFilename($filename);
         }
 
         return self::$parameters['filename'];

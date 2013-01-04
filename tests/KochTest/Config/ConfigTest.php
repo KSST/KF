@@ -104,10 +104,14 @@ EOF;
      */
     public function testWriteConfig()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $file = 'test.config.php';
+        $array = array('key' => 'value');
+        
+        $this->assertTrue($this->object->writeConfig($file, $array));
+
+        if(is_file($file)) {
+            unlink($file);
+        }
     }
 
     /**
@@ -115,6 +119,7 @@ EOF;
      */
     public function testGetApplicationConfig()
     {
-
+        $config = $this->object->getApplicationConfig();
+        $this->assertTrue(is_array($config));
     }
 }
