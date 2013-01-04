@@ -47,7 +47,7 @@ class NativeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage PHP Array Config File non-existant.file not existing or not readable.
+     * @expectedExceptionMessage The config file "non-existant.file" is not existing or not readable.
      */
     public function testReadConfig_throwsExceptionFileNotFound()
     {
@@ -56,7 +56,7 @@ class NativeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException RuntimeException
-     * @expectedExceptionMessage PHP Array Config File vfs://root/config2.php does not contain array.
+     * @expectedExceptionMessage The config file "vfs://root/config2.php" does not contain a PHP array.
      */
     public function testReadConfig_throwsExceptionIfFileContentNotArray()
     {

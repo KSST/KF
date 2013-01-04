@@ -42,7 +42,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetModulePath()
     {
-        $this->assertEquals('/Modules/ModuleABC/', $this->object->getModulePath('ModuleABC'));
+        $this->assertEquals(APPLICATION_MODULES_PATH . 'ModuleABC/', $this->object->getModulePath('ModuleABC'));
     }
 
     /**

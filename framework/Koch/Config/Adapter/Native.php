@@ -31,14 +31,14 @@ class Native
     public static function readConfig($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
-            throw new \InvalidArgumentException('PHP Array Config File ' . $file . ' not existing or not readable.');
+            throw new \InvalidArgumentException('The config file "' . $file . '" is not existing or not readable.');
         }
 
-        // it's a native php array structure so we simply include the file
+        // it's a native php array structure, so we simply include the file
         $array = include $file;
 
         if (is_array($array) === false) {
-            throw new \RuntimeException('PHP Array Config File ' . $file . ' does not contain array.');
+            throw new \RuntimeException('The config file "' . $file . '" does not contain a PHP array.');
         }
 
         return $array;

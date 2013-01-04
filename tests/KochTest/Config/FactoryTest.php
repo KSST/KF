@@ -79,8 +79,8 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testGetHandler()
     {
         $configfile = 'file.config.xml';
-        $er = $this->object->getHandler($configfile);
-        $this->assertEquals($er, 'Koch\Config\Adapter\XML');
+        $handler = $this->object->getHandler($configfile);
+        $this->assertInstanceOf('Koch\Config\Adapter\XML', $handler);
     }
 
     /**
@@ -89,7 +89,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     public function testGetAdapter()
     {
        $adapter = 'xml';
-       $er = $this->object->getAdapter($adapter);
-       $this->assertEquals($er, 'Koch\Config\Adapter\XML');
+       $handler = $this->object->getAdapter($adapter);
+       $this->assertInstanceOf('Koch\Config\Adapter\XML', $handler);
     }
 }

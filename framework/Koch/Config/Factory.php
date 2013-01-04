@@ -124,13 +124,16 @@ class Factory
 
             if (true === class_exists($class, false)) {
                 // instantiate and return the specific confighandler with the $configfile to read
-                return $class;
+                return new $class;
             } else {
-                throw new \Koch\Exception\Exception(__CLASS__ . __METHOD__ . ' -> Class not found: ' . $class);
+                throw new \Koch\Exception\Exception(
+                    __CLASS__ . __METHOD__ . ' -> Class not found: ' . $class
+                );
             }
         } else {
             throw new \Koch\Exception\Exception(
-                __CLASS__ . __METHOD__ . ' -> Adapter "' .$adapter . '" not found. File not found: ' . $file);
+                __CLASS__ . __METHOD__ . ' -> Adapter "' .$adapter . '" not found. File not found: ' . $file
+            );
         }
     }
 }

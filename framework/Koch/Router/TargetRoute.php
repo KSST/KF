@@ -69,8 +69,8 @@ class TargetRoute extends Mapper
                 self::getModulePath(self::getModule()),
                 self::getController()
             );
-            $filename = str_replace('\\', '/', $filename); // slash fix
-            self::setFilename($filename);
+            //$filename = str_replace('\\', '/', $filename); // slash fix
+            self::setFilename(realpath($filename));
         }
 
         return self::$parameters['filename'];
