@@ -86,11 +86,11 @@ class Mapper extends \ArrayObject
      */
     public static function mapControllerToFilename($module_path, $controller = null)
     {
-        // append module_path, e.g. "/modules/news/" + "Controller/"
+        // append "Controller" sub-folder to module_path
         $module_path .= 'Controller/';
 
         // Mapping Example:
-        // "/modules/news/" + "Controller/" + "Index" + "Controller.php"
+        // "/Modules/News/Controller/" + "Index" + "Controller.php"
         return $module_path . ucfirst($controller) . self::MODULE_CLASS_SUFFIX;
     }
 

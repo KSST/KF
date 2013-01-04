@@ -68,6 +68,11 @@ class Config extends AbstractConfig
         return Factory::getHandler($file)->writeConfig($file, $array);
     }
 
+    /**
+     * Fetches the Application Main Config from file or APC.
+     *
+     * @return type
+     */
     public function getApplicationConfig()
     {
         $config = array();
@@ -81,7 +86,7 @@ class Config extends AbstractConfig
         } else {
             // load config from file
             $config = \Koch\Config\Adapter\INI::readConfig(
-                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
+                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.config.php'
             );
             // set to APC
             if (APC === true) {

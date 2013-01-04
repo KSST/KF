@@ -14,7 +14,7 @@ defined('WWW_ROOT_THEMES_CORE')     || define('WWW_ROOT_THEMES_CORE', 'http://')
 defined('WWW_ROOT_THEMES_FRONTEND') || define('WWW_ROOT_THEMES_FRONTEND', 'http://'); // http://application/themes/frontend
 defined('WWW_ROOT_THEMES_BACKEND')  || define('WWW_ROOT_THEMES_BACKEND', 'http://');  // http://application/themes/backend
 
-defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'TESTAPPLICATION');
+defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'MyApplication');
 defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
 defined('APPLICATION_VERSION_STATE')|| define('APPLICATION_VERSION_STATE', 'alpha-omega');
 defined('APPLICATION_VERSION_NAME') || define('APPLICATION_VERSION_NAME', 'Aguila');
