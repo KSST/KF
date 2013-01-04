@@ -46,13 +46,13 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFilename()
     {
-       $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
+       //$this->object->setApplicationNamespace('NS');
 
        // test filename construction, if empty filename
        $file = '';
        $this->object->setFilename($file);
        $this->assertEquals(
-           '/KochTest/Router/Fixtures/Application/Modules/Index/Controller/IndexController.php',
+           APPLICATION_PATH . 'Modules/Index/Controller/IndexController.php',
            $this->object->getFilename()
        );
 
@@ -67,13 +67,13 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetClassname()
     {
-        $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
+        $this->object->setApplicationNamespace('\KochTest\Fixtures\Application');
 
         // test filename construction, if empty filename
         $class = '';
         $this->object->setClassname($class);
         $this->assertEquals(
-            '\KochTest\Router\Fixtures\Application\Modules\Index\Controller\IndexController',
+            '\KochTest\Fixtures\Application\Modules\Index\Controller\IndexController',
             $this->object->getClassname()
         );
 
@@ -317,7 +317,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testDispatchable()
     {
-        $this->object->setApplicationNamespace('\KochTest\Router\Fixtures\Application');
+        $this->object->setApplicationNamespace('\KochTest\Fixtures\Application');
 
         $this->assertTrue($this->object->dispatchable());
     }

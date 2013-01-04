@@ -36,27 +36,12 @@ namespace Koch\Config;
  * even though it's an object! Why we do that? Because less to type!
  * The __set, __get, __isset, __unset are overloading functions to work with that array.
  *
- * Usage :
- * get data : $cfg->['name'] = 'john';
- * get data, using get() : echo $cfg->get ('name');
- * get data, using array access: echo $cfg['name'];
- *
  * @category    Koch
  * @package     Core
  * @subpackage  Config
  */
 class Config extends AbstractConfig
 {
-    /**
-     * Setter for Config Array.
-     *
-     * @param array $config
-     */
-    public function setConfig($config)
-    {
-        $this->config = $config;
-    }
-
     /**
      * Reads a configuration file
      *
@@ -70,6 +55,17 @@ class Config extends AbstractConfig
         }
 
         return $this->config;
+    }
+
+    /**
+     * Write a config file
+     *
+     * @param $file path and the filename you want to write
+     * @param $array the configuration array to write. Defaults to null = empty array.
+     */
+    public function writeConfig($file, $array = array())
+    {
+        return Factory::getHandler($file)->writeConfig($file, $array);
     }
 
     public function getApplicationConfig()
@@ -112,9 +108,7 @@ class Config extends AbstractConfig
     public function readModuleConfig($module = null)
     {
         // if no modulename is set, determine the name of the current module
-        if ($module === null) {
-            $module = \Koch\Router\TargetRoute::getModule();
-        }
+        $module = ($module === null) ? \Koch\Router\TargetRoute::getModule() : ucfirst($module);
 
         $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
 
@@ -128,27 +122,16 @@ class Config extends AbstractConfig
      *
      * @param $array The configuration array to write.
      * @param $module The name of a module.
+     * @return boolean
      */
-    public function writeModuleConfig($array, $module = null)
+    public function writeModuleConfig(array $array, $module = null)
     {
-        if ($module === null) {
-            $module = Koch\Router\TargetRoute::getModule();
-        }
+        // if no modulename is set, determine the name of the current module
+        $module = ($module === null) ? \Koch\Router\TargetRoute::getModule() : ucfirst($module);
 
-        $this->writeConfig(
-            APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php',
-            $array
-        );
-    }
+        $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
+        $file = realpath($file);
 
-    /**
-     * Write a config file
-     *
-     * @param $file path and the filename you want to write
-     * @param $array the configuration array to write. Defaults to null = empty array.
-     */
-    public function writeConfig($file, $array = array())
-    {
-        Factory::getHandler($file)->writeConfig($file, $array);
+        return $this->writeConfig($file, $array);
     }
 }

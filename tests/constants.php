@@ -19,9 +19,10 @@ defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
 defined('APPLICATION_VERSION_STATE')|| define('APPLICATION_VERSION_STATE', 'alpha-omega');
 defined('APPLICATION_VERSION_NAME') || define('APPLICATION_VERSION_NAME', 'Aguila');
 
-defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/fixtures/APP/');
-defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
+defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/KochTest/Fixtures/Application/');
 defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', APPLICATION_PATH . '/Modules/');
+
+defined('APPLICATION_CACHE_PATH')   || define('APPLICATION_CACHE_PATH', sys_get_temp_dir() . '/');
 
 defined('VENDOR_PATH')              || define('VENDOR_PATH', __DIR__ . '/../vendor/');
 

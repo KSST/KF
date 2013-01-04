@@ -2,12 +2,12 @@
 /**
  * This explains your WTF!? when seeing the namespace...
  *
- * Application Namespace = KochTest\Fixtures\APP
+ * Application Namespace = KochTest\Fixtures\Application
  * Module Namespace      = \Modules
  * Module                = \Index
  * Controller            = \Controller\IndexController
  */
-namespace KochTest\Fixtures\APP\Modules\News\Controller;
+namespace KochTest\Fixtures\Application\Modules\News\Controller;
 
 use Koch\Module\ModuleInterface;
 
