@@ -88,9 +88,14 @@ abstract class AbstractRenderer
     /**
      * Returns the render engine object
      *
-     * @return string
+     * @return Renderer
      */
-    abstract public function getEngine();
+    public function getEngine()
+    {
+        if($this->renderer !== null) {
+            return $this->renderer;
+        }
+    }
 
     /**
      * Initialize the render engine object
@@ -366,5 +371,49 @@ abstract class AbstractRenderer
     protected function __clone()
     {
         return;
+    }
+
+    /**
+     * Set renderer variables
+     *
+     * @param string $key   variable name
+     * @param string $value variable value
+     */
+    public function __set($key, $value)
+    {
+        $this->renderer->assign($key, $value);
+    }
+
+    /**
+     * Get renderer Variable Value
+     *
+     * @param  string $key variable name
+     * @return mixed  variable value
+     */
+    public function __get($key)
+    {
+        return $this->renderer->$key;
+    }
+
+    /**
+     * Check if renderer variable is set
+     *
+     * @param string $key variable name
+     */
+    public function __isset($key)
+    {
+        return isset($this->renderer->$key);
+    }
+
+    /**
+     * Unset renderer variable
+     *
+     * @param string $key variable name
+     */
+    public function __unset($key)
+    {
+        if ($this->renderer->$key !== null) {
+            unset($this->renderer->$key);
+        }
     }
 }

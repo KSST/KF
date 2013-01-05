@@ -161,12 +161,4 @@ EOF;
 
         $this->assertContains($expectedString, $result);
     }
-
-    /**
-     * @covers Koch\View\Renderer\Csv::getEngine
-     */
-    public function testGetEngine()
-    {
-        $this->assertNull($this->object->getEngine());
-    }
 }

@@ -54,16 +54,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\View\Renderer\Smarty::getEngine
-     */
-    public function testGetEngine()
-    {
-        $smarty = $this->object->getEngine();
-
-        $this->assertInstanceOf('Smarty', $smarty);
-    }
-
-    /**
      * @covers Koch\View\Renderer\Smarty::setTemplatePath
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Invalid Smarty Template path provided: Path not existing or not readable.

@@ -48,10 +48,12 @@ class Json extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
+        return;
     }
 
     public function configureEngine()
     {
+        return;
     }
 
     /**
@@ -126,6 +128,6 @@ class Json extends AbstractRenderer
 
     public function getEngine()
     {
-
+        return;
     }
 }

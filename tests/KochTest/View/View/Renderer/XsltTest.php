@@ -36,18 +36,6 @@ class XsltTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\View\Renderer\Xslt::getEngine
-     * @todo   Implement testGetEngine().
-     */
-    public function testGetEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\View\Renderer\Xslt::setXSLStyleSheet
      * @todo   Implement testSetXSLStyleSheet().
      */

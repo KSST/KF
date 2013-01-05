@@ -74,11 +74,6 @@ class Phptal extends AbstractRenderer
         }
     }
 
-    public function setTemplate($template)
-    {
-        $this->renderer->setTemplate($template);
-    }
-
     /**
      * Render Engine Configuration
      * Configures the PHPTAL Object
@@ -176,78 +171,5 @@ class Phptal extends AbstractRenderer
     public function fetch($template, $data = null)
     {
         return $this->render($template, true);
-    }
-
-    /**
-     * Set charset encoding
-     *
-     * @param string encoding
-     */
-    public function setEncoding($encoding)
-    {
-        return $this->renderer->setEncoding($encoding);
-    }
-
-    /**
-     * Set output mode
-     *
-     * @param int output mode
-     */
-    public function setOutputMode($outputMode)
-    {
-        return $this->renderer->setOutputMode($outputMode);
-    }
-
-    /**
-     * Set cache lifetime
-     *
-     * @param int lifetime in days
-     */
-    public function setLifetime($lifetime)
-    {
-        return $this->renderer->setCacheLifetime($lifetime);
-    }
-    /**
-     * Set PHPTAL variables
-     *
-     * @param string $key   variable name
-     * @param string $value variable value
-     */
-    public function __set($key, $value)
-    {
-        $this->renderer->assign($key, $value);
-    }
-
-    /**
-     * Get PHPTAL Variable Value
-     *
-     * @param  string $key variable name
-     * @return mixed  variable value
-     */
-    public function __get($key)
-    {
-        return $this->renderer->$key;
-    }
-
-    /**
-     * Check if PHPTAL variable is set
-     *
-     * @param string $key variable name
-     */
-    public function __isset($key)
-    {
-        return isset($this->renderer->$key);
-    }
-
-    /**
-     * Unset PHPTAL variable
-     *
-     * @param string $key variable name
-     */
-    public function __unset($key)
-    {
-        if ($this->renderer->$key !== null) {
-            unset($this->renderer->$key);
-        }
     }
 }

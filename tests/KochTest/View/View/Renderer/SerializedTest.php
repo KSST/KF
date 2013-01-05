@@ -92,18 +92,6 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\View\Renderer\Serialized::getEngine
-     * @todo   Implement testGetEngine().
-     */
-    public function testGetEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\View\Renderer\Serialized::initializeEngine
      * @todo   Implement testInitializeEngine().
      */
