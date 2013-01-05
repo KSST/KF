@@ -18,7 +18,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         if (class_exists('PHPTAL') === false) {
-           $this->markTestSkipped('The vendor library "PHPTal" is required.');
+           $this->markTestSkipped('This test requires the vendor library "PHPTal".');
         }
 
         $options = array();

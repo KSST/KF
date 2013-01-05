@@ -19,7 +19,9 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
         $vendor = __DIR__ . '/../../../../';
 
         if ((extension_loaded('syck') === false) xor (is_file($vendor . '/spyc/Spyc.class.php') === true)) {
-            $this->markTestSkipped('The no yaml reader available. Install SYCK extensions or Spyc library.');
+            $this->markTestSkipped(
+                'This test requires a yaml reader, e.g. the PHP extension "SYCK" or the vendor library "Spyc".'
+            );
         }
 
         vfsStreamWrapper::register();
