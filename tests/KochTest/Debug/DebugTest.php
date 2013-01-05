@@ -89,18 +89,6 @@ EOD;
     }
 
     /**
-     * @covers Koch\Debug\Debug::firebug
-     * @todo   Implement testFirebug().
-     */
-    public function testFirebug()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\Debug\Debug::getOriginOfDebugCall
      */
     public function testGetOriginOfDebugCall()
@@ -108,7 +96,7 @@ EOD;
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 117: \Koch\Debug\Debug::getOriginOfDebugCall(0);
+Debugging DebugTest.php on line 105: \Koch\Debug\Debug::getOriginOfDebugCall(0);
 
 EOD;
         $this->expectOutputString($expectedOutput);
@@ -138,86 +126,80 @@ EOD;
 
     /**
      * @covers Koch\Debug\Debug::getApplicationConstants
-     * @todo   Implement testGetApplicationConstants().
      */
     public function testGetApplicationConstants()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getApplicationConstants($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getBacktrace
-     * @todo   Implement testGetBacktrace().
      */
     public function testGetBacktrace()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $limit = 1;
+        $array = \Koch\Debug\Debug::getBacktrace($limit, $returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getInterfaces
-     * @todo   Implement testGetInterfaces().
      */
     public function testGetInterfaces()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $returnArray = true;
+        $array = \Koch\Debug\Debug::getInterfaces($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getClasses
-     * @todo   Implement testGetClasses().
      */
     public function testGetClasses()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $returnArray = true;
+        $array = \Koch\Debug\Debug::getClasses($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getFunctions
-     * @todo   Implement testGetFunctions().
      */
     public function testGetFunctions()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getFunctions($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getExtensions
-     * @todo   Implement testGetExtensions().
      */
     public function testGetExtensions()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getExtensions($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
      * @covers Koch\Debug\Debug::getPhpIni
-     * @todo   Implement testGetPhpIni().
      */
     public function testGetPhpIni()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getPhpIni($returnArray);
+
+        $this->assertTrue(is_array($array));
     }
 
     /**
@@ -233,17 +215,5 @@ EOD;
         $this->assertArrayHasKey('http', $array);
         $this->assertArrayHasKey('https', $array);
         $this->assertArrayHasKey('all', $array);
-    }
-
-    /**
-     * @covers Koch\Debug\Debug::getRegisteredEventListeners
-     * @todo   Implement testGetRegisteredEventListeners().
-     */
-    public function testGetRegisteredEventListeners()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
     }
 }
