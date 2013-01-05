@@ -52,14 +52,12 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Captcha\Captcha::getRandomFont
-     * @todo   Implement testGetRandomFont().
      */
     public function testGetRandomFont()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $font = \Koch\Captcha\Captcha::getRandomFont();
+
+       $this->assertContains('.ttf', $font);
     }
 
     /**

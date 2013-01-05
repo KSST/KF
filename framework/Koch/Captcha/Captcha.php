@@ -129,10 +129,15 @@ class Captcha
      *
      * @param string $fonts_dir The directory where the font files reside.
      */
-    public static function getRandomFont($fonts_dir)
+    public static function getRandomFont($fonts_dir = null)
     {
-        // select one random dir, when multiple font folders are set
-        if (is_array($fonts_dir)) {
+        // use default font dir, if nothing was set
+        if ($fonts_dir === null) {
+            $fonts_dir[] = realpath(__DIR__ . '/fonts');
+        }
+
+        // random select one of multiple font folders
+        if (is_array($fonts_dir) === true) {
             $fonts_dir = $fonts_dir[array_rand($fonts_dir)];
         }
 
@@ -383,14 +388,10 @@ class Captcha
      * is performed in 10% of all calls to this method and
      * removes old captcha images from the captcha images directory.
      */
-    public static function garbageCollection()
+    public static function garbageCollection($options = array())
     {
         // perform the garbage_collection in 10 % of all calls
         if (mt_rand(0, 9) == 0) {
-            /*
-             * @todo get $options
-             */
-            $options = array();
             $iterator = new \DirectoryIterator($options['image_dir']);
             foreach ($iterator as $file) {
                 // delete all png files
