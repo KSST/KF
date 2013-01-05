@@ -33,85 +33,140 @@ class CsvTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Csv::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configureEngine());
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        /* @todo use phpunit dataprovider */
+        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+
+        $data = array(
+            array('aaa', 'bbb', 'ccc', 'dddd'),
+            array('123', '456', '789'),
+            array('"aaa"', '"bbb"')
         );
+
+        $this->object->assign($data, $headers);
+
+        // template is in the case the output file to write to
+        $file = 'output.csv';
+
+        $result = $this->object->render($file);
+
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Csv::render
+     */
+    public function testRender_withData()
+    {
+        $data = array(
+            array('aaa', 'bbb', 'ccc', 'dddd'),
+            array('123', '456', '789'),
+            array('"aaa"', '"bbb"')
+        );
+
+        // template is in the case the output file to write to
+        $file = 'output.csv';
+
+        $result = $this->object->render($file, $data);
+
+        $this->assertTrue($result);
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::assign
-     * @todo   Implement testAssign().
      */
     public function testAssign()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        /* @todo use phpunit dataprovider */
+        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+
+        $data = array(
+            array('aaa', 'bbb', 'ccc', 'dddd'),
+            array('123', '456', '789'),
+            array('"aaa"', '"bbb"')
         );
+
+        $this->object->assign($data, $headers);
+
+        $this->assertEquals($this->object->viewdata, $data);
+        $this->assertEquals($this->object->headers, $headers);
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::display
-     * @todo   Implement testDisplay().
      */
     public function testDisplay()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        /* @todo use phpunit dataprovider */
+        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+
+        $data = array(
+            array('aaa', 'bbb', 'ccc', 'dddd'),
+            array('123', '456', '789'),
+            array('"aaa"', '"bbb"')
         );
+
+        $this->object->assign($data, $headers);
+
+        $this->object->display('');
+
+        $expectedString = <<< 'EOF'
+ABC,NUMS,QUOTATEDABC
+aaa,bbb,ccc,dddd
+123,456,789
+"""aaa""","""bbb"""
+
+EOF;
+
+        $this->expectOutputString($expectedString);
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        /* @todo use phpunit dataprovider */
+        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+
+        $data = array(
+            array('aaa', 'bbb', 'ccc', 'dddd'),
+            array('123', '456', '789'),
+            array('"aaa"', '"bbb"')
         );
+
+        $this->object->assign($data, $headers);
+
+        $result = $this->object->fetch('');
+
+       $expectedString = '123,456,789';
+
+        $this->assertContains($expectedString, $result);
     }
 
     /**
      * @covers Koch\View\Renderer\Csv::getEngine
-     * @todo   Implement testGetEngine().
      */
     public function testGetEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->getEngine());
     }
 }

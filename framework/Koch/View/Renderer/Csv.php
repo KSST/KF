@@ -39,10 +39,9 @@ use Koch\View\AbstractRenderer;
  */
 class Csv extends AbstractRenderer
 {
-    private $data = array();
-    private $header = array();
+    public $headers = array();
 
-        /**
+    /**
      * Constructor
      *
      * @param array $options
@@ -67,10 +66,20 @@ class Csv extends AbstractRenderer
      * @param string $template The filepath location of where to save the csv file.
      * @param array|object viewdata
      */
-    public function render($template, $viewdata)
+    public function render($template, $viewdata = null)
     {
-        $this->data = $viewdata;
-        $this->mssafe_csv($template, $this->data, $this->header);
+        if($viewdata !== null) {
+            $this->viewdata = $viewdata;
+        }
+
+        $renderToFile = (empty($template) === false) ? true : false;
+
+        if($renderToFile === true) {
+            $return = $this->writeCSV($this->viewdata, $this->headers, true);
+            return (bool) file_put_contents($template, $return);
+        }
+
+        return $this->writeCSV($this->viewdata, $this->headers);
     }
 
     /**
@@ -79,102 +88,52 @@ class Csv extends AbstractRenderer
      */
     public function assign($data, $headers = array())
     {
-        $this->data = $data;
+        $this->viewdata = $data;
         $this->headers = $headers;
     }
 
-    /**
-     * mssafeCsv() builds csv files readable by ms-excel/access.
-     *
-     * Note:
-     * 1) For MS Applications the line-endings have to be \r\n not only \n
-     * 2) The first value of CSV files are disallowed to be uppercase chars.
-     *    If uppercase the csv is mis-interpreted as sylk-format file
-     *    @see http://support.microsoft.com/kb/323626
-     *
-     * @author soapergem[at]gmail[dot]com
-     * @link http://de.php.net/manual/de/function.fputcsv.php#90883
-     *
-     * @param string $filepath location of where the csv file should be saved
-     * @param array  $data     the array with the data to write as csv
-     * @param array  $header   additional array with column headings (first row of the data)
-     */
-    private function mssafeCsv($filepath, $data, $header = array())
+    private function writeCSV($data, $column_headers = array(), $display = false)
     {
-        $fp = fopen($filepath, 'w');
+        $stream = ($display === true) ? fopen('php://temp/maxmemory', 'w+') : fopen('php://output', 'w');
 
-        if ($fp === true) {
-            $show_header = true;
-
-            if (empty($header)) {
-                $show_header = false;
-                reset($data);
-                $line = current($data);
-
-                if (empty($line) == false) {
-                    reset($line);
-                    $first = current($line);
-
-                    if (mb_substr($first, 0, 2) == 'ID' and preg_match('/["\\s,]/', $first) == false) {
-                        array_shift($data);
-                        array_shift($line);
-                        if (empty($line) == true) {
-                            fwrite($fp, '"' . $first . '"' . '\r\n');
-                        } else {
-                            fwrite($fp, '"' . $first . '",');
-                            fputcsv($fp, mb_split(',', $line));
-                            fseek($fp, -1, SEEK_CUR);
-                            fwrite($fp, "\r\n");
-                        }
-                    }
-                }
-            } else {
-                reset($header);
-                $first = current($header);
-
-                if (mb_substr($first, 0, 2) == 'ID' and preg_match('/["\\s,]/', $first) == false) {
-                    array_shift($header);
-
-                    if (empty($header)) {
-                        $show_header = false;
-                        fwrite($fp, '"' . $first . '"' . '\r\n');
-                    } else {
-                        fwrite($fp, '"' . $first . '",');
-                    }
-                }
-            }
-
-            if ($show_header) {
-                fputcsv($fp, $header);
-                fseek($fp, -1, SEEK_CUR);
-                fwrite($fp, '\r\n');
-            }
-
-            foreach ($data as $line) {
-                fputcsv($fp, $line);
-                fseek($fp, -1, SEEK_CUR);
-                fwrite($fp, '\r\n');
-            }
-            fclose($fp);
-        } else {
-            return false;
+        if (empty($column_headers) === false) {
+            fputcsv($stream, $column_headers);
         }
 
-        return true;
+        foreach ($data as $record) {
+            fputcsv($stream, $record);
+        }
+
+        if ($display === true) {
+            rewind($stream);
+            $retVal = stream_get_contents($stream);
+            fclose($stream);
+            return $retVal;
+        } else {
+            fclose($stream);
+        }
     }
 
     public function display($template, $viewdata = null)
     {
+        if($viewdata !== null) {
+            $this->viewdata = $viewdata;
+        }
 
+        return $this->writeCSV($this->viewdata, $this->headers, false);
     }
 
     public function fetch($template, $viewdata = null)
     {
+        if($viewdata !== null) {
+            $this->viewdata = $viewdata;
+        }
 
+        return $this->writeCSV($this->viewdata, $this->headers, true);
     }
 
     public function getEngine()
     {
-
+        return;
     }
 }
