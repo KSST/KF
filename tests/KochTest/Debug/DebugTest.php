@@ -222,14 +222,18 @@ EOD;
 
     /**
      * @covers Koch\Debug\Debug::getWrappers
-     * @todo   Implement testGetWrappers().
      */
     public function testGetWrappers()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getWrappers($returnArray);
+        var_dump($array);
+
+        $this->assertTrue(is_array($array));
+        $this->assertArrayHasKey('openssl', $array);
+        $this->assertArrayHasKey('http', $array);
+        $this->assertArrayHasKey('https', $array);
+        $this->assertArrayHasKey('all', $array);
     }
 
     /**
