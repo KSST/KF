@@ -33,26 +33,18 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Json::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 
     /**
      * @covers Koch\View\Renderer\Json::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configureEngine());
     }
 
     /**
@@ -120,18 +112,6 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      * @todo   Implement testFetch().
      */
     public function testFetch()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Json::getEngine
-     * @todo   Implement testGetEngine().
-     */
-    public function testGetEngine()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(

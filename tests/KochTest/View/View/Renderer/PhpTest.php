@@ -104,18 +104,6 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\View\Renderer\Php::getEngine
-     * @todo   Implement testGetEngine().
-     */
-    public function testGetEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\View\Renderer\Php::initializeEngine
      * @todo   Implement testInitializeEngine().
      */
