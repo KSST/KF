@@ -43,14 +43,14 @@ namespace "Koch\Form\Element\" + formelement name
              * Failure - form was not filled properly.
              * Redisplay the form with error decorator added.
              */
-            $this->addDecorator('errors');
+            $this->addDecorator('Errors');
         } else {
             /**
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
-            $this->addDecorator('noerror');
+            $this->addDecorator('NoError');
         }
 
         $this->render();
@@ -300,7 +300,10 @@ namespace "Koch\Form\Element\" + formelement name
      */
     public function decoratorFactory($decorator)
     {
-        $classmap = array('html5validation' => 'Html5Validation');
+        $classmap = array(
+            'html5validation' => 'Html5Validation',
+            'noerror' => 'NoError'
+        );
 
         if (isset($classmap[$decorator]) === true || array_key_exists($decorator, $classmap) === true) {
             $decorator = $classmap[$decorator];
