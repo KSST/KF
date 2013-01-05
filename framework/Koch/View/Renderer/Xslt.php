@@ -26,13 +26,6 @@ use Koch\View\AbstractRenderer;
 class Xslt extends AbstractRenderer
 {
     /**
-     * holds instance of XSLT Render Engine (object)
-     *
-     * @var object xslt
-     */
-    protected $xslt = null;
-
-    /**
      * Absolute path to the XSL StyleSheet file.
      *
      * @var string
@@ -56,17 +49,17 @@ class Xslt extends AbstractRenderer
 
         // instantiate the render engine
         // @link http://php.net/manual/en/class.xsltprocessor.php
-        $this->xslt = new \XSLTProcessor;
+        $this->renderer = new \XSLTProcessor;
     }
 
-    /**
-     * Returns XSLT RenderEngine Object
-     *
-     * @return xslt_processor
-     */
-    public function getEngine()
+    public function initializeEngine($template = null)
     {
-        return $this->xslt;
+
+    }
+
+    public function configureEngine()
+    {
+
     }
 
     /**
@@ -106,20 +99,15 @@ class Xslt extends AbstractRenderer
         }
 
         // import the stylesheet for later transformation
-        $this->xslt->importStyleSheet(\DOMDocument::load($stylesheet));
+        $this->renderer->importStyleSheet(\DOMDocument::load($stylesheet));
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform
-        $dom = $this->xslt->transformToXML(\DOMDocument::load($viewdata));
+        $dom = $this->renderer->transformToXML(\DOMDocument::load($viewdata));
 
         return $dom;
     }
 
     public function assign($tpl_parameter, $value = null)
-    {
-
-    }
-
-    public function configureEngine()
     {
 
     }
@@ -130,11 +118,6 @@ class Xslt extends AbstractRenderer
     }
 
     public function fetch($template, $viewdata = null)
-    {
-
-    }
-
-    public function initializeEngine($template = null)
     {
 
     }

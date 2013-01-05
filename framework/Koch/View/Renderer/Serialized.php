@@ -34,6 +34,16 @@ class Serialized extends AbstractRenderer
     {
         parent::__construct($options);
     }
+    
+    public function initializeEngine($template = null)
+    {
+
+    }
+
+     public function configureEngine()
+    {
+
+    }
 
     /**
      * Render serialized PHP data
@@ -57,10 +67,7 @@ class Serialized extends AbstractRenderer
 
     }
 
-    public function configureEngine()
-    {
 
-    }
 
     public function display($template, $viewdata = null)
     {
@@ -68,16 +75,6 @@ class Serialized extends AbstractRenderer
     }
 
     public function fetch($template, $viewdata = null)
-    {
-
-    }
-
-    public function getEngine()
-    {
-
-    }
-
-    public function initializeEngine($template = null)
     {
 
     }

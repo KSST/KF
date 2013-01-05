@@ -56,25 +56,6 @@ class Phptal extends AbstractRenderer
     }
 
     /**
-     * Add data to the PHPTAL view
-     *
-     * @param mixed $tpl_parameter The placeholder.
-     * @param mixed $value         The value.
-     */
-    public function assign($tpl_parameter, $value = null)
-    {
-        if (is_array($tpl_parameter)) {
-            foreach ($tpl_parameter as $param => $val) {
-                $this->renderer->$param = $val;
-            }
-        } else {
-            if ($tpl_parameter != null) {
-                $this->renderer->$tpl_parameter = $value;
-            }
-        }
-    }
-
-    /**
      * Render Engine Configuration
      * Configures the PHPTAL Object
      *
@@ -97,44 +78,25 @@ class Phptal extends AbstractRenderer
     }
 
     /**
-     * Returns a clean Smarty Object
+     * Add data to the PHPTAL view
      *
-     * @return Smarty Object
+     * @param mixed $tpl_parameter The placeholder.
+     * @param mixed $value         The value.
      */
-    public function getEngine()
+    public function assign($tpl_parameter, $value = null)
     {
-        return $this->renderer;
-    }
-
-    /**
-     * Renders a template and returns the content.
-     *
-     * @param $template
-     * @param $returnOutput
-     * @return string Rendered Template Content
-     */
-    public function render($template, $viewdata = null)
-    {
-        // get the template from the parent class
-        if ($template === null) {
-            $template = $this->getTemplate();
-        }
-
-        if ($viewdata !== null) {
-            $this->assign($viewdata);
-        }
-
-        $this->renderer->setTemplate($template);
-
-        try {
-            // let PHPTAL process the template
-            return $this->renderer->execute();
-        } catch (Exception $e) {
-            throw new \Koch\Exception\Exception($e);
+        if (is_array($tpl_parameter)) {
+            foreach ($tpl_parameter as $param => $val) {
+                $this->renderer->$param = $val;
+            }
+        } else {
+            if ($tpl_parameter != null) {
+                $this->renderer->$tpl_parameter = $value;
+            }
         }
     }
 
-    /**
+     /**
      * Renders a template and displays the content.
      *
      * @param $template
@@ -171,5 +133,33 @@ class Phptal extends AbstractRenderer
     public function fetch($template, $data = null)
     {
         return $this->render($template, true);
+    }
+
+    /**
+     * Renders a template and returns the content.
+     *
+     * @param $template
+     * @param $returnOutput
+     * @return string Rendered Template Content
+     */
+    public function render($template, $viewdata = null)
+    {
+        // get the template from the parent class
+        if ($template === null) {
+            $template = $this->getTemplate();
+        }
+
+        if ($viewdata !== null) {
+            $this->assign($viewdata);
+        }
+
+        $this->renderer->setTemplate($template);
+
+        try {
+            // let PHPTAL process the template
+            return $this->renderer->execute();
+        } catch (Exception $e) {
+            throw new \Koch\Exception\Exception($e);
+        }
     }
 }
