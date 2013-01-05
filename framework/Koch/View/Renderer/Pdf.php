@@ -52,7 +52,7 @@ class Pdf extends AbstractRenderer
 
     }
 
-    public function render($template, $viewdata)
+    public function render($template, $viewdata = null)
     {
 
     }

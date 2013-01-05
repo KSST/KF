@@ -95,7 +95,7 @@ class Xslt extends AbstractRenderer
      * @param $template The XSL Stylesheet.
      * @param $data XML Data to render
      */
-    public function render($template, $data)
+    public function render($template, $viewdata = null)
     {
         // $this->response()->setContentType('text/html');
 
@@ -109,7 +109,7 @@ class Xslt extends AbstractRenderer
         $this->xslt->importStyleSheet(\DOMDocument::load($stylesheet));
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform
-        $dom = $this->xslt->transformToXML(\DOMDocument::load($data));
+        $dom = $this->xslt->transformToXML(\DOMDocument::load($viewdata));
 
         return $dom;
     }
