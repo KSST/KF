@@ -119,14 +119,21 @@ EOD;
 
     /**
      * @covers Koch\Debug\Debug::getIncludedFiles
-     * @todo   Implement testGetIncludedFiles().
      */
     public function testGetIncludedFiles()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $returnArray = true;
+        $array = \Koch\Debug\Debug::getIncludedFiles($returnArray);
+
+        $this->assertTrue(is_array($array));
+        $this->assertArrayHasKey('count', $array);
+        $this->assertArrayHasKey('size', $array);
+        $this->assertArrayHasKey('files', $array);
+
+        $this->assertTrue(is_array($array['files']));
+        $this->assertTrue(is_array($array['files'][0]));
+        $this->assertArrayHasKey('name', $array['files'][0]);
+        $this->assertArrayHasKey('size', $array['files'][0]);
     }
 
     /**

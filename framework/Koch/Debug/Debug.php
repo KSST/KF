@@ -217,7 +217,7 @@ class Debug
      * - counts all includes files
      * - calculates the total size (combined filesize) of all inclusions.
      */
-    public static function getIncludedFiles()
+    public static function getIncludedFiles($returnArray = false)
     {
         // init vars
         $includedFiles = $files = $result = array();
@@ -239,7 +239,11 @@ class Debug
             'files' => $includedFiles
         );
 
-        self::printR($result);
+        if($returnArray === true) {
+            return $result;
+        } else {
+            self::printR($result);
+        }
     }
 
     /**
