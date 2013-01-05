@@ -228,6 +228,15 @@ class Debug
 
         // loop over all included files and sum up filesize
         foreach ($files as $file) {
+
+            // if system under test, skip virtual file system files,
+            // as they might be already deleted by tearDown() methods.
+            if (defined('UNIT_TEST_RUN') === true or UNIT_TEST_RUN === true) {
+                if(stripos($file, "vfs:/") !== false) {
+                    continue;
+                }
+            }
+
             $size = filesize($file);
             $includedFiles[] = array('name' => $file, 'size' => $size);
             $totalSize += $size;
