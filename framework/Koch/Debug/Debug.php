@@ -208,8 +208,7 @@ class Debug
 
         /**
          * Get the file, to show the exact origin of the debug call.
-         *
-         * It's one level below.
+         * The line with the call is one line above.
          */
         $file_content = file($file);
         $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
@@ -227,15 +226,15 @@ class Debug
 
     /**
      * The method
-     * - lists all currently included and required files.
+     * - lists all currently included and required files
      * - counts all includes files
-     * - calculates the total size (combined filesize) of all inclusions
+     * - calculates the total size (combined filesize) of all inclusions.
      */
     public static function getIncludedFiles()
     {
         // init vars
-        $includedFiles = $files = array();
-        $includedFilesTotalSize = $includedFilesCount = 0;
+        $includedFiles = $files = $result = array();
+        $totalSize = 0;
 
         // fetch all included files
         $files = get_included_files();
@@ -244,15 +243,16 @@ class Debug
         foreach ($files as $file) {
             $size = filesize($file);
             $includedFiles[] = array('name' => $file, 'size' => $size);
-            $includedFilesTotalSize += $size;
+            $totalSize += $size;
         }
 
-        // total number of included files
-        $includedFilesCount = count($includedFiles);
-        $includedFilesTotalSize = \Koch\Functions\Functions::getsize($includedFilesTotalSize);
+        $result = array(
+            'count' => count($files),
+            'size' => \Koch\Functions\Functions::getSize($totalSize),
+            'files' => $includedFiles
+        );
 
-        $array = array('count' => $includedFilesCount, 'size' => $includedFilesTotalSize, 'files' => $includedFiles);
-        self::printR($array);
+        self::printR($result);
     }
 
     /**
