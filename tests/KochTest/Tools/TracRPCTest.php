@@ -18,7 +18,7 @@ class TracRPCTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (false === extension_loaded('curl')) {
-            $this->markTestSkipped('PHP Extension cURL not loaded.');
+            $this->markTestSkipped('This test requires the PHP extension "cURL".');
         }
     }
 
