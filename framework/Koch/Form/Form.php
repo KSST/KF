@@ -1599,6 +1599,8 @@ class Form implements FormInterface
      *
      * The method iterates (loops over) all formelement objects and calls the validation on each object.
      * In other words: a form is valid, if all formelement are valid. Surprise, surprise.
+     * If a formelement is not valid, the error flag on the form is raised and the error message
+     * of the formelement is transferred to the error message stack of the form.
      *
      * @return boolean Returns true if form validates, false if validation fails, because errors exist.
      */
@@ -1606,20 +1608,13 @@ class Form implements FormInterface
     {
         foreach ($this->formelements as $formelement) {
             if ($formelement->validate() === false) {
-                // raise error flag on the form
-                $this->setErrorState(true);
-
-                // and transfer errormessages from formelement to form errormessages stack
+                $this->hasErrors(true);
                 $this->addErrorMessage($formelement->getErrorMessages());
             }
         }
 
-        if ($this->getErrorState() === true) {
-            // form has errors and does not validate
-            return false;
-        } else {
-            return true;
-        }
+        // if form has errors, it does not validate
+        return ($this->hasErrors() === true) ? false : true;
     }
 
     /**
@@ -1629,22 +1624,16 @@ class Form implements FormInterface
      */
 
     /**
-     * Sets the error state of the form (formHasError).
-     *
-     * @param boolean $boolean
-     */
-    public function setErrorState($boolean = true)
-    {
-        $this->error = $boolean;
-    }
-
-    /**
      * Returns the error state of the form.
      *
-     * @return boolean False, if form has an error. True, otherwise.
+     * @return boolean True, if form has an error. False, otherwise.
      */
-    public function getErrorState()
+    public function hasErrors($boolean = null)
     {
+        if(is_bool($boolean) === true) {
+            $this->error = $boolean;
+        }
+
         return $this->error;
     }
 

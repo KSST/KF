@@ -870,22 +870,15 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($formelement->isRequired());
     }
 
-    public function testsetErrorState()
+    public function testhasErrors()
     {
-        $this->form->setErrorState(true);
+        $this->form->hasErrors(true);
         $this->assertTrue($this->form->error);
-        $this->assertTrue($this->form->getErrorState());
-    }
+        $this->assertTrue($this->form->hasErrors());
 
-    public function testgetErrorState()
-    {
-        $this->form->setErrorState(true);
-        $this->assertTrue($this->form->error);
-        $this->assertTrue($this->form->getErrorState());
-
-        $this->form->setErrorState(false);
+        $this->form->hasErrors(false);
         $this->assertFalse($this->form->error);
-        $this->assertFalse($this->form->getErrorState());
+        $this->assertFalse($this->form->hasErrors());
     }
 
     public function testaddErrorMessage()
