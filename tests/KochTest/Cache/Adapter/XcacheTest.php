@@ -18,7 +18,7 @@ class XcacheTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('xcache')) {
-            $this->markTestSkipped('The xcache extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "xcache".');
         }
 
         $this->object = new Xcache;

@@ -188,7 +188,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testMethod_writeAutoloadingMapApc()
     {
         if (!extension_loaded('apc')) {
-            $this->markTestSkipped('APC extensions required.');
+            $this->markTestSkipped('This test requires the PHP extension "apc".');
         }
 
         $array = array ( 'class' => 'file' );

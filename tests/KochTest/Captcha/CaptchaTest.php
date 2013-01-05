@@ -18,7 +18,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (extension_loaded('gd') === false) {
-            $this->markTestSkipped('The GD extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "gd".');
         }
 
         $this->object = new Captcha;

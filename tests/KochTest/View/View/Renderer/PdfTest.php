@@ -18,7 +18,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         if (!extension_loaded('mbstring')) {
-            $this->markTestSkipped('The mbstring extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "mbstring".');
         }
 
         $options = array();

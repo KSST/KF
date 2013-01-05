@@ -18,7 +18,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('eaccelerator')) {
-            $this->markTestSkipped('The eAccelerator extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "eaccelerator".');
         }
 
         $this->object = new EAccelerator;

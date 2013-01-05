@@ -18,7 +18,7 @@ class XsltTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         if (!extension_loaded('libxml') or extension_loaded('xsl') === false) {
-            $this->markTestSkipped('The libxml or php_xsl extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "xsl" or "libxml".');
         }
 
         $options = array();

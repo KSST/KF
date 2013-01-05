@@ -18,7 +18,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         if (!extension_loaded('apc')) {
-            $this->markTestSkipped('The APC extension is not available.');
+            $this->markTestSkipped('This test requires the PHP extension "apc".');
         }
 
         $this->object = new Apc;
