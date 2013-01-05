@@ -137,15 +137,18 @@ class Debug
     }
 
     /**
-     * Debug logs the output of $var to the firebug console
+     * Debug logs the output of $var to the firebug console in your browser.
      *
      * @param mixed $var The variable to debug.
-     * @param $firebugmethod The firebug method to call (log,info,warn, error). Defaults to "log".
-     *
-     * @return Content of $var will be returned via Header and is displayed in the FireBugConsole.
+     * @param $logmethod The firebug method to call for logging (log,info,warn, error). Defaults to "log".
+     * @return FirePHP object.
      */
-    public static function firebug($var, $firebugmethod = 'log')
+    public static function firebug($var, $logmethod = 'log')
     {
+        // @codeCoverageIgnoreStart
+        // We don't need to test vendor library functionality.
+        // @see FirePHPCore_FirePHPTest
+
         $firephp = \FirePHP::getInstance(true);
 
         /**
@@ -154,8 +157,9 @@ class Debug
          */
         $firephp->info(self::getOriginOfDebugCall());
 
-        // debug the var
-        $firephp->{$firebugmethod}($var);
+        $firephp->{$logmethod}($var);
+
+        // @codeCoverageIgnoreEnd
     }
 
     /**
@@ -254,58 +258,75 @@ class Debug
     /**
      * Lists all user defined constants (Application Constants).
      */
-    public static function getApplicationConstants()
+    public static function getApplicationConstants($returnArray = false)
     {
         $constants = get_defined_constants(true);
-        self::printR($constants['user']);
+        $result = $constants['user'];
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
      * Displayes the debug backtrace.
+     *
+     * @param int Limit the number of stack frames returned. Returns all stack frames by default (limit=0).
+     * @param bool
      */
-    public static function getBacktrace()
+    public static function getBacktrace($limit = 0, $returnArray = false)
     {
-        self::printR(debug_backtrace());
+        $result = debug_backtrace($limit);
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
-     * Lists all declared interfaces.
+     * Returns an array with the name of the defined interfaces.
      */
-    public static function getInterfaces()
+    public static function getInterfaces($returnArray = false)
     {
-        self::printR(get_declared_interfaces());
+        $result = get_declared_interfaces();
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
-     * Lists all declared classes.
+     * Returns an array with the name of the defined classes.
      */
-    public static function getClasses()
+    public static function getClasses($returnArray = false)
     {
-        self::printR(get_declared_classes());
+        $result = get_declared_classes();
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
-     * Lists all declared functions.
+     * Returns an array with the name of the defined classes.
      */
-    public static function getFunctions()
+    public static function getFunctions($returnArray = false)
     {
-        self::printR(get_defined_functions());
+        $result = get_defined_functions();
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
      * Lists all php extensions.
      */
-    public static function getExtensions()
+    public static function getExtensions($returnArray = false)
     {
-        self::printR(get_loaded_extensions());
+        $result = get_loaded_extensions();
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
      * Lists all php.ini settings.
      */
-    public static function getPhpIni()
+    public static function getPhpIni($returnArray = false)
     {
-        self::printR(parse_ini_file(get_cfg_var('cfg_file_path'), true));
+        $result = parse_ini_file(get_cfg_var('cfg_file_path'), true);
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
@@ -323,14 +344,5 @@ class Debug
         $result['all'] = $wrappers;
 
         return ($returnArray === true) ? $result : self::printR($result);
-    }
-
-    /**
-     * Returns a list of all registered event listeners
-     * @return array
-     */
-    public static function getRegisteredEventListeners()
-    {
-        // @todo
     }
 }
