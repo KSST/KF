@@ -120,7 +120,7 @@ class Php extends AbstractRenderer
      *
      * @return string HTML Representation of Template with Vars
      */
-    public function render($template, $viewdata)
+    public function render($template, $viewdata = null)
     {
         $this->assign($viewdata);
 
