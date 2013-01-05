@@ -239,11 +239,7 @@ class Debug
             'files' => $includedFiles
         );
 
-        if($returnArray === true) {
-            return $result;
-        } else {
-            self::printR($result);
-        }
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
@@ -306,13 +302,18 @@ class Debug
     /**
      * Lists all available wrappers
      */
-    public static function getWrappers()
+    public static function getWrappers($returnArray = false)
     {
-        $w = stream_get_wrappers();
-        echo 'openssl: '.  extension_loaded('openssl') ? 'yes':'no'. NL;
-        echo 'http wrapper: '. in_array('http', $w) ? 'yes':'no'. NL;
-        echo 'https wrapper: '. in_array('https', $w) ? 'yes':'no'. NL;
-        echo 'wrappers: '. self::printR($w);
+        $result = array();
+
+        $wrappers = stream_get_wrappers();
+
+        $result['openssl'] = (extension_loaded('openssl')) ? 'yes' : 'no';
+        $result['http'] = in_array('http', $wrappers) ? 'yes' : 'no';
+        $result['https'] = in_array('https', $wrappers) ? 'yes' : 'no';
+        $result['all'] = $wrappers;
+
+        return ($returnArray === true) ? $result : self::printR($result);
     }
 
     /**
