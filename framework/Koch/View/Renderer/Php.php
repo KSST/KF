@@ -52,6 +52,43 @@ class Php extends AbstractRenderer
         parent::__construct($options);
     }
 
+
+    public function initializeEngine($template = null)
+    {
+
+    }
+
+     public function configureEngine()
+    {
+
+    }
+
+    /**
+     * Assign specific variable to the template
+     *
+     * @param  mixed             $key   Object with template vars (extraction method fetch), or array or key/value pair
+     * @param  mixed             $value Variable value
+     * @return Koch_Renderer_PHP
+     */
+    public function assign($key, $value = null)
+    {
+        if (is_object($key)) {
+            // @todo pull object props to array
+            $this->data[$key] = $value->fetch();
+        } elseif (is_array($key)) {
+            array_merge($this->data, $key);
+        } else {
+            $this->data[$key] = $value;
+        }
+
+        return $this;
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
     /**
      * Executes the template rendering and returns the result.
      *
@@ -95,27 +132,6 @@ class Php extends AbstractRenderer
     }
 
     /**
-     * Assign specific variable to the template
-     *
-     * @param  mixed             $key   Object with template vars (extraction method fetch), or array or key/value pair
-     * @param  mixed             $value Variable value
-     * @return Koch_Renderer_PHP
-     */
-    public function assign($key, $value = null)
-    {
-        if (is_object($key)) {
-            // @todo pull object props to array
-            $this->data[$key] = $value->fetch();
-        } elseif (is_array($key)) {
-            array_merge($this->data, $key);
-        } else {
-            $this->data[$key] = $value;
-        }
-
-        return $this;
-    }
-
-    /**
      * Display the rendered template
      *
      * @return string HTML Representation of Template with Vars
@@ -125,38 +141,5 @@ class Php extends AbstractRenderer
         $this->assign($viewdata);
 
         return $this->fetch($template);
-    }
-
-    /**
-     * Render the content and return it
-     *
-     * @example
-     * echo new Koch_Renderer_PHP($file, array('title' => 'My title'));
-     *
-     * @return string HTML Representation
-     */
-    public function __toString()
-    {
-        return $this->render();
-    }
-
-    public function configureEngine()
-    {
-
-    }
-
-    public function display($template, $viewdata = null)
-    {
-
-    }
-
-    public function getEngine()
-    {
-
-    }
-
-    public function initializeEngine($template = null)
-    {
-
     }
 }

@@ -65,11 +65,6 @@ class Pdf extends AbstractRenderer
 
     }
 
-    public function render($template, $viewdata = null)
-    {
-
-    }
-
     public function assign($tpl_parameter, $value = null)
     {
 
@@ -79,13 +74,13 @@ class Pdf extends AbstractRenderer
     {
 
     }
-
+    
     public function fetch($template, $viewdata = null)
     {
 
     }
 
-    public function getEngine()
+    public function render($template, $viewdata = null)
     {
 
     }

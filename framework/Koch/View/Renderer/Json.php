@@ -72,7 +72,7 @@ class Json extends AbstractRenderer
     /**
      * jsonEncode
      *
-     * @param mixed|array $data Data to be json encoded.
+     * @param mixed|array $data The data to be json encoded.
      * @return $json_encoded_data
      */
     public function jsonEncode($data)
@@ -99,6 +99,21 @@ class Json extends AbstractRenderer
         return;
     }
 
+    public function assign($tpl_parameter, $value = null)
+    {
+
+    }
+
+    public function display($template, $viewdata = null)
+    {
+
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+
+    }
+
     /**
      * Render PHP data as JSON (through BODY)
      * This method returns the json encoded string.
@@ -122,25 +137,5 @@ class Json extends AbstractRenderer
         );
 
         return $this->jsonEncode($this->viewdata);
-    }
-
-    public function assign($tpl_parameter, $value = null)
-    {
-
-    }
-
-    public function display($template, $viewdata = null)
-    {
-
-    }
-
-    public function fetch($template, $viewdata = null)
-    {
-
-    }
-
-    public function getEngine()
-    {
-        return;
     }
 }

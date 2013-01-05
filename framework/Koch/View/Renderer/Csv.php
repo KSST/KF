@@ -63,6 +63,35 @@ class Csv extends AbstractRenderer
     }
 
     /**
+     * @param array $data   the array with the data to write as csv
+     * @param array $header additional array with column headings (first row of the data)
+     */
+    public function assign($data, $headers = array())
+    {
+        $this->viewdata = $data;
+        $this->headers = $headers;
+    }
+
+
+    public function display($template, $viewdata = null)
+    {
+        if($viewdata !== null) {
+            $this->viewdata = $viewdata;
+        }
+
+        return $this->writeCSV($this->viewdata, $this->headers, false);
+    }
+
+    public function fetch($template, $viewdata = null)
+    {
+        if($viewdata !== null) {
+            $this->viewdata = $viewdata;
+        }
+
+        return $this->writeCSV($this->viewdata, $this->headers, true);
+    }
+
+    /**
      * @param string $template The filepath location of where to save the csv file.
      * @param array|object viewdata
      */
@@ -80,16 +109,6 @@ class Csv extends AbstractRenderer
         }
 
         return $this->writeCSV($this->viewdata, $this->headers);
-    }
-
-    /**
-     * @param array $data   the array with the data to write as csv
-     * @param array $header additional array with column headings (first row of the data)
-     */
-    public function assign($data, $headers = array())
-    {
-        $this->viewdata = $data;
-        $this->headers = $headers;
     }
 
     private function writeCSV($data, $column_headers = array(), $display = false)
@@ -112,28 +131,5 @@ class Csv extends AbstractRenderer
         } else {
             fclose($stream);
         }
-    }
-
-    public function display($template, $viewdata = null)
-    {
-        if($viewdata !== null) {
-            $this->viewdata = $viewdata;
-        }
-
-        return $this->writeCSV($this->viewdata, $this->headers, false);
-    }
-
-    public function fetch($template, $viewdata = null)
-    {
-        if($viewdata !== null) {
-            $this->viewdata = $viewdata;
-        }
-
-        return $this->writeCSV($this->viewdata, $this->headers, true);
-    }
-
-    public function getEngine()
-    {
-        return;
     }
 }
