@@ -227,7 +227,6 @@ EOD;
     {
         $returnArray = true;
         $array = \Koch\Debug\Debug::getWrappers($returnArray);
-        var_dump($array);
 
         $this->assertTrue(is_array($array));
         $this->assertArrayHasKey('openssl', $array);
