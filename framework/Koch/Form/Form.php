@@ -320,6 +320,10 @@ namespace "Koch\Form\Element\" + formelement name
             }
         }
 
+        if(false === class_exists($class, false)) {
+            throw new \RuntimeException('Form Decorator "' . $class . '" was not found.');
+        }
+
         // instantiate the new $formdecorator and return
         return new $class();
     }
