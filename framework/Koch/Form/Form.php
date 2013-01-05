@@ -722,13 +722,12 @@ class Form implements FormInterface
     }
 
     /**
-     * Render all elements
+     * Renders all fromelements.
      *
-     * @return Koch_Formelement
+     * @return string HTML of Formelements.
      */
     public function renderAllFormelements()
     {
-        // init var
         $html_form = '';
         $html_formelement = '';
 
@@ -739,8 +738,8 @@ class Form implements FormInterface
         // developer hint: when $form->render() was triggered, but no formelement was added before
         if (count($formelements) == 0) {
             throw new \Koch\Exception\Exception(
-                'Error rendering formelements. '
-                . 'No formelements on form object. Consider adding some formelements using addElement().'
+                _('Error rendering formelements. ') .
+                _('No formelements on form object. Consider adding some formelements using addElement().')
             );
         }
 
@@ -765,7 +764,7 @@ class Form implements FormInterface
                 $formelementdecorators = $formelement->getDecorators();
             }
 
-            // then render this formelement (pure)
+            // then render this formelement
             $html_formelement = $formelement->render();
 
             // for each decorator, decorate the formelement and render it
@@ -1051,15 +1050,16 @@ class Form implements FormInterface
     {
         $formelement_object = '';
 
-        // if no position is incomming we return the last formelement item
-        // this is the normal call to this method, while chaining
+        // if no position is incomming, the last formelement is returned.
+        // this is the normal call to this method, while chaining.
         if ($position === null) {
             // fetch last item of array = last_formelement
             $formelement_object = end($this->formelements);
         } elseif (is_numeric($position)) {
-            // uh, not the last element of the formelements array requested, but some position
+            // fetch formelements from certain position
             $formelement_object = $this->getElementByPosition($position);
-        } else { // is_string
+        } else {
+            // position is_string
             $formelement_object = $this->getElementByName($position);
         }
 
@@ -1120,19 +1120,22 @@ class Form implements FormInterface
     public function processForm()
     {
         // check if form has been submitted properly
-        if ($this->validate() === false) {
-            // if not, redisplay the form (decorate with errors + render)
+        if ($this->validateForm() === false) {
+            /**
+             * Failure - form was not filled properly.
+             * Redisplay the form with error decorator added.
+             */
             $this->addDecorator('errors');
-            $this->render();
-        } else { // form was properly filled, display a success web page or a flashmessage
+        } else {
             /**
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('noerror');
-            $this->render();
         }
+
+        $this->render();
     }
 
     /**
@@ -1553,26 +1556,6 @@ class Form implements FormInterface
             unset($formelement_object->formelementdecorators[$decorator]);
         }
     }
-
-    /**
-     * ===================================================================================
-     *      Form Groups
-     * ===================================================================================
-     */
-    /**
-     * Adds a new group to the form, to group one or several formelements inside.
-     *
-     * @return Koch_Form
-     */
-    /*
-      public function addGroup($groupname)
-      {
-      // @todo groupname becomes ID of decorator (e.g. a fieldset)
-
-      $this->formgroups[] = $groupname;
-
-      return $this;
-      } */
 
     /**
      * ===================================================================================

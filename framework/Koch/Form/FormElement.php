@@ -156,13 +156,14 @@ class FormElement implements FormElementInterface
 
         if ($name === false) {
             return $this->name;
-        } else { // remove brackets
-            $name = $this->name;
-            // replace left
-            $name = str_replace('[', '_', $name);
-            // replace right with nothing (strip right)
-            $name = str_replace(']', '', $name);
         }
+
+        // remove brackets
+        $name = $this->name;
+        // replace left
+        $name = str_replace('[', '_', $name);
+        // replace right with nothing (strip right)
+        $name = str_replace(']', '', $name);
 
         return $name;
     }
@@ -285,11 +286,7 @@ class FormElement implements FormElementInterface
      */
     public function hasLabel()
     {
-        if ($this->label !== null) {
-            return true;
-        } else {
-            return false;
-        }
+        return ($this->label !== null) ? true : false;
     }
 
     /**
@@ -300,13 +297,7 @@ class FormElement implements FormElementInterface
      */
     public function isRequired()
     {
-        if ($this->required !== null) {
-            return true;
-        } else {
-            return false;
-        }
-
-        return $this;
+        return ($this->required !== null) ? true : false;
     }
 
     /**
@@ -477,11 +468,12 @@ class FormElement implements FormElementInterface
      */
 
     /**
-     * expect / setRules
+     * setRules sets validation rules as a string.
      *
-     * set validation rules as string
-     * "required, maxlength=20";
-     * "required, email";
+     * "required, maxlength=20"
+     * "required, email"
+     *
+     * @param string One or more (comma separated) validation rules to perform.
      */
     public function setRules($rule)
     {
@@ -489,20 +481,22 @@ class FormElement implements FormElementInterface
             throw new \InvalidArgumentException('Parameter $rule must be of type string.');
         }
 
+        // handle multiple rules
         $rules = explode(',', $rule);
 
         foreach ($rules as $rule) {
             $rule = trim($rule);
 
-            if (false === strpos($rule, '=')) {
-                // if there is no "=", then there is no value to set
-                // rule is then the name of a validator
-                $class = $this->mapRulenameToClassname($rule);
-                $this->addValidator($class);
-            } else { // ok -> property name to value relationship
+            // handle values (a property name to value relationship, like maxlength=20)
+            if (strpos($rule, '=') !== false) {
+
                 $array = explode('=', $rule);
-                $class = $this->mapRulenameToClassname($array[0]);
-                $this->addValidator($class, array($class => $array[1]));
+                $rule = $array[0];
+                $value = $array[1];
+
+                $this->addValidator($rule, array($rule => $value));
+            } else {
+                $this->addValidator($rule);
             }
         }
     }
@@ -558,11 +552,13 @@ class FormElement implements FormElementInterface
     public function addValidator($validator, $properties = null)
     {
         if (false === is_object($validator)) {
+
+            // raise formelement "required" flag
             if ($validator === 'required' and false === $this->isRequired()) {
                 $this->setRequired();
             }
 
-            $validator = $this->getValidator($validator);
+            $validator = $this->getValidatorFromFactory($validator);
         }
 
         if ($properties !== null) {
@@ -588,17 +584,19 @@ class FormElement implements FormElementInterface
 
         return $this;
     }
-
+    
     /**
      * Returns a form validator object.
      * Also a factory method, which instantiates and returns a new formvalidator object.
      *
      * @return Koch_Formvalidator
      */
-    public function getValidator($validator)
+    public function getValidatorFromFactory($validator)
     {
+        $validator = $this->mapRulenameToClassname($validator);
+
         // construct classname
-        $class = '\Koch\Form\Validators\\' . ucfirst($validator);
+        $class = '\Koch\Form\Validators\\' . $validator;
 
         // return early, if this object is already stored
         if (isset($this->validators[$class]) === true) {
@@ -772,7 +770,7 @@ class FormElement implements FormElementInterface
             // address each one of those decorators
             foreach ($decorators as $decorator) {
                 // and check if it is an object implementing the right interface
-                if ( ($decorator instanceof Koch\Form\FormElement_Decorator_Interface) === true ) {
+                if ( ($decorator instanceof Koch\Form\DecoratorInterface) === true ) {
                     // if so, fetch this decorator objects name
                     $decoratorname = $decorator->name;
                 } else {
@@ -875,10 +873,8 @@ class FormElement implements FormElementInterface
      */
     public function decoratorFactory($decorator)
     {
-        // construct Koch\Form\FormElement_Decorator_Name
         $class = 'Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
 
-        // if not already loaded, require forelement file
         if (false == class_exists($class, false)) {
             $file = __DIR__ . '/decorators/formelement/' . $decorator . '.php';
 
@@ -887,7 +883,6 @@ class FormElement implements FormElementInterface
             }
         }
 
-        // instantiate the new $formdecorator
         return new $class;
     }
 

@@ -585,7 +585,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->addElement('Captcha');
 
         // TEST:
-        // this will take position 0 + reorders the array
+        // this will take position 0 and reorder the array
         $this->form->addElement('Text', null, 0);
 
         $array = array();
@@ -632,7 +632,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('myButton1', $formelement_object->getName());
     }
 
-        public function testGetElement_ByName_or_ByPosition_or_LastElement()
+        public function testGetElement_ByNameOrByPositionOrLastElement()
     {
         $this->form->addElement('Button')->setName('myButton1');
 
@@ -658,7 +658,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_processForm()
     {
-        $this->markTestIncomplete();
+        $this->form->addElement('Textarea');
+
+        $this->form->processForm();
     }
 
     public function testsetValues_DataArrayPassedToMethod()
@@ -814,10 +816,9 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testAddValidator()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-                'This test has not been implemented yet.'
-        );
+        $this->form->addElement('Textarea')->addValidator('required');
+
+        $this->assertInstanceOf('Koch\Form\Validators\Required', $this->form->getElement()->validators[0]);
     }
 
     public function testValidateForm_false()
