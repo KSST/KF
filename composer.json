@@ -37,9 +37,9 @@
             "type": "package",
             "package": {
                 "name": "marijnh/CodeMirror",
-                "version": "2.35",
+                "version": "3.0",
                 "dist": {
-                    "url": "http://codemirror.net/codemirror-2.35.zip",
+                    "url": "http://codemirror.net/codemirror-3.0.zip",
                     "type": "zip"
                 }
             }
@@ -60,7 +60,7 @@
         "simplepie/simplepie"             : "dev-master",
         "smarty/smarty"                   : "v3.1.12",
         "swiftmailer/swiftmailer"         : "v4.2.2",
-        "marijnh/CodeMirror"              : "2.35"
+        "marijnh/CodeMirror"              : "3.0"
     },
     "not-required-now": {
         "mpdf/mpdf"                       : "dev-master",
