@@ -112,7 +112,7 @@ abstract class AbstractRenderer
      * @param array|object Data to assign to the template.
      * @return string
      */
-    abstract public function render($template, $viewdata);
+    abstract public function render($template, $viewdata = null);
 
     /**
      * Assigns a value to a template parameter.
@@ -356,7 +356,7 @@ abstract class AbstractRenderer
         if (method_exists($this->renderer, $method) === true) {
             return call_user_func_array(array($this->renderer, $method), $arguments);
         } else {
-            throw new Exception(
+            throw new \InvalidArgumentException(
                 'Method "'. $method .'()" not existant in Render Engine "' . get_class($this->renderer) .'"!'
             );
         }
