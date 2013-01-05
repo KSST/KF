@@ -38,19 +38,22 @@ namespace "Koch\Form\Element\" + formelement name
     public function processForm()
     {
         // check if form has been submitted properly
-        if ($this->validate() === false) {
-            // if not, redisplay the form (decorate with errors + render)
+        if ($this->validateForm() === false) {
+            /**
+             * Failure - form was not filled properly.
+             * Redisplay the form with error decorator added.
+             */
             $this->addDecorator('errors');
-            $this->render();
-        } else { // form was properly filled, display a success web page or a flashmessage
+        } else {
             /**
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('noerror');
-            $this->render();
         }
+
+        $this->render();
     }
 
     /**
@@ -471,26 +474,6 @@ namespace "Koch\Form\Element\" + formelement name
             unset($formelement_object->formelementdecorators[$decorator]);
         }
     }
-
-    /**
-     * ===================================================================================
-     *      Form Groups
-     * ===================================================================================
-     */
-    /**
-     * Adds a new group to the form, to group one or several formelements inside.
-     *
-     * @return Koch_Form
-     */
-    /*
-      public function addGroup($groupname)
-      {
-      // @todo groupname becomes ID of decorator (e.g. a fieldset)
-
-      $this->formgroups[] = $groupname;
-
-      return $this;
-      } */
 
     /**
      * ===================================================================================
