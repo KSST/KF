@@ -37,26 +37,18 @@ class PdfTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Pdf::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 
     /**
      * @covers Koch\View\Renderer\Pdf::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configureEngine());
     }
 
     /**

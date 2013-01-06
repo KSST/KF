@@ -75,14 +75,9 @@ class Json extends AbstractRenderer
      * @param mixed|array $data The data to be json encoded.
      * @return $json_encoded_data
      */
-    public function jsonEncode($data)
+    public function jsonEncode($data = null)
     {
-        if (empty($data)) {
-            return '[]';
-        } else {
-            // use php's json encode to modifiy data representation
-            return json_encode($data);
-        }
+        return ($data === null) ? '[]' : json_encode($data);
     }
 
     /**
@@ -94,24 +89,24 @@ class Json extends AbstractRenderer
      */
     public function renderAsHeader($data)
     {
-        $this->response->addHeader('X-JSON', '('.$this->jsonEncode($data).')');
+        \Koch\Http\HttpResponse::addHeader('X-JSON', '('.$this->jsonEncode($data).')');
 
-        return;
+        return true;
     }
 
     public function assign($tpl_parameter, $value = null)
     {
-
+        $this->viewdata[$tpl_parameter] = $value;
     }
 
     public function display($template, $viewdata = null)
     {
-
+        echo $this->render($template, $viewdata);
     }
 
     public function fetch($template, $viewdata = null)
     {
-
+        return $this->render($template, $viewdata);
     }
 
     /**
@@ -124,17 +119,14 @@ class Json extends AbstractRenderer
     public function render($template, $viewdata = null)
     {
         if ($viewdata !== null) {
-            $this->assign($viewdata);
+            $this->viewdata = $viewdata;
         }
 
         /**
          * The MIME media type for JSON text is application/json.
          * @see http://www.ietf.org/rfc/rfc4627
          */
-        $this->response->addHeader(
-            'Content-Type',
-            'application/json; charset=' . $this->config['locale']['outputcharset']
-        );
+        \Koch\Http\HttpResponse::addHeader('Content-Type', 'application/json; charset=UTF-8');
 
         return $this->jsonEncode($this->viewdata);
     }
