@@ -4,6 +4,10 @@ namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Xslt;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
+
 class XsltTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -24,6 +28,20 @@ class XsltTest extends \PHPUnit_Framework_TestCase
         $options = array();
 
         $this->object = new Xslt($options);
+
+        vfsStreamWrapper::register();
+
+
+        $this->stylesheetFileURL = vfsStream::url('root/stylesheet.xsl');
+        $this->file = vfsStream::newFile('stylesheet.xsl', 0777)->withContent($this->getStylesheetContent());
+
+        $this->dataFileURL = vfsStream::url('root/data.xml');
+        $this->file2 = vfsStream::newFile('data.xml', 0777)->withContent($this->getDataContent());
+
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        $this->root->addChild($this->file2);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
     /**
@@ -35,11 +53,38 @@ class XsltTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
+     /**
+      * @return string content of "stylesheet.xsl"
+      */
+    public function getStylesheetContent()
+    {
+        return <<< EOF
+<xsl:stylesheet version="1.0" xmlns:xsl="http://www.w3.org/1999/XSL/Transform">
+
+<xsl:template match="/">
+<greeting>
+Hello, <xsl:value-of select="/root/@name"/>
+</greeting>
+</xsl:template>
+
+</xsl:stylesheet>
+EOF;
+    }
+
     /**
-     * @covers Koch\View\Renderer\Xslt::setXSLStyleSheet
+     * @return string content of "data.xml"
+     */
+    public function getDataContent()
+    {
+
+        return '<root name="World"/>';
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Xslt::setStylesheet
      * @todo   Implement testSetXSLStyleSheet().
      */
-    public function testSetXSLStyleSheet()
+    public function testSetStylesheet()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -51,7 +96,7 @@ class XsltTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\Renderer\Xslt::getXSLStyleSheet
      * @todo   Implement testGetXSLStyleSheet().
      */
-    public function testGetXSLStyleSheet()
+    public function testGetStylesheet()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -65,10 +110,17 @@ class XsltTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->setStylesheet($this->stylesheetFileURL);
+
+        $this->object->render($this->dataFileURL);
+
+        $expectedOutput = <<< EOF
+<?xml version="1.0"?>
+<greeting>
+Hello, World</greeting>
+
+EOF;
+        $this->expectOutputString($expectedOutput);
     }
 
     /**

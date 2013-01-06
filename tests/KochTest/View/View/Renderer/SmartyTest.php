@@ -73,6 +73,16 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\View\Renderer\Smarty::getEngine
+     */
+    public function testGetEngine()
+    {
+        $this->object->getEngine();
+
+        $this->assertTrue(is_object($this->object->renderer));
+    }
+
+    /**
      * @covers Koch\View\Renderer\Smarty::setTemplatePath
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Invalid Smarty Template path provided: Path not existing or not readable.
@@ -298,7 +308,7 @@ EOF;
     {
         $this->object->assign('placeholder', 'World');
 
-        $result = $this->object->fetch($this->templateFileURL);
+        $result = $this->object->render($this->templateFileURL);
 
         $expectedTemplateContent = <<< EOF
 

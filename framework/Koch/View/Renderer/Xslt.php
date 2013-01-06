@@ -76,21 +76,21 @@ class Xslt extends AbstractRenderer
     }
 
     /**
-     * setXSLStyleSheet
+     * Set XSL Stylesheet
      *
      * @param $xslfile The fullpath to the XSL StyleSheet file for later combination with the xml data.
      */
-    public function setXSLStyleSheet($xslfile)
+    public function setStylesheet($xslfile)
     {
         $this->xslfile = $xslfile;
     }
 
     /**
-     * getXSLStyleSheet
+     * Get XSL Stylesheet
      *
      * @return $xslfile
      */
-    public function getXSLStyleSheet()
+    public function getStylesheet()
     {
         return $this->xslfile;
     }
@@ -105,19 +105,21 @@ class Xslt extends AbstractRenderer
     {
         // $this->response()->setContentType('text/html');
 
-        if ($template != '') {
-            $stylesheet = $template;
-        } else {
-            $stylesheet = $this->getXSLStyleSheet();
+        if(!empty($this->xslfile))
+        {
+            $dom_stylesheet = new \DOMDocument;
+            $dom_stylesheet->load($this->xslfile);
+            // import the stylesheet for later transformation
+            $this->renderer->importStyleSheet($dom_stylesheet);
         }
 
-        // import the stylesheet for later transformation
-        $this->renderer->importStyleSheet(\DOMDocument::load($stylesheet));
+        $dom_xml = new \DOMDocument;
+        $dom_xml->load($template);
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform
-        $dom = $this->renderer->transformToXML(\DOMDocument::load($viewdata));
+        $dom = $this->renderer->transformToXML($dom_xml);
 
-        return $dom;
+        echo $dom;
     }
 
     public function assign($tpl_parameter, $value = null)
@@ -132,6 +134,5 @@ class Xslt extends AbstractRenderer
 
     public function fetch($template, $viewdata = null)
     {
-
     }
 }
