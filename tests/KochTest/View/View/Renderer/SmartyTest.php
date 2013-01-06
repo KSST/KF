@@ -25,6 +25,8 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
         $this->object = new Smarty($options);
 
+        $this->object->renderer->debugging = false;
+
         vfsStreamWrapper::register();
         $this->templateFileURL = vfsStream::url('root/smarty-renderer.tpl');
         $this->file = vfsStream::newFile('smarty-renderer.tpl', 0777)->withContent($this->getTemplateContent());
@@ -176,12 +178,18 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-        //$template = $this->templateFileURL;
-        //$this->object->fetch($template);
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->assign('placeholder', 'World');
+
+        $result = $this->object->fetch($this->templateFileURL);
+
+        $expectedTemplateContent = <<< EOF
+
+<!-- [-Start-] Included Template vfs://root/smarty-renderer.tpl -->
+Hello World.
+<!-- [-End-] Included Template vfs://root/smarty-renderer.tpl  -->
+
+EOF;
+        $this->assertEquals($expectedTemplateContent, $result);
     }
 
     /**
@@ -191,19 +199,27 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     {
        $cache_id = $this->object->createCacheId();
 
-       $this->assertTrue(strlen($cache_id) === '32');
+       $this->assertTrue(is_string($cache_id));
+       $this->assertTrue(strlen($cache_id) === 32);
     }
 
     /**
      * @covers Koch\View\Renderer\Smarty::display
-     * @todo   Implement testDisplay().
      */
     public function testDisplay()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->assign('placeholder', 'World');
+
+        $result = $this->object->display($this->templateFileURL);
+
+        $expectedTemplateContent = <<< EOF
+
+<!-- [-Start-] Included Template vfs://root/smarty-renderer.tpl -->
+Hello World.
+<!-- [-End-] Included Template vfs://root/smarty-renderer.tpl  -->
+
+EOF;
+        $this->expectOutputString($expectedTemplateContent);
     }
 
     /**
@@ -243,14 +259,10 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::resetCache
-     * @todo   Implement testResetCache().
      */
     public function testResetCache()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertTrue($this->object->resetCache());
     }
 
     /**
@@ -284,21 +296,17 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+        $this->object->assign('placeholder', 'World');
 
-    /**
-     * @covers Koch\View\Renderer\Smarty::renderPartial
-     * @todo   Implement testRenderPartial().
-     */
-    public function testRenderPartial()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $result = $this->object->fetch($this->templateFileURL);
+
+        $expectedTemplateContent = <<< EOF
+
+<!-- [-Start-] Included Template vfs://root/smarty-renderer.tpl -->
+Hello World.
+<!-- [-End-] Included Template vfs://root/smarty-renderer.tpl  -->
+
+EOF;
+        $this->assertEquals($expectedTemplateContent, $result);
     }
 }
