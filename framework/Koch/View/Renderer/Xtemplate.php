@@ -48,7 +48,7 @@ class Xtemplate extends AbstractRenderer
             if (is_file($xtpl) === true) {
                 include $xtpl;
             } else {
-                throw new Exception('XTemplate Library missing!');
+                throw new \Exception('The vendor library "XTemplate" is required.');
             }
         }
 
