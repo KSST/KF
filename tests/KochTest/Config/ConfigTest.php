@@ -106,10 +106,10 @@ EOF;
     {
         $file = 'test.config.php';
         $array = array('key' => 'value');
-        
+
         $this->assertTrue($this->object->writeConfig($file, $array));
 
-        if(is_file($file)) {
+        if (is_file($file)) {
             unlink($file);
         }
     }

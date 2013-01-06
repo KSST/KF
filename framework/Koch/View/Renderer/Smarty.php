@@ -345,7 +345,7 @@ class Smarty extends AbstractRenderer
      *
      * @return string Returns md5 string as cache_id.
      */
-    protected static function createCacheId()
+    public static function createCacheId()
     {
         $module = TargetRoute::getModule();
         $controller = TargetRoute::getController();
@@ -395,18 +395,6 @@ class Smarty extends AbstractRenderer
         $this->renderer->clearAllCache();
         // empty compile folder
         $this->renderer->clearCompiledTemplate();
-    }
-
-    /**
-     * Enables or disables smarty caching
-     *
-     * @param bool $boolean
-     */
-    public function activateCaching($boolean = 'true')
-    {
-        $this->renderer->caching = $boolean;
-
-        return $this;
     }
 
     /**

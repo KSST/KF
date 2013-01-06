@@ -4,6 +4,10 @@ namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Smarty;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
+
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -20,6 +24,13 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $options = array();
 
         $this->object = new Smarty($options);
+
+        vfsStreamWrapper::register();
+        $this->templateFileURL = vfsStream::url('root/smarty-renderer.tpl');
+        $this->file = vfsStream::newFile('smarty-renderer.tpl', 0777)->withContent($this->getTemplateContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
     /**
@@ -29,6 +40,12 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->object);
+    }
+
+    public function getTemplateContent()
+    {
+        // smarty default template syntax
+        return 'Hello {$placeholder}.';
     }
 
     /**
@@ -107,6 +124,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::__get
+     * @covers Koch\View\AbstractRenderer::__get
      */
     public function test__get()
     {
@@ -118,6 +136,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::__set
+     * @covers Koch\View\AbstractRenderer::__set
      */
     public function test__set()
     {
@@ -131,6 +150,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::__isset
+     * @covers Koch\View\AbstractRenderer::__isset
      */
     public function test__isset()
     {
@@ -141,6 +161,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::__unset
+     * @covers Koch\View\AbstractRenderer::__unset
      */
     public function test__unset()
     {
@@ -152,14 +173,25 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
+        //$template = $this->templateFileURL;
+        //$this->object->fetch($template);
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
           'This test has not been implemented yet.'
         );
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Smarty::createCacheId
+     */
+    public function testCreateCacheId()
+    {
+       $cache_id = $this->object->createCacheId();
+
+       $this->assertTrue(strlen($cache_id) === '32');
     }
 
     /**
@@ -214,18 +246,6 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @todo   Implement testResetCache().
      */
     public function testResetCache()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Smarty::activateCaching
-     * @todo   Implement testActivateCaching().
-     */
-    public function testActivateCaching()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(

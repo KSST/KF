@@ -249,7 +249,7 @@ class Debug
             // if system under test, skip virtual file system files,
             // as they might be already deleted by tearDown() methods.
             if (defined('UNIT_TEST_RUN') === true or UNIT_TEST_RUN === true) {
-                if(stripos($file, "vfs:/") !== false) {
+                if (stripos($file, "vfs:/") !== false) {
                     continue;
                 }
             }

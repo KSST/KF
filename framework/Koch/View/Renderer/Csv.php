@@ -72,10 +72,9 @@ class Csv extends AbstractRenderer
         $this->headers = $headers;
     }
 
-
     public function display($template, $viewdata = null)
     {
-        if($viewdata !== null) {
+        if ($viewdata !== null) {
             $this->viewdata = $viewdata;
         }
 
@@ -84,7 +83,7 @@ class Csv extends AbstractRenderer
 
     public function fetch($template, $viewdata = null)
     {
-        if($viewdata !== null) {
+        if ($viewdata !== null) {
             $this->viewdata = $viewdata;
         }
 
@@ -97,14 +96,15 @@ class Csv extends AbstractRenderer
      */
     public function render($template, $viewdata = null)
     {
-        if($viewdata !== null) {
+        if ($viewdata !== null) {
             $this->viewdata = $viewdata;
         }
 
         $renderToFile = (empty($template) === false) ? true : false;
 
-        if($renderToFile === true) {
+        if ($renderToFile === true) {
             $return = $this->writeCSV($this->viewdata, $this->headers, true);
+
             return (bool) file_put_contents($template, $return);
         }
 
@@ -127,6 +127,7 @@ class Csv extends AbstractRenderer
             rewind($stream);
             $retVal = stream_get_contents($stream);
             fclose($stream);
+
             return $retVal;
         } else {
             fclose($stream);

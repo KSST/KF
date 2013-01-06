@@ -1405,7 +1405,7 @@ class Form implements FormInterface
             }
         }
 
-        if(false === class_exists($class, false)) {
+        if (false === class_exists($class, false)) {
             throw new \RuntimeException('Form Decorator "' . $class . '" was not found.');
         }
 
@@ -1620,7 +1620,7 @@ class Form implements FormInterface
      */
     public function hasErrors($boolean = null)
     {
-        if(is_bool($boolean) === true) {
+        if (is_bool($boolean) === true) {
             $this->error = $boolean;
         }
 
