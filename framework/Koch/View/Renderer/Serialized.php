@@ -34,7 +34,7 @@ class Serialized extends AbstractRenderer
     {
         parent::__construct($options);
     }
-    
+
     public function initializeEngine($template = null)
     {
 
@@ -66,8 +66,6 @@ class Serialized extends AbstractRenderer
     {
 
     }
-
-
 
     public function display($template, $viewdata = null)
     {

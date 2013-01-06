@@ -61,7 +61,7 @@ class Pdf extends AbstractRenderer
     {
 
     }
-    
+
     public function fetch($template, $viewdata = null)
     {
 

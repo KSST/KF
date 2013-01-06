@@ -323,7 +323,7 @@ namespace "Koch\Form\Element\" + formelement name
             }
         }
 
-        if(false === class_exists($class, false)) {
+        if (false === class_exists($class, false)) {
             throw new \RuntimeException('Form Decorator "' . $class . '" was not found.');
         }
 
@@ -538,7 +538,7 @@ namespace "Koch\Form\Element\" + formelement name
      */
     public function hasErrors($boolean = null)
     {
-        if(is_bool($boolean) === true) {
+        if (is_bool($boolean) === true) {
             $this->error = $boolean;
         }
 

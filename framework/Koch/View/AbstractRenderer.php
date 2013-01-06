@@ -92,7 +92,7 @@ abstract class AbstractRenderer
      */
     public function getEngine()
     {
-        if($this->renderer !== null) {
+        if ($this->renderer !== null) {
             return $this->renderer;
         }
     }

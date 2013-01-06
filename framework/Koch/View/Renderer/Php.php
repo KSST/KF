@@ -37,7 +37,6 @@ class Php extends AbstractRenderer
         parent::__construct($options);
     }
 
-
     public function initializeEngine($template = null)
     {
 

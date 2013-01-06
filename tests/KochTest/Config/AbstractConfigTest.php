@@ -181,7 +181,6 @@ EOF;
     {
        unset($this->object['newKey']);
 
-
        $this->assertFalse(isset($this->object->newKey));
     }
 }
