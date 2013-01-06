@@ -33,19 +33,16 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->initializeEngine();
+
+        $this->assertInstanceOf('Xtemplate', $this->renderer);
     }
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {

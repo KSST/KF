@@ -49,73 +49,61 @@ class JsonTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Json::jsonEncode
-     * @todo   Implement testJsonEncode().
      */
     public function testJsonEncode()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       // default value
+       $this->assertEquals('[]', $this->object->jsonEncode());
+
+       // with data
+       $data = array('key' => 'value');
+       $result = $this->object->jsonEncode($data);
+       $this->assertEquals('{"key":"value"}', $result);
     }
 
     /**
-     * @covers Koch\View\Renderer\Json::renderByHeader
-     * @todo   Implement testRenderByHeader().
+     * @covers Koch\View\Renderer\Json::renderAsHeader
      */
-    public function testRenderByHeader()
+    public function testRenderAsHeader()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $data = array('key' => 'value');
+        $this->assertTrue($this->object->renderAsHeader($data));
     }
 
     /**
      * @covers Koch\View\Renderer\Json::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $r = $this->object->render('', array('key' => 'value'));
+        $this->assertEquals('{"key":"value"}', $r);
     }
 
     /**
      * @covers Koch\View\Renderer\Json::assign
-     * @todo   Implement testAssign().
      */
     public function testAssign()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->assign('key', 'value');
+        $this->assertEquals('value', $this->object->viewdata['key']);
     }
 
     /**
      * @covers Koch\View\Renderer\Json::display
-     * @todo   Implement testDisplay().
      */
     public function testDisplay()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->display('', array('key' => 'value'));
+
+        $this->expectOutputString('{"key":"value"}');
     }
 
     /**
      * @covers Koch\View\Renderer\Json::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $r = $this->object->fetch('', array('key' => 'value'));
+       $this->assertEquals('{"key":"value"}', $r);
     }
 }
