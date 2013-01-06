@@ -27,8 +27,6 @@ class Php extends AbstractRenderer
 {
     private $file;
 
-    private $data = array();
-
     /**
      * Constructor
      *
@@ -60,12 +58,12 @@ class Php extends AbstractRenderer
     public function assign($key, $value = null)
     {
         if (is_object($key)) {
-            // @todo pull object props to array
-            $this->data[$key] = $value->fetch();
+            // pull all non-static object properties
+            $this->viewdata = get_object_vars($key);
         } elseif (is_array($key)) {
-            array_merge($this->data, $key);
+            $this->viewdata = array_merge($this->viewdata, $key);
         } else {
-            $this->data[$key] = $value;
+            $this->viewdata[$key] = $value;
         }
 
         return $this;
@@ -73,7 +71,9 @@ class Php extends AbstractRenderer
 
     public function display($template, $viewdata = null)
     {
+        $this->assign($viewdata);
 
+        echo $this->render($template);
     }
 
     /**
@@ -83,39 +83,11 @@ class Php extends AbstractRenderer
      * @param  array  $data     Data to extract to the local scope.
      * @return string
      */
-    public function fetch($template, $data = null)
+    public function fetch($template, $viewdata = null)
     {
-        if (is_array($data)) {
-            $this->data = $data;
-        }
+        $this->assign($viewdata);
 
-        $file = '';
-
-        if ($template === null) {
-            $file = $template . '.tpl';
-        } else {
-            $file = $this->file;
-        }
-
-        /**
-         * extract all template variables to local scope,
-         * but do not overwrite an existing variable.
-         * on collision, prefix variable with "invalid_".
-         */
-        extract($this->data, EXTR_REFS | EXTR_PREFIX_INVALID, 'invalid_');
-
-        ob_start();
-
-        try {
-            include $file; // conditional include; not require !
-        } catch (\Exception $e) {
-            // clean buffer before throwing exception
-            ob_get_clean();
-            throw $e;
-            // throw new Koch_Excpetion('PHP Renderer Error: Template ' . $file . ' not found!', 99);
-        }
-
-        return ob_get_clean();
+        return $this->render($template);
     }
 
     /**
@@ -127,6 +99,19 @@ class Php extends AbstractRenderer
     {
         $this->assign($viewdata);
 
-        return $this->fetch($template);
+        $this->file = $template;
+
+        /**
+         * extract all template variables to local scope,
+         * but do not overwrite an existing variable.
+         * on collision, prefix variable with "invalid_".
+         */
+        extract($this->viewdata, EXTR_REFS | EXTR_PREFIX_INVALID, 'invalid_');
+
+        ob_start();
+
+        include $this->file;
+
+        return ob_get_clean();
     }
 }

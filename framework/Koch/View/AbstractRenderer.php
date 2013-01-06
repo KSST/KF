@@ -57,7 +57,7 @@ abstract class AbstractRenderer
     /**
      * @var array|object Viewdata
      */
-    public $viewdata = null;
+    public $viewdata = array();
 
     /**
      * @var object Koch_View_Mapper

@@ -4,6 +4,10 @@ namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Php;
 
+use org\bovigo\vfs\vfsStream;
+use org\bovigo\vfs\vfsStreamDirectory;
+use org\bovigo\vfs\vfsStreamWrapper;
+
 class PhpTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -20,6 +24,13 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $options = array();
 
         $this->object = new Php($options);
+
+        vfsStreamWrapper::register();
+        $this->templateFileURL = vfsStream::url('root/php-renderer.tpl');
+        $this->file = vfsStream::newFile('php-renderer.tpl', 0777)->withContent($this->getTemplateContent());
+        $this->root = new vfsStreamDirectory('root');
+        $this->root->addChild($this->file);
+        vfsStreamWrapper::setRoot($this->root);
     }
 
     /**
@@ -31,87 +42,86 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
+    public function getTemplateContent()
+    {
+        // alternative placeholder syntax (php shorttag)
+        // normal syntax (normal php tags)
+        return 'Hello <?=$placeholder?>. The <?php echo $placeholder; ?> is not enough.';
+    }
+
     /**
      * @covers Koch\View\Renderer\Php::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $template = $this->templateFileURL;
+        $data = array('placeholder' => 'World');
+
+        $result = $this->object->fetch($template, $data);
+
+        $this->assertEquals('Hello World. The World is not enough.', $result);
     }
 
     /**
      * @covers Koch\View\Renderer\Php::assign
-     * @todo   Implement testAssign().
      */
     public function testAssign()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // key => value
+        $this->object->assign('key', 'value');
+        $this->assertEquals('value', $this->object->viewdata['key']);
+
+        // array
+        $array = array('key' => 'value');
+        $this->object->assign($array);
+        $this->assertEquals('value', $this->object->viewdata['key']);
+
+        // object
+        $object = new \stdClass;
+        $object->key = 'value';
+        $this->object->assign($object);
+        $this->assertEquals('value', $this->object->viewdata['key']);
     }
 
     /**
      * @covers Koch\View\Renderer\Php::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
+       $template = $this->templateFileURL;
+       $viewdata = array('placeholder' => 'World');
 
-    /**
-     * @covers Koch\View\Renderer\Php::__toString
-     * @todo   Implement test__toString().
-     */
-    public function test__toString()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $result = $this->object->render($template, $viewdata);
+
+       $this->assertEquals('Hello World. The World is not enough.', $result);
     }
 
     /**
      * @covers Koch\View\Renderer\Php::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configureEngine());
     }
 
     /**
      * @covers Koch\View\Renderer\Php::display
-     * @todo   Implement testDisplay().
      */
     public function testDisplay()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $template = $this->templateFileURL;
+       $viewdata = array('placeholder' => 'World');
+
+       $this->object->display($template, $viewdata);
+
+       $this->expectOutputString('Hello World. The World is not enough.');
     }
 
     /**
      * @covers Koch\View\Renderer\Php::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 }
