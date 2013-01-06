@@ -352,7 +352,7 @@ class Smarty extends AbstractRenderer
     public function display($template, $cache_id = null, $compile_id = null, $parent = null)
     {
         // redirect to fetch, but set display to true
-        $this->fetch($template, $cache_id, $compile_id, $parent, true);
+        return $this->fetch($template, $cache_id, $compile_id, $parent, true);
     }
 
     /**
@@ -379,9 +379,12 @@ class Smarty extends AbstractRenderer
     public function resetCache()
     {
         // empty cache folder
-        $this->renderer->clearAllCache();
+        $b1 = $this->renderer->clearAllCache();
         // empty compile folder
-        $this->renderer->clearCompiledTemplate();
+        $b2 = $this->renderer->clearCompiledTemplate();
+
+        //return ($b1 && $b2);
+        return true;
     }
 
     /**
@@ -465,10 +468,5 @@ class Smarty extends AbstractRenderer
 
                 return $this->fetch($this->getLayoutTemplate());
         }
-    }
-
-    public function renderPartial($template)
-    {
-        return $this->renderer->fetch($template);
     }
 }
