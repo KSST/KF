@@ -143,7 +143,7 @@ class Theme
             return $file;
         }
 
-        throw new \Exception('The ThemeInfo file was not found for Theme: '. $theme);
+        throw new \Exception('The Theme "' . $theme . '" has no "theme_info.xml" file.');
     }
 
     /**
