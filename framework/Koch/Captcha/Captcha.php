@@ -58,17 +58,17 @@ class Captcha
     /**
      * @var array $fonts Available Fonts.
      */
-    private static $fonts = array();
+    private $fonts = array();
 
     /*
      * @var string The selected font for the captcha.
      */
-    public static $font;
+    public $font;
 
     /**
      * @var array List of font folders.
      */
-    public static $font_folders = array();
+    public $font_folders = array();
 
     /**
      * @var resource The captcha image.
@@ -77,21 +77,43 @@ class Captcha
 
     /**
      * Constructor.
+     *
      */
-    public function __construct()
+    public function __construct($options = array())
     {
         if (extension_loaded('gd') === false) {
             throw new \Koch\Exception\Exception(_('GD Library missing.'));
         }
 
-        // set frameworks font folder as default
-        self::$font_folders[] = realpath(__DIR__ . '/fonts');
+        $this->setOptions($options);
     }
 
-    public static function setup()
+    /**
+     * Options
+     *
+     * "captcha_dir"
+     * "font"
+     * "fonts"
+     *
+     * @param type $options
+     */
+    public function setOptions($options)
     {
-        // pick a random font from the fonts dir
-        self::$font = self::getRandomFont(self::$font_folders);
+        $this->options = $options;
+
+        if(isset($options['font']) === true) {
+            $this->font = $options['font'];
+        } else {
+            if(isset($options['fontfolders']) === true) {
+                $this->setFontFolder($options['fontfolders']);
+            }
+
+            // set frameworks font folder as default
+            $this->font_folders[] = realpath(__DIR__ . '/fonts');
+
+            // pick a random font from the fonts dir
+            $this->font = $this->getRandomFont($this->font_folders);
+        }
     }
 
     /**
@@ -99,29 +121,29 @@ class Captcha
      *
      * @param string|array $folders
      */
-    public static function setFontFolder($folders)
+    public function setFontFolder($folders)
     {
         // folder might be string
         $folders = (array) $folders;
 
         foreach ($folders as $folder) {
-            self::$font_folders[] = $folder;
+            $this->font_folders[] = $folder;
         }
     }
 
-    public static function getFontFolders()
+    public function getFontFolders()
     {
-        return self::$font_folders;
+        return $this->font_folders;
     }
 
     /**
      * Set the captcha font to use.
      *
-     * @param string $font Fullpath to a font.ttf.
+     * @param string $font Full path to a font.ttf.
      */
-    public static function setFont($font)
+    public function setFont($font)
     {
-        self::$font = $font;
+        $this->font = $font;
     }
 
     /**
@@ -129,7 +151,7 @@ class Captcha
      *
      * @param string $fonts_dir The directory where the font files reside.
      */
-    public static function getRandomFont($fonts_dir = null)
+    public function getRandomFont($fonts_dir = null)
     {
         // use default font dir, if nothing was set
         if ($fonts_dir === null) {
@@ -147,12 +169,12 @@ class Captcha
         foreach ($iterator as $file) {
             // add font files (*.ttf) to the array
             if ($file->isFile() and (strrchr($file->getPathname(), '.') == '.ttf')) {
-                self::$fonts[] = $file->getPathname();
+                $this->fonts[] = $file->getPathname();
             }
         }
 
         // return a random font file
-        return self::$fonts[array_rand(self::$fonts)];
+        return $this->fonts[array_rand($this->fonts)];
     }
 
     /**
@@ -192,20 +214,24 @@ class Captcha
     public function generateCaptchaImage()
     {
         // a random captcha string
-        $string_length = rand(3, 5);
+        $string_length = rand(3, 6);
         $captcha_string = $this->generateRandomString($string_length);
 
-        // set string to session
-        $_SESSION['user']['simple_captcha_string'] = $captcha_string;
+        // set string class (user needs set this to session)
+        $this->captchaString = $captcha_string;
 
         $this->captcha = imagecreatetruecolor($this->image_width, $this->image_height);
 
-        // switch between captcha types
+        /**
+         * Switch between Captcha Types
+         */
         // rand(1,2)
         switch (1) {
             // captcha with some effects
             case 1:
-                // create backgroundcolor from random RGB colors
+                /**
+                 *  Create Background-Color from random RGB colors
+                 */
                 $background_color = imagecolorallocate($this->captcha, rand(100, 255), rand(100, 255), rand(0, 255));
 
                 /**
@@ -228,7 +254,9 @@ class Captcha
                         break;
                 }
 
-                // create textcolor from random RGB colors
+                /**
+                 * Create Text-Color from random RGB colors
+                 */
                 $textcolor = imagecolorallocate(
                     $this->captcha,
                     mt_rand(50, 240),
@@ -259,8 +287,9 @@ class Captcha
                     );
                 }
 
-                #\Koch\Debug\Debug::firebug($string_length);
-                // loop charwise through $captcha_string and apply a random font-effect
+                /**
+                 * Process the Captcha String charwise, so that each character has a random font-effect.
+                 */
                 for ($i = 0; $i < $string_length; $i++) {
                     /**
                      * Font Rotation Effect
@@ -287,7 +316,7 @@ class Captcha
                      *
                      * This is done using the bounding box of a text via imageftbbox.
                      */
-                    $bbox = imageftbbox($size, $angle, self::$font, $captcha_string[$i]);
+                    $bbox = imageftbbox($size, $angle, $this->font, $captcha_string[$i]);
                     $x = $spacing / 4 + $i * $spacing + 2;
                     /*
                      * @todo $height is undefined
@@ -305,12 +334,13 @@ class Captcha
                     /**
                      * Finally: Add the CHAR from the captcha string to the image
                      */
-                    imagettftext($this->captcha, $size, $angle, $x, $y, $color, self::$font, $captcha_string[$i]);
+                    imagettftext($this->captcha, $size, $angle, $x, $y, $color, $this->font, $captcha_string[$i]);
                 }
 
                 // add interlacing
                 // $this->interlace($captcha);
-                // add rotation
+
+                // add image rotation
                 /**
                   if (function_exists('imagerotate')) {
                   #$im2 = imagerotate($captcha,rand(-20,30),$background_color);
@@ -332,54 +362,53 @@ class Captcha
               rand(-5,5),
               25+($i*17),
               38,$text_color,
-              self::$font, $captcha_string{$i});
+              $this->font, $captcha_string{$i});
               }
               break; */
         }
 
-        $this->render('html_embedded');
+        return $this->render('base64');
     }
 
     /**
      * Render the Captcha Image on various ways
      *
-     * @param  string $render_type Types: html_embedded, direct_png. Defaults to html_embedded.
+     * @param  string $render_type Types: "file", "base64", "png". Defaults to html_embedded.
      * @return mixed  Renders the image directly or returns html string.
      */
-    public function render($render_type = 'html_embedded')
+    public function render($render_type = 'file')
     {
-        // PNG direct via header
-        if ($render_type == 'direct_png') {
-            header("Content-type: image/png");
-            imagepng($this->captcha);
-            imagedestroy($this->captcha);
-        }
-        // embed the image into an html img tag
-        elseif ($render_type == 'html_embedded') {
-            // Start buffering the output stream
-            ob_start();
-
-            // Finally: Render image and free memory.
-            imagepng($this->captcha);
-
-            // Read the output buffer
-            $imagesource = ob_get_clean(); // 2 in 1 call ob_get_contents() + ob_end_clean()
-            imagedestroy($this->captcha);
-
-            // we apply some html magic here => output the image by send it as inlined data ;)
-            return sprintf(
-                '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />',
-                base64_encode($imagesource)
-            );
-        } elseif ($render_type == 'file_html') {
-            // remove outdated captcha images
-            self::garbage_collection();
-            // write png to file
-            imagepng($this->captcha, $this->options['image_dir'] . '/' . $this->_id . '.png');
-            // return html img tag which points to the image file
-            return '<img alt="Captcha Image from File"
-                src="' . $this->options['image_url'] . '/' . $this->_id . '.png"
-                alt="' . $this->options['imgage_alt'] . '" />';
+        switch ($render_type) {
+            case 'png':
+                // PNG direct via header
+                header("Content-type: image/png");
+                imagepng($this->captcha);
+                imagedestroy($this->captcha);
+                break;
+            case 'base64':
+                // get image via output buffer rendering
+                ob_start();
+                imagepng($this->captcha);
+                $imagesource = ob_get_clean();
+                imagedestroy($this->captcha);
+                // output the image as inlined data
+                return sprintf(
+                    '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />',
+                    base64_encode($imagesource)
+                );
+                break;
+            case 'file':
+                // remove outdated captcha images
+                $this->collectGarbage();
+                $file = APPLICATION_PATH . $this->options['captcha_dir'] . '/' . $this->_id . '.png';
+                // write png to file
+                imagepng($this->captcha, $file);
+                // return html img tag which points to the image file
+                return sprintf(
+                    '<img alt="Captcha Image" src="%s" />',
+                    $file
+                );
+                break;
         }
     }
 
@@ -388,18 +417,21 @@ class Captcha
      * is performed in 10% of all calls to this method and
      * removes old captcha images from the captcha images directory.
      */
-    public static function garbageCollection($options = array())
+    public function collectGarbage()
     {
-        // perform the garbage_collection in 10 % of all calls
+        // randomize (perform the garbage_collection in 10 % of all calls)
         if (mt_rand(0, 9) == 0) {
-            $iterator = new \DirectoryIterator($options['image_dir']);
+            // get file iterator
+            $iterator = new \DirectoryIterator($this->options['captcha_dir']);
             foreach ($iterator as $file) {
-                // delete all png files
+                // and delete all png files
                 if ($file->isFile() and (strrchr($file->getPathname(), '.') == '.png')) {
                     unlink($file->getPathname());
                 }
             }
         }
+
+        return true;
     }
 
     /**

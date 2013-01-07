@@ -21,7 +21,10 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "gd".');
         }
 
-        $this->object = new Captcha;
+        // set captcha folder
+        $options['captcha_dir'] = __DIR__;
+
+        $this->object = new Captcha($options);
     }
 
     /**
@@ -55,7 +58,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomFont()
     {
-       $font = \Koch\Captcha\Captcha::getRandomFont();
+       $font = $this->object->getRandomFont();
 
        $this->assertContains('.ttf', $font);
     }
@@ -84,37 +87,59 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Captcha\Captcha::generateCaptchaImage
-     * @todo   Implement testGenerateCaptchaImage().
      */
     public function testGenerateCaptchaImage()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $font = $this->object->getRandomFont();
+       $this->object->setFont($font);
+
+       // base64 embedded captcha image
+       $result = $this->object->generateCaptchaImage();
+       $this->assertContains(
+           '<img alt="Embedded Captcha Image" src="data:image/png;base64,',
+           $result
+       );
+
     }
 
     /**
      * @covers Koch\Captcha\Captcha::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+        // lets generate a simple image
+        $image = imagecreatetruecolor(120, 20);
+        $text_color = imagecolorallocate($image, 233, 14, 91);
+        imagestring($image, 1, 5, 5, 'A Text String', $text_color);
+
+        // lets pretend that this is the generated captcha
+        $this->object->captcha = $image;
+
+        // now test output methods
+
+        /* @todo
+        $render_type = 'file';
+        $this->object->render($render_type);
+        */
+
+        $render_type = 'base64';
+        $result = $this->object->render($render_type);
+        $this->assertContains(
+           '<img alt="Embedded Captcha Image" src="data:image/png;base64,',
+           $result
         );
+
+        /* @todo
+        $render_type = 'png';
+        $this->object->render($render_type);
+        */
     }
 
     /**
-     * @covers Koch\Captcha\Captcha::garbage_collection
-     * @todo   Implement testGarbage_collection().
+     * @covers Koch\Captcha\Captcha::collectGarbage
      */
-    public function testGarbage_collection()
+    public function testCollectGarbage()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->assertTrue($this->object->collectGarbage());
     }
 }
