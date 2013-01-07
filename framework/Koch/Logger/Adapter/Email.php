@@ -75,7 +75,7 @@ class Email implements LoggerInterface
         $to_address   = $this->options['to_sysadmin'];
         $from_address = $this->options['from'];
         // append date/time to msg
-        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $data['label'];
+        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $data[1];
         $body         = var_export($data);
 
         return (bool) $this->mailer->send($to_address, $from_address, $subject, $body);
