@@ -40,17 +40,16 @@ class SwiftMailer
     /* @var \Swift_Mailer */
     public $mailer = null;
 
-    /* @var \Koch\Config\Config */
-    private $config = null;
+    /* @var array Options */
+    private $options = array();
 
     /**
      * Constructor.
      */
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct($options)
     {
-        $this->config = $config;
-
-        //require_once VENDOR_PATH . 'swiftmailer/swiftmailer/lib/swift_required.php';
+        // assign "email" subarray
+        $this->options = $options['email'];
 
         \Swift::init('Koch\Mail\SwiftMailer::swiftmailerLazyConfiguration');
 
@@ -72,12 +71,12 @@ class SwiftMailer
      */
     private function initalizeMailer()
     {
-        switch ($this->config['email']['mailmethod']) {
+        switch ($this->options['method']) {
             case 'smtp':
                 $transport = \Swift_SmtpTransport::newInstance(
-                    $this->config['email']['mailerhost'], // 'smtp.gmail.com'
-                    $this->config['email']['mailerport'], // 465
-                    $this->config['email']['mailencryption'] // tls or ssl
+                    $this->options['host'], // 'smtp.gmail.com'
+                    $this->options['port'], // 465
+                    $this->options['encryption'] // tls or ssl
                 );
                 //->setUsername('me@ff.com')->setPassword('pass');
                 break;

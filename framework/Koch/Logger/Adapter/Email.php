@@ -40,36 +40,42 @@ use Koch\Logger\LoggerInterface;
 class Email implements LoggerInterface
 {
     /**
-     * @var \Koch\Config\Config
+     * @var array Options.
      */
-    private $config;
+    private $options = array();
 
     /**
      * @var \Koch\Mail\SwiftMailer
      */
     private $mailer = null;
 
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct($config)
     {
-        $this->config = $config;
+        $this->setOptions($config);
 
         // mailing of critical errors makes only sense, if we have a email of the sysadmin
-        if ($config['mail']['to_sysadmin'] == true) {
+        if (true === (bool) $this->options['to_sysadmin']) {
             $this->mailer = new \Koch\Mail\SwiftMailer($config);
         }
     }
 
+    public function setOptions($options)
+    {
+        // assign "mail" subarray
+        $this->options = $options['mail'];
+    }
+
     /**
-     * writeLog - Sends an Email with the message.
+     * Sends a message via email.
      *
      * @param array $data array('message', 'label', 'priority')
      */
     public function writeLog($data)
     {
-        $to_address   = $this->config['mail']['to_sysadmin'];
-        $from_address = $this->config['mail']['from'];
+        $to_address   = $this->options['to_sysadmin'];
+        $from_address = $this->options['from'];
         // append date/time to msg
-        $subject      = '[' . date(DATE_FORMAT, mktime()) . '] ' . $data['label'];
+        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $data['label'];
         $body         = var_export($data);
 
         return (bool) $this->mailer->send($to_address, $from_address, $subject, $body);

@@ -17,6 +17,11 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
+        if(false === class_exists('XTemplate'))
+        {
+            $this->markTestSkipped('This test requires the vendor library "XTemplate".');
+        }
+
         $options = array();
 
         $this->object = new Xtemplate($options);

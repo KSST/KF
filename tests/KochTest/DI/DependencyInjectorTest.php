@@ -47,6 +47,23 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\DI\DependencyInjector::willUse
+     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::register
+     */
+    public function testRegister()
+    {
+        include_once __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
+
+        // instantiate as singleton
+        $this->injector->register(new Reused('KochTest\DI\CreateMeOnce'));
+        $this->assertSame(
+            $this->injector->create('KochTest\DI\CreateMeOnce'),
+            $this->injector->create('KochTest\DI\CreateMeOnce')
+        );
+    }
+
+    /**
      * @covers Koch\DI\DependencyInjector::forVariable
      * @covers Koch\DI\DependencyInjector::willUse
      * @covers Koch\DI\DependencyInjector::create
