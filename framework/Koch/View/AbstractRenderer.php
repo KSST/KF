@@ -227,7 +227,7 @@ abstract class AbstractRenderer
         /**
          * a) Assign Web Paths
          *
-         *    Watch it! These Paths are relative (based on WWW_ROOT), not absolute!
+         *    Watch it! These are relative (not absolute) paths. They are based on WWW_ROOT!
          */
         $templateConstants['www_root']                 = WWW_ROOT;
         $templateConstants['www_root_uploads']         = WWW_ROOT . 'Uploads/';

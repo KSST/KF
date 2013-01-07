@@ -45,21 +45,20 @@ class Theme
      */
     public function __construct($theme)
     {
-        $this->setThemename($theme);
+        $this->setThemeName($theme);
 
         $this->getInfoArray($theme);
 
         return $this;
     }
 
-    public function setThemename($theme)
+    public function setThemeName($theme)
     {
-        // set theme
-        if ($theme !== null) {
-            $this->theme = $theme;
-        } else {
-            throw new \Exception('No Themename given.', '100');
+        if ($theme === null) {
+            throw new \InvalidArgumentException('Please  provide a theme name.');
         }
+
+        $this->theme = $theme;
     }
 
     /**
@@ -90,16 +89,18 @@ class Theme
      */
     public function getPath($theme = null)
     {
-        if ($theme == null) {
+        if ($theme === null) {
             $theme = $this->getName();
         }
 
-        if (is_dir(APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR) === true) {
-            return APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
+        $frontend = APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
+        if (is_dir($frontend) === true) {
+            return $frontend;
         }
 
-        if (is_dir(APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR) === true) {
-            return APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR;
+        $backend = APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR;
+        if (is_dir($backend) === true) {
+            return $backend;
         }
     }
 
@@ -134,17 +135,15 @@ class Theme
      * @return string                    File path to "theme_info.xml" file.
      * @throws \Koch\Exception\Exception
      */
-    public function getInfoFile($theme)
+    public function getThemeInfoFile($theme)
     {
-        $theme_info_file = $this->getPath($theme) . 'theme_info.xml';
+        $file = $this->getPath($theme) . 'theme_info.xml';
 
-        if (is_file($theme_info_file) === true) {
-            return $theme_info_file;
-        } else {
-            throw new \Exception('The Themeinfo file was not found on Theme: '. $theme, '100');
+        if (is_file($file) === true) {
+            return $file;
         }
 
-        return $theme_info_file;
+        throw new \Exception('The ThemeInfo file was not found for Theme: '. $theme);
     }
 
     /**
@@ -155,7 +154,7 @@ class Theme
      */
     public function getInfoArray($theme = null)
     {
-        $theme_info_file = $this->getInfoFile($theme);
+        $theme_info_file = $this->getThemeInfoFile($theme);
 
         // read theme info xml file into array
         $theme_info_array = \Koch\Config\Adapter\XML::readConfig($theme_info_file);
@@ -221,14 +220,10 @@ class Theme
 
     public function getCSSFile()
     {
-        $userAgent = new \Koch\Http\UserAgent();
+        $browser = new \Koch\Browser\Browser();
 
-        if ($userAgent->isIE()) {
-            $cssPostfix = '_ie';
-        } else {
-            $cssPostfix = '';
-        }
-
+        /* @todo get rid of all this IE stuff */
+        $cssPostfix = ($browser->isIE() === true) ? '_ie' : '';
 
         if (isset($this->theme_info['css']['mainfile']) === true) {
             $part = explode('.', $this->theme_info['css']['mainfile']);

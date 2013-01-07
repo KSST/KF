@@ -18,6 +18,7 @@ defined('APPLICATION_NAME')         || define('APPLICATION_NAME', 'MyApplication
 defined('APPLICATION_VERSION')      || define('APPLICATION_VERSION', '1.0.0');
 defined('APPLICATION_VERSION_STATE')|| define('APPLICATION_VERSION_STATE', 'alpha-omega');
 defined('APPLICATION_VERSION_NAME') || define('APPLICATION_VERSION_NAME', 'Aguila');
+defined('APPLICATION_URL')          || define('APPLICATION_URL', 'http://app.url/');
 
 defined('APPLICATION_PATH')         || define('APPLICATION_PATH', __DIR__ . '/KochTest/Fixtures/Application/');
 defined('APPLICATION_MODULES_PATH') || define('APPLICATION_MODULES_PATH', APPLICATION_PATH . '/Modules/');
