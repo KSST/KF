@@ -17,6 +17,7 @@ namespace Koch\Mail;
  *
  * This is a simple wrapper for SwiftMailer.
  * @link http://swiftmailer.org/
+ * @link http://swiftmailer.org/docs/introduction.html Documentation
  *
  * @category    Koch
  * @package     Core
@@ -84,6 +85,7 @@ class SwiftMailer
                 $transport = \Swift_MailTransport::newInstance();
         }
 
+        // Create the Mailer using the created Transport
         $this->mailer = \Swift_Mailer::newInstance($transport);
     }
 
@@ -99,7 +101,7 @@ class SwiftMailer
      */
     public function send($to, $from, $subject, $body)
     {
-        $message = Swift_Message::newInstance($subject)
+        $message = \Swift_Message::newInstance($subject)
             ->setFrom($from)
             ->setTo($to)
             ->setBody($body);
