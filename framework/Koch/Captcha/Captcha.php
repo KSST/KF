@@ -88,10 +88,10 @@ class Captcha
     {
         $this->options = $options;
 
-        if(isset($options['font']) === true) {
+        if (isset($options['font']) === true) {
             $this->font = $options['font'];
         } else {
-            if(isset($options['fontfolders']) === true) {
+            if (isset($options['fontfolders']) === true) {
                 $this->setFontFolder($options['fontfolders']);
             }
 

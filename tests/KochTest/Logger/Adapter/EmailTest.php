@@ -2,6 +2,8 @@
 
 namespace KochTest\Logger\Adapter;
 
+use Koch\Logger\Adapter\Email;
+
 class EmailTest extends \PHPUnit_Framework_TestCase
 {
     /**
@@ -15,10 +17,23 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        // config is needed to fetch email of sysadmin
-        //$config = new Config();
+        // !class_exists('Swiftmailer') ?
+        if(false === is_file(VENDOR_PATH . 'swiftmailer/swiftmailer/lib/swift_required.php'))
+        {
+            $this->markTestSkipped('This test requires the vendor library "Swiftmailer".');
+        }
 
-        //$this->object = new Email($config);
+        $options['mail']['to_sysadmin'] = 'jakoch@web.de';
+        $options['mail']['from'] = 'jakoch@web.de';
+
+        $options['email']['method'] = 'mail';
+        $options['email']['host'] = '';
+        $options['email']['port'] = '';
+        $options['email']['encryption'] = '';
+
+        $options['date']['format'] = 'D.M.Y';
+
+        $this->object = new Email($options);
     }
 
     /**
@@ -27,16 +42,16 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        unset($this->object);
     }
 
     /**
      * @covers Koch\Logger\Adapter\Email::writeLog
-     * @todo   Implement testWriteLog().
      */
     public function testWriteLog()
     {
-        $this->markTestIncomplete();
         $data = array('message', 'label', 'priority');
-        $this->object->writeLog($data);
+        $r = $this->object->writeLog($data);
+        $this->assertTrue($r);
     }
 }
