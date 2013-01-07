@@ -16,7 +16,9 @@ php:
 services:
   - memcached
 
-before_script: php ./bin/travis-setup.php $OPCODE_CACHE
+before_script:
+  - sed -i "s/short_open_tag = Off/short_open_tag = On/" /etc/php.ini
+  - php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
   - composer install --dev
