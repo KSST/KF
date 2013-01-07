@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE theme SYSTEM "http://schemas.clansuite.com/dtd/theme_info.dtd">
+<theme>
+    <name>Default Backend Theme</name>
+    <description><![CDATA[The default backend theme.]]></description>
+    <author>
+        <name>Jens A. Koch</name>
+    </author>
+    <license>MIT</license>
+    <version>0.1</version>
+    <required>0.1</required>
+    <date>August 2006</date>
+    <layout mainfile="index.tpl"/>
+    <css stylename="Admin CSS" mainfile="admin.css"/>
+    <renderer>smarty</renderer>
+    <isbackendtheme>1</isbackendtheme>
+</theme>

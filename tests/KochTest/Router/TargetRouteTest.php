@@ -261,7 +261,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBackendTheme()
     {
-       $this->assertEquals('admin', $this->object->getBackendTheme());
+       $this->assertEquals('default', $this->object->getBackendTheme());
 
        $theme = 'A-Backend-Theme';
        $_SESSION['user']['backend_theme'] = $theme;
@@ -273,7 +273,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFrontendTheme()
     {
-        $this->assertEquals('standard', $this->object->getFrontendTheme());
+        $this->assertEquals('default', $this->object->getFrontendTheme());
 
         $theme = 'A-Frontend-Theme';
         $_SESSION['user']['frontend_theme'] = $theme;
@@ -288,7 +288,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         // default
         // NOTICE! this assertion needs a TargetRoute and a $_Session reset
-        $this->assertEquals('standard', $this->object->getThemeName());
+        $this->assertEquals('default', $this->object->getThemeName());
 
         // explicitly set
         $theme = 'MyTheme';
@@ -297,10 +297,10 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $this->object->reset();
 
         $this->object->setModule('controlcenter');
-        $this->assertEquals('admin', $this->object->getThemeName());
+        $this->assertEquals('default', $this->object->getThemeName());
 
         $this->object->setController('NewsAdminController');
-        $this->assertEquals('admin', $this->object->getThemeName());
+        $this->assertEquals('default', $this->object->getThemeName());
     }
 
     /**

@@ -308,6 +308,8 @@ EOF;
     {
         $this->object->assign('placeholder', 'World');
 
+        $this->object->setRenderMode('NoLayout');
+
         $result = $this->object->render($this->templateFileURL);
 
         $expectedTemplateContent = <<< EOF

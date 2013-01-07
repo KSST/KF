@@ -82,26 +82,13 @@ EOF;
 
     /**
      * @covers Koch\View\Renderer\Xslt::setStylesheet
-     * @todo   Implement testSetXSLStyleSheet().
+     * @covers Koch\View\Renderer\Xslt::getStylesheet
      */
     public function testSetStylesheet()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Xslt::getXSLStyleSheet
-     * @todo   Implement testGetXSLStyleSheet().
-     */
-    public function testGetStylesheet()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $s = 'abc';
+       $this->object->setStylesheet($s);
+       $this->assertEquals($s, $this->object->getStylesheet());
     }
 
     /**

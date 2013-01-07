@@ -37,7 +37,7 @@ class TargetRoute extends Mapper
         'layout'        => true,
         'ajax'          => false,
         'renderer'      => 'smarty',
-        'themename'     => null,
+        'themename'     => 'default',
         'modrewrite'    => false
     );
 
@@ -220,18 +220,19 @@ class TargetRoute extends Mapper
 
     public static function getBackendTheme()
     {
-        return isset($_SESSION['user']['backend_theme']) === true ? $_SESSION['user']['backend_theme'] : 'admin';
+        return (isset($_SESSION['user']['backend_theme']) === true) ? $_SESSION['user']['backend_theme'] : 'default';
     }
 
     public static function getFrontendTheme()
     {
-        return isset($_SESSION['user']['frontend_theme']) === true  ? $_SESSION['user']['frontend_theme'] : 'standard';
+        return (isset($_SESSION['user']['frontend_theme']) === true)  ? $_SESSION['user']['frontend_theme'] : 'default';
     }
 
     public static function getThemeName()
     {
         if (null === self::$parameters['themename']) {
-            // set theme automatically for "main backend module" or "backend controllers"
+            // switch automatically to a backend theme
+            // in case the "Control Center" or "Backend Controller" is requested
             if (self::getModule() == 'Controlcenter' or self::getController() == 'admin') {
                 self::setThemeName(self::getBackendTheme());
             } else {
@@ -391,7 +392,7 @@ class TargetRoute extends Mapper
             'layout' => true,
             'ajax' => false,
             'renderer' => 'smarty',
-            'themename' => null,
+            'themename' => 'default',
             'modrewrite' => false
         );
 
