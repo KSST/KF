@@ -92,8 +92,7 @@ class Xslt extends AbstractRenderer
     {
         // $this->response()->setContentType('text/html');
 
-        if(!empty($this->xslfile))
-        {
+        if (!empty($this->xslfile)) {
             $dom_stylesheet = new \DOMDocument;
             $dom_stylesheet->load($this->xslfile);
             // import the stylesheet for later transformation

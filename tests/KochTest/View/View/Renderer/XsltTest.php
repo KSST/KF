@@ -31,7 +31,6 @@ class XsltTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
 
-
         $this->stylesheetFileURL = vfsStream::url('root/stylesheet.xsl');
         $this->file = vfsStream::newFile('stylesheet.xsl', 0777)->withContent($this->getStylesheetContent());
 
@@ -76,7 +75,6 @@ EOF;
      */
     public function getDataContent()
     {
-
         return '<root name="World"/>';
     }
 
