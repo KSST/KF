@@ -63,10 +63,7 @@ class Errorhandler
      */
     public static function handle($errno, $errstr, $errfile, $errline, $errcontext = null)
     {
-        /**
-         * do just return, if the error is suppressed,
-         * due to (@)silencing-operator
-         */
+        // return, if the error is suppressed, due to (@)silencing-operator
         if (error_reporting() === 0) {
             return;
         }
@@ -76,7 +73,7 @@ class Errorhandler
          */
 
         /**
-         * Definition of PHP Errortypes Array - with names for all the php error codes
+         * Definition of PHP error types, with names for all the php error codes.
          * @link http://php.net/manual/de/errorfunc.constants.php
          */
         $errorTypes = array (
@@ -211,14 +208,15 @@ class Errorhandler
      */
     public static function getDebugBacktrace($trace = null)
     {
-        // provide backtrace only when we are in Koch Framework DEBUG Mode, otherwise just return
+        // show backtraces only in DEBUG mode
         if ( defined('DEBUG') === false xor DEBUG == 0 ) {
             return;
         }
 
-        // if a trace is incoming, then this trace comes from an exception
-        if (isset($trace) === false) {
-            // else (normally) the errorhandler has to fetch the backtrace
+        // Normally backtraces are incomming from exceptions.
+        // But, when called from the errorhandler, we need to fetch the traces ourselfs.
+        if ($trace === null) {
+
             if (function_exists('xdebug_get_function_stack') === true) {
                 $trace = xdebug_get_function_stack();
             } else {
@@ -267,7 +265,7 @@ class Errorhandler
                     // the number of arguments (method parameters)
                     $backtrace_counter_j = count($trace[$i]['args']) - 1;
 
-                    // use reflection to get the method parameters (we want to display names later)
+                    // use reflection to get the method parameters (and their names for display)
                     $reflected_method = new \ReflectionMethod($trace[$i]['class'], $trace[$i]['function']);
                     /* @var $reflected_params \ReflectionParameter */
                     $reflected_params = $reflected_method->getParameters();
@@ -327,7 +325,7 @@ class Errorhandler
      * @link http://de2.php.net/manual/en/function.debug-backtrace.php#30296
      * @link http://de2.php.net/manual/en/function.debug-backtrace.php#47644
      *
-     * @param backtraceArgument mixed The argument to identify the type upon and perform a string formatting on.
+     * @param backtraceArgument mixed The argument for type identification and string formatting.
      *
      * @return array With keys 'arg' and 'type'.
      */
@@ -387,7 +385,7 @@ class Errorhandler
                 $arg .= 'Unknown';
         }
 
-        return /*array*/ compact('arg', 'type');
+        return compact('arg', 'type');
     }
 
     /**
@@ -401,61 +399,58 @@ class Errorhandler
      */
     public static function getErrorContext($file, $line, $scope)
     {
-        // ensure error context is only shown, when in debug mode
-        if (defined('DEVELOPMENT') and DEVELOPMENT == 1  and defined('DEBUG') and DEBUG == 1) {
-            // ensure that sourcefile is readable
-            if (true === is_readable($file)) {
-                // Scope Calculations
-                $surround_lines          = round($scope/2);
-                $errorcontext_starting_line = $line - $surround_lines;
-                $errorcontext_ending_line   = $line + $surround_lines;
+        // ensure that sourcefile is readable
+        if (true === is_readable($file)) {
+            // Scope Calculations
+            $surround_lines          = round($scope/2);
+            $errorcontext_starting_line = $line - $surround_lines;
+            $errorcontext_ending_line   = $line + $surround_lines;
 
-                // create linenumbers array
-                $lines_array = range($errorcontext_starting_line, $errorcontext_ending_line);
+            // create linenumbers array
+            $lines_array = range($errorcontext_starting_line, $errorcontext_ending_line);
 
-                // colourize the errorous linenumber red
-                $lines_array[$surround_lines] = '<span class="error-line">'.$lines_array[$surround_lines].'</span>';
-                $lines_array[$surround_lines] .= '<span class="error-triangle">&#9654;</span>';
+            // colourize the errorous linenumber red
+            $lines_array[$surround_lines] = '<span class="error-line">'.$lines_array[$surround_lines].'</span>';
+            $lines_array[$surround_lines] .= '<span class="error-triangle">&#9654;</span>';
 
-                // transform linenumbers array to string for later display, use spaces as separator
-                $lines_html = implode($lines_array, ' ');
+            // transform linenumbers array to string for later display, use spaces as separator
+            $lines_html = implode($lines_array, ' ');
 
-                // get ALL LINES syntax highlighted source-code of the file and explode it into an array
-                // the if check is needed to workaround "highlight_file() has been disabled for security reasons"
-                if (function_exists('highlight_file') === true) {
-                    $array_content = explode('<br />', highlight_file($file, true));
-                } else {
-                    $array_content = explode('<br />', $file);
-                }
-
-                // get the ERROR SURROUNDING LINES from ALL LINES
-                $array_content_sliced = array_slice($array_content, $errorcontext_starting_line-1, $scope, true);
-
-                $result = array_values($array_content_sliced);
-
-                // @todo now colourize the background of the errorous line RED
-                //$result[$surround_lines] = '<span style="background-color:#BF0000;">'
-                // . $result[$surround_lines] .'</span>';
-
-                // @todo remove 4 space identation, still buggy on inline stmts
-                //foreach ($result as $i => $line) {
-                //     $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
-                //}
-
-                // transform the array into html string
-                // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
-                $errorcontext_lines  = implode($result, '<br>');
-
-                $sprintf_html = '<table>
-                                    <tr>
-                                        <td class="num">'.CR.'%s'.CR.'</td>
-                                        <td><pre>'.CR.'%s'.CR.'</pre></td>
-                                    </tr>
-                                </table>';
-
-                // @todo consider using wordwrap() to limit too long source code lines?
-                return sprintf($sprintf_html, $lines_html, $errorcontext_lines);
+            // get ALL LINES syntax highlighted source-code of the file and explode it into an array
+            // the if check is needed to workaround "highlight_file() has been disabled for security reasons"
+            if (function_exists('highlight_file') === true) {
+                $array_content = explode('<br />', highlight_file($file, true));
+            } else {
+                $array_content = explode('<br />', $file);
             }
+
+            // get the ERROR SURROUNDING LINES from ALL LINES
+            $array_content_sliced = array_slice($array_content, $errorcontext_starting_line-1, $scope, true);
+
+            $result = array_values($array_content_sliced);
+
+            // @todo now colourize the background of the errorous line RED
+            //$result[$surround_lines] = '<span style="background-color:#BF0000;">'
+            // . $result[$surround_lines] .'</span>';
+
+            // @todo remove 4 space identation, still buggy on inline stmts
+            //foreach ($result as $i => $line) {
+            //     $result[$i] = str_replace('&nbsp;&nbsp;&nbsp;&nbsp;', '', $line);
+            //}
+
+            // transform the array into html string
+            // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
+            $errorcontext_lines  = implode($result, '<br>');
+
+            $sprintf_html = '<table>
+                                <tr>
+                                    <td class="num">'.CR.'%s'.CR.'</td>
+                                    <td><pre>'.CR.'%s'.CR.'</pre></td>
+                                </tr>
+                            </table>';
+
+            // @todo consider using wordwrap() to limit too long source code lines?
+            return sprintf($sprintf_html, $lines_html, $errorcontext_lines);
         }
     }
 
