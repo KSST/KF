@@ -17,7 +17,7 @@ services:
   - memcached
 
 before_script:
-  - php -d short_open_tags=On
+  - php -d short_open_tag=On
   - php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
