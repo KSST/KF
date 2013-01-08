@@ -40,53 +40,14 @@ use Koch\Exception\Renderer\YellowScreenOfDeath;
 class Exception extends \Exception
 {
     /**
-     * Variables of a PHP Exception
-     * They are used to store the content of incomming uncatched Exceptions.
-     */
-
-    /**
-     * @var string exception message
-     */
-    protected $message = 'Unknown exception';
-
-    /**
-     * @var string debug backtrace string
-     */
-    private $string;
-
-    /**
-     * @var int user-defined exception code
-     */
-    protected $code = 0;
-
-    /**
-     * @var string source filename of exception
-     */
-    protected $file;
-
-    /**
-     * @var int source line of exception
-     */
-    protected $line;
-
-    /**
-     * @var string trace
-     */
-    private $trace;
-
-    /**
-     * Variables for the content of exception templates
-     */
-
-    /**
      * @var string HTML Representation of the Exception Template
      */
-    private static $exception_template = '';
+    private static $exceptionTemplate = '';
 
     /**
      * @var string HTML Representation of the Exception Development (RAD) Template
      */
-    private static $exception_dev_template = '';
+    private static $developmentTemplate = '';
 
     /**
      * Exception Handler Callback
@@ -97,19 +58,11 @@ class Exception extends \Exception
      */
     public function handle(\Exception $exception)
     {
-        // re/assign variables from an uncatched exception to this exception object
-        $this->message = $exception->getMessage();
-        $this->string = $exception->getTraceAsString();
-        $this->code = $exception->getCode();
-        $this->file = $exception->getFile();
-        $this->line = $exception->getLine();
-        $this->trace = $exception->getTrace();
-
         // if no errorcode is set, say that it's an rethrow
-        if ($this->code === '0') {
-            $this->code = '0 (This exception is uncatched and rethrown.)';
+        if ($exception->getCode() === '0') {
+            $exception->getCode() = '0 (This exception is uncatched and rethrown.)';
         } else {
-            self::fetchExceptionTemplates($this->code);
+            self::fetchExceptionTemplates($exception->getCode());
         }
 
         /**
@@ -117,7 +70,7 @@ class Exception extends \Exception
          * 1. catch Smarty "Template Syntax" Errors
          * 2. provide link to templateeditor (file:line) to fix the error
          */
-        /*$smartyTemplateError = (false !== stristr($this->message, 'Syntax Error in template')) ? true : false;
+        /*$smartyTemplateError = (false !== stristr($exception->getMessage(), 'Syntax Error in template')) ? true : false;
         if ($smartyTemplateError === true) {
             throw new SmartyTemplateException($exception);
         }*/
@@ -129,12 +82,12 @@ class Exception extends \Exception
          */
 
         echo \Koch\Exception\Renderer\YellowScreenOfDeath::renderException(
-            $this->message,
-            $this->string,
-            $this->code,
-            $this->file,
-            $this->line,
-            $this->trace
+            $exception->getMessage(),
+            $exception->getTraceAsString(),
+            $exception->getCode(),
+            $exception->getFile(),
+            $exception->getLine(),
+            $exception->getTrace()
         );
     }
 
@@ -174,7 +127,7 @@ class Exception extends \Exception
         $file = APPLICATION_PATH . 'themes/core/exceptions/exception-' . $code . '.html';
 
         if (is_file($file) === true) {
-            self::$exception_template = file_get_contents($file);
+            self::$exceptionTemplate = file_get_contents($file);
         }
     }
 
@@ -199,7 +152,7 @@ class Exception extends \Exception
         $file = APPLICATION_PATH . 'themes/core/exceptions/exception-dev-' . $code . '.html';
 
         if (is_file($file) === true) {
-            self::$exception_dev_template = file_get_contents($file);
+            self::$developmentTemplate = file_get_contents($file);
 
             define('RAPIDDEVTPL', true);
         }
@@ -217,22 +170,21 @@ class Exception extends \Exception
      */
     public static function getExceptionDevelopmentTemplate($placeholders)
     {
-        $original_file_content = self::$exception_dev_template;
-        $replaced_content = '';
+        $content = self::$developmentTemplate;
 
         if ($placeholders['modulename'] !== null) {
-            $replaced_content = str_replace('{$modulename}', $placeholders['modulename'], $original_file_content);
+            $content = str_replace('{$modulename}', $placeholders['modulename'], $content);
         }
 
         if ($placeholders['classname'] !== null) {
-            $replaced_content = str_replace('{$classname}', $placeholders['classname'], $replaced_content);
+            $content = str_replace('{$classname}', $placeholders['classname'], $content);
         }
 
         if ($placeholders['actionname'] !== null) {
-            $replaced_content = str_replace('{$actionname}', $placeholders['actionname'], $replaced_content);
+            $content = str_replace('{$actionname}', $placeholders['actionname'], $content);
         }
 
-        return $replaced_content;
+        return $content;
     }
 
     /**
@@ -244,23 +196,11 @@ class Exception extends \Exception
     public static function formatGetTraceString($string)
     {
         $search  = array('#', '):');
-        $replace = array('<br/><br/>Call #',')<br/>');
+        $replace = array('<br/><br/>Call #', ')<br/>');
         $string  = str_replace($search, $replace, $string);
         $string  = ltrim($string, '<br/>');
         unset($search, $replace);
 
         return $string;
-    }
-
-    /**
-     * Overwriteable Method of Class Exception
-     * This is the String representation of the exception.
-     * It is a pass-through to our presentation format (ysod);
-     */
-    public function __toString()
-    {
-        $ysod = new YellowScreenOfDeath;
-
-        return $ysod->renderException();
     }
 }
