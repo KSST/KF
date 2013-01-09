@@ -106,22 +106,21 @@ class Xslt extends AbstractRenderer
         $dom_xml->load($template);
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform
-        $dom = $this->renderer->transformToXML($dom_xml);
-
-        echo $dom;
+        return $this->renderer->transformToXML($dom_xml);
     }
 
     public function assign($tpl_parameter, $value = null)
     {
-
+        return;
     }
 
     public function display($template, $viewdata = null)
     {
-
+        echo $this->render($template, $viewdata);
     }
 
     public function fetch($template, $viewdata = null)
     {
+        return $this->render($template, $viewdata);
     }
 }
