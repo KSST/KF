@@ -58,10 +58,7 @@ class Exception extends \Exception
      */
     public function handle(\Exception $exception)
     {
-        // if no errorcode is set, say that it's an rethrow
-        if ($exception->getCode() === '0') {
-            $exception->getCode() = '0 (This exception is uncatched and rethrown.)';
-        } else {
+        if ($exception->getCode() > 0) {
             self::fetchExceptionTemplates($exception->getCode());
         }
 
