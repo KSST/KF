@@ -57,14 +57,10 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Serialized::configureEngine
-     * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->configureEngine());
     }
 
     /**
@@ -93,13 +89,9 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Serialized::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
-    public function testInitializeEngine()
+    public function testinitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 }

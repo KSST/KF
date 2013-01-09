@@ -162,7 +162,6 @@ EOF;
 
     /**
      * @covers Koch\View\Renderer\Xslt::initializeEngine
-     * @todo   Implement testInitializeEngine().
      */
     public function testinitializeEngine()
     {
