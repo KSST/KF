@@ -91,13 +91,47 @@ EOF;
 
     /**
      * @covers Koch\View\Renderer\Xslt::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
         $this->object->setStylesheet($this->stylesheetFileURL);
 
-        $this->object->render($this->dataFileURL);
+        $r = $this->object->render($this->dataFileURL);
+
+        $expectedOutput = <<< EOF
+<?xml version="1.0"?>
+<greeting>
+Hello, World</greeting>
+
+EOF;
+        $this->assertEquals($r, $expectedOutput);
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Xslt::assign
+     */
+    public function testAssign()
+    {
+       $this->assertNull($this->object->assign(''));
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Xslt::configureEngine
+     * @todo   Implement testConfigureEngine().
+     */
+    public function testConfigureEngine()
+    {
+        $this->assertNull($this->object->configureEngine());
+    }
+
+    /**
+     * @covers Koch\View\Renderer\Xslt::display
+     */
+    public function testDisplay()
+    {
+        $this->object->setStylesheet($this->stylesheetFileURL);
+
+        $this->object->display($this->dataFileURL);
 
         $expectedOutput = <<< EOF
 <?xml version="1.0"?>
@@ -109,62 +143,29 @@ EOF;
     }
 
     /**
-     * @covers Koch\View\Renderer\Xslt::assign
-     * @todo   Implement testAssign().
-     */
-    public function testAssign()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Xslt::configureEngine
-     * @todo   Implement testConfigureEngine().
-     */
-    public function testConfigureEngine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
-     * @covers Koch\View\Renderer\Xslt::display
-     * @todo   Implement testDisplay().
-     */
-    public function testDisplay()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-    }
-
-    /**
      * @covers Koch\View\Renderer\Xslt::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->setStylesheet($this->stylesheetFileURL);
+
+        $r = $this->object->render($this->dataFileURL);
+
+        $expectedOutput = <<< EOF
+<?xml version="1.0"?>
+<greeting>
+Hello, World</greeting>
+
+EOF;
+        $this->assertEquals($r, $expectedOutput);
     }
 
     /**
      * @covers Koch\View\Renderer\Xslt::initializeEngine
      * @todo   Implement testInitializeEngine().
      */
-    public function testInitializeEngine()
+    public function testinitializeEngine()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertNull($this->object->initializeEngine());
     }
 }
