@@ -284,7 +284,7 @@ EOF;
        // default mode
        $this->assertEquals('LAYOUT', $this->object->getRenderMode());
 
-       $mode = 'NOLAYOUT';
+       $mode = 'PARTIAL';
        $this->object->setRenderMode($mode);
        $this->assertEquals($mode, $this->object->getRenderMode());
     }
@@ -292,7 +292,7 @@ EOF;
     /**
      * @covers Koch\View\Renderer\Smarty::setRenderMode
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage Use LAYOUT or NOLAYOUT as parameter.
+     * @expectedExceptionMessage Use LAYOUT or PARTIAL as parameter.
      */
     public function testSetRenderMode_throwsException()
     {
@@ -308,7 +308,7 @@ EOF;
     {
         $this->object->assign('placeholder', 'World');
 
-        $this->object->setRenderMode('NoLayout');
+        $this->object->setRenderMode('PARTIAL');
 
         $result = $this->object->render($this->templateFileURL);
 

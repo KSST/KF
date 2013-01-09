@@ -406,23 +406,23 @@ class Smarty extends AbstractRenderer
     /**
      * Setter for RenderMode
      *
-     * @param string $mode Set the renderMode (LAYOUT, NOLAYOUT). Default LAYOUT.
+     * @param string $mode Set the renderMode (LAYOUT, PARTIAL). Default LAYOUT.
      */
     public function setRenderMode($mode = 'LAYOUT')
     {
         $mode = strtoupper($mode);
 
-        if ($mode === 'LAYOUT' or $mode === 'NOLAYOUT') {
+        if ($mode === 'LAYOUT' or $mode === 'PARTIAL') {
             $this->renderMode = $mode;
         } else {
-            throw new \InvalidArgumentException('Use LAYOUT or NOLAYOUT as parameter.');
+            throw new \InvalidArgumentException('Use LAYOUT or PARTIAL as parameter.');
         }
     }
 
     /**
      * Getter for RenderMode
      *
-     * @return string Returns the renderMode (LAYOUT, NOLAYOUT). Defaults to LAYOUT.
+     * @return string Returns the renderMode (LAYOUT, PARTIAL). Defaults to LAYOUT.
      */
     public function getRenderMode()
     {
@@ -469,12 +469,12 @@ class Smarty extends AbstractRenderer
         /**
          * Rendering depends on the RenderMode.
          *
-         * RenderMode "NOLAYOUT" means that only the (module) content template is rendered.
+         * RenderMode "PARTIAL" means that only the (module) content template is rendered.
          *
          * RenderMode "LAYOUT" means that the (module) content template is embedded,
          * into a layout template, by replacing the {$content} placeholder.
          */
-        if ($this->getRenderMode() === 'NOLAYOUT') {
+        if ($this->getRenderMode() === 'PARTIAL') {
             return $this->fetch($template);
         }
 
