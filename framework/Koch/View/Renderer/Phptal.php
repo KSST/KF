@@ -41,6 +41,9 @@ use Koch\View\AbstractRenderer;
  */
 class Phptal extends AbstractRenderer
 {
+    /* @var \PHPTAL */
+    public $renderer = null;
+
     /**
      * Constructor
      *

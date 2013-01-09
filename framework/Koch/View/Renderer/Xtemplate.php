@@ -41,6 +41,9 @@ use Koch\View\AbstractRenderer;
  */
 class Xtemplate extends AbstractRenderer
 {
+    /* @var \XTemplate */
+    public $renderer = null;
+
     /**
      * Constructor
      *

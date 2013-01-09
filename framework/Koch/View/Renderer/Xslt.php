@@ -38,6 +38,9 @@ use Koch\View\AbstractRenderer;
  */
 class Xslt extends AbstractRenderer
 {
+    /* @var \XSLTProcessor */
+    public $renderer = null;
+
     /**
      * Absolute path to the XSL StyleSheet file.
      *
