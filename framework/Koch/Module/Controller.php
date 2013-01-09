@@ -323,7 +323,7 @@ abstract class Controller
     /**
      * Sets the Render Mode
      *
-     * @param string $mode The RenderModes are LAYOUT or NOLAYOUT.
+     * @param string $mode The RenderModes are LAYOUT or PARTIAL.
      */
     public function setRenderMode($mode)
     {
@@ -333,7 +333,7 @@ abstract class Controller
     /**
      * Get the Render Mode
      *
-     * @return string LAYOUT|NOLAYOUT
+     * @return string LAYOUT|PARTIAL
      */
     public function getRenderMode()
     {
