@@ -38,13 +38,15 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Form\Decorators\Form\Fieldset::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $html_form_content = 'Form Content';
+        $r = $this->object->render($html_form_content);
+
+        $expectedOutput = '<fieldset class="form"><legend class="form"><em></em></legend>Form Content</fieldset>';
+
+        $this->assertEquals($expectedOutput, $r);
+
     }
 }
