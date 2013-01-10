@@ -91,7 +91,7 @@ class Xslt extends AbstractRenderer
      * @param $template The XSL Stylesheet.
      * @param $data XML Data to render
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         // $this->response()->setContentType('text/html');
 

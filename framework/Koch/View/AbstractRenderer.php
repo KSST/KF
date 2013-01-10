@@ -117,7 +117,7 @@ abstract class AbstractRenderer
      * @param array|object Data to assign to the template.
      * @return string
      */
-    abstract public function render($template, $viewdata = null);
+    abstract public function render($template = null, $viewdata = null);
 
     /**
      * Assigns a value to a template parameter.

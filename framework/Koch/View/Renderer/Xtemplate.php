@@ -104,7 +104,7 @@ class Xtemplate extends AbstractRenderer
         return $this->renderer;
     }
 
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         $this->renderer->assign($viewdata);
         $this->renderer->parse($template);

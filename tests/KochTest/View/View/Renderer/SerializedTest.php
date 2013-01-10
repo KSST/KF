@@ -33,26 +33,36 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Serialized::render
-     * @todo   Implement testRender().
      */
     public function testRender()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->assign('key', 'value');
+
+        $r = $this->object->render();
+
+        $expectedOutput = 'a:1:{s:3:"key";s:5:"value";}';
+        $this->assertEquals($expectedOutput, $r);
     }
 
     /**
      * @covers Koch\View\Renderer\Serialized::assign
-     * @todo   Implement testAssign().
      */
     public function testAssign()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // key => value
+        $this->object->assign('key', 'value');
+        $this->assertEquals('value', $this->object->viewdata['key']);
+
+        // array
+        $array = array('key' => 'value');
+        $this->object->assign($array);
+        $this->assertEquals('value', $this->object->viewdata['key']);
+
+        // object
+        $object = new \stdClass;
+        $object->key = 'value';
+        $this->object->assign($object);
+        $this->assertEquals('value', $this->object->viewdata['key']);
     }
 
     /**
@@ -65,26 +75,28 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Serialized::display
-     * @todo   Implement testDisplay().
      */
     public function testDisplay()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->object->assign('key', 'value');
+       $this->object->display();
+
+       $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
+
+       $this->expectOutputString($expectedString);
     }
 
     /**
      * @covers Koch\View\Renderer\Serialized::fetch
-     * @todo   Implement testFetch().
      */
     public function testFetch()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+       $this->object->assign('key', 'value');
+       $r = $this->object->fetch();
+
+       $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
+
+       $this->assertEquals($r, $expectedString);
     }
 
     /**
