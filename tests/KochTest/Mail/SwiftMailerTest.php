@@ -25,6 +25,7 @@ class SwiftMailerTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
+        unset($this->object);
     }
 
     /**
@@ -32,7 +33,13 @@ class SwiftMailerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSend()
     {
+        $from = 'kf-tests@trash-mail.com';
+        $to = 'kf-tests@trash-mail.com';
+        $subject = 'TestMail';
+        $body = 'TestMail';
+        $r = $this->object->send($to, $from, $subject, $body);
 
+        $this->assertEquals("Sent 0 messages\n", $r);
     }
 
     /**
@@ -40,6 +47,7 @@ class SwiftMailerTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMailer()
     {
-
+        $r = $this->object->getMailer();
+        $this->assertInstanceOf('Swift_Mailer', $r);
     }
 }

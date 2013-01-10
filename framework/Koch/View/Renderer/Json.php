@@ -116,7 +116,7 @@ class Json extends AbstractRenderer
      * @param $data array
      * @return $json_encoded_data
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         if ($viewdata !== null) {
             $this->viewdata = $viewdata;

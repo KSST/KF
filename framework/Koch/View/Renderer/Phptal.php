@@ -158,7 +158,7 @@ class Phptal extends AbstractRenderer
      * @param $returnOutput
      * @return string Rendered Template Content
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         // get the template from the parent class
         if ($template === null) {

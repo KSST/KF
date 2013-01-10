@@ -446,7 +446,7 @@ class Smarty extends AbstractRenderer
      * @param  array|object $data         Data to assign to the view.
      * @return wrapper      tpl layout
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         if ($viewdata !== null) {
             $this->assign($viewdata);

@@ -94,7 +94,7 @@ class Csv extends AbstractRenderer
      * @param string $template The filepath location of where to save the csv file.
      * @param array|object viewdata
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         if ($viewdata !== null) {
             $this->viewdata = $viewdata;

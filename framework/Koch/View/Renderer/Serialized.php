@@ -50,12 +50,12 @@ class Serialized extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-
+        return;
     }
 
-     public function configureEngine()
+    public function configureEngine()
     {
-
+        return;
     }
 
     /**
@@ -66,7 +66,7 @@ class Serialized extends AbstractRenderer
      *
      * @return string Serialized data.
      */
-    public function render($template, $viewdata = null)
+    public function render($template = null, $viewdata = null)
     {
         if ($viewdata !== null) {
             $this->viewdata = $viewdata;
@@ -75,18 +75,34 @@ class Serialized extends AbstractRenderer
         return serialize($this->viewdata);
     }
 
-    public function assign($tpl_parameter, $value = null)
+    /**
+     * Assign specific variable to the template
+     *
+     * @param  mixed             $key   Object with template vars (extraction method fetch), or array or key/value pair
+     * @param  mixed             $value Variable value
+     * @return Koch_Renderer_PHP
+     */
+    public function assign($key, $value = null)
     {
+        if (is_object($key)) {
+            // pull all non-static object properties
+            $this->viewdata = get_object_vars($key);
+        } elseif (is_array($key)) {
+            $this->viewdata = array_merge($this->viewdata, $key);
+        } else {
+            $this->viewdata[$key] = $value;
+        }
 
+        return $this;
     }
 
-    public function display($template, $viewdata = null)
+    public function display($template = null, $viewdata = null)
     {
-
+        echo $this->render($template, $viewdata);
     }
 
-    public function fetch($template, $viewdata = null)
+    public function fetch($template = null, $viewdata = null)
     {
-
+        return $this->render($template, $viewdata);
     }
 }
