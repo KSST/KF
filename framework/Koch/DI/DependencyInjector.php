@@ -38,11 +38,6 @@ class DependencyInjector
         $this->top = new Context($this);
     }
 
-    public function willUse($preference)
-    {
-        $this->top->willUse($preference);
-    }
-
     public function register($preference)
     {
         $this->top->willUse($preference);
@@ -76,18 +71,6 @@ class DependencyInjector
         $this->unnamed_parameters = array_merge($this->unnamed_parameters, $values);
 
         return $this;
-    }
-
-    public function create()
-    {
-        $values = func_get_args();
-        $type = array_shift($values);
-        $this->unnamed_parameters = array_merge($this->unnamed_parameters, $values);
-        $this->repository = new ClassRepository();
-        $object = $this->top->create($type);
-        $this->named_parameters = array();
-
-        return $object;
     }
 
     public function instantiate()
