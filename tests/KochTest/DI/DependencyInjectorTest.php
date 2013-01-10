@@ -30,25 +30,8 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\DI\DependencyInjector::willUse
-     * @covers Koch\DI\DependencyInjector::create
      * @covers Koch\DI\DependencyInjector::register
-     */
-    public function testWillUse()
-    {
-        include_once __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
-
-        // instantiate as singleton
-        $this->injector->willUse(new Reused('KochTest\DI\CreateMeOnce'));
-        $this->assertSame(
-            $this->injector->create('KochTest\DI\CreateMeOnce'),
-            $this->injector->create('KochTest\DI\CreateMeOnce')
-        );
-    }
-
-    /**
-     * @covers Koch\DI\DependencyInjector::willUse
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      * @covers Koch\DI\DependencyInjector::register
      */
     public function testRegister()
@@ -58,15 +41,16 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         // instantiate as singleton
         $this->injector->register(new Reused('KochTest\DI\CreateMeOnce'));
         $this->assertSame(
-            $this->injector->create('KochTest\DI\CreateMeOnce'),
-            $this->injector->create('KochTest\DI\CreateMeOnce')
+            $this->injector->instantiate('KochTest\DI\CreateMeOnce'),
+            $this->injector->instantiate('KochTest\DI\CreateMeOnce')
         );
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::forVariable
-     * @covers Koch\DI\DependencyInjector::willUse
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::register
+     * @covers Koch\DI\DependencyInjector::instantiate
+     * @covers Koch\DI\Engine\Variable::willUse
      */
     public function testForVariable()
     {
@@ -76,7 +60,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->injector->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
         $this->injector->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
         $this->assertEquals(
-                $this->injector->create('KochTest\DI\VariablesInConstructor'),
+                $this->injector->instantiate('KochTest\DI\VariablesInConstructor'),
                 new VariablesInConstructor(
                     new NeededForFirst(),
                     new NeededForSecond()
@@ -87,7 +71,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::whenCreating
      * @covers Koch\DI\Engine\Context::wrapWith
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      */
     public function testWhenCreating()
     {
@@ -98,7 +82,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->injector->whenCreating('KochTest\DI\Bare')->wrapWith('KochTest\DI\WrapperForBare');
 
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\Bare'),
+            $this->injector->instantiate('KochTest\DI\Bare'),
             new WrapperForBare(new BareImplementation())
         );
     }
@@ -106,7 +90,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::forType
      * @covers Koch\DI\Engine\Type::call
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      */
     public function testForType()
     {
@@ -117,7 +101,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $expected = new NeedsInitToCompleteConstruction();
         $expected->init(new NotWithoutMe()); // <-- setter injection
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\NeedsInitToCompleteConstruction'),
+            $this->injector->instantiate('KochTest\DI\NeedsInitToCompleteConstruction'),
             $expected
         );
     }
@@ -125,7 +109,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::fill
      * @covers Koch\DI\DependencyInjector::with
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      */
     public function testFill()
     {
@@ -133,7 +117,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
        // can fill missing parameters with explicit values
        $this->assertEquals(
-                $this->injector->fill('a', 'b')->with(3, 5)->create('KochTest\DI\ClassWithParameters'),
+                $this->injector->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
                 new ClassWithParameters(3, 5)
        );
     }
@@ -141,7 +125,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::with
      * @covers Koch\DI\DependencyInjector::fill
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      */
     public function testWith()
     {
@@ -149,24 +133,25 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         // 1) can fill missing parameters with explicit values
         $this->assertEquals(
-            $this->injector->with(3, 5)->create('KochTest\DI\ClassWithParameters'),
+            $this->injector->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
             new ClassWithParameters(3, 5)
         );
 
         // 2) can instantiate with named parameters
         $this->assertEquals(
-            $this->injector->fill('a', 'b')->with(3, 5)->create('KochTest\DI\ClassWithParameters'),
+            $this->injector->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
             new ClassWithParameters(3, 5)
         );
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::instantiate
-     * @covers Koch\DI\DependencyInjector::create
-     * @covers Koch\DI\DependencyInjector::willUse
+     * @covers Koch\DI\DependencyInjector::instantiate
+     * @covers Koch\DI\DependencyInjector::register
      * @covers Koch\DI\DependencyInjector::forVariable
      * @covers Koch\DI\DependencyInjector::forType
      * @covers Koch\DI\Engine\Type::call
+     * @covers Koch\DI\Engine\Variable::willUse
      */
     public function testCreate()
     {
@@ -174,14 +159,14 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         // test injection of simple dependencies
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\HintedConstructor'),
+            $this->injector->instantiate('KochTest\DI\HintedConstructor'),
             new HintedConstructor(new NeededForConstructor())
         );
 
         // test repeated type hint injection
-        $this->injector->willUse('KochTest\DI\SecondImplementation');
+        $this->injector->register('KochTest\DI\SecondImplementation');
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\RepeatedHintConstructor'),
+            $this->injector->instantiate('KochTest\DI\RepeatedHintConstructor'),
             new RepeatedHintConstructor(
                 new NeededForConstructor(),
                 new NeededForConstructor()
@@ -193,68 +178,68 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         // test create with parameters
         // this is a short syntax form of the test #1 in testWith()
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\ClassWithParameters', 3, 5),
+            $this->injector->instantiate('KochTest\DI\ClassWithParameters', 3, 5),
             new ClassWithParameters(3, 5)
         );
 
         include_once __DIR__ . '/fixtures/ClassForInjectionOfSpecificValuesTest.php';
 
         // test inject specific instance
-        $this->injector->willUse(new Thing());
+        $this->injector->register(new Thing());
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\WrapThing'),
+            $this->injector->instantiate('KochTest\DI\WrapThing'),
             new WrapThing(new Thing())
         );
 
         // test injecting specific instance for named variable
         $this->injector->forVariable('thing')->willUse(new Thing());
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\WrapAnything'),
+            $this->injector->instantiate('KochTest\DI\WrapAnything'),
             new WrapAnything(new Thing())
         );
 
         // test injecting non-object
         $this->injector->forVariable('thing')->willUse(100);
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\WrapAnything'),
+            $this->injector->instantiate('KochTest\DI\WrapAnything'),
             new WrapAnything(100)
         );
 
         // test injection string @todo
         /*$this->injector->forVariable('thing')->useString('100');
         $this->assertEquals(
-            $this->injector->create('KochTest\DI\WrapAnything'), new WrapAnything('100')
+            $this->injector->instantiate('KochTest\DI\WrapAnything'), new WrapAnything('100')
         );*/
 
         include_once __DIR__ . '/fixtures/ClassesForAutoInstantiationTest.php';
 
         // test named class instantiated automatically
-        $this->assertInstanceOf('KochTest\DI\LoneClass', $this->injector->create('KochTest\DI\LoneClass'));
+        $this->assertInstanceOf('KochTest\DI\LoneClass', $this->injector->instantiate('KochTest\DI\LoneClass'));
 
         // test will use only subclass if parent class is abstract class
-        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass', $this->injector->create('KochTest\DI\AbstractClass'));
+        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass', $this->injector->instantiate('KochTest\DI\AbstractClass'));
 
         // test can be configured to prefer a specific subclass
-        $this->injector->willUse('KochTest\DI\SecondSubclass');
-        $this->assertInstanceOf('KochTest\DI\SecondSubclass', $this->injector->create('KochTest\DI\ClassWithManySubclasses'));
+        $this->injector->register('KochTest\DI\SecondSubclass');
+        $this->assertInstanceOf('KochTest\DI\SecondSubclass', $this->injector->instantiate('KochTest\DI\ClassWithManySubclasses'));
 
         include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
         $this->assertInstanceOf(
             'KochTest\DI\OnlyImplementation',
-            $this->injector->create('KochTest\DI\InterfaceWithOneImplementation')
+            $this->injector->instantiate('KochTest\DI\InterfaceWithOneImplementation')
         );
 
         // can be configured to prefer specific implementation
-        $this->injector->willUse('KochTest\DI\SecondImplementation');
+        $this->injector->register('KochTest\DI\SecondImplementation');
         $this->assertInstanceOf(
             'KochTest\DI\SecondImplementation',
-            $this->injector->create('KochTest\DI\InterfaceWithManyImplementations')
+            $this->injector->instantiate('KochTest\DI\InterfaceWithManyImplementations')
         );
     }
 
     /**
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      * @expectedException Koch\DI\Exception\CannotFindImplementation
      * @expectedExceptionMessage InterfaceWithManyImplementations
      */
@@ -262,17 +247,17 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     {
         include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
-        $this->injector->create('InterfaceWithManyImplementations');
+        $this->injector->instantiate('InterfaceWithManyImplementations');
     }
 
     /**
-     * @covers Koch\DI\DependencyInjector::create
+     * @covers Koch\DI\DependencyInjector::instantiate
      * @expectedException Koch\DI\Exception\CannotFindImplementation
      * @expectedExceptionMessage NonExistingClass
      */
     public function testCreate_creatingNonExistingClassThrowsException()
     {
-        $this->injector->create('NonExistingClass');
+        $this->injector->instantiate('NonExistingClass');
     }
 
     /**
