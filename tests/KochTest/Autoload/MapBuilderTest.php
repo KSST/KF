@@ -40,6 +40,9 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Autoload\MapBuilder::build
+     * @covers Koch\Autoload\MapBuilder::writeMapFile
+     * @covers Koch\Autoload\MapBuilder::extractClassnames
+     * @covers Koch\Functions\Functions::globRecursive
      */
     public function testBuild()
     {
