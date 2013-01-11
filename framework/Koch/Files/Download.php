@@ -96,8 +96,7 @@ class Download
 
         if (function_exists('mime_content_type') && $mode == 0) {
             // this is deprecated
-            $mimetype = mime_content_type($file);
-            return $mimetype;
+            return mime_content_type($file);
         } elseif (function_exists('finfo_open') && $mode == 0) {
             // creates a new fileinfo resource
             // and returns the mime type and mime encoding as defined by RFC 2045
@@ -106,7 +105,7 @@ class Download
             $mimetype = finfo_file($finfo, $file);
             finfo_close($finfo);
             return $mimetype;
-        } elseif(array_key_exists($extension, $mime_types)) {
+        } elseif (array_key_exists($extension, $mime_types)) {
             return $mime_types[$extension];
         } else {
             return 'application/octet-stream';
@@ -116,123 +115,92 @@ class Download
     /**
      * Sends a file as a download to the browser
      *
-     * Uses php fileinfo extension to determine the mimetype etc.
-     *
-     * @param string $filePath The filepath as string
-     * @param int    $rate     The speedlimit in KB/s
+     * @param string $file  Filepath.
+     * @param int    $rate  The speedlimit in KB/s
      */
-    private static function sendRated($filePath, $rate = 0)
+    public static function sendFile($file, $rate = 0)
     {
-        // Check if file exists
-        if (is_file($filePath) == false) {
-            throw new \Koch\Exception\Exception('File not found.');
+        if (is_file($file) === false) {
+            throw new \InvalidArgumentException('File "' . $file . '" not found.');
         }
 
-        // get more information about the file
-        $filename = basename($filePath);
-        $size = filesize($filePath);
-        $mimetype = self::getMimeType($filePath);
+        try {
+            // get more information about the file
+            $filename = basename($file);
+            $size = filesize($file);
+            $mimetype = self::getMimeType($file);
 
-        // Create file handle
-        $fp = fopen($filePath, 'rb');
+            // create file handle
+            $fp = fopen($file, 'rb');
 
-        $seekStart = 0;
-        $seekEnd = $size;
+            $seekStart = 0;
+            $seekEnd = $size;
 
-        /**
-         * Check if only a specific part of the file should be sent.
-         * The feature names are "multipart-download" and "resumeable-download".
-         */
-        if ($_SERVER['HTTP_RANGE'] !== null) {
-            // calculate the range to use
-            $range = explode('-', mb_substr($_SERVER['HTTP_RANGE'], 6));
+            /**
+             * Check if only a specific part of the file should be sent.
+             * The feature names are "multipart-download" and "resumeable-download".
+             */
+            if (isset($_SERVER['HTTP_RANGE']) === true) {
+                // calculate the range to use
+                $range = explode('-', mb_substr($_SERVER['HTTP_RANGE'], 6));
 
-            $seekStart = intval($range[0]);
+                $seekStart = intval($range[0]);
 
-            if ($range[1] > 0) {
-                $seekEnd = intval($range[1]);
+                if ($range[1] > 0) {
+                    $seekEnd = intval($range[1]);
+                }
+
+                // Seek to the start
+                fseek($fp, $seekStart);
+
+                // Set headers including the range info
+                header('HTTP/1.1 206 Partial Content');
+                header(sprintf('Content-Range: bytes %d-%d/%d', $seekStart, $seekEnd, $size));
+            } else {
+                // Set headers for full file
+                header('HTTP/1.1 200 OK');
             }
 
-            // Seek to the start
-            fseek($fp, $seekStart);
+            // Output some headers
+            header('Cache-Control: private');
+            header('Content-Type: ' . $mimetype);
+            header('Content-Disposition: attachment; filename="' . $filename . '"');
+            header('Content-Transfer-Encoding: binary');
+            header('Content-Description: File Transfer');
+            header('Content-Length: ' . ($seekEnd - $seekStart));
+            header('Accept-Ranges: bytes');
+            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($file)) . ' GMT');
 
-            // Set headers including the range info
-            header('HTTP/1.1 206 Partial Content');
-            header(sprintf('Content-Range: bytes %d-%d/%d', $seekStart, $seekEnd, $size));
-        } else {
-            // Set headers for full file
-            header('HTTP/1.1 200 OK');
-        }
+            $block = 1024;
 
-        // Output some headers
-        header('Cache-Control: private');
-        header('Content-Type: ' . $mimetype);
-        header('Content-Disposition: attachment; filename="' . $filename . '"');
-        header('Content-Transfer-Encoding: binary');
-        header('Content-Description: File Transfer');
-        header('Content-Length: ' . ($seekEnd - $seekStart));
-        header('Accept-Ranges: bytes');
-        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', filemtime($filePath)) . ' GMT');
-
-        $block = 1024;
-
-        // limit download speed
-        if ($rate > 0) {
-            $block *= $rate;
-        }
-
-        // disable timeout before download starts
-        set_time_limit(0);
-
-        // Send file until end is reached
-        while (feof($fp) == false) {
-            $timeStart = microtime(true);
-
-            echo fread($fp, $block);
-            flush();
-
-            $wait = (microtime(true) - $timeStart) * 1000000;
-
-            // (speed limit) make sure to only send specified bytes per second
+            // limit download speed
             if ($rate > 0) {
-                usleep(1000000 - $wait);
+                $block *= $rate;
             }
-        }
 
-        // Close handle
-        fclose($fp);
-    }
+            // disable timeout before download starts
+            set_time_limit(0);
 
-    /**
-     * Send a file as a download to the browser
-     *
-     * @param string $filePath The filepath as string
-     * @param int    $rate     The speedlimit in KB/s
-     */
-    public static function send($filePath, $rate = 3)
-    {
-        try {
-            self::sendRated($filePath, $rate);
+            // Send file until end is reached
+            while (feof($fp) === false) {
+                $timeStart = microtime(true);
+
+                echo fread($fp, $block);
+                flush();
+
+                $wait = (microtime(true) - $timeStart) * 1000000;
+
+                // (speed limit) make sure to only send specified bytes per second
+                if ($rate > 0) {
+                    usleep(1000000 - $wait);
+                }
+            }
+
+            // Close handle
+            fclose($fp);
         } catch (\Koch\Exception\Exception $e) {
             header('HTTP/1.1 404 File Not Found');
-            die('Sorry, an error occured.');
-
-        }
-    }
-
-    /**
-     * Send a file as a download to the browser
-     *
-     * @param string $filePath
-     * @param int    $rate     speedlimit in KB/s
-     */
-    public function sendFile($filePath, $rate = 3)
-    {
-        try {
-            self::sendRated($filePath, $rate);
-        } catch (\Koch\Exception\Exception $e) {
-            header('HTTP/1.1 404 File Not Found');
-            die('Sorry, an error occured.');
+            die('Error, while downloading the file.');
         }
     }
 }

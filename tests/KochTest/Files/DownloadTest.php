@@ -73,34 +73,20 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
             $fetched_mimetype = $this->object->getMimeType($file);
             $this->assertEquals($mimetype, $fetched_mimetype);
          }
+
+         // fallback: unknown mimetype is always "application/octet-stream"
+         $this->assertEquals('application/octet-stream', $this->object->getMimeType('file.wtf'));
     }
 
     /**
-     * @covers Koch\Files\Download::send
-     */
-    public function testSend()
-    {
-         /*list($type, $mimetype, $binary_pack) = $this->media_files[0];
-         $filePath = vfsStream::url('root/file.' . $type);
-         $rate = 3;
-         $this->object->send($filePath, $rate);*/
-
-         // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
-
-    }
-
-    /**
+     * @runInSeparateProcess
      * @covers Koch\Files\Download::sendFile
-     * @todo   Implement testSendFile().
      */
     public function testSendFile()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $file = __DIR__ . DIRECTORY_SEPARATOR . 'DownloadTest.php';
+        $this->object->sendFile($file);
+        
+        $this->expectOutputString(file_get_contents($file));
     }
 }
