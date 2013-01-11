@@ -43,7 +43,7 @@ class Download
         /**
      * Returns the mime type of the file.
      *
-     * @param  string $file Full path to file.
+     * @param string $file Full path to file.
      * @param  int 0 (full check), 1 (extension check only)
      * @return string MimeType of File.
      */
@@ -114,6 +114,7 @@ class Download
             $finfo = finfo_open(FILEINFO_MIME);
             $mimetype = finfo_file($finfo, $file);
             finfo_close($finfo);
+
             return $mimetype;
         } elseif (array_key_exists($extension, $mime_types)) {
             return $mime_types[$extension];
@@ -125,8 +126,8 @@ class Download
     /**
      * Sends a file as a download to the browser
      *
-     * @param string $file  Filepath.
-     * @param int    $rate  The speedlimit in KB/s
+     * @param string $file Filepath.
+     * @param int    $rate The speedlimit in KB/s
      */
     public static function sendFile($file, $rate = 0)
     {
