@@ -86,7 +86,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
     {
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'DownloadTest.php';
         $this->object->sendFile($file);
-        
+
         $this->expectOutputString(file_get_contents($file));
     }
 }
