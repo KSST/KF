@@ -58,7 +58,7 @@
         "firephp/firephp-core"            : "dev-master",
         "php-gettext/php-gettext"         : "1.0.11",
         "simplepie/simplepie"             : "dev-master",
-        "smarty/smarty"                   : "v3.1.12",
+        "smarty/smarty"                   : "dev-trunk",
         "swiftmailer/swiftmailer"         : "v4.2.2",
         "marijnh/CodeMirror"              : "3.0"
     },
