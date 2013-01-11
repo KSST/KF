@@ -9,6 +9,7 @@ use Symfony\CS\FixerInterface;
 $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->ignoreVCS(true)
     ->notName('.php_cs')
+    ->notName('travis-setup.php')
     ->notName('php-cs-fixer.report.txt')
     ->notName('composer.*')
     ->notName('*.phar')
@@ -20,12 +21,8 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('*.png')
     ->notName('*.exe')
     ->notName('*classmap.php')
-    ->notName('code-coverage-settings.dat') // SimpleTest CodeCoverage files
-    ->notName('coverage.sqlite')
     ->notName('Utf8FallbackFunctions.php') // bug in php-cs-fixer, adds "public" to global functions
     ->notName('MbstringWrapper.php') // bug in php-cs-fixer, adds "public" to global functions
-    ->exclude('simpletest')
-    ->exclude('tests\coverage-report')
     ->exclude('vendor')
     ->exclude('libraries')
     ->exclude('nbproject') // netbeans project files
