@@ -71,16 +71,31 @@ EOD;
      */
     public function testDump()
     {
+/**
+ * finally after 18 or something years, someone decided to add <pre> tags to var_dump()
+ * in PHP 5.5.0! thats utterly impressive!
+ * are you fucking serious? Come get some!
+ */
+if (version_compare(PHP_VERSION, '5.5.0', '<')) {
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 88: \Koch\Debug\Debug::dump($var);
+Debugging DebugTest.php on line 103: \Koch\Debug\Debug::dump($var);
 array(1) {
   'Key' =>
   string(5) "Value"
 }
 
 EOD;
+} else {
+$expectedOutput = <<<'EOD'
+Debugging DebugTest.php on line 103: \Koch\Debug\Debug::dump($var);
+<pre>array(1) {
+  ["Key"] => string(5) "Value"
+}
+</pre>
+EOD;
+}
 
        $this->expectOutputString($expectedOutput);
 
@@ -96,7 +111,7 @@ EOD;
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 105: \Koch\Debug\Debug::getOriginOfDebugCall(0);
+Debugging DebugTest.php on line 120: \Koch\Debug\Debug::getOriginOfDebugCall(0);
 
 EOD;
         $this->expectOutputString($expectedOutput);
