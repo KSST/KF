@@ -1063,6 +1063,8 @@ class Form implements FormInterface
             $formelement_object = $this->getElementByName($position);
         }
 
+        /* @var \Koch\Form\FormElement */
+
         return $formelement_object;
     }
 
@@ -1554,14 +1556,16 @@ class Form implements FormInterface
         return $formelement_object->addDecorator($decorator);
     }
 
+    /**
+     * Removes a decorator from a formelement.
+     *
+     * @param type $decorator
+     * @param type $formelement_position
+     */
     public function removeFormelementDecorator($decorator, $formelement_position = null)
     {
-        $formelement_object = '';
-        $formelement_object = $this->getElement($formelement_position);
-
-        if (isset($formelement_object->formelementdecorators[$decorator]) === true) {
-            unset($formelement_object->formelementdecorators[$decorator]);
-        }
+        $formelement = $this->getElement($formelement_position);
+        $formelement->removeDecorator($decorator);
     }
 
     /**

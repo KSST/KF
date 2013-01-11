@@ -852,10 +852,10 @@ class FormElement implements FormElementInterface
     /**
      * Removes all Decorators of this formelement.
      */
-    /*public function removeDecorators()
+    public function removeDecorators()
     {
         $this->formelementdecorators = null;
-    }*/
+    }
 
     /**
      * Disables the use of default decorators on this formelement.

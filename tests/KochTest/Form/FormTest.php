@@ -739,7 +739,18 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testRemoveFormelementDecorator()
     {
+        $this->form->addElement('Textarea');
+        $this->form->addFormelementDecorator('label', 0);
+
         $this->form->removeFormelementDecorator('label');
+
+        $formelements = $this->form->getFormelements();
+        $textarea_element = $formelements[0];
+        $decorators = $textarea_element->formelementdecorators;
+
+        $this->assertTrue(is_array($decorators));
+        $this->assertEquals(0, count($decorators));
+        $this->assertFalse(isset($decorators['label']));
     }
 
     public function testSetDecorator()
