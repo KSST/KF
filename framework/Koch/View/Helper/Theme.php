@@ -69,13 +69,13 @@ class Theme
     public function getCurrentThemeInfoFile()
     {
         // get array for frontend or backend theme
-        $themepaths = AbstractRenderer::getThemeTemplatePaths();
+        $paths = AbstractRenderer::getThemeTemplatePaths();
 
-        foreach ($themepaths as $themepath) {
-            $theme_info_file = $themepath . DIRECTORY_SEPARATOR . 'theme_info.xml';
+        foreach ($paths as $path) {
+            $file = $path . DIRECTORY_SEPARATOR . 'theme_info.xml';
 
-            if (is_file($theme_info_file_path) === true) {
-                return $theme_info_file;
+            if (is_file($file) === true) {
+                return $file;
             }
         }
     }
@@ -154,15 +154,12 @@ class Theme
      */
     public function getInfoArray($theme = null)
     {
-        $theme_info_file = $this->getThemeInfoFile($theme);
+        $file = $this->getThemeInfoFile($theme);
 
-        // read theme info xml file into array
-        $theme_info_array = \Koch\Config\Adapter\XML::readConfig($theme_info_file);
-
-        #\Koch\Debug\Debug::printR($theme_info_array);
+        $array = \Koch\Config\Adapter\XML::readConfig($file);
 
         // when setting array as object property remove the inner theme array
-        $this->theme_info = $theme_info_array['theme'];
+        $this->theme_info = $array['theme'];
 
         return $this->theme_info;
     }

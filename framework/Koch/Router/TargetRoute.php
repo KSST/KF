@@ -246,7 +246,7 @@ class TargetRoute extends Mapper
         if (null === self::$parameters['themename']) {
             // switch automatically to a backend theme
             // in case the "Control Center" or "Backend Controller" is requested
-            if (self::getModule() == 'Controlcenter' or self::getController() == 'admin') {
+            if (self::getModule() === 'Controlcenter' or self::getController() === 'Admin') {
                 self::setThemeName(self::getBackendTheme());
             } else {
                 self::setThemeName(self::getFrontendTheme());
