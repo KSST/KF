@@ -40,8 +40,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
             // extract inner array structure into variables
             list($type, $mimetype, $binary_pack) = $mime;
 
-            $filename = 'file.' . $type;
-            $this->file = vfsStream::newFile($filename, 0777)->withContent(
+            $file = 'file.' . $type;
+            $this->file = vfsStream::newFile($file, 0777)->withContent(
                 // write binarypacks to file
                 call_user_func_array("pack", array_merge(array("n*"), (array) $binary_pack))
             );
@@ -69,8 +69,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
          foreach ($this->media_files as $mime) {
             // extract inner array structure into variables
             list($type, $mimetype, $binary_pack) = $mime;
-            $file = vfsStream::url('root/file.' . $type);
-            $fetched_mimetype = $this->object->getMimeType($file);
+            $vfsFile = vfsStream::url('root/file.' . $type);
+            $fetched_mimetype = $this->object->getMimeType($vfsFile);
             $this->assertEquals($mimetype, $fetched_mimetype);
          }
 
