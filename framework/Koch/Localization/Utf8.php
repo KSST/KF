@@ -26,7 +26,7 @@ class Utf8
     public static function initialize()
     {
         // detect, if the mbstring extension is loaded and set flag constant
-        define('UTF8_MBSTRING', extension_loaded('mbstring'));
+        defined('UTF8_MBSTRING') || define('UTF8_MBSTRING', extension_loaded('mbstring'));
 
         // mbstring extension is loaded
         if (UTF8_MBSTRING === true) {
