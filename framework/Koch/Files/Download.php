@@ -107,10 +107,7 @@ class Download
 
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-        if (function_exists('mime_content_type') && $mode == 0) {
-            // this is deprecated
-            return mime_content_type($file);
-        } elseif (function_exists('finfo_open') && $mode == 0) {
+        if (function_exists('finfo_open') === true && $mode == 0) {
             // creates a new fileinfo resource
             // and returns the mime type and mime encoding as defined by RFC 2045
             // @see http://php.net/manual/de/fileinfo.constants.php
