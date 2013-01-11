@@ -728,7 +728,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function isGet()
     {
-        return (self::$request_method == 'GET');
+        return (self::$request_method === 'GET');
     }
 
     /**
@@ -738,7 +738,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function isPost()
     {
-        return (self::$request_method == 'POST');
+        return (self::$request_method === 'POST');
     }
 
     /**
@@ -748,7 +748,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function isPut()
     {
-        return (self::$request_method == 'PUT');
+        return (self::$request_method === 'PUT');
     }
 
     /**
@@ -758,7 +758,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function isDelete()
     {
-        return (self::$request_method == 'DELETE');
+        return (self::$request_method === 'DELETE');
     }
 
     /**
