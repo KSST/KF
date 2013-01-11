@@ -95,14 +95,13 @@ class Download
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
         if (function_exists('finfo_open') === true && $mode == 0) {
-            // creates a new fileinfo resource
-            // and returns the mime type and mime encoding as defined by RFC 2045
+            // if file is a stream or url, get it as a resource
+            if ((strpos($file, '://') !== false)) {
+                $file = fopen($file, 'r+');
+            }
+            // returns the mime type and mime encoding as defined by RFC 2045
             // @see http://php.net/manual/de/fileinfo.constants.php
-            $finfo = finfo_open(FILEINFO_MIME);
-            $mimetype = finfo_file($finfo, $file);
-            finfo_close($finfo);
-
-            return $mimetype;
+            return finfo::file($file, FILEINFO_MIME);
         } elseif (array_key_exists($extension, $mime_types)) {
             return $mime_types[$extension];
         } else {
