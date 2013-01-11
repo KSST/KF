@@ -68,7 +68,7 @@
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
-        "phpunit/phpunit"                 : "3.8.*@dev"
+        "phpunit/phpunit"                 : "3.7.*@dev"
     },
     "suggest": {
         "ext-apc"         : "*",
