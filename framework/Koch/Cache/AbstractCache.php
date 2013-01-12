@@ -30,7 +30,7 @@ namespace Koch\Cache;
  */
 abstract class AbstractCache
 {
-    protected $options = array(
+    public $options = array(
         'ttl' => 900,
         'prefix' => 'kf_'
     );
@@ -93,7 +93,7 @@ abstract class AbstractCache
      */
     public function __set($key, $value)
     {
-        return null === $value ? $this->delete($key) : $this->store($key, $value);
+        return (null === $value) ? $this->delete($key) : $this->store($key, $value);
     }
 
     /**
@@ -116,5 +116,16 @@ abstract class AbstractCache
     public function __unset($key)
     {
         return $this->delete($key);
+    }
+
+    /**
+     * Checks if cache contains key (magic)
+     *
+     * @param  string  $key
+     * @return boolean
+     */
+    public function __isset($key)
+    {
+        return $this->contains($key);
     }
 }
