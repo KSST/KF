@@ -316,7 +316,7 @@ class Errorhandler
      *
      * @return array With keys 'arg' and 'type'.
      */
-    public static function formatBacktraceArgument($backtraceArgument)
+    public static function formatBacktraceArgument($backtraceArgument, $nestingLevel = 2)
     {
         $result = array();
         $arg = '';
@@ -325,7 +325,7 @@ class Errorhandler
         switch (gettype($backtraceArgument)) {
             case 'boolean':
                 $type .= '<span>bool</span>';
-                $arg .= $backtraceArgument ? 'TRUE' : 'FALSE';
+                $arg .= $backtraceArgument ? 'true' : 'false';
                 break;
             case 'integer':
                 $type .= '<span>int</span>';
@@ -351,6 +351,7 @@ class Errorhandler
             case 'object':
                 $type .= '<span>object</span>';
                 $arg .= get_class($backtraceArgument);
+                /* @todo use self::getClassProperties($backtraceArgument) */
                 break;
             case 'resource':
                 $type .= '<span>resource</span>';
@@ -373,6 +374,33 @@ class Errorhandler
         }
 
         return compact('arg', 'type');
+    }
+
+    public static function getClassProperties($class, $nestingLevel = 2)
+    {
+        $html .= '<ul>';
+        $ref = new ReflectionClass($class);
+        foreach ($ref->getProperties() as $p) {
+            $html .= '<li><span>';
+            // static ?
+            $html .= ($p->isStatic()) ? '<em>static</em> ' : '';
+            // scope ?
+            if ($p->isPrivate()) {
+                $html .= 'private';
+                $p->setAccessible(true);
+            } elseif ($p->isProtected()) {
+                $html .= 'protected';
+                $p->setAccessible(true);
+            } else {
+                $html .= 'public';
+            }
+            $html .= ' </span><span>$' . $p->getName() . ' </span>';
+            $html .= '<span>' . self::formatBacktraceArgument($p->getValue($class), $nestingLevel - 1) . '</span>';
+            $html .= '</li>';
+        }
+        $html .= '</ul>';
+
+        return $html;
     }
 
     /**
