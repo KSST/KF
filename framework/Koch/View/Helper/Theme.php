@@ -104,6 +104,8 @@ class Theme
             $theme = $this->getName();
         }
 
+        echo APPLICATION_PATH . 'themes/frontend/' . $theme;
+        
         // check absolute, return www
         if (is_dir(APPLICATION_PATH . 'themes/frontend/' . $theme) === true) {
              return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
