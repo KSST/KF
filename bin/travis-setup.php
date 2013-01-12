@@ -20,7 +20,8 @@ if (isset($argv[1]) && 'APC' === strtoupper($argv[1])) {
 $phpEnv->installExtension('memcache');
 $phpEnv->installExtension('memcached');
 
-if(version_compare(PHP_VERSION, '5.3.0', '<='))
+// enable short_open_tags for 5.3 and lower
+if(version_compare(PHP_VERSION, '5.4.0', '<'))
 {
     $phpEnv->iniSet('short_open_tag=On');
 }
