@@ -260,6 +260,33 @@ class Errorhandler
                 // Function (Class::Method)
                 $html .= '<td>' . $trace[$i]['class'] . '::' . $trace[$i]['function'] . '()';
 
+                // @todo add backlink to API Documentation
+                if (preg_match('/^Koch/', $trace[$i]['class'])) {
+                    $html .= '<span class="error-class">';
+                    $html .= '<a target="_new" href="http://docs.kf.com/en/latest/api/';
+                    $html .= str_replace('\\', '_', $trace[$i]['class']);
+                    $html .= '.html">' . $trace[$i]['class'] . '</a></span>';
+                } else {
+                    // a php internal class - backlink to php manual
+                    $classReflection = new \ReflectionClass($trace[$i]['class']);
+                    if ($classReflection->isInternal()) {
+                        $html .= '<span class="error-class"><a target="_new" href="http://php.net/manual/en/class.';
+                        $html .= str_replace('_', '-', strtolower($trace[$i]['class']));
+                        $html .= '.php">' . $trace[$i]['class'] . '</a></span>';
+                    } else {
+                        $html .= '<span class="error-class">'. $trace[$i]['class'] . '</span>';
+                    }
+                }
+
+                // a php function - backlink to manual
+                $functionReflection = new \ReflectionFunction($trace[$i]['function']);
+                if ($functionReflection->isInternal()) {
+                    $html .= '<span class="error-function">';
+                    $html .= '<a target="_new" href="http://php.net/manual/en/function.';
+                    $html .= str_replace('_', '-', $trace[$i]['function']);
+                    $html .= '.php">' . $trace[$i]['function'] . '</a></span>';
+                }
+
                 // Method Arguments
                 if (true === isset($trace[$i]['args']) and empty($trace[$i]['args']) === false) {
                     // the number of arguments (method parameters)
