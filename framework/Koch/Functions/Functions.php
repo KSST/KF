@@ -780,7 +780,7 @@ class Functions
         return false;
     }
 
-    public static function shortenString($string, $maxlength = 50, $append_string = '...')
+    public static function shortenString($string, $maxlength = 50, $append_string = '[...]')
     {
         // already way too short...
         if (mb_strlen($string) < $maxlength) {
