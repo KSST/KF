@@ -323,7 +323,6 @@ abstract class AbstractRenderer
             $this->theme = new \Koch\View\Helper\Theme($theme);
         }
 
-        echo $this->theme;
         return $this->theme;
     }
 

@@ -93,15 +93,21 @@ class Theme
             $theme = $this->getName();
         }
 
-        $frontend = APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
+        if(is_dir(APPLICATION_PATH . 'Themes') === false) {
+            throw new \RuntimeException('The application themes folder was not found.');
+        }
+
+        $frontend = APPLICATION_PATH . 'Themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
         if (is_dir($frontend) === true) {
             return $frontend;
         }
 
-        $backend = APPLICATION_PATH . 'themes/backend/' . $theme . DIRECTORY_SEPARATOR;
+        $backend = APPLICATION_PATH . 'Themes/backend/' . $theme . DIRECTORY_SEPARATOR;
         if (is_dir($backend) === true) {
             return $backend;
         }
+
+        return false;
     }
 
     /**
@@ -117,15 +123,13 @@ class Theme
             $theme = $this->getName();
         }
 
-        echo APPLICATION_PATH . 'themes/frontend/' . $theme;
-        
         // check absolute, return www
-        if (is_dir(APPLICATION_PATH . 'themes/frontend/' . $theme) === true) {
+        if (is_dir(APPLICATION_PATH . 'Themes/frontend/' . $theme) === true) {
              return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
         }
 
         // check absolute, return www
-        if (is_dir(APPLICATION_PATH . 'themes/backend/' . $theme) === true) {
+        if (is_dir(APPLICATION_PATH . 'Themes/backend/' . $theme) === true) {
             return WWW_ROOT_THEMES_BACKEND . $theme . '/';
         }
     }
