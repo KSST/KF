@@ -209,7 +209,7 @@ class Errorhandler
     public static function getDebugBacktrace($trace = null)
     {
         // show backtraces only in DEBUG mode
-        if ( defined('DEBUG') === false xor DEBUG == 0 ) {
+        if (defined('DEBUG') === false xor DEBUG == 0) {
             return;
         }
 
@@ -246,13 +246,13 @@ class Errorhandler
         $html .= '<tr><th width="2%">Callstack</th><th>Function</th><th width="46%">Location</th></tr>';
 
         // the number of backtraces
-        $backtraces_counter_i = count($trace)-1;
+        $backtraces_counter_i = count($trace) - 1;
 
         for ($i = 0; $i <= $backtraces_counter_i; $i++) {
             $html .= '<tr>';
 
             // Position in the Callstack
-            $html .= '<td align="center">'.(($backtraces_counter_i-$i)+1).'</td>';
+            $html .= '<td align="center">' . (($backtraces_counter_i - $i) + 1) . '</td>';
 
             if (isset($trace[$i]['class']) === false) {
                 $html .= '<td>[A PHP Core Function Call]</td>';
@@ -290,13 +290,13 @@ class Errorhandler
                         $html .= '<tr>';
 
                         // pos
-                        $html .= '<td>'.($j+1).'</td>';
+                        $html .= '<td>' . ($j + 1) . '</td>';
                         // name
-                        $html .= '<td>'.$matches['1'].'</td>';
+                        $html .= '<td>' . $matches['1'] . '</td>';
                         // type
-                        $html .= '<td>'.$data['type'].'</td>';
+                        $html .= '<td>' . $data['type'] . '</td>';
                         // value
-                        $html .= '<td>'.$data['arg'].'</td>'; // $defaultValue
+                        $html .= '<td>' . $data['arg'] . '</td>'; // $defaultValue
                     }
                     $html .= '</tr></table>';
                 }
@@ -354,7 +354,7 @@ class Errorhandler
                 break;
             case 'string':
                 $type .= '<span>string</span>';
-                $backtraceArgument =  htmlentities($backtraceArgument, ENT_QUOTES, 'UTF-8');
+                $backtraceArgument = htmlentities($backtraceArgument, ENT_QUOTES, 'UTF-8');
                 $arg .= \Koch\Functions\Functions::shortenString($backtraceArgument);
                 break;
             case 'array':
@@ -372,10 +372,10 @@ class Errorhandler
                     $type .= '(stream)';
                     $meta = stream_get_meta_data($backtraceArgument);
                     if (isset($meta['uri'])) {
-                       $type .= htmlspecialchars($meta['uri'], ENT_NOQUOTES, 'UTF-8');
+                        $type .= htmlspecialchars($meta['uri'], ENT_NOQUOTES, 'UTF-8');
                     }
                 }
-                $arg .= mb_strstr($backtraceArgument, '#').' - '. get_resource_type($backtraceArgument);
+                $arg .= mb_strstr($backtraceArgument, '#') . ' - ' . get_resource_type($backtraceArgument);
                 break;
             case 'NULL':
                 $type .= '<span>null</span>';
