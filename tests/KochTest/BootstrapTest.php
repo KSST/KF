@@ -28,7 +28,7 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, defined('APPLICATION_VERSION_NAME'));
         $this->assertEquals(true, defined('APPLICATION_URL'));
 
-        $this->assertEquals(true, defined('REWRITE_ENGINE'));
+        $this->assertEquals(true, defined('REWRITE_ENGINE_ON'));
         $this->assertEquals(true, defined('DEBUG'));
 
         /**
