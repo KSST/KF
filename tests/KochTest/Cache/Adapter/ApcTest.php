@@ -56,14 +56,18 @@ class ApcTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Apc::clear
-     * @todo   Implement testClear().
      */
     public function testClear()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // by default: clears user cache
+        $this->object->store('key1', 'value1');
+        $this->object->clear();
+        $this->assertFalse($this->object->contains('key1'));
+
+        // clear all caches
+        $this->object->store('key1', 'value1');
+        $this->object->clear('all');
+        $this->assertFalse($this->object->contains('key1'));
     }
 
     /**

@@ -126,7 +126,7 @@ class Apc extends AbstractCache implements CacheInterface
      * otherwise, the system cache (cached files) will be cleared. </p>
      * @return bool Returns true on success or false on failure.
      */
-    public function clear($cache_type = null)
+    public function clear($cache_type = 'user')
     {
         if ($cache_type === 'all') {
             apc_clear_cache();
@@ -266,7 +266,7 @@ class Apc extends AbstractCache implements CacheInterface
             }
         }
 
-        #$info['sma_info']['size_vars']  = \Koch\Functions\Functions::getsize($cache_user['mem_size']);
+        #$info['sma_info']['size_vars']  = Functions::getsize($cache_user['mem_size']);
 
         return $info;
     }
