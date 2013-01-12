@@ -65,7 +65,7 @@ class Exception extends \Exception
          * 2. provide link to templatefilemanager (module:file)
          */
 
-        echo \Koch\Exception\Renderer\YellowScreenOfDeath::renderException(
+        echo YellowScreenOfDeath::renderException(
             $exception->getMessage(),
             $exception->getTraceAsString(),
             $exception->getCode(),
