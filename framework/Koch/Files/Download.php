@@ -96,9 +96,9 @@ class Download
 
         if (function_exists('finfo_open') === true && $mode == 0) {
             // if file is a stream or url, get it as a resource
-            if ((strpos($file, '://') !== false)) {
+            /*if ((strpos($file, '://') !== false)) {
                 $file = fopen($file, 'r');
-            }
+            }*/
             // returns the mime type and mime encoding as defined by RFC 2045
             // @see http://php.net/manual/de/fileinfo.constants.php
             $finfo = finfo_open(FILEINFO_MIME);

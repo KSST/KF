@@ -30,11 +30,11 @@ if (is_file(__DIR__ . '/../vendor/autoload.php')) {
 }
 
 // Koch Framework Autoloader
-// Note: We are on top of the autoloader stack and not composer's classloader.
-include_once __DIR__ . '/../framework/Koch/Autoload/Loader.php';
+// Note: We are on top of the autoloader stack and not Composer's ClassLoader.
+require_once __DIR__ . '/../framework/Koch/Autoload/Loader.php';
 $autoloader = new \Koch\Autoload\Loader();
 $autoloader->setClassMapFile(__DIR__ . '/autoloader.classmap.php'); // KF/tests/autoloader.classmap.php
 
 \Koch\Localization\Utf8::initialize();
 
-include __DIR__ . '/constants.php';
+require_once __DIR__ . '/constants.php';

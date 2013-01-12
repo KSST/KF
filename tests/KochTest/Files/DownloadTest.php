@@ -34,6 +34,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
         );
 
         vfsStreamWrapper::register();
+        $this->root = new vfsStreamDirectory('root');
 
         // write virtual files
         foreach ($this->media_files as $mime) {
@@ -41,14 +42,13 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
             list($type, $mimetype, $binary_pack) = $mime;
 
             $file = 'file.' . $type;
-            $this->file = vfsStream::newFile($file, 0777)->withContent(
+            $file = vfsStream::newFile($file, 0777)->withContent(
                 // write binarypacks to file
                 call_user_func_array("pack", array_merge(array("n*"), (array) $binary_pack))
             );
-            $this->root = new vfsStreamDirectory('root');
-            $this->root->addChild($this->file);
-        }
+            $this->root->addChild($file);
 
+        }
         vfsStreamWrapper::setRoot($this->root);
     }
 
@@ -66,6 +66,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMimeType()
     {
+
+
          foreach ($this->media_files as $mime) {
             // extract inner array structure into variables
             list($type, $mimetype, $binary_pack) = $mime;
