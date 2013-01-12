@@ -34,8 +34,6 @@ class FileTest extends \PHPUnit_Framework_TestCase
         // assert that, key does not exist before
         $this->assertFalse($this->object->delete('key1'));
         $this->assertFalse($this->object->contains('key1'));
-        // assert that, it's not possible to add key with value without a TTL
-        $this->assertFalse($this->object->store('key1', 'value1'));
         // assert that, we can add key with value with ttl
         $this->assertTrue($this->object->store('key1', 'value1', 120));
         // assert that, we can get that value by key
