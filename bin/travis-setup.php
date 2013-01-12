@@ -146,6 +146,8 @@ class PhpEnvironment
     public function iniSet($option)
     {
         $this->system(sprintf("echo %s >> %s", $option, $this->phpIniFile));
+
+        printf("=> new php.ini setting (%s)\n", $option);
     }
 
     /**
