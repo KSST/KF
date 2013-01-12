@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Install PHP extensions required for testing by Travis CI.
+ * Alter INI Setting and install PHP extensions required for testing by Travis CI.
  *
  * Usage: add to your .travis.yml
  * env:
@@ -9,18 +9,23 @@
  * before_script:
  *   php ./bin/travis-setup.php $OPCODE_CACHE
  */
-$installer = new PhpExtensions();
+$phpEnv = new PhpEnvironment();
 
 if (isset($argv[1]) && 'APC' === strtoupper($argv[1])) {
-    $installer->install('apc');
+    $phpEnv->installExtension('apc');
 } else {
-    $installer->install('xcache');
+    $phpEnv->installExtension('xcache');
 }
 
-$installer->install('memcache');
-$installer->install('memcached');
+$phpEnv->installExtension('memcache');
+$phpEnv->installExtension('memcached');
 
-class PhpExtensions
+if(version_compare(PHP_VERSION, '5.3.0', '<='))
+{
+    $phpEnv->iniSet('short_open_tag=On');
+}
+
+class PhpEnvironment
 {
     /**
      * Holds build, configure and install instructions for PHP extensions.
@@ -29,13 +34,13 @@ class PhpExtensions
      */
     protected $extensions;
     protected $phpVersion;
-    protected $iniPath;
+    protected $phpIniFile;
 
     public function __construct()
     {
         $this->phpVersion = phpversion();
 
-        $this->iniPath = php_ini_loaded_file();
+        $this->phpIniFile = php_ini_loaded_file();
 
         $this->extensions = array(
         'memcache' => array(
@@ -63,7 +68,8 @@ class PhpExtensions
             'ini'         => array(
                 'extension=apc.so',
                 'apc.enabled=1',
-                'apc.enable_cli=1'
+                'apc.enable_cli=1',
+                'apc.slam_defense=1',
             ),
         ),
         'xcache' => array(
@@ -91,15 +97,15 @@ class PhpExtensions
      * @see http://php.net/php_ini_loaded_file
      * @param string $name The name of the extension to install.
      */
-    public function install($name)
+    public function installExtension($name)
     {
-        if (array_key_exists($name, $this->extensions)) {
+        if (isset($this->extensions[$name]) === true || array_key_exists($name, $this->extensions) === true) {
             $extension = $this->extensions[$name];
 
             echo "== extension: $name ==\n";
 
             foreach ($extension['php_version'] as $version) {
-                if (!version_compare($this->phpVersion, $version[1], $version[0])) {
+                if (false === version_compare($this->phpVersion, $version[1], $version[0])) {
                     printf(
                         "=> not installed, requires a PHP version %s %s (%s installed)\n",
                         $version[0],
@@ -125,7 +131,7 @@ class PhpExtensions
             ));
 
             foreach ($extension['ini'] as $ini) {
-                $this->system(sprintf("echo %s >> %s", $ini, $this->iniPath));
+                $this->system(sprintf("echo %s >> %s", $ini, $this->phpIniFile));
             }
 
             printf("=> installed (%s)\n", $folder);
@@ -133,18 +139,28 @@ class PhpExtensions
     }
 
     /**
+     * Sets a php ini configuration option.
+     *
+     * @param string $option The directive to set, like "directive=1".
+     */
+    public function iniSet($option)
+    {
+        $this->system(sprintf("echo %s >> %s", $option, $this->phpIniFile));
+    }
+
+    /**
      * Executes given command, reports and exits in case it fails.
      *
      * @param string $command The command to execute.
      */
-    private function system($cmd)
+    private function system($command)
     {
-        $ret = 0;
-        system($cmd, $ret);
-        if (0 !== $ret) {
-            printf("=> Command '%s' failed !", $cmd);
+        $statusCode = 0;
+        system($command, $statusCode);
+        if (1 === $statusCode) {
+            printf("=> Command '%s' failed !", $command);
 
-            exit($ret);
+            exit(1);
         }
     }
 }
