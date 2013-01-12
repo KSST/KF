@@ -108,7 +108,7 @@ class File extends AbstractCache implements CacheInterface
      *
      * @return boolean True if the data was successfully cached, false on failure
      */
-    public function store($key, $data, $lifetime = 0)
+    public function store($key, $data, $lifetime = 3600)
     {
         // do not write a cache file, if lifetime is 0
         if ($lifetime === 0) {

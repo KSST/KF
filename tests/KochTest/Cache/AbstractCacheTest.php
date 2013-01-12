@@ -33,6 +33,19 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Cache\AbstractCache::__construct
+     */
+    public function testConstructor()
+    {
+        unset($this->object);
+
+        $options = array('key' => 'value');
+        $this->object = new File($options);
+
+        $this->assertEquals('value', $this->object->options['key']);
+    }
+
+    /**
      * @covers Koch\Cache\AbstractCache::setPrefix
      * @covers Koch\Cache\AbstractCache::getPrefix
      */
@@ -44,6 +57,16 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Cache\AbstractCache::setPrefix
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage Prefix must not be empty.
+     */
+    public function testSetPrefix_throwsException()
+    {
+        $this->object->setPrefix('');
+    }
+
+    /**
      * @covers Koch\Cache\AbstractCache::prefixKey
      */
     public function testApplyPrefix()
@@ -52,5 +75,24 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 
         $key = 'Key';
         $this->assertEquals('newPrefixKey', $this->object->prefixKey($key));
+    }
+
+    /**
+     * @covers Koch\Cache\AbstractCache::__set
+     * @covers Koch\Cache\AbstractCache::__isset
+     * @covers Koch\Cache\AbstractCache::__get
+     * @covers Koch\Cache\AbstractCache::__unset
+     */
+    public function testSet()
+    {
+        // set
+        $this->object->key = 'value';
+        // isset
+        $this->assertTrue(isset($this->object->key));
+        // get
+        $this->assertEquals('value', $this->object->key);
+        // unset
+        unset($this->object->key);
+        $this->assertFalse(isset($this->object->key));
     }
 }
