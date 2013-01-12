@@ -114,7 +114,7 @@ class Download
             }
             // returns the mime type and mime encoding as defined by RFC 2045
             // @see http://php.net/manual/de/fileinfo.constants.php
-            return finfo::file($file, FILEINFO_MIME);
+            return \finfo::file($file, FILEINFO_MIME);
         } elseif (array_key_exists($extension, $mime_types)) {
             return $mime_types[$extension];
         } else {
