@@ -20,7 +20,16 @@ class BootstrapTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(true, defined('APPLICATION_PATH'));
         $this->assertEquals(true, defined('APPLICATION_CACHE_PATH'));
         $this->assertEquals(true, defined('APPLICATION_MODULES_PATH'));
-        #$this->assertEquals(true, defined('VENDOR_PATH'));
+        $this->assertEquals(true, defined('VENDOR_PATH'));
+
+        $this->assertEquals(true, defined('APPLICATION_NAME'));
+        $this->assertEquals(true, defined('APPLICATION_VERSION'));
+        $this->assertEquals(true, defined('APPLICATION_VERSION_STATE'));
+        $this->assertEquals(true, defined('APPLICATION_VERSION_NAME'));
+        $this->assertEquals(true, defined('APPLICATION_URL'));
+
+        $this->assertEquals(true, defined('REWRITE_ENGINE'));
+        $this->assertEquals(true, defined('DEBUG'));
 
         /**
          *  c) ensure /framework and /tests are found on the include path
