@@ -31,6 +31,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
             array("mp3", "audio/mpeg", array(0x4944, 0x3303, 0x0000, 0x0000, 0x1064, 0x5441, 0x4c42, 0x0000, 0x0017)),
             array("avi", "video/x-msvideo", array(0x5249, 0x4646, 0x6a42, 0x0100, 0x4156, 0x4920, 0x4c49, 0x5354, 0x8c05)),
             array("ogg", "application/ogg", array(0x4f67, 0x6753, 0x0002, 0x0000, 0x0000, 0x0000, 0x0000, 0x5d28, 0xf95e)),
+            array("crap", "application/octet-stream", array(0xff09, 0xff08, 0xff07, 0xff06, 0xff05, 0xff04, 0xff03, 0xff02, 0xff01)),
         );
 
         vfsStreamWrapper::register();
@@ -83,7 +84,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
          }
 
          // fallback: unknown mimetype is always "application/octet-stream"
-         $this->assertEquals('application/octet-stream', $this->object->getMimeType('file.wtf'));
+         $file = vfsStream::url('root/file.crap');
+         $this->assertEquals('application/octet-stream', $this->object->getMimeType($file));
     }
 
     /**
@@ -93,6 +95,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendFile()
     {
+        include_once __DIR__ . '/../../../framework/Koch/Files/Download.php';
+
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'DownloadTest.php';
         $this->object->sendFile($file);
 
