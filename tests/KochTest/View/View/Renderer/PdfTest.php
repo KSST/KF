@@ -17,7 +17,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        if (!extension_loaded('mbstring')) {
+        if (class_exists('mPDF', true) === false) {
             $this->markTestSkipped('This test requires the vendor library "mPDF".');
         }
 
