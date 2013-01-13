@@ -21,6 +21,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
+        include_once __DIR__ . '/../../../framework/Koch/Files/Download.php';
+
         $this->object = new Download;
 
         $this->media_files = array(
@@ -95,8 +97,6 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
      */
     public function testSendFile()
     {
-        include_once __DIR__ . '/../../../framework/Koch/Files/Download.php';
-
         $file = __DIR__ . DIRECTORY_SEPARATOR . 'DownloadTest.php';
         $this->object->sendFile($file);
 
