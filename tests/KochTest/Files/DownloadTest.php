@@ -26,6 +26,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
         include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
         include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamDirectory.php';
         include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamWrapper.php';
+        include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamAbstractContent.php';
+        include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamContainer.php';
 
         $this->object = new Download;
 
