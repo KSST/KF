@@ -72,13 +72,16 @@ class ApcTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Apc::stats
-     * @todo   Implement testStats().
      */
     public function testStats()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $array = $this->object->stats();
+
+        $this->assertArrayHasKey('version', $array);
+        $this->assertArrayHasKey('phpversion', $array);
+        $this->assertArrayHasKey('sma_info', $array);
+        $this->assertArrayHasKey('cache_info', $array);
+        $this->assertArrayHasKey('system_cache_info', $array);
+        $this->assertArrayHasKey('settings', $array);
     }
 }
