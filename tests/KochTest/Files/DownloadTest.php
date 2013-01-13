@@ -23,9 +23,9 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
     {
         include_once __DIR__ . '/../../../framework/Koch/Files/Download.php';
         // why not simply "vfsStream/vfsStream/src/..."? holy crap
-        include_once __DIR__ . '/../../../vendor/mikey179/vfsSteam/src/main/php/org/bovigo/vfs/vfsStream.php';
-        include_once __DIR__ . '/../../../vendor/mikey179/vfsSteam/src/main/php/org/bovigo/vfs/vfsStreamDirectory.php';
-        include_once __DIR__ . '/../../../vendor/mikey179/vfsSteam/src/main/php/org/bovigo/vfs/vfsStreamWrapper.php';
+        include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStream.php';
+        include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamDirectory.php';
+        include_once __DIR__ . '/../../../vendor/mikey179/vfsStream/src/main/php/org/bovigo/vfs/vfsStreamWrapper.php';
 
         $this->object = new Download;
 
