@@ -262,38 +262,27 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::pickFactory
-     * @todo   Implement testPickFactory().
+     * @expectedException \Koch\DI\Exception\CannotDetermineImplementation
      */
     public function testPickFactory()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->object->pickFactory($type, $candidates);
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::settersFor
-     * @todo   Implement testSettersFor().
      */
     public function testSettersFor()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals(array(), $this->object->settersFor());
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::wrappersFor
-     * @todo   Implement testWrappersFor().
      */
     public function testWrappersFor()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals(array(), $this->object->wrappersFor());
     }
 
     /**
@@ -322,14 +311,10 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\DI\DependencyInjector::repository
-     * @todo   Implement testRepository().
      */
     public function testRepository()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $this->assertEquals($this->repository, $this->repository());
     }
 
 }

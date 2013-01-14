@@ -28,8 +28,6 @@ namespace Koch\DI;
 use Koch\DI\Engine\Context;
 use Koch\DI\Engine\IncomingParameters;
 use Koch\DI\Storage\ClassRepository;
-use Koch\DI\Exception\CannotDetermineImplementation;
-use Koch\DI\Exception\MissingDependency;
 
 /**
  * Koch Framework - Dependency Injector (Phemto by Markus Baker).
@@ -101,7 +99,7 @@ class DependencyInjector
 
     public function pickFactory($type, $candidates)
     {
-        throw new CannotDetermineImplementation($type);
+        throw new \Koch\DI\Exception\CannotDetermineImplementation($type);
     }
 
     public function settersFor($class)
@@ -133,7 +131,7 @@ class DependencyInjector
             return $value;
         }
 
-        throw new MissingDependency($name);
+        throw new \Koch\DI\Exception\MissingDependency($name);
     }
 
     public function repository()
