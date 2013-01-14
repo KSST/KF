@@ -32,7 +32,7 @@ namespace Koch\Module;
  * - creation of folders,
  * - creation of files of a module.
  *
- * You might select the module with selectModule() or via constructor injection.
+ * You might select the module with setModule() or via constructor injection.
  *
  * @category    Koch
  * @package     Core
@@ -40,4 +40,31 @@ namespace Koch\Module;
  */
 class Generator
 {
+    static $structure = array(
+        'folders' => array(),
+        'files' => array()
+    );
+
+    public $module = null;
+
+    public function __construct($module)
+    {
+        $this->setModule($module);
+    }
+
+    public function setModule($module)
+    {
+        $this->module = $module;
+    }
+
+    public function create()
+    {
+        foreach($structure['folders'] as $folder) {
+
+        }
+
+        foreach($structure['files'] as $file) {
+
+        }
+    }
 }
