@@ -87,7 +87,7 @@ class PhpEnvironment
                 'xcache.var_size=1M',
             ),
         ),
-    );
+        );
     }
 
     /**
