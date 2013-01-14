@@ -17,7 +17,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->injector = new DependencyInjector;
+        $this->object = new DependencyInjector;
     }
 
     /**
@@ -26,7 +26,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function tearDown()
     {
-        unset($this->injector);
+        unset($this->object);
     }
 
     /**
@@ -39,10 +39,10 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         include_once __DIR__ . '/fixtures/ClassForSingletonInstantiationTest.php';
 
         // instantiate as singleton
-        $this->injector->register(new Reused('KochTest\DI\CreateMeOnce'));
+        $this->object->register(new Reused('KochTest\DI\CreateMeOnce'));
         $this->assertSame(
-            $this->injector->instantiate('KochTest\DI\CreateMeOnce'),
-            $this->injector->instantiate('KochTest\DI\CreateMeOnce')
+            $this->object->instantiate('KochTest\DI\CreateMeOnce'),
+            $this->object->instantiate('KochTest\DI\CreateMeOnce')
         );
     }
 
@@ -57,10 +57,10 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         include_once __DIR__ . '/fixtures/ClassesForInjectionOfVariablesTest.php';
 
         // test variable injection
-        $this->injector->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
-        $this->injector->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
+        $this->object->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
+        $this->object->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
         $this->assertEquals(
-                $this->injector->instantiate('KochTest\DI\VariablesInConstructor'),
+                $this->object->instantiate('KochTest\DI\VariablesInConstructor'),
                 new VariablesInConstructor(
                     new NeededForFirst(),
                     new NeededForSecond()
@@ -79,10 +79,10 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         // 1) create concrete implemenation BareImplemenation via interface Bare
         // and 2) do a constructor injection of Bare into WrapperForBare
-        $this->injector->whenCreating('KochTest\DI\Bare')->wrapWith('KochTest\DI\WrapperForBare');
+        $this->object->whenCreating('KochTest\DI\Bare')->wrapWith('KochTest\DI\WrapperForBare');
 
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\Bare'),
+            $this->object->instantiate('KochTest\DI\Bare'),
             new WrapperForBare(new BareImplementation())
         );
     }
@@ -97,11 +97,11 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         include_once __DIR__ . '/fixtures/ClassesForSetterInjectionTest.php';
 
         // test can call setters to complete initialisation
-        $this->injector->forType('KochTest\DI\NeedsInitToCompleteConstruction')->call('init');
+        $this->object->forType('KochTest\DI\NeedsInitToCompleteConstruction')->call('init');
         $expected = new NeedsInitToCompleteConstruction();
         $expected->init(new NotWithoutMe()); // <-- setter injection
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\NeedsInitToCompleteConstruction'),
+            $this->object->instantiate('KochTest\DI\NeedsInitToCompleteConstruction'),
             $expected
         );
     }
@@ -117,7 +117,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
        // can fill missing parameters with explicit values
        $this->assertEquals(
-                $this->injector->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
+                $this->object->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
                 new ClassWithParameters(3, 5)
        );
     }
@@ -133,13 +133,13 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         // 1) can fill missing parameters with explicit values
         $this->assertEquals(
-            $this->injector->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
+            $this->object->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
             new ClassWithParameters(3, 5)
         );
 
         // 2) can instantiate with named parameters
         $this->assertEquals(
-            $this->injector->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
+            $this->object->fill('a', 'b')->with(3, 5)->instantiate('KochTest\DI\ClassWithParameters'),
             new ClassWithParameters(3, 5)
         );
     }
@@ -159,14 +159,14 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         // test injection of simple dependencies
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\HintedConstructor'),
+            $this->object->instantiate('KochTest\DI\HintedConstructor'),
             new HintedConstructor(new NeededForConstructor())
         );
 
         // test repeated type hint injection
-        $this->injector->register('KochTest\DI\SecondImplementation');
+        $this->object->register('KochTest\DI\SecondImplementation');
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\RepeatedHintConstructor'),
+            $this->object->instantiate('KochTest\DI\RepeatedHintConstructor'),
             new RepeatedHintConstructor(
                 new NeededForConstructor(),
                 new NeededForConstructor()
@@ -178,63 +178,63 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         // test create with parameters
         // this is a short syntax form of the test #1 in testWith()
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\ClassWithParameters', 3, 5),
+            $this->object->instantiate('KochTest\DI\ClassWithParameters', 3, 5),
             new ClassWithParameters(3, 5)
         );
 
         include_once __DIR__ . '/fixtures/ClassForInjectionOfSpecificValuesTest.php';
 
         // test inject specific instance
-        $this->injector->register(new Thing());
+        $this->object->register(new Thing());
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\WrapThing'),
+            $this->object->instantiate('KochTest\DI\WrapThing'),
             new WrapThing(new Thing())
         );
 
         // test injecting specific instance for named variable
-        $this->injector->forVariable('thing')->willUse(new Thing());
+        $this->object->forVariable('thing')->willUse(new Thing());
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\WrapAnything'),
+            $this->object->instantiate('KochTest\DI\WrapAnything'),
             new WrapAnything(new Thing())
         );
 
         // test injecting non-object
-        $this->injector->forVariable('thing')->willUse(100);
+        $this->object->forVariable('thing')->willUse(100);
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\WrapAnything'),
+            $this->object->instantiate('KochTest\DI\WrapAnything'),
             new WrapAnything(100)
         );
 
         // test injection string @todo
-        /*$this->injector->forVariable('thing')->useString('100');
+        /*$this->object->forVariable('thing')->useString('100');
         $this->assertEquals(
-            $this->injector->instantiate('KochTest\DI\WrapAnything'), new WrapAnything('100')
+            $this->object->instantiate('KochTest\DI\WrapAnything'), new WrapAnything('100')
         );*/
 
         include_once __DIR__ . '/fixtures/ClassesForAutoInstantiationTest.php';
 
         // test named class instantiated automatically
-        $this->assertInstanceOf('KochTest\DI\LoneClass', $this->injector->instantiate('KochTest\DI\LoneClass'));
+        $this->assertInstanceOf('KochTest\DI\LoneClass', $this->object->instantiate('KochTest\DI\LoneClass'));
 
         // test will use only subclass if parent class is abstract class
-        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass', $this->injector->instantiate('KochTest\DI\AbstractClass'));
+        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass', $this->object->instantiate('KochTest\DI\AbstractClass'));
 
         // test can be configured to prefer a specific subclass
-        $this->injector->register('KochTest\DI\SecondSubclass');
-        $this->assertInstanceOf('KochTest\DI\SecondSubclass', $this->injector->instantiate('KochTest\DI\ClassWithManySubclasses'));
+        $this->object->register('KochTest\DI\SecondSubclass');
+        $this->assertInstanceOf('KochTest\DI\SecondSubclass', $this->object->instantiate('KochTest\DI\ClassWithManySubclasses'));
 
         include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
         $this->assertInstanceOf(
             'KochTest\DI\OnlyImplementation',
-            $this->injector->instantiate('KochTest\DI\InterfaceWithOneImplementation')
+            $this->object->instantiate('KochTest\DI\InterfaceWithOneImplementation')
         );
 
         // can be configured to prefer specific implementation
-        $this->injector->register('KochTest\DI\SecondImplementation');
+        $this->object->register('KochTest\DI\SecondImplementation');
         $this->assertInstanceOf(
             'KochTest\DI\SecondImplementation',
-            $this->injector->instantiate('KochTest\DI\InterfaceWithManyImplementations')
+            $this->object->instantiate('KochTest\DI\InterfaceWithManyImplementations')
         );
     }
 
@@ -247,7 +247,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     {
         include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
 
-        $this->injector->instantiate('InterfaceWithManyImplementations');
+        $this->object->instantiate('InterfaceWithManyImplementations');
     }
 
     /**
@@ -257,7 +257,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreate_creatingNonExistingClassThrowsException()
     {
-        $this->injector->instantiate('NonExistingClass');
+        $this->object->instantiate('NonExistingClass');
     }
 
     /**
@@ -266,6 +266,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testPickFactory()
     {
+        $type = ''; $candidates = '';
         $this->object->pickFactory($type, $candidates);
     }
 
@@ -274,7 +275,8 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testSettersFor()
     {
-        $this->assertEquals(array(), $this->object->settersFor());
+        $class = '';
+        $this->assertEquals(array(), $this->object->settersFor($class));
     }
 
     /**
@@ -282,31 +284,54 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testWrappersFor()
     {
-        $this->assertEquals(array(), $this->object->wrappersFor());
+        $type = '';
+        $this->assertEquals(array(), $this->object->wrappersFor($type));
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::useParameters
-     * @todo   Implement testUseParameters().
      */
     public function testUseParameters()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        $parameters = array('A' => '1');
+        $this->object->useParameters($parameters);
+        $this->assertEquals($parameters, $this->object->named_parameters);
     }
 
     /**
      * @covers Koch\DI\DependencyInjector::instantiateParameter
-     * @todo   Implement testInstantiateParameter().
      */
     public function testInstantiateParameter()
     {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-          'This test has not been implemented yet.'
-        );
+        // prepare param 1
+        $parameter = $this->getMock('parameter', array('getName'));
+        // Calling $parameter->getName() will now return 'name'.
+        $parameter->expects($this->any())->method('getName')->will($this->returnValue('name'));
+        // prepare param 2
+        $nesting = '';
+        // prepare class
+        $this->object->named_parameters['name'] = 'someValue';
+
+        $erv = $this->object->instantiateParameter($parameter, $nesting);
+
+        $this->assertEquals('someValue', $erv);
+    }
+
+    /**
+     * @covers Koch\DI\DependencyInjector::instantiateParameter
+     * @expectedException Koch\DI\Exception\MissingDependency
+     * @expectedExceptionMessage name
+     */
+    public function testInstantiateParameter_throwsException()
+    {
+        // prepare param 1
+        $parameter = $this->getMock('parameter', array('getName'));
+        // Calling $parameter->getName() will now return 'name'.
+        $parameter->expects($this->any())->method('getName')->will($this->returnValue('name'));
+        // prepare param 2
+        $nesting = '';
+
+        $erv = $this->object->instantiateParameter($parameter, $nesting);
     }
 
     /**
@@ -314,7 +339,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testRepository()
     {
-        $this->assertEquals($this->repository, $this->repository());
+        $this->assertEquals($this->object->repository, $this->object->repository());
     }
 
 }
