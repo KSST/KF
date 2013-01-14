@@ -41,9 +41,10 @@ use Koch\DI\Storage\ClassRepository;
  */
 class DependencyInjector
 {
+    public $repository;
     private $top;
-    private $named_parameters = array();
-    private $unnamed_parameters = array();
+    public $named_parameters = array();
+    public $unnamed_parameters = array();
 
     public function __construct()
     {
