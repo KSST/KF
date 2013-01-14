@@ -320,14 +320,14 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\DI\DependencyInjector::instantiateParameter
      * @expectedException Koch\DI\Exception\MissingDependency
-     * @expectedExceptionMessage name
+     * @expectedExceptionMessage theMissingDependency
      */
     public function testInstantiateParameter_throwsException()
     {
         // prepare param 1
         $parameter = $this->getMock('parameter', array('getName'));
         // Calling $parameter->getName() will now return 'name'.
-        $parameter->expects($this->any())->method('getName')->will($this->returnValue('name'));
+        $parameter->expects($this->any())->method('getName')->will($this->returnValue('theMissingDependency'));
         // prepare param 2
         $nesting = '';
 
