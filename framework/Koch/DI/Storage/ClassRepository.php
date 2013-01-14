@@ -62,7 +62,7 @@ class ClassRepository
     {
         $reflection = self::$reflection->reflection($class);
         if (false === $reflection->hasMethod($method)) {
-            throw new SetterDoesNotExist();
+            throw new \Koch\DI\Exception\SetterDoesNotExist;
         }
 
         return $reflection->getMethod($method)->getParameters();
