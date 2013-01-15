@@ -31,9 +31,19 @@ class Pagination
 
     /* @var int The maximum number of items displayed per page. */
     public $maxItemsPerPage;
-    
+
     /* @var int The current page. */
     public $currentPage;
+
+    /**
+     * Sets the pagination adapter (which is the data provider).
+     *
+     * @param \Koch\Pagination\AdapterInterface $adapter
+     */
+    public function __construct(AdapterInterface $adapter)
+    {
+        $this->adapter = $adapter;
+    }
 
     /**
      * Returns the pagination adapter.
@@ -48,6 +58,7 @@ class Pagination
     /**
      * Sets the pagination adapter (which is the data provider).
      *
+     * @param object AdapterInterface
      * @return Pagination The pagination.
      */
     public function setAdapter(AdapterInterface $adapter)
