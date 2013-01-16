@@ -16,13 +16,11 @@ class JsonExceptionTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException Koch\Config\Exception\JsonException
-     * @expectedExceptionMessage The json content from file was null.
+     * expectedExceptionMessage JSON Error in file file.json. The json content from file was null.
      */
     public function testConstructor()
     {
-        $filename = 'file.json';
-        $json_error = JSON_ERROR_NULL;
-        throw new JsonException($filename, $json_error);
+        throw new JsonException('file.json');
     }
 
     /**

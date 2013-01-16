@@ -45,7 +45,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Config\Adapter\JSON::readConfig
-     * @expectedException Koch\Exception\Exception
+     * @expectedException Koch\Config\Exception\JsonException
      */
     public function testReadConfigThrowsExceptionJsonError()
     {

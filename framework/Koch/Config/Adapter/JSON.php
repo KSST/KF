@@ -53,7 +53,7 @@ class JSON
         $json = json_decode($json_content, true);
 
         if($json === null){
-            throw new \Koch\Config\Exception\JsonException($filename, JSON_NULL_ERROR);
+            throw new \Koch\Config\Exception\JsonException($filename);
         }
 
         // fetch any error and handle the error, if any

@@ -32,10 +32,11 @@ namespace Koch\Config\Exception;
  * @package     Core
  * @subpackage  Configuration
  */
-class JsonException extends Exception
+class JsonException extends \Exception
 {
     public $error = null;
     public $error_code = JSON_ERROR_NONE;
+    const JSON_ERROR_NULL = 0;
 
     /**
      * Constructor.
@@ -46,10 +47,11 @@ class JsonException extends Exception
     function __construct($filename, $error_code = null) {
         $this->error_code = $error_code;
         $this->error = sprintf(
-            _('JSON Error in file %s - %s.'),
+            _('JSON Error in file %s. %s.'),
             $filename,
             $this->getJsonErrorMessage($error_code)
         );
+
         parent::__construct();
     }
 
@@ -61,10 +63,13 @@ class JsonException extends Exception
      * @param  string $json_error_type The json error type to get the error message for.
      * @return string The json error message for the given error type.
      */
-    public static function getJsonErrorMessage($json_error_type)
+    public static function getJsonErrorMessage($json_error_type = null)
     {
+        if($json_error_type === null) {
+            return _('The json content from file was null.');
+        }
+
         $json_error_messages = array(
-            JSON_ERROR_NULL => _('The json content from file was null.'),
             JSON_ERROR_DEPTH => _('The maximum stack depth has been exceeded.'),
             JSON_ERROR_STATE_MISMATCH => _('File contains invalid or malformed JSON.'),
             JSON_ERROR_CTRL_CHAR => _('Unexpected control character found, possibly invalid encoding.'),
