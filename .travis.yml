@@ -19,7 +19,7 @@ services:
 before_script: php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
-  - composer install --dev
+  - composer install --dev --prefer-dist
   - git submodule update --init --recursive
 
 script:
@@ -32,3 +32,7 @@ script:
 notifications:
   irc: "irc.freenode.org#koch"
   email: false
+
+# reduce commit history of git checkout
+git:
+  depth: 30
