@@ -14,7 +14,6 @@ namespace Koch\Cache\Adapter;
 
 use Koch\Cache\AbstractCache;
 use Koch\Cache\CacheInterface;
-use Koch\Exception\Exception;
 use Koch\Functions\Functions;
 
 /**
@@ -39,7 +38,7 @@ class Apc extends AbstractCache implements CacheInterface
     public function __construct($options = array())
     {
         if (extension_loaded('apc') === false) {
-            throw new Exception(
+            throw new \Koch\Exception\Exception(
                 'The PHP extension APC (Alternative PHP Cache) is not loaded. You may enable it in "php.ini"!'
             );
         }
@@ -203,6 +202,11 @@ class Apc extends AbstractCache implements CacheInterface
 
             // Request Rate (hits, misses) / cache requests/second
             $start_time = (time() - $info['system_cache_info']['start_time']);
+
+            // div by zero fix
+            if ($start_time == 0) {
+                $start_time = 1;
+            }
 
             $rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
             $info['system_cache_info']['req_rate'] = sprintf('%.2f', $rate);
