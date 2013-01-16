@@ -70,16 +70,6 @@ class JSONTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($result);
     }
 
-    /**
-     * @covers Koch\Config\Adapter\JSON::getJsonErrorMessage
-     */
-    public function testgetJsonErrorMessage()
-    {
-        $errmsg = $this->object->getJsonErrorMessage(JSON_ERROR_DEPTH);
-        $expected = 'The maximum stack depth has been exceeded.';
-        $this->assertEquals($expected, $errmsg);
-    }
-
     public function getConfigFileContent()
     {
         return '{
