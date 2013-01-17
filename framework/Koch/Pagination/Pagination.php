@@ -32,12 +32,12 @@ namespace Koch\Pagination;
  * over several pages for making it easier to view.
  * This is an example of how a typical pagination bar looks like:
  * [Prev Page] [First Page] [1] [2] [3] [...] [Last Page] [Next Page]
- * You might find additional dropdowns for Page and ItemsPerPage selection.
+ * A pagination might use formelements, like additional dropdowns for Page and ItemsPerPage selection.
  */
 class Pagination
 {
     /**
-     * The pagination adapter.
+     * The pagination adapter (data provider).
      * @var object \AdapterInterface
      */
     public $adapter;
@@ -48,8 +48,17 @@ class Pagination
     /* @var int The current page. */
     public $currentPage;
 
+    /* @var array Slice of the Dataset, containing all the results for the current page. */
+    public $currentPageResults;
+
+    /* @var int Total Number of Results */
+    public $totalNumberOfResults;
+
+    /* @var int Number of Pages (= getTotalNumberOfResults / maxItemsPerPage */
+    public $numberOfPages;
+
     /**
-     * Sets the pagination adapter (which is the data provider).
+     * Sets the pagination adapter (data provider).
      *
      * @param \Koch\Pagination\AdapterInterface $adapter
      */
@@ -59,7 +68,7 @@ class Pagination
     }
 
     /**
-     * Returns the pagination adapter.
+     * Returns the pagination adapter (data provider).
      *
      * @return AdapterInterface The adapter.
      */
@@ -83,8 +92,8 @@ class Pagination
 
     public function setMaxItemsPerPage($maxItemsPerPage)
     {
-        if($maxItemsPerPage <= 1) {
-            throw new \InvalidArgumentException('There must be 1 or more MaxItemsPerPage.');
+        if($maxItemsPerPage < 1) {
+            throw new \InvalidArgumentException('There must be more than 1 MaxItemsPerPage.');
         }
 
         $this->maxItemsPerPage = (int) $maxItemsPerPage;
@@ -109,5 +118,92 @@ class Pagination
         $this->currentPage = ($currentPage < 1) ? 1 : $currentPage;
 
         return $this;
+    }
+
+    public function getTotalNumberOfResults()
+    {
+        if (null === $this->totalNumberOfResults) {
+            $this->totalNumberOfResults = $this->getAdapter()->getTotalNumberOfResults();
+        }
+
+        return $this->totalNumberOfResults;
+    }
+
+    public function setTotalNumberOfResults($count)
+    {
+        $this->totalNumberOfResults = (integer) $count;
+    }
+
+    public function getNumberOfPages()
+    {
+        if (null === $this->numberOfPages) {
+            $this->numberOfPages = (int) ceil($this->getTotalNumberOfResults() / $this->getMaxItemsPerPage());
+        }
+
+        return $this->numberOfPages;
+    }
+
+    /**
+     * Same as getNumberOfPages().
+     */
+    public function getLastPage()
+    {
+        $this->getNumberOfPages();
+    }
+
+    public function haveToPaginate()
+    {
+        return $this->getTotalNumberOfResults() > $this->maxItemsPerPage;
+    }
+
+    public function getCurrentPageResults()
+    {
+        if (null === $this->currentPageResults) {
+            $offset = ($this->getCurrentPage() - 1) * $this->getMaxItemsPerPage();
+            $length = $this->getMaxItemsPerPage();
+            $this->currentPageResults = $this->adapter->getSlice($offset, $length);
+        }
+
+        return $this->currentPageResults;
+    }
+
+    public function hasPreviousPage()
+    {
+        return $this->currentPage > 1;
+    }
+
+    public function getPreviousPage()
+    {
+        if ($this->hasPreviousPage() === false) {
+            throw new \LogicException('There is not previous page.');
+        }
+
+        return $this->currentPage - 1;
+    }
+
+    public function hasNextPage()
+    {
+        return $this->currentPage < $this->getNumberOfPages();
+    }
+
+    public function getNextPage()
+    {
+        if ($this->hasNextPage() === false) {
+            throw new \LogicException('There is not next page.');
+        }
+
+        return $this->currentPage + 1;
+    }
+
+    /**
+     * Renders the pagination.
+     *
+     * @param string $renderer The pagination renderer to use.
+     * @param array $options Additional options. Optional.
+     */
+    public function render($renderer = null, $options = null)
+    {
+        $renderer = new Renderer($renderer, $options, $this);
+        return $renderer->render();
     }
 }

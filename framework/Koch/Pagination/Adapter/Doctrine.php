@@ -25,10 +25,12 @@
 
 namespace Koch\Pagination;
 
+use Koch\Pagination\AdapterInterface;
+
 /**
  * Koch Framework - Pagination Adapter for Doctrine Models.
  */
-class Doctrine
+class Doctrine implements AdapterInterface
 {
 
 }

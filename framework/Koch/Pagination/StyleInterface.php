@@ -25,9 +25,7 @@
 
 namespace Koch\Pagination;
 
-interface AdapterInterface
+interface StyleInterface
 {
-    function getTotalNumberOfResults();
-    function getSlice($offset, $length);
-    function getArray();
+    function render(\Koch\Pagination\Pagination $pagination);
 }
