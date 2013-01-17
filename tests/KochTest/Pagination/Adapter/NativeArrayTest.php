@@ -34,7 +34,7 @@ class NativeArrayTest extends \PHPUnit_Framework_TestCase
 
     public function testGetTotalNumberOfResults()
     {
-        $this->assertSame(count($this->array), $this->object->GetTotalNumberOfResults());
+        $this->assertSame(count($this->array), $this->object->getTotalNumberOfResults());
     }
 
     /**

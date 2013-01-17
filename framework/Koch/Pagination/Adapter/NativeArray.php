@@ -12,10 +12,12 @@
 
 namespace Koch\Pagination\Adapter;
 
+use Koch\Pagination\AdapterInterface;
+
 /**
  * Pagination Adapter for NativeArrays.
  */
-class NativeArray
+class NativeArray implements AdapterInterface
 {
     private $array;
 

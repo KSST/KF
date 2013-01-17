@@ -12,12 +12,7 @@
 
 namespace Koch\Pagination;
 
-use Koch\Pagination\AdapterInterface;
-
-/**
- * Pagination Adapter for Doctrine Models.
- */
-class Doctrine implements AdapterInterface
+interface StyleInterface
 {
-
+    function render(\Koch\Pagination\Pagination $pagination);
 }

@@ -13,9 +13,9 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        // testing: mock adapter from interface
         $this->adapter = $this->getMock('Koch\Pagination\AdapterInterface');
 
+        // constructor injection
         $this->object = new Pagination($this->adapter);
     }
 
@@ -24,14 +24,21 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $this->object;
     }
 
+    /**
+     * @covers Koch\Pagination\Pagination::setAdapter
+     */
     public function testSetAdapter()
     {
+        // setter injection
         $r = $this->object->setAdapter($this->adapter);
 
         // fluent
         $this->assertInstanceOf('Koch\Pagination\Pagination', $r);
     }
 
+    /**
+     * @covers Koch\Pagination\Pagination::getAdapter
+     */
     public function testGetAdapter()
     {
         $this->assertSame($this->adapter, $this->object->getAdapter());
@@ -54,7 +61,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage There must be 1 or more MaxItemsPerPage.
+     * @expectedExceptionMessage There must be more than 1 MaxItemsPerPage.
      */
     public function testSetMaxItemsPerPage_throwsException()
     {
@@ -79,5 +86,163 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
         // fluent
         $this->assertInstanceOf('Koch\Pagination\Pagination', $r);
+    }
+
+     /**
+     * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
+     */
+    public function getTotalNumberOfResults()
+    {
+        $this->adapter->expects($this->any())
+            ->method('getTotalNumberOfResults')->will($this->returnValue(666));
+
+        $this->assertSame(666, $this->object->getTotalNumberOfResults());
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::haveToPaginate
+     */
+    public function testHaveToPaginate()
+    {
+        $this->adapter->expects($this->any())
+            ->method('getTotalNumberOfResults')->will($this->returnValue(15));
+
+        $this->object->setMaxItemsPerPage(16);
+        $this->assertFalse($this->object->haveToPaginate());
+        $this->object->setMaxItemsPerPage(15);
+        $this->assertFalse($this->object->haveToPaginate());
+        $this->object->setMaxItemsPerPage(14);
+        $this->assertTrue($this->object->haveToPaginate());
+        $this->object->setMaxItemsPerPage(1);
+        $this->assertTrue($this->object->haveToPaginate());
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
+     * @covers Koch\Pagination\Pagination::setTotalNumberOfResults
+     */
+    public function testSetTotalNumberOfResults()
+    {
+        $this->adapter->expects($this->never())->method('getTotalNumberOfResults');
+
+        $this->object->setTotalNumberOfResults(2);
+        $this->assertEquals(2, $this->object->getTotalNumberOfResults());
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::getNumberOfPages
+     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     */
+    public function testGetNumberOfPages()
+    {
+        $this->adapter->expects($this->any())
+            ->method('getTotalNumberOfResults')->will($this->returnValue(100));
+
+        $this->object->setMaxItemsPerPage(10);
+        $this->assertSame(10, $this->object->getNumberOfPages());
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::getCurrentPageResults
+     * @covers Koch\Pagination\Pagination::getCurrentPage
+     */
+    public function testGetCurrentPageResults()
+    {
+        $returnValues = array(
+            array('foo' => 'bar', 'bar' => 'foo'),
+            array('fanta', 'reiner', 'kristall', 'weizen'),
+        );
+
+        $this->adapter->expects($this->once())->method('getSlice')
+            ->with($this->equalTo(20), $this->equalTo(10))
+            ->will($this->returnValue($returnValues[0]));
+
+        $this->object->setMaxItemsPerPage(10);
+        $this->object->setCurrentPage(3, true);
+        $this->assertSame($returnValues[0], $this->object->getCurrentPageResults());
+
+        // cached
+        $this->assertSame($returnValues[0], $this->object->getCurrentPageResults());
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::getCurrentPage
+     * @covers Koch\Pagination\Pagination::hasPreviousPage
+     * @covers Koch\Pagination\Pagination::getPreviousPage
+     * @covers Koch\Pagination\Pagination::hasNextPage
+     * @covers Koch\Pagination\Pagination::getNextPage
+     */
+    public function testGetPreviousPage()
+    {
+         $this->adapter->expects($this->any())
+            ->method('getTotalNumberOfResults')->will($this->returnValue(25));
+
+        $this->object->setMaxItemsPerPage(5);
+        $this->object->setCurrentPage(1);
+
+        // first page does not have a previous page
+        $this->assertFalse($this->object->hasPreviousPage());
+        try {
+            $this->object->getPreviousPage();
+            $this->fail();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('\LogicException', $e);
+        }
+
+        // first page has a next page
+        $this->assertTrue($this->object->hasNextPage());
+        $this->assertSame(2, $this->object->getNextPage());
+
+        // check in between
+        $this->object->setCurrentPage(5);
+        $this->assertTrue($this->object->hasPreviousPage());
+        $this->assertSame(4, $this->object->getPreviousPage());
+
+        // last page
+        $this->object->setCurrentPage(25);
+        $this->assertTrue($this->object->hasPreviousPage());
+        $this->assertSame(24, $this->object->getPreviousPage());
+        $this->assertFalse($this->object->hasNextPage());
+
+        // last page does not have a next page
+        try {
+            $this->object->getNextPage();
+            $this->fail();
+        } catch (\Exception $e) {
+            $this->assertInstanceOf('\LogicException', $e);
+        }
+    }
+
+    /**
+     * @covers Koch\Pagination\Pagination::render
+     * @covers Koch\Pagination\Pagination::setAdapter
+     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     */
+    public function testRender()
+    {
+        // dataset
+        $this->array = array();
+        for ($i = 0; $i < 10; $i++) {
+            $this->array[] = rand(1, 999);
+        }
+
+        // dataset adapter
+        $adapter = new \Koch\Pagination\Adapter\NativeArray($this->array);
+        $this->object->setAdapter($adapter);
+
+        // settings
+        $this->object->setMaxItemsPerPage(10);
+
+        // expected pagination
+        $expected = '<nav class="pagination">';
+        $expected .= '<a href="URL">&lsaquo;&nbsp;First</a>';
+        $expected .= '<a href="URL">1</a>';
+        $expected .= '<a href="URL">&gt;</a>';
+        $expected .= '</nav>';
+
+        $this->assertEquals($expected, $this->object->render());
     }
 }
