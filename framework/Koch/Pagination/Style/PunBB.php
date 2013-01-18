@@ -41,12 +41,12 @@ class PunBB implements StyleInterface
 
         $html = '<nav class="pagination">' . _('Pages');
 
-	    if ($current_page > 3) {
+        if ($current_page > 3) {
             $html .= sprintf('<a href="%s">1</a>', str_replace('{page}', 1, $url));
             if ($current_page != 4) {
                 $html .= '&hellip;';
             }
-	    }
+        }
 
         // render page range around the current page
         for ($i = $current_page - 2, $stop = $current_page + 3; $i < $stop; ++$i) {
@@ -62,7 +62,6 @@ class PunBB implements StyleInterface
             }
 
         }
-
 
         if ($current_page <= $total_pages - 3) {
             if ($current_page != $total_pages - 3) {

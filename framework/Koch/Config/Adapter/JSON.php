@@ -52,13 +52,13 @@ class JSON
         // transform JSON to PHP Array
         $json = json_decode($json_content, true);
 
-        if($json === null){
+        if ($json === null) {
             throw new \Koch\Config\Exception\JsonException($filename);
         }
 
         // fetch any error and handle the error, if any
         $json_error_type = json_last_error();
-        if($json_error_type != JSON_ERROR_NONE) {
+        if ($json_error_type != JSON_ERROR_NONE) {
             throw new \Koch\Config\Exception\JsonException($filename, $json_error_type);
         }
 

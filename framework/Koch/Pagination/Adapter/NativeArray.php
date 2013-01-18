@@ -67,8 +67,8 @@ class NativeArray implements AdapterInterface
     /**
      * Returns a slice of the result set.
      *
-     * @param integer $offset The offset.
-     * @param integer $length The length.
+     * @param  integer            $offset The offset.
+     * @param  integer            $length The length.
      * @return array|\Traversable The slice.
      */
     public function getSlice($offset, $length)

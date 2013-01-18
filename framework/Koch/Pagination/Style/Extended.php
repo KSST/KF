@@ -32,7 +32,7 @@ use Koch\Pagination\StyleInterface;
  *
  * @preview  [ « Previous | Page 2 of 11 | Showing items 6-10 of 52 | Next » ]
  */
-class Digg implements StyleInterface
+class Extended implements StyleInterface
 {
     public function render(\Koch\Pagination\Pagination $pagination)
     {

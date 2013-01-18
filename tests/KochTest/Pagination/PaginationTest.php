@@ -89,10 +89,15 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     }
 
      /**
-     * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
-     */
+      * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
+      * @covers Koch\Pagination\Pagination::setTotalNumberOfResults
+      */
     public function getTotalNumberOfResults()
     {
+        // hmm, phpunit bug? calls to the mock are not covered
+        unset($this->object->totalNumberOfResults);
+        $this->assertNull($this->object->totalNumberOfResults);
+
         $this->adapter->expects($this->any())
             ->method('getTotalNumberOfResults')->will($this->returnValue(666));
 
@@ -133,6 +138,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Pagination\Pagination::getNumberOfPages
      * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
+     * @covers Koch\Pagination\Pagination::getLastPage
      */
     public function testGetNumberOfPages()
     {
@@ -141,6 +147,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setMaxResultsPerPage(10);
         $this->assertSame(10, $this->object->getNumberOfPages());
+        $this->assertSame(10, $this->object->getLastPage());
     }
 
     /**
@@ -241,6 +248,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $expected .= '<a href="URL">&lsaquo;&nbsp;First</a>';
         $expected .= '<a href="URL">1</a>';
         $expected .= '<a href="URL">&gt;</a>';
+        $expected .= '<a href="URL">&nbsp;Last&rsaquo;</a>';
         $expected .= '</nav>';
 
         $this->assertEquals($expected, $this->object->render());

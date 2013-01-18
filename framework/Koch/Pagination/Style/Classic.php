@@ -64,7 +64,7 @@ class Classic implements StyleInterface
         }
 
         if ($lastPage) {
-            $html .= sprintf('<a href="%s">&nbsp;%s&rsaquo;</a>', str_replace('{page}', $lastPage, $url), __('Last'));
+            $html .= sprintf('<a href="%s">&nbsp;%s&rsaquo;</a>', str_replace('{page}', $lastPage, $url), _('Last'));
         }
 
         $html .= '</nav>';

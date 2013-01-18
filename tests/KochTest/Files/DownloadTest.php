@@ -76,7 +76,7 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
 
             // skip mp3, finfo detects them as "application/octet-stream"
             // instead of "audio/mpeg"
-            if($type === 'mp3') {
+            if ($type === 'mp3') {
                 // skip
                 continue;
             }

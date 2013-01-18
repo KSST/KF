@@ -93,7 +93,7 @@ class Theme
             $theme = $this->getName();
         }
 
-        if(is_dir(APPLICATION_PATH . 'Themes') === false) {
+        if (is_dir(APPLICATION_PATH . 'Themes') === false) {
             throw new \RuntimeException('The application themes folder was not found.');
         }
 
