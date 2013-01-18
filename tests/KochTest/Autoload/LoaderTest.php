@@ -58,10 +58,6 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethod_autoload()
     {
-        // set the include path to our fixtures directory, where a namespaces class exists
-        $path = __DIR__ . '/fixtures';
-        set_include_path($path . PATH_SEPARATOR . get_include_path());
-
         // workflow of autoloading
 
         // 1. existing class
