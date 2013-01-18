@@ -30,6 +30,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     {
         $options = array('key' => 'value');
         $this->object = new File($options);
+        $this->assertEquals('value', $this->object->options['key']);
     }
 
     /**
