@@ -43,7 +43,7 @@ class Digg implements StyleInterface
 
             for ($i = 1; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
-                    $html .= '<strong>' . $i . '</strong>';
+                    $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
@@ -54,7 +54,7 @@ class Digg implements StyleInterface
 
             for ($i = 1; $i <= 10; $i++) {
                 if ($i == $current_page) {
-                    $html .= '<strong>' . $i . '</strong>';
+                    $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
@@ -73,7 +73,7 @@ class Digg implements StyleInterface
 
             for ($i = $total_pages - 9; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
-                    $html .= '<strong>' . $i . '</strong>';
+                    $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
@@ -86,9 +86,10 @@ class Digg implements StyleInterface
             $html .= sprintf('<a href="%s">2</a>', str_replace('{page}', 2, $url));
             $html .= '&hellip;';
 
+            // render page range around the current page
             for ($i = $current_page - 5; $i <= $current_page + 5; $i++) {
                 if ($i == $current_page) {
-                    $html .= "<strong>$i</strong>";
+                    $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }

@@ -37,9 +37,10 @@ class Classic implements StyleInterface
             $html .= sprintf('<a href="%s">&lt;</a>', str_replace('{page}', $pagination->getPreviousPage(), $url));
         }
 
+        // render page range around the current page
         for ($i = 1; $i <= $numberOfPages; $i++) {
             if ($i == $current_page) {
-                $html .= '<strong>' . $i . '</strong>';
+                $html .= sprintf('<li class="active">%s</li>', $i);
             } else {
                 $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
             }

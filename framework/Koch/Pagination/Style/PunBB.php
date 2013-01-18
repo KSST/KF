@@ -29,12 +29,13 @@ class PunBB implements StyleInterface
         $html = '<nav class="pagination">' . _('Pages');
 
 	    if ($current_page > 3) {
-            $html .= sprintf('<a href="%s>1</a>', str_replace('{page}', 1, $url));
+            $html .= sprintf('<a href="%s">1</a>', str_replace('{page}', 1, $url));
             if ($current_page != 4) {
                 $html .= '&hellip;';
             }
 	    }
 
+        // render page range around the current page
         for ($i = $current_page - 2, $stop = $current_page + 3; $i < $stop; ++$i) {
 
             if ($i < 1 OR $i > $total_pages) {
@@ -42,7 +43,7 @@ class PunBB implements StyleInterface
             }
 
             if ($current_page == $i) {
-                $html .= '<strong>'.$i.'</strong>';
+                $html .= sprintf('<li class="active">%s</li>', $i);
             } else {
                 $html .= sprintf('<a href="%s">$s</a>', str_replace('{page}', $i, $url), $i);
             }
