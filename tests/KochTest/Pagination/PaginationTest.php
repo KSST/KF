@@ -45,15 +45,15 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
-     * @covers Koch\Pagination\Pagination::getMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
+     * @covers Koch\Pagination\Pagination::getMaxResultsPerPage
      */
-    public function testSetMaxItemsPerPage()
+    public function testSetMaxResultsPerPage()
     {
-        $maxItemsPerPage = '15';
-        $r = $this->object->setMaxItemsPerPage($maxItemsPerPage);
+        $maxResultsPerPage = '15';
+        $r = $this->object->setMaxResultsPerPage($maxResultsPerPage);
 
-        $this->assertEquals($this->object->getMaxItemsPerPage(), $maxItemsPerPage);
+        $this->assertEquals($this->object->getMaxResultsPerPage(), $maxResultsPerPage);
 
         // fluent
         $this->assertInstanceOf('Koch\Pagination\Pagination', $r);
@@ -61,11 +61,11 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @expectedException InvalidArgumentException
-     * @expectedExceptionMessage There must be more than 1 MaxItemsPerPage.
+     * @expectedExceptionMessage There must be more than 1 MaxResultsPerPage.
      */
-    public function testSetMaxItemsPerPage_throwsException()
+    public function testSetMaxResultsPerPage_throwsException()
     {
-        $this->object->setMaxItemsPerPage(-10);
+        $this->object->setMaxResultsPerPage(-10);
     }
 
      /**
@@ -100,7 +100,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
      * @covers Koch\Pagination\Pagination::haveToPaginate
      */
     public function testHaveToPaginate()
@@ -108,13 +108,13 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $this->adapter->expects($this->any())
             ->method('getTotalNumberOfResults')->will($this->returnValue(15));
 
-        $this->object->setMaxItemsPerPage(16);
+        $this->object->setMaxResultsPerPage(16);
         $this->assertFalse($this->object->haveToPaginate());
-        $this->object->setMaxItemsPerPage(15);
+        $this->object->setMaxResultsPerPage(15);
         $this->assertFalse($this->object->haveToPaginate());
-        $this->object->setMaxItemsPerPage(14);
+        $this->object->setMaxResultsPerPage(14);
         $this->assertTrue($this->object->haveToPaginate());
-        $this->object->setMaxItemsPerPage(1);
+        $this->object->setMaxResultsPerPage(1);
         $this->assertTrue($this->object->haveToPaginate());
     }
 
@@ -132,19 +132,19 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Pagination\Pagination::getNumberOfPages
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
      */
     public function testGetNumberOfPages()
     {
         $this->adapter->expects($this->any())
             ->method('getTotalNumberOfResults')->will($this->returnValue(100));
 
-        $this->object->setMaxItemsPerPage(10);
+        $this->object->setMaxResultsPerPage(10);
         $this->assertSame(10, $this->object->getNumberOfPages());
     }
 
     /**
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
      * @covers Koch\Pagination\Pagination::getCurrentPageResults
      * @covers Koch\Pagination\Pagination::getCurrentPage
      */
@@ -159,7 +159,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
             ->with($this->equalTo(20), $this->equalTo(10))
             ->will($this->returnValue($returnValues[0]));
 
-        $this->object->setMaxItemsPerPage(10);
+        $this->object->setMaxResultsPerPage(10);
         $this->object->setCurrentPage(3, true);
         $this->assertSame($returnValues[0], $this->object->getCurrentPageResults());
 
@@ -168,7 +168,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
      * @covers Koch\Pagination\Pagination::getCurrentPage
      * @covers Koch\Pagination\Pagination::hasPreviousPage
      * @covers Koch\Pagination\Pagination::getPreviousPage
@@ -180,7 +180,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
          $this->adapter->expects($this->any())
             ->method('getTotalNumberOfResults')->will($this->returnValue(25));
 
-        $this->object->setMaxItemsPerPage(5);
+        $this->object->setMaxResultsPerPage(5);
         $this->object->setCurrentPage(1);
 
         // first page does not have a previous page
@@ -219,7 +219,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Pagination\Pagination::render
      * @covers Koch\Pagination\Pagination::setAdapter
-     * @covers Koch\Pagination\Pagination::setMaxItemsPerPage
+     * @covers Koch\Pagination\Pagination::setMaxResultsPerPage
      */
     public function testRender()
     {
@@ -234,7 +234,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $this->object->setAdapter($adapter);
 
         // settings
-        $this->object->setMaxItemsPerPage(10);
+        $this->object->setMaxResultsPerPage(10);
 
         // expected pagination
         $expected = '<nav class="pagination">';
