@@ -34,15 +34,10 @@ class Form extends FormDecorator
      */
     public $name = 'form';
 
-    public function openOpenFormTag()
+    public function openFormTag()
     {
-        // init var
         $html_form = '';
-
-        // init html form with an comment
         $html_form = '<!-- Start of Form "'. $this->getName() .'" -->' . CR;
-
-        // open the opening form tag
         $html_form .= '<form ';
 
         return $html_form;
@@ -53,7 +48,6 @@ class Form extends FormDecorator
      */
     public function getFormTagAttributesAsHTML()
     {
-        // init var
         $html_form = '';
 
         if ( mb_strlen($this->getID()) > 0 ) {
@@ -94,21 +88,15 @@ class Form extends FormDecorator
 
         $html_form .= 'class="form '.$this->getClass().'"';
 
-        // return the attributes inside the opening form tag
-        return $html_form;
-    }
+        $html_form .= '>' . CR;
 
-    public function closeOpenFormTag()
-    {
-        // close the opened form tag
-        return '>' . CR;
+        return $html_form;
     }
 
     public function addHeading()
     {
         $html_form = '';
 
-        // add heading
         if ( mb_strlen($this->getHeading()) > 0 ) {
              $html_form = '<h2>'.$this->getHeading().'</h2>' . CR;
         }
@@ -120,7 +108,6 @@ class Form extends FormDecorator
     {
          $html_form = '';
 
-        // add description
         if ( mb_strlen($this->getDescription()) > 0 ) {
              $html_form = '<p>'.$this->getDescription().'</p>' . CR;
         }
@@ -130,20 +117,18 @@ class Form extends FormDecorator
 
     public function closeFormTag()
     {
-        // close form
         return CR . '</form>' . CR . '<!--- End of Form "'. $this->getName() .'" -->' . CR;
     }
 
     public function render($html_form_content)
     {
-        // put all the pieces of html together
-        $html_form_content = $this->openOpenFormTag().              // <form
-                             $this->getFormTagAttributesAsHTML().   //  id/method/action/...
-                             $this->closeOpenFormTag().             // >
-                             $this->addHeading().                   // heading
-                             $this->addDescription().               // description
-                             $html_form_content.                    // formelements
-                             $this->closeFormTag();                 // </form>
+        // put the pieces of html together
+        $html_form_content = $this->openFormTag().                // <form
+                             $this->getFormTagAttributesAsHTML(). //  id/method/action/...>
+                             $this->addHeading().                 // heading
+                             $this->addDescription().             // description
+                             $html_form_content.                  // formelements
+                             $this->closeFormTag();               // </form>
 
         return $html_form_content;
     }
