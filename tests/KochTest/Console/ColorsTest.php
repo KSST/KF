@@ -28,12 +28,21 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals("✖", Colors::unicodeSymbol('big fail'));
 
-       /* $this->assertEquals("\033[0;31m✖[0m", Colors::unicodeSymbol('big fail', 'red'));
+        $this->assertEquals("\033[0;31m✖[0m", Colors::unicodeSymbol('big fail', 'red'));
         var_dump(Colors::unicodeSymbol('big fail', 'red'));
 
         $this->assertEquals("\033[0;32m✔[0m", Colors::unicodeSymbol('big ok', 'green'));
 
-        $this->assertEquals("\033[0;32;43m✖[0m", Colors::unicodeSymbol('big fail', array('green', 'yellow')));*/
+        $this->assertEquals("\033[0;32;43m✖[0m", Colors::unicodeSymbol('big fail', array('green', 'yellow')));
+    }
+
+    /**
+     * @covers Koch\Console\Colors::unicodeSymbol()
+     * @expectedException InvalidArgumentException
+     */
+    public function testUnicodeSymbol_throwsException()
+    {
+        Colors::unicodeSymbol('not existant');
     }
 
     /**
@@ -77,5 +86,29 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
             "On a \033[0;31mdark desert\033[0m highway",
             Colors::colorize('On a dark desert highway', 'dark desert', 'red')
         );
+    }
+
+    /**
+     * @covers Koch\Console\Colors::setOptions()
+     */
+    public function testSetOptions()
+    {
+        $options = 'a,b,c,d';
+        $array = Colors::setOptions($options);
+        $expectedArray = array(0 => 'a',  1 => 'b',  2 => 'c',  3 => 'd');
+        $this->assertEquals($array, $expectedArray);
+    }
+
+    /**
+     * @covers Koch\Console\Colors::colorizeReturnValue()
+     * @covers Koch\Console\Colors::unicodeSymbol()
+     */
+    public function testColorizeReturnValue()
+    {
+        $r = Colors::colorizeReturnValue(1);
+        $this->assertEquals($r, '');
+
+        $r = Colors::colorizeReturnValue(0);
+        $this->assertEquals($r, '');
     }
 }
