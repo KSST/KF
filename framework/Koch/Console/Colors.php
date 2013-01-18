@@ -103,14 +103,14 @@ class Colors
             $symbol = static::$unicode[$symbol];
         } else {
             throw new \InvalidArgumentException(sprintf(
-                'Invalid unicode symbol specified: "%s". Expected one of (%s)',
+                'Invalid unicode symbol specified: "%s". Expected one of (%s).',
                 $symbol,
                 implode(', ', array_keys(static::$unicode))
             ));
         }
 
-        return $symbol;
-        //return self::write($symbol, $options));
+        //return $symbol;
+        return self::write($symbol, $options);
     }
 
     public static function write($text, $foreground = null, $background = null, $modifiers = null)
@@ -178,8 +178,8 @@ class Colors
         return is_null($ansi_text) ? $text : $ansi_text;
     }
 
-    public function returnValue($value)
+    public static function colorizeReturnValue($value)
     {
-        return ($value == 0) ? self::unicodeSymbol('x', 'red') : self::unicodeSymbol('check', 'green');
+        return ($value == 0) ? self::unicodeSymbol('x', 'red') : self::unicodeSymbol('ok', 'green');
     }
 }
