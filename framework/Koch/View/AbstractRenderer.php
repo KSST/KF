@@ -99,6 +99,16 @@ abstract class AbstractRenderer
     }
 
     /**
+     * Returns options array.
+     * 
+     * @return array Options.
+     */
+    public function getOptions()
+    {
+        return $this->options;
+    }
+
+    /**
      * Returns the render engine object
      *
      * @return Renderer
