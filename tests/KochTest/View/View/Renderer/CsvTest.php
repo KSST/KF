@@ -17,9 +17,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $options = array();
-
-        $this->object = new Csv($options);
+        $this->object = new Csv();
     }
 
     /**
@@ -29,6 +27,20 @@ class CsvTest extends \PHPUnit_Framework_TestCase
     protected function tearDown()
     {
         unset($this->object);
+    }
+
+
+    /**
+     * @covers Koch\View\Renderer\Csv::__construct
+     * @covers Koch\View\Renderer\Csv::getOptions
+     */
+    public function testConstructor()
+    {
+        $setOptions = array('key' => 'value');
+        $this->object = new Csv($setOptions);
+
+        $options = $this->object->getOptions();
+        $this->assertEquals('value', $options['key']);
     }
 
     /**
