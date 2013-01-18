@@ -61,13 +61,14 @@ class Colors
         'green' => '42',
         'blue' => '44',
         'cyan' => '46',
-        'light_gray' => '47',
+        'grey' => '47',
     );
 
     // Ansi Modifiers
     private static $modifier = array(
         'reset'         => '0',
         'bold'          => '1',
+        'dark'          => '2',
         'italic'        => '3',
         'underline'     => '4',
         'blink'         => '5',
@@ -86,25 +87,24 @@ class Colors
 
     public static function unicodeSymbol($symbol, $options = null)
     {
-        if (isset(static::$unicode[$symbol])) {
-            $symbol = static::$unicode[$symbol];
-        } else {
-            throw new \InvalidArgumentException(sprintf(
-                'Invalid unicode symbol specified: "%s". Expected one of (%s).',
-                $symbol,
-                implode(', ', array_keys(static::$unicode))
-            ));
+        if (false === isset(static::$unicode[$symbol])) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    'Invalid unicode symbol specified: "%s". Expected one of (%s).',
+                    $symbol,
+                    implode(', ', array_keys(static::$unicode)))
+            );
         }
 
-        //return $symbol;
-        return self::write($symbol, $options);
+        $symbol = static::$unicode[$symbol];
+
+        return is_array($options) ? self::write($symbol, $options) : $symbol;
     }
 
     public static function write($text, $foreground = null, $background = null, $modifiers = null)
     {
         if (is_array($foreground)) {
              $options = self::setOptions($foreground);
-
              $foreground = array_shift($options); // 0
              $background = array_shift($options); // 1
              $modifiers = $options;
@@ -132,9 +132,11 @@ class Colors
             }
         }
 
-        $escapeCodes = implode(';', $codes);
+        if(is_array($codes)) {
+            $escapeCodes = implode(';', $codes);
+        }
 
-        return sprintf("\033[%sm%s\033[0m", $escapeCodes, $text);
+        return sprintf('\033[%sm%s\033[0m', $escapeCodes, $text);
     }
 
     public static function setOptions($options)
@@ -154,7 +156,7 @@ class Colors
      * @param string regexp
      * @param mixed|string|array
      */
-    public static function colorize($text, $search_regexp, $color)
+    public static function colorizePart($text, $search_regexp, $color)
     {
         $callback = function ($matches) use ($color) {
             return Colors::write($matches[1], $color);
@@ -167,6 +169,6 @@ class Colors
 
     public static function colorizeReturnValue($value)
     {
-        return ($value == 0) ? self::unicodeSymbol('x', 'red') : self::unicodeSymbol('ok', 'green');
+        return ($value == 0) ? self::unicodeSymbol('fail', array('red')) : self::unicodeSymbol('ok', array('green'));
     }
 }
