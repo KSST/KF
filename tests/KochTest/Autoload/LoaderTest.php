@@ -26,8 +26,11 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        // Fixtures
-        set_include_path(realpath(__DIR__ . '/fixtures') . PATH_SEPARATOR . get_include_path());
+        // add Fixtures folder, only if not already on the include_path
+        $path = realpath(__DIR__ . '/fixtures');
+        if(strpos(get_include_path(), $path) === false) {
+            set_include_path($path. PATH_SEPARATOR . get_include_path());
+        }
 
         /**
          * The APC user cache needs a reset, so that the map is generated freshly each run.
