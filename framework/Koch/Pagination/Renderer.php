@@ -22,7 +22,7 @@ class Renderer
      * Constructor.
      *
      * @param string $style
-     * @param array $options
+     * @param array  $options
      * @param object Pagination with Adapter
      */
     public function __construct($style = null, $options = null, $adapter)
@@ -35,7 +35,7 @@ class Renderer
      * Returns the classname of a pagination renderer by it's shortcut name.
      *
      * @staticvar array $viewRendererClassMap
-     * @param string $style Name of Pagination Renderer. Default "classic".
+     * @param  string $style Name of Pagination Renderer. Default "classic".
      * @return string Filename
      */
     public function getStyleClassname($style)

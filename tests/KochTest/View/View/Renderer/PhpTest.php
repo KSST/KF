@@ -23,7 +23,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     {
         // With the PHP renderer one might use short_open_tags in templates.
         // They are enabled by default from PHP 5.4 on, but were disabled by default in PHP 5.3.
-        if(version_compare(PHP_VERSION, '5.4.0', '<') and (ini_get('short_open_tag') == false)) {
+        if (version_compare(PHP_VERSION, '5.4.0', '<') and (ini_get('short_open_tag') == false)) {
             $this->markTestSkipped('This test requires the php.ini option "short_open_tag=on".');
         }
 

@@ -28,7 +28,7 @@ class TextTemplate extends AbstractRenderer
     /**
      * Sets the template file.
      *
-     * @param  string $file
+     * @param  string                   $file
      * @throws InvalidArgumentException
      */
     public function setTemplate($file)
@@ -51,10 +51,10 @@ class TextTemplate extends AbstractRenderer
      */
     public function render($template = null, $viewdata = null)
     {
-        if($template !== null) {
+        if ($template !== null) {
             $this->setTemplate($template);
         }
-        if($viewdata !== null) {
+        if ($viewdata !== null) {
             $this->assign($viewdata);
         }
 
@@ -72,7 +72,7 @@ class TextTemplate extends AbstractRenderer
     /**
      * Renders template content to file.
      *
-     * @param string $file Output file.
+     * @param  string $file Output file.
      * @return bool
      */
     public function renderToFile($file)

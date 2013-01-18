@@ -27,7 +27,7 @@ namespace Koch\Module;
  */
 class Generator
 {
-    static $structure = array(
+    $structure = array(
         'folders' => array(),
         'files' => array()
     );
@@ -46,11 +46,11 @@ class Generator
 
     public function create()
     {
-        foreach($structure['folders'] as $folder) {
+        foreach ($structure['folders'] as $folder) {
 
         }
 
-        foreach($structure['files'] as $file) {
+        foreach ($structure['files'] as $file) {
 
         }
     }

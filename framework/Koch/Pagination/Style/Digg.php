@@ -100,7 +100,6 @@ class Digg implements StyleInterface
             $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages, $url), $total_pages);
         }
 
-
         if ($next_page) {
             $html .= sprintf('<a href="%s">%s &nbsp;&raquo;</a>', str_replace('{page}', $next_page, $url), _('Next'));
         } else {

@@ -79,7 +79,7 @@ class Pagination
 
     public function setMaxResultsPerPage($maxResultsPerPage)
     {
-        if($maxResultsPerPage < 1) {
+        if ($maxResultsPerPage < 1) {
             throw new \InvalidArgumentException('There must be more than 1 MaxResultsPerPage.');
         }
 
@@ -141,7 +141,7 @@ class Pagination
      */
     public function getLastPage()
     {
-        $this->getNumberOfPages();
+        return $this->getNumberOfPages();
     }
 
     /**
@@ -197,11 +197,12 @@ class Pagination
      * Renders the pagination.
      *
      * @param string $renderer The pagination renderer to use.
-     * @param array $options Additional options. Optional.
+     * @param array  $options  Additional options. Optional.
      */
     public function render($renderer = null, $options = null)
     {
         $renderer = new Renderer($renderer, $options, $this);
+
         return $renderer->render();
     }
 }

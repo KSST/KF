@@ -98,6 +98,7 @@ class Download
             $finfo = finfo_open(FILEINFO_MIME_TYPE);
             $mimetype = finfo_file($finfo, $file);
             finfo_close($finfo);
+
             return $mimetype;
         } elseif (array_key_exists($extension, $mime_types)) {
             return $mime_types[$extension];

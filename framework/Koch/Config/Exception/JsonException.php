@@ -31,7 +31,8 @@ class JsonException extends \Exception
      * @param $filename
      * @param $error_code
      */
-    function __construct($filename, $error_code = null) {
+    public function __construct($filename, $error_code = null)
+    {
         $this->error_code = $error_code;
         $this->error = sprintf(
             _('JSON Error in file %s. %s.'),
@@ -52,7 +53,7 @@ class JsonException extends \Exception
      */
     public static function getJsonErrorMessage($json_error_type = null)
     {
-        if($json_error_type === null) {
+        if ($json_error_type === null) {
             return _('The json content from file was null.');
         }
 
