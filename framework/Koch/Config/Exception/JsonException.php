@@ -23,7 +23,6 @@ class JsonException extends \Exception
 {
     public $error = null;
     public $error_code = JSON_ERROR_NONE;
-    const JSON_ERROR_NULL = 0;
 
     /**
      * Constructor.
@@ -35,7 +34,7 @@ class JsonException extends \Exception
     {
         $this->error_code = $error_code;
         $this->error = sprintf(
-            _('JSON Error in file %s. %s.'),
+            _('JSON Error in file "%s". %s'),
             $filename,
             $this->getJsonErrorMessage($error_code)
         );
