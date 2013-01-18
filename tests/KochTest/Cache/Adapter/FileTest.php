@@ -24,10 +24,20 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Cache\Adapter\File::__construct
+     */
+    public function testConstructor()
+    {
+        $options = array('key' => 'value');
+        $this->object = new File($options);
+    }
+
+    /**
      * @covers Koch\Cache\Adapter\File::contains
      * @covers Koch\Cache\Adapter\File::store
      * @covers Koch\Cache\Adapter\File::fetch
      * @covers Koch\Cache\Adapter\File::delete
+     * @covers Koch\Cache\Adapter\File::clear
      */
     public function testFetch()
     {
@@ -58,7 +68,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Cache\Adapter\File::stats
+     * @covers Koch\Cache\Adapter\File::createFileNameFromKey
      */
     public function testCreateFilenameFromKey()
     {
