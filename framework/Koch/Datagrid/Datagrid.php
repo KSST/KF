@@ -196,16 +196,6 @@ class Datagrid extends Base
     }
 
     /**
-     * Set the doctrine pager layout object
-     *
-     * @param Doctrine_Pager_Layout $doctrinePagerLayout
-     */
-    public function setPagerLayout(Doctrine_Pager_Layout $doctrinePagerLayout)
-    {
-        $this->_doctrinePagerLayout = $doctrinePagerLayout;
-    }
-
-    /**
      * Set the results per page
      *
      * @param int $resultsPerPage
@@ -883,7 +873,7 @@ class Datagrid extends Base
         }
     }
 
-    public function getPage()
+    public function getCurrentPage()
     {
         $page = null;
 
@@ -911,7 +901,7 @@ class Datagrid extends Base
     private function addPaginationLimitToQuery()
     {
         // Page (URL alias => p)
-        $page = $this->getPage();
+        $page = $this->getCurrentPage();
 
         // Results Per Page (URL alias => rpp)
         $resultsPerPage = $this->getResultsPerPage();

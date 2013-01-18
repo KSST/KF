@@ -81,144 +81,31 @@ class Renderer
         self::$resultsPerPageItems = $_Items;
     }
 
-    public static function setPagerCssClass($pagerCssClass)
-    {
-        self::$pagerCssClass = $pagerCssClass;
-    }
-
-    public static function getPagerCssClass()
-    {
-        return self::$pagerCssClass;
-    }
-
-    /**
-     * getFirstPage
-     *
-     * Returns the first page
-     *
-     * @return int first page
-     */
-    public static function getFirstPage()
-    {
-        return 1;
-    }
-
-    public static function getPreviousPage()
-    {
-        return max(self::getDatagrid()->getPage() - 1, self::getFirstPage());
-    }
-
-    /**
-     * getNextPage
-     *
-     * Returns the next page
-     *
-     * @return int next page
-     */
-    public static function getNextPage()
-    {
-        return min(self::getDatagrid()->getPage() + 1, self::getLastPage());
-    }
-
-    /**
-     * getLastPage
-     *
-     * Returns the last page
-     *
-     * @return int last page
-     */
-    public static function getLastPage()
-    {
-        return max(1, ceil(self::getDatagrid()->getTotalResultsCount() / self::getDatagrid()->getResultsPerPage()));
-    }
-
-    public static function getOffset()
-    {
-        return (self::getDatagrid()->getPage() - 1) * self::getDatagrid()->getResultsPerPage();
-    }
-
-    /**
-     * getFirstIndice
-     *
-     * Return the first indice number for the current page
-     *
-     * @return int First indice number
-     */
-    public static function getFirstIndice()
-    {
-        return (self::getDatagrid()->getPage() - 1) * self::getDatagrid()->getResultsPerPage() + 1;
-    }
-
-    /**
-     * getLastIndice
-     *
-     * Return the last indice number for the current page
-     *
-     * @return int Last indice number
-     */
-    public static function getLastIndice()
-    {
-        $i = self::getDatagrid()->getPage() * self::getDatagrid()->getResultsPerPage();
-
-        return min(self::getDatagrid()->getTotalResultsCount(), $i);
-    }
-
-    /**
-     * haveToPaginate
-     *
-     * Return true if it's necessary to paginate or false if not
-     *
-     * @return bool true if it is necessary to paginate, false otherwise
-     */
-    public function haveToPaginate()
-    {
-        return self::getDatagrid()->getTotalResultsCount() > self::getDatagrid()->getResultsPerPage();
-    }
-
-    /**
-     * getNumberOfPages
-     *
-     * Return the number of pages ( total results / results per page )
-     * e.g.: 40 pages = 1000 results / 25 results per page.
-     *
-     * @return int Return the number of pages
-     */
-    public static function getNumberOfPages()
-    {
-        $number_of_pages = (self::getDatagrid()->getTotalResultsCount() / self::getDatagrid()->getResultsPerPage());
-
-        if ($number_of_pages > (int) $number_of_pages) {
-            $number_of_pages = (int) ($number_of_pages) + 1;
-        }
-
-        return $number_of_pages;
-    }
-
     public static function renderPager()
     {
-        $selected_page = self::getDatagrid()->getPage();
-        $results_count = self::getDatagrid()->getTotalResultsCount();
-        $results_per_page = self::getDatagrid()->getResultsPerPage();
-        $number_of_pages = self::getNumberOfPages();
+        $currentPage = $pagination->getCurrentPage();
+        $results_count = $pagination->getTotalResultsCount();
+        $results_per_page = $pagination->getResultsPerPage();
+        $numberOfPages = $pagination->getNumberOfPages();
 
-        $min_page_number = (int) ($selected_page - 5);
-        $max_page_number = (int) ($selected_page + 5);
+        $min_page_number = (int) ($currentPage - 5);
+        $max_page_number = (int) ($currentPage + 5);
 
         if ($min_page_number < 1) {
             $min_page_number = 1;
             $max_page_number = 11;
-            $max_page_number = ($max_page_number > $number_of_pages) ? $number_of_pages : 11;
+            $max_page_number = ($max_page_number > $numberOfPages) ? $numberOfPages : 11;
         }
 
-        if ($max_page_number > $number_of_pages) {
-            $max_page_number = $number_of_pages;
+        if ($max_page_number > $numberOfPages) {
+            $max_page_number = $numberOfPages;
             $min_page_number = $max_page_number - 10;
             $min_page_number = ($min_page_number < 1) ? 1 : $max_page_number - 10;
         }
 
         if ($results_count <= $results_per_page) {
             $min_page_number = 1;
-            $max_page_number = $number_of_pages;
+            $max_page_number = $numberOfPages;
         }
 
         // init
@@ -229,7 +116,7 @@ class Renderer
         // b) first [1][2][3][4][5] last
         // c) first prev [1][2][3][4][5] next last
 
-        if ($selected_page > 1 and $number_of_pages > 1) {
+        if ($currentPage > 1 and $numberOfPages > 1) {
             $url = self::getURLForPageInRange(self::getFirstPage());
             $first = '<li class="previous"><a href="' . $url . '" title="First Page">&laquo First Page</a></li>';
 
@@ -237,9 +124,9 @@ class Renderer
             $prev = '<li class="previous"><a href="' . $url . '" title="Previous Page">&laquo Previous</a></li>';
         }
 
-        $pages = self::renderPageRangeAroundPage($selected_page, $min_page_number, $max_page_number);
+        // renderPageRangeAroundPage
 
-        if ($selected_page < $number_of_pages and $number_of_pages > 1) {
+        if ($currentPage < $numberOfPages and $numberOfPages > 1) {
 
             $url = self::getURLForPageInRange(self::getNextPage());
             $next = '<li class="next"><a href="' . $url . '" title="Next Page">Next &raquo;</a></li>';
@@ -253,8 +140,8 @@ class Renderer
          */
         $info = '';
         $info .= 'Total Records' . $results_count;
-        $info .= 'Number of pages' . $number_of_pages;
-        $info .= 'Current Page' . $selected_page;
+        $info .= 'Number of pages' . $numberOfPages;
+        $info .= 'Current Page' . $currentPage;
         $info .= 'Min Page Index' . $min_page_number;
         $info .= 'Max Page Index' . $max_page_number;
         $info .= 'Results per page' . $results_per_page;
@@ -284,26 +171,6 @@ class Renderer
                        href: "themes/core/css/pagination.css"
                     }).appendTo("head");';
         $html .= '});</script>';
-
-        return $html;
-    }
-
-    public static function renderPageRangeAroundPage($selected_page, $min_page_number, $max_page_number)
-    {
-        $currentPageString = '<li class="active">%s</span>';
-        $pageInRangeString = '<li><a href="%s">%s</a></li>';
-
-        $url = self::getURLForPageInRange($selected_page);
-
-        $html = '';
-        for ($page = $min_page_number; $page <= $max_page_number; $page++) {
-            if ($page != $selected_page) {
-                $html .= sprintf($pageInRangeString, $url, $page);
-            } else {
-                // render the current page
-                $html .= sprintf($currentPageString, $page);
-            }
-        }
 
         return $html;
     }
@@ -792,7 +659,7 @@ class Renderer
         $html .= sprintf(
             $input_field_sprintf,
             self::getDatagrid()->getParameterAlias('Page'),
-            self::getDatagrid()->getPage()
+            self::getDatagrid()->getCurrentPage()
         );
 
         // hidden inputfield ResultsPerPage
