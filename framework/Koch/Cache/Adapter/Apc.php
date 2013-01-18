@@ -164,7 +164,7 @@ class Apc extends AbstractCache implements CacheInterface
          *   Retrieves APC's Shared Memory Allocation information
          * ========================================================
          */
-        if (false === function_exists('apc_sma_info')) {
+        if (true === function_exists('apc_sma_info')) {
             $info['sma_info'] = apc_sma_info(); // set "false" for details
 
             // Calculate "APC Memory Size" (Number of Segments * Size of Segment)
@@ -179,6 +179,9 @@ class Apc extends AbstractCache implements CacheInterface
             $memsize_total = $info['sma_info']['avail_mem'] * 100;
             $avail_mem_percent = sprintf('(%.1f%%)', $memsize_total  / $info['sma_info']['mem_size']);
             $info['sma_info']['mem_avail_percentage'] = $avail_mem_percent;
+        } else {
+            // if apc_sma_info not available, assign empty array
+            $info['sma_info'] = array();
         }
 
         if (true === function_exists('apc_cache_info')) {
