@@ -26,14 +26,13 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
      */
     public function testUnicodeSymbol()
     {
-        $this->assertEquals("✖", Colors::unicodeSymbol('big fail'));
+        $this->assertEquals('✖', Colors::unicodeSymbol('big fail'));
 
-        $this->assertEquals("\033[0;31m✖[0m", Colors::unicodeSymbol('big fail', 'red'));
-        var_dump(Colors::unicodeSymbol('big fail', 'red'));
+        $this->assertEquals('\033[0;31m✖\033[0m', Colors::unicodeSymbol('big fail', array('red')));
 
-        $this->assertEquals("\033[0;32m✔[0m", Colors::unicodeSymbol('big ok', 'green'));
+        $this->assertEquals('\033[0;32m✔\033[0m', Colors::unicodeSymbol('big ok', array('green')));
 
-        $this->assertEquals("\033[0;32;43m✖[0m", Colors::unicodeSymbol('big fail', array('green', 'yellow')));
+        $this->assertEquals('\033[0;32;43m✖\033[0m', Colors::unicodeSymbol('big fail', array('green', 'yellow')));
     }
 
     /**
@@ -52,39 +51,39 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
     {
         // only foreground color
         $this->assertEquals(
-            "\033[0;31mOn a dark desert highway\033[0m",
+            '\033[0;31mOn a dark desert highway\033[0m',
             Colors::write('On a dark desert highway', 'red')
         );
 
         // foreground and background color
         $this->assertEquals(
-            "\033[0;32;40mOn a dark desert highway\033[0m",
+            '\033[0;32;40mOn a dark desert highway\033[0m',
             Colors::write('On a dark desert highway', 'green', 'black')
         );
 
         // foreground, background and a modifier
        $this->assertEquals(
-            "\033[0;32;40;1mOn a dark desert highway\033[0m",
+            '\033[0;32;40;1mOn a dark desert highway\033[0m',
             Colors::write('On a dark desert highway', 'green', 'black', 'bold')
         );
 
         // foreground, background and two modifiers
         $options = array('green', 'black', 'bold', 'underscore');
         $this->assertEquals(
-            "\033[0;32;40;1mOn a dark desert highway\033[0m",
+            '\033[0;32;40;1mOn a dark desert highway\033[0m',
             Colors::write('On a dark desert highway', $options)
         );
     }
 
     /**
-     * @covers Koch\Console\Colors::colorize()
+     * @covers Koch\Console\Colors::colorizePart()
      */
-    public function testColorize()
+    public function testColorizePart()
     {
         // let's colorize only a defined part of a string
         $this->assertEquals(
-            "On a \033[0;31mdark desert\033[0m highway",
-            Colors::colorize('On a dark desert highway', 'dark desert', 'red')
+            'On a \033[0;31mdark desert\033[0m highway',
+            Colors::colorizePart('On a dark desert highway', 'dark desert', 'red')
         );
     }
 
@@ -105,10 +104,7 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
      */
     public function testColorizeReturnValue()
     {
-        $r = Colors::colorizeReturnValue(1);
-        $this->assertEquals($r, '');
-
-        $r = Colors::colorizeReturnValue(0);
-        $this->assertEquals($r, '');
+        $this->assertEquals('\033[0;32m✓\033[0m', Colors::colorizeReturnValue(1));
+        $this->assertEquals('\033[0;31m✖\033[0m', Colors::colorizeReturnValue(0));
     }
 }
