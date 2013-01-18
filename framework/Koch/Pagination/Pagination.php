@@ -43,7 +43,7 @@ class Pagination
     public $adapter;
 
     /* @var int The maximum number of items displayed per page. */
-    public $maxItemsPerPage;
+    public $maxResultsPerPage;
 
     /* @var int The current page. */
     public $currentPage;
@@ -90,20 +90,20 @@ class Pagination
         return $this;
     }
 
-    public function setMaxItemsPerPage($maxItemsPerPage)
+    public function setMaxResultsPerPage($maxResultsPerPage)
     {
-        if($maxItemsPerPage < 1) {
-            throw new \InvalidArgumentException('There must be more than 1 MaxItemsPerPage.');
+        if($maxResultsPerPage < 1) {
+            throw new \InvalidArgumentException('There must be more than 1 MaxResultsPerPage.');
         }
 
-        $this->maxItemsPerPage = (int) $maxItemsPerPage;
+        $this->maxResultsPerPage = (int) $maxResultsPerPage;
 
         return $this;
     }
 
-    public function getMaxItemsPerPage()
+    public function getMaxResultsPerPage()
     {
-        return $this->maxItemsPerPage;
+        return $this->maxResultsPerPage;
     }
 
     public function getCurrentPage()
@@ -134,33 +134,44 @@ class Pagination
         $this->totalNumberOfResults = (integer) $count;
     }
 
+    /**
+     * Returns the number of pages ( total results / results per page )
+     * Example: 1000 results / 25 results per page = 40 pages.
+     *
+     * @return int Number of Pages.
+     */
     public function getNumberOfPages()
     {
         if (null === $this->numberOfPages) {
-            $this->numberOfPages = (int) ceil($this->getTotalNumberOfResults() / $this->getMaxItemsPerPage());
+            $this->numberOfPages = (int) ceil($this->getTotalNumberOfResults() / $this->getMaxResultsPerPage());
         }
 
         return $this->numberOfPages;
     }
 
     /**
-     * Same as getNumberOfPages().
+     * Returns the last page. Same as getNumberOfPages(), but for convenience.
      */
     public function getLastPage()
     {
         $this->getNumberOfPages();
     }
 
+    /**
+     * Returns true, if it's necessary to paginate and false, if not.
+     *
+     * @return bool True, if it is necessary to paginate. False otherwise.
+     */
     public function haveToPaginate()
     {
-        return $this->getTotalNumberOfResults() > $this->maxItemsPerPage;
+        return $this->getTotalNumberOfResults() > $this->maxResultsPerPage;
     }
 
     public function getCurrentPageResults()
     {
         if (null === $this->currentPageResults) {
-            $offset = ($this->getCurrentPage() - 1) * $this->getMaxItemsPerPage();
-            $length = $this->getMaxItemsPerPage();
+            $offset = ($this->getCurrentPage() - 1) * $this->getMaxResultsPerPage();
+            $length = $this->getMaxResultsPerPage();
             $this->currentPageResults = $this->adapter->getSlice($offset, $length);
         }
 
