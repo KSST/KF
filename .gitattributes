@@ -9,7 +9,7 @@ tests export-ignore
 
 # do not git export the following files
 .travis.yml export-ignore
-.phpmd.xml export-ignore
+phpmd.xml export-ignore
 .php_cs export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore
