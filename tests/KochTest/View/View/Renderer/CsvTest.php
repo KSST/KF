@@ -29,7 +29,6 @@ class CsvTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
-
     /**
      * @covers Koch\View\Renderer\Csv::__construct
      * @covers Koch\View\Renderer\Csv::getOptions

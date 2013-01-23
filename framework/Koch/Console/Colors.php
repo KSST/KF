@@ -145,7 +145,7 @@ class Colors
             }
         }
 
-        if(is_array($codes)) {
+        if (is_array($codes)) {
             $escapeCodes = implode(';', $codes);
         }
 
