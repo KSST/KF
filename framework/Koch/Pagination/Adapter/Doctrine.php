@@ -23,7 +23,7 @@
  *
  */
 
-namespace Koch\Pagination;
+namespace Koch\Pagination\Adapter;
 
 use Koch\Pagination\AdapterInterface;
 
