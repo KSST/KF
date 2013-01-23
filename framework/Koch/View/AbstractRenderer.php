@@ -87,7 +87,7 @@ abstract class AbstractRenderer
 
     /**
      * Returns options array.
-     * 
+     *
      * @return array Options.
      */
     public function getOptions()

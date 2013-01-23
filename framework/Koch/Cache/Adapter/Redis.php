@@ -53,7 +53,7 @@ class Redis extends AbstractCache implements CacheInterface
         $this->redis = new \Redis();
 
         // connect to redis instance
-        if ($this->redis->connect('127.0.0.1') === false) {
+        if ($this->redis->connect('127.0.0.1', 6379) === false) {
             throw new RuntimeException('Connection to Redis database failed. Check configuration.');
         }
 

@@ -28,7 +28,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // add Fixtures folder, only if not already on the include_path
         $path = realpath(__DIR__ . '/fixtures');
-        if(strpos(get_include_path(), $path) === false) {
+        if (strpos(get_include_path(), $path) === false) {
             set_include_path($path. PATH_SEPARATOR . get_include_path());
         }
 
