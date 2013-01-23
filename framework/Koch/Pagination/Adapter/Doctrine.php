@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Pagination;
+namespace Koch\Pagination\Adapter;
 
 use Koch\Pagination\AdapterInterface;
 
