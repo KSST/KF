@@ -30,7 +30,7 @@ class Conversion
      */
     public static function arrayToXml($array)
     {
-        // initalize new XML Writer in memory
+        // initialize new XML Writer in memory
         $xml = new \XmlWriter();
         $xml->openMemory();
 
