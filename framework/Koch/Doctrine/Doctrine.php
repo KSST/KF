@@ -35,7 +35,7 @@ namespace and path to search in
         $classLoader->register();
 
         // fetch doctrine config handler for configuring
-        $config = new \Doctrine\ORM\Configuration();
+        $D2Config = new \Doctrine\ORM\Configuration();
 
         // fetch cache driver - APC in production and Array in development mode
         if (extension_loaded('apc') and DEBUG == false) {
@@ -45,11 +45,11 @@ namespace and path to search in
         }
 
         // set cache driver
-        $config->setMetadataCacheImpl($cache);
-        $config->setQueryCacheImpl($cache);
+        $D2Config->setMetadataCacheImpl($cache);
+        $D2Config->setQueryCacheImpl($cache);
 
         // set annotation driver for entities
-        $config->setMetadataDriverImpl($config->newDefaultAnnotationDriver(self::getModelPathsForAllModules()));
+        $D2Config->setMetadataDriverImpl($D2Config->newDefaultAnnotationDriver(self::getModelPathsForAllModules()));
 
         /**
          * This is slow like hell, because getAllClassNames traverses all
@@ -57,30 +57,30 @@ namespace and path to search in
          * a better way to acquire all the models.
          * @todo optimize this for performance reasons
          */
-        $config->getMetadataDriverImpl()->getAllClassNames();
+        $D2Config->getMetadataDriverImpl()->getAllClassNames();
         #\Koch\Debug\Debug::firebug($config->getMetadataDriverImpl()->getAllClassNames());
 
         // set proxy dirs
-        $config->setProxyDir(APPLICATION_PATH . 'Doctrine');
-        $config->setProxyNamespace('Proxy');
+        $D2Config->setProxyDir(APPLICATION_PATH . 'Doctrine');
+        $D2Config->setProxyNamespace('Proxy');
 
         // regenerate proxies only in debug and not in production mode
         if (DEBUG == true) {
-            $config->setAutoGenerateProxyClasses(true);
+            $D2Config->setAutoGenerateProxyClasses(true);
         } else {
-            $config->setAutoGenerateProxyClasses(false);
+            $D2Config->setAutoGenerateProxyClasses(false);
         }
 
         // use main configuration values for setting up the connection
         $connectionOptions = array(
-            'driver'    => $applicationConfig['database']['driver'],
-            'user'      => $applicationConfig['database']['user'],
-            'password'  => $applicationConfig['database']['password'],
-            'dbname'    => $applicationConfig['database']['dbname'],
-            'host'      => $applicationConfig['database']['host'],
-            'charset'   => $applicationConfig['database']['charset'],
+            'driver'    => $config['database']['driver'],
+            'user'      => $config['database']['user'],
+            'password'  => $config['database']['password'],
+            'dbname'    => $config['database']['dbname'],
+            'host'      => $config['database']['host'],
+            'charset'   => $config['database']['charset'],
             'driverOptions' => array(
-                'charset' => $applicationConfig['database']['charset']
+                'charset' => $config['database']['charset']
             )
         );
 
@@ -98,7 +98,7 @@ namespace and path to search in
          * The constant definition is for building (raw) sql queries manually.
          * The database prefixing is registered via an event.
          */
-        define('DB_PREFIX', $applicationConfig['database']['prefix']);
+        define('DB_PREFIX', $config['database']['prefix']);
 
         $tablePrefix = new TablePrefix(DB_PREFIX);
         $event->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
@@ -108,17 +108,17 @@ namespace and path to search in
          *
          * We need some more functions for MySQL, like RAND for random values.
          */
-        $config->addCustomNumericFunction('RAND', 'Koch\Doctrine\Extensions\Query\Mysql\Rand');
+        $D2Config->addCustomNumericFunction('RAND', 'Koch\Doctrine\Extensions\Query\Mysql\Rand');
 
         /**
          * Set UTF-8 handling of database data via Doctrine Event for MySQL.
          */
-        if ($applicationConfig['database']['driver'] !== null
-        and $applicationConfig['database']['driver'] == "pdo_mysql") {
-            if ($applicationConfig['database']['charset'] !== null) {
+        if ($config['database']['driver'] !== null
+        and $config['database']['driver'] == 'pdo_mysql') {
+            if ($config['database']['charset'] !== null) {
                 $event->addEventSubscriber(
                     new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit(
-                        $applicationConfig['database']['charset'],
+                        $config['database']['charset'],
                         'utf8_unicode_ci'
                     )
                 );
@@ -126,23 +126,20 @@ namespace and path to search in
         }
 
         // Entity manager
-        $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $config, $event);
+        $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $D2Config, $event);
 
         // set DBAL DebugStack Logger (also needed for counting queries)
         if (defined('DEBUG') and DEBUG == 1) {
             self::$sqlLoggerStack = new \Doctrine\DBAL\Logging\DebugStack();
             $em->getConfiguration()->setSQLLogger(self::$sqlLoggerStack);
-
-            /**
-             * Echo SQL Queries directly on the page.
-             */
-            #$em->getConfiguration()->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
+            // Echo SQL Queries directly on the page.
+            $em->getConfiguration()->setSQLLogger(new \Doctrine\DBAL\Logging\EchoSQLLogger());
         }
 
         self::$em = $em;
 
-        // done with config, remove to safe memory
-        unset($applicationConfig, $em, $event, $cache, $classLoader, $config);
+        // the D2 initalization is done, remove vars to safe memory
+        unset($config, $em, $event, $cache, $classLoader, $D2Config);
 
         return self::$em;
     }
@@ -150,7 +147,7 @@ namespace and path to search in
     /**
      * Gets the entity manager to use for all tests
      *
-     * @return Doctrine\ORM\EntityManager
+     * @return \Doctrine\ORM\EntityManager
      */
     public static function getEntityManager()
     {
@@ -164,11 +161,13 @@ namespace and path to search in
      */
     protected function loadSchema($classes = null)
     {
+        $em = $this->getEntityManager();
+
         if ($classes === null) {
-            $classes = $entityManager->getMetadataFactory()->getAllMetadata();
+            $classes = $em->getMetadataFactory()->getAllMetadata();
         }
 
-        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($this->getEntityManager());
+        $schemaTool = new \Doctrine\ORM\Tools\SchemaTool($em);
         $schemaTool->createSchema($classes);
     }
 
