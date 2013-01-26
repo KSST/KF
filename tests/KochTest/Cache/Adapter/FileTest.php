@@ -28,9 +28,9 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $options = array('key' => 'value');
+        $options = array('prefix' => 'value');
         $this->object = new File($options);
-        $this->assertEquals('value', $this->object->options['key']);
+        $this->assertEquals('value', $this->object->options['prefix']);
     }
 
     /**
