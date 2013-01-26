@@ -39,10 +39,64 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->object);
 
-        $options = array('key' => 'value');
+        $options = array('prefix' => 'value');
         $this->object = new File($options);
 
-        $this->assertEquals('value', $this->object->options['key']);
+        $this->assertEquals('value', $this->object->options['prefix']);
+    }
+
+    /**
+     * @covers Koch\Cache\AbstractCache::setOptions
+     * @covers Koch\Cache\AbstractCache::setOption
+     */
+    public function testSetOptions()
+    {
+        $options = array(
+             'prefix' => 'someprefix',
+             'ttl' => 1337
+        );
+        $this->object->setOptions($options);
+
+        $this->assertEquals('someprefix', $this->object->options['prefix']);
+        $this->assertEquals(1337, $this->object->options['ttl']);
+    }
+
+    public static function SetOptionDataprovider()
+    {
+        return array(
+          array('prefix', 'some-prefix'),
+          array('ttl', 1337)
+        );
+    }
+
+    /**
+     * @covers Koch\Cache\AbstractCache::setOption
+     * @dataProvider SetOptionDataprovider
+     */
+    public function testSetOption($key, $value)
+    {
+        $this->object->setOption($key, $value);
+        $this->assertEquals($this->object->options[$key], $value);
+    }
+
+    public static function SetOptionDataproviderInvalidData()
+    {
+        return array(
+          array('prefix', ''),
+          array('ttl', -1),
+          array('unknown', 'unknown')
+        );
+    }
+
+    /**
+     * @covers Koch\Cache\AbstractCache::setOption
+     * @covers Koch\Cache\AbstractCache::setOptions
+     * @dataProvider SetOptionDataproviderInvalidData
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetOption_throwsException($key, $value)
+    {
+        $this->object->setOption($key, $value);
     }
 
     /**

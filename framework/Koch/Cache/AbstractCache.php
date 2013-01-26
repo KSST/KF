@@ -29,9 +29,52 @@ abstract class AbstractCache
      */
     public function __construct($options = array())
     {
-        foreach ($options as $key => $value) {
-            $this->options[$key] = $value;
+        $this->setOptions($options);
+    }
+
+    /**
+     * Set options.
+     *
+     * @param array Options.
+     */
+    public function setOptions($options = array())
+    {
+        if(is_array($options) === true) {
+            foreach ($options as $key => $value) {
+                $this->setOption($key, $value);
+            }
         }
+    }
+
+    /**
+     * Sets a single option.
+     *
+     * @param string Key.
+     * @param mixed Value.
+     * @return mixed True, if successfull.
+     */
+    public function setOption($key, $value)
+    {
+        switch ($key) {
+            case 'ttl':
+                $value = (int) $value;
+                if ($value < 1) {
+                    throw new \InvalidArgumentException('TTL can not be lower than 1.');
+                }
+                $this->options['ttl'] = $value;
+                break;
+            case 'prefix':
+                $prefix = (string) $value;
+                if ($prefix === '') {
+                    throw new \InvalidArgumentException('Prefix can not empty.');
+                }
+                $this->options['prefix'] = $prefix;
+                break;
+            default:
+                throw new \InvalidArgumentException(sprintf('You tried to set the Option "%s", which is unknown.', $key));
+        }
+
+        return true;
     }
 
     /**
