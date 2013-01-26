@@ -419,7 +419,7 @@ class Router implements RouterInterface, \ArrayAccess
      * 1. firstly, check if ModRewrite is enabled,
      *    this decides upon which URL parser to use.
      * 2. URL parser splits the uri into uri segments.
-     * 3. routes are initalized (the defaultRoute and all module routes)
+     * 3. routes are initialized (the defaultRoute and all module routes)
      * 4. try to find a route/map matching with the uri_segments
      * 5. if no mapping applies, then set default values from config and fallback to a static routing
      * 6. always! -> found_route -> call!
@@ -436,7 +436,7 @@ class Router implements RouterInterface, \ArrayAccess
             return $this->dispatchToDefaultRoute();
         }
 
-        // initalize Routes
+        // initialize Routes
         $this->loadDefaultRoutes();
 
         /**

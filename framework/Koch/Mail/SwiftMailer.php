@@ -54,7 +54,7 @@ class SwiftMailer
 
         \Swift::init('Koch\Mail\SwiftMailer::swiftmailerLazyConfiguration');
 
-        $this->initalizeMailer();
+        $this->initializeMailer();
     }
 
     /**
@@ -70,7 +70,7 @@ class SwiftMailer
     /**
      * Instantiates and configures Swift Mailer
      */
-    private function initalizeMailer()
+    private function initializeMailer()
     {
         switch ($this->options['method']) {
             case 'smtp':
@@ -136,7 +136,7 @@ class SwiftMailer
     public function getMailer()
     {
         if ($this->mailer === null) {
-            $this->initalizeMailer();
+            $this->initializeMailer();
         }
 
         return $this->mailer;
