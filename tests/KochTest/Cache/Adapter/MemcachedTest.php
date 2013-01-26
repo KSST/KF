@@ -29,6 +29,25 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
         $this->object = null;
     }
 
+
+    public static function SetOptionDataprovider()
+    {
+        return array(
+          array('useConnection', 'default'),
+          array('connection', array('default' => array()))
+        );
+    }
+
+    /**
+     * @covers Koch\Cache\Adapter\Memcached::setOption
+     * @dataProvider SetOptionDataprovider
+     */
+    public function testSetOption($key, $value)
+    {
+        $this->object->setOption($key, $value);
+        $this->assertEquals($this->object->options[$key], $value);
+    }
+
     /**
      * @covers Koch\Cache\Adapter\Memcached::contains
      * @covers Koch\Cache\Adapter\Memcached::store

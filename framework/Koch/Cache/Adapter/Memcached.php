@@ -85,6 +85,38 @@ class Memcached extends AbstractCache implements CacheInterface
         $this->memcached = $this->getMemcachedInstance($options['useConnection']);
     }
 
+    /**
+     * Sets a single option.
+     *
+     * @param string Key.
+     * @param mixed Value.
+     * @return mixed True, if successfull.
+     */
+    public function setOption($key, $value)
+    {
+        switch ($key) {
+            case 'useConnection':
+                $value = (string) $value;
+                if ($value === '') {
+                    throw new \InvalidArgumentException('useConnection options can not be empty.');
+                }
+                $this->options['useConnection'] = $value;
+                break;
+             case 'connection':
+                $connection = (array) $value;
+                if (is_array($connection) === false) {
+                    throw new \InvalidArgumentException('Connection option must be array.');
+                }
+                $this->options['connection'] = $connection;
+                break;
+            default:
+                // maybe the option is known on the parent class, otherwise will throw excetion
+                parent::setOption($key, $value);
+        }
+
+        return true;
+    }
+
     public function getMemcachedInstance($connection = 'default')
     {
         // one instantiation (per-connection per-request)
