@@ -29,7 +29,6 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
         $this->object = null;
     }
 
-
     public static function SetOptionDataprovider()
     {
         return array(

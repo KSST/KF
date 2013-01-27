@@ -39,7 +39,7 @@ abstract class AbstractCache
      */
     public function setOptions($options = array())
     {
-        if(is_array($options) === true) {
+        if (is_array($options) === true) {
             foreach ($options as $key => $value) {
                 $this->setOption($key, $value);
             }

@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\PHPUnit;
+namespace Koch\PhpUnit;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\Common\Cache\ArrayCache;
@@ -35,7 +35,7 @@ class DoctrineTestCase extends TestCase
     {
         parent::setUp();
 
-        if(!extension_loaded('pdo_sqlite') or !extension_loaded('sqlite')) {
+        if (!extension_loaded('pdo_sqlite') or !extension_loaded('sqlite')) {
             $this->markTestSkipped('This test requires the php extension "pdo_sqlite" or "sqlite".');
         }
 
