@@ -35,7 +35,6 @@ nbproject
 /.htaccess
 
 # Scriptfiles
-cache
 *.log
 
 # Subversion
