@@ -23,7 +23,7 @@
  *
  */
 
-namespace Koch\PHPUnit;
+namespace Koch\PhpUnit;
 
 /**
  * Koch Framework - An alternative base-class for PHPUnit test cases.
@@ -50,10 +50,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
         /**
      * Calls a class or object method.
      *
-     * @param object|string $class  The class name or object.
-     * @param string        $method The method name.
-     * @param array         $args   The method arguments.
-     * @return mixed The method result.
+     * @param  object|string $class  The class name or object.
+     * @param  string        $method The method name.
+     * @param  array         $args   The method arguments.
+     * @return mixed         The method result.
      */
     public function callMethod($class, $method, array $args = array())
     {
@@ -69,10 +69,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Recursively copies a file or directory tree to another location.
      *
-     * @param string  $from    The source file system path.
-     * @param string  $to      The target file system path.
-     * @param boolean $replace Replacing existing files?
-     * @param boolean $purge   Automatically purge?
+     * @param  string     $from    The source file system path.
+     * @param  string     $to      The target file system path.
+     * @param  boolean    $replace Replacing existing files?
+     * @param  boolean    $purge   Automatically purge?
      * @throws \Exception If the path could not be copied.
      */
     public function copyPath($from, $to, $replace = true, $purge = true)
@@ -121,8 +121,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * Creates a temporary directory path that will be automatically purged
      * at the end of the test.
      *
-     * @param string $name The directory name.
-     * @return string The directory path.
+     * @param  string     $name The directory name.
+     * @return string     The directory path.
      * @throws \Exception If the directory could not be created.
      */
     public function createDir($name = null)
@@ -148,8 +148,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
      * Creates a temporary file path that will be automatically purged at the
      * end of the test.
      *
-     * @param string $name The file name.
-     * @return string The file path.
+     * @param  string     $name The file name.
+     * @return string     The file path.
      * @throws \Exception If the file could not be created.
      */
     public function createFile($name = null)
@@ -174,9 +174,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Finds a class method and returns the ReflectionMethod instance.
      *
-     * @param object|string $class The class name or object.
-     * @param string        $name  The method name.
-     * @return ReflectionMethod The method name.
+     * @param  object|string       $class The class name or object.
+     * @param  string              $name  The method name.
+     * @return ReflectionMethod    The method name.
      * @throws ReflectionException If the method does not exist.
      */
     public function findMethod($class, $name)
@@ -199,9 +199,9 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Finds a class property and returns the ReflectionProperty instance.
      *
-     * @param object|string $class The class name or object.
-     * @param string        $name  The property name.
-     * @return ReflectionProperty The property instance.
+     * @param  object|string       $class The class name or object.
+     * @param  string              $name  The property name.
+     * @return ReflectionProperty  The property instance.
      * @throws ReflectionException If the property is not found.
      */
     public function findProperty($class, $name)
