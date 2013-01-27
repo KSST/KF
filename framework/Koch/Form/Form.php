@@ -141,7 +141,7 @@ class Form implements FormInterface
      * @var string
      */
     protected $name;
-    protected $novalidation;
+    protected $noValidation;
     protected $target;
 
     /**
@@ -361,7 +361,7 @@ class Form implements FormInterface
      */
     public function getNoValidation()
     {
-        return ($this->novalidation === true) ? 'novalidate' : '';
+        return ($this->noValidation === true) ? 'novalidate' : '';
     }
 
     /**
@@ -374,7 +374,7 @@ class Form implements FormInterface
      */
     public function setNoValidation($bool)
     {
-        $this->novalidation = (bool) $bool;
+        $this->noValidation = (bool) $bool;
 
         return $this;
     }
@@ -414,12 +414,12 @@ class Form implements FormInterface
     {
         if (is_array($attributes)) {
             /**
-             * Array is a form description array for the formgenerator
+             * The incomming attributes array contains a form description array for the formgenerator.
              */
             if (isset($attributes['form']) === true) {
-                // generate a form with the formgenerator by passing the attributes array in
+                // generate form
                 $form = new \Koch\Form\Generator\PHPArray($attributes);
-                // and copy all properties of the inner form object to ($this) outer form object =)
+                // copy all properties of the inner form object to ($this) outer form object =)
                 $this->copyObjectProperties($form, $this);
                 // unset inner form
                 unset($form);
