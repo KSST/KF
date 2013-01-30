@@ -122,9 +122,9 @@ class Browser
     /**
      * Constructor
      *
-     *  Configure the User Agent from a user agent string.
-     *  @param  String  $userAgentString => the user agent string.
-     *  @param  UserAgentParser  $userAgentParser => the parser used to parse the string.
+     * Configure the User Agent from a user agent string.
+     * @param String          $userAgentString => the user agent string.
+     * @param UserAgentParser $userAgentParser => the parser used to parse the string.
      */
     public function __construct($userAgentString = null, UserAgentParser $userAgentParser = null)
     {
@@ -157,7 +157,7 @@ class Browser
      */
     public function isBot()
     {
-        return (bool) ($this->getBrowserTyp() == self::TYPE_BOT);
+        return (bool) ($this->getBrowserTyp() === self::TYPE_BOT);
     }
 
     /**
@@ -166,7 +166,7 @@ class Browser
      */
     public function isIE()
     {
-        return (bool) ($this->getBrowserName() == self::BROWSER_IE);
+        return (bool) ($this->getBrowserName() === self::BROWSER_IE);
     }
 
     /**
@@ -175,7 +175,7 @@ class Browser
      */
     public function isFirefox()
     {
-        return (bool) ($this->getBrowserName() == self::BROWSER_FIREFOX);
+        return (bool) ($this->getBrowserName() === self::BROWSER_FIREFOX);
     }
 
     /**
@@ -184,7 +184,7 @@ class Browser
      */
     public function isOpera()
     {
-        return (bool) ($this->getBrowserName() == self::BROWSER_OPERA);
+        return (bool) ($this->getBrowserName() === self::BROWSER_OPERA);
     }
 
     /**
@@ -193,7 +193,7 @@ class Browser
      */
     public function isChrome()
     {
-        return (bool) ($this->getBrowserName() == self::BROWSER_CHROME);
+        return (bool) ($this->getBrowserName() === self::BROWSER_CHROME);
     }
 
     /**
@@ -202,7 +202,7 @@ class Browser
      */
     public function isSafari()
     {
-        return (bool) ($this->getBrowserName() == self::BROWSER_SAFARI);
+        return (bool) ($this->getBrowserName() === self::BROWSER_SAFARI);
     }
 
     /**
@@ -211,7 +211,7 @@ class Browser
      */
     public function isMobilSystem()
     {
-        return (bool) ($this->getOperatingSystemTyp() == self::SYSTEM_MOBIL);
+        return (bool) ($this->getOperatingSystemTyp() === self::SYSTEM_MOBIL);
     }
 
     /**
@@ -220,15 +220,15 @@ class Browser
      */
     public function isConsoleSystem()
     {
-        return (bool) ($this->getOperatingSystemTyp() == self::SYSTEM_CONSOLE);
+        return (bool) ($this->getOperatingSystemTyp() === self::SYSTEM_CONSOLE);
     }
 
     // --------------- BROWSER ---------------
 
     /**
-     *  Get Browser name
+     * Get Browser name
      *
-     *  @return String - the browser name
+     * @return String - the browser name
      */
     public function getBrowserName()
     {
@@ -236,8 +236,8 @@ class Browser
     }
 
     /**
-     *  Set Browser name
-     *  @param String - the browser name;
+     * Set Browser name
+     * @param String - the browser name;
      */
     public function setBrowserName($name)
     {
@@ -245,9 +245,9 @@ class Browser
     }
 
     /**
-     *  Get Browser typ (bot, browser...)
+     * Get Browser typ (bot, browser...)
      *
-     *  @return String - the browser typ
+     * @return String - the browser typ
      */
     public function getBrowserTyp()
     {
@@ -255,8 +255,8 @@ class Browser
     }
 
     /**
-     *  Set Browser typ
-     *  @param String - the browser typ;
+     * Set Browser typ
+     * @param String - the browser typ;
      */
     public function setBrowserTyp($name)
     {
@@ -264,9 +264,9 @@ class Browser
     }
 
     /**
-     *  Get Browser sub typ (validator, pda...)
+     * Get Browser sub typ (validator, pda...)
      *
-     *  @return String - the browser sub typ
+     * @return String - the browser sub typ
      */
     public function getBrowserTypSub()
     {
@@ -274,8 +274,8 @@ class Browser
     }
 
     /**
-     *  Set Browser sub typ
-     *  @param String - the browser sub typ;
+     * Set Browser sub typ
+     * @param String - the browser sub typ;
      */
     public function setBrowserTypSub($name)
     {
@@ -283,9 +283,9 @@ class Browser
     }
 
     /**
-     *  Get Browser version
+     * Get Browser version
      *
-     *  @return String - the browser version
+     * @return String - the browser version
      */
     public function getBrowserVersion()
     {
@@ -293,8 +293,8 @@ class Browser
     }
 
     /**
-     *  Set Browser version
-     *  @param String - the browser version;
+     * Set Browser version
+     * @param String - the browser version;
      */
     public function setBrowserVersion($version)
     {
@@ -302,9 +302,9 @@ class Browser
     }
 
     /**
-     *  Get Browser version major
+     * Get Browser version major
      *
-     *  @return String - the browser version major
+     * @return String - the browser version major
      */
     public function getBrowserVersionMajor()
     {
@@ -312,8 +312,8 @@ class Browser
     }
 
     /**
-     *  Set Browser version major
-     *  @param String - the browser version major;
+     * Set Browser version major
+     * @param String - the browser version major;
      */
     public function setBrowserVersionMajor($version)
     {
@@ -321,9 +321,9 @@ class Browser
     }
 
     /**
-     *  Get Browser version minor
+     * Get Browser version minor
      *
-     *  @return String - the browser version minor
+     * @return String - the browser version minor
      */
     public function getBrowserVersionMinor()
     {
@@ -331,8 +331,8 @@ class Browser
     }
 
     /**
-     *  Set Browser version minor
-     *  @param String - the browser version minor;
+     * Set Browser version minor
+     * @param String - the browser version minor;
      */
     public function setBrowserVersionMinor($version)
     {
@@ -340,9 +340,9 @@ class Browser
     }
 
     /**
-     *  Get Browser version release
+     * Get Browser version release
      *
-     *  @return String - the browser version release
+     * @return String - the browser version release
      */
     public function getBrowserVersionRelease()
     {
@@ -350,8 +350,8 @@ class Browser
     }
 
     /**
-     *  Set Browser version release
-     *  @param String - the browser version release;
+     * Set Browser version release
+     * @param String - the browser version release;
      */
     public function setBrowserVersionRelease($value)
     {
@@ -362,9 +362,9 @@ class Browser
     }
 
     /**
-     *  Get Browser version build
+     * Get Browser version build
      *
-     *  @return String - the browser version build
+     * @return String - the browser version build
      */
     public function getBrowserVersionBuild()
     {
@@ -372,8 +372,8 @@ class Browser
     }
 
     /**
-     *  Set Browser version build
-     *  @param String - the browser version build;
+     * Set Browser version build
+     * @param String - the browser version build;
      */
     public function setBrowserVersionBuild($value)
     {
@@ -386,9 +386,9 @@ class Browser
     // --------------- OPERATING SYSTEM ---------------
 
     /**
-     *  Get the operating system
+     * Get the operating system
      *
-     *  @return String - the operating system
+     * @return String - the operating system
      */
     public function getOperatingSystem()
     {
@@ -396,8 +396,8 @@ class Browser
     }
 
     /**
-     *  Set Operating System ( windows, linux ...)
-     *  @param String - the operating system.
+     * Set Operating System ( windows, linux ...)
+     * @param String - the operating system.
      */
     public function setOperatingSystem($os)
     {
@@ -405,9 +405,9 @@ class Browser
     }
 
     /**
-     *  Get the operating system name ( vista, 2000, 7 ...)
+     * Get the operating system name ( vista, 2000, 7 ...)
      *
-     *  @return String - the operating system name
+     * @return String - the operating system name
      */
     public function getOperatingSystemName()
     {
@@ -415,8 +415,8 @@ class Browser
     }
 
     /**
-     *  Set Operating System typ ( os, mobile...)
-     *  @param String - the operating system typ.
+     * Set Operating System typ ( os, mobile...)
+     * @param String - the operating system typ.
      */
     public function setOperatingSystemTyp($value)
     {
@@ -424,8 +424,8 @@ class Browser
     }
 
     /**
-     *  Get the operating system typ
-     *  @return String - the operating system typ
+     * Get the operating system typ
+     * @return String - the operating system typ
      */
     public function getOperatingSystemTyp()
     {
@@ -433,8 +433,8 @@ class Browser
     }
 
     /**
-     *  Set Operating System sub typ ( device...)
-     *  @param String - the operating system sub typ.
+     * Set Operating System sub typ ( device...)
+     * @param String - the operating system sub typ.
      */
     public function setOperatingSystemTypSub($value)
     {
@@ -442,9 +442,9 @@ class Browser
     }
 
     /**
-     *  Get the operating system sub typ
+     * Get the operating system sub typ
      *
-     *  @return String - the operating system sub typ
+     * @return String - the operating system sub typ
      */
     public function getOperatingSystemTypSub()
     {
@@ -452,7 +452,7 @@ class Browser
     }
 
     /**
-     *  Set Operating System name
+     * Set Operating System name
      *  @param String - the operating system name.
      */
     public function setOperatingSystemName($value)
@@ -462,8 +462,8 @@ class Browser
 
     // --------------- ENGINE ---------------
     /**
-     *  Get the Engine Name
-     *  @return String the engine name
+     * Get the Engine Name
+     * @return String the engine name
      */
     public function getEngine()
     {
@@ -471,8 +471,8 @@ class Browser
     }
 
     /**
-     *  Set Engine name
-     *  @param String - the engine name
+     * Set Engine name
+     * @param String - the engine name
      */
     public function setEngine($engine)
     {
@@ -480,8 +480,8 @@ class Browser
     }
 
     /**
-     *  Get the Engine version
-     *  @return String the engine version
+     * Get the Engine version
+     * @return String the engine version
      */
     public function getEngineVersion()
     {
@@ -489,18 +489,17 @@ class Browser
     }
 
     /**
-     *  Set Engine version
-     *  @param String - the engine version
+     * Set Engine version
+     * @param String - the engine version
      */
     public function setEngineVersion($version)
     {
         $this->engineVersion = $version;
     }
 
-    // --------------- USER AGENT ---------------
     /**
-     *  Get the User Agent String
-     *  @return String the User Agent string
+     * Get the User Agent String
+     * @return String the User Agent string
      */
     public function getUserAgentString()
     {
@@ -508,23 +507,22 @@ class Browser
     }
 
     /**
-     *  Set Engine name
-     *  @param String - the engine name
+     * Set Engine name
+     * @param String - the engine name
      */
     public function setUserAgentString($userAgentString)
     {
         $this->userAgentString = $userAgentString;
     }
 
-    // --------------- INFO ---------------
     public function __toString()
     {
         return $this->getFullName();
     }
 
     /**
-     *  Returns a string combined browser name plus version
-     *  @return browser name plus version
+     * Returns a string combined browser name plus version
+     * @return browser name plus version
      */
     public function getFullName()
     {
@@ -532,7 +530,9 @@ class Browser
     }
 
     /**
-     *  Convert the http user agent to an array.
+     * Convert the http user agent to an array.
+     *
+     * @return array
      */
     public function toArray()
     {
@@ -556,8 +556,8 @@ class Browser
     }
 
     /**
-     *  Configure the user agent from an input array.
-     *  @param Array $data input data array
+     * Configure the user agent from an input array.
+     * @param Array $data input data array
      */
     public function fromArray(array $data)
     {
@@ -580,8 +580,9 @@ class Browser
     }
 
     /**
-     *  This method tells whether this User Agent is unknown or not.
-     *  @return TRUE is the User Agent is unknown, FALSE otherwise.
+     * This method tells whether this User Agent is unknown or not.
+     *
+     * @return TRUE is the User Agent is unknown, FALSE otherwise.
      */
     public function isUnknown()
     {

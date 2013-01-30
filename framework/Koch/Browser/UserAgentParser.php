@@ -20,26 +20,10 @@ class UserAgentParser
     const TYPE_UNKNOW = 'unknown';
 
     /**
-     *  Parse a user agent string.
+     * Parse a user agent string.
      *
-     *  @param  (String) $userAgentString - defaults to $_SERVER['USER_AGENT'] if empty
-     *  @return Array(
-     *                'user_agent'     => 'mozilla/5.0 (windows; u;...))',
-     *                'browser_name'     => 'firefox',
-     *                'browser_type'     => 'browser',
-     *                'browser_type_sub'     => '',
-     *                'browser_version'  => '3.6',
-     *                'browser_version_major'  => '3',
-     *                'browser_version_minor'  => '6',
-     *                'browser_version_release'  => '15',
-     *                'browser_version_build'  => '',
-     *                'operating_system' => 'windows'
-     *                'operating_system_name' => 'xp'
-     *                'operating_system_typ' => 'os'
-     *                'operating_system_typ_sub' => 'os'
-     *                'engine' => 'gecko'
-     *                'engine_version' => '1.9.2.15'
-     *               );
+     * @param  (String) $userAgentString - defaults to $_SERVER['USER_AGENT'] if empty
+     * @return array
      */
     public function parse($userAgentString = null)
     {
@@ -50,17 +34,14 @@ class UserAgentParser
         // parse quickly with medium accuracy
         $informations = $this->doParse($userAgentString);
 
-        // debug
-        #var_dump( $informations );
-
         return $informations;
     }
 
     /**
-     *  Detect quickly informations from the user agent string.
+     * Detect quickly informations from the user agent string.
      *
-     *  @param  (String) $userAgentString => user agent string.
-     *  @return (Array)  $information     => user agent informations directly in array.
+     * @param  (String) $userAgentString => user agent string.
+     * @return (Array)  $information     => user agent informations directly in array.
      */
     public function doParse($userAgentString)
     {
@@ -88,12 +69,12 @@ class UserAgentParser
             return $userAgent;
         }
 
-        // --------------- Parse Browser ---------------
+        // Parse Browser
         $found = false;
         $tmp_array = array();
 
         foreach ($this->getListBrowsers() as $name => $elements) {
-            // ----- read browser ----
+            // read browser
             $exprReg = $elements['search'];
             foreach ($exprReg as $expr) {
                 if (preg_match($expr, $userAgent['string'], $tmp_array)) {
@@ -105,7 +86,7 @@ class UserAgentParser
                     }
                     $found = true;
 
-                    // ----- read version ----
+                    // read version
                     if ($elements['vparam'] !== null) {
                         $pattern = '';
                         $pv = $elements['vparam'];
@@ -120,14 +101,14 @@ class UserAgentParser
                         $userAgent['browser_version'] = self::TYPE_UNKNOW;
                     }
 
-                    // ----- read engine ----
+                    // read engine
                     if ($elements['engine'] !== null) {
                         $userAgent['engine'] = $elements['engine'];
                     } else {
                         $userAgent['engine'] = self::TYPE_UNKNOW;
                     }
 
-                    // ----- read engine version -----
+                    // read engine version
                     $pattern = '';
                     if ($elements['eparam'] !== null) {
                         $pe = $elements['eparam'];
@@ -144,7 +125,7 @@ class UserAgentParser
             $userAgent['browser_typ'] = self::TYPE_UNKNOW;
         }
 
-        // --------------- Parse Operating System ---------------
+        // Parse Operating System
         $found = false;
         $tmp_array = array();
         foreach ($this->getListOperatingSystems() as $name => $elements) {
@@ -194,10 +175,10 @@ class UserAgentParser
     }
 
     /**
-     *  Make user agent string lowercase, and replace browser aliases.
+     * Make user agent string lowercase, and replace browser aliases.
      *
-     *  @param String $userAgentString => the dirty user agent string.
-     *  @param String $userAgentString => the clean user agent string.
+     * @param String $userAgentString => the dirty user agent string.
+     * @param String $userAgentString => the clean user agent string.
      */
     public function cleanUserAgentString($userAgentString)
     {
@@ -250,9 +231,9 @@ class UserAgentParser
     }
 
     /**
-     *  Get operating system list
+     * Get operating system list
      *
-     *  @return array => the operating system.
+     * @return array => the operating system.
      */
     protected function getListOperatingSystems()
     {

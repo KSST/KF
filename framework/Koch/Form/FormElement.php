@@ -457,7 +457,7 @@ class FormElement
                  */
                 if ( defined('DEBUG') and DEBUG == true ) {
                     $method = 'set' . ucfirst($attribute);
-                    if(method_exists($this, $method)) {
+                    if (method_exists($this, $method)) {
                         $this->$method($value);
                     } else {
                         throw new \RuntimeException(
@@ -541,7 +541,7 @@ class FormElement
                 $rule = $array[0];
                 $value = $array[1];
 
-                if(in_array($rule, array('maxvalue'))) {
+                if (in_array($rule, array('maxvalue'))) {
                    $value = (int) $value;
                 }
 
