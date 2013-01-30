@@ -72,14 +72,15 @@ class Html5Validation extends FormDecorator
 
     public function render($html_form_content)
     {
-        if (true === is_file(APPLICATION_PATH . 'themes/core/javascript/jquery/jquery.html5form-min.js')) {
-            // put all the pieces of html together
-            return $this->addValidationJavascript() . $html_form_content;
-        } else { // fail by prepending a message :(
-            $message = '[ERROR] HTML5 Validation Support not available. File missing : <br/>'.
-            APPLICATION_PATH . 'themes/core/javascript/jquery/jquery.html5form-min.js';
+        if (false === is_file(APPLICATION_PATH . 'themes/core/javascript/jquery/jquery.html5form-min.js')) {
+            // fail by prepending a message
+            $message = '[ERROR] HTML5 Validation Support not available. File missing : <br/>' .
+                APPLICATION_PATH . 'themes/core/javascript/jquery/jquery.html5form-min.js';
 
-            return  $message . $html_form_content;
+            return $message . $html_form_content;
         }
+
+        // put all the pieces of html together
+        return $this->addValidationJavascript() . $html_form_content;
     }
 }

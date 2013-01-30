@@ -37,7 +37,7 @@ class Form extends FormDecorator
     public function openFormTag()
     {
         $html_form = '';
-        $html_form = '<!-- Start of Form "'. $this->getName() .'" -->' . CR;
+        $html_form = CR . '<!-- Start of Form "'. $this->getFormName() .'" -->' . CR;
         $html_form .= '<form ';
 
         return $html_form;
@@ -79,14 +79,16 @@ class Form extends FormDecorator
         }
 
         if ( $this->getAcceptCharset() === true ) {
-             $html_form .= ' autocomplete ';
+             $html_form .= ' autocomplete';
         }
 
         if ( $this->getNoValidation() === true ) {
-             $html_form .= ' novalidation ';
+             $html_form .= ' novalidation';
         }
 
-        $html_form .= 'class="form '.$this->getClass().'"';
+        $html_form .= 'class="form';
+        $html_form .= $this->getClass() ? ' ' . $this->getClass() : '';
+        $html_form .= '"';
 
         $html_form .= '>' . CR;
 
@@ -117,7 +119,7 @@ class Form extends FormDecorator
 
     public function closeFormTag()
     {
-        return CR . '</form>' . CR . '<!--- End of Form "'. $this->getName() .'" -->' . CR;
+        return CR . '</form>' . CR . '<!--- End of Form "'. $this->getFormName() .'" -->' . CR;
     }
 
     public function render($html_form_content)

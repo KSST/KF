@@ -60,16 +60,25 @@ use Koch\Form\DecoratorInterface;
  */
 abstract class FormDecorator implements DecoratorInterface
 {
-
     /**
      * Instance of the form, which is to decorate.
      *
-     * @var Koch_Form Defaults to null.
+     * @var \Koch\Form\Form Defaults to null.
      */
     protected $form = null;
     private $name;
     private $class;
     private $id;
+
+    /**
+     * Returns the name of the form.
+     *
+     * @return string
+     */
+    public function getFormName()
+    {
+        return $this->form->name;
+    }
 
     public function getName()
     {
@@ -126,33 +135,33 @@ abstract class FormDecorator implements DecoratorInterface
     }
 
     /**
-     * Setter method to set the form object which is to decorate.
+     * Setter method to set the form object, which is to decorate.
      *
-     * @param $form object of type Koch_Form_Interface or Koch_Form_Decorator_Interface
+     * @param $form object of type Koch\Form\FormInterface or Koch\Form\FormDecoratorInterface
      */
     public function decorateWith($form)
     {
         if (null === $form) {
-            throw InvalidArgumentException('Form is null!');
+            throw new \InvalidArgumentException('Form is null!');
         }
 
         $this->form = $form;
     }
 
     /**
-     * Form setter.
+     * Setter method to set the form object, which is to decorate.
      *
      * @param Form $form
      */
-    public function setForm(Koch_Form $form)
+    public function setForm(\Koch\Form\FormInterface $form)
     {
         $this->decorateWith($form);
     }
 
     /**
-     * Form Getter
+     * Get the form object, which is to decorate.
      *
-     * @return object Koch_Form
+     * @return \Koch\Form\Form
      */
     public function getForm()
     {
@@ -172,7 +181,7 @@ abstract class FormDecorator implements DecoratorInterface
             return true;
         }
         // check if method exists in the decorator of this object
-        elseif ($this->form instanceof Koch_Form_Decorator) {
+        elseif ($this->form instanceof Koch\Form\DecoratorInterface) {
             return $this->form->hasMethod($method);
         } else { // nope, method does not exist
 

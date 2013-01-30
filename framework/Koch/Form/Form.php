@@ -205,7 +205,7 @@ class Form implements FormInterface
      *
      * @var array
      */
-    protected $errormessages = array();
+    protected $errorMessages = array();
 
     /**
      * Construct
@@ -221,7 +221,7 @@ class Form implements FormInterface
     {
         if (null === $name_or_attributes) {
             throw new \InvalidArgumentException(
-                'Missing argument 1 - has to be string (Name of Form) or array (Form Description Array).'
+                'Missing argument 1. Expected a string (Name of Form) or an array (Form Description Array).'
             );
         }
 
@@ -688,7 +688,7 @@ class Form implements FormInterface
 
     /**
      * ===================================================================================
-     *      Formerrors
+     *      Form Errors
      * ===================================================================================
      */
 
@@ -789,36 +789,34 @@ class Form implements FormInterface
      */
     public function render()
     {
-        // the content of the form are the formelements
+        // a) the content of the form are all the formelements
         $html_form = $this->renderAllFormelements();
 
-        if (empty($this->formdecorators) === true) {
+        // b) attach default decorators
+        //if (empty($this->formdecorators) === true) {
             // should the default form decorators be applied?
             if ($this->useDefaultFormDecorators === true) {
                 // set a common style to the form by registering one or more decorators
                 $this->registerDefaultFormDecorators();
             }
-        }
+        //}
 
         // iterate over all decorators
         foreach ($this->getDecorators() as $decorator) {
-            // thereby sticking this form in each decorator
+            // stick form into the decorator decorator
             $decorator->decorateWith($this);
 
             // apply some settings or call some methods on the decorator
-            // before rendering
-            // $decorator->$value;
-            // $decorator->$method($value);
-            // combined $decorator->setAttributes();
+            // before rendering $decorator->$value; or $decorator->$method($value);
+            // combined into $decorator->setAttributes();
             $this->applyDecoratorAttributes();
 
-            // then rendering it
             $html_form = $decorator->render($html_form);
 
             // remove the processed decorator from the decorators stack
             $this->removeDecorator($decorator);
 
-            // unset the decorator var in the foreach context
+            // unset decorator var in foreach context
             unset($decorator);
         }
 
@@ -1121,23 +1119,21 @@ class Form implements FormInterface
      */
     public function processForm()
     {
-        // check if form has been submitted properly
-        if ($this->validateForm() === false) {
-            /**
-             * Failure - form was not filled properly.
-             * Redisplay the form with error decorator added.
-             */
-            $this->addDecorator('Errors');
-        } else {
-            /**
+        // check, if form has been submitted properly
+        if ($this->validateForm() === true) {
+             /**
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('NoError');
+        } else {
+            /**
+             * Failure - form was not filled properly.
+             * Redisplay the form with error decorator added.
+             */
+            $this->addDecorator('Errors');
         }
-
-        $this->render();
     }
 
     /**
@@ -1180,20 +1176,20 @@ class Form implements FormInterface
         // now we got an $data array to populate all the formelements with (setValue)
         foreach ($data as $key => $value) {
             foreach ($this->formelements as $formelement) {
-                $type = $formelement->getType();
 
                 /**
-                 * Exclude some formelements from setValue(), e.g. buttons, etc.
+                 * Exclude some formelements from setValue() by type, e.g. Buttons, etc.
                  * Setting the value would just change the visible "name" of these elements.
                  */
+                $type = $formelement->getType();
                 if (true === in_array($type, array('submit', 'button', 'cancelbutton', 'resetbutton'))) {
                     continue;
                 }
 
                 // data[key] and formelement[name] have to match
-                if ($formelement->getName() == ucfirst($key)) {
+                //if ($formelement->getName() == ucfirst($key)) {
                     $formelement->setValue($value);
-                }
+                //}
             }
         }
     }
@@ -1603,7 +1599,7 @@ class Form implements FormInterface
         foreach ($this->formelements as $formelement) {
             if ($formelement->validate() === false) {
                 $this->hasErrors(true);
-                $this->addErrorMessage($formelement->getErrorMessages());
+                $this->addErrorMessages($formelement->getErrorMessages());
             }
         }
 
@@ -1631,24 +1627,24 @@ class Form implements FormInterface
         return $this->error;
     }
 
-    public function addErrorMessage($errormessage)
+    public function addErrorMessage($errorMessage)
     {
-        $this->errormessages[] = $errormessage;
+        $this->errorMessages[] = $errorMessage;
     }
 
-    public function addErrorMessages(array $errormessages)
+    public function addErrorMessages(array $errorMessages)
     {
-        $this->errormessages = $errormessages;
+        $this->errorMessages = $errorMessages;
     }
 
-    public function resetErrormessages()
+    public function resetErrorMessages()
     {
-        $this->errormessages = array();
+        $this->errorMessages = array();
     }
 
-    public function getErrormessages()
+    public function getErrorMessages()
     {
-        return $this->errormessages;
+        return $this->errorMessages;
     }
 
     /**

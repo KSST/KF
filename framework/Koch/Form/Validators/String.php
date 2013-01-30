@@ -41,7 +41,7 @@ class String extends Validator
 
     protected function processValidationLogic($value)
     {
-        if (is_string($value) or is_numeric($value)) {
+        if (is_string($value) === true or is_numeric($value) === true) {
             return true;
         } else {
             return false;
