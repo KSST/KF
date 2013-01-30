@@ -25,7 +25,7 @@
 namespace Koch\Browser;
 
 /**
- * Koch Framework - The Class provids a User Agent Parser.
+ * Koch Framework - The Class provides a User Agent Parser.
  */
 class UserAgentParser
 {
@@ -34,12 +34,12 @@ class UserAgentParser
     /**
      * Parse a user agent string.
      *
-     * @param  (String) $userAgentString - defaults to $_SERVER['USER_AGENT'] if empty
+     * @param  string $userAgentString Defaults to $_SERVER['USER_AGENT'], if empty.
      * @return array
      */
     public function parse($userAgentString = null)
     {
-        if (!$userAgentString) {
+        if ($userAgentString === null) {
             $userAgentString = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
         }
 
@@ -52,16 +52,16 @@ class UserAgentParser
     /**
      * Detect quickly informations from the user agent string.
      *
-     * @param  (String) $userAgentString => user agent string.
-     * @return (Array)  $information     => user agent informations directly in array.
+     * @param  string $userAgentString => user agent string.
+     * @return array $information     => user agent informations directly in array.
      */
     public function doParse($userAgentString)
     {
         $userAgent = array(
             'string' => $this->cleanUserAgentString($userAgentString),
             'browser_name' => null,
-            'browser_typ' => null,
-            'browser_typ_sub' => null,
+            'browser_type' => null,
+            'browser_type_sub' => null,
             'browser_version' => null,
             'browser_version_major' => null,
             'browser_version_minor' => null,
@@ -69,8 +69,8 @@ class UserAgentParser
             'browser_version_build' => null,
             'operating_system' => null,
             'operating_system_name' => null,
-            'operating_system_typ' => null,
-            'operating_system_typ_sub' => null,
+            'operating_system_type' => null,
+            'operating_system_type_sub' => null,
             'engine' => null,
             'engine_version' => null
         );
@@ -92,9 +92,9 @@ class UserAgentParser
                 if (preg_match($expr, $userAgent['string'], $tmp_array)) {
                     $userAgent['browser_name'] = $name;
 
-                    $userAgent['browser_typ'] = $elements['type'];
+                    $userAgent['browser_type'] = $elements['type'];
                     if (isset($elements['subtype']) === true) {
-                        $userAgent['browser_typ_sub'] = $elements['subtype'];
+                        $userAgent['browser_type_sub'] = $elements['subtype'];
                     }
                     $found = true;
 
@@ -134,7 +134,7 @@ class UserAgentParser
         }
 
         if (false === $found) {
-            $userAgent['browser_typ'] = self::TYPE_UNKNOW;
+            $userAgent['browser_type'] = self::TYPE_UNKNOW;
         }
 
         // Parse Operating System
@@ -165,13 +165,13 @@ class UserAgentParser
                         }
                     }
                     if ($elements['type'] !== null) {
-                        $userAgent['operating_system_typ'] = $elements['type'];
+                        $userAgent['operating_system_type'] = $elements['type'];
                     } else {
-                        $userAgent['operating_system_typ'] = self::TYPE_UNKNOW;
+                        $userAgent['operating_system_type'] = self::TYPE_UNKNOW;
                     }
 
                     if (isset($elements['subtype']) === true) {
-                        $userAgent['operating_system_typ_sub'] = $elements['subtype'];
+                        $userAgent['operating_system_type_sub'] = $elements['subtype'];
                     }
 
                     $found = true;
@@ -180,7 +180,7 @@ class UserAgentParser
         }
 
         if (false === $found) {
-            $userAgent['operating_system_typ'] = self::TYPE_UNKNOW;
+            $userAgent['operating_system_type'] = self::TYPE_UNKNOW;
         }
 
         return $userAgent;
@@ -189,8 +189,7 @@ class UserAgentParser
     /**
      * Make user agent string lowercase, and replace browser aliases.
      *
-     * @param String $userAgentString => the dirty user agent string.
-     * @param String $userAgentString => the clean user agent string.
+     * @param string $userAgentString The dirty user agent string.
      */
     public function cleanUserAgentString($userAgentString)
     {
@@ -245,7 +244,7 @@ class UserAgentParser
     /**
      * Get operating system list
      *
-     * @return array => the operating system.
+     * @return array The operating system.
      */
     protected function getListOperatingSystems()
     {

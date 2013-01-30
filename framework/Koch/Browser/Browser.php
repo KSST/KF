@@ -42,7 +42,7 @@ class Browser
     const SYSTEM_CONSOLE = 'console';
 
     /**
-     * usrer agent
+     * user agent
      * @var string
      */
     protected $userAgentString;
@@ -57,13 +57,13 @@ class Browser
      * browser typ
      * @var string
      */
-    protected $browserTyp;
+    protected $browserType;
 
     /**
      * browser sub typ
      * @var string
      */
-    protected $browserTypSub;
+    protected $browserTypeSub;
 
     /**
      * browser version
@@ -108,16 +108,16 @@ class Browser
     protected $operatingSystemName;
 
     /**
-     * operating system typ
+     * operating system type
      * @var string
      */
-    protected $operatingSystemTyp;
+    protected $operatingSystemType;
 
     /**
-     * operating system sub typ
+     * operating system sub type
      * @var string
      */
-    protected $operatingSystemTypSub;
+    protected $operatingSystemTypeSub;
 
     /**
      * engine
@@ -135,8 +135,8 @@ class Browser
      * Constructor
      *
      * Configure the User Agent from a user agent string.
-     * @param String          $userAgentString => the user agent string.
-     * @param UserAgentParser $userAgentParser => the parser used to parse the string.
+     * @param string          $userAgentString The user agent string.
+     * @param UserAgentParser $userAgentParser The parser used to parse the string.
      */
     public function __construct($userAgentString = null, UserAgentParser $userAgentParser = null)
     {
@@ -169,7 +169,7 @@ class Browser
      */
     public function isBot()
     {
-        return (bool) ($this->getBrowserTyp() === self::TYPE_BOT);
+        return (bool) ($this->getBrowserType() === self::TYPE_BOT);
     }
 
     /**
@@ -223,7 +223,7 @@ class Browser
      */
     public function isMobilSystem()
     {
-        return (bool) ($this->getOperatingSystemTyp() === self::SYSTEM_MOBIL);
+        return (bool) ($this->getOperatingSystemType() === self::SYSTEM_MOBIL);
     }
 
     /**
@@ -232,7 +232,7 @@ class Browser
      */
     public function isConsoleSystem()
     {
-        return (bool) ($this->getOperatingSystemTyp() === self::SYSTEM_CONSOLE);
+        return (bool) ($this->getOperatingSystemType() === self::SYSTEM_CONSOLE);
     }
 
     // --------------- BROWSER ---------------
@@ -240,7 +240,7 @@ class Browser
     /**
      * Get Browser name
      *
-     * @return String - the browser name
+     * @return string the browser name
      */
     public function getBrowserName()
     {
@@ -249,7 +249,7 @@ class Browser
 
     /**
      * Set Browser name
-     * @param String - the browser name;
+     * @param string The browser name
      */
     public function setBrowserName($name)
     {
@@ -257,47 +257,47 @@ class Browser
     }
 
     /**
-     * Get Browser typ (bot, browser...)
+     * Get Browser type (bot, browser...)
      *
-     * @return String - the browser typ
+     * @return string the browser type
      */
-    public function getBrowserTyp()
+    public function getBrowserType()
     {
-        return $this->browserTyp;
+        return $this->browserType;
     }
 
     /**
-     * Set Browser typ
-     * @param String - the browser typ;
+     * Set Browser type
+     * @param string The browser type.
      */
-    public function setBrowserTyp($name)
+    public function setBrowserType($name)
     {
-        $this->browserTyp = $name;
+        $this->browserType = $name;
     }
 
     /**
-     * Get Browser sub typ (validator, pda...)
+     * Get Browser sub type (validator, pda...)
      *
-     * @return String - the browser sub typ
+     * @return string the browser sub type
      */
-    public function getBrowserTypSub()
+    public function getBrowserTypeSub()
     {
-        return $this->browserTypSub;
+        return $this->browserTypeSub;
     }
 
     /**
-     * Set Browser sub typ
-     * @param String - the browser sub typ;
+     * Set Browser sub type
+     * @param string  the browser sub type;
      */
-    public function setBrowserTypSub($name)
+    public function setBrowserTypeSub($name)
     {
-        $this->browserTypSub = $name;
+        $this->browserTypeSub = $name;
     }
 
     /**
      * Get Browser version
      *
-     * @return String - the browser version
+     * @return string the browser version
      */
     public function getBrowserVersion()
     {
@@ -306,7 +306,7 @@ class Browser
 
     /**
      * Set Browser version
-     * @param String - the browser version;
+     * @param string  the browser version;
      */
     public function setBrowserVersion($version)
     {
@@ -316,7 +316,7 @@ class Browser
     /**
      * Get Browser version major
      *
-     * @return String - the browser version major
+     * @return string the browser version major
      */
     public function getBrowserVersionMajor()
     {
@@ -325,7 +325,7 @@ class Browser
 
     /**
      * Set Browser version major
-     * @param String - the browser version major;
+     * @param string  the browser version major;
      */
     public function setBrowserVersionMajor($version)
     {
@@ -335,7 +335,7 @@ class Browser
     /**
      * Get Browser version minor
      *
-     * @return String - the browser version minor
+     * @return string the browser version minor
      */
     public function getBrowserVersionMinor()
     {
@@ -344,7 +344,7 @@ class Browser
 
     /**
      * Set Browser version minor
-     * @param String - the browser version minor;
+     * @param string  the browser version minor;
      */
     public function setBrowserVersionMinor($version)
     {
@@ -354,7 +354,7 @@ class Browser
     /**
      * Get Browser version release
      *
-     * @return String - the browser version release
+     * @return string the browser version release
      */
     public function getBrowserVersionRelease()
     {
@@ -363,7 +363,7 @@ class Browser
 
     /**
      * Set Browser version release
-     * @param String - the browser version release;
+     * @param string  the browser version release;
      */
     public function setBrowserVersionRelease($value)
     {
@@ -376,7 +376,7 @@ class Browser
     /**
      * Get Browser version build
      *
-     * @return String - the browser version build
+     * @return string the browser version build
      */
     public function getBrowserVersionBuild()
     {
@@ -385,7 +385,7 @@ class Browser
 
     /**
      * Set Browser version build
-     * @param String - the browser version build;
+     * @param string  the browser version build;
      */
     public function setBrowserVersionBuild($value)
     {
@@ -400,7 +400,7 @@ class Browser
     /**
      * Get the operating system
      *
-     * @return String - the operating system
+     * @return string the operating system
      */
     public function getOperatingSystem()
     {
@@ -409,7 +409,7 @@ class Browser
 
     /**
      * Set Operating System ( windows, linux ...)
-     * @param String - the operating system.
+     * @param string  the operating system.
      */
     public function setOperatingSystem($os)
     {
@@ -419,7 +419,7 @@ class Browser
     /**
      * Get the operating system name ( vista, 2000, 7 ...)
      *
-     * @return String - the operating system name
+     * @return string the operating system name
      */
     public function getOperatingSystemName()
     {
@@ -427,45 +427,45 @@ class Browser
     }
 
     /**
-     * Set Operating System typ ( os, mobile...)
-     * @param String - the operating system typ.
+     * Set Operating System type ( os, mobile...)
+     * @param string  the operating system type.
      */
-    public function setOperatingSystemTyp($value)
+    public function setOperatingSystemType($value)
     {
-        $this->operatingSystemTyp = $value;
+        $this->operatingSystemType = $value;
     }
 
     /**
-     * Get the operating system typ
-     * @return String - the operating system typ
+     * Get the operating system type
+     * @return string the operating system type
      */
-    public function getOperatingSystemTyp()
+    public function getOperatingSystemType()
     {
-        return $this->operatingSystemTyp;
+        return $this->operatingSystemType;
     }
 
     /**
-     * Set Operating System sub typ ( device...)
-     * @param String - the operating system sub typ.
+     * Set Operating System sub type ( device...)
+     * @param string  the operating system sub type.
      */
-    public function setOperatingSystemTypSub($value)
+    public function setOperatingSystemTypeSub($value)
     {
-        $this->operatingSystemTypSub = $value;
+        $this->operatingSystemTypeSub = $value;
     }
 
     /**
-     * Get the operating system sub typ
+     * Get the operating system sub type
      *
-     * @return String - the operating system sub typ
+     * @return string the operating system sub type
      */
-    public function getOperatingSystemTypSub()
+    public function getOperatingSystemTypeSub()
     {
-        return $this->operatingSystemTypSub;
+        return $this->operatingSystemTypeSub;
     }
 
     /**
      * Set Operating System name
-     *  @param String - the operating system name.
+     * @param string  the operating system name.
      */
     public function setOperatingSystemName($value)
     {
@@ -484,7 +484,7 @@ class Browser
 
     /**
      * Set Engine name
-     * @param String - the engine name
+     * @param string  the engine name
      */
     public function setEngine($engine)
     {
@@ -502,7 +502,7 @@ class Browser
 
     /**
      * Set Engine version
-     * @param String - the engine version
+     * @param string  the engine version
      */
     public function setEngineVersion($version)
     {
@@ -520,7 +520,7 @@ class Browser
 
     /**
      * Set Engine name
-     * @param String - the engine name
+     * @param string  the engine name
      */
     public function setUserAgentString($userAgentString)
     {
@@ -551,8 +551,8 @@ class Browser
         return array(
             'user_agent' => $this->getUserAgentString(),
             'browser_name' => $this->getBrowserName(),
-            'browser_typ' => $this->getBrowserTyp(),
-            'browser_typ_sub' => $this->getBrowserTypSub(),
+            'browser_type' => $this->getBrowserType(),
+            'browser_type_sub' => $this->getBrowserTypeSub(),
             'browser_version' => $this->getBrowserVersion(),
             'browser_version_major' => $this->getBrowserVersionMajor(),
             'browser_version_minor' => $this->getBrowserVersionMinor(),
@@ -560,8 +560,8 @@ class Browser
             'browser_version_build' => $this->getBrowserVersionBuild(),
             'operating_system' => $this->getOperatingSystem(),
             'operating_system_name' => $this->getOperatingSystemName(),
-            'operating_system_typ' => $this->getOperatingSystemTyp(),
-            'operating_system_typ_sub' => $this->getOperatingSystemTypSub(),
+            'operating_system_type' => $this->getOperatingSystemType(),
+            'operating_system_type_sub' => $this->getOperatingSystemTypeSub(),
             'engine' => $this->getEngine(),
             'engine_version' => $this->getEngineVersion()
         );
@@ -569,24 +569,24 @@ class Browser
 
     /**
      * Configure the user agent from an input array.
-     * @param Array $data input data array
+     * @return array $data input data array
      */
     public function fromArray(array $data)
     {
         $this->setUserAgentString($data['user_agent']);
         $this->setBrowserName($data['browser_name']);
-        $this->setBrowserTyp($data['browser_typ']);
-        $this->setBrowserTypSub($data['browser_typ_sub']);
+        $this->setBrowserType($data['browser_type']);
+        $this->setBrowserTypeSub($data['browser_type_sub']);
         $this->setBrowserVersion($data['browser_version']);
         $this->setBrowserVersionMajor($data['browser_version_major']);
         $this->setBrowserVersionMinor($data['browser_version_minor']);
         $this->setBrowserVersionRelease($data['browser_version_release']);
         $this->setBrowserVersionBuild($data['browser_version_build']);
-        $this->setBrowserTyp($data['browser_typ']);
+        $this->setBrowserType($data['browser_type']);
         $this->setOperatingSystem($data['operating_system']);
         $this->setOperatingSystemName($data['operating_system_name']);
-        $this->setOperatingSystemTyp($data['operating_system_typ']);
-        $this->setOperatingSystemTypSub($data['operating_system_typ_sub']);
+        $this->setOperatingSystemType($data['operating_system_type']);
+        $this->setOperatingSystemTypeSub($data['operating_system_type_sub']);
         $this->setEngine($data['engine']);
         $this->setEngineVersion($data['engine_version']);
     }
