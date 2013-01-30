@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form;
@@ -78,10 +77,6 @@ namespace Koch\Form;
  *       -> goto a)
  *
  * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Form
  */
 class Form implements FormInterface
 {

@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Mvc;
@@ -33,10 +32,6 @@ use Koch\Filter\FilterInterface;
  * Interface for FrontController
  *
  * The Frontcontroller has to implement the following methods.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  FrontController
  */
 interface FrontControllerInterface
 {

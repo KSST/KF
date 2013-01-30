@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Security;
@@ -29,10 +28,6 @@ namespace Koch\Security;
  * DoorKeeper
  *
  * These are security-methods to keep the entrance to Koch Framework clean :).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Doorkeeper
  */
 class DoorKeeper
 {

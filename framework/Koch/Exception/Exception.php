@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Exception;
@@ -32,10 +31,6 @@ use Koch\Exception\Renderer\YellowScreenOfDeath;
  *
  * @see http://php.net/manual/de/class.exception.php
  * @see http://php.net/manual/de/function.set-exception-handler.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Exceptionhandler
  */
 class Exception extends \Exception
 {

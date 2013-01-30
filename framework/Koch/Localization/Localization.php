@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Localization;
@@ -29,10 +28,6 @@ use Koch\Config\Config;
 
 /**
  * Koch Framework - Class for Localization (l10n) & Internationalization (i18n) Handling.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Localization
  */
 class Localization
 {

@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Exception;
@@ -38,10 +37,6 @@ use Koch\Exception\Renderer\SmartyTemplateError;
  *    E_ERROR_TYPE as string or int
  * 2) trigger_error('Errorhandler Test - This should trigger a E_USER_NOTICE!', E_USER_NOTICE);
  * </code>
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Errorhandler
  */
 class Errorhandler
 {

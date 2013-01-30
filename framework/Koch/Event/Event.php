@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event;
 
 /**
  * Koch Framework - Class represents an Event.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Event
  */
 class Event implements \ArrayAccess
 {

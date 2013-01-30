@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Autoload;
@@ -44,10 +43,6 @@ namespace Koch\Autoload;
  *
  * PHP Manual: spl_autoload_register
  * @link http://www.php.net/manual/de/function.spl-autoload-register.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Loader
  */
 class Loader
 {

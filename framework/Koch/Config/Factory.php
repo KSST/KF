@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config;
@@ -30,10 +29,6 @@ namespace Koch\Config;
  *
  * The static method getConfiguration() includes and instantiates
  * a Configuration Engine Object and injects the configfile.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Config
  */
 class Factory
 {

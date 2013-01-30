@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Module;
@@ -30,10 +29,6 @@ namespace Koch\Module;
  *
  * Purpose: attach plugins and methods at runtime to the module by nesting (wrapping) them.
  * Pattern: @book "GOF:175" - Decorator (structural pattern)
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 class Decorator
 {

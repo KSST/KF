@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Logger;
 
 /**
  * Koch Framework - Interface for the Logger Adapters.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 interface LoggerInterface
 {

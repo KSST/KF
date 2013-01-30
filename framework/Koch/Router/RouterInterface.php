@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Router;
@@ -29,10 +28,6 @@ namespace Koch\Router;
  * Interface for Router(s)
  *
  * A router has to implement the following methods to resolve the Request to a Module and the Action/Command.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Router
  */
 interface RouterInterface
 {

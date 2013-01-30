@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View;
@@ -30,10 +29,6 @@ use Koch\Http\HttpRequest;
 /**
  * A abstract base class for all our view rendering engines.
  * All renderers must extend from this class.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Renderer
  */
 abstract class AbstractRenderer
 {

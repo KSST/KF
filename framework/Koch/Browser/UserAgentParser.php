@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Browser;
 
 /**
  * Koch Framework - The Class provids a User Agent Parser.
- *
- * @category    Koch
- * @package     Tools
- * @subpackage  Browser
  */
 class UserAgentParser
 {

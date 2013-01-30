@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config;
@@ -35,10 +34,6 @@ namespace Koch\Config;
  * The array access implementation makes it seem that $config is an array,
  * even though it's an object! Why we do that? Because less to type!
  * The __set, __get, __isset, __unset are overloading functions to work with that array.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Config
  */
 class Config extends AbstractConfig
 {

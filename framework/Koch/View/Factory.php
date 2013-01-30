@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View;
@@ -30,10 +29,6 @@ namespace Koch\View;
  *
  * The static method getRenderer() returns the included and instantiated
  * Rendering Engine Object - which is the View in MVC!
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Renderer
  */
 class Factory
 {

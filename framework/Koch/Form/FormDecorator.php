@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form;
@@ -53,10 +52,6 @@ use Koch\Form\DecoratorInterface;
  * Effect is that all children of this base class have all the methods of Koch_Form.
  *
  * @pattern Decorator, [GoF, 216/220]
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Form
  */
 abstract class FormDecorator implements DecoratorInterface
 {

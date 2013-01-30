@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Module;
@@ -35,10 +34,6 @@ use Koch\Http\HttpResponseInterface;
  * Is an abstract class (parent class) to share some common features for all (Module/Action)-Controllers.
  * You could call it ModuleController and ActionController.
  * It`s abstract because it should only be extended, not instantiated.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 abstract class Controller
 {

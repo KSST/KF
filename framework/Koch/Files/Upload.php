@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Files;
 
 /**
  * Koch Framework - Class for Upload Handling
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Upload
  */
 class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
 {

@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Permissions;
 
 /**
  * Koch Framework - Class for Role and User Based Access Control Management
- *
- * @category    Koch
- * @package     Core
- * @subpackage  ACL
  */
 class ACL
 {

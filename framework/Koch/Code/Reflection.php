@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Code;
@@ -30,10 +29,6 @@ namespace Koch\Code;
  *
  * Purpose of this class is to reverse-engineer classes,
  * interfaces, functions, methods and extensions.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Reflection
  */
 class Reflection
 {

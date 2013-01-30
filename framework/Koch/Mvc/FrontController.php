@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Mvc;
@@ -40,10 +39,6 @@ use Koch\Filter\FilterInterface;
  * 1. to intercept all requests made by the client to the web server through central "index.php".
  * 2. to get all needed "pre action processing" done; things like Auth, Sessions, Logging, whatever... pluggable or not.
  * 3. to decide then, which ModuleController we must dynamically invoking to process the request.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  FrontController
  */
 class FrontController implements FrontControllerInterface
 {

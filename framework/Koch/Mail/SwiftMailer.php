@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Mail;
@@ -31,10 +30,6 @@ namespace Koch\Mail;
  * This is a simple wrapper for SwiftMailer.
  * @link http://swiftmailer.org/
  * @link http://swiftmailer.org/docs/introduction.html Documentation
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Mailer
  */
 class SwiftMailer
 {

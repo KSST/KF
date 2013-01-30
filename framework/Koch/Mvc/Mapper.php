@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Mvc;
@@ -31,10 +30,6 @@ namespace Koch\Mvc;
  * Provides helper methods to transform (map)
  * (a) the controller name into the specific application classname and filename
  * (b) the action name into the specific application actioname.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Mapper
  */
 class Mapper extends \ArrayObject
 {

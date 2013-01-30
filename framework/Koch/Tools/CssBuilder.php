@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Tools;
@@ -40,10 +39,6 @@ namespace Koch\Tools;
  *
  * Optional:
  *   $builder->addBrowser( 'ie', 'Internet Explorer', true, 'ie' );
- *
- * @category    Koch
- * @package     Tools
- * @subpackage  CssBuilder
  */
 class CssBuilder
 {

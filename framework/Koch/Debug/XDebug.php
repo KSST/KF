@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Debug;
@@ -30,10 +29,6 @@ namespace Koch\Debug;
  *
  * This class initializes xdebug at system start-up and displays debug
  * and runtime-informations at application shutdown.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  XDebug
  */
 class XDebug
 {

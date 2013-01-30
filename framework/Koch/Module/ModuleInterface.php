@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Module;
@@ -30,10 +29,6 @@ namespace Koch\Module;
  * Inspired by Sinatra.
  *
  * Force classes implementing the interface to define these (must have) methods!
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 interface ModuleInterface
 {

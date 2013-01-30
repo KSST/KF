@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Security;
@@ -36,10 +35,6 @@ namespace Koch\Security;
  *
  * @link http://www.schneier.com/cryptography.html Website of Bruce Schneier
  * @link http://www.php.net/manual/en/refs.crypto.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Security
  */
 final class Security
 {

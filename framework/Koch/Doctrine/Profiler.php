@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Doctrine;
 
 /**
  * Koch Framework - Class for the Initialization of the Profiler for Doctrine.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Doctrine
  */
 class Profiler
 {

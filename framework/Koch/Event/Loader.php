@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event;
@@ -30,10 +29,6 @@ namespace Koch\Event;
  *
  * Purpose:
  * Eventloader handles the loading and registering of events by using event configuration files.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Eventloader
  */
 class Loader
 {

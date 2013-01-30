@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter;
@@ -30,10 +29,6 @@ use Koch\Http\HttpResponseInterface;
 
 /**
  * Interface Koch_Filter_Interface
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filter
  */
 interface FilterManagerInterface
 {

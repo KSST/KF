@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Files;
@@ -33,10 +32,6 @@ namespace Koch\Files;
  * The class depends on the fileinfo extension (default since php5.3).
  *
  * @link http://www.php.net/manual/en/book.fileinfo.php PHP Manual for the FileInfo Extension
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Download
  */
 class Download
 {

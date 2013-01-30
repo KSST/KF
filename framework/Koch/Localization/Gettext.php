@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Localization;
@@ -46,10 +45,6 @@ namespace Koch\Localization;
  *  - Drupals "translation_extraction" (GPL)
  *  - Matthias Bauer's work on PO/MO Filehandling for Wordpress during GSoC 2007 (GPL)
  *  - Heiko Rabe's "Codestyling Localization" Plugin for Wordpress (GPL)
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class Gettext extends ExtractorTool
 {

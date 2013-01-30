@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Tools;
@@ -29,10 +28,6 @@ namespace Koch\Tools;
  * Koch Framework - Systeminfo
  *
  * The class provides pieces of information about the environment.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  SystemInfo
  */
 class SysInfo
 {

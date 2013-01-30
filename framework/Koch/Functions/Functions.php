@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Functions;
 
 /**
  * Koch Framework - Class Library for various static helper Functions.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Functions
  */
 class Functions
 {

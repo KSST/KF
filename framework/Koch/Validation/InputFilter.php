@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Validation;
@@ -34,7 +33,6 @@ namespace Koch\Validation;
  * @note by vain: check PHP 5 >= 5.2.0 FilterFunctions
  * @todo implement PHP5.2 Filterfunctions
  * @link http://www.php.net/manual/de/ref.filter.php
- *
  */
 class InputFilter
 {

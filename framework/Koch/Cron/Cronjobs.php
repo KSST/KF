@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cron;
@@ -140,10 +139,6 @@ namespace Koch\Cron;
  *
  * v1.0    01-17-2003
  *     initial release
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cron
  */
 class Cronjobs
 {

@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View;
@@ -39,7 +38,6 @@ use Koch\Http\HttpRequest;
  * by mapping the requested class and action to a template.
  *
  * layout_template selection, depends on the main configuration and user selection (settings).
- *
  */
 class Mapper
 {

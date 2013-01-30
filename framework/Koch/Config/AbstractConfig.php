@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config;
 
 /**
  * Koch Framework - Abstract Base Class for Config.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
 {

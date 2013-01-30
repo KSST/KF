@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Logger;
@@ -32,10 +31,6 @@ namespace Koch\Logger;
  * Another name for this class would be MultiLog.
  * A new logger object is added with addLogger(), removed with removeLogger().
  * The composition is fired via method writeLog().
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Compositum implements LoggerInterface
 {

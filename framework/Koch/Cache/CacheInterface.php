@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache;
 
 /**
  * Interface for all Cache Adapters to implement.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 interface CacheInterface
 {

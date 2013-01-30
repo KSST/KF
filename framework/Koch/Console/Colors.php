@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Console;
@@ -38,10 +37,6 @@ namespace Koch\Console;
  * Ansi Escape Sequences takes from
  * @link http://ascii-table.com/ansi-escape-sequences.php
  * @link https://wiki.archlinux.org/index.php/Color_Bash_Prompt
- *
- * @category    Koch
- * @package     Core
- * @subpackage  CLI
  */
 class Colors
 {

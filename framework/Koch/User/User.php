@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\User;
 
 /**
  * Koch Framework - Class for User Handling
- *
- * @category    Koch
- * @package     Modules
- * @subpackage  User
  */
 class User
 {

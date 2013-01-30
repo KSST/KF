@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Permissions;
@@ -37,10 +36,6 @@ namespace Koch\Permissions;
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @copyright   LGPL
  * Thanks and credit to both authors.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  ACM
  */
 class ACM
 {

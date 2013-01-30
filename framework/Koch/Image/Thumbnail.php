@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Image;
 
 /**
  * Koch Framework - Class for Image Thumbnailing.
- *
- * @package     Koch
- * @subpackage  Core
- * @category    Image
  */
 class Thumbnail extends Image
 {

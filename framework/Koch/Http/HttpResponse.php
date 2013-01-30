@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Http;
@@ -29,10 +28,6 @@ namespace Koch\Http;
  * Koch Framework - Class for Response Handling.
  *
  * This class represents the web response object on a request processed by Koch Framework.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpResponse
  */
 class HttpResponse implements HttpResponseInterface
 {

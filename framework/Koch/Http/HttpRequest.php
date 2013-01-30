@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Http;
@@ -30,10 +29,6 @@ namespace Koch\Http;
  *
  * It encapsulates the access to sanitized superglobals ($_GET, $_POST, $_SERVER).
  * There are two ways of access (1) via methods and (2) via spl arrayaccess array handling.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpRequest
  */
 class HttpRequest implements HttpRequestInterface, \ArrayAccess
 {

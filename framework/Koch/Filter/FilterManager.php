@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter;
@@ -36,10 +35,6 @@ use Koch\Http\HttpResponseInterface;
  * The method addFilter() adds filters to the array.
  * A filter has to implement the Koch_Filter_Interface,
  * it has to provide the executeFilter() method.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filter
  */
 class FilterManager
 {

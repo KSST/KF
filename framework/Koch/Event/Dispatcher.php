@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event;
@@ -36,10 +35,6 @@ namespace Koch\Event;
  * This is a very flexible form of communication between objects.
  *
  * @pattern EventDispatcher, Event, Advanced Subject-Observer-Pattern, Notification Queue
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Eventdispatcher
  */
 class Dispatcher
 {

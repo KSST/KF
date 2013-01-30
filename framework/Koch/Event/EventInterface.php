@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event;
@@ -29,10 +28,6 @@ namespace Koch\Event;
  * Koch Framework - Interface for all Events.
  *
  * Events have to implement at least a execute() method
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Event
  */
 interface EventInterface
 {
