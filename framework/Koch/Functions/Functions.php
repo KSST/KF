@@ -14,10 +14,6 @@ namespace Koch\Functions;
 
 /**
  * Class Library for various static helper Functions.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Functions
  */
 class Functions
 {

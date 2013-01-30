@@ -19,10 +19,6 @@ namespace Koch\Feed;
  * It's written and copyrighted by Ryan Parman and Geoffrey Sneddon, (c) 2004-2008.
  * SimplePie is licensed under the modified BSD (3-clause) license.
  * @link https://github.com/simplepie/simplepie
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Feed
  */
 class Feed
 {

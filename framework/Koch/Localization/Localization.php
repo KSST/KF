@@ -16,10 +16,6 @@ use Koch\Config\Config;
 
 /**
  * Class for Localization (l10n) & Internationalization (i18n) Handling.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Localization
  */
 class Localization
 {

@@ -17,10 +17,6 @@ namespace Koch\Http;
  *
  * It encapsulates the access to sanitized superglobals ($_GET, $_POST, $_SERVER).
  * There are two ways of access (1) via methods and (2) via spl arrayaccess array handling.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpRequest
  */
 class HttpRequest implements HttpRequestInterface, \ArrayAccess
 {

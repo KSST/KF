@@ -20,10 +20,6 @@ namespace Koch\Module;
  * - creation of files of a module.
  *
  * You might select the module with setModule() or via constructor injection.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 class Generator
 {

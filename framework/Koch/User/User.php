@@ -14,10 +14,6 @@ namespace Koch\User;
 
 /**
  * Koch Framework - Class for User Handling
- *
- * @category    Koch
- * @package     Modules
- * @subpackage  User
  */
 class User
 {

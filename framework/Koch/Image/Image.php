@@ -14,10 +14,6 @@ namespace Koch\Image;
 
 /**
  * Class for Image Handling.
- *
- * @package     Koch
- * @subpackage  Core
- * @category    Image
  */
 class Image
 {

@@ -20,10 +20,6 @@ use Koch\Filter\FilterInterface;
  * Interface for FrontController
  *
  * The Frontcontroller has to implement the following methods.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  FrontController
  */
 interface FrontControllerInterface
 {

@@ -24,10 +24,6 @@ namespace Koch\Permissions;
  * @author      Konsta Vesterinen <kvesteri@cc.hut.fi>
  * @copyright   LGPL
  * Thanks and credit to both authors.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  ACM
  */
 class ACM
 {

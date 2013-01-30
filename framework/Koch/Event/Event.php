@@ -14,10 +14,6 @@ namespace Koch\Event;
 
 /**
  * Class represents an Event.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Event
  */
 class Event implements \ArrayAccess
 {

@@ -14,10 +14,6 @@ namespace Koch\Logger;
 
 /**
  * Interface for the Logger Adapters.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 interface LoggerInterface
 {

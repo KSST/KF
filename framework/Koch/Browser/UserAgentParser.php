@@ -14,10 +14,6 @@ namespace Koch\Browser;
 
 /**
  * The Class provids a User Agent Parser.
- *
- * @category    Koch
- * @package     Tools
- * @subpackage  Browser
  */
 class UserAgentParser
 {

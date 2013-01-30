@@ -17,10 +17,6 @@ namespace Koch\View;
  *
  * The static method getRenderer() returns the included and instantiated
  * Rendering Engine Object - which is the View in MVC!
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Renderer
  */
 class Factory
 {

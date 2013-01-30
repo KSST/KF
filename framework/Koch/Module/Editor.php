@@ -21,10 +21,6 @@ namespace Koch\Module;
  *  - adding libraries to a module.
   *
  * You might select the module with selectModule() or via constructor injection.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 class Editor
 {

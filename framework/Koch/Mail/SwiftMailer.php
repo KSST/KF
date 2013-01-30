@@ -18,10 +18,6 @@ namespace Koch\Mail;
  * This is a simple wrapper for SwiftMailer.
  * @link http://swiftmailer.org/
  * @link http://swiftmailer.org/docs/introduction.html Documentation
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Mailer
  */
 class SwiftMailer
 {

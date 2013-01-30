@@ -14,10 +14,6 @@ namespace Koch\Http;
 
 /**
  * Interface for the Response Object.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpResponse
  */
 interface HttpResponseInterface
 {

@@ -14,10 +14,6 @@ namespace Koch\Browser;
 
 /**
  * Class for acquiring Browser information.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Browser
  */
 class Browser
 {

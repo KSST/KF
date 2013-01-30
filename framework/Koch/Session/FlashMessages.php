@@ -33,10 +33,6 @@ namespace Koch\Session;
  * The message is removed from session after itï¿½s been displayed.
  *
  * Inspired by Ruby on Rails Flash Messages.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Flashmessages
  */
 class FlashMessages /* extends Koch_Session */
 {

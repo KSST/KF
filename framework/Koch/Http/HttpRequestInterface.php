@@ -14,10 +14,6 @@ namespace Koch\Http;
 
 /**
  * Interface for the Request Object.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpRequest
  */
 interface HttpRequestInterface
 {

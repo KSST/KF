@@ -17,10 +17,6 @@ namespace Koch\Code;
  *
  * Purpose of this class is to reverse-engineer classes,
  * interfaces, functions, methods and extensions.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Reflection
  */
 class Reflection
 {

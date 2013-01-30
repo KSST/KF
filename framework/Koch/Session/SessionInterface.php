@@ -14,10 +14,6 @@ namespace Koch\Session;
 
 /**
  * Interface for Session
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Session
  */
 interface SessionInterface
 {

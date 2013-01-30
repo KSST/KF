@@ -19,10 +19,6 @@ namespace Koch\Logger;
  * Another name for this class would be MultiLog.
  * A new logger object is added with addLogger(), removed with removeLogger().
  * The composition is fired via method writeLog().
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Compositum implements LoggerInterface
 {

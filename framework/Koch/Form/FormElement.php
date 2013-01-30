@@ -14,10 +14,6 @@ namespace Koch\Form;
 
 /**
  * Class for a FormElement.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Form
  */
 class FormElement implements FormElementInterface
 {

@@ -23,10 +23,6 @@ namespace Koch\Event;
  * This is a very flexible form of communication between objects.
  *
  * @pattern EventDispatcher, Event, Advanced Subject-Observer-Pattern, Notification Queue
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Eventdispatcher
  */
 class Dispatcher
 {

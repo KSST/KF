@@ -14,10 +14,6 @@ namespace Koch\Files;
 
 /**
  * Koch Framework - Class for the File Object
- *
- * @category    Koch
- * @package     Core
- * @subpackage  File
  */
 class File
 {

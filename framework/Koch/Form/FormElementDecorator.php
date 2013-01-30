@@ -14,10 +14,6 @@ namespace Koch\Form;
 
 /**
  * Class for decorating a Formelement.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Form
  */
 
 abstract class FormElementDecorator implements DecoratorInterface

@@ -17,10 +17,6 @@ use Koch\Http\HttpRequest;
 /**
  * A abstract base class for all our view rendering engines.
  * All renderers must extend from this class.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Renderer
  */
 abstract class AbstractRenderer
 {

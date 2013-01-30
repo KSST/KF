@@ -33,10 +33,6 @@ use Koch\Cache\Cache;
  * There are two different URL Formatings allowed:
  * 1. Slashes as Segment Dividers-Style, like so: /mod/sub/action/id
  * 2. Fake HTML File Request or SMF-Style, like so: /mod.sub.action.id.html
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Router
  */
 class Router implements RouterInterface, \ArrayAccess
 {

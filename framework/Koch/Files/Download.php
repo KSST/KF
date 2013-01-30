@@ -20,10 +20,6 @@ namespace Koch\Files;
  * The class depends on the fileinfo extension (default since php5.3).
  *
  * @link http://www.php.net/manual/en/book.fileinfo.php PHP Manual for the FileInfo Extension
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Download
  */
 class Download
 {

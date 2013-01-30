@@ -23,10 +23,6 @@ namespace Koch\Module;
  * - update of a module.
  *
  * You might select the module with selectModule() or via constructor injection.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 class Manager
 {

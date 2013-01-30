@@ -19,10 +19,6 @@ use Koch\Exception\Renderer\YellowScreenOfDeath;
  *
  * @see http://php.net/manual/de/class.exception.php
  * @see http://php.net/manual/de/function.set-exception-handler.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Exceptionhandler
  */
 class Exception extends \Exception
 {

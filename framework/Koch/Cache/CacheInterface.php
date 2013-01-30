@@ -14,10 +14,6 @@ namespace Koch\Cache;
 
 /**
  * Interface for all Cache Adapters to implement.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 interface CacheInterface
 {

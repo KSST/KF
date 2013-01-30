@@ -17,10 +17,6 @@ namespace Koch\Event;
  *
  * Purpose:
  * Eventloader handles the loading and registering of events by using event configuration files.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Eventloader
  */
 class Loader
 {

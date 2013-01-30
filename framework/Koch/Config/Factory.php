@@ -17,10 +17,6 @@ namespace Koch\Config;
  *
  * The static method getConfiguration() includes and instantiates
  * a Configuration Engine Object and injects the configfile.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Config
  */
 class Factory
 {

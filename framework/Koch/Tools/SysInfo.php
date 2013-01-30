@@ -16,10 +16,6 @@ namespace Koch\Tools;
  * Koch Framework - Systeminfo
  *
  * The class provides pieces of information about the environment.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  SystemInfo
  */
 class SysInfo
 {

@@ -27,10 +27,6 @@ namespace Koch\Tools;
  *
  * Optional:
  *   $builder->addBrowser( 'ie', 'Internet Explorer', true, 'ie' );
- *
- * @category    Koch
- * @package     Tools
- * @subpackage  CssBuilder
  */
 class CssBuilder
 {

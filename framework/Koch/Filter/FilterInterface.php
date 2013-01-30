@@ -17,10 +17,6 @@ use Koch\Http\HttpResponseInterface;
 
 /**
  * Interface Koch_Filter_Interface
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filter
  */
 interface FilterInterface
 {

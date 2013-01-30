@@ -14,10 +14,6 @@ namespace Koch\Image;
 
 /**
  * Class for Image Cropping.
- *
- * @package     Koch
- * @subpackage  Core
- * @category    Image
  */
 class Crop extends Image
 {

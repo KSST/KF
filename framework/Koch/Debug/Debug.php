@@ -18,10 +18,6 @@ namespace Koch\Debug;
  * This class initializes debugging helpers like xdebug, the doctrine profiler,
  * firebug and printR at system start-up and displays debug
  * and runtime-informations on demand or at application shutdown.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Debug
  */
 class Debug
 {

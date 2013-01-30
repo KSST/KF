@@ -16,10 +16,6 @@ namespace Koch\Router;
  * Interface for Router(s)
  *
  * A router has to implement the following methods to resolve the Request to a Module and the Action/Command.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Router
  */
 interface RouterInterface
 {

@@ -17,10 +17,6 @@ namespace Koch\Module;
  * Inspired by Sinatra.
  *
  * Force classes implementing the interface to define these (must have) methods!
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Module
  */
 interface ModuleInterface
 {

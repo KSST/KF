@@ -14,10 +14,6 @@ namespace Koch\Doctrine;
 
 /**
  * Class for the Initialization of the Profiler for Doctrine.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Doctrine
  */
 class Profiler
 {

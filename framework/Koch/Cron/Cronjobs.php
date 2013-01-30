@@ -127,10 +127,6 @@ namespace Koch\Cron;
  *
  * v1.0    01-17-2003
  *     initial release
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cron
  */
 class Cronjobs
 {

@@ -25,10 +25,6 @@ namespace Koch\Console;
  * Ansi Escape Sequences takes from
  * @link http://ascii-table.com/ansi-escape-sequences.php
  * @link https://wiki.archlinux.org/index.php/Color_Bash_Prompt
- *
- * @category    Koch
- * @package     Core
- * @subpackage  CLI
  */
 class Colors
 {

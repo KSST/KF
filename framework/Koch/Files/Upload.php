@@ -14,10 +14,6 @@ namespace Koch\Files;
 
 /**
  * Koch Framework - Class for Upload Handling
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Upload
  */
 class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
 {

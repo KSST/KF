@@ -14,10 +14,6 @@ namespace Koch\Permissions;
 
 /**
  * Koch Framework - Class for Role and User Based Access Control Management
- *
- * @category    Koch
- * @package     Core
- * @subpackage  ACL
  */
 class ACL
 {

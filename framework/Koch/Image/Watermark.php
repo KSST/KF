@@ -14,10 +14,6 @@ namespace Koch\Image;
 
 /**
  * Class for Image Watermarking.
- *
- * @package     Koch
- * @subpackage  Core
- * @category    Image
  */
 class Watermark extends Image
 {

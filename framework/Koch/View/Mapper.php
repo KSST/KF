@@ -26,7 +26,6 @@ use Koch\Http\HttpRequest;
  * by mapping the requested class and action to a template.
  *
  * layout_template selection, depends on the main configuration and user selection (settings).
- *
  */
 class Mapper
 {

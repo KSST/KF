@@ -23,10 +23,6 @@ use Koch\Http\HttpResponseInterface;
  * The method addFilter() adds filters to the array.
  * A filter has to implement the Koch_Filter_Interface,
  * it has to provide the executeFilter() method.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filter
  */
 class FilterManager
 {

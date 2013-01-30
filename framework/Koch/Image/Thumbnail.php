@@ -14,10 +14,6 @@ namespace Koch\Image;
 
 /**
  * Class for Image Thumbnailing.
- *
- * @package     Koch
- * @subpackage  Core
- * @category    Image
  */
 class Thumbnail extends Image
 {

@@ -16,10 +16,6 @@ namespace Koch\Http;
  * Class for Response Handling.
  *
  * This class represents the web response object on a request processed by Koch Framework.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  HttpResponse
  */
 class HttpResponse implements HttpResponseInterface
 {

@@ -9,8 +9,7 @@
  *
  * *
  * *
- * *
- */
+ * */
 /**
  * Class provides MB_STRING Wrapper Methods.
  *

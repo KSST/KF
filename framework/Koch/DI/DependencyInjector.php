@@ -23,7 +23,6 @@ use Koch\DI\Storage\ClassRepository;
  *
  * Version: 0.1_alpha10 - SVN-Revision: 90
  * @link http://phemto.sourceforge.net/index.php
- *
  */
 class DependencyInjector
 {

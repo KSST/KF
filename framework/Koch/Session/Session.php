@@ -16,10 +16,6 @@ use Koch\Exception\Exception;
 
 /**
  * Koch Framework - Class for Session Handling
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Session
  */
 class Session implements SessionInterface, \ArrayAccess /* 5.4 implements SessionHandlerInterface */
 {

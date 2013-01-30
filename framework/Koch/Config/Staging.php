@@ -14,10 +14,6 @@ namespace Koch\Config;
 
 /**
  * Class for Staging (Config overloading based on ServerName).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Config
  */
 class Staging
 {

@@ -17,10 +17,6 @@ namespace Koch\Debug;
  *
  * This class initializes xdebug at system start-up and displays debug
  * and runtime-informations at application shutdown.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  XDebug
  */
 class XDebug
 {

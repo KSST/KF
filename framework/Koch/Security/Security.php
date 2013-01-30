@@ -23,10 +23,6 @@ namespace Koch\Security;
  *
  * @link http://www.schneier.com/cryptography.html Website of Bruce Schneier
  * @link http://www.php.net/manual/en/refs.crypto.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Security
  */
 final class Security
 {
