@@ -139,10 +139,10 @@ class Browser
     {
         $aBrowser = array();
 
-        $aBrowser['name'] = $this->getBrowserName();
-        $aBrowser['version'] = $this->getBrowserVersion();
-        $aBrowser['engine'] = $this->getEngine() . ' ' . $this->getEngineVersion();
-        $aBrowser['os'] = $this->getOperatingSystem() . ' ' . $this->getOperatingSystemName();
+        $aBrowser['name'] = $this->browserName;
+        $aBrowser['version'] = $this->browserVersion;
+        $aBrowser['engine'] = $this->engine . ' ' . $this->engineVersion;
+        $aBrowser['os'] = $this->operatingSystem . ' ' . $this->operatingSystemName;
 
         return $aBrowser;
     }
@@ -157,7 +157,7 @@ class Browser
      */
     public function isBot()
     {
-        return (bool) ($this->getBrowserType() === self::TYPE_BOT);
+        return (bool) ($this->browserType === self::TYPE_BOT);
     }
 
     /**
@@ -166,7 +166,7 @@ class Browser
      */
     public function isIE()
     {
-        return (bool) ($this->getBrowserName() === self::BROWSER_IE);
+        return (bool) ($this->browserName === self::BROWSER_IE);
     }
 
     /**
@@ -175,7 +175,7 @@ class Browser
      */
     public function isFirefox()
     {
-        return (bool) ($this->getBrowserName() === self::BROWSER_FIREFOX);
+        return (bool) ($this->browserName === self::BROWSER_FIREFOX);
     }
 
     /**
@@ -184,7 +184,7 @@ class Browser
      */
     public function isOpera()
     {
-        return (bool) ($this->getBrowserName() === self::BROWSER_OPERA);
+        return (bool) ($this->browserName === self::BROWSER_OPERA);
     }
 
     /**
@@ -193,7 +193,7 @@ class Browser
      */
     public function isChrome()
     {
-        return (bool) ($this->getBrowserName() === self::BROWSER_CHROME);
+        return (bool) ($this->browserName === self::BROWSER_CHROME);
     }
 
     /**
@@ -202,7 +202,7 @@ class Browser
      */
     public function isSafari()
     {
-        return (bool) ($this->getBrowserName() === self::BROWSER_SAFARI);
+        return (bool) ($this->browserName === self::BROWSER_SAFARI);
     }
 
     /**
@@ -211,7 +211,7 @@ class Browser
      */
     public function isMobilSystem()
     {
-        return (bool) ($this->getOperatingSystemType() === self::SYSTEM_MOBIL);
+        return (bool) ($this->operatingSystemType === self::SYSTEM_MOBIL);
     }
 
     /**
@@ -220,7 +220,7 @@ class Browser
      */
     public function isConsoleSystem()
     {
-        return (bool) ($this->getOperatingSystemType() === self::SYSTEM_CONSOLE);
+        return (bool) ($this->operatingSystemType === self::SYSTEM_CONSOLE);
     }
 
     // --------------- BROWSER ---------------
@@ -526,7 +526,7 @@ class Browser
      */
     public function getFullName()
     {
-        return $this->getBrowserName() . ' ' . $this->getBrowserVersion();
+        return $this->browserName . ' ' . $this->browserVersion;
     }
 
     /**
@@ -537,21 +537,21 @@ class Browser
     public function toArray()
     {
         return array(
-            'user_agent' => $this->getUserAgentString(),
-            'browser_name' => $this->getBrowserName(),
-            'browser_type' => $this->getBrowserType(),
-            'browser_type_sub' => $this->getBrowserTypeSub(),
-            'browser_version' => $this->getBrowserVersion(),
-            'browser_version_major' => $this->getBrowserVersionMajor(),
-            'browser_version_minor' => $this->getBrowserVersionMinor(),
-            'browser_version_release' => $this->getBrowserVersionRelease(),
-            'browser_version_build' => $this->getBrowserVersionBuild(),
-            'operating_system' => $this->getOperatingSystem(),
-            'operating_system_name' => $this->getOperatingSystemName(),
-            'operating_system_type' => $this->getOperatingSystemType(),
-            'operating_system_type_sub' => $this->getOperatingSystemTypeSub(),
-            'engine' => $this->getEngine(),
-            'engine_version' => $this->getEngineVersion()
+            'user_agent' => $this->userAgentString,
+            'browser_name' => $this->browserName,
+            'browser_type' => $this->browserType,
+            'browser_type_sub' => $this->browserTypeSub,
+            'browser_version' => $this->browserVersion,
+            'browser_version_major' => $this->browserVersionMajor,
+            'browser_version_minor' => $this->browserVersionMinor,
+            'browser_version_release' => $this->browserVersionRelease,
+            'browser_version_build' => $this->browserVersionBuild,
+            'operating_system' => $this->operatingSystem,
+            'operating_system_name' => $this->operatingSystemName,
+            'operating_system_type' => $this->operatingSystemType,
+            'operating_system_type_sub' => $this->operatingSystemTypeSub,
+            'engine' => $this->engine,
+            'engine_version' => $this->engineVersion
         );
     }
 
