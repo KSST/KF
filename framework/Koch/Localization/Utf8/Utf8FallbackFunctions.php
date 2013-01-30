@@ -8,21 +8,6 @@
  * @link       http://github.com/splitbrain/dokuwiki/raw/master/inc/utf8.php
  */
 
-/**
- * check for mb_string support
- */
-if (false === defined('UTF8_MBSTRING')) {
-    if (function_exists('mb_substr') && !defined('UTF8_NOMBSTRING')) {
-        define('UTF8_MBSTRING', 1);
-    } else {
-        define('UTF8_MBSTRING', 0);
-    }
-}
-
-if (UTF8_MBSTRING) {
-    mb_internal_encoding('UTF-8');
-}
-
 if (false === function_exists('utf8_isASCII')) {
 
     /**
