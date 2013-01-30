@@ -17,7 +17,7 @@ namespace Koch\Browser;
  */
 class UserAgentParser
 {
-    const TYPE_UNKNOW = 'unknown';
+    const TYPE_UNKNOWN = 'unknown';
 
     /**
      * Parse a user agent string.
@@ -31,10 +31,7 @@ class UserAgentParser
             $userAgentString = isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null;
         }
 
-        // parse quickly with medium accuracy
-        $informations = $this->doParse($userAgentString);
-
-        return $informations;
+        return $this->doParse($userAgentString);
     }
 
     /**
@@ -98,14 +95,14 @@ class UserAgentParser
                         $userAgent['browser_version_release'] = isset($tVer[2]) ? $tVer[2] : null;
                         $userAgent['browser_version_build'] = isset($tVer[3]) ? $tVer[3] : null;
                     } else {
-                        $userAgent['browser_version'] = self::TYPE_UNKNOW;
+                        $userAgent['browser_version'] = self::TYPE_UNKNOWN;
                     }
 
                     // read engine
                     if ($elements['engine'] !== null) {
                         $userAgent['engine'] = $elements['engine'];
                     } else {
-                        $userAgent['engine'] = self::TYPE_UNKNOW;
+                        $userAgent['engine'] = self::TYPE_UNKNOWN;
                     }
 
                     // read engine version
@@ -115,14 +112,14 @@ class UserAgentParser
                         $pattern = '|.+\s' . $pe . '([0-9\.]+)(.*).*|';
                         $userAgent['engine_version'] = preg_replace($pattern, '$1', $userAgent['string']);
                     } else {
-                        $userAgent['engine_version'] = self::TYPE_UNKNOW;
+                        $userAgent['engine_version'] = self::TYPE_UNKNOWN;
                     }
                 }
             }
         }
 
         if (false === $found) {
-            $userAgent['browser_type'] = self::TYPE_UNKNOW;
+            $userAgent['browser_type'] = self::TYPE_UNKNOWN;
         }
 
         // Parse Operating System
@@ -155,7 +152,7 @@ class UserAgentParser
                     if ($elements['type'] !== null) {
                         $userAgent['operating_system_type'] = $elements['type'];
                     } else {
-                        $userAgent['operating_system_type'] = self::TYPE_UNKNOW;
+                        $userAgent['operating_system_type'] = self::TYPE_UNKNOWN;
                     }
 
                     if (isset($elements['subtype']) === true) {
@@ -168,7 +165,7 @@ class UserAgentParser
         }
 
         if (false === $found) {
-            $userAgent['operating_system_type'] = self::TYPE_UNKNOW;
+            $userAgent['operating_system_type'] = self::TYPE_UNKNOWN;
         }
 
         return $userAgent;
