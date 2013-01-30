@@ -31,6 +31,16 @@ class UserAgentParser
 {
     const TYPE_UNKNOWN = 'unknown';
 
+    public function getBrowser()
+    {
+        static $browser;
+
+        if(isset($browser) === false){
+            $browser = get_browser($_SERVER['HTTP_USER_AGENT']);
+        }
+        return $browser;
+    }
+
     /**
      * Parse a user agent string.
      *
@@ -82,7 +92,9 @@ class UserAgentParser
         $found = false;
         $tmp_array = array();
 
-        foreach ($this->getListBrowsers() as $name => $elements) {
+        $list = $this->getBrowsersList();
+
+        foreach ($list as $name => $elements) {
             // read browser
             $exprReg = $elements['search'];
             foreach ($exprReg as $expr) {
@@ -97,9 +109,7 @@ class UserAgentParser
 
                     // read version
                     if ($elements['vparam'] !== null) {
-                        $pattern = '';
-                        $pv = $elements['vparam'];
-                        $pattern = '|.+\s' . $pv . '([0-9a-z\+\-\.]+).*|';
+                        $pattern = '|.+\s' . $elements['vparam'] . '([0-9a-z\+\-\.]+).*|';
                         $userAgent['browser_version'] = preg_replace($pattern, '$1', $userAgent['string']);
                         $tVer = preg_split("/\./", $userAgent['browser_version']);
                         $userAgent['browser_version_major'] = $tVer[0];
@@ -120,8 +130,7 @@ class UserAgentParser
                     // read engine version
                     $pattern = '';
                     if ($elements['eparam'] !== null) {
-                        $pe = $elements['eparam'];
-                        $pattern = '|.+\s' . $pe . '([0-9\.]+)(.*).*|';
+                        $pattern = '|.+\s' . $elements['eparam'] . '([0-9\.]+)(.*).*|';
                         $userAgent['engine_version'] = preg_replace($pattern, '$1', $userAgent['string']);
                     } else {
                         $userAgent['engine_version'] = self::TYPE_UNKNOWN;
@@ -137,7 +146,9 @@ class UserAgentParser
         // Parse Operating System
         $found = false;
         $tmp_array = array();
-        foreach ($this->getListOperatingSystems() as $name => $elements) {
+        $osList = $this->getListOperatingSystems();
+
+        foreach ($osList as $name => $elements) {
             $exprReg = $elements['search'];
 
             foreach ($exprReg as $expr) {
@@ -207,7 +218,7 @@ class UserAgentParser
      *
      * @return Array of browsers
      */
-    protected function getListBrowsers()
+    protected function getBrowsersList()
     {
         $aList = array();
 
