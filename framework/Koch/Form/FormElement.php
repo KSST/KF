@@ -25,21 +25,79 @@ class FormElement implements FormElementInterface
      * @var string
      */
     public $name;
+
+    /**
+     * @var string
+     */
     public $id;
+
+    /**
+     * @var string
+     */
     public $type;
+
+    /**
+     * @var string
+     */
     public $class;
+
+    /**
+     * @var string
+     */
     public $size;
+
+    /**
+     * @var string
+     */
     public $disabled;
+
+    /**
+     * @var int
+     */
     public $maxlength;
+
+    /**
+     * @var string
+     */
     public $style;
+
+    /**
+     * @var string
+     */
     public $onclick;
+
+    /**
+     * @var string
+     */
     public $label;
+
+    /**
+     * @var string
+     */
     public $value;
+
+    /**
+     * @var int
+     */
     public $position;
+
+    /**
+     * @var boolean
+     */
     public $required;
+    /**
+     * @var array
+     */
     public $additional_attributes;
 
+    /**
+     * @var array
+     */
     protected $formelementdecorators = array();
+
+    /**
+     * @var boolean
+     */
     protected $disableDefaultDecorators;
 
     /**
@@ -139,11 +197,7 @@ class FormElement implements FormElementInterface
      */
     public function getNameWithoutBrackets()
     {
-        $name = mb_strrpos($this->name, '[');
-
-        if ($name === false) {
-            return $this->name;
-        }
+        $name = strrpos($this->name, '[');
 
         // remove brackets
         $name = $this->name;
@@ -406,8 +460,17 @@ class FormElement implements FormElementInterface
                  * If the setter method exists most likely the property will exist too, i guess.
                  */
                 if ( defined('DEBUG') and DEBUG == true ) {
-                    $method = 'set' . $attribute;
-                    $this->$method($value);
+                    $method = 'set' . ucfirst($attribute);
+                    if(method_exists($this, $method)) {
+                        $this->$method($value);
+                    } else {
+                        throw new \RuntimeException(
+                            sprintf(
+                                'You are trying to set attribute "%s", but the setter method "%s" was not found.',
+                                $attribute,
+                                $method
+                        ));
+                    }
                 } else { // while in production mode
                     // set attribute directly
                     $this->{$attribute} = $value;
@@ -461,6 +524,7 @@ class FormElement implements FormElementInterface
      * "required, email"
      *
      * @param string One or more (comma separated) validation rules to perform.
+     * @return \Koch\Form\FormElement
      */
     public function setRules($rule)
     {
@@ -481,11 +545,17 @@ class FormElement implements FormElementInterface
                 $rule = $array[0];
                 $value = $array[1];
 
+                if(in_array($rule, array('maxvalue'))) {
+                   $value = (int) $value;
+                }
+
                 $this->addValidator($rule, array($rule => $value));
             } else {
                 $this->addValidator($rule);
             }
         }
+
+        return $this;
     }
 
     /**
@@ -496,34 +566,23 @@ class FormElement implements FormElementInterface
      */
     public function mapRulenameToClassname($rule)
     {
-        switch ($rule) {
-            case 'email':
-                return 'Email';
-            case 'equals':
-                return 'Equals';
-            case 'ip':
-                return 'Ip';
-            case 'locale':
-                return 'Locale';
-            case 'maxlength':
-                return 'MaxLength';
-            case 'maxvalue':
-                return 'MaxValue';
-            case 'minlength':
-                return 'MinLength';
-            case 'minvalue':
-                return 'MinValue';
-            case 'range':
-                return 'Range';
-            case 'regexp':
-                return 'RegExp';
-            case 'required':
-                return 'Required';
-            case 'string':
-                return 'String';
-            case 'url':
-                return 'Url';
-        }
+        $array = array(
+            'email' => 'Email',
+            'equals' => 'Equals',
+            'ip' => 'Ip',
+            'locale' => 'Locale',
+            'maxlength' => 'MaxLength',
+            'maxvalue' => 'MaxValue',
+            'minlength' => 'MinLength',
+            'minvalue' => 'MinValue',
+            'range' => 'Range',
+            'regexp' => 'RegExp',
+            'required' => 'Required',
+            'string' => 'String',
+            'url' => 'Url'
+        );
+
+        return (isset($rule, $array) === true) ? $array[$rule] : $rule;
     }
 
     /**
@@ -580,10 +639,10 @@ class FormElement implements FormElementInterface
      */
     public function getValidatorFromFactory($validator)
     {
-        $validator = $this->mapRulenameToClassname($validator);
+        $class = $this->mapRulenameToClassname($validator);
 
         // construct classname
-        $class = '\Koch\Form\Validators\\' . $validator;
+        $class = '\Koch\Form\Validators\\' . $class;
 
         // return early, if this object is already stored
         if (isset($this->validators[$class]) === true) {
@@ -643,6 +702,24 @@ class FormElement implements FormElementInterface
     }
 
     /**
+     * Return the validators of formelement.
+     *
+     * @return \Koch\Form\FormValidatorInterface
+     */
+    public function getValidators()
+    {
+        return $this->validators;
+    }
+
+    /**
+     * Removes all Decorators of this formelement.
+     */
+    public function resetValidators()
+    {
+        $this->formelementdecorators = null;
+    }
+
+    /**
      * Method adds an validation error to the formelement_validation_error stack.
      *
      * @param $errormessage
@@ -698,6 +775,7 @@ class FormElement implements FormElementInterface
 
     /**
      * The method __toString works in the scope of the subclass.
+     * Each formelement renders itself.
      * All formelements inherit the formelement base class,
      * so we place the magic method here, in the parent,
      * and catch the subclass via get_class($this).
@@ -711,10 +789,6 @@ class FormElement implements FormElementInterface
         if (method_exists($subclass, 'render') === true) {
             return $subclass->render();
         }
-        /*else { // nothing, because each formelement renders itself
-
-            return $this->render();
-        }*/
     }
 
     /**
@@ -722,20 +796,6 @@ class FormElement implements FormElementInterface
      *      Formelement Decoration
      * ===================================================================================
      */
-
-    /**
-     * setDecorator
-     *
-     * Is a shortcut/proxy/convenience method for addDecorator()
-     * @see $this->addDecorator()
-     *
-     * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @return Koch\Form\FormElement_Decorator
-     */
-    public function setDecorator($decorators)
-    {
-        return $this->addDecorator($decorators);
-    }
 
     /**
      * Adds a decorator to the formelement
@@ -852,6 +912,11 @@ class FormElement implements FormElementInterface
         $this->disableDefaultDecorators = true;
     }
 
+    public function useDefaultDecorators()
+    {
+        return ($this->disableDefaultDecorators == true) ? false : true;
+    }
+
     /**
      * Factory method. Instantiates and returns a new formdecorator object.
      *
@@ -860,7 +925,7 @@ class FormElement implements FormElementInterface
      */
     public function decoratorFactory($decorator)
     {
-        $class = 'Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
+        $class = '\Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
 
         if (false == class_exists($class, false)) {
             $file = __DIR__ . '/decorators/formelement/' . $decorator . '.php';

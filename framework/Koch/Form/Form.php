@@ -37,23 +37,21 @@ namespace "Koch\Form\Element\" + formelement name
      */
     public function processForm()
     {
-        // check if form has been submitted properly
-        if ($this->validateForm() === false) {
-            /**
-             * Failure - form was not filled properly.
-             * Redisplay the form with error decorator added.
-             */
-            $this->addDecorator('Errors');
-        } else {
-            /**
+        // check, if form has been submitted properly
+        if ($this->validateForm() === true) {
+             /**
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('NoError');
+        } else {
+            /**
+             * Failure - form was not filled properly.
+             * Redisplay the form with error decorator added.
+             */
+            $this->addDecorator('Errors');
         }
-
-        $this->render();
     }
 
     /**
@@ -96,20 +94,20 @@ namespace "Koch\Form\Element\" + formelement name
         // now we got an $data array to populate all the formelements with (setValue)
         foreach ($data as $key => $value) {
             foreach ($this->formelements as $formelement) {
-                $type = $formelement->getType();
 
                 /**
-                 * Exclude some formelements from setValue(), e.g. buttons, etc.
+                 * Exclude some formelements from setValue() by type, e.g. Buttons, etc.
                  * Setting the value would just change the visible "name" of these elements.
                  */
+                $type = $formelement->getType();
                 if (true === in_array($type, array('submit', 'button', 'cancelbutton', 'resetbutton'))) {
                     continue;
                 }
 
                 // data[key] and formelement[name] have to match
-                if ($formelement->getName() == ucfirst($key)) {
+                //if ($formelement->getName() == ucfirst($key)) {
                     $formelement->setValue($value);
-                }
+                //}
             }
         }
     }
@@ -519,7 +517,7 @@ namespace "Koch\Form\Element\" + formelement name
         foreach ($this->formelements as $formelement) {
             if ($formelement->validate() === false) {
                 $this->hasErrors(true);
-                $this->addErrorMessage($formelement->getErrorMessages());
+                $this->addErrorMessages($formelement->getErrorMessages());
             }
         }
 
@@ -547,24 +545,24 @@ namespace "Koch\Form\Element\" + formelement name
         return $this->error;
     }
 
-    public function addErrorMessage($errormessage)
+    public function addErrorMessage($errorMessage)
     {
-        $this->errormessages[] = $errormessage;
+        $this->errorMessages[] = $errorMessage;
     }
 
-    public function addErrorMessages(array $errormessages)
+    public function addErrorMessages(array $errorMessages)
     {
-        $this->errormessages = $errormessages;
+        $this->errorMessages = $errorMessages;
     }
 
-    public function resetErrormessages()
+    public function resetErrorMessages()
     {
-        $this->errormessages = array();
+        $this->errorMessages = array();
     }
 
-    public function getErrormessages()
+    public function getErrorMessages()
     {
-        return $this->errormessages;
+        return $this->errorMessages;
     }
 
     /**

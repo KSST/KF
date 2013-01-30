@@ -23,6 +23,16 @@ class Errors extends FormDecorator
 
     public function render($html_form_content)
     {
-        return $html_form_content;
+        $errors = '<ul id="form-errors">';
+
+        $messages = $this->getErrorMessages();
+
+        foreach ($messages as $idx => $message) {
+            $errors .= '<li>' . $message . '</li>';
+        }
+
+        $errors .= '</ul>';
+
+        return $errors . $html_form_content;
     }
 }
