@@ -234,7 +234,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
             array('minlength', 'MinLength'),
             array('minvalue', 'MinValue'),
             array('range', 'Range'),
-            array( 'regexp', 'RegExp'),
+            array('regexp', 'RegExp'),
             array('required', 'Required'),
             array('string', 'String'),
             array('url', 'Url')
@@ -278,11 +278,11 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Form\FormElement::getValidatorFromFactory
      * @expectedException Exception
-     * @expectedExceptionMessage Validator named rule not available.
+     * @expectedExceptionMessage Validator named "not-existing" not available.
      */
     public function testGetValidatorFromFactory()
     {
-        $this->object->setRules('rule');
+        $this->object->getValidatorFromFactory('not-existing');
     }
 
     /**
@@ -337,19 +337,12 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Form\FormElement::render
-     */
-    public function testRender()
-    {
-        $this->assertEquals('',  $this->object->render());
-    }
-
-    /**
      * @covers Koch\Form\FormElement::__toString
      */
     public function test__toString()
     {
-        $this->assertEquals('', $this->object->__toString());
+        $formelement = new \Koch\Form\Elements\Email;
+        $this->assertEquals('<input type="email" name="" />'.CR, $formelement->__toString());
     }
 
     /**
