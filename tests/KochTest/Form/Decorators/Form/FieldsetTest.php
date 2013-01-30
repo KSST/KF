@@ -1,5 +1,7 @@
 <?php
-namespace Koch\Form\Decorators\Form;
+namespace KochTest\Form\Decorators\Form;
+
+use Koch\Form\Decorators\Form\Fieldset;
 
 class FieldsetTest extends \PHPUnit_Framework_TestCase
 {
@@ -8,19 +10,11 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
     protected function setUp()
     {
         $this->object = new Fieldset;
     }
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
     protected function tearDown()
     {
     }
@@ -47,6 +41,5 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
         $expectedOutput = '<fieldset class="form"><legend class="form"><em></em></legend>Form Content</fieldset>';
 
         $this->assertEquals($expectedOutput, $r);
-
     }
 }

@@ -468,6 +468,28 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('</form>', $html);
     }
 
+    public function testRender_withDecorator()
+    {
+        $this->form->addElement('Textarea');
+        $this->form->addErrorMessage('Doh! This is an error message. Doh!');
+        $this->form->addDecorator('Errors');
+
+        $html = $this->form->render();
+
+        $this->assertFalse(empty($html));
+
+        // content from decorator
+        $this->assertContains('<ul id="form-errors">', $html);
+        $this->assertContains('<li>Doh! This is an error message. Doh!</li>', $html);
+        $this->assertContains('</ul>', $html);
+
+        // normal form tag
+        $this->assertContains('<!-- Start of Form "TestForm" -->', $html);
+        $this->assertContains('<form', $html);
+        $this->assertContains('<textarea id="textarea-formelement-0">', $html);
+        $this->assertContains('</form>', $html);
+    }
+
     public function test__toString()
     {
         $this->form->addElement('Textarea');
@@ -658,9 +680,30 @@ class FormTest extends \PHPUnit_Framework_TestCase
 
     public function testMethod_processForm()
     {
-        $this->form->addElement('Textarea');
+        $this->form->addElement('Textarea')->setRules('maxvalue=120')->setValue(123);
 
         $this->form->processForm();
+
+        $html = $this->form->render();
+
+        $this->assertContains('error', $html);
+        $this->assertContains('<form', $html);
+    }
+
+    public function testMethod_processForm_withIncommingData()
+    {
+        $this->form->addElement('Textarea')->setValue(123)->setRules('string');
+
+        // two options were selected (array is incomming via post)
+        $data = array('textarea-formelement-0' => 'Lore ipsum...');
+        $this->form->setValues($data);
+
+        $html = $this->form->render();
+
+        $this->assertContains('<form', $html);
+        $this->assertContains('</form>', $html);
+        $this->assertContains('<textarea', $html);
+        $this->assertContains('Lore ipsum...', $html);
     }
 
     public function testsetValues_DataArrayPassedToMethod()
@@ -835,7 +878,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testValidateForm_false()
     {
         $this->form->addElement('Textarea')
-                ->setName('Textarea-Validate-Test')
+                ->setName('Textarea-testValidateForm-false')
                 ->setRequired()
                 ->setRules('required, string, maxlength=20');
         // ->setValue() is missing intentionally
@@ -844,7 +887,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->form->validateForm());
 
         // set a value, exceeding maxlength
-        $element = $this->form->getElementByName('Textarea-Validate-Test');
+        $element = $this->form->getElementByName('Textarea-testValidateForm-false');
         $element->setValue('0123456789-0123456789'); // 21 chars
 
         // max length exceeded
@@ -854,12 +897,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testValidateForm_true()
     {
         $this->form->addElement('Textarea')
-                ->setName('Textarea-Validate-Test')
+                ->setName('Textarea-testValidateForm-true')
                 ->setRequired()
                 ->setRules('required, string, maxlength=20');
 
         // set value, length ok
-        $element = $this->form->getElementByName('Textarea-Validate-Test');
+        $element = $this->form->getElementByName('Textarea-testValidateForm-true');
         $element->setValue('01234567890123456789'); // 20 chars
 
         $this->assertTrue($this->form->validateForm());
