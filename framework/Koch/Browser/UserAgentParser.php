@@ -33,7 +33,7 @@ class UserAgentParser
 
     public function getBrowser()
     {
-        static $browser;
+        static $browser = array();
 
         if(isset($browser) === false){
             $browser = get_browser($_SERVER['HTTP_USER_AGENT']);
