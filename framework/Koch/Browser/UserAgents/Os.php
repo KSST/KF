@@ -1,13 +1,15 @@
 <?php
-/** -------------------------------------------------
+
+/**
+ * -------------------------------------------------
  * OPERATING SYSTEM (OS)
  * -------------------------------------------------
  *
  * Array Structure:
- *  - search      = searchstring
- *  - subsearch   = sub search in search
- *  - addsearch   = additional searchstring for specific os
- *  - type        = os
+ * - search      = searchstring
+ * - subsearch   = sub search in search
+ * - addsearch   = additional searchstring for specific os
+ * - type        = os
  *
  */
 
