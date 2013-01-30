@@ -15,7 +15,7 @@ namespace Koch\Form;
 /**
  * Class for a FormElement.
  */
-class FormElement implements FormElementInterface
+class FormElement
 {
     /**
      * @var string
@@ -578,7 +578,7 @@ class FormElement implements FormElementInterface
             'url' => 'Url'
         );
 
-        return (isset($rule, $array) === true) ? $array[$rule] : $rule;
+        return (isset($array[$rule]) === true) ? $array[$rule] : $rule;
     }
 
     /**
@@ -647,7 +647,7 @@ class FormElement implements FormElementInterface
             return new $class();
         } else {
             // validator not found
-            throw new \Exception('Validator named ' . $validator . ' not available.');
+            throw new \Exception('Validator named "' . $validator . '" not available.');
         }
     }
 
@@ -762,14 +762,6 @@ class FormElement implements FormElementInterface
      */
 
     /**
-     * override
-     */
-    public function render()
-    {
-        // nothing, because each formelement renders itself
-    }
-
-    /**
      * The method __toString works in the scope of the subclass.
      * Each formelement renders itself.
      * All formelements inherit the formelement base class,
@@ -780,11 +772,7 @@ class FormElement implements FormElementInterface
      */
     public function __toString()
     {
-        $subclass = get_class($this);
-
-        if (method_exists($subclass, 'render') === true) {
-            return $subclass->render();
-        }
+        return $this->render();
     }
 
     /**
