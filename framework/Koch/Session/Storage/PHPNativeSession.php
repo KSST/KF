@@ -10,8 +10,13 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\Session;
+namespace Koch\Session\Storage;
 
+use Koch\Session\AbstractSession;
+
+/**
+ * Koch Framwork - Class for a PHP native session storage.
+ */
 class PHPNativeSession extends AbstractSession
 {
     public function close()
