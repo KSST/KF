@@ -30,7 +30,7 @@ namespace Koch\User;
  * The object represents the initial values of the user object.
  * This is the guest visitor.
  */
-class GuestUser
+class Guest
 {
     /**
      * @var object Koch_GuestUser is a singleton.
