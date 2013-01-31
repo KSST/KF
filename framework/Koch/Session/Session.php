@@ -29,7 +29,7 @@ use Koch\Exception\Exception;
 /**
  * Koch Framework - Class for Session Handling
  */
-class Session implements SessionInterface, \ArrayAccess /* 5.4 implements SessionHandlerInterface */
+class Session extends AbstractSession implements SessionInterface, \ArrayAccess
 {
     // stop applications to influcence each other by applying a session_name
     const SESSION_NAME = 'CsuiteSID';

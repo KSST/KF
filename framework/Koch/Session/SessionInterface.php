@@ -26,6 +26,9 @@ namespace Koch\Session;
 
 /**
  * Interface for Session
+ *
+ * Compatible with the SessionHandlerInterface of PHP 5.4.
+ * @link http://php.net/manual/ro/class.sessionhandlerinterface.php
  */
 interface SessionInterface
 {
