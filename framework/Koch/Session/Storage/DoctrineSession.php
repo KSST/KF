@@ -17,7 +17,7 @@ use Koch\Session\AbstractSession;
 /**
  * Class for Doctrine Session Storage.
  */
-class Session extends AbstractSession
+class DoctrineSession extends AbstractSession
 {
     // stop applications to influcence each other by applying a session_name
     const SESSION_NAME = 'CsuiteSID';
