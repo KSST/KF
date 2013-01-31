@@ -22,8 +22,13 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Koch\Session;
+namespace Koch\Session\Storage;
 
+use Koch\Session\AbstractSession;
+
+/**
+ * Koch Framwork - Class for a PHP native session storage.
+ */
 class PHPNativeSession extends AbstractSession
 {
     public function close()

@@ -24,10 +24,10 @@
 
 namespace Koch\Session;
 
-use Koch\Exception\Exception;
+use Koch\Session\AbstractSession;
 
 /**
- * Koch Framework - Class for Session Handling
+ * Koch Framework - Class for Doctrine Session Storage.
  */
 class Session extends AbstractSession
 {
