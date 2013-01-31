@@ -14,5 +14,33 @@ namespace Koch\Session;
 
 class PHPNativeSession extends AbstractSession
 {
-    // no body
+    public function close()
+    {
+        ;
+    }
+
+    public function write($id, $data)
+    {
+        ;
+    }
+
+    public function gc($maxlifetime)
+    {
+        ;
+    }
+
+    public function destroy($id)
+    {
+        ;
+    }
+
+    public function open($path, $name)
+    {
+        ;
+    }
+
+    public function read($id)
+    {
+        ;
+    }
 }
