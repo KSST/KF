@@ -466,7 +466,7 @@ class User
     /**
      * Check whether a user is logged in
      *
-     * @return Returns true if user is authed, false otherwise.
+     * @return boolean Returns true if user is authed, false otherwise.
      */
     public function isUserAuthed()
     {
