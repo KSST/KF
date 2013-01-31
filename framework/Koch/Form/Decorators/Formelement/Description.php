@@ -25,19 +25,15 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\AbstractFormElementDecorator;
 
 /**
  * Koch Framework - Formelement Decorator Description.
  *
  * Adds a <span> element containing the formelement
  * description after html_fromelement_content.
- *
- * @category Koch
- * @package Koch_Form
- * @subpackage Koch_Form_Decorator
  */
-class Description extends FormElementDecorator
+class Description extends AbstractFormElementDecorator
 {
     /**
      * @var string Name of this decorator

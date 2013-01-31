@@ -25,9 +25,9 @@
 
 namespace Koch\Form\Decorators\Form;
 
-use Koch\Form\FormDecorator;
+use Koch\Form\AbstractFormDecorator;
 
-class Fieldset extends FormDecorator
+class Fieldset extends AbstractFormDecorator
 {
     /**
      * @var string Name of this decorator

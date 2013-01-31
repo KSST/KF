@@ -25,7 +25,7 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\AbstractFormElementDecorator;
 
 /**
  * Formelement_Decorator_Formelement
@@ -37,12 +37,8 @@ use Koch\Form\FormElementDecorator;
  * From inside formelement (A) you can't reach the form to add another formelement (B).
  * But you can reach the addDecorator() method. And at this point this class comes in.
  * It utilizes the autoloader to get the formelement (B).
- *
- * @category Koch
- * @package Koch\Form
- * @subpackage Koch\Form\Decorator
  */
-class Formelement extends FormElementDecorator
+class Formelement extends AbstractFormElementDecorator
 {
     /**
      * @var string Name of this decorator

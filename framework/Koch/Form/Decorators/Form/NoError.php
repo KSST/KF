@@ -25,9 +25,9 @@
 
 namespace Koch\Form\Decorators\Form;
 
-use Koch\Form\FormDecorator;
+use Koch\Form\AbstractFormDecorator;
 
-class NoError extends FormDecorator
+class NoError extends AbstractFormDecorator
 {
     /**
      * @var string Name of this decorator

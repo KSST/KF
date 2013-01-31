@@ -25,19 +25,15 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\AbstractFormElementDecorator;
 
 /**
  * Formelement_Decorator_None
  *
  * None - this hardly decorates anything at all.
  * Just wraps linebreaks around the html formelemnet content.
- *
- * @category Koch
- * @package Koch_Form
- * @subpackage Koch_Form_Decorator
  */
-class LineBreak extends FormElementDecorator
+class LineBreak extends AbstractFormElementDecorator
 {
     public $name = 'none';
 
