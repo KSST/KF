@@ -11,12 +11,9 @@ report any bugs or feature requests and to see the list of known issues.
 
 ## Contributing
 
-Please fork this repository and contribute back using [pull requests](https://github.com/KSST/KF/pulls).
-Before contributing, please read the [step by step guide on contributing](https://github.com/KSST/KF/blob/master/CONTRIBUTING.md).
-
-Any contributions, large or small, major features, bug fixes, additional
-language translations, unit/integration tests are welcomed and appreciated
-but will be thoroughly reviewed and discussed.
+* Please fork this repository and contribute back using [pull requests](https://github.com/KSST/KF/pulls).
+* Before contributing, please read the [step by step guide on contributing](https://github.com/KSST/KF/blob/master/CONTRIBUTING.md).
+* Contributions are welcomed and appreciated. They will be reviewed and discussed.
 
 ## Installation
 
