@@ -27,7 +27,7 @@ namespace Koch\Feed;
 /**
  * FeedCreator lets you choose during runtime which format to build.
  */
-class Generator // extends FeedGeneratorAbstract
+class Generator // extends AbstractGenerator
 {
     protected $feed = null;
     protected $format = '';
