@@ -17,7 +17,7 @@ use Koch\Exception\Exception;
 /**
  * Koch Framework - Class for Session Handling
  */
-class Session extends AbstractSession implements SessionInterface, \ArrayAccess
+class Session extends AbstractSession
 {
     // stop applications to influcence each other by applying a session_name
     const SESSION_NAME = 'CsuiteSID';
@@ -386,72 +386,4 @@ class Session extends AbstractSession implements SessionInterface, \ArrayAccess
         return true;
     }
 
-    /**
-     * =======================
-     *       Get and Set
-     * =======================
-     */
-
-    /**
-     * Sets Data into the Session.
-     *
-     * @param string key
-     * @param mixed  value
-     */
-    public function set($key, $value)
-    {
-        if (is_resource($value) === true) {
-            throw new \LogicException('Do not store resources in the SESSION! Keep it light!');
-        }
-
-        $_SESSION[$key] = $value;
-    }
-
-    /**
-     * Gets Data from the Session.
-     *
-     * @param string key
-     * @return mixed value/boolean false
-     */
-    public function get($key)
-    {
-        if ($_SESSION[$key] !== null) {
-            return $_SESSION[$key];
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * =====================================
-     *   Implementation of SPL ArrayAccess
-     * =====================================
-     */
-
-    public function offsetExists($offset)
-    {
-        return isset($_SESSION[$offset]);
-    }
-
-    public function offsetGet($offset)
-    {
-        if (isset($_SESSION[$offset]) === true) {
-            return $_SESSION[$offset];
-        } else {
-            throw new \InvalidArgumentException(sprintf('Array Key "%s" is not defined.', $offset));
-        }
-    }
-
-    public function offsetSet($offset, $value)
-    {
-        $this->set($offset, $value);
-    }
-
-    // @todo note by vain: check if this works on single array of session?
-    public function offsetUnset($offset)
-    {
-        unset($_SESSION[$offset]);
-
-        return true;
-    }
 }
