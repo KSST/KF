@@ -108,7 +108,7 @@ class ManifestManager
      * @param  string  $modulename The modulename
      * @return boolean True if modulename is a core module, false otherwise.
      */
-    public static function isACoreModule($modulename)
+    public static function isCoreModule($modulename)
     {
         // hardcoded map with core modules
         static $core_modules = array( 'account', 'categories', 'controlcenter', 'doctrine', 'menu', 'modulemanager',
@@ -273,7 +273,7 @@ class ManifestManager
             self::$modulesinfo[$modulename]['name']   = $modulename;
             self::$modulesinfo[$modulename]['id']     = $number_of_modules;
             self::$modulesinfo[$modulename]['path']   = $modulepath;
-            self::$modulesinfo[$modulename]['core']   = self::isACoreModule($modulename);
+            self::$modulesinfo[$modulename]['core']   = self::isCoreModule($modulename);
 
             // active - based on /configuration/modules.config.php
             self::$modulesinfo[$modulename]['active'] = self::isModuleActive($modulename);
