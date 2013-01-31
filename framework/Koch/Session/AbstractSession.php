@@ -24,6 +24,9 @@
 
 namespace Koch\Session;
 
+/**
+ * Koch Framework - Abstract base class for Session Storages.
+ */
 abstract class AbstractSession implements SessionInterface
 {
     // no body

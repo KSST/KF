@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 
 /**
  * Koch Framework
@@ -25,10 +25,12 @@
 namespace Koch\Feed;
 
 /**
+ * Koch Framework - Abstract base class for Feed Generators.
+ *
  * FeedCreator is the abstract base implementation for concrete
  * implementations of specific formats of syndication.
  */
-abstract class GeneratorAbstract extends ElementBase
+abstract class AbstractGenerator extends ElementBase
 {
     /**
      * An identifier to be used to create the name for a cache file

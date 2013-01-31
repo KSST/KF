@@ -24,6 +24,9 @@
 
 namespace Koch\DI;
 
+/**
+ * Koch Framework - Abstract base class for Lifecycles.
+ */
 abstract class AbstractLifecycle
 {
     public $class;

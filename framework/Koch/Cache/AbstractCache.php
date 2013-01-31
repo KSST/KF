@@ -25,7 +25,7 @@
 namespace Koch\Cache;
 
 /**
- * Koch Framework - Abstract Base Class for Cache Adapters.
+ * Koch Framework - Abstract base class for Cache Adapters.
  */
 abstract class AbstractCache
 {
