@@ -12,7 +12,7 @@
 
 namespace Koch\Session;
 
-class PHPNativeSession
+class PHPNativeSession extends AbstractSession
 {
     // no body
 }
