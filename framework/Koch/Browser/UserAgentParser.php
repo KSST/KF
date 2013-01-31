@@ -35,9 +35,10 @@ class UserAgentParser
     {
         static $browser = array();
 
-        if(isset($browser) === false){
+        if (isset($browser) === false) {
             $browser = get_browser($_SERVER['HTTP_USER_AGENT']);
         }
+
         return $browser;
     }
 
@@ -60,7 +61,7 @@ class UserAgentParser
      * Detect quickly informations from the user agent string.
      *
      * @param  string $userAgentString => user agent string.
-     * @return array $information     => user agent informations directly in array.
+     * @return array  $information     => user agent informations directly in array.
      */
     public function doParse($userAgentString)
     {
