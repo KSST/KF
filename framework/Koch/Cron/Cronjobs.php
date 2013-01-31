@@ -18,8 +18,8 @@ namespace Koch\Cron;
  * Cronjobs is a service wrapper class for stack processing of regular tasks.
  *
  * This is a fork of Kai Blankenhorn's pseudo-cron v1.3
- * (c) 2003,2004 Kai Blankenhorn, www.bitfolge.de/pseudocron, <kaib@bitfolge.de>
- * (c) 2008,2009 Jens A. Koch, www.http://a-b-c.de, <jakoch@web.de>
+ * (c) 2003,2004 Kai Blankenhorn, http://www.bitfolge.de/pseudocron/, <kaib@bitfolge.de>
+ * (c) 2008-onwards Jens A. Koch, http://http://a-b-c.de/, <jakoch@web.de>
  *
  * Usually regular tasks like backup up the site's database are run using cron
  * jobs. With cron jobs, you can exactly plan when a certain command is to be
@@ -68,65 +68,6 @@ namespace Koch\Cron;
  * ------
  * You can log messages to pseudo-cron's log file from cron jobs by calling:
  *  logMessage("log a message");
- *
- * Release notes for v1.2.2:
- * -------------------------
- *
- * This release changed the way cron jobs are called. The file paths you specify in
- * the crontab file are now relative to the location of pseudo-cron.inc.php, instead
- * of to the calling script. Example: If /include/pseudo-cron.inc.php is included
- * in /index.php and your cronjobs are in /include/cronjobs, then your crontab file
- * looked like this:
- *
- * 10    1    *    *    *    include/cronjobs/dosomething.php    // do something
- *
- * Now you have to change it to
- *
- * 10    1    *    *    *    cronjobs/dosomething.php            // do something
- *
- * After you install the new version, each of your cronjobs will be run once,
- * and the .job files will have different names than before.
- *
- * ----------
- * Changelog:
- * ----------
- *
- * v1.4 10-05-2008
- *     fork:     removed globals, added constant for debugging
- *               added handlers for cronjobs from file and from database
- *
- * v1.3    06-15-2004
- *     added:    the number of jobs run during one call of pseudocron
- *               can now be limited.
- *     added:    additional script to call pseudocron from an HTML img tag
- *     improved: storage of job run times
- *     fixed:    bug with jobs marked as run although they did not complete
- *
- * v1.2.2 01-17-2004
- *     added:    send an email for each completed job
- *     improved: easier cron job configuration (relative to pseudo-cron, not
- *               to calling script. Please read the release notes on this)
- *
- * v1.2.1 02-03-2003
- *     fixed:   jobs may be run too often under certain conditions
- *     added:   global debug switch
- *     changed: typo in imagecron.php which prevented it from working
- *
- * v1.2    01-31-2003
- *     added:   more documentation
- *     changed: log file should now be easier to use
- *     changed: log file name
- *
- * v1.1    01-29-2003
- *     changed: renamed pseudo-cron.php to pseudo-cron.inc.php
- *     fixed:   comments at the end of a line don't work
- *     fixed:   empty lines in crontab file create nonsense jobs
- *     changed: log file grows big very quickly
- *     changed: included config file in main file to avoid directory confusion
- *     added:   day of week abbreviations may now be used (three letters, english)
- *
- * v1.0    01-17-2003
- *     initial release
  */
 class Cronjobs
 {
