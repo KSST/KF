@@ -12,18 +12,14 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\AbstractFormElementDecorator;
 
 /**
  * Formelement_Decorator_Label
  *
  * Adds a <label> element containing the formelement label in-front of html_fromelement_content.
- *
- * @category Koch
- * @package Koch\Form
- * @subpackage Koch\Form\Decorators
  */
-class Label extends FormElementDecorator
+class Label extends AbstractFormElementDecorator
 {
     /**
      * @var string Name of this decorator

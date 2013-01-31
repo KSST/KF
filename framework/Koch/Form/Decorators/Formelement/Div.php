@@ -12,18 +12,14 @@
 
 namespace Koch\Form\Decorators\Formelement;
 
-use Koch\Form\FormElementDecorator;
+use Koch\Form\AbstractFormElementDecorator;
 
 /**
  * Formelement_Decorator_Div
  *
  * Wraps a <div> element around the html_formelement_content.
- *
- * @category Koch
- * @package Koch_Form
- * @subpackage Koch_Form_Decorator
  */
-class Div extends FormElementDecorator
+class Div extends AbstractFormElementDecorator
 {
     /**
      * @var string Name of this decorator

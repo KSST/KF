@@ -12,9 +12,9 @@
 
 namespace Koch\Form\Decorators\Form;
 
-use Koch\Form\FormDecorator;
+use Koch\Form\AbstractFormDecorator;
 
-class Html5Validation extends FormDecorator
+class Html5Validation extends AbstractFormDecorator
 {
     /**
      * @var string Name of this decorator
