@@ -15,6 +15,8 @@ namespace Koch\View;
 use Koch\Http\HttpRequest;
 
 /**
+ * Abstract base class for View Renderers.
+ * 
  * A abstract base class for all our view rendering engines.
  * All renderers must extend from this class.
  */

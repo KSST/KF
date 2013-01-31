@@ -13,7 +13,7 @@
 namespace Koch\Config;
 
 /**
- * Abstract Base Class for Config.
+ * Abstract base class for Configuration Adapters.
  */
 abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
 {

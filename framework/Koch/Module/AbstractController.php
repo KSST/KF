@@ -23,7 +23,7 @@ use Koch\Http\HttpResponseInterface;
  * You could call it ModuleController and ActionController.
  * It`s abstract because it should only be extended, not instantiated.
  */
-abstract class Controller
+abstract class AbstractController
 {
     /**
      * @var object The rendering engine / view object

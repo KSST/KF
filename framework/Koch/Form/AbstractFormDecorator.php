@@ -15,7 +15,7 @@ namespace Koch\Form;
 use Koch\Form\DecoratorInterface;
 
 /**
- * Class for Decorating Forms.
+ * Abstract base class for Form Decorators.
  *
  * The base class for all decorators. It has the same type as Koch_Form itself.
  * The decorator pattern suggests that the decorator implements all public
@@ -41,7 +41,7 @@ use Koch\Form\DecoratorInterface;
  *
  * @pattern Decorator, [GoF, 216/220]
  */
-abstract class FormDecorator implements DecoratorInterface
+abstract class AbstractFormDecorator implements DecoratorInterface
 {
     /**
      * Instance of the form, which is to decorate.

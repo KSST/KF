@@ -13,10 +13,9 @@
 namespace Koch\Form;
 
 /**
- * Class for decorating a Formelement.
+ * Abstract base class for Formelement Decorators.
  */
-
-abstract class FormElementDecorator implements DecoratorInterface
+abstract class AbstractFormElementDecorator implements DecoratorInterface
 {
     // instance of formelement, which is to decorate
     protected $formelement;
