@@ -184,9 +184,7 @@ class Debug
         $trace  = array();
         $file = $line = $function = $class = $object = $trace_line = '';
 
-        /**
-         * Get the backtrace.
-         */
+        // Get the backtrace and the caller information.
         $trace = debug_backtrace();
         $file = $trace[$level]['file'];
         $line = $trace[$level]['line'];
@@ -195,7 +193,7 @@ class Debug
 
         /**
          * Get the file, to show the exact origin of the debug call.
-         * The line with the call is one line above.
+         * The line with the call, is one line above.
          */
         $file_content = file($file);
         $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
