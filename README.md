@@ -5,10 +5,6 @@ This repository contains the source code for the Koch Framework, a PHP 5.3 full-
 Please see the [issues](https://github.com/KSST/KF/issues) section to
 report any bugs or feature requests and to see the list of known issues.
 
-## License
-
-* [MIT License](https://opensource.org/license/MIT).
-
 ## Contributing
 
 * Please fork this repository and contribute back using [pull requests](https://github.com/KSST/KF/pulls).
@@ -26,3 +22,7 @@ you simply add the following line to your project's `composer.json` file.
             "KSST/KF": "dev-master"
         }
     }
+
+## License
+
+* [MIT License](https://opensource.org/license/MIT).
