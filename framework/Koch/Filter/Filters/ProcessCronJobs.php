@@ -20,10 +20,6 @@ use Koch\Http\HttpResponseInterface;
  * Filter for triggering the processing of cronjobs.
  *
  * Purpose: processes regular jobs (cron-daemon like).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class ProcessCronJobs implements FilterInterface
 {

@@ -20,10 +20,6 @@ use Koch\Http\HttpResponseInterface;
  * Filter for Permissions / RBACL Checks.
  *
  * Purpose: Perform an Permissions / RBACL Check
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class Permissions implements FilterInterface
 {

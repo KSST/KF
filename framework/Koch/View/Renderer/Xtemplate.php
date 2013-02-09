@@ -21,10 +21,6 @@ use Koch\View\AbstractRenderer;
  *
  * @link http://www.phpxtemplate.org/ Offical Website of PHP XTemplate
  * @link http://xtpl.sourceforge.net/ Project's Website at Sourceforge
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Xtemplate extends AbstractRenderer
 {

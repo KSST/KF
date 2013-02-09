@@ -14,10 +14,6 @@ namespace Koch\Localization\Adapter\Gettext;
 
 /**
  * Class for handling of Gettext (.po) files.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class Po
 {

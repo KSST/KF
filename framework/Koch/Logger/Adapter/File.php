@@ -18,10 +18,6 @@ use Koch\Logger\LoggerInterface;
  * Log to File.
  *
  * This class is a service wrapper for logging messages to a logfile.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class File implements LoggerInterface
 {

@@ -20,10 +20,6 @@ use Koch\Http\HttpResponseInterface;
  * Filter for updating the visitor statistics.
  *
  * This updates the statistics with the data of the current visitor.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class Statistics implements FilterInterface
 {

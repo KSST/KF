@@ -28,10 +28,6 @@ use Koch\View\AbstractRenderer;
  * This class implements two ways of rendering data as json.
  * 1) The method renderByHeader() wraps the json directly in the header.
  * 2) The method render() returns the json data for later rendering (as body).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  View
  */
 class Json extends AbstractRenderer
 {

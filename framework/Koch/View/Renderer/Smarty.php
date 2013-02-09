@@ -23,10 +23,6 @@ use Koch\Router\TargetRoute;
  *
  * @link http://smarty.php.net/ Official Website of Smarty Template Engine
  * @link http://smarty.incutio.com/ Smarty Wiki
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Smarty extends AbstractRenderer
 {

@@ -18,10 +18,6 @@ use Koch\View\AbstractRenderer;
  * View Renderer for native PHP Templates.
  *
  * This is a wrapper/adapter for using native PHP as Template Engine.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Php extends AbstractRenderer
 {

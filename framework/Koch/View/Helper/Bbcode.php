@@ -19,10 +19,6 @@ namespace Koch\View\Helper;
  * a) GeShi Code/Syntax Highligther
  *    This is used with the code tags, like [code]<?php ... ?>[/code]
  * b) bbcode_stringparser.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  BBCode
  */
 class Bbcode
 {

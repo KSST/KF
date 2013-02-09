@@ -18,10 +18,6 @@ use Koch\View\AbstractRenderer;
  * View Renderer for XSLT/XML.
  *
  * This is a wrapper/adapter for returning XML/XSLT data.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Xslt extends AbstractRenderer
 {

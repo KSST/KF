@@ -28,10 +28,6 @@ use Koch\Cache\CacheInterface;
  *
  * Download: http://sourceforge.net/projects/wincache/files/
  * It's a PECL extension. http://pecl.php.net/package/WinCache
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Wincache extends AbstractCache implements CacheInterface
 {

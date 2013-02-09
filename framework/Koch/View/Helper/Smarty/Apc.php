@@ -7,8 +7,6 @@ namespace Koch\View\Helper\Smarty;
  *
  * Implements APC resource for the HTML cache
  *
- * @package Smarty
- * @subpackage CacheResource
  * @author Monte Ohrt
  */
 

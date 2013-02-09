@@ -14,10 +14,6 @@ namespace Koch\Config\Exception;
 
 /**
  * The JSON Exception class represents any failures of decoding json strings.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class JsonException extends \Exception
 {

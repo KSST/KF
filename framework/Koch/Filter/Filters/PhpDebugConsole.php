@@ -18,10 +18,6 @@ use Koch\Http\HttpResponseInterface;
 
 /**
  * Filter for displaying the Debugging Console.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class PhpDebugConsole implements FilterInterface
 {

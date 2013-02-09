@@ -15,9 +15,6 @@
 /**
  * Koch Framework Smarty Viewhelper
  *
- * @category Koch
- * @package Smarty
- * @subpackage Viewhelper
  *
  * Name:        tabpanel
  * Type:        function

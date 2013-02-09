@@ -32,10 +32,6 @@ namespace Koch\View\Helper;
  * @link http://koti.welho.com/pnikande/GoF-models/html/Composite.html
  * @link http://java.sun.com/blueprints/patterns/CompositeView.html
  * @link http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Layout
  */
 class CompositeView implements ViewNodeInterface
 {

@@ -19,10 +19,6 @@ use Koch\View\AbstractRenderer;
  *
  * This is a wrapper/adapter for rendering CSV Data. CSV stands for 'comma-seperated-values'.
  * These files are commonly used to export and import data into different databases.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Csv extends AbstractRenderer
 {

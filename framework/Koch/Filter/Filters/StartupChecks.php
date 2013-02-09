@@ -21,10 +21,6 @@ use Koch\Exception\Exception;
  * Filter performing Startup Checks.
  *
  * Purpose: Perform Various Startup Check before running a Koch Framework Module.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class StartupChecks implements FilterInterface
 {

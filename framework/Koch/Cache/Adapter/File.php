@@ -19,10 +19,6 @@ use Koch\Cache\CacheInterface;
  * Cache Handler for Filecaching.
  *
  * The Filecache stores directly to disk.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class File extends AbstractCache implements CacheInterface
 {

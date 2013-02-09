@@ -21,10 +21,6 @@ use Koch\User\User;
  * Filter for Instantiation of the User Object.
  *
  * Purpose: Sets up the user session and user object.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class GetUser implements FilterInterface
 {

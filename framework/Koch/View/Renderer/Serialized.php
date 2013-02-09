@@ -18,10 +18,6 @@ use Koch\View\AbstractRenderer;
  * View Renderer for serialized PHP data.
  *
  * This is a wrapper/adapter for returning serialized PHP data.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Serialized extends AbstractRenderer
 {

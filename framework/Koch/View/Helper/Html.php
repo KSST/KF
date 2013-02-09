@@ -16,10 +16,6 @@ namespace Koch\View\Helper;
  * Class for rendering HTML output.
  *
  * The class provides helper methods to output html-tag elements.
- *
- * @category    Koch
- * @package     View
- * @subpackage  HTML
  */
 class Html /* extends DOMDocument */
 {

@@ -23,10 +23,6 @@ use Koch\Http\HttpResponseInterface;
  *
  * @link http://de3.php.net/manual/de/ref.tidy.php PHP Extension Tidy
  * @link http://de3.php.net/manual/de/function.tidy-get-config.php Tidy Config Parameters
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class HtmlTidy implements FilterInterface
 {

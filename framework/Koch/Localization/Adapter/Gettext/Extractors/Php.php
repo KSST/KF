@@ -16,13 +16,9 @@ use Koch\Localization\ExtractorBase;
 use Koch\Localization\ExtractorInterface;
 
 /**
- * Gettext Extractor PHP
+ * Koch Framework - Class for extracting Gettext string from PHP
  *
  * Extracts translation strings by scanning for certain functions: translate(), t(), _().
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class Php extends ExtractorBase implements ExtractorInterface
 {

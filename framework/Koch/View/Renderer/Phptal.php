@@ -21,10 +21,6 @@ use Koch\View\AbstractRenderer;
  *
  * @link http://phptal.org/ Official Website of the PHPTal Project.
  * @link http://phptal.sourceforge.net/ Project's Website at Sourceforge
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Phptal extends AbstractRenderer
 {

@@ -16,10 +16,6 @@ use Koch\Router\TargetRoute;
 
 /**
  * Class for Breadcrumb Handling.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Breadcrumb
  */
 class Breadcrumb
 {

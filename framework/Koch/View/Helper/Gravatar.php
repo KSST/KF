@@ -25,9 +25,6 @@ namespace Koch\View\Helper;
  *
  * 2) TalkPHP :
  *    http://www.talkphp.com/script-giveaway/1905-gravatar-wrapper-class.html
- *
- * @package     Koch
- * @subpackage  Libraries
  */
 class Gravatar
 {

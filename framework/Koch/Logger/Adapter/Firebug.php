@@ -29,10 +29,6 @@ use Koch\Logger\LoggerInterface;
  *
  * @link http://getfirebug.com/
  * @link http://firephp.org/
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Firebug implements LoggerInterface
 {

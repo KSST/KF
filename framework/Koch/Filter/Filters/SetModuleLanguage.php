@@ -22,10 +22,6 @@ use Koch\Router\TargetRoute;
  * Filter for Setting the Module Language.
  *
  * Purpose: Sets the TextDomain for the requested Module
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class SetModuleLanguage implements FilterInterface
 {

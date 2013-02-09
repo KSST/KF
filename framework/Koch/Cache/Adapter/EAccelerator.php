@@ -26,10 +26,6 @@ use Koch\Exception\Exception;
  * memory are cached on disk only.
  *
  * @link http://eaccelerator.net/
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class EAccelerator extends AbstractCache implements CacheInterface
 {

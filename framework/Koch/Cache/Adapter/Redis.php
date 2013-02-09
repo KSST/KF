@@ -25,10 +25,6 @@ use Koch\Cache\CacheInterface;
  * composer.json > require { "predis/service-provider": "dev-master" }
  * @link http://redis.io/
  * @link https://github.com/nicolasff/phpredis
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Redis extends AbstractCache implements CacheInterface
 {

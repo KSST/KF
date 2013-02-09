@@ -20,10 +20,6 @@ use Koch\View\AbstractRenderer;
  * This is a wrapper/adapter for the PDF Engine tcpdf.
  *
  * @link http://www.tcpdf.com/ TCPDF Website
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Pdf extends AbstractRenderer
 {

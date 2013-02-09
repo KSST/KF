@@ -3,9 +3,6 @@
 /**
  * Koch Framework Smarty View Helper
  *
- * @category Koch
- * @package Smarty
- * @subpackage Viewhelper
  */
 
 /**

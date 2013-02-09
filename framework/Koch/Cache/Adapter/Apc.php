@@ -22,10 +22,6 @@ use Koch\Functions\Functions;
  * APC is a) an opcache and b) a memory based cache.
  *
  * @link http://de3.php.net/manual/de/ref.apc.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Apc extends AbstractCache implements CacheInterface
 {

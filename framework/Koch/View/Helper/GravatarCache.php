@@ -17,9 +17,6 @@ namespace Koch\View\Helper;
  *
  * This is a service class for accessing cached Gravatars as provided
  * by http://www.gravatar.com.
- *
- * @package     Koch
- * @subpackage  Libraries
  */
 class GravatarCache
 {

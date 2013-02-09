@@ -19,10 +19,6 @@ use Koch\Logger\LoggerInterface;
  *
  * This class is a service wrapper for sending logging messages via email.
  * The email is send using the Koch_Mailer, which is a wrapper for SwiftMailer.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Email implements LoggerInterface
 {

@@ -14,10 +14,6 @@ namespace Koch\Config\Adapter;
 
 /**
  * Config Handler for INI Format.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class INI
 {

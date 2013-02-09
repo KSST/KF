@@ -16,10 +16,6 @@ use Koch\Datatype\Conversion;
 
 /**
  * Config Handler for XML Format (via SimpleXML).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class XML
 {

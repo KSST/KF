@@ -32,10 +32,6 @@ use Koch\Exception\Exception;
  * See also the new implementation by Andrei Zmievsk based on libmemcached and memcached.
  * @link http://github.com/andreiz/php-memcached/tree/master
  * @link http://pecl.php.net/package/memcached
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Memcached extends AbstractCache implements CacheInterface
 {

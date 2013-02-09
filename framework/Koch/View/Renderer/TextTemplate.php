@@ -18,10 +18,6 @@ use Koch\View\AbstractRenderer;
  * View Renderer for Text Templates.
  *
  * This is a simple Text Template Engine.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class TextTemplate extends AbstractRenderer
 {

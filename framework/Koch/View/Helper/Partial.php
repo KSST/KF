@@ -14,10 +14,6 @@ namespace Koch\View\Helper;
 
 /**
  * Class is a Container for Blocks.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Layout
  */
 class Partial extends Layout
 {

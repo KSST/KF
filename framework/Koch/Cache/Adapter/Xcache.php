@@ -27,10 +27,6 @@ use Koch\Cache\CacheInterface;
  *
  * @link http://xcache.lighttpd.net/
  * @link http://xcache.lighttpd.net/wiki/XcacheApi
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Xcache extends AbstractCache implements CacheInterface
 {
