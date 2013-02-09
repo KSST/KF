@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config\Adapter;
 
 /**
  * Koch Framework - Config Handler for CSV Format.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class CSV
 {

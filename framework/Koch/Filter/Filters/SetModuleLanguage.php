@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -35,10 +34,6 @@ use Koch\Router\TargetRoute;
  * Koch Framework - Filter for Setting the Module Language.
  *
  * Purpose: Sets the TextDomain for the requested Module
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class SetModuleLanguage implements FilterInterface
 {

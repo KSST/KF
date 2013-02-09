@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
@@ -32,10 +31,6 @@ namespace Koch\View\Helper;
  * a) GeShi Code/Syntax Highligther
  *    This is used with the code tags, like [code]<?php ... ?>[/code]
  * b) bbcode_stringparser.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  BBCode
  */
 class Bbcode
 {

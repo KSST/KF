@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -34,10 +33,6 @@ use Koch\User\User;
  * Koch Framework - Filter for Instantiation of the User Object.
  *
  * Purpose: Sets up the user session and user object.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class GetUser implements FilterInterface
 {

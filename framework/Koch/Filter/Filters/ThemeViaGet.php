@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -37,10 +36,6 @@ use Koch\Validation\InputFilter;
  * Purpose: Sets Theme via URL by appendix $_GET['theme']
  * Usage example: index.php?theme=themename
  * When request parameter 'theme' is set, the user session value for theme will be updated
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class ThemeViaGet implements FilterInterface
 {

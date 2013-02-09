@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Logger\Adapter;
@@ -32,10 +31,6 @@ use Koch\Logger\LoggerInterface;
  *
  * This class is a service wrapper for sending logging messages via email.
  * The email is send using the Koch_Mailer, which is a wrapper for SwiftMailer.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Email implements LoggerInterface
 {

@@ -3,8 +3,6 @@
  * This smarty function is part of "Koch Framework".
  *
  * Smarty plugin
- * @package Smarty
- * @subpackage plugins
  */
 
 /**

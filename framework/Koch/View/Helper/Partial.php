@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
 
 /**
  * Koch Framework - Class is a Container for Blocks.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Layout
  */
 class Partial extends Layout
 {

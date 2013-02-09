@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
@@ -45,10 +44,6 @@ namespace Koch\View\Helper;
  * @link http://koti.welho.com/pnikande/GoF-models/html/Composite.html
  * @link http://java.sun.com/blueprints/patterns/CompositeView.html
  * @link http://java.sun.com/blueprints/corej2eepatterns/Patterns/CompositeView.html
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Layout
  */
 class CompositeView implements ViewNodeInterface
 {

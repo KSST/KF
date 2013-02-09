@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -36,10 +35,6 @@ use Koch\View\Renderer\Smarty;
  *
  * Purpose: Display Maintenace Template
  * When config parameter 'maintenance' is set, the maintenance template will be displayed
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class Maintenance implements FilterInterface
 {

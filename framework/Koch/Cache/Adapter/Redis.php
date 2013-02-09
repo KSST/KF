@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -38,10 +37,6 @@ use Koch\Cache\CacheInterface;
  * composer.json > require { "predis/service-provider": "dev-master" }
  * @link http://redis.io/
  * @link https://github.com/nicolasff/phpredis
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Redis extends AbstractCache implements CacheInterface
 {

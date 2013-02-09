@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -47,10 +46,6 @@ use Koch\Config\Config;
  *
  * Note: The check if a certain language exists is not important,
  *       because there are 1) english hardcoded values and 2) the default language as fallback.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class LanguageViaGet implements FilterInterface
 {

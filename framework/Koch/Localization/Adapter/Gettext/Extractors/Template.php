@@ -29,13 +29,9 @@ use Koch\Localization\ExtractorBase;
 use Koch\Localization\ExtractorInterface;
 
 /**
- * Gettext Extractor Template
+ * Koch Framework - Class for extracting Gettext strings from Template
  *
  * Extracts translation strings from templates by scanning for certain placeholders, like {t}, {_}.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class Template extends ExtractorBase implements ExtractorInterface
 {

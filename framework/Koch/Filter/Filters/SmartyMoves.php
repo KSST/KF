@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -48,10 +47,6 @@ use \Koch\Http\HttpResponseInterface;
  * PRE_BODY_CLOSE
  *
  * Purpose: detect block-tags, move content of such blocks, remove tags afterwards.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class SmartyMoves implements FilterInterface
 {

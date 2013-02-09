@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Renderer;
@@ -31,10 +30,6 @@ use Koch\View\AbstractRenderer;
  * Koch Framework - View Renderer for XSLT/XML.
  *
  * This is a wrapper/adapter for returning XML/XSLT data.
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Xslt extends AbstractRenderer
 {

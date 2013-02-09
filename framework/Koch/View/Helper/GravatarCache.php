@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
@@ -30,9 +29,6 @@ namespace Koch\View\Helper;
  *
  * This is a service class for accessing cached Gravatars as provided
  * by http://www.gravatar.com.
- *
- * @package     Koch
- * @subpackage  Libraries
  */
 class GravatarCache
 {

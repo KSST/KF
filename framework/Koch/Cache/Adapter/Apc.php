@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -35,10 +34,6 @@ use Koch\Functions\Functions;
  * APC is a) an opcache and b) a memory based cache.
  *
  * @link http://de3.php.net/manual/de/ref.apc.php
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Apc extends AbstractCache implements CacheInterface
 {

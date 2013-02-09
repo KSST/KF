@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -40,10 +39,6 @@ use Koch\Cache\CacheInterface;
  *
  * @link http://xcache.lighttpd.net/
  * @link http://xcache.lighttpd.net/wiki/XcacheApi
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Xcache extends AbstractCache implements CacheInterface
 {

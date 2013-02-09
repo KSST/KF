@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -32,10 +31,6 @@ use Koch\Cache\CacheInterface;
  * Koch Framework - Cache Handler for Filecaching.
  *
  * The Filecache stores directly to disk.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class File extends AbstractCache implements CacheInterface
 {

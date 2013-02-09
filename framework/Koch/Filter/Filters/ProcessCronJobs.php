@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -33,10 +32,6 @@ use Koch\Http\HttpResponseInterface;
  * Koch Framework - Filter for triggering the processing of cronjobs.
  *
  * Purpose: processes regular jobs (cron-daemon like).
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class ProcessCronJobs implements FilterInterface
 {

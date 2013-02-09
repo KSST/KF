@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -34,10 +33,6 @@ use Koch\Exception\Exception;
  * Koch Framework - Filter performing Startup Checks.
  *
  * Purpose: Perform Various Startup Check before running a Koch Framework Module.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class StartupChecks implements FilterInterface
 {

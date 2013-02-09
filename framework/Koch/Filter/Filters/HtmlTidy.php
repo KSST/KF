@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -36,10 +35,6 @@ use Koch\Http\HttpResponseInterface;
  *
  * @link http://de3.php.net/manual/de/ref.tidy.php PHP Extension Tidy
  * @link http://de3.php.net/manual/de/function.tidy-get-config.php Tidy Config Parameters
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class HtmlTidy implements FilterInterface
 {

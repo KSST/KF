@@ -20,17 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config\Exception;
 
 /**
  * Koch Framework - The JSON Exception class represents any failures of decoding json strings.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class JsonException extends \Exception
 {

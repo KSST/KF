@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Renderer;
@@ -33,10 +32,6 @@ use Koch\View\AbstractRenderer;
  * This is a wrapper/adapter for the PDF Engine tcpdf.
  *
  * @link http://www.tcpdf.com/ TCPDF Website
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Pdf extends AbstractRenderer
 {

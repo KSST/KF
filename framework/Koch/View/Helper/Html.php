@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
@@ -29,10 +28,6 @@ namespace Koch\View\Helper;
  * Koch Framework - Class for rendering HTML output.
  *
  * The class provides helper methods to output html-tag elements.
- *
- * @category    Koch
- * @package     View
- * @subpackage  HTML
  */
 class Html /* extends DOMDocument */
 {

@@ -317,7 +317,6 @@ class Cronjobs
             // execute
             $job_object->execute();
 
-
             /* }
              * lse
              {

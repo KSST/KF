@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Renderer;
@@ -34,10 +33,6 @@ use Koch\View\AbstractRenderer;
  *
  * @link http://phptal.org/ Official Website of the PHPTal Project.
  * @link http://phptal.sourceforge.net/ Project's Website at Sourceforge
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Phptal extends AbstractRenderer
 {

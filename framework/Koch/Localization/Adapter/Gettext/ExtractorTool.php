@@ -34,10 +34,6 @@ namespace Koch\Localization\Adapter\Gettext;
  * This is a php implementation of a gettext extractor on basis of preg_matching.
  * The extractor matches certain translation functions, like translate('term') or t('term') or _('term').
  * and their counterparts in templates, often {t('term')} or {_('term')}.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class ExtractorTool
 {

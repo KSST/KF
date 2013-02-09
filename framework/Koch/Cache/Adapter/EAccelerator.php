@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -39,10 +38,6 @@ use Koch\Exception\Exception;
  * memory are cached on disk only.
  *
  * @link http://eaccelerator.net/
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class EAccelerator extends AbstractCache implements CacheInterface
 {

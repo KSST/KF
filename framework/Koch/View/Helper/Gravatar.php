@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Helper;
@@ -38,9 +37,6 @@ namespace Koch\View\Helper;
  *
  * 2) TalkPHP :
  *    http://www.talkphp.com/script-giveaway/1905-gravatar-wrapper-class.html
- *
- * @package     Koch
- * @subpackage  Libraries
  */
 class Gravatar
 {

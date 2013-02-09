@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Logger\Adapter;
@@ -31,10 +30,6 @@ use Koch\Logger\LoggerInterface;
  * Koch Framework - Log to File.
  *
  * This class is a service wrapper for logging messages to a logfile.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class File implements LoggerInterface
 {

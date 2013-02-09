@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Config\Adapter;
@@ -45,10 +44,6 @@ namespace Koch\Config\Adapter;
  * @link http://pecl.php.net/package/syck/ PECL SYCK Package maintained by Alexey Zakhlestin
  * @link http://github.com/why/syck/tree/master PECL SYCK Repository
  * @link http://spyc.sourceforge.net/ SPYC Library Website at Sourceforge
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Configuration
  */
 class YAML
 {

@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Cache\Adapter;
@@ -41,10 +40,6 @@ use Koch\Cache\CacheInterface;
  *
  * Download: http://sourceforge.net/projects/wincache/files/
  * It's a PECL extension. http://pecl.php.net/package/WinCache
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Cache
  */
 class Wincache extends AbstractCache implements CacheInterface
 {

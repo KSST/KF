@@ -33,10 +33,6 @@ namespace Koch\Localization\Adapter\Gettext;
  * @copyright 2007 Matthias Bauer
  * @license GNU/LGPL 2.1
  * @link http://wordpress-soc-2007.googlecode.com/svn/trunk/moeffju/php-msgfmt/
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Gettext
  */
 class Po
 {

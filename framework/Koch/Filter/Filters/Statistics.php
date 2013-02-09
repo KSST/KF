@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -33,10 +32,6 @@ use Koch\Http\HttpResponseInterface;
  * Koch Framework - Filter for updating the visitor statistics.
  *
  * This updates the statistics with the data of the current visitor.
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class Statistics implements FilterInterface
 {

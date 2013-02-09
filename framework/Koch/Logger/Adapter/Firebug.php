@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Logger\Adapter;
@@ -42,10 +41,6 @@ use Koch\Logger\LoggerInterface;
  *
  * @link http://getfirebug.com/
  * @link http://firephp.org/
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Logger
  */
 class Firebug implements LoggerInterface
 {

@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\View\Renderer;
@@ -36,10 +35,6 @@ use Koch\Router\TargetRoute;
  *
  * @link http://smarty.php.net/ Official Website of Smarty Template Engine
  * @link http://smarty.incutio.com/ Smarty Wiki
- *
- * @category    Koch
- * @package     View
- * @subpackage  Renderer
  */
 class Smarty extends AbstractRenderer
 {

@@ -1,8 +1,6 @@
 <?php
 /**
  * Smarty plugin
- * @package Clansuite
- * @subpackage smarty_plugins
  */
 
 /**

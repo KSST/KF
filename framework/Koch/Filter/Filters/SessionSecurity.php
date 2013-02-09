@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Filter\Filters;
@@ -40,10 +39,6 @@ use Koch\Http\HttpResponseInterface;
  * 2) Browser changed
  * 3) Host changed
  * 4) wrong passwords where tried a number of times
- *
- * @category    Koch
- * @package     Core
- * @subpackage  Filters
  */
 class SessionSecurity implements FilterInterface
 {
