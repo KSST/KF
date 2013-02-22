@@ -105,6 +105,7 @@ class HttpResponse implements HttpResponseInterface
            '404' => 'Not Found',
            // Server Error
            '500' => 'Internal Server Error',
+           '502' => 'Bad Gateway',
            '503' => 'Service Temporarily Unavailable'
         );
 
