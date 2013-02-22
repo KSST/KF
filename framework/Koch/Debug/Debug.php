@@ -42,7 +42,7 @@ class Debug
         $trace_line = $file[$trace['line']-1];
 
         echo '<pre>';
-        echo '<b>Debugging';
+        echo '<b>Debugging ';
         echo '<font color=red>'.basename($trace['file']).'</font>';
         echo ' on line <font color=red>'.$trace['line'].'</font></b>:' . "\n";
         echo "<div style='background: #f5f5f5; padding: 0.2em 0em;'>".htmlspecialchars($trace_line).'</div>' . "\n";
@@ -176,7 +176,7 @@ class Debug
      * The default level is 2 (0,1,2), because we have to skip
      * the 3 calls to dump() and getWhereDebugWasCalled().
      *
-     * @param  type   $level default 2.
+     * @param int $level Default 1.
      * @return string Message with origin of the debug call.
      */
     public static function getOriginOfDebugCall($level = 1)
