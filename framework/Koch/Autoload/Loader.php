@@ -215,7 +215,7 @@ class Loader
         }
 
         if (isset(self::$autoloaderMap[$classname]) === true) {
-            include_once self::$autoloaderMap[$classname];
+            include self::$autoloaderMap[$classname];
 
             return true;
         } else {
@@ -438,8 +438,10 @@ class Loader
     /**
      * Registers the autoloader.
      */
-    public static function register()
+    public static function register($mapfile)
     {
+        self::setClassMapFile($mapfile);
+
         spl_autoload_register(array(__CLASS__, 'autoload'), true, true);
     }
 
