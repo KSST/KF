@@ -37,9 +37,9 @@
             "type": "package",
             "package": {
                 "name": "marijnh/CodeMirror",
-                "version": "3.0",
+                "version": "3.1",
                 "dist": {
-                    "url": "http://codemirror.net/codemirror-3.0.zip",
+                    "url": "https://github.com/marijnh/CodeMirror/archive/v3.1.zip",
                     "type": "zip"
                 }
             }
@@ -48,7 +48,7 @@
     "require": {
         "php"                             : ">=5.3.3",
 
-        "doctrine/orm"                    : "2.3.0",
+        "doctrine/orm"                    : "2.3.2",
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
@@ -57,12 +57,12 @@
         "php-gettext/php-gettext"         : "1.0.11",
         "simplepie/simplepie"             : "dev-master",
         "smarty/smarty"                   : "dev-trunk",
-        "swiftmailer/swiftmailer"         : "v4.2.2",
-        "marijnh/CodeMirror"              : "3.0"
+        "swiftmailer/swiftmailer"         : "v4.3.0"
     },
     "not-required-now": {
         "mpdf/mpdf"                       : "dev-master",
-        "tcpdf/tcpdf"                     : "dev-master"
+        "tcpdf/tcpdf"                     : "dev-master",
+        "marijnh/CodeMirror"              : "3.1"
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
