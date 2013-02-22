@@ -185,8 +185,10 @@ namespace<br>";
     /**
      * Registers the autoloader.
      */
-    public static function register()
+    public static function register($mapfile)
     {
+        self::setClassMapFile($mapfile);
+
         spl_autoload_register(array(__CLASS__, 'autoload'), true, true);
     }
 
