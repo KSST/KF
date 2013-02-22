@@ -1,7 +1,8 @@
 <?php
-namespace Koch\Mail;
+namespace KochTest\Mail;
 
 use Koch\Config\Config;
+use Koch\Mail\SwiftMailer;
 
 class SwiftMailerTest extends \PHPUnit_Framework_TestCase
 {

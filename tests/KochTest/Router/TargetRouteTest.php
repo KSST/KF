@@ -1,5 +1,7 @@
 <?php
-namespace Koch\Router;
+namespace KochTest\Router;
+
+use Koch\Router\TargetRoute;
 
 class TargetRouteTest extends \PHPUnit_Framework_TestCase
 {

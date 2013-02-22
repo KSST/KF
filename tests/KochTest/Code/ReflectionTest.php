@@ -1,5 +1,7 @@
 <?php
-namespace Koch\Code;
+namespace KochTest\Code;
+
+use Koch\Code\Reflection;
 
 class ReflectionTest extends \PHPUnit_Framework_TestCase
 {
