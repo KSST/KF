@@ -1,6 +1,6 @@
 <?php
 
-namespace Koch\Config;
+namespace KochTest\Config;
 
 use Koch\Config\Config;
 use org\bovigo\vfs\vfsStream;
