@@ -112,32 +112,31 @@ class Mapper
         $theme_paths = array();
 
         /**
-         * 1. BACKEND THEME
-         * when controlcenter or admin is requested, it has to be a BACKEND theme
+         * BACKEND THEME
+         * when either "controlcenter" or "admin" is requested, it has to be a BACKEND theme.
          */
         if ($module == 'controlcenter' or $controller == 'admin') {
-            // get backend theme from session for path construction
-            $backendtheme = TargetRoute::getBackendTheme();
+
+            $theme = TargetRoute::getBackendTheme();
 
             // (a) USER BACKENDTHEME - check in the active session backendtheme
             // e.g. /themes/backend/ + admin/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme;
+            $theme_paths[] = APPLICATION_PATH . '/backend/' . $theme;
             // e.g. /themes/backend/ + admin/modules/template_name.tpl
-            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            $theme_paths[] = APPLICATION_PATH . '/backend/' . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (b) BACKEND FALLBACK - check the fallback dir: themes/admin
-            $theme_paths[] = ROOT_THEMES_BACKEND . 'default/';
+            $theme_paths[] = APPLICATION_PATH . '/backend/default/';
         } else {
-            // 2. FRONTEND THEME
+            // FRONTEND THEME
 
-            // get frontend theme from session for path construction
-            $frontendtheme = TargetRoute::getFrontendTheme();
+            $theme = TargetRoute::getFrontendTheme();
 
             // (a) USER FRONTENDTHEME - check, if template exists in current session user THEME
-            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR;
+            $theme_paths[] = APPLICATION_PATH . '/frontend/' . $theme . DIRECTORY_SEPARATOR;
             // (b) FRONTEND FALLBACK - check, if template exists in usertheme/modulename/tpl
-            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            $theme_paths[] = APPLICATION_PATH . '/frontend/' . $theme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (c) FRONTEND FALLBACK - check, if template exists in standard theme
-            $theme_paths[] = ROOT_THEMES_FRONTEND . 'default/';
+            $theme_paths[] = APPLICATION_PATH . '/frontend/default/';
         }
 
         return $theme_paths;
