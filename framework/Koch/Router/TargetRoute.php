@@ -87,7 +87,7 @@ class TargetRoute extends Mapper
 
     public static function getClassname()
     {
-        if (empty(self::$parameters['classname'])) {
+        if (empty(self::$parameters['classname']) === true) {
             $classname = self::mapControllerToClassname(self::getModule(), self::getController());
             self::setClassname($classname);
         }
@@ -108,8 +108,8 @@ class TargetRoute extends Mapper
     public static function getController()
     {
         // the default "controller" name is the "module" name
-        // this is the case if a route "/:module" is used
-        if (null === self::$parameters['controller']) {
+        // this is the case if a route "/:module", e.g. "/users" is used
+        if (empty(self::$parameters['controller']) === true) {
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
