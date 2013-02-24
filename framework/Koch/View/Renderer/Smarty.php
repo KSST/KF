@@ -387,6 +387,8 @@ class Smarty extends AbstractRenderer
     {
         $this->renderer->clearAllCache();
         $this->renderer->clearCompiledTemplate();
+
+        return true;
     }
 
     /**
