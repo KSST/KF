@@ -99,21 +99,15 @@ class Mapper
      */
     public static function getTemplatePath($template)
     {
-        // done: if template is a qualified path and template filename
+        // return early, if template is a qualified path and template filename
         if (is_file($template) === true) {
             return $template;
         }
 
-        // fetch the template by searching in the Theme Template Paths
+        // try to find the template in Theme or Module Path
         $theme_template = self::getThemeTemplatePath($template);
 
-        // check if template was found there, else it's null
-        if ($theme_template != null) {
-            return $theme_template;
-        }
-
-        // fetch the template by searching in the Module Template Path
-        return self::getModuleTemplatePath($template);
+        return ($theme_template != null) ? $theme_template : self::getModuleTemplatePath($template);
     }
 
     /**
@@ -123,50 +117,42 @@ class Mapper
      */
     public static function getThemeTemplatePaths()
     {
-        $route = HttpRequest::getRoute();
-
         // get module, submodule, renderer names
-        $module = $route->getModule();
-        $controller = $route->getController();
-        #$renderer  = $route->getRenderEngine();
-
-        $themePaths = array();
-        $themePath = '';
+        $module = TargetRoute::getModule();
+        $controller = TargetRoute::getController();
+        #$renderer  = HttpRequest::getRoute()->getRenderEngine();
+        $theme_paths = array();
 
         /**
          * 1. BACKEND THEME
          * when controlcenter or admin is requested, it has to be a BACKEND theme
          */
-        if ($module === 'controlcenter' or $controller === 'admin') {
+        if ($module == 'controlcenter' or $controller == 'admin') {
             // get backend theme from session for path construction
-            $theme = $route->getBackendTheme();
+            $backendtheme = TargetRoute::getBackendTheme();
 
-            $themesPath = APPLICATION_PATH . 'themes/backend/';
-
-            // (a) USER BACKEND THEME - check in the active session backendtheme
+            // (a) USER BACKENDTHEME - check in the active session backendtheme
             // e.g. /themes/backend/ + admin/template_name.tpl
-            $themePaths[] = $themesPath . $theme;
+            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme;
             // e.g. /themes/backend/ + admin/modules/template_name.tpl
-            $themePaths[] = $themesPath . $theme . '/modules/' . $module . '/';
+            $theme_paths[] = ROOT_THEMES_BACKEND . $backendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
             // (b) BACKEND FALLBACK - check the fallback dir: themes/admin
-            $themePaths[] = $themesPath . 'admin/';
+            $theme_paths[] = ROOT_THEMES_BACKEND . 'default/';
         } else {
             // 2. FRONTEND THEME
 
             // get frontend theme from session for path construction
-            $theme = $route->getFrontendTheme();
+            $frontendtheme = TargetRoute::getFrontendTheme();
 
-            $themesPath = APPLICATION_PATH . 'themes/frontend/';
-
-            // (a) USER FRONTEND THEME - check, if template exists in current session user THEME
-            $themePaths[] = $themesPath . $theme . '/';
+            // (a) USER FRONTENDTHEME - check, if template exists in current session user THEME
+            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . DIRECTORY_SEPARATOR;
             // (b) FRONTEND FALLBACK - check, if template exists in usertheme/modulename/tpl
-            $themePaths[] = $themesPath . $theme . '/modules/' . $module . '/';
-            // (c) FRONTEND FALLBACK - check, if template exists in /themes/frontend/standard
-            $themePaths[] = $themesPath . 'standard/';
+            $theme_paths[] = ROOT_THEMES_FRONTEND . $frontendtheme . '/modules/' . $module . DIRECTORY_SEPARATOR;
+            // (c) FRONTEND FALLBACK - check, if template exists in standard theme
+            $theme_paths[] = ROOT_THEMES_FRONTEND . 'default/';
         }
 
-        return $themePaths;
+        return $theme_paths;
     }
 
     /**
@@ -194,19 +180,19 @@ class Mapper
     public static function getModuleTemplatePaths($module = null)
     {
         // fetch modulename for template path construction
-        if ($module === null) {
+        if($module === null) {
             $module = TargetRoute::getModule();
         }
 
         // fetch renderer name for template path construction
-        $renderer = HttpRequest::getRoute()->getRenderEngine();
+        $renderer = TargetRoute::getRenderEngine();
 
         // compose templates paths in the module dir
         $module_paths = array(
             APPLICATION_MODULES_PATH,
-            APPLICATION_MODULES_PATH . $module .  '/',
+            APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR,
             APPLICATION_MODULES_PATH . $module . '/View/',
-            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst($renderer) . '/'
+            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst($renderer) . DIRECTORY_SEPARATOR
         );
 
         return $module_paths;
@@ -222,11 +208,10 @@ class Mapper
     {
         $paths = self::getModuleTemplatePaths($module);
 
-        $module_template = null;
-
         // check if template exists in one of the defined paths
         $module_template = self::findFileInPaths($paths, $template);
-        //\Koch\Debug\Debug::firebug('Module Template: ' . $module_template . '<br />');
+
+        #\Koch\Debug\Debug::firebug('Module Template: ' . $module_template . '<br />');
 
         if ($module_template != null) {
             return $module_template;
@@ -252,7 +237,7 @@ class Mapper
         // check if the file exists in one of the defined paths
         foreach ($paths as $path) {
             $file = $path . $filename;
-            //\Koch\Debug\Debug::dump($file, false);
+            #\Koch\Debug\Debug::dump($file, false);
             if (is_file($file) === true) {
                 // file found
                 return $file;
