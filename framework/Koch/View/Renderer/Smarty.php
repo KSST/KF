@@ -65,7 +65,7 @@ class Smarty extends AbstractRenderer
     public function initializeEngine($template = null)
     {
         // Do it with smarty style > eat like a bird, poop like an elefant!
-        /* @var Smarty */
+        // @var object \Smarty
         $this->renderer = new \Smarty();
     }
 
@@ -315,9 +315,6 @@ class Smarty extends AbstractRenderer
      */
     public function fetch($template, $cache_id = null, $compile_id = null, $parent = null, $display = false)
     {
-        // ask the view mapper for the path of the template
-        $template = Mapper::getTemplatePath($template);
-
         // create cache_id
         if ($cache_id === null) {
             $cache_id = $this->createCacheId();
@@ -351,7 +348,7 @@ class Smarty extends AbstractRenderer
     public function display($template, $cache_id = null, $compile_id = null, $parent = null)
     {
         // redirect to fetch, but set display to true
-        return $this->fetch($template, $cache_id, $compile_id, $parent, true);
+        $this->fetch($template, $cache_id, $compile_id, $parent, true);
     }
 
     /**
@@ -377,13 +374,8 @@ class Smarty extends AbstractRenderer
      */
     public function resetCache()
     {
-        // empty cache folder
-        $b1 = $this->renderer->clearAllCache();
-        // empty compile folder
-        $b2 = $this->renderer->clearCompiledTemplate();
-
-        //return ($b1 && $b2);
-        return true;
+        $this->renderer->clearAllCache();
+        $this->renderer->clearCompiledTemplate();
     }
 
     /**
