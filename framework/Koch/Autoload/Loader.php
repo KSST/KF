@@ -215,7 +215,7 @@ class Loader
         }
 
         if (isset(self::$autoloaderMap[$classname]) === true) {
-            include self::$autoloaderMap[$classname];
+            include_once self::$autoloaderMap[$classname];
 
             return true;
         } else {
