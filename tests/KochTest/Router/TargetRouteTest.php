@@ -48,16 +48,17 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFilename()
     {
-       $this->object->setApplicationNamespace('KochTest/Fixtures/Application');
+       //$this->object->setApplicationNamespace('KochTest/Fixtures/Application');
 
        // test filename construction, if empty filename
        $file = '';
        $this->object->setFilename($file);
        $this->assertEquals(
-           '/KochTest/Fixtures/Application/Modules/Index/Controller/IndexController.php',
+           realpath(APPLICATION_MODULES_PATH . 'Index/Controller/IndexController.php'),
            $this->object->getFilename()
        );
 
+       // setter test
        $file = 'abc';
        $this->object->setFilename($file);
        $this->assertEquals($file, $this->object->getFilename());
