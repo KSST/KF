@@ -41,7 +41,9 @@ class Factory
      */
     public static function getRenderer($adapter = 'smarty', $injector = null)
     {
-        $file = __DIR__ . '/Renderer/' . ucfirst($adapter) . '.php';
+        $adapter = ucfirst($adapter);
+
+        $file = realpath(__DIR__ . '/Renderer/' . $adapter . '.php');
 
         if (is_file($file) === true) {
             $class = 'Koch\View\Renderer\\' . $adapter;
