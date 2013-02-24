@@ -25,7 +25,6 @@
 namespace Koch\View\Renderer;
 
 use Koch\View\AbstractRenderer;
-use Koch\View\Mapper;
 use Koch\Router\TargetRoute;
 
 /**
