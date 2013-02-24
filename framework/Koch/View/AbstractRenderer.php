@@ -24,7 +24,6 @@
 
 namespace Koch\View;
 
-use Koch\Http\HttpRequest;
 
 /**
  * Koch Framework - Abstract base class for View Renderers.
@@ -34,10 +33,7 @@ use Koch\Http\HttpRequest;
  */
 abstract class AbstractRenderer
 {
-    protected $options = array(
-        'a' => '',
-        'b' => ''
-    );
+    protected $options = array();
 
     /**
      * @var Object Holds instance of the Rendering Engine Object
@@ -70,7 +66,7 @@ abstract class AbstractRenderer
     public $viewdata = array();
 
     /**
-     * @var object Koch_View_Mapper
+     * @var object Koch\View\Mapper
      */
     public $viewMapper = null;
 
@@ -227,7 +223,7 @@ abstract class AbstractRenderer
      */
     public function getConstants()
     {
-        $modulename = HttpRequest::getRoute()->getModule();
+        $modulename = \Koch\Router\TargetRoute::getModule();
 
         $templateConstants = array();
 
@@ -325,7 +321,7 @@ abstract class AbstractRenderer
     public function getTheme()
     {
         if ($this->theme === null) {
-            $theme = HttpRequest::getRoute()->getThemeName();
+            $theme = \Koch\Router\TargetRoute::getThemeName();
 
             $this->theme = new \Koch\View\Helper\Theme($theme);
         }
