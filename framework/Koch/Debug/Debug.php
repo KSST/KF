@@ -188,7 +188,7 @@ class Debug
      * The default level is 2 (0,1,2), because we have to skip
      * the 3 calls to dump() and getWhereDebugWasCalled().
      *
-     * @param int $level Default 1.
+     * @param  int    $level Default 1.
      * @return string Message with origin of the debug call.
      */
     public static function getOriginOfDebugCall($level = 1)

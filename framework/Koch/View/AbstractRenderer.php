@@ -24,7 +24,6 @@
 
 namespace Koch\View;
 
-
 /**
  * Koch Framework - Abstract base class for View Renderers.
  *
