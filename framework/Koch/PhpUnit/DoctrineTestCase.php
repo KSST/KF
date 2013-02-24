@@ -36,7 +36,7 @@ class DoctrineTestCase extends TestCase
         parent::setUp();
 
         if (!extension_loaded('pdo_sqlite') or !extension_loaded('sqlite')) {
-            $this->markTestSkipped('This test requires the php extension "pdo_sqlite" or "sqlite".');
+            $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite" or "sqlite".');
         }
 
         $driver = AnnotationDriver::create(__DIR__ . '/KochTest/Fixtures/Doctrine/Entity');
