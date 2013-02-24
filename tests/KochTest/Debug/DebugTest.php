@@ -38,7 +38,7 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-<pre><b>Debugging<font color=red>DebugTest.php</font> on line <font color=red>66</font></b>:
+<pre><b>Debugging <font color=red>DebugTest.php</font> on line <font color=red>66</font></b>:
 <div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var, $var2);
 </div>
 <b>Type</b>: array
