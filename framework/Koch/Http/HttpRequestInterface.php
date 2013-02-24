@@ -37,10 +37,10 @@ interface HttpRequestInterface
     public static function getHeader($parameter);
 
     // Direct Access to individual Parameters Arrays
-    public function getGet($parameter);
-    public function getPost($parameter);
-    public function getCookie($parameter);
-    public function getServer($parameter);
+    public function getGet();
+    public function getPost();
+    public function getCookies();
+    public function getServer();
 
     // Request Method
     public static function getRequestMethod();

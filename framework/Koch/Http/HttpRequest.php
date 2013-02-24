@@ -156,6 +156,11 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         return $this->cookie_parameters;
     }
 
+    public function getServer()
+    {
+        return $_SERVER;
+    }
+
     /**
      * expectParameters
      *
