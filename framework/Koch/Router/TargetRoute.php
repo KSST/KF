@@ -57,6 +57,11 @@ class TargetRoute extends Mapper
         return $instance;
     }
 
+    public static function getApplicationNamespace()
+    {
+        return Mapper::getApplicationNamespace();
+    }
+
     public static function setFilename($filename)
     {
         self::$parameters['filename'] = $filename;
@@ -65,9 +70,11 @@ class TargetRoute extends Mapper
     public static function getFilename()
     {
         if (empty(self::$parameters['filename'])) {
-            $filename = self::getClassname() . '.php';
-            $filename = str_replace('\\', '/', $filename); // slash fix
-            self::setFilename($filename);
+            $filename = self::mapControllerToFilename(
+                self::getModulePath(self::getModule()),
+                self::getController()
+            );
+            self::setFilename(realpath($filename));
         }
 
         return self::$parameters['filename'];
@@ -102,7 +109,7 @@ class TargetRoute extends Mapper
     {
         // the default "controller" name is the "module" name
         // this is the case if a route "/:module" is used
-        if (empty(self::$parameters['controller'])) {
+        if (null === self::$parameters['controller']) {
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
@@ -276,7 +283,7 @@ class TargetRoute extends Mapper
         }
 
         // LEAVE THIS - It shows how many routes were tried before a match happens!
-        //echo 'Route not found : [ ' . $file .' | '. $class .' | '. $method . ']';
+        //#\Koch\Debug\Debug::firebug('Route not found : [ ' . $file .' | '. $class .' | '. $method . ']');
         return false;
     }
 
