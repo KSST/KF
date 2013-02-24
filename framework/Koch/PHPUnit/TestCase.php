@@ -22,7 +22,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-namespace Koch\PhpUnit;
+namespace Koch\PHPUnit;
 
 /**
  * Koch Framework - An alternative base-class for PHPUnit test cases.
