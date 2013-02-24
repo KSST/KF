@@ -102,17 +102,17 @@ class FrontController implements FrontControllerInterface
      *
      * Speaking in very basic concepts: this is a RequestHandler.
      * The C in MVC. It handles the dispatching of the request.
-     * Calls/executes the apropriate controller and returns a response.
+     * It calls the apropriate controller and returns a response.
      */
     public function processRequest()
     {
         $this->router->route();
 
-        $this->preFilterManager->processFilters($this->request, $this->response);
+        #$this->preFilterManager->processFilters($this->request, $this->response);
 
         $this->eventDispatcher->triggerEvent('onBeforeDispatcherForward');
 
-        $this->forward($this->request, $this->response);
+        $this->forward();
 
         $this->eventDispatcher->triggerEvent('onAfterDispatcherForward');
 
@@ -133,16 +133,9 @@ class FrontController implements FrontControllerInterface
      *
      * The dispatcher forwards to the pagecontroller = modulecontroller + moduleaction.
      */
-    public function forward($request, $response)
+    public function forward()
     {
-        // fetch the target route from the request
-        $route = $request->getRoute();
-
-        if ($route === null) {
-            throw new \Exception('The dispatcher is unable to forward. No route object given.');
-        }
-
-        //$route::debug();
+        $route = $this->request->getRoute();
 
         $classname    = $route::getClassname();
         $method       = $route::getMethod();
@@ -150,9 +143,11 @@ class FrontController implements FrontControllerInterface
         #$request_meth = Koch_HttpRequest::getRequestMethod();
         #$renderengine = $route::getRenderEngine();
 
-        #$this->eventDispatcher->addEventHandler('onBeforeControllerMethodCall', new Koch_Event_InitializeModule());
+        #$this->eventDispatcher->addEventHandler('onBeforeControllerMethodCall', new Koch\Event\InitializeModule());
 
-        $controllerInstance = new $classname($request, $response);
+        #\Koch\Debug\Debug::firebug($classname . ' ' . $method . ' ' . var_export($parameters, true));
+
+        $controllerInstance = new $classname($this->request, $this->response);
 
         /**
          * Initialize the Module
