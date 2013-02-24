@@ -527,7 +527,6 @@ class Router implements RouterInterface, \ArrayAccess
             $this->uriSegments = $this->parseUrlNoRewrite($this->uri);
 
             $this->uriSegments = self::fixNoRewriteShorthands($this->uriSegments);
-            var_dump($this->uriSegments);
 
             $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
 
