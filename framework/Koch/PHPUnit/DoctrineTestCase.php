@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\PhpUnit;
+namespace Koch\PHPUnit;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\Common\Cache\ArrayCache;
