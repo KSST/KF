@@ -60,7 +60,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     /**
      * @var object Object with pieces of informations about the target route.
      */
-    private static $route;
+    private $route;
 
     /**
      * Construct the Request Object
@@ -117,63 +117,11 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * Returns the raw POST Parameters Array.
      * Raw means: no validation, no filtering, no sanitization.
      *
-     * @param  string $parameter Name of the Parameter
-     * @return array  POST Parameters Array.
+     * @return array POST Parameters Array.
      */
-    public function getPost($parameter = null)
+    public function getPost()
     {
-        if ($parameter === null) {
-            return $this->post_parameters;
-        }
-
-        return $this->getParameter($parameter, 'POST');
-    }
-
-    /**
-     * Returns the raw GET Parameters Array.
-     * Raw means: no validation, no filtering, no sanitization.
-     *
-     * @param  string $parameter Name of the Parameter
-     * @return array  GET Parameters Array.
-     */
-    public function getGet($parameter = null)
-    {
-        if ($parameter === null) {
-            return $this->get_parameters;
-        }
-
-        return $this->getParameter($parameter, 'GET');
-    }
-
-    /**
-     * Returns the COOKIES Parameters Array.
-     * Raw means: no validation, no filtering, no sanitization.
-     *
-     * @param  string $parameter Name of the Parameter
-     * @return array  COOKIES Parameters Array.
-     */
-    public function getCookie($parameter = null)
-    {
-        if ($parameter === null) {
-            return $this->cookie_parameters;
-        }
-
-        return $this->getParameter($parameter, 'COOKIE');
-    }
-
-    /**
-     * Shortcut to get a Parameter from $_SERVER
-     *
-     * @param  string $parameter Name of the Parameter
-     * @return mixed  data | null
-     */
-    public function getServer($parameter)
-    {
-        if (in_array($parameter, array_keys($_SERVER))) {
-            return $_SERVER[$parameter];
-        } else {
-            return null;
-        }
+        return $this->post_parameters;
     }
 
     /**
@@ -183,9 +131,29 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public function getPostRaw()
     {
-        $src = (php_sapi_name() === 'cli') ? 'php://stdin' : 'php://input';
+        return file_get_contents('php://input');
+    }
 
-        return file_get_contents($src);
+    /**
+     * Returns the raw GET Parameters Array.
+     * Raw means: no validation, no filtering, no sanitization.
+     *
+     * @return array GET Parameters Array.
+     */
+    public function getGet()
+    {
+        return $this->get_parameters;
+    }
+
+    /**
+     * Returns the COOKIES Parameters Array.
+     * Raw means: no validation, no filtering, no sanitization.
+     *
+     * @return array COOKIES Parameters Array.
+     */
+    public function getCookies()
+    {
+        return $this->cookie_parameters;
     }
 
     /**
@@ -343,6 +311,56 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             return $this->{mb_strtolower($array).'_parameters'}[$parameter];
         } else {
             return null;
+        }
+    }
+
+    /**
+     * Shortcut to get a Parameter from $_POST
+     *
+     * @param  string $name Name of the Parameter
+     * @return mixed  data | null
+     */
+    public function getParameterFromPost($name)
+    {
+        return $this->getParameter($name, 'POST');
+    }
+
+    /**
+     * Shortcut to get a Parameter from $_GET
+     *
+     * @param  string $name Name of the Parameter
+     * @return mixed  data | null
+     */
+    public function getParameterFromGet($name)
+    {
+        return $this->getParameter($name, 'GET');
+    }
+
+    /**
+     * Shortcut to get a Parameter from $_SERVER
+     *
+     * @param  string $name Name of the Parameter
+     * @return mixed  data | null
+     */
+    public function getParameterFromServer($name)
+    {
+        if (in_array($name, array_keys($_SERVER))) {
+            return $_SERVER[$name];
+        } else {
+            return null;
+        }
+    }
+
+    /**
+     * Get previously set cookies.
+     *
+     * @param  string  $name Name of the Cookie
+     * @return Returns an associative array containing any previously set cookies.
+     */
+    public function getParameterFromCookie($name)
+    {
+        if (isset($this->cookie_parameters[$name]) == true) {
+            return $this->cookie_parameters($name);
         }
     }
 
@@ -592,27 +610,27 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     }
 
     /**
-     * Get Route returns the static Koch_TargetRoute object.
+     * Get Route returns the static \Koch\Router\TargetRoute object.
      *
      * With php onbord tools you can't debug this.
      * Please use \Koch\Debug\Debug:firebug($route); to debug.
      * Firebug uses Reflection to show the static properties and values.
      *
-     * @return Koch_TargetRoute
+     * @return object \Koch\Router\TargetRoute
      */
-    public static function getRoute()
+    public function getRoute()
     {
-       return (self::$route == null) ? \Koch\Router\TargetRoute::instantiate() : self::$route;
+        return $this->route;
     }
 
     /**
-     * Set Route
+     * Set Route Object.
      *
-     * @param $route The route container.
+     * @param $route \Koch\Router\TargetRoute
      */
-    public static function setRoute($route)
+    public function setRoute(\Koch\Router\TargetRoute $route)
     {
-        self::$route = $route;
+        $this->route = $route;
     }
 
     /**
