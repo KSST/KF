@@ -434,19 +434,16 @@ class User
     }
 
     /**
-     * Checks if the user has a certain permission
-     * Proxy Method for ACL::checkPermission()
+     * Checks, if the user is authorized to access a resource.
+     * It's a proxy method forwarding to Authorization::isAuthorized()
      *
-     * Two values are necessary the modulname and the name of the permission,
-     * which is often the actionname.
-     *
-     * @param $modulename string The modulename, e.g. 'news'.
-     * @param $permission string The permission name, e.g. 'action_show'.
-     * @return boolean True if the user has the permission, false otherwise.
+     * @param string $module Module name, e.g. 'guestbook'.
+     * @param string $permission Permission name, e.g. 'actionList'.
+     * @return boolean True, if the user is authorized. Otherwise, false.
      */
-    public static function hasAccess($modulename = '', $permission = '')
+    public static function isAuthorized($module = '', $permission = '')
     {
-        return Koch\ACL::checkPermission($modulename, $permission);
+        return \Koch\User\Authorization\Authorization::isAuthorized($module, $permission);
     }
 
     /**
