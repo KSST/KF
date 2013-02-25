@@ -81,7 +81,7 @@ class Config extends AbstractConfig
         } else {
             // load config from file
             $config = \Koch\Config\Adapter\INI::readConfig(
-                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.config.php'
+                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
             // set to APC
             if (APC === true) {
