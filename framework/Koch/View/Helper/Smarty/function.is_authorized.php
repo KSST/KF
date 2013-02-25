@@ -4,22 +4,22 @@
  */
 
 /**
- * Smarty Viewhelper for checking permissions
+ * Smarty Viewhelper for checking the user authorization for a resource.
  *
- * Examples:
+ * Usage Example:
  * <pre>
- * {check_permission name="module.action"}
+ * {is_authorized name="module.action"}
  * </pre>
  *
  * Type:    function<br>
- * Name:    check_permission<br>
- * Purpose: checks if a user has a certain permission<br>
+ * Name:    is_authorized<br>
+ * Purpose: Checks, if a user is authorized for accessing a resource.<br>
  *
  * @param   array $params
  * @param   Smarty $smarty
  * @return  boolean True if user has permission, false otherwise.
  */
-function Smarty_function_check_permission($params, $smarty)
+function Smarty_function_is_authorized($params, $smarty)
 {
     // ensure we got parameter name
     if ( empty($params['name']) or is_string($params['name']) == false) {
@@ -43,7 +43,7 @@ function Smarty_function_check_permission($params, $smarty)
     }
 
     // perform the permission check
-    if ( false !== Koch\Permissions\ACL::checkPermission( $module, $permission ) ) {
+    if ( false !== \Koch\User\Authorization::isAuthorized( $module, $permission ) ) {
         unset($array, $name, $permission);
 
         return true;
@@ -51,3 +51,4 @@ function Smarty_function_check_permission($params, $smarty)
         return false;
     }
 }
+
