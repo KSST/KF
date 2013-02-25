@@ -39,16 +39,22 @@ use Koch\Validation\InputFilter;
  */
 class ThemeViaGet implements FilterInterface
 {
-    private $config     = null;
-    private $input      = null;
+    // default setting
+    private $config = array(
+        'theme_via_get' => 0
+    );
+
+    private $input = null;
 
     public function __construct(Config $config, InputFilter $input)
     {
         $config = $config->getApplicationConfig();
 
-        // reduce array size by selection of the section
-        $this->config = $config['prefilter'];
-        $this->input  = $input;
+        if (isset($config['prefilter']) === true) {
+            $this->config = $config['prefilter'];
+        }
+
+        $this->input = $input;
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
