@@ -281,7 +281,7 @@ abstract class AbstractController
     {
         $this->renderEngineName = $renderEngineName;
 
-        HttpRequest::getRoute()->setRenderEngine($renderEngineName);
+        $this->request->getRoute()->setRenderEngine($renderEngineName);
     }
 
     /**
@@ -294,7 +294,7 @@ abstract class AbstractController
     public function getRenderEngineName()
     {
         // check if the requesttype is xmlhttprequest (ajax) is incomming, then we will return data in json format
-        if (self::getHttpRequest()->isAjax() === true) {
+        if ($this->request->isAjax() === true) {
             $this->setRenderEngine('json');
         }
 
@@ -405,11 +405,11 @@ abstract class AbstractController
     public function loadForm($formname = null, $module = null, $action = null, $assign_to_view = true)
     {
         if (null === $module) {
-            $module = HttpRequest::getRoute()->getModule();
+            $module = $this->request->getRoute()->getModule();
         }
 
         if (null === $action) {
-            $action = HttpRequest::getRoute()->getAction();
+            $action = $this->request->getRoute()->getAction();
         }
 
         if (null === $formname) {
@@ -441,13 +441,13 @@ abstract class AbstractController
      */
     public function redirectToReferer()
     {
-        $referer = self::getHttpRequest()->getReferer();
+        $referer = $this->request->getReferer();
 
         // we have a referer in the environment
         if (empty($referer) === false) {
             $this->redirect(SERVER_URL . $referer);
         } else { // build referer on base of the current module
-            $route = HttpRequest::getRoute();
+            $route = $this->request->getRoute();
 
             // we use internal rewrite style here: /module/action
             $redirect_to = '/' . $route->getModuleName();
@@ -459,7 +459,7 @@ abstract class AbstractController
             }
 
             // redirect() builds the url
-            $this->getHttpResponse()->redirect($redirect_to);
+            $this->response->redirect($redirect_to);
         }
     }
 
@@ -471,7 +471,7 @@ abstract class AbstractController
      */
     public function redirect404($url, $time = 5)
     {
-        $this->getHttpResponse()->redirect($url, $time, 404, _('The URL you requested is not available.'));
+        $this->response->redirect($url, $time, 404, _('The URL you requested is not available.'));
     }
 
     /**
@@ -486,7 +486,7 @@ abstract class AbstractController
      */
     public function redirect($url, $time = 0, $statusCode = 303, $message = null, $mode = null)
     {
-        $this->getHttpResponse()->redirect($url, $time, $statusCode, $message, $mode);
+        $this->response->redirect($url, $time, $statusCode, $message, $mode);
     }
 
     /**
