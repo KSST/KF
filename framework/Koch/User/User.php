@@ -449,13 +449,13 @@ class User
     }
 
     /**
-     * Check whether a user is logged in
+     * Check, whether a user is authenticated (logged in).
      *
-     * @return boolean Returns true if user is authed, false otherwise.
+     * @return boolean Returns Tru,e if user is authenticated. Otherwise, false.
      */
-    public function isUserAuthed()
+    public function isUserAuthenticated()
     {
-        if (true === isset($_SESSION['user']['authed']) and true === (bool) $_SESSION['user']['authed']) {
+        if (true === isset($_SESSION['user']['authenticated']) and true === (bool) $_SESSION['user']['authenticated']) {
             return true;
         } else {
             return false;
