@@ -16,6 +16,9 @@ class EntityToolTest extends DoctrineTestCase
         parent::setUp();
 
         $this->object = new EntityTool($this->em);
+
+        // force Doctrine annotations to be loaded
+        class_exists('Doctrine\ORM\Mapping\Driver\AnnotationDriver');
     }
 
     /**
@@ -38,7 +41,7 @@ class EntityToolTest extends DoctrineTestCase
     }
 
     /**
-     * @expectedException \InvalidPropertyException
+     * expectedException \InvalidPropertyException
      */
     public function testCannotAddInvalidProperty()
     {
