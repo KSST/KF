@@ -15,6 +15,7 @@ namespace Koch\PHPUnit;
 use Doctrine\ORM\Configuration;
 use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Base class for all unit-tests working with the Doctrine2 ORM.
@@ -40,6 +41,12 @@ class DoctrineTestCase extends TestCase
             $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite".');
         }
 
+        // setup Annotation Registry
+        AnnotationRegistry::registerFile(
+            __DIR__.'/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
+        );
+
+        // setup Annotation Driver
         $driver = AnnotationDriver::create(__DIR__ . '/KochTest/Fixtures/Doctrine/Entity');
 
         $config = new Configuration();
