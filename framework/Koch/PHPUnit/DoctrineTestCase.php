@@ -35,8 +35,13 @@ class DoctrineTestCase extends TestCase
     {
         parent::setUp();
 
-        if (!extension_loaded('pdo_sqlite') or !extension_loaded('sqlite')) {
-            $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite" or "sqlite".');
+        phpinfo();
+
+        var_dump(\PDO::getAvailableDrivers());
+
+        //if(!in_array('sqlite', \PDO::getAvailableDrivers())) {
+        if(!extension_loaded('pdo_sqlite')) {
+            $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite".');
         }
 
         $driver = AnnotationDriver::create(__DIR__ . '/KochTest/Fixtures/Doctrine/Entity');
@@ -47,12 +52,12 @@ class DoctrineTestCase extends TestCase
         $config->setProxyDir(__DIR__ . '/KochTest/Fixtures/Doctrine/Proxy');
         $config->setProxyNamespace('/KochTest/Fixtures/Doctrine/Entity');
 
-        $conn = array(
+        $connectionParams = array(
             'driver' => 'pdo_sqlite',
             'memory' => true,
         );
 
-        $this->em = \Doctrine\ORM\EntityManager::create($conn, $config);
+        $this->em = \Doctrine\ORM\EntityManager::create($connectionParams, $config);
     }
 
     /**
