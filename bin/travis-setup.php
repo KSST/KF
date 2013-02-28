@@ -26,9 +26,6 @@ if(version_compare(PHP_VERSION, '5.4.0', '<'))
     $phpEnv->iniSet('short_open_tag=On');
 }
 
-// enable sqlite (for database tests)
-$phpEnv->iniSet('extension=pdo_sqlite.so');
-
 class PhpEnvironment
 {
     /**
