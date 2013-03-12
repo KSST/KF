@@ -25,8 +25,10 @@
 namespace Koch\PHPUnit;
 
 use Doctrine\ORM\Configuration;
-use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
+use Doctrine\ORM\Tools\SchemaTool;
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
@@ -53,17 +55,17 @@ class DoctrineTestCase extends TestCase
             $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite".');
         }
 
-        // setup Annotation Registry
-        AnnotationRegistry::registerFile(
-            __DIR__.'/../vendor/doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php'
-        );
-
         // setup Annotation Driver
-        $driver = AnnotationDriver::create(__DIR__ . '/KochTest/Fixtures/Doctrine/Entity');
+        $driver = new AnnotationDriver(new AnnotationReader(), array(
+            __DIR__ . '/KochTest/Fixtures/Doctrine/Entity',
+        ));
 
         $config = new Configuration();
         $config->setMetadataDriverImpl($driver);
-        $config->setQueryCacheImpl(new ArrayCache);
+        $config->addEntityNamespace('KochTest', 'KochTest\Fixtures\Doctrine\Entity');
+
+
+        $config->setQueryCacheImpl(new ArrayCache());
         $config->setProxyDir(__DIR__ . '/KochTest/Fixtures/Doctrine/Proxy');
         $config->setProxyNamespace('/KochTest/Fixtures/Doctrine/Entity');
 
@@ -72,7 +74,12 @@ class DoctrineTestCase extends TestCase
             'memory' => true,
         );
 
-        $this->em = \Doctrine\ORM\EntityManager::create($connectionParams, $config);
+        $em = EntityManager::create($connectionParams, $config);
+
+        $tool = new SchemaTool($em);
+        $tool->createSchema($em->getMetadataFactory()->getAllMetadata());
+
+        $this->em = $em;
     }
 
     /**
