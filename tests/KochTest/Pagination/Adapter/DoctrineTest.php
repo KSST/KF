@@ -11,29 +11,20 @@ use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class DoctrineTest extends DoctrineTestCase
 {
-    /**
-     * @var \Koch\Pagination\Adapter\DoctrineCollection
-     */
-    protected $object;
-
-    public $collection;
-
     public function setUp()
     {
         parent::setUp();
 
-        // Setup Doctrine2 fixtures
+        // load doctrine/data-fixtures
         $loader = new Loader();
         $loader->loadFromDirectory(__DIR__ . '/../../../KochTest/Fixtures/Pagination');
+        $fixtures = $loader->getFixtures();
 
         // execute fixtures
-        $fixtures = $loader->getFixtures();
         $em = $this->getEntityManager();
         $purger = new ORMPurger();
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($fixtures);
-
-        $this->object = new Doctrine($this->collection);
     }
 
     protected function tearDown()
@@ -41,50 +32,12 @@ class DoctrineTest extends DoctrineTestCase
         unset($this->object);
     }
 
-    public function testGetCollection()
+    public function testGetTotalNumberOfResults()
     {
-        $this->assertSame($this->collection, $this->object->getCollection());
-    }
+        $dql = "SELECT u FROM KochTest\Doctrine\Entity\User u";
+        $query = $this->entityManager->createQuery($dql);
 
-    public function testgetTotalNumberOfResults()
-    {
-        $this->collection
-            ->expects($this->once())
-            ->method('count')
-            ->will($this->returnValue(120));
-
-        $this->assertSame(120, $this->object->getTotalNumberOfResults());
-    }
-
-    /**
-     * @dataProvider getResultsProvider
-     */
-    public function testGetResults($offset, $length)
-    {
-        $this->collection
-            ->expects($this->once())
-            ->method('slice')
-            ->with($offset, $length)
-            ->will($this->returnValue($all = array(new \DateTime(), new \DateTime())));
-
-        $this->assertSame($all, $this->object->getSlice($offset, $length));
-    }
-
-    public function getResultsProvider()
-    {
-        return array(
-            array(3, 8),
-            array(3, 6),
-        );
-    }
-
-    public function testGetArray()
-    {
-        $this->collection
-            ->expects($this->once())
-            ->method('toArray')
-            ->will($this->returnValue(array('a', 'b')));
-
-        $this->assertEquals(array('a', 'b'), $this->object->getArray());
+        $adapter = new Doctrine($query);
+        $this->assertEquals(2, $adapter->getTotalNumberOfResults());
     }
 }

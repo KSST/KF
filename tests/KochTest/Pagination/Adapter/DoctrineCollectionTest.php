@@ -18,8 +18,7 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires Doctrine\Common\Collections\Collection.');
         }
 
-        $this->collection = $this
-            ->getMockBuilder('Doctrine\Common\Collections\Collection')
+        $this->collection = $this->getMockBuilder('Doctrine\Common\Collections\Collection')
             ->disableOriginalConstructor()
             ->getMock();
 
