@@ -59,7 +59,7 @@ class DoctrineTest extends DoctrineTestCase
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);
-        $this->assertEquals($dql, $adapter->getQuery());
+        $this->assertInstanceOf('Doctrine\ORM\Query', $adapter->getQuery());
     }
 
     public function testGetArray()
