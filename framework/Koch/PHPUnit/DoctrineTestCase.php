@@ -57,16 +57,15 @@ class DoctrineTestCase extends TestCase
 
         // setup Annotation Driver
         $driver = new AnnotationDriver(new AnnotationReader(), array(
-            __DIR__ . '/../../../KochTest/Fixtures/Doctrine/Entity',
+            __DIR__ . '/../../../tests/KochTest/Fixtures/Doctrine/Entity',
         ));
 
         $config = new Configuration();
         $config->setMetadataDriverImpl($driver);
         $config->addEntityNamespace('KochTest', 'KochTest\Fixtures\Doctrine\Entity');
 
-
         $config->setQueryCacheImpl(new ArrayCache());
-        $config->setProxyDir(__DIR__ . '/../../../KochTest/Fixtures/Doctrine/Entity');
+        $config->setProxyDir(__DIR__ . '/../../../tests/KochTest/Fixtures/Doctrine/Entity');
         $config->setProxyNamespace('/KochTest/Fixtures/Doctrine/Entity');
 
         $connectionParams = array(
