@@ -9,8 +9,6 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
-// entity
-//use KochTest\Fixtures\Doctrine\Entity\User;
 
 class DoctrineTest extends DoctrineTestCase
 {
@@ -42,5 +40,34 @@ class DoctrineTest extends DoctrineTestCase
 
         $adapter = new Doctrine($query);
         $this->assertEquals(2, $adapter->getTotalNumberOfResults());
+    }
+
+    public function testGetSlice()
+    {
+        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $query = $this->entityManager->createQuery($dql);
+
+        $adapter = new Doctrine($query);
+        $this->assertEquals(1, count( $adapter->getSlice(0, 1)) );
+        $this->assertEquals(2, count( $adapter->getSlice(0, 10)) );
+        $this->assertEquals(1, count( $adapter->getSlice(1, 1)) );
+    }
+
+    public function testGetQuery()
+    {
+        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $query = $this->entityManager->createQuery($dql);
+
+        $adapter = new Doctrine($query);
+        $this->assertEquals($dql, $adapter->getQuery());
+    }
+
+    public function testGetArray()
+    {
+        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $query = $this->entityManager->createQuery($dql);
+
+        $adapter = new Doctrine($query);
+        $this->assertTrue(is_array($adapter->getArray()));
     }
 }

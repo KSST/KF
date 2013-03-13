@@ -84,6 +84,6 @@ class Doctrine implements AdapterInterface
 
     public function getArray()
     {
-        return array();
+        return $this->paginator->getQuery()->getResult();
     }
 }
