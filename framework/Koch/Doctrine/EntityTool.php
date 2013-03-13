@@ -15,7 +15,7 @@ namespace Koch\Doctrine;
 use Doctrine\ORM\EntityManager;
 
 /**
- * Class for manipulating entities.
+ * Class for manipulating and creating entities.
  */
 class EntityTool
 {

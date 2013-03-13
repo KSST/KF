@@ -22,7 +22,7 @@ class EntityToolTest extends DoctrineTestCase
     }
 
     /**
-     * @covers Koch\Doctrine\EntityCreator::createEntity
+     * @covers Koch\Doctrine\EntityTool::createEntity
      */
     public function testCreateEntity()
     {
