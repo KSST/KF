@@ -425,8 +425,8 @@ class User
      * Checks, if the user is authorized to access a resource.
      * It's a proxy method forwarding to Authorization::isAuthorized()
      *
-     * @param string $module Module name, e.g. 'guestbook'.
-     * @param string $permission Permission name, e.g. 'actionList'.
+     * @param  string  $module     Module name, e.g. 'guestbook'.
+     * @param  string  $permission Permission name, e.g. 'actionList'.
      * @return boolean True, if the user is authorized. Otherwise, false.
      */
     public static function isAuthorized($module = '', $permission = '')

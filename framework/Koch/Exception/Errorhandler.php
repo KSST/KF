@@ -262,7 +262,7 @@ class Errorhandler
                 }
 
                 // a php function - backlink to manual
-                if(function_exists($trace[$i]['function']) === true) {
+                if (function_exists($trace[$i]['function']) === true) {
                     $functionReflection = new \ReflectionFunction($trace[$i]['function']);
                     if ($functionReflection->isInternal()) {
                         $html .= '<span class="error-function">';
