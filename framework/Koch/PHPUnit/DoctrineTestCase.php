@@ -51,8 +51,8 @@ class DoctrineTestCase extends TestCase
     {
         parent::setUp();
 
-        //if(!in_array('sqlite', \PDO::getAvailableDrivers())) {
-        if(!extension_loaded('pdo_sqlite')) {
+        //if (!in_array('sqlite', \PDO::getAvailableDrivers())) {
+        if (!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite".');
         }
 

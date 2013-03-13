@@ -9,7 +9,6 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
-
 class DoctrineTest extends DoctrineTestCase
 {
     public function setUp()

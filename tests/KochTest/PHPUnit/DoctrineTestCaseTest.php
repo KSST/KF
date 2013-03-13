@@ -33,4 +33,3 @@ class DoctrineTestCaseTest extends \PHPUnit_Framework_TestCase
         //$this->assertInstanceOf('\Doctrine\ORM\EntityManager', $em);
     }
 }
-

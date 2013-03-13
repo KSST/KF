@@ -51,4 +51,3 @@ function Smarty_function_is_authorized($params, $smarty)
         return false;
     }
 }
-
