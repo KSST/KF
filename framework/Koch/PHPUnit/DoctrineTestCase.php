@@ -33,7 +33,7 @@ use Doctrine\Common\Annotations\AnnotationRegistry;
 class DoctrineTestCase extends TestCase
 {
     /* @var \Doctrine\ORM\EntityManager */
-    protected $em;
+    protected $entityManager;
 
     public function setUp()
     {
@@ -70,7 +70,7 @@ class DoctrineTestCase extends TestCase
         $tool = new SchemaTool($em);
         $tool->createSchema($em->getMetadataFactory()->getAllMetadata());
 
-        $this->em = $em;
+        $this->entityManager = $em;
     }
 
     /**
@@ -80,6 +80,6 @@ class DoctrineTestCase extends TestCase
      */
     public function getEntityManager()
     {
-        return $this->em;
+        return $this->entityManager;
     }
 }
