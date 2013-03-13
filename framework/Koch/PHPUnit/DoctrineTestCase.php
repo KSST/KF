@@ -18,6 +18,7 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
+use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Base class for all unit-tests working with the Doctrine2 ORM.
@@ -42,6 +43,9 @@ class DoctrineTestCase extends TestCase
         if(!extension_loaded('pdo_sqlite')) {
             $this->markTestSkipped('This test requires the PHP extension "pdo_sqlite".');
         }
+
+        // this is the same as AnnotationRegistry::registerFile()
+        require_once VENDOR_PATH . 'doctrine\orm\lib\Doctrine\ORM\Mapping\Driver\DoctrineAnnotations.php';
 
         // setup Annotation Driver
         $driver = new AnnotationDriver(new AnnotationReader(), array(
