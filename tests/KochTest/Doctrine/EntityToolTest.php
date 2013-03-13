@@ -41,7 +41,8 @@ class EntityToolTest extends DoctrineTestCase
     }
 
     /**
-     * expectedException \InvalidPropertyException
+     * @expectedException \InvalidPropertyException
+     * @expectedExceptionMessage Property "category" does not exist on class "KochTest\Fixtures\Doctrine\Entity\Product".
      */
     public function testCannotAddInvalidProperty()
     {
