@@ -45,7 +45,7 @@ class DoctrineTestCase extends TestCase
         }
 
         // this is the same as AnnotationRegistry::registerFile()
-        require_once VENDOR_PATH . 'doctrine\orm\lib\Doctrine\ORM\Mapping\Driver\DoctrineAnnotations.php';
+        require_once VENDOR_PATH . 'doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php';
 
         // setup Annotation Driver
         $driver = new AnnotationDriver(new AnnotationReader(), array(
