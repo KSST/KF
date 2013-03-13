@@ -15,7 +15,7 @@ class EntityToolTest extends DoctrineTestCase
     {
         parent::setUp();
 
-        $this->object = new EntityTool($this->em);
+        $this->object = new EntityTool($this->entityManager);
 
         // force Doctrine annotations to be loaded
         class_exists('Doctrine\ORM\Mapping\Driver\AnnotationDriver');
