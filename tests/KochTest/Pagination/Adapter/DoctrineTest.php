@@ -9,6 +9,9 @@ use Doctrine\Common\DataFixtures\Loader;
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
+// entity
+//use KochTest\Fixtures\Doctrine\Entity\User;
+
 class DoctrineTest extends DoctrineTestCase
 {
     public function setUp()
@@ -34,7 +37,7 @@ class DoctrineTest extends DoctrineTestCase
 
     public function testGetTotalNumberOfResults()
     {
-        $dql = "SELECT u FROM KochTest\Doctrine\Entity\User u";
+        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);
