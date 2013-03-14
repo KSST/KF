@@ -16,6 +16,8 @@ class IncomingParameters
 {
     private $injector;
 
+    private $names;
+
     public function __construct($names, $injector)
     {
         $this->names = $names;
