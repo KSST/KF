@@ -28,7 +28,6 @@ namespace Koch\DI\Engine;
 use Koch\DI\AbstractLifecycle;
 use Koch\DI\Lifecycle\Factory;
 use Koch\DI\Lifecycle\Value;
-
 use Koch\DI\Exception\CannotFindImplementation;
 
 class Context
