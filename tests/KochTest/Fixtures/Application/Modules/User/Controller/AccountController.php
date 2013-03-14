@@ -9,7 +9,7 @@
  */
 namespace KochTest\Fixtures\Application\Modules\User\Controller;
 
-use Koch\Module\ModuleInterface;
+// use Koch\Module\ModuleInterface;
 
 class AccountController //implements ModuleInterface
 {

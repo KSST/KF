@@ -3,7 +3,6 @@
 namespace KochTest\Files;
 
 use Koch\Files\Download;
-
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;

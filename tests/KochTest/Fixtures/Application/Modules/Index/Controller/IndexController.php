@@ -9,7 +9,7 @@
  */
 namespace KochTest\Fixtures\Application\Modules\Index\Controller;
 
-use Koch\Module\ModuleInterface;
+// use Koch\Module\ModuleInterface;
 
 class IndexController //implements ModuleInterface
 {
