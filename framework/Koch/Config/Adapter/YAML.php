@@ -53,7 +53,7 @@ class YAML
         // take syck, as the faster one first
         if ( extension_loaded('syck') ) {
             // convert to YAML via SYCK
-            $yaml = syck_dump($data);
+            $yaml = syck_dump($array);
         }
         // else check, if we have spyc as library
         elseif (is_file($spyc_lib) === true) {
@@ -93,7 +93,6 @@ class YAML
 
         // init
         $array = '';
-        $yaml_content = '';
 
         // read the yaml content of the file
         $yaml_content = file_get_contents($file);
