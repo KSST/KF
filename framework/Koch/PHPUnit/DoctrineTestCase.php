@@ -30,7 +30,6 @@ use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
 use Doctrine\Common\Annotations\AnnotationReader;
 use Doctrine\Common\Cache\ArrayCache;
-use Doctrine\Common\Annotations\AnnotationRegistry;
 
 /**
  * Koch Framework - Base class for all unit-tests working with the Doctrine2 ORM.
