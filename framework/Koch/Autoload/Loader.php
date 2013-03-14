@@ -242,17 +242,15 @@ class Loader
         $classname = ltrim($classname, '\\');
 
         $filename  = '';
-        $namespace = '';
 
         // determine position of last namespace separator
         if (false !== ($lastNsPos = strripos($classname, '\\'))) {
             // everything before it, is the namespace
-            $namespace = substr($classname, 0, $lastNsPos);
+            $namespace = substr($classname, 0, $lastNsPos + 1);
             // everything after it, is the classname
             $classname = substr($classname, $lastNsPos + 1);
-
             // replace every namespace separator with a directory separator
-            $filename  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
+            $filename  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
         }
 
         // convert underscore
