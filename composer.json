@@ -62,11 +62,11 @@
     "not-required-now": {
         "mpdf/mpdf"                       : "dev-master",
         "tcpdf/tcpdf"                     : "dev-master",
-        "marijnh/CodeMirror"              : "3.1"
+        "marijnh/CodeMirror"              : "3.1",
+        "phpunit/phpunit"                 : "3.7.*@dev"
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
-        "phpunit/phpunit"                 : "3.7.*@dev",
         "doctrine/data-fixtures"          : "*@dev"
     },
     "suggest": {
