@@ -46,7 +46,7 @@ class Compositum implements LoggerInterface
      * @param string             $label label
      * @param string             $level priority level (LOG, INFO, WARNING, ERROR...)
      */
-    public function writeLog($data_or_msg, $label = null, $level = null)
+    public function log($data_or_msg, $label = null, $level = null)
     {
         $data = array();
 
@@ -65,7 +65,7 @@ class Compositum implements LoggerInterface
         // combined boolean return value
         $bool = true;
         foreach ($this->loggers as $logger) {
-            $bool = $bool && $logger->writeLog($data);
+            $bool = $bool && $logger->log($data);
         }
 
         return $bool;
