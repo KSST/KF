@@ -169,7 +169,7 @@ class Context
         foreach ($parameters as $parameter) {
             try {
                 $values[] = $this->instantiateParameter($parameter, $nesting);
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
                 if ($parameter->isOptional()) {
                     break;
                 }
@@ -188,7 +188,7 @@ class Context
         }
 
         if (true === isset($this->variables[$parameter->getName()])) {
-            if ($this->variables[$parameter->getName()]->preference instanceof Lifecycle) {
+            if ($this->variables[$parameter->getName()]->preference instanceof AbstractLifecycle) {
                 return $this->variables[$parameter->getName()]->preference->instantiate(array());
             }
 
