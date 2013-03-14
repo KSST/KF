@@ -60,6 +60,6 @@ class Link extends ColumnRenderer implements ColumnRendererInterface
         $html_link = Koch\View\Helper\Html::renderElement('a', $this->nameFormat, $options);
 
         // replace
-        return $this->_replacePlaceholders($values, $html_link);
+        return $this->replacePlaceholders($values, $html_link);
     }
 }
