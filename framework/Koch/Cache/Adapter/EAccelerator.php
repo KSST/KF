@@ -142,18 +142,18 @@ class EAccelerator extends AbstractCache implements CacheInterface
      */
     public function stats()
     {
-        // get info Get info about eAccelerator
-        $eac_sysinfos['infos'] = eaccelerator_info();
+        $infos = array();
 
-        // List cached keys
+        $infos['infos'] = eaccelerator_info();
+
         $keys = eaccelerator_list_keys();
 
         if (is_array($keys)) {
             foreach ($keys as $key) {
-                $eac_sysinfo['keys'][] = $key;
+                $infos['keys'][] = $key;
             }
         }
 
-        return null;
+        return $infos;
     }
 }
