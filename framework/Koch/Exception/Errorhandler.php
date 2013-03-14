@@ -29,6 +29,20 @@ use Koch\Exception\Renderer\SmartyTemplateError;
 class Errorhandler
 {
     /**
+     * Handle Error as ErrorException
+     *
+     * @param type $severity
+     * @param type $message
+     * @param type $filename
+     * @param type $lineno
+     * @throws \ErrorException
+     */
+    public function handleError($severity, $message, $filename, $lineno)
+    {
+        throw new \ErrorException($message, 0, $severity, $filename, $lineno);
+    }
+
+    /**
      * Error callback.
      *
      * This is basically a switch statement, defining the actions taken,
@@ -403,6 +417,7 @@ class Errorhandler
 
     public static function getClassProperties($class, $nestingLevel = 2)
     {
+        $html = '';
         $html .= '<ul>';
         $ref = new ReflectionClass($class);
         foreach ($ref->getProperties() as $p) {
