@@ -3,7 +3,6 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Xslt;
-
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;

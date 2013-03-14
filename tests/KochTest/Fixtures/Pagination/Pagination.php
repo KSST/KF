@@ -4,7 +4,6 @@ namespace MyDataFixtures;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\FixtureInterface;
-
 use KochTest\Fixtures\Doctrine\Entity\User;
 
 class LoadPaginationData implements FixtureInterface
