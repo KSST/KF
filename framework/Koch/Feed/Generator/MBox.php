@@ -96,6 +96,7 @@ class MBox extends Generator
 
             $itemDate = new FeedDate($this->items[$i]->date);
 
+            $feed = '';
             $feed .= "From " . strtr(self::qpEnc($from), " ", "_") . " ";
             $feed .= date("D M d H:i:s Y", $itemDate->unix()) . "\n";
             $feed .= "Content-Type: text/plain;\n";
