@@ -77,7 +77,7 @@ class Xcache extends AbstractCache implements CacheInterface
     public function store($key, $data, $ttl = 0)
     {
         if (null === $ttl) {
-            $ttl = $this->_options['ttl'];
+            $ttl = $this->options['ttl'];
         }
 
         return xcache_set($key, serialize($data), $ttl);
