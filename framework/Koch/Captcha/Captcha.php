@@ -75,6 +75,13 @@ class Captcha
     public $captcha;
 
     /**
+     * Options
+     *
+     * @var array
+     */
+    public $options;
+
+    /**
      * Constructor.
      *
      */
