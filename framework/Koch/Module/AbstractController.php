@@ -31,9 +31,9 @@ use Koch\Http\HttpResponseInterface;
 /**
  * ModuleController
  *
- * Is an abstract class (parent class) to share some common features for all (Module/Action)-Controllers.
- * You could call it ModuleController and ActionController.
- * It`s abstract because it should only be extended, not instantiated.
+ * The ModuleController is an abstract class (parent class)
+ * to share some common features on/for all (Module/Action)-Controllers.
+ * It`s abstract, because it should only be extended, not instantiated.
  */
 abstract class AbstractController
 {
@@ -65,7 +65,7 @@ abstract class AbstractController
     /**
      * @var \Doctrine\ORM\EntityManager
      */
-    public $doctrine_em = null;
+    public $entityManager = null;
 
     /**
      * @var array The Module Configuration Array
@@ -76,7 +76,7 @@ abstract class AbstractController
     {
         $this->request = $request;
         $this->response = $response;
-        $this->doctrine_em = \Clansuite\Application::getEntityManager();
+        $this->entityManager = \Clansuite\Application::getEntityManager();
     }
 
     /**
@@ -84,9 +84,9 @@ abstract class AbstractController
      *
      * @return \Doctrine\ORM\EntityManager
      */
-    public function getDoctrineEntityManager()
+    public function getEntityManager()
     {
-        return $this->doctrine_em;
+        return $this->entityManager;
     }
 
     /**
@@ -122,7 +122,7 @@ abstract class AbstractController
             $entityName = $this->getEntityNameFromClassname();
         }
 
-        return $this->doctrine_em->getRepository($entityName);
+        return $this->entityManager->getRepository($entityName);
     }
 
     /**
@@ -135,12 +135,12 @@ abstract class AbstractController
      */
     public function saveModel(\Doctrine\ORM\Mapping\Entity $model, $flush = true)
     {
-        $this->doctrine_em->persist($model);
+        $this->entityManager->persist($model);
 
         if ($flush === true) {
-            $this->doctrine_em->flush();
+            $this->entityManager->flush();
         } else {
-            $this->doctrine_em->save();
+            $this->entityManager->save();
         }
     }
 
@@ -549,7 +549,7 @@ abstract class AbstractController
     }
 
     /**
-     * Shortcut to get the HttpRequest Object
+     * Returns the HttpRequest Object
      *
      * @return \Koch\Core\HttpRequest
      */
@@ -559,14 +559,12 @@ abstract class AbstractController
     }
 
     /**
-     * Shortcut to get the HttpResponse Object
+     * Returns the HttpResponse Object
      *
      * @return \Koch\Core\HttpResponse
      */
     public function getHttpResponse()
     {
-        /* @var \Koch\Core\HttpResponse */
-
         return $this->response;
     }
 }
