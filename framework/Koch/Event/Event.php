@@ -82,11 +82,11 @@ class Event implements \ArrayAccess
     }
 
     /**
-     * getCancelled returns the cancelled-status of the event
+     * isCancelled returns the cancelled-status of the event
      *
      * @returns boolean
      */
-    public function getCancelled()
+    public function isCancelled()
     {
         return (boolean) $this->cancelled;
     }
