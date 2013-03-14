@@ -79,7 +79,7 @@ class Firebug implements LoggerInterface
      *
      * @param $data array date['message'], data['label'], data['level']
      */
-    public function writeLog($data)
+    public function log($data)
     {
         $loglevel = $this->getFirePHPLoglevel($data['level']);
 

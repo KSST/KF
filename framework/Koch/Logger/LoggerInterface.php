@@ -17,6 +17,6 @@ namespace Koch\Logger;
  */
 interface LoggerInterface
 {
-    // each logger has to provide the method writeLog()
-    public function writeLog($data);
+    // each logger has to provide the method log()
+    public function log($data);
 }

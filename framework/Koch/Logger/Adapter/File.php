@@ -46,7 +46,7 @@ class File implements LoggerInterface
      * @param $logfile The name of the Logfile to append to.
      * @param $string The string to append to the logfile.
      */
-    public function writeLog($string)
+    public function log($string)
     {
         return (bool) file_put_contents($this->getErrorLogFilename(), $string, FILE_APPEND & LOCK_EX);
     }

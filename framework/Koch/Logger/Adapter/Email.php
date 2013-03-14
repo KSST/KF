@@ -53,7 +53,7 @@ class Email implements LoggerInterface
      *
      * @param array $data array('message', 'label', 'priority')
      */
-    public function writeLog($data)
+    public function log($data)
     {
         $to_address   = $this->options['to_sysadmin'];
         $from_address = $this->options['from'];
