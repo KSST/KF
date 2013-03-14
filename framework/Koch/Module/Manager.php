@@ -72,6 +72,7 @@ class Manager
     }
 
     /**
+     * Install module
      *
      * @return boolean True, if module was installed. False otherwise.
      */
@@ -81,6 +82,7 @@ class Manager
     }
 
     /**
+     * Uninstall module
      *
      * @return boolean
      */
@@ -90,6 +92,7 @@ class Manager
     }
 
     /**
+     * Update module
      *
      * @return boolean
      */
