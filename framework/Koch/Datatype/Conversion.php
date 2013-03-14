@@ -110,14 +110,14 @@ class Conversion
      * @param $object object to convert
      * @return array
      */
-    public static function object2array($object)
+    public static function objectToArray($object)
     {
         $array = null;
         if (is_object($object) === true) {
             $array = array();
             foreach (get_object_vars($object) as $key => $value) {
                 if (is_object($value) === true) {
-                    $array[$key] = self::object2Array($value);
+                    $array[$key] = self::objectToArray($value);
                 } else {
                     $array[$key] = $value;
                 }
@@ -133,7 +133,7 @@ class Conversion
      * @param $array array to convert to an object
      * @return array
      */
-    public function array2object($array)
+    public function arrayToObject($array)
     {
         if (is_array($array) === false) {
             return $array;
@@ -147,7 +147,7 @@ class Conversion
 
                 if (empty($name) === false) {
                     // WATCH OUT ! Recursion.
-                    $object->$name = self::array2Object($value);
+                    $object->$name = self::arrayToObject($value);
                 }
             }
 
