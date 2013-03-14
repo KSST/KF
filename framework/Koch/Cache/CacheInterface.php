@@ -24,21 +24,51 @@ interface CacheInterface
     const STATS_MEMORY_USAGE = 'memory_usage';
     const STATS_MEMORY_AVAILABLE = 'memory_available';
 
-    // Checks cache for a stored variable
+    /**
+     * Checks cache for a stored variable.
+     *
+     * @param string $key
+     * @return bool True, if key found, otherwise false.
+     */
     public function contains($key);
 
-    // Fetch a stored variable from the cache
+    /**
+     * Fetch a stored variable from the cache.
+     *
+     * @param string $key
+     * @return mixed
+     */
     public function fetch($key);
 
-    // Cache a variable in the data store
+    /**
+     * Cache a variable in the data store.
+     *
+     * @param string $key
+     * @param mixed  $value
+     * @param int    $ttl
+     * @return bool
+     */
     public function store($key, $data, $ttl = 0);
 
-    // Removes a stored variable from the cache
+    /**
+     * Removes a stored variable from the cache.
+     *
+     * @param string $key
+     * @return bool
+     */
     public function delete($key);
 
-    // Clears the cache
+    /**
+     * Clears the cache.
+     *
+     * @return boolean
+     */
     public function clear();
 
-    // Fetches cache adapter statistics
+    /**
+     * Fetches cache adapter statistics.
+     *
+     * @return array
+     */
     public function stats();
 }
