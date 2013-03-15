@@ -12,7 +12,6 @@
  * - vparam   = version string name
  *
  */
-
 /**
  * Example:
  *
@@ -27,6 +26,5 @@
  *          'vparam' => 'Nokia ',
  *      ),
  */
-
-$mobile = array(
+return array(
 );
