@@ -211,25 +211,26 @@ class UserAgentParser
     {
         $aList = array();
 
-        include __DIR__ . '/UserAgents/Bot.php';
+        $bot = include_once __DIR__ . '/UserAgents/Bot.php';
 
+        // @todo use array_merge
         foreach ($bot as $name => $row) {
             $aList[$name] = $row;
         }
 
-        include __DIR__ . '/UserAgents/Browser.php';
+        $browser = include_once __DIR__ . '/UserAgents/Browser.php';
 
         foreach ($browser as $name => $row) {
             $aList[$name] = $row;
         }
 
         /*
-        include __DIR__ . '/UserAgents/Mobile.php';
+        $mobile = include_once __DIR__ . '/UserAgents/Mobile.php';
         foreach ($mobile as $name => $row) {
             $aList[$name] = $row;
         }
 
-        include __DIR__ . '/UserAgents/Console.php';
+        $console = include_once __DIR__ . '/UserAgents/Console.php';
         foreach ($console as $name => $row) {
             $aList[$name] = $row;
         }

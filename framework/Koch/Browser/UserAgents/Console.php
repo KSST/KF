@@ -1,4 +1,5 @@
 <?php
+
 /**
  * -------------------------------------------------
  * Console
@@ -9,7 +10,6 @@
  * - type       = browser|bot
  *
  */
-
 /**
  * Example:
  *
@@ -23,6 +23,5 @@
  *          'type' => 'Console',
  *      ),
  */
-
-$console = array(
+return array(
 );
