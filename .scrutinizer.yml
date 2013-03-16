@@ -3,12 +3,23 @@ before_commands:
     - composer install --dev
 
 tools:
-    php_cs_fixer: false
-    php_code_sniffer:
+
+    php_cs_fixer: false	
+        config:
+            level: all
+        filter:
+            paths: [framework/*, tests/*]
+
+    php_code_sniffer: false
         config:
             standard: PSR2
+       filter:
+            paths: [framework/*, tests/*]
+
     php_mess_detector: false
-    php_analyzer:
+
+    php_analyzer: true
         filter:
-            excluded_paths: ["*/tests/*", "*/vendor/*", , "*/bin/*"]
+            paths: [framework/*, tests/*]
+
     sensiolabs_security_checker: false
