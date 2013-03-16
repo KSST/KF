@@ -13,7 +13,7 @@
 namespace Koch\Browser;
 
 /**
- * The Class provides a User Agent Parser.
+ * The class provides a User Agent Parser.
  */
 class UserAgentParser
 {
@@ -54,7 +54,7 @@ class UserAgentParser
     public function doParse($userAgentString)
     {
         $userAgent = array(
-            'string' => $this->cleanUserAgentString($userAgentString),
+            'string' => trim(strtolower($userAgentString)),
             'browser_name' => null,
             'browser_type' => null,
             'browser_type_sub' => null,
@@ -79,15 +79,15 @@ class UserAgentParser
 
         // Parse Browser
         $found = false;
-        $tmp_array = array();
+        $matches = array();
 
         $list = $this->getBrowsersList();
 
         foreach ($list as $name => $elements) {
             // read browser
-            $exprReg = $elements['search'];
-            foreach ($exprReg as $expr) {
-                if (preg_match($expr, $userAgent['string'], $tmp_array)) {
+            
+            foreach ($elements['regexp'] as $regexp) {
+                if (preg_match($regexp, $userAgent['string'], $matches)) {
                     $userAgent['browser_name'] = $name;
 
                     $userAgent['browser_type'] = $elements['type'];
@@ -134,29 +134,27 @@ class UserAgentParser
 
         // Parse Operating System
         $found = false;
-        $tmp_array = array();
+        $matches = array();
         $osList = $this->getListOperatingSystems();
 
         foreach ($osList as $name => $elements) {
-            $exprReg = $elements['search'];
-
-            foreach ($exprReg as $expr) {
-                if (preg_match($expr, $userAgent['string'], $tmp_array)) {
+            foreach ($elements['regexp'] as $regexp) {
+                if (preg_match($regexp, $userAgent['string'], $matches)) {
                     $userAgent['operating_system'] = $name;
-                    if ($tmp_array !== null && isset($tmp_array[1])) {
+                    if ($matches !== null && isset($matches[1])) {
                         if ($elements['subsearch'] !== null) {
-                            foreach ($elements['subsearch'] as $sub => $expr) {
-                                if (preg_match($expr, $tmp_array[1])) {
+                            foreach ($elements['subsearch'] as $sub => $regexp) {
+                                if (preg_match($regexp, $matches[1])) {
                                     $userAgent['operating_system_name'] = $sub;
                                 }
                             }
                         }
                         if ($userAgent['operating_system_name'] === null) {
-                            $userAgent['operating_system_name'] = (string) $tmp_array[1];
+                            $userAgent['operating_system_name'] = (string) $matches[1];
                         }
                     } elseif (isset($elements['addsearch']) === true) {
-                        foreach ($elements['addsearch'] as $sub => $expr) {
-                            if (preg_match($expr, $userAgent['string'])) {
+                        foreach ($elements['addsearch'] as $sub => $regexp) {
+                            if (preg_match($regexp, $userAgent['string'])) {
                                 $userAgent['operating_system_name'] = $sub;
                             }
                         }
@@ -181,25 +179,6 @@ class UserAgentParser
         }
 
         return $userAgent;
-    }
-
-    /**
-     * Make user agent string lowercase, and replace browser aliases.
-     *
-     * @param string $userAgentString The dirty user agent string.
-     */
-    public function cleanUserAgentString($userAgentString)
-    {
-        //clean up the string
-        $userAgentString = trim(strtolower($userAgentString));
-
-        //replace browser names with their aliases
-        #$userAgentString = strtr($userAgentString, $this->getListBrowserAliases());
-
-        //replace engine names with their aliases
-        #$userAgentString = strtr($userAgentString, $this->getListEngineAliases());
-
-        return $userAgentString;
     }
 
     /**
@@ -248,7 +227,7 @@ class UserAgentParser
     {
         $aList = array();
 
-        include __DIR__ . '/UserAgents/Os.php';
+        $os = include_once __DIR__ . '/UserAgents/Os.php';
 
         foreach ($os as $name => $row) {
             $aList[$name] = $row;

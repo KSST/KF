@@ -6,7 +6,7 @@
  * -------------------------------------------------
  *
  * Array Structure:
- * - search    = searchstring
+ * - regexp    = regular expression
  * - type       = browser|bot
  *
  */
@@ -15,7 +15,7 @@
  *
  *  'PlayStation Portable' =>
  *      array (
- *          'search' =>
+ *          'regexp' =>
  *              array (
  *                  '/psp.*playstation.*portable[^0-9]*([0-9a-z\.]+)\)/si',
  *                  '/psp.*playstation.*portable/si',

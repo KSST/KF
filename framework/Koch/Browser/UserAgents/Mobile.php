@@ -6,7 +6,7 @@
  * -------------------------------------------------
  *
  * Array Structure:
- * - search    = searchstring
+ * - regexp    = regular expression
  * - type       = browser|bot
  * - subtype  = device|os
  * - vparam   = version string name
@@ -17,7 +17,7 @@
  *
  *  'Nokia' =>
  *      array (
- *          'search' =>
+ *          'regexp' =>
  *              array (
  *                  0 => '/Nokia[ ]{0,1}.....',
  *              ),

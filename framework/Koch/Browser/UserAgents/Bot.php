@@ -12,7 +12,7 @@
 return array(
     'Googlebot' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             '/Googlebot\/([0-9a-z\+\-\.]+).*/si',
             '/Googlebot\-(Image\/[0-9a-z\+\-\.]+).*/si',
@@ -21,7 +21,7 @@ return array(
     ),
     'MSN Bot' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             '/msnbot(-media|)\/([0-9a-z\+\-\.]+).*/si',
             '/msnbot\/([0-9a-z\+\-\.]+).*/si',
