@@ -6,7 +6,7 @@
  * -------------------------------------------------
  *
  * Array Structure:
- * - search      = searchstring
+ * - regexp    = regular expression
  * - subsearch   = sub search in search
  * - addsearch   = additional searchstring for specific os
  * - type        = os
@@ -16,7 +16,7 @@ return array(
     // Windows
     'Windows' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/windows ([0-9\.]+).*/si',
             1 => '/[ \(]win([0-9\.]+).*/si',
@@ -45,7 +45,7 @@ return array(
     ),
     'Linux' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/linux/si',
         ),
@@ -75,7 +75,7 @@ return array(
     ),
     'BSD' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/bsd/si',
         ),
@@ -89,7 +89,7 @@ return array(
     ),
     'Mac OS' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/mac_/si',
             1 => '/macos/si',
@@ -102,7 +102,7 @@ return array(
     ),
     'SunOs' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/sunos/si',
         ),

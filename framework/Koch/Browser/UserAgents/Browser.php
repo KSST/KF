@@ -6,7 +6,7 @@
  * -------------------------------------------------
  *
  * Array Structure:
- * - search    = searchstring
+ * - regexp    = regular expression
  * - type       = browser|bot
  * - engine    = browserengine
  * - vparam   = version string name
@@ -16,7 +16,7 @@ return array(
     // Firefox
     'Firefox' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/mozilla.*rv:[0-9\.]+.*gecko\/[0-9]+.*firefox\/([0-9a-z\+\-\.]+).*/si',
         ),
@@ -28,7 +28,7 @@ return array(
     // Safari
     'Safari' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/mozilla.*applewebkit.*safari\/([0-9a-z\+\-\.]+).*/si',
         ),
@@ -40,7 +40,7 @@ return array(
     // Google Chrome
     'Google Chrome' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/\schrome/si',
         ),
@@ -52,7 +52,7 @@ return array(
     // Opera
     'Opera' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/mozilla.*opera ([0-9a-z\+\-\.]+).*/si',
             1 => '/^opera\/([0-9a-z\+\-\.]+).*/si',
@@ -65,7 +65,7 @@ return array(
     // Internet Explorer
     'Internet Explorer' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/microsoft.*internet.*explorer/si',
             1 => '/mozilla.*MSIE ([0-9a-z\+\-\.]+).*/si',
@@ -78,7 +78,7 @@ return array(
     // Konqueror
     'Konqueror' =>
     array(
-        'search' =>
+        'regexp' =>
         array(
             0 => '/mozilla.*konqueror\/([0-9a-z\+\-\.]+).*/si',
         ),
