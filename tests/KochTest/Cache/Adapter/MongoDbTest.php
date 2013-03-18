@@ -13,6 +13,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        if (!extension_loaded('mongo')) {
+            $this->markTestSkipped('This test requires the PHP extension "mongo".');
+        }
+
         $options = array(
             'collection' => 'test',
             'database' => 'test'
