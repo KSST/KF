@@ -41,7 +41,7 @@ use Koch\Exception\Exception;
  * @link http://libmemcached.org/libMemcached.html
  * @link http://php.net/manual/en/book.memcached.php
  *
- * See also the new implementation by Andrei Zmievsk based on libmemcached and memcached.
+ * See also the new implementation by Andrei Zmievski based on libmemcached and memcached.
  * @link http://github.com/andreiz/php-memcached/tree/master
  * @link http://pecl.php.net/package/memcached
  */
