@@ -28,11 +28,11 @@ namespace Koch\Logger;
  * Koch Framework - Class provides a compositum for loggers.
  *
  * This class represents a compositum for all registered loggers.
- * Another name for this class would be MultiLog.
+ * Another name for this class would be MultiLogger.
  * A new logger object is added with addLogger(), removed with removeLogger().
- * The composition is fired via method writeLog().
+ * The composition is fired via method log().
  */
-class Compositum implements LoggerInterface
+class Compositum
 {
     /**
      * @var array Array constains a object composition of all loggers
@@ -42,37 +42,24 @@ class Compositum implements LoggerInterface
     /**
      * Iterates over all registered loggers and writes the log entry.
      *
-     * @param mixed|array|string $data  array(message, label, level) or message
-     * @param string             $label label
-     * @param string             $level priority level (LOG, INFO, WARNING, ERROR...)
+     * @param string $level   priority level (LOG, INFO, WARNING, ERROR...)
+     * @param string $message
+     * @param array  $context Context Array
      */
-    public function log($data_or_msg, $label = null, $level = null)
+    public function log($level, $message, array $context = array())
     {
-        $data = array();
+        $bool = true;
 
-        if (is_array($data_or_msg) === true) {
-            // first parameter is array
-            $data['message'] = $data_or_msg[0];
-            $data['label'] = $data_or_msg[1];
-            $data['level'] = $data_or_msg[2];
-        } else {
-            // first parameter is string
-            $data['message'] = $data_or_msg;
-            $data['label'] = $label;
-            $data['level'] = $level;
+        foreach ($this->loggers as $logger) {
+            $bool = $bool && $logger->log($level, $message, $context);
         }
 
         // combined boolean return value
-        $bool = true;
-        foreach ($this->loggers as $logger) {
-            $bool = $bool && $logger->log($data);
-        }
-
         return $bool;
     }
 
     /**
-     * Registers a logger as composite element
+     * Registers a logger as composite element.
      *
      * @param array $logger Logger to add
      */
@@ -86,7 +73,7 @@ class Compositum implements LoggerInterface
     }
 
     /**
-     * Remove a logger from the compositum
+     * Remove a logger from the compositum.
      *
      * @param array $logger Logger to remove
      */

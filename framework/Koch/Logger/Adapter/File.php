@@ -24,6 +24,7 @@
 
 namespace Koch\Logger\Adapter;
 
+use Koch\Logger\AbstractLogger;
 use Koch\Logger\LoggerInterface;
 
 /**
@@ -31,7 +32,7 @@ use Koch\Logger\LoggerInterface;
  *
  * This class is a service wrapper for logging messages to a logfile.
  */
-class File implements LoggerInterface
+class File extends AbstractLogger implements LoggerInterface
 {
     private $logfile;
 
@@ -53,14 +54,16 @@ class File implements LoggerInterface
     }
 
     /**
-     * writeLog - Writes a string to the logfile.
+     * Writes a string to the logfile.
      *
-     * @param $logfile The name of the Logfile to append to.
-     * @param $string The string to append to the logfile.
+     * @param  mixed  $level
+     * @param  string $message
+     * @param  array  $context
+     * @return bool
      */
-    public function log($string)
+    public function log($level, $message, array $context = array())
     {
-        return (bool) file_put_contents($this->getErrorLogFilename(), $string, FILE_APPEND & LOCK_EX);
+        return (bool) file_put_contents($this->getErrorLogFilename(), $message, FILE_APPEND & LOCK_EX);
     }
 
     /**

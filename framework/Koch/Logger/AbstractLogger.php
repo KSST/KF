@@ -24,13 +24,12 @@
 
 namespace Koch\Logger;
 
+use Logger\LogLevel;
+
 /**
- * Koch Framework - Interface for the Logger Adapters.
- *
- * Implements the PSR-3 standard.
- * @link https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-3-logger-interface.md
+ * Koch Framework - Abstract base class for all Logger Adapters.
  */
-interface LoggerInterface
+abstract class AbstractLogger
 {
     /**
      * System is unusable.
@@ -39,7 +38,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function emergency($message, array $context = array());
+    public function emergency($message, array $context = array())
+    {
+        return $this->log(LogLevel::EMERGENCY, $message, $context);
+    }
 
     /**
      * Action must be taken immediately.
@@ -51,7 +53,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function alert($message, array $context = array());
+    public function alert($message, array $context = array())
+    {
+        return $this->log(LogLevel::ALERT, $message, $context);
+    }
 
     /**
      * Critical conditions.
@@ -62,7 +67,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function critical($message, array $context = array());
+    public function critical($message, array $context = array())
+    {
+        return $this->log(LogLevel::CRITICAL, $message, $context);
+    }
 
     /**
      * Runtime errors that do not require immediate action but should typically
@@ -72,7 +80,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function error($message, array $context = array());
+    public function error($message, array $context = array())
+    {
+        return $this->log(LogLevel::ERROR, $message, $context);
+    }
 
     /**
      * Exceptional occurrences that are not errors.
@@ -84,7 +95,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function warning($message, array $context = array());
+    public function warning($message, array $context = array())
+    {
+        return $this->log(LogLevel::WARNING, $message, $context);
+    }
 
     /**
      * Normal but significant events.
@@ -93,7 +107,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function notice($message, array $context = array());
+    public function notice($message, array $context = array())
+    {
+        return $this->log(LogLevel::NOTICE, $message, $context);
+    }
 
     /**
      * Interesting events.
@@ -104,7 +121,10 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function info($message, array $context = array());
+    public function info($message, array $context = array())
+    {
+        return $this->log(LogLevel::INFO, $message, $context);
+    }
 
     /**
      * Detailed debug information.
@@ -113,15 +133,8 @@ interface LoggerInterface
      * @param  array  $context
      * @return null
      */
-    public function debug($message, array $context = array());
-
-    /**
-     * Logs with an arbitrary level.
-     *
-     * @param  mixed  $level
-     * @param  string $message
-     * @param  array  $context
-     * @return null
-     */
-    public function log($level, $message, array $context = array());
+    public function debug($message, array $context = array())
+    {
+        return $this->log(LogLevel::DEBUG, $message, $context);
+    }
 }

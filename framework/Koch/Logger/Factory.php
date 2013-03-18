@@ -29,6 +29,12 @@ namespace Koch\Logger;
  */
 class Factory
 {
+    /**
+     * Returns the requested Logger adapter.
+     * 
+     * @param type $adapter (File, Email, Firebug)
+     * @return \Koch\Logger\class
+     */
     public function getAdapter($adapter)
     {
         $classname = ucfirst($adapter);

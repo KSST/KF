@@ -47,13 +47,18 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Logger\Adapter\Firebug::writeLog
+     * @covers Koch\Logger\Adapter\Firebug::Log
      * @expectedException Exception
      * @expectedExceptionMessage Headers already sent
      */
-    public function testWriteLog()
+    public function testLog()
     {
-        $data = array('message' => 'Message', 'label' => 'Label', 'level' => 'error');
-        $this->assertTrue($this->object->writeLog($data));
+        $level = 'ERROR';
+        $message = 'Error Message';
+        $context = array('Yarp!', 'Some Content', 'Yarp! Yarp!');
+
+        $r = $this->object->log($level, $message, $context);
+
+        $this->assertTrue($r);
     }
 }

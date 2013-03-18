@@ -24,6 +24,7 @@
 
 namespace Koch\Logger\Adapter;
 
+use Koch\Logger\AbstractLogger;
 use Koch\Logger\LoggerInterface;
 
 /**
@@ -42,7 +43,7 @@ use Koch\Logger\LoggerInterface;
  * @link http://getfirebug.com/
  * @link http://firephp.org/
  */
-class Firebug implements LoggerInterface
+class Firebug extends AbstractLogger implements LoggerInterface
 {
     private static $firephp = null;
 
@@ -89,12 +90,15 @@ class Firebug implements LoggerInterface
      * It utilizes firephp's procedural API.
      * fb($var, 'Label', FirePHP::*)
      *
-     * @param $data array date['message'], data['label'], data['level']
+     * @param  type  $level
+     * @param  type  $message
+     * @param  array $context
+     * @return bool
      */
-    public function log($data)
+    public function log($level, $message, array $context = array())
     {
-        $loglevel = $this->getFirePHPLoglevel($data['level']);
+        $loglevel = $this->getFirePHPLoglevel($level);
 
-        return self::$firephp->fb($data['message'], $data['label'], $loglevel);
+        return self::$firephp->fb($message, $level, $loglevel);
     }
 }
