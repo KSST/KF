@@ -31,10 +31,10 @@ class Errorhandler
     /**
      * Handle Error as ErrorException
      *
-     * @param type $severity
-     * @param type $message
-     * @param type $filename
-     * @param type $lineno
+     * @param  type            $severity
+     * @param  type            $message
+     * @param  type            $filename
+     * @param  type            $lineno
      * @throws \ErrorException
      */
     public function handleError($severity, $message, $filename, $lineno)
