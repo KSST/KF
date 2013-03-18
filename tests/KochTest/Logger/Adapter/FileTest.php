@@ -52,15 +52,16 @@ class FileTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Logger\Adapter\File::writeLog
+     * @covers Koch\Logger\Adapter\File::log
      * @covers Koch\Logger\Adapter\File::readLog
      */
-    public function testWriteLog()
+    public function testLog()
     {
-        $string = 'String to log';
-        $this->object->writeLog($string);
+        $level = 'ERROR';
+        $message = 'String to log';
+        $this->object->log($level, $message);
 
-        $this->assertEquals($string, $this->object->readLog());
+        $this->assertEquals($message, $this->object->readLog());
     }
 
       /**

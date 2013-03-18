@@ -12,6 +12,7 @@
 
 namespace Koch\Logger\Adapter;
 
+use Koch\Logger\AbstractLogger;
 use Koch\Logger\LoggerInterface;
 
 /**
@@ -20,7 +21,7 @@ use Koch\Logger\LoggerInterface;
  * This class is a service wrapper for sending logging messages via email.
  * The email is send using the Koch_Mailer, which is a wrapper for SwiftMailer.
  */
-class Email implements LoggerInterface
+class Email extends AbstractLogger implements LoggerInterface
 {
     /**
      * @var array Options.
@@ -49,17 +50,21 @@ class Email implements LoggerInterface
     }
 
     /**
-     * Sends a message via email.
+     * Sends the log message via E-Mail.
      *
-     * @param array $data array('message', 'label', 'priority')
+     * @param  mixed  $level
+     * @param  string $message
+     * @param  array  $context
+     * @return bool
      */
-    public function log($data)
+    public function log($level, $message, array $context = array())
     {
         $to_address   = $this->options['to_sysadmin'];
         $from_address = $this->options['from'];
-        // append date/time to msg
-        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $data[1];
-        $body         = var_export($data, true);
+
+        // append date/time to message
+        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $message;
+        $body         = var_export($message, true);
 
         return (bool) $this->mailer->send($to_address, $from_address, $subject, $body);
     }

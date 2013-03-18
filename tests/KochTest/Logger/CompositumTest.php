@@ -25,9 +25,9 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Logger\Compositum::writeLog
+     * @covers Koch\Logger\Compositum::Log
      */
-    public function testWriteLog()
+    public function testLog()
     {
         // create a virtual error log file
         vfsStreamWrapper::register();
@@ -44,16 +44,10 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
 
         // setup message to log
         $message = 'TestMessage';
-        $label = 'Info';
-        $level = '1';
+        $context = array('Context Info');
+        $level = 'ERROR';
 
-        // log message via array
-        $data = array($message, $label, $level);
-        $this->assertTrue($this->object->writeLog($data));
-
-        // log message via parameters
-        $this->object->writeLog($message . '2', $label, $level);
-        $this->assertTrue($this->object->writeLog($data));
+        $this->assertTrue($this->object->log($level, $message, $context));
     }
 
     /**

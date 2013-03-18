@@ -45,12 +45,16 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Logger\Adapter\Email::writeLog
+     * @covers Koch\Logger\Adapter\Email::Log
      */
-    public function testWriteLog()
+    public function testLog()
     {
-        $data = array('message', 'label', 'priority');
-        $r = $this->object->writeLog($data);
+        $level = 'ERROR';
+        $message = 'Error Message';
+        $context = array('Yarp!', 'Some Content', 'Yarp! Yarp!');
+
+        $r = $this->object->log($level, $message, $context);
+
         $this->assertTrue($r);
     }
 }
