@@ -27,15 +27,15 @@ interface CacheInterface
     /**
      * Checks cache for a stored variable.
      *
-     * @param string $key
-     * @return bool True, if key found, otherwise false.
+     * @param  string $key
+     * @return bool   True, if key found, otherwise false.
      */
     public function contains($key);
 
     /**
      * Fetch a stored variable from the cache.
      *
-     * @param string $key
+     * @param  string $key
      * @return mixed
      */
     public function fetch($key);
@@ -43,9 +43,9 @@ interface CacheInterface
     /**
      * Cache a variable in the data store.
      *
-     * @param string $key
-     * @param mixed  $value
-     * @param int    $ttl
+     * @param  string $key
+     * @param  mixed  $value
+     * @param  int    $ttl
      * @return bool
      */
     public function store($key, $data, $ttl = 0);
@@ -53,7 +53,7 @@ interface CacheInterface
     /**
      * Removes a stored variable from the cache.
      *
-     * @param string $key
+     * @param  string $key
      * @return bool
      */
     public function delete($key);
