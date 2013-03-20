@@ -74,7 +74,7 @@ class LogLevel
     public static function getLevelName($level)
     {
         if (!isset(static::$levels[$level])) {
-            throw new InvalidArgumentException(sprintf(
+            throw new \InvalidArgumentException(sprintf(
                 'Logging level "%s" is not defined, use one of: %s', $level, implode(', ', array_keys(static::$levels))
             ));
         }
