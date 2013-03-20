@@ -32,6 +32,9 @@ class DoctrineTest extends DoctrineTestCase
         unset($this->object);
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\Doctrine::getTotalNumberOfResults
+     */
     public function testGetTotalNumberOfResults()
     {
         $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
@@ -41,6 +44,9 @@ class DoctrineTest extends DoctrineTestCase
         $this->assertEquals(2, $adapter->getTotalNumberOfResults());
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\Doctrine::getSlice
+     */
     public function testGetSlice()
     {
         $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
@@ -52,6 +58,9 @@ class DoctrineTest extends DoctrineTestCase
         $this->assertEquals(1, count( $adapter->getSlice(1, 1)) );
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\Doctrine::getQuery
+     */
     public function testGetQuery()
     {
         $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
@@ -61,6 +70,9 @@ class DoctrineTest extends DoctrineTestCase
         $this->assertInstanceOf('Doctrine\ORM\Query', $adapter->getQuery());
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\Doctrine::getArray
+     */
     public function testGetArray()
     {
         $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";

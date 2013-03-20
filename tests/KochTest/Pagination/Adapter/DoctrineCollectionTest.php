@@ -30,11 +30,17 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\DoctrineCollection::getCollection
+     */
     public function testGetCollection()
     {
         $this->assertSame($this->collection, $this->object->getCollection());
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\DoctrineCollection::getTotalNumberOfResults
+     */
     public function testgetTotalNumberOfResults()
     {
         $this->collection
@@ -46,6 +52,7 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Pagination\Adapter\DoctrineCollection::getSlice
      * @dataProvider getResultsProvider
      */
     public function testGetResults($offset, $length)
@@ -67,6 +74,9 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
         );
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\DoctrineCollection::getArray
+     */
     public function testGetArray()
     {
         $this->collection
