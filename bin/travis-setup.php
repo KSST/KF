@@ -3,6 +3,8 @@
 /**
  * Alter INI Setting and install PHP extensions required for testing by Travis CI.
  *
+ * http://about.travis-ci.org/docs/user/languages/php/#Preinstalled-PHP-extensions
+ *
  * Usage: add to your .travis.yml
  * env:
  *   - OPCODE_CACHE=apc
@@ -19,6 +21,8 @@ if (isset($argv[1]) && 'APC' === strtoupper($argv[1])) {
 
 $phpEnv->installExtension('memcache');
 $phpEnv->installExtension('memcached');
+
+$phpEnv->enableExtension('mongo'); # preinstalled on travis
 
 // enable short_open_tags for 5.3 and lower
 if(version_compare(PHP_VERSION, '5.4.0', '<'))
@@ -132,7 +136,7 @@ class PhpEnvironment
             ));
 
             foreach ($extension['ini'] as $ini) {
-                $this->system(sprintf("echo %s >> %s", $ini, $this->phpIniFile));
+                $this->enableExtension($ini);
             }
 
             printf("=> installed (%s)\n", $folder);
@@ -149,6 +153,18 @@ class PhpEnvironment
         $this->system(sprintf("echo %s >> %s", $option, $this->phpIniFile));
 
         printf("=> new php.ini setting (%s)\n", $option);
+    }
+
+    /**
+     * Enables a PHP extension in php ini.
+     *
+     * @param type $extension
+     */
+    public function enableExtension($extension)
+    {
+        $this->system(sprintf("echo extension=%s.so >> %s", $extension, $this->phpIniFile));
+
+        printf("=> enabled php/ext (%s)\n", $extension);
     }
 
     /**
