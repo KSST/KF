@@ -22,10 +22,10 @@ abstract class AbstractRenderer
 {
     /**
      * Options Array.
-     * 
+     *
      * @var array
      */
-    protected $options = array();
+    public $options = array();
 
     /**
      * @var Object Holds instance of the Rendering Engine Object
@@ -76,9 +76,7 @@ abstract class AbstractRenderer
      */
     public function __construct($options = array())
     {
-        foreach ($options as $key => $value) {
-            $this->options[$key] = $value;
-        }
+        $this->setOptions($options);
 
         $this->viewMapper = new \Koch\View\Mapper;
     }
@@ -91,6 +89,18 @@ abstract class AbstractRenderer
     public function getOptions()
     {
         return $this->options;
+    }
+
+    /**
+     * Set options.
+     * 
+     * @param array $options
+     */
+    public function setOptions(array $options)
+    {
+        foreach ($options as $key => $value) {
+            $this->options[$key] = $value;
+        }
     }
 
     /**
