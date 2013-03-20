@@ -41,7 +41,7 @@ class Html
      * Optional attributes of a Html field.
      *
      */
-    public $truncSize;
+    public $truncateSize;
     public $syndicateHtml;
 
     /**
@@ -70,8 +70,10 @@ class Html
         } elseif ($this->syndicateHtml) {
             $result = '<![CDATA[' . $this->rawFieldContent . ']]>';
         } else {
-            if ($this->truncSize and is_int($this->truncSize)) {
-                $result = FeedCreator::iTrunc(htmlspecialchars($this->rawFieldContent), $this->truncSize);
+            if ($this->truncateSize and is_int($this->truncateSize)) {
+                $result = \Koch\Feed\AbstractGenerator::iTrunc(
+                    htmlspecialchars($this->rawFieldContent), $this->truncateSize
+                );
             } else {
                 $result = htmlspecialchars($this->rawFieldContent);
             }

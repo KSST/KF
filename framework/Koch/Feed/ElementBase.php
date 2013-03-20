@@ -50,7 +50,7 @@ class ElementBase
     {
         $descriptionField = new Koch\Feed\Element\Html($this->description);
         $descriptionField->syndicateHtml = $this->descriptionHtmlSyndicated;
-        $descriptionField->truncSize = $this->descriptionTruncSize;
+        $descriptionField->truncateSize = $this->descriptionTruncSize;
 
         return $descriptionField->output();
     }
