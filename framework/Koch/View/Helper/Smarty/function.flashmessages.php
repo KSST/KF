@@ -1,14 +1,14 @@
 <?php
 /**
- * Koch Framework Smarty View Helper for rendering Flashmessages
+ * Smarty Viewhelper for rendering \Koch\Session\FlashMessages.
  */
 function Smarty_function_flashmessages($params, $smarty)
 {
     // render only a certain type of flashmessages
     if ($params['type'] !== null) {
-        return Koch_Flashmessages::render($params['type']);
-    } else { // render all
-
-        return Koch_Flashmessages::render();
+        return \Koch\Session\FlashMessages::render($params['type']);
     }
+
+    // render all
+    return \Koch\Session\FlashMessages::render();
 }
