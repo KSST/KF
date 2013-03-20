@@ -78,7 +78,7 @@ class CSV
         if (($handle = fopen($file, "r+")) !== false) {
             // transform array to csv notation
             foreach ($array as $key => $value) {
-                if (is_string($value)) {
+                if (is_string($value) === true) {
                     $value = explode(',', $value);
                     $value = array_map('trim', $value);
                     // write to csv to file
