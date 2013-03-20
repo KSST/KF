@@ -45,22 +45,6 @@ class Exception extends \Exception
             self::fetchExceptionTemplates($exception->getCode());
         }
 
-        /**
-         * @todo
-         * 1. catch Smarty "Template Syntax" Errors
-         * 2. provide link to templateeditor (file:line) to fix the error
-         */
-        /*$smartyTemplateError = (false !== stristr($exception->getMessage(), 'Syntax Error in template')) ? true : false;
-        if ($smartyTemplateError === true) {
-            throw new SmartyTemplateException($exception);
-        }*/
-
-        /**
-         * @todo
-         * 1. catch Smarty "Unable to load template file" Errors
-         * 2. provide link to templatefilemanager (module:file)
-         */
-
         echo YellowScreenOfDeath::renderException(
             $exception->getMessage(),
             $exception->getTraceAsString(),
@@ -69,6 +53,10 @@ class Exception extends \Exception
             $exception->getLine(),
             $exception->getTrace()
         );
+
+        // we use our own exception handler here, so PHP returns exit code 0.
+        // the execution will stop anyway, but let's return the correct code.
+        exit(255);
     }
 
     /**

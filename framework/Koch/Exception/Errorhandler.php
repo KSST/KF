@@ -29,15 +29,25 @@ use Koch\Exception\Renderer\SmartyTemplateError;
 class Errorhandler
 {
     /**
+     * Registers this class as the new PHP errorhandler, thereby overwriting any previous handlers.
+     */
+    public static function initialize()
+    {
+        set_error_handler(array('Errorhandler', 'handleError'));
+        //set_error_handler(array('Errorhandler', 'handleErrorAsErrorException'));
+        //set_exception_handler(array('Errorhandler', 'handleException'));
+    }
+
+    /**
      * Handle Error as ErrorException
      *
-     * @param  type            $severity
+     * @param  type            $errnum
      * @param  type            $message
      * @param  type            $filename
      * @param  type            $lineno
      * @throws \ErrorException
      */
-    public function handleError($severity, $message, $filename, $lineno)
+    public function handleErrorAsErrorException($errnum, $message, $filename, $lineno)
     {
         throw new \ErrorException($message, 0, $severity, $filename, $lineno);
     }
@@ -52,13 +62,13 @@ class Errorhandler
      * @link http://www.php.net/manual/de/function.set-error-handler.php
      * @link http://www.php.net/manual/de/errorfunc.constants.php
      *
-     * @param int $errno      contains the error as integer.
+     * @param int $errnum      contains the error as integer.
      * @param string  $errstr     contains error string info.
      * @param string  $errfile    contains the filename with occuring error.
      * @param string  $errline    contains the line of error.
      * @param string  $errcontext (optional) array with variables from error context.
      */
-    public static function handle($errno, $errstr, $errfile, $errline, $errcontext = null)
+    public static function handleError($errnum, $errstr, $errfile, $errline, $errcontext = null)
     {
         // return, if the error is suppressed, due to (@)silencing-operator
         if (error_reporting() === 0) {
@@ -95,7 +105,7 @@ class Errorhandler
         );
 
         // get the errorname from the array via $errornumber
-        $errorname = isset($errorTypes[$errno]) ? $errorTypes[$errno] : '';
+        $errorname = isset($errorTypes[$errnum]) ? $errorTypes[$errnum] : '';
 
         // Handling the ErrorType via Switch
         switch ($errorname) {
@@ -128,7 +138,7 @@ class Errorhandler
                 break;
             // when it's not in there, its an unknown errorcode
             default:
-                $errorname .= ' Unknown Errorcode ['. $errno .']: ';
+                $errorname .= ' Unknown Errorcode ['. $errnum .']: ';
         }
 
         // make the errorstring more useful by linking it to the php manual
@@ -149,10 +159,10 @@ class Errorhandler
             if ((true === (bool) mb_strpos(mb_strtolower($errfile), 'smarty')) or
                 (true === (bool) mb_strpos(mb_strtolower($errfile), 'tpl.php'))) {
                 // render the smarty template error
-                echo SmartyTemplateError::render($errno, $errorname, $errstr, $errfile, $errline, $errcontext);
+                echo SmartyTemplateError::render($errnum, $errorname, $errstr, $errfile, $errline, $errcontext);
             } else {
                 // render normal error display, with all pieces of information, except backtraces
-                echo YellowScreenOfDeath::renderError($errno, $errorname, $errstr, $errfile, $errline, $errcontext);
+                echo YellowScreenOfDeath::renderError($errnum, $errorname, $errstr, $errfile, $errline, $errcontext);
             }
         }
 
