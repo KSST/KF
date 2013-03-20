@@ -36,6 +36,7 @@ class Errorhandler
         set_error_handler(array('Errorhandler', 'handleError'));
         //set_error_handler(array('Errorhandler', 'handleErrorAsErrorException'));
         //set_exception_handler(array('Errorhandler', 'handleException'));
+        //register_shutdown_function(array('Errorhandler, 'catchFatalErrors'));
     }
 
     /**
