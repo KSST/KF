@@ -674,7 +674,10 @@ class Errorhandler
 
     public static function catchFatalErrorsShutdownHandler()
     {
-        if (!$err = error_get_last()) {
+        $lastError = error_get_last();
+
+        // return early, if there hasn't been an error yet
+        if (null === $lastError) {
             return;
         }
 
@@ -688,8 +691,8 @@ class Errorhandler
             E_COMPILE_WARNING => 'Compile Warning'
         );
 
-        if (isset($fatals[$err['type']])) {
-            self::handle($err['type'], $err['message'], $err['file'], $err['line']);
+        if (isset($fatals[$lastError['type']]) === true) {
+            self::handle($lastError['type'], $lastError['message'], $lastError['file'], $lastError['line']);
         }
     }
 }
