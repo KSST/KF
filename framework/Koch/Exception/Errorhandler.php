@@ -286,17 +286,17 @@ class Errorhandler
 
                 $html .= '<td>';
 
-                 // show the function call, e.g. Class->Method() or Class::Method()
+                // show the function call, e.g. Class->Method() or Class::Method()
                 $html .= $trace[$i]['class'] . $trace[$i]['type'] . $trace[$i]['function'] . '()';
 
-                // @todo add backlink to API Documentation
-                if (preg_match('/^Koch/', $trace[$i]['class'])) {
+                // if the class is one of our own, add backlink to API Documentation
+                if (1 === preg_match('/^Koch/', $trace[$i]['class'])) {
                     $html .= '<span class="error-class">';
                     $html .= '<a target="_new" href="http://docs.kf.com/en/latest/api/';
                     $html .= str_replace('\\', '_', $trace[$i]['class']);
                     $html .= '.html"> ' . $trace[$i]['class'] . '</a></span>';
                 } else {
-                    // a php internal class - backlink to php manual
+                    // else it's a php internal class, then add a backlink to the php manual
                     $classReflection = new \ReflectionClass($trace[$i]['class']);
                     if ($classReflection->isInternal()) {
                         $html .= '<span class="error-class"><a target="_new" href="http://php.net/manual/en/class.';
@@ -318,8 +318,15 @@ class Errorhandler
                     }
                 }
 
+                // XDebug uses the array key 'params' for the method parameters array
+                // PHP backtrace uses 'args', so let's rename to 'args'
+                if (isset($trace[$i]['params']) === true) {
+                    $trace[$i]['args'] = $trace[$i]['params'];
+                    unset($trace[$i]['params']);
+                }
+
                 // Method Arguments
-                if (true === isset($trace[$i]['args']) and empty($trace[$i]['args']) === false) {
+                if (isset($trace[$i]['args']) === true and empty($trace[$i]['args']) === false) {
                     // the number of arguments (method parameters)
                     $backtrace_counter_j = count($trace[$i]['args']) - 1;
 
@@ -328,9 +335,8 @@ class Errorhandler
                     /* @var $reflected_params \ReflectionParameter */
                     $reflected_params = $reflected_method->getParameters();
 
-                    // render table with method parameters
+                    // render a table with method parameters
                     // argument position | name | type | value
-                    // @todo
                     $html .= '<table style="border-collapse: collapse;">';
                     $html .= '<tr><th style="line-height: 0.8em;" colspan="4">Parameters</th></tr>';
                     $html .= '<tr style="line-height: 0.8em;">';
@@ -346,15 +352,10 @@ class Errorhandler
                         preg_match('/\[ ([^[]+) \]/', $parameter, $matches);
 
                         $html .= '<tr>';
-
-                        // pos
-                        $html .= '<td>' . ($j + 1) . '</td>';
-                        // name
-                        $html .= '<td>' . $matches['1'] . '</td>';
-                        // type
-                        $html .= '<td>' . $data['type'] . '</td>';
-                        // value
-                        $html .= '<td>' . $data['arg'] . '</td>'; // $defaultValue
+                        $html .= '<td>' . ($j + 1) . '</td>'; // pos
+                        $html .= '<td>' . $matches['1'] . '</td>'; // name
+                        $html .= '<td>' . $data['type'] . '</td>'; // type
+                        $html .= '<td>' . $data['arg'] . '</td>'; // value $defaultValue
                     }
                     $html .= '</tr></table>';
                 }
