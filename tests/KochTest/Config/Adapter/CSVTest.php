@@ -44,6 +44,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Config\Adapter\CSV::readConfig
      * @expectedException Koch\Exception\Exception
      * @expectedExceptionMessage CSV Config File non-existant.file not existing or not readable.
      */
@@ -58,6 +59,18 @@ class CSVTest extends \PHPUnit_Framework_TestCase
     public function testWriteConfig()
     {
         $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $this->assertTrue($result);
+    }
+
+    /**
+     * @covers Koch\Config\Adapter\CSV::writeConfig
+     */
+    public function testWriteConfig_ArrayHasValueContainsCommaSeparatedString()
+    {
+        // array value contains a untrimmed comma separated string
+        $array = array('key' => 'a, comma, separated  ,   string');
+
+        $result = $this->object->writeConfig($this->configFileURL, $array);
         $this->assertTrue($result);
     }
 
