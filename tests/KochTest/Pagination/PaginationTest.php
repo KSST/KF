@@ -90,7 +90,6 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
      /**
       * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
-      * @covers Koch\Pagination\Pagination::setTotalNumberOfResults
       */
     public function getTotalNumberOfResults()
     {

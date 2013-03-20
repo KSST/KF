@@ -27,11 +27,17 @@ class NativeArrayTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\NativeArray::getArray
+     */
     public function testGetArray()
     {
         $this->assertSame($this->array, $this->object->getArray());
     }
 
+    /**
+     * @covers Koch\Pagination\Adapter\NativeArray::getTotalNumberOfResults
+     */
     public function testGetTotalNumberOfResults()
     {
         $this->assertSame(count($this->array), $this->object->getTotalNumberOfResults());
