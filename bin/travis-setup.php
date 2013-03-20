@@ -136,7 +136,7 @@ class PhpEnvironment
             ));
 
             foreach ($extension['ini'] as $ini) {
-                $this->enableExtension($ini);
+                $this->iniSet($ini);
             }
 
             printf("=> installed (%s)\n", $folder);
