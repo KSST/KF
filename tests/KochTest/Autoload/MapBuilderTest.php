@@ -70,6 +70,16 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\Autoload\MapBuilder::extractClassnames
+     * @expectedException \InvalidArgumentException
+     * @expectedExceptionMessage File from-not-existing-file.php does not exist.
+     */
+    public function testExtractClassnames_throwsException()
+    {
+        $classname = $this->object->extractClassnames('from-not-existing-file.php');
+    }
+
+    /**
      * @covers Koch\Autoload\MapBuilder::writeMapFile
      */
     public function testWriteMapFile()
