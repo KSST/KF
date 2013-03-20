@@ -43,7 +43,7 @@ class Errorhandler
     /**
      * Registers this class as the new PHP errorhandler, thereby overwriting any previous handlers.
      */
-    public static function initialize()
+    public static function register()
     {
         set_error_handler(array('Errorhandler', 'handleError'));
         //set_error_handler(array('Errorhandler', 'handleErrorAsErrorException'));
@@ -276,8 +276,18 @@ class Errorhandler
             if (isset($trace[$i]['class']) === false) {
                 $html .= '<td>[A PHP Core Function Call]</td>';
             } else {
-                // Function (Class::Method)
-                $html .= '<td>' . $trace[$i]['class'] . '::' . $trace[$i]['function'] . '()';
+
+                 // replace trace type string with it's operator
+                 if ($trace[$i]['type'] === 'dynamic') {
+                     $trace[$i]['type'] = '->';
+                 } else {
+                     $trace[$i]['type'] = '::';
+                 }
+
+                $html .= '<td>';
+
+                 // show the function call, e.g. Class->Method() or Class::Method()
+                $html .= $trace[$i]['class'] . $trace[$i]['type'] . $trace[$i]['function'] . '()';
 
                 // @todo add backlink to API Documentation
                 if (preg_match('/^Koch/', $trace[$i]['class'])) {
@@ -297,7 +307,7 @@ class Errorhandler
                     }
                 }
 
-                // a php function - backlink to manual
+                // is this a normal php function? if yes, add a backlink to the php manual
                 if (function_exists($trace[$i]['function']) === true) {
                     $functionReflection = new \ReflectionFunction($trace[$i]['function']);
                     if ($functionReflection->isInternal()) {
