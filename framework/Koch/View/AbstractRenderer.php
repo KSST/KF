@@ -20,6 +20,11 @@ namespace Koch\View;
  */
 abstract class AbstractRenderer
 {
+    /**
+     * Options Array.
+     * 
+     * @var array
+     */
     protected $options = array();
 
     /**
