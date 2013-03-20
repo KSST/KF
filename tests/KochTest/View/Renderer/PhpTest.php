@@ -47,6 +47,19 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
+    /**
+     * @covers Koch\View\AbstractRenderer::getOptions
+     * @covers Koch\View\AbstractRenderer::setOptions
+     */
+    public function testConstructor_testPassingOptions()
+    {
+        $options = array('optionA' => 'value');
+        $this->object = new Php($options);
+
+        $this->assertTrue(isset($this->object->options['optionA']));
+        $this->assertArrayHasKey('optionA', $this->object->getOptions());
+    }
+
     public function getTemplateContent()
     {
         // alternative placeholder syntax (php shorttag)
