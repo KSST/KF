@@ -38,32 +38,30 @@ class DebugTest extends \PHPUnit_Framework_TestCase
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-<pre><b>Debugging <font color=red>DebugTest.php</font> on line <font color=red>66</font></b>:
-<div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var, $var2);
+<pre><b>Debugging <font color=red>DebugTest.php</font> on line <font color=red>64</font></b>:
+<div style='background: #f5f5f5; padding: 0.2em 0em;'>        \Koch\Debug\Debug::printR($var, $var2, $string);
 </div>
 <b>Type</b>: array
-<b>Length</b>: 2
+<b>Length</b>: 1
 <b>Value</b>: Array
 (
-    [0] =&gt; Array
-        (
-            [Key] =&gt; Value
-        )
-
-    [1] =&gt; Array
-        (
-            [Key2] =&gt; Value2
-        )
-
+    [Key] =&gt; Value
 )
-</pre>
+<b>Length</b>: 1
+<b>Value</b>: Array
+(
+    [Key2] =&gt; Value2
+)
+<b>Length</b>: 13
+<b>Value</b>: Just a string</pre>
 EOD;
 
         $this->expectOutputString($expectedOutput);
 
         $var = array('Key' => 'Value');
         $var2 = array('Key2' => 'Value2');
-        \Koch\Debug\Debug::printR($var, $var2);
+        $string = 'Just a string';
+        \Koch\Debug\Debug::printR($var, $var2, $string);
     }
 
     /**
@@ -80,7 +78,7 @@ if (version_compare(PHP_VERSION, '5.5.0-dev', '<')) {
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 103: \Koch\Debug\Debug::dump($var);
+Debugging DebugTest.php on line 101: \Koch\Debug\Debug::dump($var);
 array(1) {
   'Key' =>
   string(5) "Value"
@@ -89,7 +87,7 @@ array(1) {
 EOD;
 } else {
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 103: \Koch\Debug\Debug::dump($var);
+Debugging DebugTest.php on line 101: \Koch\Debug\Debug::dump($var);
 <pre>array(1) {
   ["Key"] => string(5) "Value"
 }
@@ -111,7 +109,7 @@ EOD;
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 120: \Koch\Debug\Debug::getOriginOfDebugCall(0);
+Debugging DebugTest.php on line 118: \Koch\Debug\Debug::getOriginOfDebugCall(0);
 
 EOD;
         $this->expectOutputString($expectedOutput);

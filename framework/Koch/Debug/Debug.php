@@ -32,7 +32,7 @@ class Debug
     {
         // this will handle more than one parameter
         if (func_num_args() > 1) {
-            $var = func_get_args();
+            $vars = func_get_args();
         }
 
         $backtrace_array = array();
@@ -49,35 +49,40 @@ class Debug
 
         echo '<b>Type</b>: ' . gettype($var) . "\n"; // uhhh.. gettype is slow like hell
 
-        if (is_string($var) === true) {
-            echo '<b>Length</b>: ' . strlen($var) . "\n";
-        }
+        // handle more than one parameter
+        foreach($vars as $var) {
 
-        if (is_array($var) === true) {
-            echo '<b>Length</b>: ' . count($var) . "\n";
-        }
-
-        echo '<b>Value</b>: ';
-
-        if ($var === true) {
-            echo '<font color=green><b>true</b></font>';
-        } elseif ($var === false) {
-            echo '<font color=red><b>false</b></font>';
-        } elseif ($var === null) {
-            echo '<font color=red><b>null</b></font>';
-        } elseif ($var === 0) {
-            echo '0';
-        } elseif (is_string($var) and strlen($var) == '0') {
-            echo '<font color=green>*EMPTY STRING*</font>';
-        } elseif (is_string($var)) {
-            echo htmlspecialchars($var);
-        } else {
-            $print_r = print_r($var, true);
-            // str_contains < or >
-            if ((strstr($print_r, '<') !== false) or (strstr($print_r, '>') !== false)) {
-                $print_r = htmlspecialchars($print_r);
+            if (is_string($var) === true) {
+                echo '<b>Length</b>: ' . strlen($var) . "\n";
             }
-            echo $print_r;
+
+            if (is_array($var) === true) {
+                echo '<b>Length</b>: ' . count($var) . "\n";
+            }
+
+            echo '<b>Value</b>: ';
+
+            if ($var === true) {
+                echo '<font color=green><b>true</b></font>';
+            } elseif ($var === false) {
+                echo '<font color=red><b>false</b></font>';
+            } elseif ($var === null) {
+                echo '<font color=red><b>null</b></font>';
+            } elseif ($var === 0) {
+                echo '0';
+            } elseif (is_string($var) and strlen($var) == '0') {
+                echo '<font color=green>*EMPTY STRING*</font>';
+            } elseif (is_string($var)) {
+                echo htmlspecialchars($var);
+            } else {
+                $print_r = print_r($var, true);
+                // str_contains < or >
+                if ((strstr($print_r, '<') !== false) or (strstr($print_r, '>') !== false)) {
+                    $print_r = htmlspecialchars($print_r);
+                }
+                echo $print_r;
+            }
+
         }
 
         echo '</pre>';
