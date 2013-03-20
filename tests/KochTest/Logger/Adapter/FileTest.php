@@ -24,17 +24,17 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         # file 1
-        $this->configFileAURL = vfsStream::url('root/errorlog.txt');
-        $this->fileA = vfsStream::newFile('errorlog.txt', 0777);
+        $this->configFileURL1 = vfsStream::url('root/errorlog.txt');
+        $this->file1 = vfsStream::newFile('errorlog.txt', 0777);
         # file 2
-        $this->configFileBURL = vfsStream::url('root/errorlog-full.txt');
-        $this->fileB = vfsStream::newFile('errorlog-full.txt', 0777)->withContent($this->getFileContent());
+        $this->configFileURL2 = vfsStream::url('root/errorlog-full.txt');
+        $this->file2 = vfsStream::newFile('errorlog-full.txt', 0777)->withContent($this->getFileContent());
         $this->root = new vfsStreamDirectory('root');
-        $this->root->addChild($this->fileA);
-        $this->root->addChild($this->fileB);
+        $this->root->addChild($this->file1);
+        $this->root->addChild($this->file2);
         vfsStreamWrapper::setRoot($this->root);
 
-        $this->object->setErrorLogFilename($this->configFileAURL);
+        $this->object->setErrorLogFilename($this->configFileURL1);
     }
 
     /**
@@ -85,10 +85,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
         $e = $this->object->getEntriesFromLogfile('5');
         $this->assertEquals('<b>No Entries</b>', $e);
 
-        $e = $this->object->getEntriesFromLogfile('5', $this->configFileBURL);
+        $e = $this->object->getEntriesFromLogfile('5', $this->configFileURL2);
 
 // @todo remove newline before closing span's
-$out = <<<EOD
+$expected = <<<EOD
 <span class="log-id">Entry 6</span><span class="log-entry">Line6
 </span>
 <span class="log-id">Entry 5</span><span class="log-entry">Line5
@@ -101,7 +101,10 @@ $out = <<<EOD
 </span>
 
 EOD;
+        $this->assertEquals($expected, $e);
 
-        $this->assertEquals($out, $e);
+        $e = $this->object->getEntriesFromLogfile('5', 'not-existing-log.file');
+        $this->assertEquals('<b>No Logfile found. No entries yet.</b>', $e);
+
     }
 }
