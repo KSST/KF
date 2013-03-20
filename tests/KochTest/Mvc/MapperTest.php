@@ -30,11 +30,13 @@ class MapperTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Mvc\Mapper::setApplicationNamespace
+     * @covers Koch\Mvc\Mapper::getApplicationNamespace
      */
     public function testSetApplicationNamespace()
     {
         $this->object->setApplicationNamespace(__NAMESPACE__);
         $this->assertEquals('\KochTest\Mvc', Mapper::$applicationNamespace);
+        $this->assertEquals('\KochTest\Mvc', $this->object->getApplicationNamespace());
     }
 
     /**
