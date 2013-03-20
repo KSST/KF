@@ -35,12 +35,12 @@ class Php extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-
+        return;
     }
 
     public function configureEngine()
     {
-
+        return;
     }
 
     /**
