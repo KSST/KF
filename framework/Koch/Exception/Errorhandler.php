@@ -379,6 +379,9 @@ class Errorhandler
      */
     public static function formatBacktraceArgument($backtraceArgument, $nestingLevel = 2)
     {
+        // do not throw a notice on PHP 5.3 - the constant was added with PHP 5.4 htmlspecialchars()
+        defined('ENT_SUBSTITUTE') || define('ENT_SUBSTITUTE', 8);
+        
         $result = array();
         $arg = '';
         $type = '';
@@ -402,7 +405,7 @@ class Errorhandler
                 break;
             case 'string':
                 $type .= '<span>string</span>';
-                $backtraceArgument = htmlentities($backtraceArgument, ENT_QUOTES, 'UTF-8');
+                $backtraceArgument = htmlspecialchars($backtraceArgument, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
                 $arg .= \Koch\Functions\Functions::shortenString($backtraceArgument);
                 break;
             case 'array':
