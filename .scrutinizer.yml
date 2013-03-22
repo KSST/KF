@@ -4,21 +4,24 @@ before_commands:
 
 tools:
 
-    php_cs_fixer: true
+    php_cs_fixer:
+        enabled: true
         config:
             level: all
         filter:
             paths: [framework/*, tests/*]
 
-    php_code_sniffer: true
+    php_code_sniffer:
+        enabled: true
         config:
             standard: PSR2
-       filter:
+        filter:
             paths: [framework/*, tests/*]
 
     php_mess_detector: false
 
-    php_analyzer: true
+    php_analyzer:
+        enabled: true
         filter:
             paths: [framework/*, tests/*]
 
