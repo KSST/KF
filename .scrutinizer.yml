@@ -4,13 +4,13 @@ before_commands:
 
 tools:
 
-    php_cs_fixer: false
+    php_cs_fixer: true
         config:
             level: all
         filter:
             paths: [framework/*, tests/*]
 
-    php_code_sniffer: false
+    php_code_sniffer: true
         config:
             standard: PSR2
        filter:
