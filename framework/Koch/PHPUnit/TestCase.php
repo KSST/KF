@@ -34,7 +34,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     private $purgePaths = array();
 
-        /**
+    /**
      * Calls a class or object method.
      *
      * @param  object|string $class  The class name or object.
@@ -161,14 +161,14 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Finds a class method and returns the ReflectionMethod instance.
      *
-     * @param  object|string       $class The class name or object.
+     * @param  object|string       $class The class name or object or a ReflectionClass.
      * @param  string              $name  The method name.
      * @return ReflectionMethod    The method name.
      * @throws ReflectionException If the method does not exist.
      */
     public function findMethod($class, $name)
     {
-        $reflection = new \ReflectionClass($class);
+        $reflection = ($class instanceOf \ReflectionClass) ? $class : new \ReflectionClass($class);
 
         while (false === $reflection->hasMethod($name)) {
             if (false === ($reflection = $reflection->getParentClass())) {
@@ -186,14 +186,14 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Finds a class property and returns the ReflectionProperty instance.
      *
-     * @param  object|string       $class The class name or object.
+     * @param  object|string       $class The class name or object or a ReflectionClass.
      * @param  string              $name  The property name.
      * @return ReflectionProperty  The property instance.
      * @throws ReflectionException If the property is not found.
      */
     public function findProperty($class, $name)
     {
-        $reflection = new \ReflectionClass($class);
+        $reflection = ($class instanceOf \ReflectionClass) ? $class : new \ReflectionClass($class);
 
         while (false === $reflection->hasProperty($name)) {
             if (false === ($reflection = $reflection->getParentClass())) {
@@ -225,13 +225,29 @@ class TestCase extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * Sets the value of the property.
+     *
+     * @param object|string $class The class name or object.
+     * @param string        $name  The property name.
+     * @param mixed         $value The property value.
+     */
+    public function setPropertyValue($class, $name, $value)
+    {
+        $property = $this->findProperty($class, $name);
+        $property->setAccessible(true);
+        $property->setValue(
+            is_object($class) ? $class : null,
+            $value
+        );
+    }
+
+    /**
      * Recursively deletes a file or directory tree.
      *
      * @param string $path The file or directory path.
-     *
      * @throws FileSystemException If the path could not be purged.
-s    */
- public function purgePath($path)
+    */
+    public function purgePath($path)
     {
         if (false === file_exists($path)) {
             throw new \Exception('InvalidPath %s', $from);
@@ -243,7 +259,7 @@ s    */
             }
 
             while (false !== ($item = readdir($dh))) {
-                if (('.' === $item) || ('..' === $item)) {
+                if (('.' === $item) or ('..' === $item)) {
                     continue;
                 }
 
@@ -260,23 +276,6 @@ s    */
                 throw new \Exception('unlink error %s', $path);
             }
         }
-    }
-
-    /**
-     * Sets the value of the property.
-     *
-     * @param object|string $class The class name or object.
-     * @param string        $name  The property name.
-     * @param mixed         $value The property value.
-     */
-    public function setPropertyValue($class, $name, $value)
-    {
-        $property = $this->findProperty($class, $name);
-        $property->setAccessible(true);
-        $property->setValue(
-            is_object($class) ? $class : null,
-            $value
-        );
     }
 
     /**
