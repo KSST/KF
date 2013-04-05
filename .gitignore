@@ -51,9 +51,14 @@ vendor
 # php-cs-fixer
 php-cs-fixer*.txt
 
-# build folders
+# build folders for standard php projects
 build/api
 build/code-browser
 build/coverage
 build/logs
 build/pdepend
+
+# various files
+._*
+.~lock.*
+*.bak
