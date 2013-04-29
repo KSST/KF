@@ -100,7 +100,7 @@ abstract class AbstractController
         $matches = array();
 
         // takes a classname, e.g. "Clansuite\Modules\News\Controller\NewsController"
-        $classname = get_called_class();
+        $classname = get_class($this);
         preg_match("~Controller\\\(.*)Controller~is", $classname, $matches);
 
         // and returns the entity name, e.g. "Entity\News"
