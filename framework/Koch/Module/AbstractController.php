@@ -76,7 +76,6 @@ abstract class AbstractController
     {
         $this->request = $request;
         $this->response = $response;
-        $this->entityManager = \Clansuite\Application::getEntityManager();
     }
 
     /**
@@ -87,6 +86,11 @@ abstract class AbstractController
     public function getEntityManager()
     {
         return $this->entityManager;
+    }
+
+    public function setEntityManager($em)
+    {
+        $this->entityManager = $em;
     }
 
     /**
@@ -101,6 +105,7 @@ abstract class AbstractController
 
         // takes a classname, e.g. "Clansuite\Modules\News\Controller\NewsController"
         $classname = get_class($this);
+        echo $classname;
         preg_match("~Controller\\\(.*)Controller~is", $classname, $matches);
 
         // and returns the entity name, e.g. "Entity\News"
