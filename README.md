@@ -5,6 +5,9 @@ This repository contains the source code for the Koch Framework, a PHP 5.3 full-
 Please see the [issues](https://github.com/KSST/KF/issues) section to
 report any bugs or feature requests and to see the list of known issues.
 
+Koch Framework is still under heavy development. Significant changes may happen without prior notices.
+It is not ready for production use yet.
+
 ## Contributing
 
 * Please fork this repository and contribute back using [pull requests](https://github.com/KSST/KF/pulls).
