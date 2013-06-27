@@ -10,8 +10,9 @@
 namespace KochTest\Fixtures\Application\Modules\News\Controller;
 
 use Koch\Module\ModuleInterface;
+use Koch\Module\AbstractController;
 
-class NewsController implements ModuleInterface
+class NewsController extends AbstractController implements ModuleInterface
 {
     public function actionList()
     {
