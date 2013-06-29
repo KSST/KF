@@ -105,7 +105,7 @@ abstract class AbstractRenderer
 
     /**
      * Set options.
-     * 
+     *
      * @param array $options
      */
     public function setOptions(array $options)
@@ -180,7 +180,7 @@ abstract class AbstractRenderer
      */
     public function clearVars()
     {
-        $this->viewdata = null;
+        return $this->viewdata = null;
     }
 
     /**
@@ -204,7 +204,7 @@ abstract class AbstractRenderer
     /**
      * Set the template name.
      *
-     * Proxies to Koch_View_Mapper::setTemplate()
+     * Proxies to Koch\View\Mapper::setTemplate()
      *
      * @param string $template Name of the Template (full path)
      */
@@ -216,7 +216,7 @@ abstract class AbstractRenderer
     /**
      * Get the template name
      *
-     * Proxies to Koch_View_Mapper::getTemplate()
+     * Proxies to Koch\View\Mapper::getTemplate()
      *
      * @return string $template Name of the Template (full path)
      */
@@ -351,8 +351,6 @@ abstract class AbstractRenderer
      * because htmlentities will cast all values to string.
      * Character encoding used is UTF-8.
      *
-     * @todo: do we need a config toggle for this?
-     *
      * @param  string  $key The variable name.
      * @param  mixed   $val The variable value.
      * @return boolean True if data was assigned to view; false if not.
@@ -364,13 +362,11 @@ abstract class AbstractRenderer
             foreach ($value as $key2 => $value2) {
                 $clean[$key2] = htmlentities($value2, ENT_QUOTES, 'utf-8');
             }
-
-            return $this->assign($clean);
         } else {
-            $clean = htmlentities($value2, ENT_QUOTES, 'utf-8');
-
-            return $this->assign($key, $clean);
+            $clean = htmlentities($value, ENT_QUOTES, 'utf-8');
         }
+
+        return $this->assign($key, $clean);
     }
 
     /**

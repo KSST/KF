@@ -3,6 +3,8 @@
 namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Php;
+use Koch\View\Mapper;
+
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -17,6 +19,8 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     /**
      * Sets up the fixture, for example, opens a network connection.
      * This method is called before a test is executed.
+     *
+     * @covers Koch\View\AbstractRenderer::__construct
      */
     protected function setUp()
     {
@@ -48,6 +52,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
+     * @covers Koch\View\Renderer\Php::__construct
      * @covers Koch\View\AbstractRenderer::getOptions
      * @covers Koch\View\AbstractRenderer::setOptions
      */
@@ -69,6 +74,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Php::fetch
+     * @covers Koch\View\AbstractRenderer::fetch
      */
     public function testFetch()
     {
@@ -82,6 +88,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Php::assign
+     * @covers Koch\View\AbstractRenderer::assign
      */
     public function testAssign()
     {
@@ -103,6 +110,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Php::render
+     * @covers Koch\View\AbstractRenderer::render
      */
     public function testRender()
     {
@@ -116,6 +124,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Php::configureEngine
+     * @covers Koch\View\AbstractRenderer::configureEngine
      */
     public function testConfigureEngine()
     {
@@ -124,6 +133,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Php::display
+     * * @covers Koch\View\AbstractRenderer::display
      */
     public function testDisplay()
     {
@@ -141,5 +151,81 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function testInitializeEngine()
     {
         $this->assertNull($this->object->initializeEngine());
+    }
+
+    /**
+     * Test methods of the AbstractRenderer
+     */
+
+    /**
+     * @covers Koch\View\AbstractRenderer::getEngine
+     */
+    public function testGetEngine()
+    {
+        $this->assertNull($this->object->getEngine());
+    }
+
+    /**
+     * @covers Koch\View\AbstractRenderer::clearVars
+     */
+    public function testClearVars()
+    {
+        $this->assertNull($this->object->clearVars());
+    }
+
+    /**
+     * @covers Koch\View\AbstractRenderer::getVars
+     */
+    public function testGetVars()
+    {
+        // key => value
+        $this->object->assign('key', 'value');
+        $this->assertEquals('value', $this->object->viewdata['key']);
+
+        $this->assertArrayHasKey('key', $this->object->getVars());
+    }
+
+    /**
+     * @covers Koch\View\AbstractRenderer::setViewMapper
+     * @covers Koch\View\AbstractRenderer::getViewMapper
+     */
+    public function testGetSetViewMapper()
+    {
+        $viewMapper = new Mapper;
+        $this->object->setViewMapper($viewMapper);
+        $this->assertEquals($viewMapper, $this->object->getViewMapper());
+    }
+
+    /**
+     * @covers Koch\View\AbstractRenderer::getTemplate
+     * @covers Koch\View\AbstractRenderer::setTemplate
+     */
+    public function testGetSetTemplate()
+    {
+        $template = 'bubble-burst.dot.com';
+        $this->object->setTemplate($template);
+        $this->assertEquals($template, $this->object->getTemplate());
+    }
+
+    /**
+     * @covers Koch\View\AbstractRenderer::autoEscape
+     */
+    public function testAutoEscape()
+    {
+        $key1 = 'key1';
+        $value1 = 'value1';
+
+        $this->object->autoEscape($key1, $value1);
+        $this->assertEquals(array('key1' => 'value1'), $this->object->getVars());
+
+        $this->object->clearVars();
+
+        // array
+        $key2 = 'key2';
+        $value2 = array('value2a', 'value2b');
+        $this->object->autoEscape($key2, $value2);
+
+        $expected = array('key2' => array(0 => 'value2a', 1 => 'value2b'));
+        $this->assertEquals($expected, $this->object->getVars());
     }
 }
