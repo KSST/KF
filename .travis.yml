@@ -30,6 +30,9 @@ script:
   - ant phpunit
   - php ./bin/coverage-check.php ./tests/clover.xml 70
 
+after_script:
+  - php vendor/bin/coveralls
+
 notifications:
   irc: "irc.freenode.org#koch"
   email: false

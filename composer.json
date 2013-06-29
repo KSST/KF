@@ -67,7 +67,8 @@
     "require-dev": {
         "mikey179/vfsStream"              : "*",
         "phpunit/phpunit"                 : "3.7.*@dev",
-        "doctrine/data-fixtures"          : "*@dev"
+        "doctrine/data-fixtures"          : "*@dev",
+        "satooshi/php-coveralls"          : "dev-master"
     },
     "suggest": {
         "ext-apc"         : "*",
