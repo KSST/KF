@@ -1,9 +1,16 @@
-### Koch Framework [![Build Status](https://travis-ci.org/KSST/KF.png)](https://travis-ci.org/KSST/KF)
+### Koch Framework
+
+| Branch | Unit Tests | Coverage |
+| ------ | ---------- | -------- |
+| [![Latest Stable Version](https://poser.pugx.org/ksst/kf/v/stable.png)](https://packagist.org/packages/ksst/kf) | [![Build Status](https://travis-ci.org/KSST/KF.png)](https://travis-ci.org/KSST/KF) | [![Coverage Status](https://coveralls.io/repos/KSST/KF/badge.png)](https://coveralls.io/r/KSST/KF) |
 
 This repository contains the source code for the Koch Framework, a PHP 5.3 full-stack web framework.
 
 Please see the [issues](https://github.com/KSST/KF/issues) section to
 report any bugs or feature requests and to see the list of known issues.
+
+Koch Framework is still under heavy development. Significant changes may happen without prior notices.
+It is not ready for production use yet.
 
 ## Contributing
 
