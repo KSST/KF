@@ -66,7 +66,9 @@ class PhpEnvironment
         'apc' => array(
             'url'        => 'http://pecl.php.net/get/APC-3.1.9.tgz',
             'php_version' => array(
-                // apc 3.1.9 causes a segfault on PHP 5.4
+                // a) apc 3.1.9 causes a segfault on PHP 5.4
+                // b) from PHP 5.5.0 and up APC is not longer needed,
+                //    because a Opcode Cache is shipped with PHP (formerly Zend Optimizer+)
                 array('<', '5.4'),
             ),
             'cfg'         => array(),
