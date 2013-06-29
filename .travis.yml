@@ -32,7 +32,7 @@ script:
   # ant utf8-encoding-check
   # ant phpcs
   - ant phpunit
-  - php ./bin/coverage-check.php ./tests/clover.xml 70
+  # - php ./bin/coverage-check.php ./tests/clover.xml 70
 
 after_script:
   # php vendor/bin/coveralls
