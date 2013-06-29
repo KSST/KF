@@ -13,21 +13,24 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        $this->markTestSkipped('All Mongo Tests are skipped.');
+
         if (!extension_loaded('mongo')) {
             $this->markTestSkipped('This test requires the PHP extension "mongo".');
         }
 
+        if (version_compare(phpversion('mongo'), '1.3.0', '>=')) {
+            $this->markTestSkipped('This test requires the PHP extension "mongo" >= 1.3.0.');
+        }
+
         $options = array(
-            'collection' => 'test',
-            'database' => 'test'
+            'database' => 'test',
+            'collection' => 'test'
         );
 
-        $this->mongo = $this->getMock('\Mongo', array('selectDB'));
-        $this->collection = $this->getMock(
-            '\MongoCollection',
-            array('remove', 'insert', 'findOne', 'drop')
-        );
-        $this->db = $this->getMock('\MongoDB', array('selectCollection'));
+        $this->mongo = $this->getMockMongo();
+        $this->collection = $this->getMockMongoCollection();
+        $this->db = $this->getMockMongoDB();
 
         $this->db->expects($this->any())
             ->method('selectCollection')->with($options['collection'])
@@ -106,8 +109,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      */
     public function testDelete()
     {
-         $this->collection->expects($this->once())->method('remove')
-             ->with( $this->equalTo( array('key' => 'key1')) )->will( $this->returnValue(false) );
+        $this->collection->expects($this->once())
+            ->method('remove')
+            ->with($this->equalTo(array('key' => 'key1')))
+            ->will($this->returnValue(false));
 
         // assert that, key does not exist before
         $this->assertFalse($this->object->delete('key1'));
@@ -254,5 +259,31 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     public function testStats()
     {
         $this->assertEquals(array(), $this->object->stats());
+    }
+
+    /**
+     * Mock the Mongo!
+     */
+
+    private function getMockMongo()
+    {
+        return $this->getMock('Mongo', array(), array(), '', false, false);
+    }
+
+    private function getMockMongoClient()
+    {
+        return $this->getMockBuilder('MongoClient')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    private function getMockMongoDB()
+    {
+        return $this->getMock('MongoDB', array(), array(), '', false, false);
+    }
+
+    private function getMockMongoCollection()
+    {
+        return $this->getMock('MongoCollection', array(), array(), '', false, false);
     }
 }
