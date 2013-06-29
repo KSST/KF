@@ -21,6 +21,12 @@ use Koch\Functions\Functions;
  *
  * APC is a) an opcache and b) a memory based cache.
  *
+ * Use this class only on PHP versions below PHP 5.5.0.
+ *
+ * As of PHP 5.5.0 using APC is no longer required, because
+ * PHP ships an Opcode Cache (formerly Zend Optimizer+) by default.
+ * For userland caching APCu is in the making (APC User Cache).
+ *
  * @link http://de3.php.net/manual/de/ref.apc.php
  */
 class Apc extends AbstractCache implements CacheInterface
