@@ -56,7 +56,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\AbstractRenderer::getOptions
      * @covers Koch\View\AbstractRenderer::setOptions
      */
-    public function testConstructor_testPassingOptions()
+    public function testPassingOptionsViaConstructor()
     {
         $options = array('optionA' => 'value');
         $this->object = new Php($options);
@@ -114,12 +114,12 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-       $template = $this->templateFileURL;
-       $viewdata = array('placeholder' => 'World');
+        $template = $this->templateFileURL;
+        $viewdata = array('placeholder' => 'World');
 
-       $result = $this->object->render($template, $viewdata);
+        $result = $this->object->render($template, $viewdata);
 
-       $this->assertEquals('Hello World. The World is not enough.', $result);
+        $this->assertEquals('Hello World. The World is not enough.', $result);
     }
 
     /**
@@ -137,12 +137,12 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisplay()
     {
-       $template = $this->templateFileURL;
-       $viewdata = array('placeholder' => 'World');
+        $template = $this->templateFileURL;
+        $viewdata = array('placeholder' => 'World');
 
-       $this->object->display($template, $viewdata);
+        $this->object->display($template, $viewdata);
 
-       $this->expectOutputString('Hello World. The World is not enough.');
+        $this->expectOutputString('Hello World. The World is not enough.');
     }
 
     /**
@@ -228,4 +228,5 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $expected = array('key2' => array(0 => 'value2a', 1 => 'value2b'));
         $this->assertEquals($expected, $this->object->getVars());
     }
+
 }
