@@ -1,4 +1,4 @@
-﻿{
+{
     "name": "ksst/kf",
     "description": "Koch Framework",
     "license": "MIT",
@@ -57,10 +57,9 @@
         "simplepie/simplepie"             : "dev-master",
         "smarty/smarty"                   : "dev-trunk",
         "swiftmailer/swiftmailer"         : "v4.3.0"
-
     },
     "not-required-now": {
-        "imagine/imagine": "~0.5.0"
+        "imagine/imagine"                 : "~0.5.0",
         "mpdf/mpdf"                       : "dev-master",
         "tcpdf/tcpdf"                     : "dev-master",
         "marijnh/CodeMirror"              : "3.1"
@@ -69,7 +68,7 @@
         "mikey179/vfsStream"              : "*",
         "phpunit/phpunit"                 : "3.7.*@dev",
         "doctrine/data-fixtures"          : "*@dev",
-        "firephp/firephp-core"           : "dev-master",
+        "firephp/firephp-core"            : "dev-master",
         "satooshi/php-coveralls"          : "dev-master"
     },
     "suggest": {
