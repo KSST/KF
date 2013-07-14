@@ -41,6 +41,10 @@ nbproject
 .svn
 .svn/entries
 
+# Mercurial / Subversion
+.hg
+.svn
+
 # PHPUnit
 # phpunit.xml
 
