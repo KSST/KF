@@ -32,18 +32,17 @@ class Breadcrumb
      * @param string $replace_array_position Position in the array to replace with name/trail. Start = 0.
      */
     public static function add($title, $link = '', $replace_array_position = null)
-    {
-        // $breadcrumb contains the array structure for a new breadcrumb
-        $breadcrumb = array('title' => '', 'link' => '');
-
+    { 
         // set data to breadcrumb
-        $breadcrumb['title'] = ucwords($title);
-        $breadcrumb['link']  = '/' . ltrim($link, '/ ');
+        $breadcrumb = array(
+            'title' => ucwords($title),
+            'link' => '/' . ltrim($link, '/ ')
+        );
 
         // replace
         if ($replace_array_position !== null) {
             self::$path[$replace_array_position] = $breadcrumb;
-        } else { // no, just add
+        } else { // just add
             self::$path[] = $breadcrumb;
         }
 
