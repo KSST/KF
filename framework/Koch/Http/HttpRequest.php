@@ -66,10 +66,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * Construct the Request Object
      *
      * 1) Drop Superglobal $_REQUEST. Just hardcoded reminder for developers to not use it!
-     * 2) Intrusion Detection System
-     * 3) Additional Security Checks
-     * 4) Clear Array, Filter and Assign the $_REQUEST Global to it
-     * 5) Detect REST Tunneling through POST and set request_method accordingly
+     * 2) Additional Security Checks
+     * 3) Clear Array, Filter and Assign the $_REQUEST Global to it
+     * 4) Detect REST Tunneling through POST and set request_method accordingly
      */
     public function __construct() /*$ids_on = false*/
     {
@@ -77,24 +76,18 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         unset($_REQUEST);
         //unset($GLOBALS);
 
-        /*if ($ids_on === true) {
-            // 2) Run Intrusion Detection System (on GET, POST, COOKIES)
-            $doorKeeper = new Koch\Security\DoorKeeper;
-            $doorKeeper->runIDS();
-        }*/
-
         /**
-         *  3) Additional Security Checks
+         * 2) Additional Security Checks
          */
 
         // block XSS
         $_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
-        if (isset($_SERVER['QUERY_STRING'])) {
+        if (isset($_SERVER['QUERY_STRING']) === true) {
             htmlspecialchars($_SERVER['QUERY_STRING']);
         }
 
         /**
-         *  5) Init Parameter Arrays and Assign the GLOBALS
+         * 3) Init Parameter Arrays and Assign the GLOBALS
          */
 
         // Clear Parameters Array
@@ -108,7 +101,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         $this->cookie_parameters  = $_COOKIE;
 
         /**
-         * 6) Detect REST Tunneling through POST and set request_method accordingly
+         * 4) Detect REST Tunneling through POST and set request_method accordingly
          */
         $this->detectRESTTunneling();
     }
