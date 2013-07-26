@@ -68,7 +68,7 @@ class Functions
         return (int) $load;
     }
 
-    public static function in_string($needle, $haystack, $insensitive = false)
+    public static function inString($needle, $haystack, $insensitive = false)
     {
         if ($insensitive === true) {
             return (false !== stristr($haystack, $needle)) ? true : false;
@@ -225,7 +225,7 @@ class Functions
      * @param $needle string
      * @return string
      */
-    public static function cut_string_backwards($haystack, $needle)
+    public static function cutStringBackwards($haystack, $needle)
     {
         $needle_length = mb_strlen($needle);
 
@@ -243,7 +243,7 @@ class Functions
      * @param int    $times
      * @return $needle
      */
-    public static function str_replace_count($haystack, $replace, $needle, $times)
+    public static function strReplaceCount($haystack, $replace, $needle, $times)
     {
         $subject_original = $needle;
         $length = mb_strlen($haystack);
@@ -302,7 +302,7 @@ class Functions
      * @param $array1
      * @param $array2
      */
-    public static function array_compare($array1, $array2)
+    public static function arrayCompare($array1, $array2)
     {
         $diff = false;
 
@@ -363,7 +363,7 @@ class Functions
      * @param  array $valueArray
      * @return array Combined Array
      */
-    public static function array_unequal_combine($keyArray, $valueArray)
+    public static function arrayUnequalCombine($keyArray, $valueArray)
     {
         $returnArray = array();
         $key = '';
@@ -397,7 +397,7 @@ class Functions
      * @param  type $to_value_of_key2
      * @return type array
      */
-    public static function map_array_keys_to_values($array, $map_value_of_key1, $to_value_of_key2)
+    public static function mapArrayKeysToValues($array, $map_value_of_key1, $to_value_of_key2)
     {
         $new_array = array();
         foreach ($array as $inner_array) {
@@ -413,7 +413,7 @@ class Functions
      * @param  array $array
      * @return array
      */
-    public static function array_flatten(array $array)
+    public static function arrayFlatten(array $array)
     {
         $flatened_array = array();
         foreach (new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array)) as $value) {
@@ -553,7 +553,7 @@ class Functions
      * @param $bytes bytes
      * @return string
      */
-    public static function getsize($bytes)
+    public static function getSize($bytes)
     {
         static $s = array('B', 'KB', 'MB', 'GB', 'TB'); //  'PB', 'EB', 'ZB', 'YB');
         $e = (int) (log($bytes) / (M_LN2 * 10));
@@ -664,7 +664,7 @@ class Functions
      * @param $html A String with HTML Comments.
      * @return string $html String without Comments.
      */
-    public function remove_tpl_comments($html )
+    public function removeCommentsFromTemplate($html )
     {
         return preg_replace('/<!--.*-->/U', '', $html);
     }
@@ -676,7 +676,7 @@ class Functions
      * @param $destination
      * @param $overwrite boolean
      */
-    public function dir_copy($source, $destination, $overwrite = true )
+    public function dirCopy($source, $destination, $overwrite = true )
     {
         $folder_path = '';
 
@@ -734,7 +734,7 @@ class Functions
      * @param $directory directory string Name / Path of the Directory to delete.
      * @param $delete_dir_itself boolean Delete the directory itself. Default false.
      */
-    public static function delete_dir_content($directory, $delete_dir_itself = false)
+    public static function deleteDirContent($directory, $delete_dir_itself = false)
     {
         if (substr($directory, -1) == '/') {
             $directory = substr($directory, 0, -1);
@@ -813,7 +813,7 @@ class Functions
      * @param $encodeTags booloean TRUE will convert "<" to "&lt;", Default = false
      * @return returns the converted HTML-string
      */
-    public static function UTF8_to_HTML($utf8, $encodeTags = false)
+    public static function utf8ToHtml($utf8, $encodeTags = false)
     {
         // check if this function was aleady loaded
         if (isset(self::$alreadyLoaded[__FUNCTION__]) === false) {
