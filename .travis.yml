@@ -38,9 +38,12 @@ after_script:
   - php vendor/bin/coveralls -v
 
 notifications:
-  irc: "irc.freenode.org#koch"
   email: false
+  irc: 
+    channels: 
+      - "irc.freenode.org#koch"
+    use_notice: true  
 
 # reduce commit history of git checkout
 git:
-  depth: 30
+  depth: 1
