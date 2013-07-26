@@ -243,9 +243,9 @@ class Cronjobs
                 $dateArr['wday']-=7;
             }
 
-            $months28 = Array(2);
-            $months30 = Array(4, 6, 9, 11);
-            $months31 = Array(1, 3, 5, 7, 8, 10, 12);
+            $months28 = array(2);
+            $months30 = array(4, 6, 9, 11);
+            $months31 = array(1, 3, 5, 7, 8, 10, 12);
 
             if ((in_array($dateArr['mon'], $months28) && $dateArr['mday']==28) ||
                ( in_array($dateArr['mon'], $months30) && $dateArr['mday']==30) ||
@@ -394,7 +394,7 @@ class Cronjobs
 
     public function getLastScheduledRunTime($job)
     {
-        $extjob = Array();
+        $extjob = array();
 
         $this->parseElement($job[self::CONST_PC_MINUTE], $extjob[self::CONST_PC_MINUTE], 60);
         $this->parseElement($job[self::CONST_PC_HOUR], $extjob[self::CONST_PC_HOUR], 24);
