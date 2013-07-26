@@ -74,7 +74,7 @@ EOD;
  * in PHP 5.5.0alpha1! thats utterly impressive!
  * are you fucking serious? Come get some!
  */
-if (version_compare(PHP_VERSION, '5.5.0-dev', '<')) {
+
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
@@ -85,15 +85,6 @@ array(1) {
 }
 
 EOD;
-} else {
-$expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 101: \Koch\Debug\Debug::dump($var);
-<pre>array(1) {
-  ["Key"] => string(5) "Value"
-}
-</pre>
-EOD;
-}
 
        $this->expectOutputString($expectedOutput);
 
