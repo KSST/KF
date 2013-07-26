@@ -78,7 +78,7 @@ EOD;
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 101: \Koch\Debug\Debug::dump($var);
+Debugging DebugTest.php on line 92: \Koch\Debug\Debug::dump($var);
 array(1) {
   'Key' =>
   string(5) "Value"
@@ -100,7 +100,7 @@ EOD;
 // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
-Debugging DebugTest.php on line 118: \Koch\Debug\Debug::getOriginOfDebugCall(0);
+Debugging DebugTest.php on line 109: \Koch\Debug\Debug::getOriginOfDebugCall(0);
 
 EOD;
         $this->expectOutputString($expectedOutput);
