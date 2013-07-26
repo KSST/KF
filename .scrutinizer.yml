@@ -13,7 +13,7 @@ tools:
     php_code_sniffer:
         enabled: true
         config:
-            standard: /home/scrutinizer/package/vendor/metamodels/php-coding-standard/MetaModels
+            standard: %path%/vendor/metamodels/php-coding-standard/MetaModels
         filter:
             paths: [framework/*, tests/*]
 
