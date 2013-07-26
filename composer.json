@@ -70,7 +70,7 @@
         "doctrine/data-fixtures"          : "*@dev",
         "firephp/firephp-core"            : "dev-master",
         "satooshi/php-coveralls"          : "dev-master",
-        "foobugs-standards/php53to54"     : "*"
+        "MetaModels/php-coding-standard"  : "*"
     },
     "suggest": {
         "ext-apc"         : "*",

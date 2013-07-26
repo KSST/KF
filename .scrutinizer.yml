@@ -13,7 +13,7 @@ tools:
     php_code_sniffer:
         enabled: true
         config:
-            standard: ./vendor/foobugs-standards/php53to54
+            standard: ./vendor/MetaModels/php-coding-standard
         filter:
             paths: [framework/*, tests/*]
 
