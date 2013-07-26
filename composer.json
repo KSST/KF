@@ -69,7 +69,8 @@
         "phpunit/phpunit"                 : "3.7.*@dev",
         "doctrine/data-fixtures"          : "*@dev",
         "firephp/firephp-core"            : "dev-master",
-        "satooshi/php-coveralls"          : "dev-master"
+        "satooshi/php-coveralls"          : "dev-master",
+        "foobugs-standards"               : "php53to54"
     },
     "suggest": {
         "ext-apc"         : "*",
