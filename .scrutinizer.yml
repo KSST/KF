@@ -1,3 +1,8 @@
+#
+# scrutinizer-ci.com Configuration File
+#
+# https://scrutinizer-ci.com/docs/
+#
 before_commands:
     - composer install --dev
 
@@ -24,9 +29,9 @@ tools:
         filter:
             paths: [framework/*, tests/*]
 
-    php_code_coverage:
-        enabled: true
-        filter:
-            paths: [framework/*, tests/*]
+#    php_code_coverage:
+#        enabled: true
+#        filter:
+#            paths: [framework/*, tests/*]
 
     sensiolabs_security_checker: false
