@@ -1,4 +1,4 @@
- <?php
+<?php
 
 /**
  * Koch Framework
@@ -38,7 +38,7 @@ class PunBB implements StyleInterface
         // render page range around the current page
         for ($i = $current_page - 2, $stop = $current_page + 3; $i < $stop; ++$i) {
 
-            if ($i < 1 OR $i > $total_pages) {
+            if ($i < 1 or $i > $total_pages) {
                 continue;
             }
 
