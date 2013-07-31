@@ -838,9 +838,6 @@ class Functions
      */
     public static function __callStatic($method, $arguments)
     {
-        // Because value of $name is case sensitive, its forced to be lowercase.
-        $method = mb_strtolower($method);
-
         // Debug message for Method Overloading
         // Making it easier to see which static method is called magically
         //\Koch\Debug\Debug::firebug('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
