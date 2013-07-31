@@ -385,7 +385,7 @@ class Router implements RouterInterface, \ArrayAccess
              * [1]=> "show"  to  [action] => "show"
              * [2]=> "2"     to  [id]     => "2"
              */
-            $urlData = \Koch\Functions\Functions::array_unequal_combine($urlKeys, $urlParameters);
+            $urlData = \Koch\Functions\Functions::arrayUnequalCombine($urlKeys, $urlParameters);
 
             // determine the separator. it defaults to "&amp;" for internal usage in html documents
             $argSeparator = ($encode === true) ? '&amp;' : '&';

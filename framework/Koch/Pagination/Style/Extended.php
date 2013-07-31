@@ -38,7 +38,8 @@ class Extended implements StyleInterface
         $html .= '|';
         $html .= sprintf('%s, %s, %s, %s', _('Page'), $current_page, _('of'), $total_pages);
         $html .= '|';
-        $html .= sprintf('%s, %s, &ndash; %s %s %s', 
+        $html .= sprintf(
+            '%s, %s, &ndash; %s %s %s',
             _('Items'), 
             $current_first_item, 
             $current_last_item, 
