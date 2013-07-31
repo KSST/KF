@@ -29,9 +29,9 @@ tools:
         filter:
             paths: [framework/*, tests/*]
 
-#    php_code_coverage:
-#        enabled: true
-#        filter:
-#            paths: [framework/*, tests/*]
+    php_code_coverage:
+        enabled: true
+        filter:
+            paths: [framework/*, tests/*]
 
     sensiolabs_security_checker: false
