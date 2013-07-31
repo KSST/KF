@@ -140,7 +140,7 @@ class Smarty extends AbstractRenderer
         );
 
         // flatten that thing
-        $this->renderer->template_dir = \Koch\Functions\Functions::array_flatten($tpl_array);
+        $this->renderer->template_dir = \Koch\Functions\Functions::arrayFlatten($tpl_array);
 
         #\Koch\Debug\Debug::printR($this->renderer->template_dir);
 
