@@ -20,6 +20,11 @@ tools:
         filter:
             paths: [framework/*, tests/*]
 
+    php_cpd:
+        enabled: true
+        filter:
+            paths: [framework/*, tests/*]
+
     php_code_sniffer:
         enabled: true
         config:
@@ -34,11 +39,24 @@ tools:
                 - codesize
                 - unusedcode
                 - naming
+        filter:
+            paths: [framework/*, tests/*]
 
     php_analyzer:
         enabled: true
         filter:
             paths: [framework/*, tests/*]
+            config:
+                checkstyle: ~
+                verify_php_doc_comments: ~
+                doc_comment_fixes: ~
+
+        path_configs:
+            tests:
+                paths: [tests/*]
+                checkstyle: false
+                verify_php_doc_comments: false
+                doc_comment_fixes: false
 
     php_code_coverage:
         enabled: true
