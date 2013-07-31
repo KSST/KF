@@ -494,9 +494,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     {
         $this->form->addElement('Textarea');
 
-        ob_start();
-        print $this->form;
-        $html = ob_get_clean();
+        $html = $this->form->__toString();
 
         $this->assertFalse(empty($html));
         $this->assertContains('<form', $html);

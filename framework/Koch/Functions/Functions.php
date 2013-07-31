@@ -855,7 +855,7 @@ class Functions
 
         // Debug message for Method Overloading
         // Making it easier to see which static method is called magically
-        \Koch\Debug\Debug::firebug('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
+        //\Koch\Debug\Debug::firebug('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
         // construct the filename of the command
         $filename = __DIR__  . '/Pool/' . $method . '.php';
 
@@ -866,7 +866,9 @@ class Functions
 
             return call_user_func_array($method, $arguments);
         } else {
-            trigger_error('Koch Framework Function not found: "' . $filename . '".');
+            throw new \RuntimeException(
+                sprintf('Koch Framework Function not found: "%s".', $filename)
+            );
         }
     }
 
@@ -900,7 +902,9 @@ class Functions
 
             return call_user_func_array($method, $arguments);
         } else {
-            trigger_error('Koch Framework Function not found: "' . $filename . '".');
+            throw new \RuntimeException(
+                sprintf('Koch Framework Function not found: "%s".', $filename)
+            );
         }
     }
 
