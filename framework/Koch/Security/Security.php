@@ -136,7 +136,7 @@ final class Security
         $salt = '';
 
         // the primary choice for a cryptographic strong randomness function is
-        // openssl_random_pseudo_bytes. 
+        // openssl_random_pseudo_bytes.
         if (true === function_exists('openssl_random_pseudo_bytes')) {
             // generate a pseudo-random string of bytes
             $bytes = openssl_random_pseudo_bytes($length);
@@ -149,13 +149,13 @@ final class Security
 
             return $salt;
         }
-        
+
         /**
-         * If "ext/mcrypt" is available, then we gather entropy from the 
+         * If "ext/mcrypt" is available, then we gather entropy from the
          * operating system's PRNG. This is better than reading /dev/urandom
-         * directly since it avoids reading larger blocks of data than needed.  
+         * directly since it avoids reading larger blocks of data than needed.
          */
-        if(true === function_exists('mcrypt_create_iv')) {
+        if (true === function_exists('mcrypt_create_iv')) {
             // generate a pseudo-random string of bytes
             $bytes = mcrypt_create_iv($length, MCRYPT_DEV_URANDOM);
             // bytes to hexadecimal to decimal
@@ -166,17 +166,17 @@ final class Security
 
             return $salt;
         }
-        
+
         /**
          * use mt_srand
-         * 
-         * mt_srand() and mt_rand() are used to generate even better randoms, 
+         *
+         * mt_srand() and mt_rand() are used to generate even better randoms,
          * because of mersenne-twisting. still worse, but better then rand().
-         * 
-         * Security Note! This is considered a week seeding. As of PHP 5.3 
+         *
+         * Security Note! This is considered a week seeding. As of PHP 5.3
          * openssl_random_pseudo_bytes() from "ext/openssl" is primary choice.
          */
-        
+
         // seed the randoms generator with microseconds since last "whole" second
         mt_srand((double) microtime()*1000000);
         // set up the random chars to choose from
@@ -195,6 +195,6 @@ final class Security
         }
 
         return $salt;
-        
+
     }
 }

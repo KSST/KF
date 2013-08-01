@@ -62,7 +62,7 @@ class Debug
         echo '<b>Type</b>: ' . gettype($var) . "\n"; // uhhh.. gettype is slow like hell
 
         // handle more than one parameter
-        foreach($vars as $var) {
+        foreach ($vars as $var) {
 
             if (is_string($var) === true) {
                 echo '<b>Length</b>: ' . strlen($var) . "\n";

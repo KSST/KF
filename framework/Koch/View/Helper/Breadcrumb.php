@@ -44,7 +44,7 @@ class Breadcrumb
      * @param string $replace_array_position Position in the array to replace with name/trail. Start = 0.
      */
     public static function add($title, $link = '', $replace_array_position = null)
-    { 
+    {
         // set data to breadcrumb
         $breadcrumb = array(
             'title' => ucwords($title),

@@ -75,7 +75,7 @@ class Digg implements StyleInterface
                     $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>',
-                        str_replace('{page}', $i, $url), 
+                        str_replace('{page}', $i, $url),
                         $i
                     );
                 }
@@ -83,11 +83,11 @@ class Digg implements StyleInterface
 
             $html .= '&hellip;';
             $html .= sprintf('<a href="%s">%s</a>',
-                str_replace('{page}', $total_pages - 1, $url), 
+                str_replace('{page}', $total_pages - 1, $url),
                 $total_pages - 1
             );
-            $html .= sprintf('<a href="%s">%s</a>', 
-                str_replace('{page}', $total_pages, $url), 
+            $html .= sprintf('<a href="%s">%s</a>',
+                str_replace('{page}', $total_pages, $url),
                 $total_pages
             );
         } elseif ($current_page > $total_pages - 8) {

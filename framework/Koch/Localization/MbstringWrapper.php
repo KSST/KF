@@ -57,7 +57,7 @@
  */
 if (!function_exists('mb_convert_encoding')) {
 
-    function mb_convert_encoding($str, $to_encoding, $from_encoding = null)
+    public function mb_convert_encoding($str, $to_encoding, $from_encoding = null)
     {
         if (null === $from_encoding) {
             return utf8_convert_encoding($str, $to_encoding);
@@ -72,7 +72,7 @@ if (!function_exists('mb_convert_encoding')) {
  */
 if (!function_exists('mb_detect_encoding')) {
 
-    function mb_detect_encoding($str)
+    public function mb_detect_encoding($str)
     {
         return utf8_detect_encoding($str);
     }
@@ -83,7 +83,7 @@ if (!function_exists('mb_detect_encoding')) {
  */
 if (!function_exists('mb_stripos')) {
 
-    function mb_stripos($haystack, $needle, $offset = null)
+    public function mb_stripos($haystack, $needle, $offset = null)
     {
         if (null === $offset) {
             return stripos($haystack, $needle);
@@ -98,7 +98,7 @@ if (!function_exists('mb_stripos')) {
  */
 if (!function_exists('mb_stristr')) {
 
-    function mb_stristr($haystack, $needle)
+    public function mb_stristr($haystack, $needle)
     {
         return stristr($haystack, $needle);
     }
@@ -109,7 +109,7 @@ if (!function_exists('mb_stristr')) {
  */
 if (!function_exists('mb_strlen')) {
 
-    function mb_strlen($str, $encoding = '')
+    public function mb_strlen($str, $encoding = '')
     {
         return utf8_strlen($str);
     }
@@ -120,7 +120,7 @@ if (!function_exists('mb_strlen')) {
  */
 if (!function_exists('mb_strpos')) {
 
-    function mb_strpos($haystack, $needle, $offset = null)
+    public function mb_strpos($haystack, $needle, $offset = null)
     {
         if (null === $offset) {
             return utf8_strpos($haystack, $needle);
@@ -134,7 +134,7 @@ if (!function_exists('mb_strpos')) {
  */
 if (!function_exists('mb_strrchr')) {
 
-    function mb_strrchr($haystack, $needle)
+    public function mb_strrchr($haystack, $needle)
     {
         return utf8_strrchr($haystack, $needle);
     }
@@ -145,7 +145,7 @@ if (!function_exists('mb_strrchr')) {
  */
 if (!function_exists('mb_strrpos')) {
 
-    function mb_strrpos($haystack, $needle)
+    public function mb_strrpos($haystack, $needle)
     {
         return utf8_strrpos($haystack, $needle);
     }
@@ -156,7 +156,7 @@ if (!function_exists('mb_strrpos')) {
  */
 if (!function_exists('mb_strstr')) {
 
-    function mb_strstr($haystack, $needle)
+    public function mb_strstr($haystack, $needle)
     {
         return utf8_strstr($haystack, $needle);
     }
@@ -167,7 +167,7 @@ if (!function_exists('mb_strstr')) {
  */
 if (!function_exists('mb_strtolower')) {
 
-    function mb_strtolower($str)
+    public function mb_strtolower($str)
     {
         return utf8_strtolower($str);
     }
@@ -178,7 +178,7 @@ if (!function_exists('mb_strtolower')) {
  */
 if (!function_exists('mb_strtoupper')) {
 
-    function mb_strtoupper($str)
+    public function mb_strtoupper($str)
     {
         return utf8_strtoupper($str);
     }
@@ -189,7 +189,7 @@ if (!function_exists('mb_strtoupper')) {
  */
 if (!function_exists('mb_substr')) {
 
-    function mb_substr($str, $start, $length = null)
+    public function mb_substr($str, $start, $length = null)
     {
         if (null === $length) {
             return utf8_substr($str, $start);
@@ -204,7 +204,7 @@ if (!function_exists('mb_substr')) {
  */
 if (!function_exists('mb_substr_count')) {
 
-    function mb_substr_count($haystack, $needle, $offset = null)
+    public function mb_substr_count($haystack, $needle, $offset = null)
     {
         if (null === $offset) {
             return substr_count($haystack, $needle);

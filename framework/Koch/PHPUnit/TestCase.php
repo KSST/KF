@@ -256,7 +256,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
     /**
      * Recursively deletes a file or directory tree.
      *
-     * @param string $path The file or directory path.
+     * @param  string              $path The file or directory path.
      * @throws FileSystemException If the path could not be purged.
     */
     public function purgePath($path)
