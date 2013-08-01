@@ -15,7 +15,7 @@ if (false === function_exists('utf8_isASCII')) {
      *
      * @author Andreas Haerter <andreas.haerter@dev.mail-node.com>
      */
-    function utf8_isASCII($str)
+    public function utf8_isASCII($str)
     {
         return (preg_match('/(?:[^\x00-\x7F])/', $str) !== 1);
     }
@@ -31,7 +31,7 @@ if (false === function_exists('utf8_strip')) {
      *
      * @author Andreas Gohr <andi@splitbrain.org>
      */
-    function utf8_strip($str)
+    public function utf8_strip($str)
     {
         $ascii = '';
         $len = strlen($str);
@@ -54,7 +54,7 @@ if (false === function_exists('utf8_check')) {
      * @author <bmorel@ssi.fr>
      * @link   http://www.php.net/manual/en/function.utf8-encode.php
      */
-    function utf8_check($Str)
+    public function utf8_check($Str)
     {
         $len = strlen($Str);
         for ($i = 0; $i < $len; $i++) {
@@ -96,7 +96,7 @@ if (false === function_exists('utf8_decode_entities')) {
      * @param string
      * @return string
      */
-    function utf8_decode_entities($str)
+    public function utf8_decode_entities($str)
     {
         $str = preg_replace_callback('~&#x([0-9a-f]+);~i', 'utf8_hexchr_callback', $str);
         $str = preg_replace_callback('~&#([0-9]+);~', 'utf8_chr_callback', $str);
@@ -110,7 +110,7 @@ if (false === function_exists('utf8_decode_entities')) {
      * @param array
      * @return string
      */
-    function utf8_chr_callback($matches)
+    public function utf8_chr_callback($matches)
     {
         return utf8_chr($matches[1]);
     }
@@ -121,7 +121,7 @@ if (false === function_exists('utf8_decode_entities')) {
      * @param array
      * @return string
      */
-    function utf8_hexchr_callback($matches)
+    public function utf8_hexchr_callback($matches)
     {
         return utf8_chr(hexdec($matches[1]));
     }
@@ -141,7 +141,7 @@ if (false === function_exists('utf8_strlen')) {
      * @see    strlen()
      * @see    utf8_decode()
      */
-    function utf8_strlen($string)
+    public function utf8_strlen($string)
     {
         return strlen(utf8_decode($string));
     }
@@ -162,7 +162,7 @@ if (false === function_exists('utf8_substr')) {
      * @param int (optional) length in UTF-8 characters from offset
      * @return mixed string or false if failure
      */
-    function utf8_substr($str, $offset, $length = null)
+    public function utf8_substr($str, $offset, $length = null)
     {
         if (UTF8_MBSTRING) {
             if ($length === null) {
@@ -278,7 +278,7 @@ if (false === function_exists('utf8_substr_replace')) {
      * @author Andreas Gohr <andi@splitbrain.org>
      * @see    substr_replace()
      */
-    function utf8_substr_replace($string, $replacement, $start, $length=0)
+    public function utf8_substr_replace($string, $replacement, $start, $length=0)
     {
         $ret = '';
         if($start > 0)
@@ -300,7 +300,7 @@ if (false === function_exists('utf8_ltrim')) {
      * @see    ltrim()
      * @return string
      */
-    function utf8_ltrim($str, $charlist='')
+    public function utf8_ltrim($str, $charlist='')
     {
         if($charlist == '')
 
@@ -323,7 +323,7 @@ if (false === function_exists('utf8_rtrim')) {
      * @see    rtrim()
      * @return string
      */
-    function utf8_rtrim($str, $charlist='')
+    public function utf8_rtrim($str, $charlist='')
     {
         if($charlist == '')
 
@@ -346,7 +346,7 @@ if (false === function_exists('utf8_trim')) {
      * @see    trim()
      * @return string
      */
-    function utf8_trim($str, $charlist='')
+    public function utf8_trim($str, $charlist='')
     {
         if($charlist == '')
 
@@ -368,7 +368,7 @@ if (false === function_exists('utf8_strtolower')) {
      * @see    strtolower()
      * @see    utf8_strtoupper()
      */
-    function utf8_strtolower($string)
+    public function utf8_strtolower($string)
     {
         if (UTF8_MBSTRING) {
             return mb_strtolower($string, 'utf-8');
@@ -390,7 +390,7 @@ if (false === function_exists('utf8_strtoupper')) {
      * @see    strtoupper()
      * @see    utf8_strtoupper()
      */
-    function utf8_strtoupper($string)
+    public function utf8_strtoupper($string)
     {
         if (UTF8_MBSTRING) {
             return mb_strtoupper($string, 'utf-8');
@@ -411,7 +411,7 @@ if (false === function_exists('utf8_ucfirst')) {
      * @param string
      * @return string with first character as upper case (if applicable)
      */
-    function utf8_ucfirst($str)
+    public function utf8_ucfirst($str)
     {
         switch (utf8_strlen($str)) {
             case 0:
@@ -438,7 +438,7 @@ if (false === function_exists('utf8_ucwords')) {
      * @return string with first char of each word uppercase
      * @see http://www.php.net/ucwords
      */
-    function utf8_ucwords($str)
+    public function utf8_ucwords($str)
     {
         // Note: [\x0c\x09\x0b\x0a\x0d\x20] matches;
         // form feeds, horizontal tabs, vertical tabs, linefeeds and carriage returns
@@ -458,7 +458,7 @@ if (false === function_exists('utf8_ucwords')) {
      * @see utf8_ucwords
      * @see utf8_strtoupper
      */
-    function utf8_ucwords_callback($matches)
+    public function utf8_ucwords_callback($matches)
     {
         $leadingws = $matches[2];
         $ucfirst = utf8_strtoupper($matches[3]);
@@ -479,7 +479,7 @@ if (false === function_exists('utf8_deaccent')) {
      *
      * @author Andreas Gohr <andi@splitbrain.org>
      */
-    function utf8_deaccent($string, $case=0)
+    public function utf8_deaccent($string, $case=0)
     {
         if ($case <= 0) {
 
@@ -502,7 +502,7 @@ if (false === function_exists('utf8_romanize')) {
      *
      * @author Andreas Gohr <andi@splitbrain.org>
      */
-    function utf8_romanize($string)
+    public function utf8_romanize($string)
     {
         if (utf8_isASCII($string)) {
             return $string; // nothing to do
@@ -526,7 +526,7 @@ if (false === function_exists('utf8_stripspecials')) {
      * @param string $repl       Replace special with this string
      * @param string $additional Additional chars to strip (used in regexp char class)
      */
-    function utf8_stripspecials($string, $repl='', $additional='')
+    public function utf8_stripspecials($string, $repl='', $additional='')
     {
         static $specials = null;
 
@@ -552,7 +552,7 @@ if (false === function_exists('utf8_strpos')) {
      * @param  int
      * @return integer
      */
-    function utf8_strpos($haystack, $needle, $offset=0)
+    public function utf8_strpos($haystack, $needle, $offset=0)
     {
         $comp = 0;
         $length = null;
@@ -584,7 +584,7 @@ if (false === function_exists('utf8_tohtml')) {
      * @author <vpribish at shopping dot com>
      * @link   http://www.php.net/manual/en/function.utf8-decode.php
      */
-    function utf8_tohtml($str)
+    public function utf8_tohtml($str)
     {
         $ret = '';
         foreach (utf8_to_unicode($str) as $cp) {
@@ -621,7 +621,7 @@ if (false === function_exists('utf8_unhtml')) {
      * @param  boolean $entities Flag controlling decoding of named entities.
      * @return UTF-8   encoded string with numeric (and named) entities replaced.
      */
-    function utf8_unhtml($str, $entities=null)
+    public function utf8_unhtml($str, $entities=null)
     {
         static $decoder = null;
         if (null === $decoder) {
@@ -638,7 +638,7 @@ if (false === function_exists('utf8_unhtml')) {
 
 if (false === function_exists('utf8_decode_numeric')) {
 
-    function utf8_decode_numeric($ent)
+    public function utf8_decode_numeric($ent)
     {
         switch ($ent[2]) {
             case 'X':
@@ -664,7 +664,7 @@ if (false === function_exists('utf8_detect_encoding')) {
      * @param string
      * @return string
      */
-    function utf8_detect_encoding($str)
+    public function utf8_detect_encoding($str)
     {
             if (UTF8_MBSTRING) {
                     return mb_detect_encoding($str, array('ASCII', 'ISO-2022-JP', 'UTF-8', 'EUC-JP', 'ISO-8859-1'));
@@ -701,7 +701,7 @@ if (false === function_exists('utf8_convert_encoding')) {
      * @param string
      * @return string
      */
-    function utf8_convert_encoding($str, $to, $from=null)
+    public function utf8_convert_encoding($str, $to, $from=null)
     {
         if (!$str) {
             return '';
@@ -798,7 +798,7 @@ if (false === function_exists('utf8_to_unicode')) {
      * @link   http://hsivonen.iki.fi/php-utf8/
      * @link   http://sourceforge.net/projects/phputf8/
      */
-    function utf8_to_unicode($str,$strict=false)
+    public function utf8_to_unicode($str,$strict=false)
     {
         $mState = 0;     // cached expected number of octets after the current octet
                          // until the beginning of the next UTF8 character sequence
@@ -977,7 +977,7 @@ if (false === function_exists('unicode_to_utf8')) {
      * @link   http://hsivonen.iki.fi/php-utf8/
      * @link   http://sourceforge.net/projects/phputf8/
      */
-    function unicode_to_utf8($arr,$strict=false)
+    public function unicode_to_utf8($arr,$strict=false)
     {
         if (!is_array($arr)) return '';
         ob_start();
@@ -1057,7 +1057,7 @@ if (false === function_exists('utf8_to_utf16be')) {
      *
      * Maybe really UCS-2 without mb_string due to utf8_to_unicode limits
      */
-    function utf8_to_utf16be(&$str, $bom = false)
+    public function utf8_to_utf16be(&$str, $bom = false)
     {
         $out = $bom ? "\xFE\xFF" : '';
         if(UTF8_MBSTRING)
@@ -1081,7 +1081,7 @@ if (false === function_exists('utf16be_to_utf8')) {
      *
      * Maybe really UCS-2 without mb_string due to utf8_to_unicode limits
      */
-    function utf16be_to_utf8(&$str)
+    public function utf16be_to_utf8(&$str)
     {
         $uni = unpack('n*', $str);
 
@@ -1107,7 +1107,7 @@ if (false === function_exists('utf8_bad_replace')) {
      * @param string to replace bad bytes with (defaults to '?') - use ASCII
      * @return string
      */
-    function utf8_bad_replace($str, $replace = '')
+    public function utf8_bad_replace($str, $replace = '')
     {
         $UTF8_BAD =
                 '([\x00-\x7F]' . // ASCII (including control chars)
@@ -1149,7 +1149,7 @@ if (false === function_exists('utf8_correctIdx')) {
      *
      * @author       chris smith <chris@jalakai.co.uk>
      */
-    function utf8_correctIdx(&$str, $i, $next=false)
+    public function utf8_correctIdx(&$str, $i, $next=false)
     {
 
         if($i <= 0)

@@ -40,10 +40,10 @@ class Extended implements StyleInterface
         $html .= '|';
         $html .= sprintf(
             '%s, %s, &ndash; %s %s %s',
-            _('Items'), 
-            $current_first_item, 
-            $current_last_item, 
-            _('of'), 
+            _('Items'),
+            $current_first_item,
+            $current_last_item,
+            _('of'),
             $total_items
         );
         $html .= '|';

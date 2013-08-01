@@ -12,7 +12,6 @@
 
 namespace Koch\Logger;
 
-
 /**
  * Class for mapping a LogLevel constant to it's name.
  */

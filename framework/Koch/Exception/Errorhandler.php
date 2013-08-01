@@ -63,7 +63,7 @@ class Errorhandler
      * @link http://www.php.net/manual/de/function.set-error-handler.php
      * @link http://www.php.net/manual/de/errorfunc.constants.php
      *
-     * @param int $errnum      contains the error as integer.
+     * @param int $errnum     contains the error as integer.
      * @param string  $errstr     contains error string info.
      * @param string  $errfile    contains the filename with occuring error.
      * @param string  $errline    contains the line of error.
@@ -381,7 +381,7 @@ class Errorhandler
     {
         // do not throw a notice on PHP 5.3 - the constant was added with PHP 5.4 htmlspecialchars()
         defined('ENT_SUBSTITUTE') || define('ENT_SUBSTITUTE', 8);
-        
+
         $result = array();
         $arg = '';
         $type = '';

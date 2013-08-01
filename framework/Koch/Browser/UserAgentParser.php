@@ -85,7 +85,7 @@ class UserAgentParser
 
         foreach ($list as $name => $elements) {
             // read browser
-            
+
             foreach ($elements['regexp'] as $regexp) {
                 if (preg_match($regexp, $userAgent['string'], $matches)) {
                     $userAgent['browser_name'] = $name;
