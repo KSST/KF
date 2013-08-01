@@ -21,6 +21,17 @@ class ApcTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "apc".');
         }
 
+        $enabled = ini_get('apc.enabled');
+        if (PHP_SAPI == 'cli') {
+            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
+        }
+
+        if ($enabled === false) {
+            $this->markTestSkipped(
+                "This test requires the PHP extension 'apc' to be enabled. You may enable it with 'apc.enabled=1' and 'apc.enable_cli=1'"
+            );
+        }
+
         $this->object = new Apc;
     }
 

@@ -57,6 +57,17 @@ class Apc extends AbstractCache implements CacheInterface
             );
         }
 
+        $enabled = ini_get('apc.enabled');
+        if (PHP_SAPI == 'cli') {
+            $enabled = $enabled && (bool) ini_get('apc.enable_cli');
+        }
+
+        if ($enabled === false) {
+            throw new \Koch\Exception\Exception(
+                "The PHP extension APC (Alternative PHP Cache) is not loaded. You may enable it with 'apc.enabled=1' and 'apc.enable_cli=1'!"
+            );
+        }
+
         parent::__construct($options);
     }
 
