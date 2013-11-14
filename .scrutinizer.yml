@@ -57,6 +57,8 @@ tools:
             paths: ['framework/*', 'tests/*']
     php_cpd: true
     php_hhvm:
+        filter:
+            paths: ['framework/*', 'tests/*']
         config:
             bad_php_include_file: true
             php_include_file_not_found: true
