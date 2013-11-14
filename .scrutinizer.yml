@@ -10,21 +10,6 @@ before_commands:
     - 'sudo composer self-update'
     - 'composer install --dev --prefer-source'
 tools:
-
-    php_cs_fixer:
-        enabled: true
-        config:
-            level: all
-        filter:
-            paths: [framework/*, tests/*]
-
-    php_code_sniffer:
-        filter:
-            paths: ['framework/*', 'tests/*']
-        config:
-            standard: PSR2
-            sniffs: { generic: { white_space: { disallow_tab_indent_sniff: true } } }
-
     php_mess_detector:
         filter:
             paths: ['framework/*', 'tests/*']
@@ -32,8 +17,12 @@ tools:
             code_size_rules: { too_many_methods: true }
             unused_code_rules: { unused_formal_parameter: true }
             naming_rules: { short_variable: true, long_variable: true, short_method: true, boolean_method_name: true }
-
-	php_analyzer:
+    php_cs_fixer:
+        filter:
+            paths: ['framework/*', 'tests/*']
+        config:
+            level: all
+    php_analyzer:
         filter:
             paths: ['framework/*', 'tests/*']
         config:
@@ -56,16 +45,17 @@ tools:
             doc_comment_fixes: { enabled: true }
             reflection_fixes: { enabled: true }
             use_statement_fixes: { enabled: true, remove_unused: true, preserve_multiple: true, order_alphabetically: false }
-    
-
+    php_code_sniffer:
+        filter:
+            paths: ['framework/*', 'tests/*']
+        config:
+            standard: PSR2
+            sniffs: { generic: { white_space: { disallow_tab_indent_sniff: true } } }
     php_code_coverage:
         test_command: 'phpunit -c tests/phpunit.xml.dist'
         filter:
             paths: ['framework/*', 'tests/*']
-    sensiolabs_security_checker: false
-	
-    php_cpd: true    
-	
+    php_cpd: true
     php_hhvm:
         config:
             bad_php_include_file: true
