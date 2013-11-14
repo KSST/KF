@@ -3,14 +3,12 @@
 #
 # https://scrutinizer-ci.com/docs/
 #
-before_commands:
-    - sudo composer self-update
-    - composer install --dev --prefer-source
-
 filter:
     excluded_paths:
         - 'vendor/*'
-
+before_commands:
+    - 'sudo composer self-update'
+    - 'composer install --dev --prefer-source'
 tools:
 
     php_cs_fixer:
@@ -20,48 +18,62 @@ tools:
         filter:
             paths: [framework/*, tests/*]
 
-    php_cpd:
-        enabled: true
-        #filter:
-        #    paths: [framework/*, tests/*]
-
     php_code_sniffer:
-        enabled: true
+        filter:
+            paths: ['framework/*', 'tests/*']
         config:
             standard: PSR2
-        filter:
-            paths: [framework/*, tests/*]
+            sniffs: { generic: { white_space: { disallow_tab_indent_sniff: true } } }
 
     php_mess_detector:
-        enabled: true
-        #config:
-        #    rulesets:
-        #        - codesize
-        #        - unusedcode
-        #        - naming
         filter:
-            paths: [framework/*, tests/*]
+            paths: ['framework/*', 'tests/*']
+        config:
+            code_size_rules: { too_many_methods: true }
+            unused_code_rules: { unused_formal_parameter: true }
+            naming_rules: { short_variable: true, long_variable: true, short_method: true, boolean_method_name: true }
 
-    php_analyzer:
-        enabled: true
+	php_analyzer:
         filter:
-            paths: [framework/*, tests/*]
-        #config:
-        #    checkstyle: ~
-        #    verify_php_doc_comments: ~
-        #    doc_comment_fixes: ~
-#
-        #path_configs:
-        #    tests:
-        #        paths: [tests/*]
-        #        checkstyle: false
-        #        verify_php_doc_comments: false
-        #        doc_comment_fixes: false
+            paths: ['framework/*', 'tests/*']
+        config:
+            parameter_reference_check: { enabled: true }
+            checkstyle: { enabled: true, no_trailing_whitespace: true, naming: { enabled: true, local_variable: '^[a-z][a-zA-Z0-9]*$', abstract_class_name: ^Abstract|Factory$, utility_class_name: 'Utils?$', constant_name: '^[A-Z][A-Z0-9]*(?:_[A-Z0-9]+)*$', property_name: '^[a-z][a-zA-Z0-9]*$', method_name: '^(?:[a-z]|__)[a-zA-Z0-9]*$', parameter_name: '^[a-z][a-zA-Z0-9]*$', interface_name: '^[A-Z][a-zA-Z0-9]*Interface$', type_name: '^[A-Z][a-zA-Z0-9]*$', exception_name: '^[A-Z][a-zA-Z0-9]*Exception$', isser_method_name: '^(?:is|has|should|may|supports)' } }
+            unreachable_code: { enabled: true }
+            check_access_control: { enabled: true }
+            typo_checks: { enabled: true }
+            check_variables: { enabled: true }
+            suspicious_code: { enabled: true, overriding_parameter: true, overriding_closure_use: true, parameter_closure_use_conflict: true, parameter_multiple_times: true, non_existent_class_in_instanceof_check: true, non_existent_class_in_catch_clause: true, assignment_of_null_return: true, non_commented_switch_fallthrough: true, non_commented_empty_catch_block: true, overriding_private_members: true, use_statement_alias_conflict: true, precedence_in_condition_assignment: true }
+            dead_assignments: { enabled: true }
+            verify_php_doc_comments: { enabled: true, parameters: true, return: true, suggest_more_specific_types: true, ask_for_return_if_not_inferrable: true, ask_for_param_type_annotation: true }
+            loops_must_use_braces: { enabled: true }
+            check_usage_context: { enabled: true, method_call_on_non_object: { enabled: true, ignore_null_pointer: true }, foreach: { value_as_reference: true, traversable: true }, missing_argument: true, argument_type_checks: lenient }
+            simplify_boolean_return: { enabled: true }
+            phpunit_checks: { enabled: false }
+            reflection_checks: { enabled: true }
+            precedence_checks: { enabled: true, assignment_in_condition: true, comparison_of_bit_result: true }
+            basic_semantic_checks: { enabled: true }
+            doc_comment_fixes: { enabled: true }
+            reflection_fixes: { enabled: true }
+            use_statement_fixes: { enabled: true, remove_unused: true, preserve_multiple: true, order_alphabetically: false }
+    
 
     php_code_coverage:
-        enabled: true
-        test_command: phpunit -c tests/phpunit.xml.dist
+        test_command: 'phpunit -c tests/phpunit.xml.dist'
         filter:
-            paths: [framework/*, tests/*]
-
+            paths: ['framework/*', 'tests/*']
     sensiolabs_security_checker: false
+	
+    php_cpd: true    
+	
+    php_hhvm:
+        config:
+            bad_php_include_file: true
+            php_include_file_not_found: true
+            unknown_class: true
+            unknown_base_class: true
+            unknown_function: true
+            use_evaluation: true
+            use_undeclared_global_variable: true
+            unknown_object_method: true
+            unknown_trait: true
