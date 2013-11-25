@@ -139,6 +139,10 @@ class Apc extends AbstractCache implements CacheInterface
      */
     public function clear($cache_type = 'user')
     {
+        if(extension_loaded('apcu') === true) {
+            return apc_clear_cache();
+        }
+
         if ($cache_type === 'all') {
             apc_clear_cache();
             apc_clear_cache('user');
