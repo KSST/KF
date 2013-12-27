@@ -15,6 +15,10 @@ php:
   - 5.5
   - hhvm
 
+matrix:
+  allow_failures:
+   - php: hhvm
+
 services:
   - memcached
   - mongodb
