@@ -9,6 +9,9 @@ filter:
 before_commands:
     - 'sudo composer self-update'
     - 'composer install --dev --prefer-source'
+changetracking:
+    bug_patterns: ["\bfix(?:es|ed)?\b", "\bclose(?:s|ed)?\b",]
+    feature_patterns: ["\badd(?:s|ed)?\b", "\bimplement(?:s|ed)?\b"]
 tools:
     php_mess_detector:
         filter:
@@ -57,6 +60,7 @@ tools:
             paths: ['framework/*', 'tests/*']
     php_cpd: true
     php_hhvm:
+        enabled: false
         filter:
             paths: ['framework/*', 'tests/*']
         config:
