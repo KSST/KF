@@ -11,6 +11,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->notName('.php_cs')
     ->notName('travis-setup.php')
     ->notName('php-cs-fixer.report.txt')
+    ->notName('AllTests.php')
     ->notName('composer.*')
     ->notName('*.phar')
     ->notName('*.ico')
@@ -26,9 +27,6 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->exclude('vendor')
     ->exclude('libraries')
     ->exclude('nbproject') // netbeans project files
-    ->in(__DIR__)
-;
+    ->in(__DIR__);
 
-return Symfony\CS\Config\Config::create()
-    ->finder($finder)
-;
+return Symfony\CS\Config\Config::create()->finder($finder);
