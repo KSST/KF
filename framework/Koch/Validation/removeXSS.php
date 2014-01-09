@@ -44,7 +44,7 @@ namespace Koch\Validation;
  * @author      Travis Puderbaugh <kallahar@quickwired.com>
  * @author      Jigal van Hemert <jigal@xs4all.nl>
  */
-final class RemoveXSS
+final class removeXSS
 {
     /**
      * Removes potential XSS code from an input string.

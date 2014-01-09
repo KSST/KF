@@ -291,7 +291,7 @@ class ResponseEncode
      * if (self::gzip_accepted()) { echo "Page will be gziped"; }
      *
      * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if
-     * Accept-Encoding Header is found. False otherwise.
+     *               Accept-Encoding Header is found. False otherwise.
      */
     public static function gzipAccepted()
     {

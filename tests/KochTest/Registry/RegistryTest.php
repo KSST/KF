@@ -46,7 +46,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->object->has('B'));
 
         // set closure (as a resolver) to registry
-        $closure = function() {
+        $closure = function () {
             return new \stdClass;
         };
         $this->object->set('C', $closure);
@@ -98,7 +98,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('KochTest\Registry\B', $resultB);
 
         // set closure (as a resolver) to registry
-        $closure = function() {
+        $closure = function () {
             return new \stdClass;
         };
         $this->object->set('C', $closure);

@@ -21,7 +21,7 @@ function Smarty_function_jqconfirm($params, $smarty)
 
 echo <<<EOD
 <script type="text/javascript">
-    $(function(){
+    $(function () {
         // jQuery UI Dialog
         $('#dialog').dialog({
             autoOpen: false,
@@ -29,19 +29,19 @@ echo <<<EOD
             modal: true,
             resizable: false,
             buttons: {
-                "Submit Form": function() {
+                "Submit Form": function () {
                     document.deleteForm.submit();
                 },
-                "Cancel": function() {
+                "Cancel": function () {
                     $(this).dialog("close");
                 }
             }
         });
 
         // ok, lets trigger an submit action on the form named #deleteForm
-        $('form#deleteForm').submit(function(){
+        $('form#deleteForm').submit(function () {
               // fetch every checked! checkbox
-              $('input[type=checkbox]:checked').each(function(i, selected){
+              $('input[type=checkbox]:checked').each(function (i, selected) {
                   // define vars for td texts
                   var id, td1text, td2text;
                   // determine id of selected (which is the value of the checked checkbox element)

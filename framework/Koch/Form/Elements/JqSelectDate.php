@@ -55,7 +55,7 @@ class JqSelectDate extends FormElement implements FormElementInterface
      * @var string
      */
     private $sprintf_datepicker_js = '<script type="text/javascript">
-                                         $(document).ready(function(){
+                                         $(document).ready(function () {
                                             $("#%s").datepicker({
                                             %s
                                          }); });</script>';

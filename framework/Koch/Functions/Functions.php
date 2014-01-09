@@ -119,7 +119,7 @@ class Functions
      * Transforms a string from underscored_lower_case to Underscored_Upper_Camel_Case.
      *
      * @param string $string String in underscored_lower_case format.
-     * @return $string String in Upper_Camel_Case.
+     *                       @return $string String in Upper_Camel_Case.
      */
     public static function toUnderscoredUpperCamelCase($string)
     {
@@ -253,7 +253,7 @@ class Functions
      * @param string $replace
      * @param string $needle
      * @param int    $times
-     * @return $needle
+     *                         @return $needle
      */
     public static function strReplaceCount($haystack, $replace, $needle, $times)
     {
@@ -282,7 +282,7 @@ class Functions
      *
      * @param string $needle   Needle to find
      * @param array  $haystack Haystack to look through
-     * @result array Returns the elements that the $string was found in
+     *                         @result array Returns the elements that the $string was found in
      *
      * array_values_recursive
      */
@@ -628,7 +628,7 @@ class Functions
      * @param $chmod
      * @param $recursive
      */
-    public function chmod($path = '', $chmod = '755', $recursive = false )
+    public function chmod($path = '', $chmod = '755', $recursive = false)
     {
         if (is_dir($path) === false) {
             $file_mode = '0' . $chmod;
@@ -676,7 +676,7 @@ class Functions
      * @param $html A String with HTML Comments.
      * @return string $html String without Comments.
      */
-    public function removeCommentsFromTemplate($html )
+    public function removeCommentsFromTemplate($html)
     {
         return preg_replace('/<!--.*-->/U', '', $html);
     }
@@ -688,7 +688,7 @@ class Functions
      * @param $destination
      * @param $overwrite boolean
      */
-    public function dirCopy($source, $destination, $overwrite = true )
+    public function dirCopy($source, $destination, $overwrite = true)
     {
         $folder_path = '';
 

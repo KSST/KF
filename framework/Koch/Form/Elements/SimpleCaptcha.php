@@ -25,7 +25,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\Captcha;
 use Koch\Form\FormElementInterface;
 
 /**

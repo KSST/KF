@@ -47,7 +47,7 @@ final class Security
      * @param string $hash_algorithm The hashing algorithm to use.
      *
      * @return boolean true if the incomming hashed password matches the hashed+salted in db,
-     *                               false otherwise
+     *                 false otherwise
      */
     public static function checkSaltedHash($passwordhash, $databasehash, $salt, $hash_algorithm)
     {

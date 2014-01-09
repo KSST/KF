@@ -62,7 +62,7 @@ class Html5Validation extends AbstractFormDecorator
 
         // activate html5 syntax validation support on the form
         $html .= '<script>
-                      $(document).ready(function(){
+                      $(document).ready(function () {
                           $(\'#' . $ident_form . '\').html5form();
                       });
                       </script>';

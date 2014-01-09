@@ -21,7 +21,7 @@ $str = <<<EOD
 <script type="text/javascript">
 var $buoop = {vs:{i:7,f:3,o:10.01,s:2,n:9}}
 $buoop.ol = window.onload;
-window.onload=function(){
+window.onload=function () {
  if ($buoop.ol) $buoop.ol();
  var e = document.createElement("script");
  e.setAttribute("type", "text/javascript");

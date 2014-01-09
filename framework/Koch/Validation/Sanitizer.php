@@ -212,7 +212,7 @@ class Sanitizer
      *
      * @param  array  $matches
      * @return string
-     * @see     sanitizeURL
+     *                        @see     sanitizeURL
      */
     protected function _sanitizeURLCallback($matches)
     {
@@ -237,7 +237,7 @@ class Sanitizer
      *
      * @param  array  $matches
      * @return string
-     * @see     sanitizeURL
+     *                        @see     sanitizeURL
      */
     protected function _sanitizeSrcCallback($matches)
     {
@@ -301,7 +301,7 @@ class Sanitizer
      *
      * @param  array  $matches
      * @return string
-     * @see     removeDOMEvents
+     *                        @see     removeDOMEvents
      */
     protected function _removeDOMEventsCallback($matches)
     {
@@ -330,7 +330,7 @@ class Sanitizer
      *
      * @param  array  $matches
      * @return string
-     * @see     removeStyle
+     *                        @see     removeStyle
      */
     protected function removeStyleCallback($matches)
     {

@@ -49,7 +49,7 @@ function Smarty_block_tabpanel($params, $content, $smarty, &$repeat)
 
     $js = <<< EOF
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $(".tabs").accessibleTabs({
             fx: "fadeIn",
             tabbody: '.tab-page',

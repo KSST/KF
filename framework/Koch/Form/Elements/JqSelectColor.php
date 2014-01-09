@@ -65,10 +65,10 @@ class JqSelectColor extends FormElement implements FormElementInterface
          *          before you assign a js function to it via $('#datepicker')
          */
         $datepickerJs   = "<script type=\"text/javascript\">
-                                          $(document).ready(function() {
+                                          $(document).ready(function () {
                                             $('#colorpicker').farbtastic('#color');
                                             $('#colorpicker').hide();
-                                            $('img#color').click(function(){
+                                            $('img#color').click(function () {
                                                 $('#colorpicker').toggle();
                                             });
                                           });

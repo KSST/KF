@@ -1,5 +1,5 @@
 <?php
-namespace KochTest\Pagination;
+namespace KochTest\Pagination\Adapter;
 
 use \Koch\Pagination\Adapter\DoctrineCollection;
 

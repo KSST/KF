@@ -96,8 +96,8 @@ class JqSelectImage extends Select implements FormElementInterface
             // Watch out!
             // the div images/preview must be present in the dom, before you assign js function to it via $('#image')
             $javascript = '<script type="text/javascript">
-                           $(document).ready(function() {
-                              $("#images_' . $this->getNameWithoutBrackets() . '").change(function() {
+                           $(document).ready(function () {
+                              $("#images_' . $this->getNameWithoutBrackets() . '").change(function () {
                                     var src = $("option:selected", this).val();
                                     $("#imagePreview_' . $this->getNameWithoutBrackets() . '").html(
                                         src ? "<img src=\'" + src + "\'>" : ""

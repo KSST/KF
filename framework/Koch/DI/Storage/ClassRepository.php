@@ -25,8 +25,6 @@
 
 namespace Koch\DI\Storage;
 
-use Koch\DI\Storage\ReflectionCache;
-
 class ClassRepository
 {
     private static $reflection = false;

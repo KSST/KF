@@ -176,7 +176,7 @@ class Renderer
      */
     public static function getPaginationCSSdynamically()
     {
-        $html = '<script>$(document).ready(function(){';
+        $html = '<script>$(document).ready(function () {';
         $html .= '$("<link/>", {
                        rel: "stylesheet",
                        type: "text/css",
@@ -346,9 +346,9 @@ class Renderer
     /**
      * Render the pagination for the datagrid
      *
-     * @param boolean $_ShowResultsPerPage If true, the drop-down for maximal results per page is shown.
-     * Otherwise the total number of items.
-     * @return string Returns the html-code for the pagination row
+     * @param  boolean $_ShowResultsPerPage If true, the drop-down for maximal results per page is shown.
+     *                                      Otherwise the total number of items.
+     * @return string  Returns the html-code for the pagination row
      */
     private static function renderTablePagination($_ShowResultsPerPage = true)
     {
