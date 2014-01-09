@@ -38,22 +38,23 @@ class ACL extends \PHPUnit_Framework_TestCase
 
     public function testAddResource()
     {
-        $this->acl->addResource("Haus");
-        $this->acl->addResource("Haus", "Wohnung1");
-        $this->acl->addResource("Haus", "Wohnung2");
+        $this->acl->addResource('Haus');
+        $this->acl->addResource('Haus', 'Wohnung1');
+        $this->acl->addResource('Haus', 'Wohnung2');
     }
 
     public function testRuleAllow()
     {
-        $this->acl->RuleAllow("Hausverwalter", "view", "Haus");
-        $this->acl->Ruleallow("Hausbewohner", "view", "course");
-        $this->acl->RuleAllow("teacher", "teach", "course");
+        $this->acl->RuleAllow('Hausverwalter', 'view', 'Haus');
+        $this->acl->Ruleallow('Mieter1', 'view', 'Wohnung1');
+        $this->acl->RuleAllow('Mieter2', 'view', 'Wohnung2');
 
     }
 
     public function testRuleDeny()
     {
-        $this->acl->RuleDeny("junior-student", "learn", "senior-course");
+        $this->acl->RuleDeny("Mieter1", "view", "Wohnung2");
+        $this->acl->RuleDeny("Mieter2", "view", "Wohnung1");
     }
 
     public function testIsAllowed()
