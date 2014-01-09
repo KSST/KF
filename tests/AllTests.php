@@ -1,10 +1,12 @@
 <?php
+namespace KochTest;
+
 require 'PHPUnit/Autoload.php';
 
 require __DIR__ . '/bootstrap.php';
 
 if (!defined('PHPUnit_MAIN_METHOD')) {
-    define('PHPUnit_MAIN_METHOD', 'AllTests::main');
+    define('PHPUnit_MAIN_METHOD', 'KochTest\AllTests::main');
 }
 
 class AllTests
