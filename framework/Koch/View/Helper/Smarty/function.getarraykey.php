@@ -17,7 +17,7 @@ function Smarty_function_getarraykey($params)
     return array_search_key($params['key'], $params['array']);
 }
 
-function array_search_key( $needle_key, $array )
+function array_search_key($needle_key, $array)
 {
     foreach ($array as $key => $value) {
         if ($key == $needle_key) {

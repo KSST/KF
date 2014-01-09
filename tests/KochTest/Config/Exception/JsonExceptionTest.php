@@ -1,6 +1,6 @@
 <?php
 
-namespace KochTest\Config;
+namespace KochTest\Config\Exception;
 
 use Koch\Config\Exception\JsonException;
 

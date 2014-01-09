@@ -161,7 +161,7 @@ class XDebug
             /**
              * Visibility Toggle + Toggle Text Change
              */
-            echo 'function toggleXDebugTable(a){document.getElementById(a).style.display=="none"
+            echo 'function toggleXDebugTable(a) {document.getElementById(a).style.display=="none"
                   ?(document.getElementById(a).style.display="table",
                     document.getElementById("toggle-icon-"+a).innerHTML="&#9660;")
                   :(document.getElementById(a).style.display="none",

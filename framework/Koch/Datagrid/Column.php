@@ -274,7 +274,7 @@ class Column extends Base
      * Default renderer: String
      *
      * @return string Returns html-code
-     * @param Koch\Datagrid\Datagrid_Cell
+     *                @param Koch\Datagrid\Datagrid_Cell
      */
     public function renderCell($oCell)
     {

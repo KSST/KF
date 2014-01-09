@@ -12,7 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\File;
 use Koch\Form\FormElementInterface;
 
 class UploadAjax extends File implements FormElementInterface
@@ -29,14 +28,14 @@ class UploadAjax extends File implements FormElementInterface
         // b) handler for the ajaxupload
         $javascript .= "
         <script type=\"text/javascript\">// <![CDATA[
-        $(function(){
+        $(function () {
                 var btnUpload=$(\"#upload\");
                 var status=$(\"#upload_status\");
                 new AjaxUpload(btnUpload, {
                     action: 'upload-file.php',
                     // name of the file input box
                     name: 'uploadfile',
-                    onSubmit: function(file, ext){
+                    onSubmit: function (file, ext) {
                         if (! (ext && /^(jpg|png|jpeg|gif)$/.test(ext))) {
                             // check for valid file extension
                             status.text('Only JPG, PNG or GIF files are allowed');
@@ -45,7 +44,7 @@ class UploadAjax extends File implements FormElementInterface
                         }
                         status.text('Uploading...');
                     },
-                    onComplete: function(file, response){
+                    onComplete: function (file, response) {
 
                         // on completion clear the status
                         status.text('');

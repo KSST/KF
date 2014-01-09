@@ -12,7 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\Input;
 use Koch\Form\FormElementInterface;
 
 class JqConfirmSubmitButton extends Input implements FormElementInterface
@@ -53,17 +52,17 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
                                     modal: true,
                                     resizable: false,
                                     buttons: {
-                                        \"Submit Form\": function() {
+                                        \"Submit Form\": function () {
                                             document.".$this->formid.".submit();
                                         },
-                                        \"Cancel\": function() {
+                                        \"Cancel\": function () {
                                             $(this).dialog(\"close\");
                                         }
                                     }
                                 });
 
 
-                              $('form#".$this->formid."').submit(function(){
+                              $('form#".$this->formid."').submit(function () {
                                 $('#dialog').dialog('open');
 
                                  return false;

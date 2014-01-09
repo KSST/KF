@@ -12,7 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\Select;
 use Koch\Form\FormElementInterface;
 
 class SelectYesNo extends Select implements FormElementInterface

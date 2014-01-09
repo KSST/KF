@@ -40,7 +40,7 @@ class YAML
      *
      * @param   string  The filename
      * @return array | boolean false
-     * @todo fix this return true/false thingy
+     *               @todo fix this return true/false thingy
      */
     public static function writeConfig($file, array $array)
     {

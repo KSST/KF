@@ -12,7 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\Input;
 use Koch\Form\FormElementInterface;
 
 class Number extends Input implements FormElementInterface

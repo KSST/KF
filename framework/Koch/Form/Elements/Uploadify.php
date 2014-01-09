@@ -12,7 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\File;
 use Koch\Form\FormElementInterface;
 
 class Uploadify extends File implements FormElementInterface
@@ -34,7 +33,7 @@ class Uploadify extends File implements FormElementInterface
 
         // attach the uploadify handler and apply some configuration
         $javascript .= "<script type=\"text/javascript\">// <![CDATA[
-                        $(document).ready(function() {
+                        $(document).ready(function () {
                             $('#uploadify').uploadify({
                             'uploader'  : '" . WWW_ROOT_THEMES_CORE . "/javascript/uploadify/uploadify.swf',
                             'script'    : '" . WWW_ROOT_THEMES_CORE . "/javascript/uploadify/uploadify.php',

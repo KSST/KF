@@ -301,8 +301,8 @@ class HttpResponse implements HttpResponseInterface
      * @param string $name   Name of the cookie
      * @param string $path   Path where the cookie is used
      * @param string $domain Domain of the cookie
-     * @param bool Secure mode?
-     * @param bool Only allow HTTP usage? (PHP 5.2)
+     *                       @param bool Secure mode?
+     *                       @param bool Only allow HTTP usage? (PHP 5.2)
      */
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null)
     {

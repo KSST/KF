@@ -12,8 +12,6 @@
 
 namespace Koch\Form;
 
-use Koch\Form\DecoratorInterface;
-
 /**
  * Abstract base class for Form Decorators.
  *

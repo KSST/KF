@@ -49,7 +49,7 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
         // b) handler to attach nicedit to all textareas
         $javascript .= "<script type=\"text/javascript\">// <![CDATA[
                         var wysiwyg;
-                            bkLib.onDomLoaded(function() {
+                            bkLib.onDomLoaded(function () {
                               wysiwyg = new nicEditor({
                                     fullPanel : true,
                                     iconsPath : '" . WWW_ROOT_THEMES_CORE . "/javascript/nicedit/nicEditorIcons.gif',

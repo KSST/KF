@@ -61,7 +61,7 @@ function Smarty_function_googleanalytics($params, $smarty)
             _gaq.push([\'_setAccount\', \'' . $google_id . '\']);
             _gaq.push([\'_trackPageview\']);
             <!-- ga object call by inserting it into the page -->
-            (function() {
+            (function () {
               var ga = document.createElement(\'script\');
                 ga.type = \'text/javascript\';
                 ga.async = true;
@@ -78,12 +78,12 @@ function Smarty_function_googleanalytics($params, $smarty)
         $return = '
               <script type="text/javascript">
               // <![CDATA[
-              $(document).ready(function(){$.ajax({
+              $(document).ready(function () {$.ajax({
                       type: \'GET\',
                       url: \'http://www.google-analytics.com/ga.js\',
                       dataType: \'script\',
                       cache: true,
-                      success: function() {
+                      success: function () {
                           var pageTracker = _gat._getTracker(\'' . $google_id . '\');
                           pageTracker._trackPageview();
                         }

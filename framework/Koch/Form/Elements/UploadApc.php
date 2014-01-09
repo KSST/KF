@@ -12,8 +12,6 @@
 
 namespace Koch\Form\Elements;
 
-use Koch\Form\Elements\File;
-
 class UploadApc extends File
 {
     /**
@@ -41,7 +39,7 @@ class UploadApc extends File
          */
         $javascript = "<script type=\"text/javascript\"> //<![CDATA[
 
-                            $(document).ready(function() {
+                            $(document).ready(function () {
                                 $(\"#progressbar\").progressbar({ value: 0 });
                             });
 
@@ -55,7 +53,7 @@ class UploadApc extends File
                                     // No AJAX Support
                                 }
 
-                                req.onreadystatechange = function() {
+                                req.onreadystatechange = function () {
                                     if ((req.readyState == 4) && (req.status == 200)) {
                                         // evaluate the incomming json array
                                         var status = eval('(' + req.responseText + ')');

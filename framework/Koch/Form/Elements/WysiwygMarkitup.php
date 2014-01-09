@@ -59,7 +59,7 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
 
         // d) plug it to an specific textarea by ID
         $javascript .= '<script type="text/javascript">// <![CDATA[
-                           jQuery(document).ready(function($){
+                           jQuery(document).ready(function ($) {
                               $("textarea:visible").markItUp(mySettings);
                            });
                         // ]]></script>';

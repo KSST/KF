@@ -1,9 +1,9 @@
 <?php
-namespace KochTest\ACL;
+namespace KochTest\Permissions\ACL;
 
 use Koch\Permissions\ACL;
 
-class ACLTest extends \PHPUnit_Framework_TestCase
+class ACL extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var ACL

@@ -32,7 +32,7 @@ class GravatarCache
     public $size                 = null;
     public $rating               = null;
 
-    public function __construct( $gravatar_url, $gravatar_id, $size, $rating)
+    public function __construct($gravatar_url, $gravatar_id, $size, $rating)
     {
         $this->gravatar_url = $gravatar_url;
         $this->gravatar_id  = $gravatar_id;
