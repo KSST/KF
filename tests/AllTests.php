@@ -1,6 +1,4 @@
 <?php
-namespace KochTest;
-
 require 'PHPUnit/Autoload.php';
 
 require __DIR__ . '/bootstrap.php';
