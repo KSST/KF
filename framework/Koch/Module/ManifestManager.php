@@ -317,16 +317,16 @@ class ManifestManager
         $lang = array();
 
         // we are looking at the languages folder for the given module path
-        $module_lang_dir = $modulepath . DIRECTORY_SEPARATOR . 'languages';
+        $moduleLangDir = $modulepath . DIRECTORY_SEPARATOR . 'languages';
 
         // return early, if languages directory does not exist
-        if (false === is_dir($module_lang_dir)) {
+        if (false === is_dir($moduleLangDir)) {
             return 'No language dir.';
         }
 
         // lets recurse this directory
         $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($module_lang_dir, \FilesystemIterator::UNIX_PATHS),
+            new \RecursiveDirectoryIterator($moduleLangDir, \FilesystemIterator::UNIX_PATHS),
             \RecursiveIteratorIterator::LEAVES_ONLY
         );
 
@@ -411,7 +411,7 @@ class ManifestManager
         $string = '[';
         $string .= $permissions[(int) $perm_oct[0]] . '|';
         $string .= $permissions[(int) $perm_oct[1]] . '|';
-        $srring .= $permissions[(int) $perm_oct[2]] . ']';
+        $string .= $permissions[(int) $perm_oct[2]] . ']';
 
         return $string;
     }
