@@ -62,7 +62,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Validators\Email::processValidationLogic
      * @covers Koch\Form\Validator::processValidationLogic
      */
-    public function testMethod_processValidationLogic($email, $expectedValidationState)
+    public function testMethodprocessValidationLogic($email, $expectedValidationState)
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -75,7 +75,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Validators\Email::getErrorMessage
      * @covers Koch\Form\Validator::getErrorMessage
      */
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
@@ -84,7 +84,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Validators\Email::getValidationHint
      * @covers Koch\Form\Validator::getValidationHint
      */
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

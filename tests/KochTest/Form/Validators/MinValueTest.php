@@ -33,7 +33,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_getMinvalue()
+    public function testMethodgetMinvalue()
     {
         // set property
         $this->validator->minvalue = 1980;
@@ -49,7 +49,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
      * expectedException        InvalidArgumentException
      * expectedExceptionMessage Parameter Minvalue must be numeric (int|float) and not string.
      */
-    public function testMethod_setMinvalue()
+    public function testMethodsetMinvalue()
     {
         $this->setExpectedException('InvalidArgumentException');
         $this->validator->setMinvalue('1980');
@@ -59,7 +59,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(1980, $this->validator->getMinvalue());
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -85,7 +85,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->validate($value));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->validator->setMinvalue(19);
 
@@ -93,7 +93,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
                            $this->validator->getErrorMessage());;
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->validator->setMinvalue(19);
 

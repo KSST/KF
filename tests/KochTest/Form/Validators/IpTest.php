@@ -30,7 +30,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -50,12 +50,12 @@ class IpTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->validate('clansuite.com'));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

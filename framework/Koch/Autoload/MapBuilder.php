@@ -97,9 +97,9 @@ class MapBuilder
                 $namespace = '';
 
                 // extract the namespace
-                while (($t = $tokens[++$i]) and (is_array($t) === true)) {
-                    if (in_array($t[0], array(T_STRING, T_NS_SEPARATOR)) === true) {
-                        $namespace .= $t[1];
+                while (($tok = $tokens[++$i]) and (is_array($tok) === true)) {
+                    if (in_array($tok[0], array(T_STRING, T_NS_SEPARATOR)) === true) {
+                        $namespace .= $tok[1];
                     }
                 }
 
@@ -108,10 +108,10 @@ class MapBuilder
 
             if (($token[0] === T_CLASS) or ($token[0] === T_INTERFACE)) {
                 // extract the classname
-                while (($t = $tokens[++$i]) and (is_array($t) === true)) {
-                    if (T_STRING === $t[0]) {
-                        $classname .= $t[1];
-                    } elseif ($classname !== '' and T_WHITESPACE == $t[0]) {
+                while (($tok = $tokens[++$i]) and (is_array($tok) === true)) {
+                    if (T_STRING === $tok[0]) {
+                        $classname .= $tok[1];
+                    } elseif ($classname !== '' and T_WHITESPACE == $tok[0]) {
                         break;
                     }
                 }

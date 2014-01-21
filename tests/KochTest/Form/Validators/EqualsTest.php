@@ -29,7 +29,7 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_getEqualsTo()
+    public function testMethodgetEqualsTo()
     {
         $this->validator->equalsTo = 1980;
 
@@ -40,7 +40,7 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame('1980', $this->validator->getEqualsTo());
     }
 
-    public function testMethod_setEqualsTo()
+    public function testMethodsetEqualsTo()
     {
          // setter accepts numeric
          $this->validator->setEqualsTo(19);
@@ -51,7 +51,7 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
          $this->assertEquals(19, $this->validator->getEqualsTo());
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         // equals
         $this->validator->setEqualsTo('1980');
@@ -62,12 +62,12 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->validate('19801980'));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

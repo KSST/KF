@@ -35,7 +35,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_setRange()
+    public function testMethodsetRange()
     {
         $minimum_length = '1';
         $maximum_length = '1980';
@@ -58,7 +58,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         $minimum_length = '1';
         $maximum_length = '1980';
@@ -76,7 +76,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->validate('Evolution'));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $minimum_length = '1';
         $maximum_length = '1980';
@@ -86,7 +86,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
                 $this->validator->getErrorMessage());
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $minimum_length = '1';
         $maximum_length = '1980';

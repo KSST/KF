@@ -121,7 +121,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage The target parameter is "abc", but has to be one of _blank, _self, _parent, _top.
      */
-    public function testMethod_setTargetThrowsException()
+    public function testMethodsetTargetThrowsException()
     {
         $this->form->setTarget('abc');
     }
@@ -130,7 +130,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Form::getTarget
      * @covers Koch\Form\Form::setTarget
      */
-    public function testMethod_setTarget()
+    public function testMethodsetTarget()
     {
         $this->form->setTarget('_self');
 
@@ -676,7 +676,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceof('\Koch\Form\Elements\Url', $formelement_object);
     }
 
-    public function testMethod_processForm()
+    public function testMethodprocessForm()
     {
         $this->form->addElement('Textarea')->setRules('maxvalue=120')->setValue(123);
 
@@ -688,7 +688,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertContains('<form', $html);
     }
 
-    public function testMethod_processForm_withIncommingData()
+    public function testMethodprocessForm_withIncommingData()
     {
         $this->form->addElement('Textarea')->setValue(123)->setRules('string');
 
