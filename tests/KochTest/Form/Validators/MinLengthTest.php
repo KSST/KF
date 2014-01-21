@@ -33,7 +33,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_getMinlength()
+    public function testMethodgetMinlength()
     {
         // set property
         $this->validator->minlength = 1980;
@@ -45,7 +45,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame('1980', $this->validator->getMinlength());
     }
 
-    public function testMethod_setMinlength()
+    public function testMethodsetMinlength()
     {
         // set property
         $this->validator->setMinlength('1980');
@@ -56,7 +56,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertNotSame('1980', $this->validator->getMinlength());
     }
 
-    public function testMethod_getStringLength_mbstring()
+    public function testMethodgetStringLength_mbstring()
     {
         if (!function_exists('mb_strlen')) {
             Koch\Localization\Utf8::initialize();
@@ -64,7 +64,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(36, $this->validator->getStringLength('äöü-öäü-äöü-german-umlauts-ûúéáóâôéê'));
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -88,7 +88,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->validate($value));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->validator->setMinlength('19');
 
@@ -96,7 +96,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
                            $this->validator->getErrorMessage());;
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->validator->setMinlength('19');
 

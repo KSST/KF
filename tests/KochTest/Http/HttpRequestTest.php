@@ -29,7 +29,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         unset($this->request);
     }
 
-    public function testMethod_contructor_unsetsGlobalVars()
+    public function testMethodcontructor_unsetsGlobalVars()
     {
         $this->assertFalse(isset($_REQUEST));
 
@@ -38,7 +38,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         //$this->assertFalse(isset($GLOBALS));
     }
 
-    public function testMethod_getRequestMethod()
+    public function testMethodgetRequestMethod()
     {
         $_SERVER['REQUEST_METHOD'] = 'someMethod';
         $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] = 'OverrideMethodName';
@@ -54,37 +54,37 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         unset($_SERVER['REQUEST_METHOD']);
     }
 
-    public function testMethod_setRequestMethod()
+    public function testMethodsetRequestMethod()
     {
         $this->request->setRequestMethod('BUTTHEAD');
         $this->assertEquals('BUTTHEAD', HttpRequest::getRequestMethod());
     }
 
-    public function testMethod_isGET()
+    public function testMethodisGET()
     {
         $this->request->setRequestMethod('GET');
         $this->assertTrue($this->request->isGet());
     }
 
-    public function testMethod_isPOST()
+    public function testMethodisPOST()
     {
         $this->request->setRequestMethod('POST');
         $this->assertTrue($this->request->isPost());
     }
 
-    public function testMethod_isPUT()
+    public function testMethodisPUT()
     {
         $this->request->setRequestMethod('PUT');
         $this->assertTrue($this->request->isPut());
     }
 
-    public function testMethod_isDELETE()
+    public function testMethodisDELETE()
     {
         $this->request->setRequestMethod('DELETE');
         $this->assertTrue($this->request->isDelete());
     }
 
-    public function testMethod_isAjax()
+    public function testMethodisAjax()
     {
         $isAjax = $this->request->isAjax();
         $this->assertFalse($isAjax);
@@ -101,7 +101,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         unset($_SERVER['HTTP_X_REQUESTED_WITH']);
     }
 
-    /*public function testMethod_getPost()
+    /*public function testMethodgetPost()
     {
         $_POST['POST-ABC'] = '123';
         $result = $this->request->getPost();
@@ -111,14 +111,14 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->request['POST-ABC'], '123');
     }
 
-    public function testMethod_getGet()
+    public function testMethodgetGet()
     {
         $_GET['GET-ABC'] = '123';
         $result = $this->request->getGET();
         $this->assertArrayHasKey('GETABC', $result);
     }*/
 
-    public function testMethod_getServerProtocol()
+    public function testMethodgetServerProtocol()
     {
         $this->assertEquals($this->request->getServerProtocol(), 'http://');
 
@@ -126,7 +126,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->request->getServerProtocol(), 'https://');
     }
 
-    public function testMethod_IsSecure()
+    public function testMethodIsSecure()
     {
         $_SERVER['HTTPS'] = 'NO';
         $this->assertFalse($this->request->isSecure());
@@ -135,7 +135,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->request->isSecure());
     }
 
-    public function testMethod_getBaseURL()
+    public function testMethodgetBaseURL()
     {
         $_SERVER['HTTPS'] = 'off';
         $_SERVER['SERVER_NAME'] = 'localhost';
@@ -153,7 +153,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->request->getBaseURL(), 'https://localhost');*/
     }
 
-    public function testMethod_getServerName()
+    public function testMethodgetServerName()
     {
         $name = 'ServerName';
         $_SERVER['SERVER_NAME'] = $name;

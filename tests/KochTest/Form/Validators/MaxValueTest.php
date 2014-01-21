@@ -30,7 +30,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_getMaxvalue()
+    public function testMethodgetMaxvalue()
     {
         $this->validator->maxvalue = 1980;
 
@@ -45,7 +45,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \InvalidArgumentException
      * @expectedExceptionMessage Parameter Maxvalue must be numeric (int|float) and not string.
      */
-    public function testMethod_setMaxvalue()
+    public function testMethodsetMaxvalue()
     {
          $this->setExpectedException('InvalidArgumentException');
          $this->validator->setMaxvalue('19');
@@ -60,7 +60,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
      * @expectedException           InvalidArgumentException
      * @expectedExceptionMessage    Parameter Maxvalue must be numeric (int|float) and not string.
      */
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -87,7 +87,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->validate(21));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->validator->setMaxvalue(1980);
 
@@ -95,7 +95,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
                            $this->validator->getErrorMessage());;
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->validator->setmaxvalue(1980);
 

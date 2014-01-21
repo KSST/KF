@@ -54,9 +54,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_autoload()
+     * testMethodautoload()
      */
-    public function testMethod_autoload()
+    public function testMethodautoload()
     {
         // workflow of autoloading
 
@@ -79,7 +79,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // 5. autoloadTryPathsAndMap()
     }
 
-    public function testMethod__construct()
+    public function testMethodconstruct()
     {
         // unregister first (autoloader was registered during test setup)
         $r = spl_autoload_unregister(array('Koch\Autoload\Loader', 'autoload'));
@@ -94,9 +94,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_autoloadExclusions()
+     * testMethodautoloadExclusions()
      */
-    public function testMethod_autoloadExclusions()
+    public function testMethodautoloadExclusions()
     {
         // exclude "Smarty_Internal" classes
         $this->assertTrue(Loader::autoloadExclusions('Smarty_Internal_SomeClass'));
@@ -115,9 +115,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_autoloadInclusions()
+     * testMethodautoloadInclusions()
      */
-    public function testMethod_autoloadInclusions()
+    public function testMethodautoloadInclusions()
     {
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadInclusions('SomeUnknownClass'));
@@ -128,9 +128,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_autoloadByApcOrFileMap
+     * testMethodautoloadByApcOrFileMap
      */
-    public function testMethod_autoloadByApcOrFileMap()
+    public function testMethodautoloadByApcOrFileMap()
     {
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
@@ -140,9 +140,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_autoloadIncludePath()
+     * testMethodautoloadIncludePath()
      */
-    public function testMethod_autoloadIncludePath()
+    public function testMethodautoloadIncludePath()
     {
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadIncludePath('\Namespace\Library\SomeUnknownClass'));
@@ -155,7 +155,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(Loader::autoloadIncludePath('NamespacedClass'));
    }
 
-   public function testMethod_writeAutoloadingMapFile()
+   public function testMethodwriteAutoloadingMapFile()
    {
         if (is_file($this->classMapFile)) {
             unlink($this->classMapFile);
@@ -170,7 +170,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
 
-    public function testMethod_readAutoloadingMapFile()
+    public function testMethodreadAutoloadingMapFile()
     {
         if (is_file($this->classMapFile)) {
             unlink($this->classMapFile);
@@ -184,7 +184,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
 
-    public function testMethod_writeAutoloadingMapApc()
+    public function testMethodwriteAutoloadingMapApc()
     {
         if (!extension_loaded('apc')) {
             $this->markTestSkipped('This test requires the PHP extension "apc".');
@@ -195,7 +195,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($array, Loader::readAutoloadingMapApc());
     }
 
-    public function testMethod_readAutoloadingMapApc()
+    public function testMethodreadAutoloadingMapApc()
     {
         if (!extension_loaded('apc')) {
             $this->markTestSkipped(' This test requires the PHP extension "apc".');
@@ -204,7 +204,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
     }
 
-    public function testMethod_addMapping()
+    public function testMethodaddMapping()
     {
         $class = 'addToMappingClass';
         $file = realpath(__DIR__ . '/fixtures/notloaded/addToMapping.php');
@@ -227,7 +227,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists($class, true));
     }
 
-    public function testMethod_includeFileAndMap()
+    public function testMethodincludeFileAndMap()
     {
         $file = realpath(__DIR__ . '/fixtures/includeFileAndMap.php');
         $class = 'includeFileAndMapClass';
@@ -245,7 +245,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(class_exists($class, false));
     }
 
-    public function testMethod_includeFile()
+    public function testMethodincludeFile()
     {
         // a) include file
         $this->assertTrue(Loader::includeFile(__DIR__ . '/fixtures/ClassForRequireFile1.php'));

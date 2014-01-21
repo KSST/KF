@@ -30,7 +30,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -60,7 +60,7 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($this->validator->validate('yy_non-existing-locale'));
     }
 
-    public function testMethod_isLocaleWithInvalidLocale()
+    public function testMethodisLocaleWithInvalidLocale()
     {
         // locale does not exist
         $this->assertFalse($this->validator->isLocale('yy_non-existing-locale'));
@@ -72,12 +72,12 @@ class LocaleTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->isLocale('de_de'));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

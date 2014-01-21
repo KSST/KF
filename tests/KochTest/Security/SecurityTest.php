@@ -12,9 +12,9 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_generate_salt()
+     * testMethodgenerate_salt()
      */
-    public function testMethod_generateSalt()
+    public function testMethodgenerateSalt()
     {
         // generate a salt with length
         $salt = Security::generateSalt(12);
@@ -26,7 +26,7 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(strlen($salt), 12);
     }
 
-    public function testMethod_generateHash()
+    public function testMethodgenerateHash()
     {
         $hash_md5 = \Koch\Security\Security::generateHash('md5', 'admin');
 
@@ -37,14 +37,14 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('d033e22ae348aeb5660fc2140aec35850c4da997', $hash_sha1);
     }
 
-    public function testMethod_buildSaltedHash()
+    public function testMethodbuildSaltedHash()
     {
         $salted_hash = \Koch\Security\Security::buildSaltedHash('admin', 'md5');
 
         $this->assertTrue(is_array($salted_hash), true);
      }
 
-    public function testMethod_checkSaltedHash()
+    public function testMethodcheckSaltedHash()
     {
         // md5('admin'); from form input
         $passwordhash = '21232f297a57a5a743894a0e4a801fc3';

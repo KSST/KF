@@ -23,9 +23,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_fetchRSS()
+     * testMethodfetchRSS()
      */
-    public function testMethod_fetchRSS()
+    public function testMethodfetchRSS()
     {
         $simplepie_feed_object = Feed::fetchRSS($this->feedUrl);
 
@@ -33,9 +33,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_fetchRawRSS_withoutCaching()
+     * testMethodfetchRawRSS_withoutCaching()
      */
-    public function testMethod_fetchRawRSS_withoutCaching()
+    public function testMethodfetchRawRSS_withoutCaching()
     {
         // read feed
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, false);
@@ -47,9 +47,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethod_fetchRawRSS_withCaching()
+     * testMethodfetchRawRSS_withCaching()
      */
-    public function testMethod_fetchRawRSS_withCaching()
+    public function testMethodfetchRawRSS_withCaching()
     {
         // fetch and cache
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);

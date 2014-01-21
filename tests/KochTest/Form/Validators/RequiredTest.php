@@ -30,19 +30,19 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
         unset($this->validator);
     }
 
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         $this->assertFalse($this->validator->validate(''));
 
         $this->assertTrue($this->validator->validate('Evolution'));
     }
 
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
 
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

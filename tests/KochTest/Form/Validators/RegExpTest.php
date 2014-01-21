@@ -34,7 +34,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Validators\RegExp::setRegexp
      * @covers Koch\Form\Validators\RegExp::getRegexp
      */
-    public function testMethod_setRegexp()
+    public function testMethodsetRegexp()
     {
         $regexp = '/php/i';
         $this->validator->setRegexp($regexp);
@@ -47,7 +47,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\Validators\RegExp::validate
      * @covers Koch\Form\Validators\RegExp::processValidationLogic
      */
-    public function testMethod_processValidationLogic()
+    public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
@@ -63,7 +63,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Form\Validators\RegExp::getErrorMessage
      */
-    public function testMethod_getErrorMessage()
+    public function testMethodgetErrorMessage()
     {
         $this->assertTrue(is_string($this->validator->getErrorMessage()));
     }
@@ -71,7 +71,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Form\Validators\RegExp::getValidationHint
      */
-    public function testMethod_getValidationHint()
+    public function testMethodgetValidationHint()
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }

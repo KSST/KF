@@ -42,7 +42,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         unset($this->router);
     }
 
-    public function testMethod_addRoute()
+    public function testMethodaddRoute()
     {
         $this->router->addRoute('/news/(:id)', array('controller', 'id'));
 
@@ -54,7 +54,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->reset();
     }
 
-    public function testMethod_delRoute()
+    public function testMethoddelRoute()
     {
         // static controller with dynamic id
         $this->router->addRoute('/news/(:id)', array(':controller', 'id'));
@@ -69,7 +69,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(0 == count($this->router->getRoutes()));
     }
 
-    public function testMethod_reset()
+    public function testMethodreset()
     {
         $this->assertTrue(0 == count($this->router->getRoutes()));
 
@@ -82,7 +82,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(0 == count($this->router->getRoutes()));
     }
 
-    public function testMethod_reset_resets_TargetRoute_too()
+    public function testMethodreset_resets_TargetRoute_too()
     {
         TargetRoute::setAction('testclass');
         $this->assertEquals('testclass', TargetRoute::getAction());
@@ -93,7 +93,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('list', TargetRoute::getAction());
     }
 
-    public function testMethod_addRoutes()
+    public function testMethodaddRoutes()
     {
         $routes = array(
             '/news'                   => array(':controller'),
@@ -109,7 +109,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( count($routes) === count($this->router->getRoutes()));
     }
 
-    public function testMethod_addRoutes_via_ArrayAccess()
+    public function testMethodaddRoutes_via_ArrayAccess()
     {
         $r = $this->router;
 
@@ -123,7 +123,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue( 6 === count($this->router->getRoutes()));
     }
 
-    public function testMethod_removeRoutesBySegmentCount()
+    public function testMethodremoveRoutesBySegmentCount()
     {
         // adding 3 routes, each with different segment number
         $this->router->addRoute('/news', array(':controller'));
@@ -141,7 +141,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(1 == count($this->router->getRoutes()));
     }
 
-    public function testMethod_prepareRequestURI()
+    public function testMethodprepareRequestURI()
     {
         // prepends slash
         $this->assertEquals('/news', $this->router->prepareRequestURI('news'));
@@ -153,7 +153,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/news/edit', $this->router->prepareRequestURI('news/edit'));
     }
 
-    public function testMethod_placeholdersToRegexp()
+    public function testMethodplaceholdersToRegexp()
     {
         $this->assertEquals('/route/with/([0-9]+)', $this->router->placeholdersToRegexp('/route/with/(:id)'));
         $this->assertEquals('/route/with/([0-9]+)', $this->router->placeholdersToRegexp('/route/with/(:num)'));
@@ -166,7 +166,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/route/with/(0[1-9]|1[012])', $this->router->placeholdersToRegexp('/route/with/(:day)'));
     }
 
-    public function testMethod_processSegmentsRegExp()
+    public function testMethodprocessSegmentsRegExp()
     {
         $segments = array('news', 'edit', '([0-9]+)');
         $requirements = array('controller', 'action', ':num',);
@@ -188,7 +188,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testMethod_match_RestRoutes()
+    public function testMethodmatch_RestRoutes()
     {
         $applicationNamespace = '\KochTest\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
@@ -401,7 +401,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->router->reset(true);
     }
 
-     public function testMethod_match_StaticRoute()
+     public function testMethodmatch_StaticRoute()
     {
         $applicationNamespace = '\KochTest\Router\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
@@ -455,7 +455,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $r->reset(true);
     }
 
-    /*public function testMethod_match_CustomActionNames()
+    /*public function testMethodmatch_CustomActionNames()
     {
         /*
          * Feature Idea:
@@ -472,7 +472,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     //}
 
     /* Feature not implemented yet.
-    public function testMethod_match_SEO_Dynamic_Routes()
+    public function testMethodmatch_SEO_Dynamic_Routes()
     {
         HttpRequest::setRequestMethod('GET');
         $this->router->prepareRequestURI('http://example.com/category/movies/Se7en.htm');
@@ -492,7 +492,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     /**
      * @expectedException OutOfBoundsException
      */
-    public function testMethod_match_throwsExceptionIfNoRoutesFound()
+    public function testMethodmatch_throwsExceptionIfNoRoutesFound()
     {
         $this->router->reset();
 
@@ -501,7 +501,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->router->match());
     }
 
-    public function testMethod_generateURL()
+    public function testMethodgenerateURL()
     {
         /*
         $url = $this->router->generateURL($url_pattern);
@@ -511,7 +511,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
 
     }
 
-    public function testMethod_buildURL_ModRewrite_OFF()
+    public function testMethodbuildURL_ModRewrite_OFF()
     {
         /**
          * Do not build an URL, if FQDN is passed and mod_rewrite is off.
@@ -581,7 +581,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=edit&amp;id=1', $url);
     }
 
-    public function testMethod_buildURL_ModRewrite_ON()
+    public function testMethodbuildURL_ModRewrite_ON()
     {
         // precondition
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
