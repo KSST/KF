@@ -54,10 +54,10 @@ class Errorhandler
     /**
      * Handle Error as ErrorException
      *
-     * @param  type            $errnum
-     * @param  type            $message
-     * @param  type            $filename
-     * @param  type            $lineno
+     * @param  integer $errnum     contains the error as integer.
+     * @param  string $message     contains the error string.
+     * @param  string $filename    contains the filename with occuring error.
+     * @param  integer $lineno     contains the line of error.
      * @throws \ErrorException
      */
     public function handleErrorAsErrorException($errnum, $message, $filename, $lineno)
@@ -76,7 +76,7 @@ class Errorhandler
      * @link http://www.php.net/manual/de/errorfunc.constants.php
      *
      * @param integer $errnum     contains the error as integer.
-     * @param string  $errstr     contains error string info.
+     * @param string  $errstr     contains the error string.
      * @param string  $errfile    contains the filename with occuring error.
      * @param string  $errline    contains the line of error.
      * @param string  $errcontext (optional) array with variables from error context.
