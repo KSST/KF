@@ -18,7 +18,7 @@ echo WARNING: Set environment variable PHPBIN to the location of your php.exe
 echo          executable. Hint: set PHPBIN=C:\PHP\php.exe
 echo ------------------------------------------------------------------------
 :: fallback to hardcoded path
-set PHPBIN=i:\wpnxm\bin\php\php.exe
+set PHPBIN=c:\server\bin\php\php.exe
 goto:eof
 
 pause
