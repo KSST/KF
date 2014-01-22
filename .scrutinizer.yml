@@ -43,7 +43,7 @@ tools:
             loops_must_use_braces: { enabled: true }
             check_usage_context: { enabled: true, method_call_on_non_object: { enabled: true, ignore_null_pointer: true }, foreach: { value_as_reference: true, traversable: true }, missing_argument: true, argument_type_checks: lenient }
             simplify_boolean_return: { enabled: true }
-            phpunit_checks: { enabled: false }
+            phpunit_checks: { enabled: true }
             reflection_checks: { enabled: true }
             precedence_checks: { enabled: true, assignment_in_condition: true, comparison_of_bit_result: true }
             basic_semantic_checks: { enabled: true }
