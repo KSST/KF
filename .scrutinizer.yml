@@ -50,6 +50,9 @@ tools:
             doc_comment_fixes: { enabled: true }
             reflection_fixes: { enabled: true }
             use_statement_fixes: { enabled: true, remove_unused: true, preserve_multiple: true, order_alphabetically: false }
+            doctrine_entity_manager_injection: { enabled: true }
+            useless_function_calls: { enabled: true }
+            check_calls: { enabled: true, too_many_arguments: true, missing_argument: true, argument_type_checks: lenient }
     php_code_sniffer:
         filter:
             paths: ['framework/*', 'tests/*']
