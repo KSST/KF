@@ -65,7 +65,7 @@ tools:
             paths: ['framework/*', 'tests/*']
     php_cpd: true
     php_hhvm:
-        enabled: false
+        enabled: true
         filter:
             paths: ['framework/*', 'tests/*']
         config:
