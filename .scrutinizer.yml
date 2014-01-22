@@ -68,13 +68,3 @@ tools:
         enabled: true
         filter:
             paths: ['framework/*', 'tests/*']
-        config:
-            bad_php_include_file: true
-            php_include_file_not_found: true
-            unknown_class: true
-            unknown_base_class: true
-            unknown_function: true
-            use_evaluation: true
-            use_undeclared_global_variable: true
-            unknown_object_method: true
-            unknown_trait: true
