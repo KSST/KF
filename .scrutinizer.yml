@@ -17,9 +17,11 @@ tools:
         filter:
             paths: ['framework/*', 'tests/*']
         config:
-            code_size_rules: { too_many_methods: true }
+            code_size_rules: { too_many_methods: false }
             unused_code_rules: { unused_formal_parameter: true }
-            naming_rules: { short_variable: true, long_variable: true, short_method: true, boolean_method_name: true }
+            naming_rules: { short_variable: false, long_variable: true, short_method: true, boolean_method_name: true }
+            controversial_rules: { superglobals: false }
+            design_rules: { exit_expression: true, eval_expression: true, goto_statement: true }
     php_cs_fixer:
         filter:
             paths: ['framework/*', 'tests/*']
