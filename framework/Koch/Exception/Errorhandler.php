@@ -54,10 +54,10 @@ class Errorhandler
     /**
      * Handle Error as ErrorException
      *
-     * @param  integer $errnum     contains the error as integer.
-     * @param  string $message     contains the error string.
-     * @param  string $filename    contains the filename with occuring error.
-     * @param  integer $lineno     contains the line of error.
+     * @param  integer         $errnum   contains the error as integer.
+     * @param  string          $message  contains the error string.
+     * @param  string          $filename contains the filename with occuring error.
+     * @param  integer         $lineno   contains the line of error.
      * @throws \ErrorException
      */
     public function handleErrorAsErrorException($errnum, $message, $filename, $lineno)
