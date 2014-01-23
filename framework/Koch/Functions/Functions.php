@@ -815,14 +815,7 @@ class Functions
      */
     public static function utf8ToHtml($utf8, $encodeTags = false)
     {
-        // check if this function was aleady loaded
-        if (isset(self::$alreadyLoaded[__FUNCTION__]) === false) {
-            // if not, load function
-            include __DIR__ . '/Pool/' . __FUNCTION__ . '.php';
-
-            // function loaded successfully
-            self::$alreadyLoaded[__FUNCTION__] = true;
-        }
+        include_once __DIR__ . '/Pool/UTF8_to_HTML.php';
 
         // calling the loaded function
         return UTF8_to_HTML($utf8, $encodeTags);
