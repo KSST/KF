@@ -30,7 +30,7 @@ before_script:
 
 before_install:
   - composer self-update
-  - composer install --dev --prefer-dist --no-interaction
+  - composer install --dev --prefer-dist --no-interaction --optimize-autoloader
   - git submodule update --init --recursive
 
 script:
@@ -45,10 +45,10 @@ after_script:
 
 notifications:
   email: false
-  irc: 
-    channels: 
+  irc:
+    channels:
       - "irc.freenode.org#koch"
-    use_notice: true  
+    use_notice: true
 
 # reduce commit history of git checkout
 git:
