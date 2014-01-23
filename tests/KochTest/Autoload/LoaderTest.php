@@ -122,9 +122,9 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadInclusions('SomeUnknownClass'));
 
-        // try to load "Clansuite_Staging" class
+        // try to load "Application_Staging" class
         // no definitions atm
-        #$this->assertTrue(Loader::autoloadInclusions('Clansuite_Staging'));
+        #$this->assertTrue(Loader::autoloadInclusions('Application_Staging'));
     }
 
     /**
@@ -147,8 +147,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadIncludePath('\Namespace\Library\SomeUnknownClass'));
 
-        // set the include path to our fixtures directory, where a namespaces class exists
-        $path = __DIR__ . '/fixtures/Clansuite';
+        // set the include path to our fixtures directory, where a namespaced class exists
+        $path = __DIR__ . '/fixtures/Application';
         set_include_path($path . PATH_SEPARATOR . get_include_path());
 
         // try to load existing namespaced class
@@ -201,7 +201,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped(' This test requires the PHP extension "apc".');
         }
 
-        $this->assertSame(apc_fetch('CLANSUITE_CLASSMAP'), Loader::readAutoloadingMapApc());
+        $this->assertSame(apc_fetch('KF_CLASSMAP'), Loader::readAutoloadingMapApc());
     }
 
     public function testMethodaddMapping()
