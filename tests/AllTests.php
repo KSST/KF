@@ -1,5 +1,5 @@
 <?php
-require 'PHPUnit/Autoload.php';
+//require 'PHPUnit/Autoload.php';
 
 require __DIR__ . '/bootstrap.php';
 
