@@ -119,7 +119,7 @@ namespace<br>";
      */
     public static function readAutoloadingMapApc()
     {
-        return apc_fetch('CLANSUITE_CLASSMAP');
+        return apc_fetch('KF_CLASSMAP');
     }
 
     /**
@@ -130,7 +130,7 @@ namespace<br>";
      */
     public static function writeAutoloadingMapApc($array)
     {
-        return apc_store('CLANSUITE_CLASSMAP', $array);
+        return apc_store('KF_CLASSMAP', $array);
     }
 
     /**
