@@ -59,24 +59,12 @@ class File extends Input implements FormElementInterface
         switch ($this->uploadType) {
             default:
             case 'ajaxupload':
-                if (false === class_exists('UploadAjax', false)) {
-                    include __DIR__ . '/UploadAjax.php';
-                }
-
                 return new \Koch\Form\Elements\UploadAjax();
                 break;
             case 'apc':
-                if (false === class_exists('UploadAPC', false)) {
-                    include __DIR__ . '/UploadAPC.php';
-                }
-
-                return new \Koch\Form\Elements\UploadAPC();
+                return new \Koch\Form\Elements\UploadApc();
                 break;
             case 'uploadify':
-                if (false === class_exists('Uploadify', false)) {
-                    include __DIR__ . '/Uploadify.php';
-                }
-
                 return new \Koch\Form\Elements\Uploadify();
                 break;
             case 'html':
@@ -85,7 +73,6 @@ class File extends Input implements FormElementInterface
                  * Currently not using the render method of the parent class
                  * return parent::render();
                  */
-
                 return '<input type="file" name="file[]" multiple="true">';
                 break;
         }
