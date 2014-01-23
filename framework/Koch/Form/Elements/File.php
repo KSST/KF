@@ -22,7 +22,7 @@ class File extends Input implements FormElementInterface
      * There are several different formelements available to upload files:
      *
      * 1) Ajaxupload    -> UploadAjax.php
-     * 2) APC           -> UploadAPC.php
+     * 2) APC           -> UploadApc.php
      * 3) Uploadify     -> Uploadify.php
      * 4) Default HTML  -> this class
      *
