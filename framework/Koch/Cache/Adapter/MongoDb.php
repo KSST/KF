@@ -57,7 +57,7 @@ class MongoDb extends AbstractCache implements CacheInterface
     {
 
         if (class_exists('Mongo') === false) {
-            throw new \Koch\Exception\Exception('The MongoDb was not found.');
+            throw new \Koch\Exception\Exception('MongoDb was not found.');
         }
 
         // omg. let's grab the passed in mock objects from the $options array
