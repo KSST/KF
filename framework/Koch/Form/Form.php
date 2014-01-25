@@ -307,7 +307,7 @@ class Form implements FormInterface
      * @param $bool boolean state to set for autocomplete.
      * @return Koch_Form
      */
-    public function setAutocomplete($bool)
+    public function setAutoComplete($bool)
     {
         $this->autocomplete = (bool) $bool;
 
