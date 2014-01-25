@@ -89,9 +89,9 @@ class Column extends Base
      *
      * @param array Koch\Datagrid\Datagrid_Cell
      */
-    public function setCells($_Cells)
+    public function setCells($cells)
     {
-        $this->cells = $_Cells;
+        $this->cells = $cells;
     }
 
     /**

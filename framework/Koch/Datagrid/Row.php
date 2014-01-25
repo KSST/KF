@@ -43,13 +43,6 @@ class Row extends Base
     private $Cells = array();
 
     /**
-     * The datagrid
-     *
-     * @var Koch\Datagrid\Datagrid $_Datagrid
-     */
-    private $Datagrid;
-
-    /**
      * The position of a column
      *
      * @var int
