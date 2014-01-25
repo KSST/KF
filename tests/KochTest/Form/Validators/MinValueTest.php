@@ -9,6 +9,7 @@ use Koch\Form\Validators\MinValue;
  */
 class MinValueTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var MinValue
      */
@@ -49,6 +50,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
      * expectedException        InvalidArgumentException
      * expectedExceptionMessage Parameter Minvalue must be numeric (int|float) and not string.
      */
+
     public function testMethodsetMinvalue()
     {
         $this->setExpectedException('InvalidArgumentException');
@@ -65,9 +67,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-
         $value = 10; // 20 chars
-
         // int
         $this->validator->setMinvalue(10);
         $this->assertTrue($this->validator->validate($value));
@@ -76,7 +76,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
         $this->validator->setMinvalue(9.99);
         $this->assertTrue($this->validator->validate($value));
 
-         // float, too big
+        // float, too big
         $this->validator->setMinvalue(10.01);
         $this->assertFalse($this->validator->validate($value));
 
@@ -89,15 +89,17 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setMinvalue(19);
 
-        $this->assertEquals('The value deceeds (is less than) the minimum value of 19.',
-                           $this->validator->getErrorMessage());;
+        $this->assertEquals('The value is less than the minimum value of 19.', $this->validator->getErrorMessage());
     }
 
     public function testMethodgetValidationHint()
     {
         $this->validator->setMinvalue(19);
 
-        $this->assertEquals('Please enter a value not deceeding (being less than) the minimum value of 19.',
-                           $this->validator->getValidationHint());;
+        $this->assertEquals(
+            'Please enter a value not being less than the minimum value of 19.',
+            $this->validator->getValidationHint()
+        );
     }
+
 }

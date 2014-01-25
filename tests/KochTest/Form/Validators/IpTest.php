@@ -6,6 +6,7 @@ use Koch\Form\Validators\Ip;
 
 class IpTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Ip
      */
@@ -59,4 +60,5 @@ class IpTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertTrue(is_string($this->validator->getValidationHint()));
     }
+
 }

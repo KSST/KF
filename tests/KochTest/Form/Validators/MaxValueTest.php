@@ -6,6 +6,7 @@ use Koch\Form\Validators\MaxValue;
 
 class MaxValueTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var MaxValue
      */
@@ -45,28 +46,29 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
      * @expectedException        \InvalidArgumentException
      * @expectedExceptionMessage Parameter Maxvalue must be numeric (int|float) and not string.
      */
+
     public function testMethodsetMaxvalue()
     {
-         $this->setExpectedException('InvalidArgumentException');
-         $this->validator->setMaxvalue('19');
-         $this->assertEquals(19, $this->validator->getMaxvalue());
+        $this->setExpectedException('InvalidArgumentException');
+        $this->validator->setMaxvalue('19');
+        $this->assertEquals(19, $this->validator->getMaxvalue());
 
-         // setter accepts numeric
-         $this->validator->setMaxvalue(19);
-         $this->assertEquals(19, $this->validator->getMaxvalue());
+        // setter accepts numeric
+        $this->validator->setMaxvalue(19);
+        $this->assertEquals(19, $this->validator->getMaxvalue());
     }
 
     /*
      * @expectedException           InvalidArgumentException
      * @expectedExceptionMessage    Parameter Maxvalue must be numeric (int|float) and not string.
      */
+
     public function testMethodprocessValidationLogic()
     {
         /**
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-
         $this->validator->setMaxvalue(19);
         $this->assertTrue($this->validator->validate(19));
 
@@ -91,15 +93,14 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setMaxvalue(1980);
 
-        $this->assertEquals('The value exceeds the maximum value of 1980.',
-                           $this->validator->getErrorMessage());;
+        $this->assertEquals('The value exceeds the maximum value of 1980.', $this->validator->getErrorMessage());
     }
 
     public function testMethodgetValidationHint()
     {
         $this->validator->setmaxvalue(1980);
 
-        $this->assertEquals('The value must be smaller than 1980.',
-                           $this->validator->getValidationHint());;
+        $this->assertEquals('The value must be smaller than 1980.', $this->validator->getValidationHint());
     }
+
 }
