@@ -74,7 +74,7 @@ class Acl extends \PHPUnit_Framework_TestCase
      */
     public function testIsAllowed()
     {
-        // the shorthand in the user object is $user->isAllowed($action, $resource);        
+        // the shorthand in the user object is $user->isAllowed($action, $resource);
         // the Role is incomming via the user object (user_id -> roles table)
         // action and resource are identified by the router and exist in the TargetRoute object
         $this->acl->isAllowed($role, $action, $resource);
