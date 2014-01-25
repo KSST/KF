@@ -57,6 +57,8 @@ tools:
         filter:
             paths: ['framework/*', 'tests/*']
         config:
+            tab_width: 4
+            encoding: utf8
             standard: PSR2
             sniffs: { generic: { white_space: { disallow_tab_indent_sniff: true } } }
     php_code_coverage:
@@ -65,7 +67,8 @@ tools:
             paths: ['framework/*', 'tests/*']
     php_cpd: true
     php_hhvm:
-        enabled: true
+        enabled: false
+        #command: hhvm -vRepo.Authoritative=false
         filter:
             paths: ['framework/*', 'tests/*']
         excluded_paths: ['vendor/*']
