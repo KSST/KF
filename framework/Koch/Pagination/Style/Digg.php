@@ -44,11 +44,10 @@ class Digg implements StyleInterface
 
         if ($previous_page) {
             $html .= sprintf(
-                '<a href="%s">&laquo;&nbsp;%s</a>',
-                str_replace('{page}', $previous_page, $url),
-                _('Previous')
+                '<a href="%s">&laquo;&nbsp;%s</a>', str_replace('{page}', $previous_page, $url), _('Previous')
             );
-        } else {
+        }
+        else {
             $html .= '&laquo;&nbsp;' . _('Previous');
         }
 
@@ -59,11 +58,9 @@ class Digg implements StyleInterface
             for ($i = 1; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
-                } else {
-                    $html .= sprintf('<a href="%s">%s</a>',
-                        str_replace('{page}', $i, $url),
-                        $i
-                    );
+                }
+                else {
+                    $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
             }
         } elseif ($current_page < 9) {
@@ -73,23 +70,18 @@ class Digg implements StyleInterface
             for ($i = 1; $i <= 10; $i++) {
                 if ($i == $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
-                } else {
-                    $html .= sprintf('<a href="%s">%s</a>',
-                        str_replace('{page}', $i, $url),
-                        $i
-                    );
+                }
+                else {
+                    $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
             }
 
             $html .= '&hellip;';
-            $html .= sprintf('<a href="%s">%s</a>',
-                str_replace('{page}', $total_pages - 1, $url),
-                $total_pages - 1
+            $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages - 1, $url), $total_pages - 1
             );
-            $html .= sprintf('<a href="%s">%s</a>',
-                str_replace('{page}', $total_pages, $url),
-                $total_pages
+            $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages, $url), $total_pages
             );
+            
         } elseif ($current_page > $total_pages - 8) {
 
             /* « Previous  1 2 … 17 18 19 20 21 22 23 24 25 26  Next » */
@@ -101,54 +93,39 @@ class Digg implements StyleInterface
             for ($i = $total_pages - 9; $i <= $total_pages; $i++) {
                 if ($i == $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
-                } else {
-                    $html .= sprintf('<a href="%s">%s</a>',
-                        str_replace('{page}', $i, $url),
-                        $i
-                    );
+                }
+                else {
+                    $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
             }
+            
         } else {
 
             /* « Previous  1 2 … 5 6 7 8 9 10 11 12 13 14 … 25 26  Next » */
 
-            $html .= sprintf('<a href="%s">1</a>',
-                str_replace('{page}', 1, $url)
-            );
-            $html .= sprintf('<a href="%s">2</a>',
-                str_replace('{page}', 2, $url)
-            );
+            $html .= sprintf('<a href="%s">1</a>', str_replace('{page}', 1, $url));
+            $html .= sprintf('<a href="%s">2</a>', str_replace('{page}', 2, $url));
             $html .= '&hellip;';
 
             // render page range around the current page
             for ($i = $current_page - 5; $i <= $current_page + 5; $i++) {
                 if ($i == $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
-                } else {
-                    $html .= sprintf('<a href="%s">%s</a>',
-                        str_replace('{page}', $i, $url),
-                        $i
-                    );
+                }
+                else {
+                    $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
             }
 
             $html .= '&hellip;';
-            $html .= sprintf('<a href="%s">%s</a>',
-                str_replace('{page}', $total_pages - 1, $url),
-                $total_pages - 1
-            );
-            $html .= sprintf('<a href="%s">%s</a>',
-                str_replace('{page}', $total_pages, $url),
-                $total_pages
-            );
+            $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages - 1, $url), $total_pages - 1);
+            $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages, $url), $total_pages);
         }
 
         if ($next_page) {
-            $html .= sprintf('<a href="%s">%s &nbsp;&raquo;</a>',
-                str_replace('{page}', $next_page, $url),
-                _('Next')
-            );
-        } else {
+            $html .= sprintf('<a href="%s">%s &nbsp;&raquo;</a>', str_replace('{page}', $next_page, $url), _('Next'));
+        }
+        else {
             $html .= _('Next') . '&nbsp;&raquo';
         }
 
