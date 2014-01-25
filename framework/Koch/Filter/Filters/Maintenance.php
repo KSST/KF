@@ -77,6 +77,6 @@ class Maintenance implements FilterInterface
         $response->setContent($html);
         $response->flush();
 
-        exit();
+        \Koch\Tools\Quit::quit();
     }
 }
