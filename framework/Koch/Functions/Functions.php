@@ -106,7 +106,7 @@ class Functions
     /**
      * Transforms a string from underscored_lower_case to Underscored_Upper_Camel_Case.
      *
-     * @param string $string String in underscored_lower_case format.
+     * @param  string  $string String in underscored_lower_case format.
      * @return $string String in Upper_Camel_Case.
      */
     public static function toUnderscoredUpperCamelCase($string)
@@ -237,10 +237,10 @@ class Functions
     }
 
     /**
-     * @param string $haystack
-     * @param string $replace
-     * @param string $needle
-     * @param int    $times
+     * @param  string  $haystack
+     * @param  string  $replace
+     * @param  string  $needle
+     * @param  int     $times
      * @return $needle
      */
     public static function strReplaceCount($haystack, $replace, $needle, $times)
@@ -705,7 +705,7 @@ class Functions
                         }
 
                         while ($parent_folder_path = array_pop($folder_path)) {
-                            if (false === is_dir($parent_folder_path) and 
+                            if (false === is_dir($parent_folder_path) and
                                 false === @mkdir($parent_folder_path, fileperms($parent_folder_path))) {
                                 throw new \Exception(
                                     _('Could not create the directory that should be copied (destination).' .
@@ -719,11 +719,11 @@ class Functions
                             throw new \Exception(_('Could not copy the directory. Probably a permission problem.'));
                         }
                         ini_set('error_reporting', $old);
-                        
+
                     } elseif (is_dir($source_path) === true) {
                         if (is_dir($target_path) === false) {
-                            if(@mkdir($target_path, fileperms($source_path)) == false) {
-                              // nope, not an empty if statement :)                               
+                            if (@mkdir($target_path, fileperms($source_path)) == false) {
+                              // nope, not an empty if statement :)
                             }
                         }
                         $this->dir_copy($source_path, $target_path, $overwrite);

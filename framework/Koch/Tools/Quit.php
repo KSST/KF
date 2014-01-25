@@ -13,13 +13,13 @@
 namespace Koch\Tools;
 
 /**
- * Quit 
- * 
+ * Quit
+ *
  * ExitExpressions are nice. They allow breaking the application control flow at any time.
  * Within regular code ExitExpressions are said to be untestable and therefore they should be avoided.
- * Actually, testing them depends on the testing tool :) 
+ * Actually, testing them depends on the testing tool :)
  * If it's stupid enough, then ExitExpressions are untestable.
- * 
+ *
  * The point of this class is to change nothing about the usage of ExitExpressions,
  * but to provide a central point of "dieing in vain", thereby reducing the number of PHP mess detections.
  */
@@ -27,16 +27,16 @@ class Quit
 {
     /**
      * Exits the application immediately.
-     * 
-     * @param int $exitCode ExitCode (defaults to 0 = success).
+     *
+     * @param int    $exitCode  ExitCode (defaults to 0 = success).
      * @param string $lastWords Exit Message.
      */
-    static function quit($exitCode = 0, $lastWords = '')
+    public static function quit($exitCode = 0, $lastWords = '')
     {
-        if($lastWords != '') {
+        if ($lastWords != '') {
             echo $lastWords;
         }
-        
+
         exit($exitCode);
     }
 }

@@ -55,7 +55,7 @@ class Json extends AbstractRenderer
     /**
      * jsonEncode
      *
-     * @param mixed|array $data The data to be json encoded.
+     * @param  mixed|array        $data The data to be json encoded.
      * @return $json_encoded_data
      */
     public function jsonEncode($data = null)
