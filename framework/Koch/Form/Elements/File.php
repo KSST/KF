@@ -86,6 +86,7 @@ class File extends Input implements FormElementInterface
                  * Currently not using the render method of the parent class
                  * return parent::render();
                  */
+
                 return '<input type="file" name="file[]" multiple="true">';
                 break;
         }

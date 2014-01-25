@@ -35,7 +35,7 @@ class Renderer
      *
      * @param string $style
      * @param array  $options
-     *                        @param object Pagination with Adapter
+     * @param object Pagination with Adapter
      */
     public function __construct($style = null, $options = null, $adapter)
     {

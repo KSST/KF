@@ -52,24 +52,22 @@ class YAML
      *
      * @param   string  The filename
      * @return array | boolean false
-     *               @todo fix this return true/false thingy
+     * @todo fix this return true/false thingy
      */
     public static function writeConfig($file, array $array)
     {
         $spyc_lib = VENDOR_PATH . '/spyc/Spyc.class.php';
 
-        /**
-         * transform PHP Array into YAML Format
-         */
+        // transform PHP Array into YAML Format
 
-        // take syck, as the faster one first
-        if ( extension_loaded('syck') ) {
+        // prefer syck - faster one first
+        if (extension_loaded('syck')) {
             // convert to YAML via SYCK
             $yaml = syck_dump($array);
         }
-        // else check, if we have spyc as library
+        // else use Spyc, if found
         elseif (is_file($spyc_lib) === true) {
-            // ok, load spyc
+            // found, now load spyc
             if (false === class_exists('Spyc', false)) {
                 include $spyc_lib;
             }
@@ -82,11 +80,7 @@ class YAML
             throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
         }
 
-        /**
-         * write array
-         */
-
-        // write YAML content to file
+        // write YAML to file
         return (bool) file_put_contents($file, $yaml);
     }
 
@@ -103,7 +97,6 @@ class YAML
             throw new \Koch\Exception\Exception('YAML File ' . $file . ' not existing or not readable.');
         }
 
-        // init
         $array = '';
 
         // read the yaml content of the file
@@ -135,4 +128,5 @@ class YAML
 
         return $array;
     }
+
 }

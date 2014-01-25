@@ -670,11 +670,11 @@ class Datagrid extends Base
             $oCol->setId($colSet['Alias']);
             $oCol->setName($colSet['Name']);
 
-            if ( false == isset($colSet['Sort']) ) {
+            if (false == isset($colSet['Sort'])) {
                 $oCol->disableFeature('Sorting');
             } else {
                 $oCol->setSortOrder($colSet['Sort']);
-                if ( isset($colSet['SortCol']) ) {
+                if (isset($colSet['SortCol'])) {
                     $oCol->setSortField($colSet['SortCol']);
                 } else {
                     $oCol->setSortField($colSet['ResultSet']);
@@ -759,7 +759,7 @@ class Datagrid extends Base
         }
 
         // Standard for ResultSets is an array
-        if ( false === is_array($_ColumnSet['ResultSet'])) {
+        if (false === is_array($_ColumnSet['ResultSet'])) {
             $aResultSet = array($_ColumnSet['ResultSet']);
         } else {
             $aResultSet = $_ColumnSet['ResultSet'];
@@ -775,7 +775,7 @@ class Datagrid extends Base
             $_TmpArrayHandler = $_Dataset;
 
             foreach ($_ArrayStructure as $_LevelKey) {
-                if ( false === is_array($_TmpArrayHandler) or false === isset($_TmpArrayHandler[$_LevelKey]) ) {
+                if (false === is_array($_TmpArrayHandler) or false === isset($_TmpArrayHandler[$_LevelKey])) {
                     #\Koch\Debug\Debug::firebug('ResultSet not found in Dataset: ' . $ResultValue, 'warn');
                     $_TmpArrayHandler = '';
                     break;

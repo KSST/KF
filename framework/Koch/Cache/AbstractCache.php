@@ -83,7 +83,9 @@ abstract class AbstractCache
                 $this->options['prefix'] = $prefix;
                 break;
             default:
-                throw new \InvalidArgumentException(sprintf('You tried to set the Option "%s", which is unknown.', $key));
+                throw new \InvalidArgumentException(
+                        sprintf('You tried to set the Option "%s", which is unknown.', $key)
+                );
         }
 
         return true;

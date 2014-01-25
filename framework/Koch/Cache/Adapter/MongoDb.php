@@ -91,14 +91,14 @@ class MongoDb extends AbstractCache implements CacheInterface
     {
         switch ($key) {
             case 'database':
-                 $database = (string) $value;
+                $database = (string) $value;
                 if ($database === '') {
                     throw new \InvalidArgumentException('Database can not be empty.');
                 }
                 $this->options['database'] = $database;
                 break;
-             case 'collection':
-                 $database = (string) $value;
+            case 'collection':
+                $database = (string) $value;
                 if ($database === '') {
                     throw new \InvalidArgumentException('Collection can not be empty.');
                 }
@@ -189,9 +189,12 @@ class MongoDb extends AbstractCache implements CacheInterface
         return false;
     }
 
+    /**
+     * @todo
+     * @return array
+     */
     public function stats()
     {
-        // @todo
         return array();
     }
 }
