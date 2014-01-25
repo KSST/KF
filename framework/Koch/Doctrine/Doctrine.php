@@ -44,13 +44,6 @@ class Doctrine
     private static $em;
 
     /**
-     * Total execution time for all queries
-     *
-     * @var float
-     */
-    private static $execTime = '';
-
-    /**
      * Ensure that Database Connection Informations are present
      * in configuration. If not, point back to the installation.
      */
