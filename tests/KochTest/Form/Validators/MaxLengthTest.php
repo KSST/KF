@@ -6,6 +6,7 @@ use Koch\Form\Validators\MaxLength;
 
 class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Maxlength
      */
@@ -43,16 +44,16 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodsetMaxlength()
     {
-         // setter accepts numeric
-         $this->validator->setMaxlength(19);
-         $this->assertEquals(19, $this->validator->getMaxlength());
+        // setter accepts numeric
+        $this->validator->setMaxlength(19);
+        $this->assertEquals(19, $this->validator->getMaxlength());
 
-         // setter accepts string
-         $this->validator->setMaxlength('19');
-         $this->assertEquals(19, $this->validator->getMaxlength());
+        // setter accepts string
+        $this->validator->setMaxlength('19');
+        $this->assertEquals(19, $this->validator->getMaxlength());
     }
 
-     public function testMethodgetStringLength_mbstring()
+    public function testMethodgetStringLength_mbstring()
     {
         if (!function_exists('mb_strlen')) {
             Koch\Localization\Utf8::initialize();
@@ -66,7 +67,6 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-
         $value = '12345678901234567890'; // 20 chars
 
         $this->validator->setMaxlength('19');
@@ -87,15 +87,13 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setMaxlength('1980');
 
-        $this->assertEquals('The value exceeds the maxlength of 1980 chars',
-                           $this->validator->getErrorMessage());;
+        $this->assertEquals('The value exceeds the maxlength of 1980 chars', $this->validator->getErrorMessage());
     }
 
     public function testMethodgetValidationHint()
     {
         $this->validator->setMaxlength('1980');
 
-        $this->assertEquals('Please enter 1980 chars at maximum.',
-                           $this->validator->getValidationHint());;
+        $this->assertEquals('Please enter 1980 chars at maximum.', $this->validator->getValidationHint());
     }
 }
