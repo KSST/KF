@@ -2,4 +2,7 @@
 
 namespace KochTest\DI;
 
-class CreateMeOnce { }
+class CreateMeOnce
+{
+    
+}
