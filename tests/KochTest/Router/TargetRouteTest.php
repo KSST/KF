@@ -1,10 +1,12 @@
 <?php
+
 namespace KochTest\Router;
 
 use Koch\Router\TargetRoute;
 
 class TargetRouteTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var TargetRoute
      */
@@ -48,20 +50,19 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetFilename()
     {
-       //$this->object->setApplicationNamespace('KochTest/Fixtures/Application');
+        //$this->object->setApplicationNamespace('KochTest/Fixtures/Application');
+        // test filename construction, if empty filename
+        $file1 = '';
+        $this->object->setFilename($file1);
+        $this->assertEquals(
+            realpath(APPLICATION_MODULES_PATH . 'Index/Controller/IndexController.php'), 
+            $this->object->getFilename()
+        );
 
-       // test filename construction, if empty filename
-       $file = '';
-       $this->object->setFilename($file);
-       $this->assertEquals(
-           realpath(APPLICATION_MODULES_PATH . 'Index/Controller/IndexController.php'),
-           $this->object->getFilename()
-       );
-
-       // setter test
-       $file = 'abc';
-       $this->object->setFilename($file);
-       $this->assertEquals($file, $this->object->getFilename());
+        // setter test
+        $file2 = 'abc';
+        $this->object->setFilename($file2);
+        $this->assertEquals($file2, $this->object->getFilename());
     }
 
     /**
@@ -73,16 +74,16 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $this->object->setApplicationNamespace('\KochTest\Fixtures\Application');
 
         // test filename construction, if empty filename
-        $class = '';
-        $this->object->setClassname($class);
+        $class1 = '';
+        $this->object->setClassname($class1);
         $this->assertEquals(
-            '\KochTest\Fixtures\Application\Modules\Index\Controller\IndexController',
+            '\KochTest\Fixtures\Application\Modules\Index\Controller\IndexController', 
             $this->object->getClassname()
         );
 
-        $class = 'abc';
-        $this->object->setClassname($class);
-        $this->assertEquals($class, $this->object->getClassname());
+        $class2 = 'abc';
+        $this->object->setClassname($class2);
+        $this->assertEquals($class2, $this->object->getClassname());
     }
 
     /**
@@ -106,9 +107,9 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetModule()
     {
-       $module = 'ABCModule';
-       $this->object->setModule($module);
-       $this->assertEquals($module, $this->object->getModule());
+        $module = 'ABCModule';
+        $this->object->setModule($module);
+        $this->assertEquals($module, $this->object->getModule());
     }
 
     /**
@@ -189,23 +190,23 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetParameters()
     {
-       $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
 
-       // test for default array
-       $er = $this->object->getParameters();
-       $this->assertTrue(is_array($er));
+        // test for default array
+        $er = $this->object->getParameters();
+        $this->assertTrue(is_array($er));
 
-       // test if values from $_POST array are automatically populated
-       // POST array is not populated on linux???
-       /*$_SERVER['REQUEST_METHOD'] = 'POST';
-       $_POST['KEY1'] = 'VALUE1';
+        // test if values from $_POST array are automatically populated
+        // POST array is not populated on linux???
+        /* $_SERVER['REQUEST_METHOD'] = 'POST';
+          $_POST['KEY1'] = 'VALUE1';
 
-       $er = $this->object->getParameters();
-       $this->assertTrue(is_array($er));
-       $this->assertArrayHasKey('KEY1', $er);
+          $er = $this->object->getParameters();
+          $this->assertTrue(is_array($er));
+          $this->assertArrayHasKey('KEY1', $er);
 
-       unset($_SERVER['REQUEST_METHOD']);
-       unset($_POST['KEY1']);*/
+          unset($_SERVER['REQUEST_METHOD']);
+          unset($_POST['KEY1']); */
     }
 
     /**
@@ -222,12 +223,12 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRequestMethod()
     {
-       $_SERVER['REQUEST_METHOD'] = 'GET';
+        $_SERVER['REQUEST_METHOD'] = 'GET';
 
-       $er = $this->object->getRequestMethod();
-       $this->assertEquals($er, 'GET');
+        $er = $this->object->getRequestMethod();
+        $this->assertEquals($er, 'GET');
 
-       unset($_SERVER['REQUEST_METHOD']);
+        unset($_SERVER['REQUEST_METHOD']);
     }
 
     /**
@@ -245,7 +246,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAjaxMode()
     {
-       $this->assertFalse($this->object->getAjaxMode());
+        $this->assertFalse($this->object->getAjaxMode());
     }
 
     /**
@@ -264,11 +265,11 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetBackendTheme()
     {
-       $this->assertEquals('default', $this->object->getBackendTheme());
+        $this->assertEquals('default', $this->object->getBackendTheme());
 
-       $theme = 'A-Backend-Theme';
-       $_SESSION['user']['backend_theme'] = $theme;
-       $this->assertEquals($theme, $this->object->getBackendTheme());
+        $theme = 'A-Backend-Theme';
+        $_SESSION['user']['backend_theme'] = $theme;
+        $this->assertEquals($theme, $this->object->getBackendTheme());
     }
 
     /**
@@ -333,7 +334,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $_SERVER['REQUEST_METHOD'] = 'GET';
 
         $segments = array();
-        $er = $this->object->setSegmentsToTargetRoute($segments);
+        $er       = $this->object->setSegmentsToTargetRoute($segments);
 
         $this->assertTrue(is_object($er));
 
@@ -350,9 +351,8 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $targetRouteParameters_MODDED = $this->object->getRoute();
         $this->assertNotEquals($targetRouteParameters_MODDED, $targetRouteParameters_BEFORE);
         $this->object->reset();
-        $targetRouteParameters_AFTER = $this->object->getRoute();
+        $targetRouteParameters_AFTER  = $this->object->getRoute();
         $this->assertEquals($targetRouteParameters_AFTER, $targetRouteParameters_BEFORE);
-
     }
 
     /**
