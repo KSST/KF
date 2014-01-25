@@ -34,7 +34,7 @@ class WysiwygCkeditor extends Textarea implements FormElementInterface
     public static function checkDependencies()
     {
         if (!is_file(APPLICATION_PATH . 'themes/core/javascript/ckeditor/ckeditor.js')) {
-            exit('Ckeditor Javascript Library missing!');
+            throw new \Koch\Exception\Exception('Ckeditor Javascript Library missing!');
         }
     }
 
