@@ -38,8 +38,7 @@ function Smarty_block_move_to($params, $content, $smarty, &$repeat)
 
     if (isset($params['target']) === true) {
         $target = mb_strtoupper($params['target']);
-    }
-    else {
+    } else {
         /**
          * the full errormessage is created by appending the first string
          * (one line would be over 130 chars long and the whitespaces matter)
@@ -64,7 +63,7 @@ function Smarty_block_move_to($params, $content, $smarty, &$repeat)
         'POST_BODY_OPEN', //  <body>x
         'PRE_BODY_CLOSE'
     ); //  x</body>
-    
+
     // whitelist: check if tag is a valid movement position
     if (!in_array($target, $valid_movement_positions)) {
         trigger_error(

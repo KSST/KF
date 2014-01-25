@@ -306,11 +306,9 @@ class Datagrid extends Base
         // $resultsPerPage is incomming via Session, URL GET or Set to 1 as default
         if (isset($_SESSION['Datagrid_' . $this->getAlias()]['ResultsPerPage'])) {
             $resultsPerPage = $_SESSION['Datagrid_' . $this->getAlias()]['ResultsPerPage'];
-        }
-        elseif (isset($_REQUEST[$this->getParameterAlias('ResultsPerPage')])) {
+        } elseif (isset($_REQUEST[$this->getParameterAlias('ResultsPerPage')])) {
             $resultsPerPage = (int) $_REQUEST[$this->getParameterAlias('ResultsPerPage')];
-        }
-        else { // if page is not inside session or request, we are on the first page
+        } else { // if page is not inside session or request, we are on the first page
             $resultsPerPage = $this->resultsPerPage; // default via setResultsPerPage / config
         }
 
@@ -516,8 +514,7 @@ class Datagrid extends Base
     {
         if (isset($this->features[$feature]) === false) {
             throw new Koch\Exception\Exception(_('There is no such feature in this datagrid: ') . $feature);
-        }
-        else {
+        } else {
             return $this->features[$feature];
         }
     }
@@ -651,13 +648,11 @@ class Datagrid extends Base
 
             if (false == isset($colSet['Sort'])) {
                 $oCol->disableFeature('Sorting');
-            }
-            else {
+            } else {
                 $oCol->setSortOrder($colSet['Sort']);
                 if (isset($colSet['SortCol'])) {
                     $oCol->setSortField($colSet['SortCol']);
-                }
-                else {
+                } else {
                     $oCol->setSortField($colSet['ResultSet']);
                 }
             }
@@ -742,8 +737,7 @@ class Datagrid extends Base
         // Standard for ResultSets is an array
         if (false === is_array($_ColumnSet['ResultSet'])) {
             $aResultSet = array($_ColumnSet['ResultSet']);
-        }
-        else {
+        } else {
             $aResultSet = $_ColumnSet['ResultSet'];
         }
 
@@ -815,8 +809,7 @@ class Datagrid extends Base
             $this->queryBuilder->add('orderBy', 'a.' . $oCol->getSortField() . ' ' . $SortOrder);
 
             $oCol->setSortOrder($SortOrder);
-        }
-        else {
+        } else {
             $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'] = '';
             $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder']  = '';
         }
@@ -869,11 +862,9 @@ class Datagrid extends Base
         // Page is incomming via Session, URL GET or Set to 1 as default
         if ($_SESSION['Datagrid_' . $this->getAlias()]['Page'] !== null) {
             $page = $_SESSION['Datagrid_' . $this->getAlias()]['Page'];
-        }
-        elseif ($_REQUEST[$this->getParameterAlias('Page')] !== null) {
+        } elseif ($_REQUEST[$this->getParameterAlias('Page')] !== null) {
             $page = (int) $_REQUEST[$this->getParameterAlias('Page')];
-        }
-        else {
+        } else {
             // default value: first page
             $page = 1;
         }

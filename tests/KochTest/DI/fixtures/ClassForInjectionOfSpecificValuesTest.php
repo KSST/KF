@@ -24,5 +24,5 @@ class WrapAnything
 
 class Thing
 {
-    
+
 }

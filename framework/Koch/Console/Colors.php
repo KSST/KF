@@ -59,7 +59,7 @@ class Colors
         'white'       => '1;37',
         'bold_gray'   => '0;37',
     );
-    
+
     // Ansi background colors
     private static $background = array(
         'black'   => '40',
@@ -71,7 +71,7 @@ class Colors
         'cyan'    => '46',
         'grey'    => '47',
     );
-    
+
     // Ansi Modifiers
     private static $modifier = array(
         'reset'         => '0',
@@ -84,7 +84,7 @@ class Colors
         'inverse'       => '7',
         'strikethrough' => '9'
     );
-    
+
     // Unicode Symbol Name to Octal Escape Sequence
     private static $unicode = array(
         'ok'       => "✓", // "check mark" - \u221A
@@ -98,8 +98,8 @@ class Colors
         if (false === isset(self::$unicode[$symbol])) {
             throw new \InvalidArgumentException(
             sprintf(
-                'Invalid unicode symbol specified: "%s". Expected one of (%s).', 
-                $symbol, 
+                'Invalid unicode symbol specified: "%s". Expected one of (%s).',
+                $symbol,
                 implode(', ', array_keys(self::$unicode)))
             );
         }

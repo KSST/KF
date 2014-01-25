@@ -4,12 +4,12 @@ namespace KochTest\DI;
 
 class NeededForFirst
 {
-    
+
 }
 
 class NeededForSecond
 {
-    
+
 }
 
 class VariablesInConstructor

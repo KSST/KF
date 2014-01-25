@@ -54,8 +54,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('GET', $this->form->getMethod());
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON) {
             $expectedURL = WWW_ROOT . 'someActionName';
-        }
-        else {
+        } else {
             $expectedURL = WWW_ROOT . 'index.php?mod=someActionName';
         }
         $this->assertEquals($expectedURL, $this->form->getAction());
@@ -97,8 +96,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setAction('/news/show');
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON) {
             $expectedURL = WWW_ROOT . 'news/show';
-        }
-        else {
+        } else {
             $expectedURL = WWW_ROOT . 'index.php?mod=news&amp;ctrl=show';
         }
         $this->assertEquals($expectedURL, $this->form->getAction());

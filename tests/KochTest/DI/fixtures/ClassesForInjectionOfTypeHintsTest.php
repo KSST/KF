@@ -4,12 +4,12 @@ namespace KochTest\DI;
 
 interface Hinted
 {
-    
+
 }
 
 class NeededForConstructor
 {
-    
+
 }
 
 class HintedConstructor implements Hinted
