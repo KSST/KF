@@ -77,8 +77,8 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetClass()
     {
-       $this->object->setClass('class');
-       $this->assertEquals('class', $this->object->getClass());
+        $this->object->setClass('class');
+        $this->assertEquals('class', $this->object->getClass());
     }
 
     /**
@@ -87,8 +87,8 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetValue()
     {
-       $this->object->setValue('value');
-       $this->assertEquals('value', $this->object->getValue());
+        $this->object->setValue('value');
+        $this->assertEquals('value', $this->object->getValue());
     }
 
     /**
@@ -96,8 +96,8 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRawValue()
     {
-       $this->object->setValue('value');
-       $this->assertEquals('value', $this->object->getRawValue());
+        $this->object->setValue('value');
+        $this->assertEquals('value', $this->object->getRawValue());
     }
 
     /**
@@ -120,10 +120,10 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetLabel()
     {
-       $this->assertFalse($this->object->hasLabel());
-       $this->object->setLabel('label');
-       $this->assertTrue($this->object->hasLabel());
-       $this->assertEquals('label', $this->object->getLabel());
+        $this->assertFalse($this->object->hasLabel());
+        $this->object->setLabel('label');
+        $this->assertTrue($this->object->hasLabel());
+        $this->assertEquals('label', $this->object->getLabel());
     }
 
     /**
@@ -176,10 +176,10 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAttribute()
     {
-       $value = array('required' => true, 'label' => 'someLabel');
-       $this->object->setAttributes($value);
-       $this->assertTrue($this->object->required);
-       $this->assertEquals('someLabel', $this->object->getLabel());
+        $value = array('required' => true, 'label' => 'someLabel');
+        $this->object->setAttributes($value);
+        $this->assertTrue($this->object->required);
+        $this->assertEquals('someLabel', $this->object->getLabel());
     }
 
     /**
@@ -187,11 +187,11 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetAttribute()
     {
-       $this->object->setAttribute('required', true);
-       $this->assertTrue($this->object->required);
+        $this->object->setAttribute('required', true);
+        $this->assertTrue($this->object->required);
 
-       $this->object->setAttribute('required', false);
-       $this->assertFalse($this->object->required);
+        $this->object->setAttribute('required', false);
+        $this->assertFalse($this->object->required);
     }
 
     /**
@@ -199,8 +199,8 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderAttributes()
     {
-       $attributes = array('key1' => 'value1', 'key2' => 'value2');
-       $this->assertEquals(' key1="value1" key2="value2" ', $this->object->renderAttributes($attributes));
+        $attributes = array('key1' => 'value1', 'key2' => 'value2');
+        $this->assertEquals(' key1="value1" key2="value2" ', $this->object->renderAttributes($attributes));
     }
 
     /**
@@ -218,7 +218,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Parameter $rule must be of type string.
      */
-    public function testSetRules_throwsException()
+    public function testSetRulesThrowsException()
     {
         $rule = 123;
         $this->object->setRules($rule);
@@ -249,7 +249,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testMapRulenameToClassname($rule, $classname)
     {
-       $this->assertEquals($classname, $this->object->mapRulenameToClassname($rule));
+        $this->assertEquals($classname, $this->object->mapRulenameToClassname($rule));
     }
 
     /**
@@ -292,16 +292,16 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testValidate()
     {
-       $this->object->setValue('');
-       $this->object->isRequired();
-       $this->assertTrue($this->object->validate());
+        $this->object->setValue('');
+        $this->object->isRequired();
+        $this->assertTrue($this->object->validate());
 
-       $this->object->setValue(null);
-       $this->object->isRequired();
-       $this->assertTrue($this->object->validate());
+        $this->object->setValue(null);
+        $this->object->isRequired();
+        $this->assertTrue($this->object->validate());
 
-       $this->object->resetValidators();
-       $this->assertTrue($this->object->validate());
+        $this->object->resetValidators();
+        $this->assertTrue($this->object->validate());
     }
 
     /**
@@ -320,7 +320,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetErrorMessages()
     {
-        $errormessages = array(0 =>  'Message1', 1 =>  'Message2');
+        $errormessages = array(0 => 'Message1', 1 => 'Message2');
 
         $this->object->addErrorMessage($errormessages[0]);
         $this->object->addErrorMessage($errormessages[1]);
@@ -341,10 +341,10 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Form\FormElement::__toString
      */
-    public function test__toString()
+    public function testMagicToString()
     {
         $formelement = new \Koch\Form\Elements\Email;
-        $this->assertEquals('<input type="email" name="" />'.CR, $formelement->__toString());
+        $this->assertEquals('<input type="email" name="" />' . CR, $formelement->__toString());
     }
 
     /**
@@ -368,7 +368,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
         $decorator = 'description';
         $this->object->addDecorator($decorator);
 
-        $decorator = $this->object->getDecoratorByName('description');
+        $decorator  = $this->object->getDecoratorByName('description');
         $decorators = $this->object->getDecorators();
         $this->assertInstanceOf('\Koch\Form\Decorators\Formelement\Description', $decorators['description']);
     }
@@ -381,7 +381,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
         $decorator = 'description';
         $this->object->addDecorator($decorator);
 
-        $decorator = $this->object->getDecoratorByName('description');
+        $decorator  = $this->object->getDecoratorByName('description');
         $decorators = $this->object->getDecorators();
         $this->assertInstanceOf('\Koch\Form\Decorators\Formelement\Description', $decorators['description']);
 
@@ -398,7 +398,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
         $decorator = 'description';
         $this->object->addDecorator($decorator);
 
-        $decorator = $this->object->getDecoratorByName('description');
+        $decorator  = $this->object->getDecoratorByName('description');
         $decorators = $this->object->getDecorators();
         $this->assertInstanceOf('\Koch\Form\Decorators\Formelement\Description', $decorators['description']);
 
@@ -431,7 +431,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Form\FormElement::__set
      * @covers Koch\Form\FormElement::__get
      */
-    public function test__set()
+    public function testMagicSet()
     {
         $this->object->name = 'test';
 
@@ -445,7 +445,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      * @expectedExceptionMessage
      * You are trying to set attribute "noSetter", but the setter method "noSetter" was not found.
      */
-    public function test__set_throwsException()
+    public function testMagicSetThrowsException()
     {
         $this->object->noSetter = 'test';
     }

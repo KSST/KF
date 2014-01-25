@@ -9,6 +9,7 @@ use org\bovigo\vfs\vfsStreamWrapper;
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Smarty
      */
@@ -28,8 +29,9 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         $this->templateFileURL = vfsStream::url('root/smarty-renderer.tpl');
-        $this->file = vfsStream::newFile('smarty-renderer.tpl', 0777)->withContent($this->getTemplateContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file            = vfsStream::newFile('smarty-renderer.tpl', 0777)
+            ->withContent($this->getTemplateContent());
+        $this->root            = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -86,9 +88,9 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Invalid Smarty Template path provided: Path not existing or not readable.
      */
-    public function testSetTemplatePath_throwsException()
+    public function testSetTemplatePathThrowsException()
     {
-       $this->object->setTemplatePath('/path/to/where/the/smarty/flavour/is/not');
+        $this->object->setTemplatePath('/path/to/where/the/smarty/flavour/is/not');
     }
 
     /**
@@ -97,10 +99,10 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetTemplatePath()
     {
-       $this->object->setTemplatePath(__DIR__);
-       $paths = $this->object->getTemplatePaths();
+        $this->object->setTemplatePath(__DIR__);
+        $paths = $this->object->getTemplatePaths();
 
-       $this->assertEquals($paths[0], __DIR__ . DIRECTORY_SEPARATOR);
+        $this->assertEquals($paths[0], __DIR__ . DIRECTORY_SEPARATOR);
     }
 
     /**
@@ -137,9 +139,9 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\Renderer\Smarty::__get
      * @covers Koch\View\AbstractRenderer::__get
      */
-    public function test__get()
+    public function testMagicGet()
     {
-        $value = 'value1';
+        $value                      = 'value1';
         $this->object->templatevar1 = $value;
 
         $this->assertEquals($this->object->templatevar1, $value);
@@ -149,9 +151,9 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\Renderer\Smarty::__set
      * @covers Koch\View\AbstractRenderer::__set
      */
-    public function test__set()
+    public function testMagicSet()
     {
-        $value = 'value1';
+        $value                      = 'value1';
         $this->object->templatevar1 = $value;
 
         $vars = $this->object->getVars();
@@ -163,7 +165,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\Renderer\Smarty::__isset
      * @covers Koch\View\AbstractRenderer::__isset
      */
-    public function test__isset()
+    public function testMagicIsset()
     {
         $this->object->templatevar1 = 'value1';
 
@@ -174,7 +176,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\View\Renderer\Smarty::__unset
      * @covers Koch\View\AbstractRenderer::__unset
      */
-    public function test__unset()
+    public function testMagicUnset()
     {
         $this->object->templatevar1 = 'value1';
         unset($this->object->templatevar1);
@@ -206,10 +208,10 @@ EOF;
      */
     public function testCreateCacheId()
     {
-       $cache_id = $this->object->createCacheId();
+        $cache_id = $this->object->createCacheId();
 
-       $this->assertTrue(is_string($cache_id));
-       $this->assertTrue(strlen($cache_id) === 32);
+        $this->assertTrue(is_string($cache_id));
+        $this->assertTrue(strlen($cache_id) === 32);
     }
 
     /**
@@ -236,7 +238,7 @@ EOF;
      */
     public function testGetVars()
     {
-        $value = 'value1';
+        $value                      = 'value1';
         $this->object->templatevar1 = $value;
 
         $vars = $this->object->getVars();
@@ -251,7 +253,7 @@ EOF;
      */
     public function testClearVars()
     {
-        $value = 'value1';
+        $value                      = 'value1';
         $this->object->templatevar1 = $value;
 
         $vars = $this->object->getVars();
@@ -262,8 +264,8 @@ EOF;
 
         $this->object->clearVars();
 
-        $vars = $this->object->getVars();
-        $this->assertEquals(1, count($vars));
+        $varsB = $this->object->getVars();
+        $this->assertEquals(1, count($varsB));
     }
 
     /**
@@ -280,12 +282,12 @@ EOF;
      */
     public function testSetRenderMode()
     {
-       // default mode
-       $this->assertEquals('LAYOUT', $this->object->getRenderMode());
+        // default mode
+        $this->assertEquals('LAYOUT', $this->object->getRenderMode());
 
-       $mode = 'PARTIAL';
-       $this->object->setRenderMode($mode);
-       $this->assertEquals($mode, $this->object->getRenderMode());
+        $mode = 'PARTIAL';
+        $this->object->setRenderMode($mode);
+        $this->assertEquals($mode, $this->object->getRenderMode());
     }
 
     /**
@@ -293,10 +295,10 @@ EOF;
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage Use LAYOUT or PARTIAL as parameter.
      */
-    public function testSetRenderMode_throwsException()
+    public function testSetRenderModeThrowsException()
     {
-       $mode = 'BLA';
-       $this->object->setRenderMode($mode);
+        $mode = 'BLA';
+        $this->object->setRenderMode($mode);
     }
 
     /**
@@ -320,4 +322,5 @@ Hello World.
 EOF;
         $this->assertEquals($expectedTemplateContent, $result);
     }
+
 }

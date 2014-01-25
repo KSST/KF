@@ -37,25 +37,20 @@ class RangeTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodsetRange()
     {
-        $minimum_length = '1';
-        $maximum_length = '1980';
-        $this->validator->setRange($minimum_length, $maximum_length);
+        $minLength = '1';
+        $maxLength = '1980';
+        $this->validator->setRange($minLength, $maxLength);
 
         // string != int
-        $this->assertNotSame($minimum_length,
-                           $this->validator->options['options']['min_range']);
+        $this->assertNotSame($minLength, $this->validator->options['options']['min_range']);
 
-        $this->assertNotSame($maximum_length,
-                           $this->validator->options['options']['max_range']);
+        $this->assertNotSame($maxLength, $this->validator->options['options']['max_range']);
 
         // string to int
-        $this->assertEquals($minimum_length,
-                           $this->validator->options['options']['min_range']);
+        $this->assertEquals($minLength, $this->validator->options['options']['min_range']);
 
-         // string to int
-        $this->assertEquals($maximum_length,
-                           $this->validator->options['options']['max_range']);
-
+        // string to int
+        $this->assertEquals($maxLength, $this->validator->options['options']['max_range']);
     }
 
     public function testMethodprocessValidationLogic()
@@ -78,9 +73,9 @@ class RangeTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodgetErrorMessage()
     {
-        $minimum_length = '1';
-        $maximum_length = '1980';
-        $this->validator->setRange($minimum_length, $maximum_length);
+        $minLength = '1';
+        $maxLength = '1980';
+        $this->validator->setRange($minLength, $maxLength);
 
         $this->assertSame('The value is outside the range of 1 <> 1980.',
                 $this->validator->getErrorMessage());
@@ -88,9 +83,9 @@ class RangeTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodgetValidationHint()
     {
-        $minimum_length = '1';
-        $maximum_length = '1980';
-        $this->validator->setRange($minimum_length, $maximum_length);
+        $minLength = '1';
+        $maxLength = '1980';
+        $this->validator->setRange($minLength, $maxLength);
 
         $this->assertSame('Please enter a value within the range of 1 <> 1980.',
                 $this->validator->getValidationHint());
