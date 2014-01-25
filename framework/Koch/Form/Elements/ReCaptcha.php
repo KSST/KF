@@ -27,11 +27,6 @@ class ReCaptcha extends Captcha implements FormElementInterface
     private $privateKey;
 
     /**
-     * @var string The ReCaptcha Error String.
-     */
-    private $error;
-
-    /**
      * @var object Instance of Koch_HttpRequest Object.
      */
 
@@ -78,7 +73,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
         );
 
         if ($response->is_valid == false) {
-            return _('The reCAPTCHA was not entered correctly. Try again. (recaptcha error ' . $resp->error . ')');
+            return _('The reCAPTCHA was not entered correctly. Try again. (recaptcha error ' . $response->error . ')');
         }
     }
 
