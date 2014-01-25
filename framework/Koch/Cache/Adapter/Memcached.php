@@ -60,9 +60,11 @@ class Memcached extends AbstractCache implements CacheInterface
                 'default' => array(
                     'servers' => array(
                         array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true),
-            )))
+                    )))
         );
+
         $options = array_merge($options, $defaultOptions);
+
         parent::__construct($options);
 
         $this->memcached = $this->getMemcachedInstance($options['useConnection']);
@@ -85,7 +87,7 @@ class Memcached extends AbstractCache implements CacheInterface
                 }
                 $this->options['useConnection'] = $value;
                 break;
-             case 'connection':
+            case 'connection':
                 $connection = (array) $value;
                 if (is_array($connection) === false) {
                     throw new \InvalidArgumentException('Connection option must be array.');
@@ -106,7 +108,7 @@ class Memcached extends AbstractCache implements CacheInterface
         static $instances = array();
 
         // return early, if connection already exists
-        if ( array_key_exists($connection, $instances)) {
+        if (array_key_exists($connection, $instances)) {
             return $instances[$connection];
         }
 
@@ -120,13 +122,13 @@ class Memcached extends AbstractCache implements CacheInterface
         #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
         #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
 
-        if ( !count($memcached->getServerList()) ) {
+        if (!count($memcached->getServerList())) {
             if (isset($this->options[$connection]) || array_key_exists($connection, $this->options['connection'])) {
-                 // specific servers set per connection
-                 $memcached->addServers($this->options['connection'][$connection]['servers']);
+                // specific servers set per connection
+                $memcached->addServers($this->options['connection'][$connection]['servers']);
             } else {
-                 // default servers
-                 $memcached->addServers($this->options['connection']['default']['servers']);
+                // default servers
+                $memcached->addServers($this->options['connection']['default']['servers']);
             }
         }
 
@@ -202,8 +204,8 @@ class Memcached extends AbstractCache implements CacheInterface
      */
     public function stats()
     {
-        $version    = $this->memcached->getVersion();
-        $stats      = $this->memcached->getStats();
+        $version = $this->memcached->getVersion();
+        $stats = $this->memcached->getStats();
         $serverlist = $this->memcached->getServerList();
 
         // combine arrays
@@ -219,4 +221,5 @@ class Memcached extends AbstractCache implements CacheInterface
     {
         return $this->memcached;
     }
+
 }

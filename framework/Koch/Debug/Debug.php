@@ -26,7 +26,7 @@ class Debug
      *
      * @param mixed/array/object $var  Array or Object as Variable to display
      * @param bool               $exit Stop execution after dump? Default is true (stops).
-     *                                 @returns Returns a better structured display of an array/object as native print_r().
+     * @returns Returns a better structured display of an array/object as native print_r().
      */
     public static function printR($var)
     {
@@ -141,7 +141,7 @@ class Debug
      * Debug logs the output of $var to the firebug console in your browser.
      *
      * @param  mixed   $var The variable to debug.
-     *                      @param $logmethod The firebug method to call for logging (log,info,warn, error). Defaults to "log".
+     * @param $logmethod The firebug method to call for logging (log,info,warn, error). Defaults to "log".
      * @return FirePHP object.
      */
     public static function firebug($var, $logmethod = 'log')

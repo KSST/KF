@@ -107,7 +107,7 @@ class Functions
      * Transforms a string from underscored_lower_case to Underscored_Upper_Camel_Case.
      *
      * @param string $string String in underscored_lower_case format.
-     *                       @return $string String in Upper_Camel_Case.
+     * @return $string String in Upper_Camel_Case.
      */
     public static function toUnderscoredUpperCamelCase($string)
     {
@@ -241,7 +241,7 @@ class Functions
      * @param string $replace
      * @param string $needle
      * @param int    $times
-     *                         @return $needle
+     * @return $needle
      */
     public static function strReplaceCount($haystack, $replace, $needle, $times)
     {
@@ -270,7 +270,7 @@ class Functions
      *
      * @param string $needle   Needle to find
      * @param array  $haystack Haystack to look through
-     *                         @result array Returns the elements that the $string was found in
+     * @result array Returns the elements that the $string was found in
      *
      * array_values_recursive
      */

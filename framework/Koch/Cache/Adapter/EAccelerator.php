@@ -62,7 +62,7 @@ class EAccelerator extends AbstractCache implements CacheInterface
      */
     public function contains($key)
     {
-        if ( true === eaccelerator_get($key) ) {
+        if (true === eaccelerator_get($key)) {
             return true;
         } else {
             return false;

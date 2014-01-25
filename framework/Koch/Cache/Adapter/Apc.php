@@ -52,7 +52,8 @@ class Apc extends AbstractCache implements CacheInterface
 
         if ($enabled === false) {
             throw new \Koch\Exception\Exception(
-                "The PHP extension APC (Alternative PHP Cache) is not loaded. You may enable it with 'apc.enabled=1' and 'apc.enable_cli=1'!"
+                "The PHP extension APC (Alternative PHP Cache) is not loaded." .
+                "You may enable it with 'apc.enabled=1' and 'apc.enable_cli=1'!"
             );
         }
 

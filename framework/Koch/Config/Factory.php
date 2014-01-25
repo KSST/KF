@@ -36,7 +36,7 @@ class Factory
     {
         // init var
         $adapter = '';
-        $extension  = '';
+        $extension = '';
 
         // use the filename only to detect adapter
         // @todo simplify extension detection, but watch out for .info.php
@@ -49,9 +49,9 @@ class Factory
         }
         $extension = $extension[0];
 
-       if ($extension == '.config.php' or $extension == '.info.php') {
+        if ($extension == '.config.php' or $extension == '.info.php') {
             $adapter = 'native';
-       } elseif ($extension == '.config.ini') {
+        } elseif ($extension == '.config.ini') {
             $adapter = 'ini';
         } elseif ($extension == '.config.xml') {
             $adapter = 'xml';
@@ -59,7 +59,7 @@ class Factory
             $adapter = 'yaml';
         } else {
             throw new \Koch\Exception\Exception(
-                _('No handler for that type of configuration file found (' . $extension .')')
+            _('No handler for that type of configuration file found (' . $extension . ')')
             );
         }
 

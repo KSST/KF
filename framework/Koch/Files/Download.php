@@ -27,7 +27,7 @@ class Download
      * Returns the mime type of the file.
      *
      * @param  string $file Full path to file.
-     *                      @param  int 0 (full check), 1 (extension check only)
+     * @param  int 0 (full check), 1 (extension check only)
      * @return string MimeType of File.
      */
     public static function getMimeType($file, $mode = 0)
