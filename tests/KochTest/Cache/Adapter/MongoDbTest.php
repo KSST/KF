@@ -24,13 +24,13 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         }
 
         $options = array(
-            'database' => 'test',
+            'database'   => 'test',
             'collection' => 'test'
         );
 
-        $this->mongo = $this->getMockMongo();
+        $this->mongo      = $this->getMockMongo();
         $this->collection = $this->getMockMongoCollection();
-        $this->db = $this->getMockMongoDB();
+        $this->db         = $this->getMockMongoDB();
 
         $this->db->expects($this->any())
             ->method('selectCollection')->with($options['collection'])
@@ -54,8 +54,8 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     public static function SetOptionDataprovider()
     {
         return array(
-          array('database', 'default'),
-          array('collection', 'default')
+            array('database', 'default'),
+            array('collection', 'default')
         );
     }
 
@@ -84,10 +84,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      * @expectedException RuntimeException
      * @expectedExcetptionMessage The option "collection" must be set.
      */
-    public function testInitialize_throwsException_collection()
+    public function testInitializeThrowsExceptionCollection()
     {
         $this->object->collection = null;
-        $this->object->options = null;
+        $this->object->options    = null;
         $this->object->initialize();
     }
 
@@ -96,10 +96,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      * @expectedException RuntimeException
      * @expectedExcetptionMessage The option "database" must be set.
      */
-    public function testInitialize_throwsException_database()
+    public function testInitializeThrowsExceptionDatabase()
     {
         $this->object->collection = null;
-        $this->object->options = null;
+        $this->object->options    = null;
         $this->object->initialize();
     }
 
@@ -123,23 +123,23 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Cache\Adapter\MongoDb::store
      * @covers Koch\Cache\Adapter\MongoDb::delete
      */
-    public function testStore_WithoutTTL()
+    public function testStoreWithoutTTL()
     {
         $this->collection->expects($this->once())->method('remove');
-        $this->collection->expects($this->once())->method('insert')->will( $this->returnValue(false) );
+        $this->collection->expects($this->once())->method('insert')->will($this->returnValue(false));
 
         // assert that, it's not possible to add key with value without a TTL
         $this->assertFalse($this->object->store('key1', 'value1'));
     }
 
-     /**
+    /**
      * @covers Koch\Cache\Adapter\MongoDb::store
      * @covers Koch\Cache\Adapter\MongoDb::delete
      */
-    public function testStore_WithTTL()
+    public function testStoreWithTTL()
     {
         $this->collection->expects($this->once())->method('remove');
-        $this->collection->expects($this->once())->method('insert')->will( $this->returnValue(true) );
+        $this->collection->expects($this->once())->method('insert')->will($this->returnValue(true));
 
         // assert that, we can add key with value with ttl
         $this->assertTrue($this->object->store('key1', 'value1', 120));
@@ -150,9 +150,9 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-        $key = 'keyname';
+        $key   = 'keyname';
         $value = 'somevalue';
-        $ttl = 900;
+        $ttl   = 900;
 
         $item = array(
             'key'   => $key,
@@ -161,10 +161,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->collection
-            ->expects( $this->once() )
+            ->expects($this->once())
             ->method('findOne')
-            ->with( $this->equalTo(array('key' => $key)) )
-            ->will( $this->returnValue($item) );
+            ->with($this->equalTo(array('key' => $key)))
+            ->will($this->returnValue($item));
 
         // assert that, we can get that value by key
         $this->assertEquals($value, $this->object->fetch($key));
@@ -177,13 +177,12 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         //$this->assertFalse($this->object->contains('key1'));
     }
 
-
     /**
      * @covers Koch\Cache\Adapter\MongoDb::clear
      */
     public function testClear()
     {
-        $this->collection->expects($this->once())->method('drop')->will( $this->returnValue(true) );
+        $this->collection->expects($this->once())->method('drop')->will($this->returnValue(true));
 
         // assert that, clearing the whole cache works
         $this->assertTrue($this->object->clear());
@@ -194,9 +193,9 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetData()
     {
-        $key = 'keyname';
+        $key   = 'keyname';
         $value = 'somevalue';
-        $ttl = 900;
+        $ttl   = 900;
 
         $item = array(
             'key'   => $key,
@@ -205,10 +204,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->collection
-            ->expects( $this->once() )
+            ->expects($this->once())
             ->method('findOne')
-            ->with( $this->equalTo(array('key' => $key)) )
-            ->will( $this->returnValue($item) );
+            ->with($this->equalTo(array('key' => $key)))
+            ->will($this->returnValue($item));
 
         $this->assertEquals($value, $this->object->getData($key));
     }
@@ -216,11 +215,11 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Cache\Adapter\MongoDb::getData
      */
-    public function testGetData_TTLHasEnded()
+    public function testGetDataTTLHasEnded()
     {
-        $key = 'keyname';
+        $key   = 'keyname';
         $value = 'somevalue';
-        $ttl = -10000;
+        $ttl   = -10000;
 
         $item = array(
             'key'   => $key,
@@ -229,10 +228,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         );
 
         $this->collection
-            ->expects( $this->once() )
+            ->expects($this->once())
             ->method('findOne')
-            ->with( $this->equalTo(array('key' => $key)) )
-            ->will( $this->returnValue($item) );
+            ->with($this->equalTo(array('key' => $key)))
+            ->will($this->returnValue($item));
 
         $this->assertEquals(false, $this->object->getData($key));
     }
@@ -240,15 +239,15 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Cache\Adapter\MongoDb::getData
      */
-    public function testGetData_KeyNotFound()
+    public function testGetDataKeyNotFound()
     {
         $key = 'no-existant-key';
 
         $this->collection
-            ->expects( $this->once() )
+            ->expects($this->once())
             ->method('findOne')
-            ->with( $this->equalTo(array('key' => $key)) )
-            ->will( $this->returnValue(false) );
+            ->with($this->equalTo(array('key' => $key)))
+            ->will($this->returnValue(false));
 
         $this->assertEquals(false, $this->object->getData($key));
     }
@@ -264,7 +263,6 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     /**
      * Mock the Mongo!
      */
-
     private function getMockMongo()
     {
         return $this->getMock('Mongo', array(), array(), '', false, false);
@@ -273,8 +271,8 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     private function getMockMongoClient()
     {
         return $this->getMockBuilder('MongoClient')
-            ->disableOriginalConstructor()
-            ->getMock();
+                ->disableOriginalConstructor()
+                ->getMock();
     }
 
     private function getMockMongoDB()
