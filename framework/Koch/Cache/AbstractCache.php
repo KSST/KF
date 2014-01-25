@@ -84,7 +84,7 @@ abstract class AbstractCache
                 break;
             default:
                 throw new \InvalidArgumentException(
-                        sprintf('You tried to set the Option "%s", which is unknown.', $key)
+                    sprintf('You tried to set the Option "%s", which is unknown.', $key)
                 );
         }
 
