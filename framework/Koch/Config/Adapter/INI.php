@@ -64,23 +64,11 @@ class INI
 
                 // for every element after that
                 foreach ($item as $key2 => $item2) {
-                    if (is_numeric($item2) === true or is_bool($item2) === true) {
-                        // write numeric and boolean values without quotes
-                        $content .= $key2 . ' = ' . $item2 . "\n";
-                    } else {
-                        // write value with quotes
-                        $content .= $key2 . ' = "' . $item2 . '"' . "\n";
-                    }
+                    $content .= isNumericOrBoolean($key2, $item2);
                 }
             } else {
                 // it's a value
-                if (is_numeric($item) === true or is_bool($item) === true) {
-                    // write numeric and boolean values without quotes
-                    $content .= $key . ' = ' . $item . "\n";
-                } else {
-                    // it's a string - write value with quotes
-                    $content .= $key . ' = "' . $item . '"' . "\n";
-                }
+                $content .= isNumericOrBoolean($key, $item);                
             }
         }
 
@@ -89,6 +77,28 @@ class INI
 
         // write to file
         return (bool) file_put_contents($file, $content);
+    }
+    
+    /**
+     * String formatting based on type.
+     * 
+     * @param mixed $key
+     * @param mixed $item
+     * @return string
+     */
+    public static function isNumericOrBoolean($key, $item)
+    {
+        $content = '';
+        
+        if (is_numeric($item) === true or is_bool($item) === true) {
+            // write numeric and boolean values without quotes
+            $content .= $key . ' = ' . $item . "\n";
+        } else {
+            // it's a string - write value with quotes
+            $content .= $key . ' = "' . $item . '"' . "\n";
+        }
+        
+        return $content;
     }
 
     /**
