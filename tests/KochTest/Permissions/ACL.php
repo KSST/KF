@@ -1,5 +1,5 @@
 <?php
-namespace KochTest\Permissions\Acl;
+namespace KochTest\Permissions;
 
 use Koch\Permissions\Acl;
 

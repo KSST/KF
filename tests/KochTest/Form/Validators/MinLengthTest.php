@@ -9,6 +9,7 @@ use Koch\Form\Validators\MinLength;
  */
 class MinLengthTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var MinLength
      */
@@ -70,7 +71,6 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */
-
         $value = '12345678901234567890'; // 20 chars
 
         $this->validator->setMinlength('10');
@@ -92,15 +92,13 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     {
         $this->validator->setMinlength('19');
 
-        $this->assertEquals('The value deceeds (is less than) the Minlength of 19 chars.',
-                           $this->validator->getErrorMessage());;
+        $this->assertEquals('The value is less than the Minlength of 19 chars.', $this->validator->getErrorMessage());
     }
 
     public function testMethodgetValidationHint()
     {
         $this->validator->setMinlength('19');
 
-        $this->assertEquals('Please enter 19 chars at maximum.',
-                           $this->validator->getValidationHint());;
+        $this->assertEquals('Please enter 19 chars at maximum.', $this->validator->getValidationHint());
     }
 }

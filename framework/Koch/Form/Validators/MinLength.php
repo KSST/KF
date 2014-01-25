@@ -51,7 +51,7 @@ class MinLength extends Validator
 
     public function getErrorMessage()
     {
-        $msg = _('The value deceeds (is less than) the Minlength of %s chars.');
+        $msg = _('The value is less than the Minlength of %s chars.');
 
         return sprintf($msg, $this->getMinlength());
     }

@@ -55,7 +55,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $file1 = '';
         $this->object->setFilename($file1);
         $this->assertEquals(
-            realpath(APPLICATION_MODULES_PATH . 'Index/Controller/IndexController.php'), 
+            realpath(APPLICATION_MODULES_PATH . 'Index/Controller/IndexController.php'),
             $this->object->getFilename()
         );
 
@@ -77,7 +77,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $class1 = '';
         $this->object->setClassname($class1);
         $this->assertEquals(
-            '\KochTest\Fixtures\Application\Modules\Index\Controller\IndexController', 
+            '\KochTest\Fixtures\Application\Modules\Index\Controller\IndexController',
             $this->object->getClassname()
         );
 

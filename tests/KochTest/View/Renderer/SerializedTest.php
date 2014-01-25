@@ -6,6 +6,7 @@ use Koch\View\Renderer\Serialized;
 
 class SerializedTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Serialized
      */
@@ -59,7 +60,7 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value', $this->object->viewdata['key']);
 
         // object
-        $object = new \stdClass;
+        $object      = new \stdClass;
         $object->key = 'value';
         $this->object->assign($object);
         $this->assertEquals('value', $this->object->viewdata['key']);
@@ -78,12 +79,12 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisplay()
     {
-       $this->object->assign('key', 'value');
-       $this->object->display();
+        $this->object->assign('key', 'value');
+        $this->object->display();
 
-       $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
+        $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
 
-       $this->expectOutputString($expectedString);
+        $this->expectOutputString($expectedString);
     }
 
     /**
@@ -91,12 +92,12 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-       $this->object->assign('key', 'value');
-       $r = $this->object->fetch();
+        $this->object->assign('key', 'value');
+        $r = $this->object->fetch();
 
-       $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
+        $expectedString = 'a:1:{s:3:"key";s:5:"value";}';
 
-       $this->assertEquals($r, $expectedString);
+        $this->assertEquals($r, $expectedString);
     }
 
     /**
@@ -106,4 +107,5 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertNull($this->object->initializeEngine());
     }
+
 }

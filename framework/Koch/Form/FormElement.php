@@ -29,6 +29,7 @@ namespace Koch\Form;
  */
 class FormElement
 {
+
     /**
      * @var string
      */
@@ -93,6 +94,7 @@ class FormElement
      * @var boolean
      */
     public $required;
+
     /**
      * @var array
      */
@@ -467,16 +469,14 @@ class FormElement
                  * To protect the developer a bit more, we are focing the usage of a setter method.
                  * If the setter method exists most likely the property will exist too, i guess.
                  */
-                if ( defined('DEBUG') and DEBUG == true ) {
+                if (defined('DEBUG') and DEBUG == true) {
                     $method = 'set' . ucfirst($attribute);
                     if (method_exists($this, $method)) {
                         $this->$method($value);
                     } else {
                         throw new \RuntimeException(
-                            sprintf(
-                                'You are trying to set attribute "%s", but the setter method "%s" was not found.',
-                                $attribute,
-                                $method
+                        sprintf(
+                            'You are trying to set attribute "%s", but the setter method "%s" was not found.', $attribute, $method
                         ));
                     }
                 } else { // while in production mode
@@ -550,11 +550,11 @@ class FormElement
             if (strpos($rule, '=') !== false) {
 
                 $array = explode('=', $rule);
-                $rule = $array[0];
+                $rule  = $array[0];
                 $value = $array[1];
 
                 if (in_array($rule, array('maxvalue'))) {
-                   $value = (int) $value;
+                    $value = (int) $value;
                 }
 
                 $this->addValidator($rule, array($rule => $value));
@@ -575,19 +575,19 @@ class FormElement
     public function mapRulenameToClassname($rule)
     {
         $array = array(
-            'email' => 'Email',
-            'equals' => 'Equals',
-            'ip' => 'Ip',
-            'locale' => 'Locale',
+            'email'     => 'Email',
+            'equals'    => 'Equals',
+            'ip'        => 'Ip',
+            'locale'    => 'Locale',
             'maxlength' => 'MaxLength',
-            'maxvalue' => 'MaxValue',
+            'maxvalue'  => 'MaxValue',
             'minlength' => 'MinLength',
-            'minvalue' => 'MinValue',
-            'range' => 'Range',
-            'regexp' => 'RegExp',
-            'required' => 'Required',
-            'string' => 'String',
-            'url' => 'Url'
+            'minvalue'  => 'MinValue',
+            'range'     => 'Range',
+            'regexp'    => 'RegExp',
+            'required'  => 'Required',
+            'string'    => 'String',
+            'url'       => 'Url'
         );
 
         return (isset($array[$rule]) === true) ? $array[$rule] : $rule;
@@ -806,19 +806,19 @@ class FormElement
     {
         // init vars
         $decoratorname = '';
-        $decorator = '';
+        $decorator     = '';
 
         // check if multiple decorators are incomming at once
         if (is_array($decorators) === true) {
             // address each one of those decorators
             foreach ($decorators as $decorator) {
                 // and check if it is an object implementing the right interface
-                if ( ($decorator instanceof Koch\Form\DecoratorInterface) === true ) {
+                if (($decorator instanceof Koch\Form\DecoratorInterface) === true) {
                     // if so, fetch this decorator objects name
                     $decoratorname = $decorator->name;
                 } else {
                     // turn it into an decorator object
-                    $decorator = $this->decoratorFactory($decorator);
+                    $decorator     = $this->decoratorFactory($decorator);
                     $decoratorname = $decorator->name;
 
                     // WATCH OUT! RECURSION!
@@ -826,14 +826,14 @@ class FormElement
                 }
             }
         } elseif (is_object($decorators) === true) { // one element is incomming via recursion
-            $decorator = $decorators;
+            $decorator     = $decorators;
             $decoratorname = $decorator->name;
         }
 
         // if we got a string (ignore the plural, it's a one element string, like 'fieldset')
         if (is_string($decorators) === true) {
             // turn it into an decorator object
-            $decorator = $this->decoratorFactory($decorators);
+            $decorator     = $this->decoratorFactory($decorators);
             $decoratorname = $decorator->name;
         }
 
@@ -849,7 +849,6 @@ class FormElement
         // @return decorator object
         #\Koch\Debug\Debug::printR($this->formelementdecorators[$decoratorname]);
         #\Koch\Debug\Debug::printR($this->name);
-
         #\Koch\Debug\Debug::firebug($this);
         #\Koch\Debug\Debug::firebug($this->formelementdecorators);
 
@@ -917,19 +916,11 @@ class FormElement
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Formelement Decorator.
-     * @return Koch\Form\FormElement_Decorator
+     * @return Koch\Form\FormElement\Decorators\$decorator
      */
     public function decoratorFactory($decorator)
     {
         $class = '\Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
-
-        if (false == class_exists($class, false)) {
-            $file = __DIR__ . '/decorators/formelement/' . $decorator . '.php';
-
-            if (is_file($file) === true) {
-                include $file;
-            }
-        }
 
         return new $class;
     }
@@ -954,4 +945,5 @@ class FormElement
     {
         return $this->getAttribute($name);
     }
+
 }
