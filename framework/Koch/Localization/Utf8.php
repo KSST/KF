@@ -46,12 +46,6 @@ class Utf8
 
             // load functional replacements for mbstring functions
             include __DIR__ . DS . 'MbstringWrapper.php';
-
-            // load utf-8 character tables for lookups
-            include __DIR__ . DS . 'Utf8' . DS . 'CharacterTable.php';
-
-            // load utf8 fallback functions
-            include __DIR__ . DS . 'Utf8' . DS . 'Utf8FallbackFunctions.php';
         }
     }
 }
