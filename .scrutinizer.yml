@@ -71,4 +71,4 @@ tools:
         #command: hhvm -vRepo.Authoritative=false
         filter:
             paths: ['framework/*', 'tests/*']
-        excluded_paths: ['vendor/*']
+            #excluded_paths: ['vendor/*']
