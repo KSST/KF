@@ -57,20 +57,6 @@ class Datagrid extends Base
     private $dataModifyHook = array('class' => '', 'method' => '');
 
     /**
-     * Array of Koch\Datagrid\Datagrid\Cell objects
-     *
-     * @var array
-     */
-    private $Cells = array();
-
-    /**
-     * Amount of columns
-     *
-     * @var integer
-     */
-    private $ColCount = 0;
-
-    /**
      * Array of Koch\Datagrid\Datagrid\Column objects
      *
      * @var array
@@ -79,14 +65,6 @@ class Datagrid extends Base
 
     private $sortColumn = null;
     private $sortOrder = null;
-
-    /**
-     * The datagrid type
-     *
-     * @todo implement
-     * @var string
-     */
-    #private $_DatagridType  = 'Normal';
 
     /**
      * Feature configuration for the datagrid
