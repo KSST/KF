@@ -68,7 +68,7 @@ class Memcached extends AbstractCache implements CacheInterface
 
         $defaultOptions = array(
             'useConnection' => 'default',
-            'connection' => array(
+            'connection'    => array(
                 'default' => array(
                     'servers' => array(
                         array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true),
@@ -188,7 +188,7 @@ class Memcached extends AbstractCache implements CacheInterface
             $ttl = $this->options['ttl'];
         }
 
-       return $this->memcached->set($key, $data, time() + $ttl);
+        return $this->memcached->set($key, $data, time() + $ttl);
     }
 
     /**
@@ -233,5 +233,4 @@ class Memcached extends AbstractCache implements CacheInterface
     {
         return $this->memcached;
     }
-
 }
