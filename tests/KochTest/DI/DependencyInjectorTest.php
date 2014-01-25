@@ -62,7 +62,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $this->object->forVariable('first')->willUse('KochTest\DI\NeededForFirst');
         $this->object->forVariable('second')->willUse('KochTest\DI\NeededForSecond');
         $this->assertEquals(
-            $this->object->instantiate('KochTest\DI\VariablesInConstructor'), 
+            $this->object->instantiate('KochTest\DI\VariablesInConstructor'),
             new VariablesInConstructor(
                 new NeededForFirst(), new NeededForSecond()
             )
@@ -84,7 +84,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals(
             $this->object->instantiate(
-                'KochTest\DI\Bare'), 
+                'KochTest\DI\Bare'),
                 new WrapperForBare(
                     new BareImplementation()
                 )
@@ -211,16 +211,16 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         include_once __DIR__ . '/fixtures/ClassesForAutoInstantiationTest.php';
 
         // test named class instantiated automatically
-        $this->assertInstanceOf('KochTest\DI\LoneClass', 
+        $this->assertInstanceOf('KochTest\DI\LoneClass',
             $this->object->instantiate('KochTest\DI\LoneClass'));
 
         // test will use only subclass if parent class is abstract class
-        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass', 
+        $this->assertInstanceOf('KochTest\DI\ConcreteSubclass',
             $this->object->instantiate('KochTest\DI\AbstractClass'));
 
         // test can be configured to prefer a specific subclass
         $this->object->register('KochTest\DI\SecondSubclass');
-        $this->assertInstanceOf('KochTest\DI\SecondSubclass', 
+        $this->assertInstanceOf('KochTest\DI\SecondSubclass',
             $this->object->instantiate('KochTest\DI\ClassWithManySubclasses'));
 
         include_once __DIR__ . '/fixtures/ClassesForInterfaceInstantiationTest.php';
@@ -232,7 +232,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         // can be configured to prefer specific implementation
         $this->object->register('KochTest\DI\SecondImplementation');
         $this->assertInstanceOf(
-            'KochTest\DI\SecondImplementation', 
+            'KochTest\DI\SecondImplementation',
             $this->object->instantiate('KochTest\DI\InterfaceWithManyImplementations')
         );
     }
@@ -332,7 +332,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
         $nesting   = '';
 
         $erv = $this->object->instantiateParameter($parameter, $nesting);
-        
+
         $this->assertEquals('someValue', $erv);
     }
 

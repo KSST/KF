@@ -5,12 +5,12 @@ namespace KochTest\DI;
 /** wrapWith */
 interface Bare
 {
-    
+
 }
 
 class BareImplementation implements Bare
 {
-    
+
 }
 
 class WrapperForBare
