@@ -76,11 +76,11 @@ class INI
 
                 // for every element after that
                 foreach ($item as $key2 => $item2) {
-                    $content .= isNumericOrBoolean($key2, $item2);
+                    $content .= self::isNumericOrBoolean($key2, $item2);
                 }
             } else {
                 // it's a value
-                $content .= isNumericOrBoolean($key, $item);                
+                $content .= self::isNumericOrBoolean($key, $item);                
             }
         }
 
@@ -94,9 +94,9 @@ class INI
     /**
      * String formatting based on type.
      * 
-     * @param mixed $key
-     * @param mixed $item
-     * @return string
+     * @param mixed $key A Key.
+     * @param mixed $item An item.
+     * @return string The result string. No you know more.
      */
     public static function isNumericOrBoolean($key, $item)
     {
