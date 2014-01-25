@@ -80,7 +80,7 @@ class INI
                 }
             } else {
                 // it's a value
-                $content .= self::isNumericOrBoolean($key, $item);                
+                $content .= self::isNumericOrBoolean($key, $item);
             }
         }
 
@@ -90,18 +90,18 @@ class INI
         // write to file
         return (bool) file_put_contents($file, $content);
     }
-    
+
     /**
      * String formatting based on type.
-     * 
-     * @param mixed $key A Key.
-     * @param mixed $item An item.
+     *
+     * @param  mixed  $key  A Key.
+     * @param  mixed  $item An item.
      * @return string The result string. No you know more.
      */
     public static function isNumericOrBoolean($key, $item)
     {
         $content = '';
-        
+
         if (is_numeric($item) === true or is_bool($item) === true) {
             // write numeric and boolean values without quotes
             $content .= $key . ' = ' . $item . "\n";
@@ -109,7 +109,7 @@ class INI
             // it's a string - write value with quotes
             $content .= $key . ' = "' . $item . '"' . "\n";
         }
-        
+
         return $content;
     }
 
