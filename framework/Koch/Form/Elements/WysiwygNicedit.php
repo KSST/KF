@@ -46,7 +46,7 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
     public static function checkDependencies()
     {
         if (!is_file(APPLICATION_PATH . 'themes/core/javascript/nicedit/nicedit.js')) {
-            exit('NicEdit Javascript Library missing!');
+            throw new \Koch\Exception\Exception('NicEdit Javascript Library missing!');
         }
     }
 

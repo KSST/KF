@@ -47,7 +47,7 @@ class WysiwygTinymce extends Textarea implements FormElementInterface
     public static function checkDependencies()
     {
         if (!is_file(APPLICATION_PATH . 'themes/core/javascript/tiny_mce/tiny_mce.js')) {
-            exit('TinyMCE Library missing!');
+            throw new \Koch\Exception\Exception('TinyMCE Library missing!');
         }
     }
 

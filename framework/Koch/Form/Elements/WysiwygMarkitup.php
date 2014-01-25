@@ -45,7 +45,7 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
     public static function checkDependencies()
     {
         if (!is_file(APPLICATION_PATH . 'themes/core/javascript/markitup/jquery.markitup.js')) {
-            exit('MarkitUp Javascript Library missing!');
+            throw new \Koch\Exception\Exception('MarkitUp Javascript Library missing!');
         }
     }
 
