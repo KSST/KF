@@ -1,12 +1,12 @@
 <?php
-namespace KochTest\Permissions\ACL;
+namespace KochTest\Permissions\Acl;
 
-use Koch\Permissions\ACL;
+use Koch\Permissions\Acl;
 
-class ACL extends \PHPUnit_Framework_TestCase
+class Acl extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ACL
+     * @var Acl
      */
     protected $acl;
 
@@ -16,7 +16,7 @@ class ACL extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->acl = new ACL;
+        $this->acl = new Acl;
     }
 
     /**
@@ -28,6 +28,9 @@ class ACL extends \PHPUnit_Framework_TestCase
         unset($this->acl);
     }
 
+    /**
+     * @covers Koch\Permissions\Acl::addRole
+     */
     public function testAddRole()
     {
         $this->acl->addRole('Hausbewohner');
@@ -36,6 +39,9 @@ class ACL extends \PHPUnit_Framework_TestCase
         $this->acl->addRole('Hausverwalter');
     }
 
+    /**
+     * @covers Koch\Permissions\Acl::addResource
+     */
     public function testAddResource()
     {
         $this->acl->addResource('Haus');
@@ -43,24 +49,34 @@ class ACL extends \PHPUnit_Framework_TestCase
         $this->acl->addResource('Haus', 'Wohnung2');
     }
 
+    /**
+     * @covers Koch\Permissions\Acl::addRuleAllow
+     */
     public function testRuleAllow()
     {
-        $this->acl->RuleAllow('Hausverwalter', 'view', 'Haus');
-        $this->acl->Ruleallow('Mieter1', 'view', 'Wohnung1');
-        $this->acl->RuleAllow('Mieter2', 'view', 'Wohnung2');
+        $this->acl->ruleAllow('Hausverwalter', 'view', 'Haus');
+        $this->acl->ruleAllow('Mieter1', 'view', 'Wohnung1');
+        $this->acl->ruleAllow('Mieter2', 'view', 'Wohnung2');
 
     }
 
+    /**
+     * @covers Koch\Permissions\Acl::addRuleDeny
+     */
     public function testRuleDeny()
     {
-        $this->acl->RuleDeny("Mieter1", "view", "Wohnung2");
-        $this->acl->RuleDeny("Mieter2", "view", "Wohnung1");
+        $this->acl->ruleDeny("Mieter1", "view", "Wohnung2");
+        $this->acl->ruleDeny("Mieter2", "view", "Wohnung1");
     }
 
+    /**
+     * @covers Koch\Permissions\Acl::isAllowed
+     */
     public function testIsAllowed()
     {
-        // $user->isAllowed($action, $resource);
-        // role is incomming via user object (user_id -> roles table)
+        // the shorthand in the user object is $user->isAllowed($action, $resource);        
+        // the Role is incomming via the user object (user_id -> roles table)
+        // action and resource are identified by the router and exist in the TargetRoute object
         $this->acl->isAllowed($role, $action, $resource);
     }
 

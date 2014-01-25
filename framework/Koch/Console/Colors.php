@@ -85,10 +85,11 @@ class Colors
     {
         if (false === isset(self::$unicode[$symbol])) {
             throw new \InvalidArgumentException(
-            sprintf(
-                'Invalid unicode symbol specified: "%s". Expected one of (%s).',
-                $symbol,
-                implode(', ', array_keys(self::$unicode)))
+                sprintf(
+                    'Invalid unicode symbol specified: "%s". Expected one of (%s).',
+                    $symbol,
+                    implode(', ', array_keys(self::$unicode))
+                )
             );
         }
 

@@ -406,7 +406,7 @@ class HttpResponse implements HttpResponseInterface
                 case 'LOCATION':
                     header('LOCATION: '. $url);
                     #session_write_close(); // @todo figure out, if session closing is needed?
-                    \Koch\Tools\Quit::quit();
+                    \Koch\Tools\ApplicationQuit::quit();
                     break;
                 case 'REFRESH':
                     header('Refresh: 0; URL="' . $url . '"');

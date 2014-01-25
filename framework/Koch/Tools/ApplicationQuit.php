@@ -13,7 +13,7 @@
 namespace Koch\Tools;
 
 /**
- * Quit
+ * Application Quit
  *
  * ExitExpressions are nice. They allow breaking the application control flow at any time.
  * Within regular code ExitExpressions are said to be untestable and therefore they should be avoided.
@@ -23,7 +23,7 @@ namespace Koch\Tools;
  * The point of this class is to change nothing about the usage of ExitExpressions,
  * but to provide a central point of "dieing in vain", thereby reducing the number of PHP mess detections.
  */
-class Quit
+class ApplicationQuit
 {
     /**
      * Exits the application immediately.
