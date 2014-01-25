@@ -291,11 +291,11 @@ class Form implements FormInterface
     }
 
     /**
-     * Returns autocompletion state of this form.
+     * Returns the auto-completion state of this form.
      *
-     * @return boolean Returns autocompletion state of this form.
+     * @return boolean Returns the auto-completion state of this form.
      */
-    public function getAutocomplete()
+    public function isAutoComplete()
     {
         return ($this->autocomplete === true) ? 'on' : 'off';
     }

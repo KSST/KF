@@ -140,16 +140,16 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetAutocomplete()
     {
         $this->form->setAutocomplete(false);
-        $this->assertEquals('off', $this->form->getAutocomplete());
+        $this->assertEquals('off', $this->form->isAutoComplete());
     }
 
     public function testSetAutocomplete()
     {
         $this->form->setAutocomplete(false);
-        $this->assertEquals('off', $this->form->getAutocomplete());
+        $this->assertEquals('off', $this->form->isAutoComplete());
 
         $this->form->setAutocomplete(true);
-        $this->assertEquals('on', $this->form->getAutocomplete());
+        $this->assertEquals('on', $this->form->isAutoComplete());
     }
 
     public function testGetNoValidation()
