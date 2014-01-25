@@ -705,20 +705,26 @@ class Functions
                         }
 
                         while ($parent_folder_path = array_pop($folder_path)) {
-                            if (false === is_dir($parent_folder_path) and false === @mkdir($parent_folder_path, fileperms($parent_folder_path))) {
-                                die(_('Could not create the directory that should be copied (destination). Probably a permission problem.'));
+                            if (false === is_dir($parent_folder_path) and 
+                                false === @mkdir($parent_folder_path, fileperms($parent_folder_path))) {
+                                throw new \Exception(
+                                    _('Could not create the directory that should be copied (destination).' .
+                                      'Probably a permission problem.')
+                                );
                             }
                         }
 
                         $old = ini_set('error_reporting', 0);
                         if (copy($source_path, $target_path) == false) {
-                            die(_('Could not copy the directory. Probably a permission problem.'));
+                            throw new \Exception(_('Could not copy the directory. Probably a permission problem.'));
                         }
                         ini_set('error_reporting', $old);
+                        
                     } elseif (is_dir($source_path) === true) {
                         if (is_dir($target_path) === false) {
-                            if(@mkdir($target_path, fileperms($source_path)) == false
-                                );
+                            if(@mkdir($target_path, fileperms($source_path)) == false) {
+                              // nope, not an empty if statement :)                               
+                            }
                         }
                         $this->dir_copy($source_path, $target_path, $overwrite);
                     }

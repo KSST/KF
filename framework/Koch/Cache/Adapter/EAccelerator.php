@@ -45,7 +45,7 @@ class EAccelerator extends AbstractCache implements CacheInterface
         // @todo ensure eaccelerator 0.9.5 is in use
         // from 0.9.6 the user cache functions are removed
         /*if (false === function_exists('eaccelerator_info')) {
-            die('eAccelerator isn\'t compiled with info support!');
+            throw new \Exception('eAccelerator isn\'t compiled with info support!');
         } else {
             $info = eaccelerator_info();
             $version = $info['name'];
