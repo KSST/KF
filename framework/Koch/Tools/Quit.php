@@ -40,12 +40,15 @@ class Quit
     /**
      * Exits the application immediately.
      * 
-     * @param string $lastWords
-     * @param int $exitCode ExitCode (0=success)
+     * @param int $exitCode ExitCode (defaults to 0 = success).
+     * @param string $lastWords Exit Message.
      */
-    static function quit($lastWords, $exitCode = 0)
+    static function quit($exitCode = 0, $lastWords = '')
     {
-        echo $lastWords;
+        if($lastWords != '') {
+            echo $lastWords;
+        }
+        
         exit($exitCode);
     }
 }

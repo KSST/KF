@@ -260,7 +260,7 @@ abstract class AbstractGenerator extends ElementBase
         header('Content-Type: ' . $this->contentType . '; charset=' . $this->encoding);
         header('Content-Disposition: inline; filename=' . basename($filename));
         readfile($filename, 'r');
-        die();
+        \Koch\Tools\Quit::quit();
     }
 
     /**

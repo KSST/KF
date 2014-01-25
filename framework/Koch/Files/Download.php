@@ -202,8 +202,8 @@ class Download
             // Close handle
             fclose($fp);
         } catch (\Koch\Exception\Exception $e) {
-            header('HTTP/1.1 404 File Not Found');
-            die('Error, while downloading the file.');
+            // Error, while downloading the file.;
+            header('HTTP/1.1 404 File Not Found');            
         }
     }
 }
