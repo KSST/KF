@@ -6,6 +6,7 @@ use Koch\Captcha\Captcha;
 
 class CaptchaTest extends \PHPUnit_Framework_TestCase
 {
+
     /**
      * @var Captcha
      */
@@ -33,6 +34,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
+        
     }
 
     public function testSetFontFolder()
@@ -40,17 +42,17 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         // accepts string
         $this->object->setFontFolder('folder');
 
-        $expected_folders = $this->object->getFontFolders();
+        $expectedFolders = $this->object->getFontFolders();
         // note:  $expected_folders[0] is the path to the framework's font folder
-        $this->assertEquals('folder', $expected_folders[1]);
+        $this->assertEquals('folder', $expectedFolders[1]);
 
         // accepts array
         $folders = array('folder/A', 'folder/B');
 
         $this->object->setFontFolder($folders);
 
-        $expected_folders = array_merge($expected_folders, $folders);
-        $this->assertEquals($expected_folders, $this->object->getFontFolders());
+        $expectedFolders = array_merge($expectedFolders, $folders);
+        $this->assertEquals($expectedFolders, $this->object->getFontFolders());
     }
 
     /**
@@ -58,9 +60,9 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRandomFont()
     {
-       $font = $this->object->getRandomFont();
+        $font = $this->object->getRandomFont();
 
-       $this->assertContains('.ttf', $font);
+        $this->assertContains('.ttf', $font);
     }
 
     /**
@@ -68,14 +70,12 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateRandomString()
     {
-        $length = 5;
+        $length       = 5;
         $randomString = $this->object->generateRandomString($length);
 
         // test valid chars, length, excluded chars
         $constraint = $this->logicalAnd(
-             $this->isType('string'),
-             $this->matchesRegularExpression('/[a-zA-Z0-9]{5}/i'),
-             $this->logicalNot(
+            $this->isType('string'), $this->matchesRegularExpression('/[a-zA-Z0-9]{5}/i'), $this->logicalNot(
                 $this->matchesRegularExpression('/[017IO]/') // not case-[i]nsensitve
             )
         );
@@ -90,16 +90,14 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function testGenerateCaptchaImage()
     {
-       $font = $this->object->getRandomFont();
-       $this->object->setFont($font);
+        $font = $this->object->getRandomFont();
+        $this->object->setFont($font);
 
-       // base64 embedded captcha image
-       $result = $this->object->generateCaptchaImage();
-       $this->assertContains(
-           '<img alt="Embedded Captcha Image" src="data:image/png;base64,',
-           $result
-       );
-
+        // base64 embedded captcha image
+        $result = $this->object->generateCaptchaImage();
+        $this->assertContains(
+            '<img alt="Embedded Captcha Image" src="data:image/png;base64,', $result
+        );
     }
 
     /**
@@ -108,7 +106,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         // lets generate a simple image
-        $image = imagecreatetruecolor(120, 20);
+        $image      = imagecreatetruecolor(120, 20);
         $text_color = imagecolorallocate($image, 233, 14, 91);
         imagestring($image, 1, 5, 5, 'A Text String', $text_color);
 
@@ -118,21 +116,20 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         // now test output methods
 
         /* @todo
-        $render_type = 'file';
-        $this->object->render($render_type);
-        */
+          $render_type = 'file';
+          $this->object->render($render_type);
+         */
 
         $render_type = 'base64';
-        $result = $this->object->render($render_type);
+        $result      = $this->object->render($render_type);
         $this->assertContains(
-           '<img alt="Embedded Captcha Image" src="data:image/png;base64,',
-           $result
+            '<img alt="Embedded Captcha Image" src="data:image/png;base64,', $result
         );
 
         /* @todo
-        $render_type = 'png';
-        $this->object->render($render_type);
-        */
+          $render_type = 'png';
+          $this->object->render($render_type);
+         */
     }
 
     /**
@@ -140,6 +137,6 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function testCollectGarbage()
     {
-       $this->assertTrue($this->object->collectGarbage());
+        $this->assertTrue($this->object->collectGarbage());
     }
 }

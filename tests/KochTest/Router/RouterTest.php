@@ -69,7 +69,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(0 == count($this->router->getRoutes()));
     }
 
-    public function testMethodreset()
+    public function testMethodReset()
     {
         $this->assertTrue(0 == count($this->router->getRoutes()));
 
@@ -82,7 +82,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue(0 == count($this->router->getRoutes()));
     }
 
-    public function testMethodreset_resets_TargetRoute_too()
+    public function testMethodResetResetsTargetRouteToo()
     {
         TargetRoute::setAction('testclass');
         $this->assertEquals('testclass', TargetRoute::getAction());
@@ -96,20 +96,20 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMethodaddRoutes()
     {
         $routes = array(
-            '/news'                   => array(':controller'),
-            '/news/edit'              => array(':controller', ':action', 'id'),
-            '/news/edit/(:id)'        => array(':controller', ':action', 'id'),
-            '/news/admin/edit/(:id)'  => array(':controller', ':subcontroller', ':action', 'id'),
-            '/news/:year/:month'      => array(':controller', ':year', ':month'),
-            '/news/he-ad-li-ne-SEO'   => array(':controller', ':word')
+            '/news'                  => array(':controller'),
+            '/news/edit'             => array(':controller', ':action', 'id'),
+            '/news/edit/(:id)'       => array(':controller', ':action', 'id'),
+            '/news/admin/edit/(:id)' => array(':controller', ':subcontroller', ':action', 'id'),
+            '/news/:year/:month'     => array(':controller', ':year', ':month'),
+            '/news/he-ad-li-ne-SEO'  => array(':controller', ':word')
         );
 
         $this->router->addRoutes($routes);
 
-        $this->assertTrue( count($routes) === count($this->router->getRoutes()));
+        $this->assertTrue(count($routes) === count($this->router->getRoutes()));
     }
 
-    public function testMethodaddRoutes_via_ArrayAccess()
+    public function testMethodaddRoutesViaArrayAccess()
     {
         $r = $this->router;
 
@@ -166,9 +166,9 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('/route/with/(0[1-9]|1[012])', $this->router->placeholdersToRegexp('/route/with/(:day)'));
     }
 
-    public function testMethodprocessSegmentsRegExp()
+    public function testMethodProcessSegmentsRegExp()
     {
-        $segments = array('news', 'edit', '([0-9]+)');
+        $segments     = array('news', 'edit', '([0-9]+)');
         $requirements = array('controller', 'action', ':num',);
 
         $this->assertSame(
@@ -179,7 +179,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         /**
          * Static Named Route
          */
-        $segments = array(':news');
+        $segments     = array(':news');
         $requirements = array('controller');
 
         $this->assertSame(
@@ -188,7 +188,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         );
     }
 
-    public function testMethodmatch_RestRoutes()
+    public function testMethodMatchRestRoutes()
     {
         $applicationNamespace = '\KochTest\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
@@ -209,15 +209,14 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',       $route->getModule());
-        $this->assertEquals('News',       $route->getController());
-        $this->assertEquals('list',       $route->getAction());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('list', $route->getAction());
         $this->assertEquals('actionList', $route->getMethod());
-        $this->assertEquals(array(),      $route->getParameters());
-        $this->assertEquals('GET',        $route->getRequestMethod());
+        $this->assertEquals(array(), $route->getParameters());
+        $this->assertEquals('GET', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -232,14 +231,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',              $route->getModule());
-        $this->assertEquals('News',              $route->getController());
-        $this->assertEquals('actionShow',        $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionShow', $route->getMethod());
         $this->assertEquals(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('GET',               $route->getRequestMethod());
+        $this->assertEquals('GET', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/new
@@ -253,13 +251,12 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',      $route->getModule());
-        $this->assertEquals('News',      $route->getController());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
         $this->assertEquals('actionNew', $route->getMethod());
-        $this->assertEquals('GET',       $route->getRequestMethod());
+        $this->assertEquals('GET', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42/edit
@@ -274,14 +271,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',            $route->getModule());
-        $this->assertEquals('News',            $route->getController());
-        $this->assertEquals('actionEdit',      $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionEdit', $route->getMethod());
         $this->assertSame(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('GET',             $route->getRequestMethod());
+        $this->assertEquals('GET', $route->getRequestMethod());
         $this->router->reset(true);
 
         // same as above with reversed last segements
@@ -297,14 +293,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',              $route->getModule());
-        $this->assertEquals('News',              $route->getController());
-        $this->assertEquals('actionEdit',        $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionEdit', $route->getMethod());
         $this->assertEquals(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('GET',               $route->getRequestMethod());
+        $this->assertEquals('GET', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -320,14 +315,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',              $route->getModule());
-        $this->assertEquals('News',              $route->getController());
-        $this->assertEquals('actionUpdate',      $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionUpdate', $route->getMethod());
         $this->assertEquals(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('PUT',               $route->getRequestMethod());
+        $this->assertEquals('PUT', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news
@@ -336,23 +330,21 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         // Action: actionInsert()
         // Type: POST [REST Route]
         // Post_parameters are filled.
-
         // fake incoming env data
-        $_POST['id'] = '42';
+        $_POST['id']           = '42';
         $_POST['article_text'] = 'blabla';
         HttpRequest::setRequestMethod('POST');
         $this->router->prepareRequestURI('/news');
-        $route = $this->router->route();
+        $route                 = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',         $route->getModule());
-        $this->assertEquals('News',         $route->getController());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
         $this->assertEquals('actionInsert', $route->getMethod());
         $this->assertEquals(array('id' => '42', 'article_text' => 'blabla'), $route->getParameters());
-        $this->assertEquals('POST',         $route->getRequestMethod());
+        $this->assertEquals('POST', $route->getRequestMethod());
         $this->router->reset(true);
 
         // http://example.com/news/42
@@ -367,14 +359,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',              $route->getModule());
-        $this->assertEquals('News',              $route->getController());
-        $this->assertEquals('actionDelete',      $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionDelete', $route->getMethod());
         $this->assertEquals(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('DELETE',            $route->getRequestMethod());
+        $this->assertEquals('DELETE', $route->getRequestMethod());
         $this->router->reset(true);
 
         // same as above, web route
@@ -390,18 +381,17 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\News\Controller\NewsController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\News\Controller\NewsController', $route->getClassname()
         );
-        $this->assertEquals('News',              $route->getModule());
-        $this->assertEquals('News',              $route->getController());
-        $this->assertEquals('actionDelete',      $route->getMethod());
+        $this->assertEquals('News', $route->getModule());
+        $this->assertEquals('News', $route->getController());
+        $this->assertEquals('actionDelete', $route->getMethod());
         $this->assertEquals(array('id' => '42'), $route->getParameters());
-        $this->assertEquals('DELETE',            $route->getRequestMethod());
+        $this->assertEquals('DELETE', $route->getRequestMethod());
         $this->router->reset(true);
     }
 
-     public function testMethodmatch_StaticRoute()
+    public function testMethodmatch_StaticRoute()
     {
         $applicationNamespace = '\KochTest\Router\Fixtures\Application';
         Mapper::setApplicationNamespace($applicationNamespace);
@@ -420,14 +410,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\User\Controller\AccountController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\User\Controller\AccountController', $route->getClassname()
         );
-        $this->assertEquals('User',        $route->getModule());
-        $this->assertEquals('Account',     $route->getController());
+        $this->assertEquals('User', $route->getModule());
+        $this->assertEquals('Account', $route->getController());
         $this->assertEquals('actionLogin', $route->getMethod());
-        $this->assertEquals(array(),       $route->getParameters());
-        $this->assertEquals('GET',         $route->getRequestMethod());
+        $this->assertEquals(array(), $route->getParameters());
+        $this->assertEquals('GET', $route->getRequestMethod());
 
         unset($route);
         $r->reset(true);
@@ -442,14 +431,13 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $route = $this->router->route();
 
         $this->assertEquals(
-            $applicationNamespace . '\Modules\Index\Controller\IndexController',
-            $route->getClassname()
+            $applicationNamespace . '\Modules\Index\Controller\IndexController', $route->getClassname()
         );
-        $this->assertEquals('Index',       $route->getModule());
-        $this->assertEquals('Index',       $route->getController());
+        $this->assertEquals('Index', $route->getModule());
+        $this->assertEquals('Index', $route->getController());
         $this->assertEquals('actionAbout', $route->getMethod());
-        $this->assertEquals(array(),       $route->getParameters());
-        $this->assertEquals('GET',         $route->getRequestMethod());
+        $this->assertEquals(array(), $route->getParameters());
+        $this->assertEquals('GET', $route->getRequestMethod());
 
         unset($route);
         $r->reset(true);
@@ -501,31 +489,30 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->router->match());
     }
 
-    public function testMethodgenerateURL()
+    public function testMethodGenerateURL()
     {
         /*
         $url = $this->router->generateURL($url_pattern);
         $this->assertEquals('url', $url);
          */
         $this->markTestIncomplete('Test not implemented yet.');
-
     }
 
-    public function testMethodbuildURL_ModRewrite_OFF()
+    public function testMethodBuildURLWhenModRewriteOFF()
     {
         /**
          * Do not build an URL, if FQDN is passed and mod_rewrite is off.
          * like http://clansuite-dev.com/tests/index.php?mod=news&action=show
          * Just return the URL (pass-through).
          */
-        $urlstring = WWW_ROOT . 'index.php?mod=news&action=show';
+        $urlstring    = WWW_ROOT . 'index.php?mod=news&action=show';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, false);
+        $url          = $this->router->buildURL($urlstring, false);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
-        $urlstring = WWW_ROOT . 'index.php?mod=news&action=show';
+        $urlstring    = WWW_ROOT . 'index.php?mod=news&action=show';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
         /**
@@ -540,54 +527,55 @@ class RouterTest extends \PHPUnit_Framework_TestCase
          * Parameter 1 - module
          */
         // removes crappy slashes - test 1
-        $urlstring = '////news///';
+        $urlstring    = '////news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         // removes crappy slashes - test 2
-        $urlstring = '/news///';
+        $urlstring    = '/news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         // route to module
-        $urlstring = '/news';
+        $urlstring    = '/news';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news', $url);
 
         /**
          * Parameter 2 - action or controller
          */
         // route to module/action
-        $urlstring = array('/news/show' => 'module/action');
+        $urlstring    = array('/news/show' => 'module/action');
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&action=show', $url);
 
         // route to module/action/id
-        $urlstring = array('/news/show/42' => 'module/action/id');
+        $urlstring    = array('/news/show/42' => 'module/action/id');
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&amp;action=show&amp;id=42', $url);
 
         // STANDARD PARAMETER ROUTING when MODREWRITE is OFF
         // we are not leaving any parameter out, so we don't need an urlstring description array
         // route to module/controller/action/id
-        $urlstring = '/news/admin/edit/1';
+        $urlstring    = '/news/admin/edit/1';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'index.php?mod=news&amp;ctrl=admin&amp;action=edit&amp;id=1', $url);
     }
 
-    public function testMethodbuildURL_ModRewrite_ON()
+    public function testMethodBuildURLWhenModRewriteON()
     {
         // precondition
         if (defined('REWRITE_ENGINE_ON') and REWRITE_ENGINE_ON == false) {
             $this->markTestSkipped('The Test depends on MOD_REWRITE.');
-        } else {
-             $this->assertTrue(REWRITE_ENGINE_ON);
+        }
+        else {
+            $this->assertTrue(REWRITE_ENGINE_ON);
         }
 
         /**
@@ -602,43 +590,43 @@ class RouterTest extends \PHPUnit_Framework_TestCase
          * Parameter 1 - module
          */
         // removes crappy slashes - test 1
-        $urlstring = '////news///';
+        $urlstring    = '////news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news', $url);
 
         // removes crappy slashes - test 2
-        $urlstring = '/news///';
+        $urlstring    = '/news///';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news', $url);
 
         // removes crappy slashes - test 3
-        $urlstring = '/////news';
+        $urlstring    = '/////news';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news', $url);
 
         /**
          * Parameter 2 - action or sub
          */
-        $urlstring = '/news/show';
+        $urlstring    = '/news/show';
         $internal_url = false;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news/show', $url);
 
         /**
          * Internal URLs (mod_rewrite style)
          * This should by-pass...
          */
-        $urlstring = '/news/show/42';
+        $urlstring    = '/news/show/42';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news/show/42', $url);
 
-        $urlstring = '/news/admin/edit/1';
+        $urlstring    = '/news/admin/edit/1';
         $internal_url = true;
-        $url = $this->router->buildURL($urlstring, $internal_url);
+        $url          = $this->router->buildURL($urlstring, $internal_url);
         $this->assertEquals(WWW_ROOT . 'news/admin/edit/1', $url);
     }
 }
