@@ -63,7 +63,7 @@
         "mpdf/mpdf"                       : "dev-master",
         "tcpdf/tcpdf"                     : "dev-master",
         "marijnh/CodeMirror"              : "3.1",
-        "simplepie/simplepie"             : "dev-master",
+        "simplepie/simplepie"             : "dev-master"
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
