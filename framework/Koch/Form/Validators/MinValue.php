@@ -45,14 +45,14 @@ class MinValue extends Validator
 
     public function getErrorMessage()
     {
-        $msg = _('The value deceeds (is less than) the minimum value of %s.');
+        $msg = _('The value is less than the minimum value of %s.');
 
         return sprintf($msg, $this->getMinValue());
     }
 
     public function getValidationHint()
     {
-        $msg = _('Please enter a value not deceeding (being less than) the minimum value of %s.');
+        $msg = _('Please enter a value not being less than the minimum value of %s.');
 
         return sprintf($msg, $this->getMinValue());
     }
