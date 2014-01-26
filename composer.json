@@ -48,15 +48,15 @@
     "require": {
         "php"                             : ">=5.3.3",
 
-        "doctrine/orm"                    : "2.3.2",
+        "doctrine/orm"                    : "2.4.1",
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
 
         "php-gettext/php-gettext"         : "1.0.11",
         "simplepie/simplepie"             : "dev-master",
-        "smarty/smarty"                   : "dev-trunk",
-        "swiftmailer/swiftmailer"         : "v5.0.3"
+        "smarty/smarty"                   : "3.1.6",
+        "swiftmailer/swiftmailer"         : "5.0.3"
     },
     "not-required-now": {
         "imagine/imagine"                 : "~0.5.0",
