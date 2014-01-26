@@ -54,15 +54,16 @@
         "gedmo/doctrine-extensions"       : "dev-master",
 
         "php-gettext/php-gettext"         : "1.0.11",
-        "simplepie/simplepie"             : "dev-master",
-        "smarty/smarty"                   : "v3.1.6",
+
+        "smarty/smarty"                   : "3.1.16",
         "swiftmailer/swiftmailer"         : "5.0.3"
     },
     "not-required-now": {
         "imagine/imagine"                 : "~0.5.0",
         "mpdf/mpdf"                       : "dev-master",
         "tcpdf/tcpdf"                     : "dev-master",
-        "marijnh/CodeMirror"              : "3.1"
+        "marijnh/CodeMirror"              : "3.1",
+        "simplepie/simplepie"             : "dev-master",
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
