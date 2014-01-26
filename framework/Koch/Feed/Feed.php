@@ -33,6 +33,10 @@ class Feed
      */
     public static function fetchRSS($feed_url, $numberOfItems = null, $cache_duration = null, $cache_location = null)
     {
+        if (false === class_exists('SimeplePie')) {
+            throw new \Exception('This class requires the vendor library "SimplePie".');
+        }
+
         $simplepie = new \SimplePie();
 
         // if cache_location was not specified manually, set it to the default cache directory for feeds
