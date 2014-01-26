@@ -264,20 +264,6 @@ class Column extends Base
 
         $className = 'Koch\Datagrid\ColumnRenderer\\' . $rendererName;
 
-        if (false == class_exists($className, false)) {
-            $file = __DIR__ . '/ColumnRenderer/' . $rendererName . '.php';
-
-            if ( is_file($file) ) {
-                include $file;
-
-                if (false == class_exists($className, false)) {
-                    throw new Koch\Exception\Exception(_('The column renderer class does not exist: ') . $className);
-                }
-            } else {
-                throw new Koch\Exception\Exception(_('The column renderer file does not exist: ') . $file);
-            }
-        }
-
         return new $className($this);
     }
 
