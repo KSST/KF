@@ -13,11 +13,6 @@
 namespace "Koch\Form\Element\" + formelement name
         $class = '\Koch\Form\Elements\\' . $classname;
 
-        // if not already loaded, require formelement file
-        if (false === class_exists($class, false)) {
-            include $file;
-        }
-
         // instantiate the new formelement and return
         return new $class;
     }
@@ -309,23 +304,8 @@ namespace "Koch\Form\Element\" + formelement name
             $decorator = ucfirst($decorator);
         }
 
-        // construct Koch\Form\Decorator\Name
         $class = 'Koch\Form\Decorators\Form\\' . ucfirst($decorator);
 
-        // if not already loaded, require forelement file
-        if (false === class_exists($class, false)) {
-            $file = __DIR__ . '/Decorators/Form/' . $decorator . '.php';
-
-            if (is_file($file) === true) {
-                include $file;
-            }
-        }
-
-        if (false === class_exists($class, false)) {
-            throw new \RuntimeException('Form Decorator "' . $class . '" was not found.');
-        }
-
-        // instantiate the new $formdecorator and return
         return new $class();
     }
 

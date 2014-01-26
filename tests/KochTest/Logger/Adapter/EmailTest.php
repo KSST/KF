@@ -17,8 +17,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        // !class_exists('Swiftmailer') ?
-        if (false === is_file(VENDOR_PATH . 'swiftmailer/swiftmailer/lib/swift_required.php')) {
+        if (false === class_exists('Swiftmailer')) {
             $this->markTestSkipped('This test requires the vendor library "Swiftmailer".');
         }
 
