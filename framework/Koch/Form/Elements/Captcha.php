@@ -106,20 +106,11 @@ class Captcha extends FormElement implements FormElementInterface
      */
     private function captchaFactory()
     {
-        // camelCase rename
-        // cut the last 7 chars "captcha" (last 7 chars)
+        // camelCase rename,  cut the last 7 chars = "captcha"
         $name = mb_substr($this->captcha, 0, -7);
-        $name = ucfirst($name) . 'Captcha';
 
-        // construct classname
-        $classname = 'Koch\Form\Formelements\\'. $name;
+        $classname = 'Koch\Form\Formelements\\'. ucfirst($name) . 'Captcha';
 
-        // load file
-        if (class_exists($classname, false) === false) {
-            include __DIR__ . '/'. $name . '.php';
-        }
-
-        // instantiate
         $editor_formelement = new $classname();
 
         return $editor_formelement;
