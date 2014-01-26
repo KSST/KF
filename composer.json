@@ -56,7 +56,7 @@
         "php-gettext/php-gettext"         : "1.0.11",
         "simplepie/simplepie"             : "dev-master",
         "smarty/smarty"                   : "dev-trunk",
-        "swiftmailer/swiftmailer"         : "v4.3.0"
+        "swiftmailer/swiftmailer"         : "v5.0.3"
     },
     "not-required-now": {
         "imagine/imagine"                 : "~0.5.0",
