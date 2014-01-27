@@ -71,7 +71,7 @@ class Date
                     $ord = ord($matches[7]);
                     if ($ord < ord("M")) {
                         $tzOffset = (ord("A") - $ord - 1) * $oneHour;
-                    } elseif ($ord >= ord("M") AND $matches[7] != "Z") {
+                    } elseif ($ord >= ord("M") and $matches[7] != "Z") {
                         $tzOffset = ($ord - ord("M")) * $oneHour;
                     } elseif ($matches[7] == "Z") {
                         $tzOffset = 0;

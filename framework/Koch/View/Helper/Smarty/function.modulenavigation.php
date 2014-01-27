@@ -27,7 +27,7 @@ function Smarty_function_modulenavigation($params, $smarty)
 
     $file = APPLICATION_MODULES_PATH. $module . DIRECTORY_SEPARATOR . $module . '.menu.php';
 
-    if ( is_file($file) ) {
+    if (is_file($file)) {
         // this includes the file, which contains a php array name $modulenavigation
         include $file;
 

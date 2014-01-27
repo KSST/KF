@@ -195,7 +195,7 @@ class Column extends Base
      */
     public function isEnabled($feature)
     {
-        if ( !isset($this->features[$feature]) ) {
+        if (!isset($this->features[$feature])) {
             throw new Koch\Exception\Exception(_('There is no such feature in this datagrid column: ') . $feature);
         } else {
             return $this->features[$feature];
@@ -211,7 +211,7 @@ class Column extends Base
      */
     public function enableFeature($feature)
     {
-        if ( false == isset($this->features[$feature]) ) {
+        if (false == isset($this->features[$feature])) {
             return false;
         } else {
             $this->features[$feature] = true;
@@ -230,7 +230,7 @@ class Column extends Base
      */
     public function disableFeature($feature)
     {
-        if ( false == isset($this->features[$feature]) ) {
+        if (false == isset($this->features[$feature])) {
             return false;
         } else {
             $this->features[$feature] = false;

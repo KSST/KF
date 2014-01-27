@@ -45,12 +45,12 @@ class Div extends AbstractFormDecorator
         $html_deco = CR . '<div';
 
         // add class
-        if ( mb_strlen($this->getClass()) > 0 ) {
+        if (mb_strlen($this->getClass()) > 0) {
              $html_deco .= ' class="' . $this->getClass() .'"';
         }
 
         // add class
-        if ( mb_strlen($this->getId()) > 0 ) {
+        if (mb_strlen($this->getId()) > 0) {
              $html_deco .= ' id="' . $this->getId() .'"';
         }
 

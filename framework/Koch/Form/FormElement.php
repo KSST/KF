@@ -474,9 +474,10 @@ class FormElement
                     if (method_exists($this, $method)) {
                         $this->$method($value);
                     } else {
-                        throw new \RuntimeException(
-                        sprintf(
-                            'You are trying to set attribute "%s", but the setter method "%s" was not found.', $attribute, $method
+                        throw new \RuntimeException(sprintf(
+                            'You are trying to set attribute "%s", but the setter method "%s" was not found.',
+                            $attribute,
+                            $method
                         ));
                     }
                 } else { // while in production mode
@@ -945,5 +946,4 @@ class FormElement
     {
         return $this->getAttribute($name);
     }
-
 }

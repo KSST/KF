@@ -25,7 +25,7 @@ function Smarty_function_help($params, $smarty)
     $modulename = $smarty->getTemplateVars('template_of_module');
 
     // check if file exists
-    if ( $smarty->templateExists( $modulename. '/view/smarty/help.tpl') ) {
+    if ($smarty->templateExists( $modulename. '/view/smarty/help.tpl')) {
         // load the help template from modulepath ->  modulename/view/help.tpl
         return $smarty->fetch( $modulename. '/view/smarty/help.tpl');
     }

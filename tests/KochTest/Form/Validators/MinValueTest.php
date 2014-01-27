@@ -101,5 +101,4 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
             $this->validator->getValidationHint()
         );
     }
-
 }

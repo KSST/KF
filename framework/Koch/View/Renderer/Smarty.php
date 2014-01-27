@@ -262,7 +262,7 @@ class Smarty extends AbstractRenderer
      */
     public function assign($tpl_parameter, $value = null)
     {
-        if (is_array($tpl_parameter) === true or is_object($tpl_parameter) === true ) {
+        if (is_array($tpl_parameter) === true or is_object($tpl_parameter) === true) {
             return $this->renderer->assign($tpl_parameter);
         } else {
             return $this->renderer->assign($tpl_parameter, $value);

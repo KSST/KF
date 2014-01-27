@@ -62,7 +62,7 @@ class RSS091 extends Generator
         $this->descriptionTruncSize = 500;
         $feed.= '        <description>' . $this->getDescription() . "</description>\n";
         $feed.= '        <link>' . $this->link . "</link>\n";
-        if ('2.0' == substr($this->rssVersion, 0, 3) AND !empty($this->syndicationURL)) {
+        if ('2.0' == substr($this->rssVersion, 0, 3) and !empty($this->syndicationURL)) {
             $feed .= "    <atom:link href=\"$this->syndicationURL\" rel=\"self\" type=\"application/rss+xml\" />";
         }
         $now = new FeedDate();
@@ -156,7 +156,7 @@ class RSS091 extends Generator
             }
             $feed.= $this->createAdditionalElements($this->items[$i]->additionalElements, "        ");
             if ('2.0' == substr($this->rssVersion, 0, 3)
-                AND !empty($this->syndicationURL) AND $this->items[$i]->enclosure != null) {
+                and !empty($this->syndicationURL) and $this->items[$i]->enclosure != null) {
                 $feed.= '            <enclosure url="';
                 $feed.= $this->items[$i]->enclosure->url;
                 $feed.= '" length="';

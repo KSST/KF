@@ -52,11 +52,11 @@ class Html5Validation extends AbstractFormDecorator
         $ident_form = '[Error] Form has no attribute "id" or "name"!';
 
         // to identify the form use the name or id
-        if ( mb_strlen($this->getName()) > 0 ) {
+        if (mb_strlen($this->getName()) > 0) {
              $ident_form .= $this->getName();
         }
 
-        if ( mb_strlen($this->getId()) > 0 ) {
+        if (mb_strlen($this->getId()) > 0) {
              $ident_form .= $this->getId();
         }
 

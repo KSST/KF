@@ -233,7 +233,7 @@ class Base
     {
         $separator = '?';
 
-        if ( preg_match('#\?#', self::getBaseURL()) ) {
+        if (preg_match('#\?#', self::getBaseURL())) {
             $separator = '&amp;';
         }
 

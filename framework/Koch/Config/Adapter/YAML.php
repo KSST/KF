@@ -73,7 +73,7 @@ class YAML
      * Read the complete config file *.yaml
      *
      * @param  string  The yaml file.
-     * @return array   PHP array of the yaml file.
+     * @return array PHP array of the yaml file.
      */
     public static function readConfig($file)
     {

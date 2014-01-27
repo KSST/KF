@@ -67,7 +67,7 @@ class GravatarCache
      */
     public function checkIfCachable()
     {
-        if ($this->cacheable == true or 1 == ini_get("allow_url_fopen") ) {
+        if ($this->cacheable == true or 1 == ini_get("allow_url_fopen")) {
             $this->cacheable = true;
         }
 

@@ -281,7 +281,7 @@ abstract class AbstractGenerator extends ElementBase
         if ($filename == '') {
             $filename = $this->generateFilename();
         }
-        if (file_exists($filename) AND (time() - filemtime($filename) < $timeout)) {
+        if (file_exists($filename) and (time() - filemtime($filename) < $timeout)) {
             $this->redirect($filename);
         }
     }
