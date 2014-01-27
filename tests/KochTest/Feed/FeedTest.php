@@ -12,7 +12,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        parent::setUp();
+        if (!class_exists('SimplePie')) {
+            $this->markTestSkipped('This test requires the vendor dependency "SimplePie".');
+        }
 
         // valid rss feed online source
         #$this->feed_url = 'http://groups.google.com/group/clansuite/feed/rss_v2_0_msgs.xml';
@@ -23,9 +25,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodfetchRSS()
+     * @covers Koch\Feed\Feed::fetchRSS
      */
-    public function testMethodfetchRSS()
+    public function testMethodFetchRSS()
     {
         $simplepie_feed_object = Feed::fetchRSS($this->feedUrl);
 
@@ -33,9 +35,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodfetchRawRSS_withoutCaching()
+     * @covers Koch\Feed\Feed::fetchRawRSS
      */
-    public function testMethodfetchRawRSS_withoutCaching()
+    public function testMethodFetchRawRSSWithoutCaching()
     {
         // read feed
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, false);
@@ -47,9 +49,9 @@ class FeedTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodfetchRawRSS_withCaching()
+     * @covers Koch\Feed\Feed::fetchRawRSS
      */
-    public function testMethodfetchRawRSS_withCaching()
+    public function testMethodFetchRawRSSWithCaching()
     {
         // fetch and cache
         $feedcontent = Feed::fetchRawRSS($this->feedUrl, true, $this->cacheFolder);
