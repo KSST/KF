@@ -25,7 +25,7 @@ function array_search_key($needle_key, $array)
         }
 
         if (true === is_array($value)) {
-            if ( ($result = array_search_key($needle_key,$value)) !== false) {
+            if (($result = array_search_key($needle_key,$value)) !== false) {
                 return $result;
             }
         }

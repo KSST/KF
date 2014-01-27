@@ -395,7 +395,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function isSecure()
     {
-        if (isset($_SERVER['HTTPS']) and (mb_strtolower($_SERVER['HTTPS']) === 'on' or $_SERVER['HTTPS'] == '1') ) {
+        if (isset($_SERVER['HTTPS']) and (mb_strtolower($_SERVER['HTTPS']) === 'on' or $_SERVER['HTTPS'] == '1')) {
             return true;
         } else {
             return false;
@@ -431,7 +431,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function getBaseURL()
     {
-        if ( empty(self::$baseURL) ) {
+        if (empty(self::$baseURL)) {
             // 1. Determine Protocol
             self::$baseURL = self::getServerProtocol();
 
@@ -535,7 +535,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             $ip = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
         } elseif ($_SERVER['HTTP_FORWARDED'] !== null) {
             $ip = $_SERVER['HTTP_FORWARDED'];
-        } elseif (isset($_SERVER['HTTP_X_FORWARDED']) ) {
+        } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
             $ip =  $_SERVER['HTTP_X_FORWARDED'];
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];

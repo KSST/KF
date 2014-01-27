@@ -102,5 +102,4 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('The value must be smaller than 1980.', $this->validator->getValidationHint());
     }
-
 }

@@ -46,7 +46,7 @@ class SessionSecurity implements FilterInterface
          */
 
         if ($this->config['session']['check_ip'] == true) {
-            if ( !isset($_SESSION['client_ip']) ) {
+            if (!isset($_SESSION['client_ip'])) {
                 $_SESSION['client_ip'] = $_SERVER['REMOTE_ADDR'];
             } elseif ($_SERVER['REMOTE_ADDR'] != $_SESSION['client_ip']) {
                 session_destroy(session_id());
@@ -60,7 +60,7 @@ class SessionSecurity implements FilterInterface
          */
 
         if ($this->config['session']['check_browser'] == true) {
-            if ( !isset($_SESSION['client_browser']) ) {
+            if (!isset($_SESSION['client_browser'])) {
                 $_SESSION['client_browser'] = $_SERVER['HTTP_USER_AGENT'];
             } elseif ($_SERVER['HTTP_USER_AGENT'] != $_SESSION['client_browser']) {
                 session_unset();
@@ -75,7 +75,7 @@ class SessionSecurity implements FilterInterface
          */
 
         if ($this->config['session']['check_host'] == true) {
-            if ( isset($_SESSION['client_host']) === false ) {
+            if (isset($_SESSION['client_host']) === false) {
                 $_SESSION['client_host'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
             } else {
                 if (gethostbyaddr($_SERVER['REMOTE_ADDR']) != $_SESSION['client_host']) {

@@ -36,7 +36,7 @@ class HtmlTidy implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // htmltidy must be enabled in configuration
-        if ( $this->config['htmltidy']['enabled'] == 1 and extension_loaded('tidy')) {
+        if ($this->config['htmltidy']['enabled'] == 1 and extension_loaded('tidy')) {
             // bypass
             return;
         }

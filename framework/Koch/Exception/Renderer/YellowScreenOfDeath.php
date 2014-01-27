@@ -166,7 +166,7 @@ class YellowScreenOfDeath
         }
 
         // clear all output buffers
-        if ( ob_get_length() ) {
+        if (ob_get_length()) {
             ob_end_clean();
         }
 

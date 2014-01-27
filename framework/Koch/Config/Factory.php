@@ -109,7 +109,7 @@ class Factory
         $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
 
         $class = 'Koch\Config\Adapter\\' . $adapter;
-        
-        return new $class;           
+
+        return new $class;
     }
 }

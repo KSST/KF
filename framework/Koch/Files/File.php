@@ -161,22 +161,22 @@ class File
     public function moveTo($destination, $overwrite = false)
     {
         // ensure upload was valid
-        if ( false == $this->isValid()) {
+        if (false == $this->isValid()) {
             throw new \Koch\Exception\Exception('File upload was not successful.', $this->getError());
         }
 
         // ensure a valid file extension was used
-        if ( false == $this->hasValidExtension()) {
+        if (false == $this->hasValidExtension()) {
             throw new \Koch\Exception\Exception('File does not have an allowed extension.');
         }
 
         // ensure destination directory exists
-        if ( false == is_dir($destination)) {
+        if (false == is_dir($destination)) {
             throw new \Koch\Exception\Exception($destination . ' is not a directory.');
         }
 
         // ensure destination directory is writeable
-        if ( false == is_writable($destination)) {
+        if (false == is_writable($destination)) {
             throw new \Koch\Exception\Exception('Cannot write to destination directory ' . $destination);
         }
 
@@ -187,12 +187,12 @@ class File
                 throw new \Koch\Exception\Exception('File ' . $destination . ' already exists.');
             }
 
-            if ( false == is_writable($destination)) {
+            if (false == is_writable($destination)) {
                 throw new \Koch\Exception\Exception('Cannot overwrite ' . $destination);
             }
         }
 
-        if ( false == move_uploaded_file($this->temporayName, $destination)) {
+        if (false == move_uploaded_file($this->temporayName, $destination)) {
             throw new \Koch\Exception\Exception('Moving uploaded file failed.');
         }
     }

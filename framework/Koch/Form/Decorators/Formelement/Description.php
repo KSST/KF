@@ -35,7 +35,7 @@ class Description extends AbstractFormElementDecorator
     public function render($html_formelement)
     {
         // add description
-        if ( isset($this->formelement->description) == true) {
+        if (isset($this->formelement->description) == true) {
             $html_formelement .= '<br />'. CR;
             $html_formelement .= '<span class="formdescription">';
             $html_formelement .= $this->formelement->getDescription();

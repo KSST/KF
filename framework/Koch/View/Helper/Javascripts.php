@@ -85,7 +85,7 @@ class Javascripts extends Layout
                  */
                 $jquery_version_whitelist = array( '1.4.2', '1.4.1' ); // not 'latest'
 
-                if ( in_array($version, $jquery_version_whitelist) ) {
+                if (in_array($version, $jquery_version_whitelist)) {
                     self::addJS('http://code.jquery.com/jquery-'.$version.'.pack.js');
                 }
             }
@@ -116,7 +116,7 @@ class Javascripts extends Layout
              */
             $jquery_version_whitelist = array( '1.7.2', '1.8.1' ); // not 'latest'
 
-            if ( in_array($version, $jquery_version_whitelist) ) {
+            if (in_array($version, $jquery_version_whitelist)) {
                 $this->jquery_initscript  = '';
                 $this->jquery_initscript .= "    <script src=\"http://www.google.com/jsapi\"></script>\n";
                 $this->jquery_initscript .= "    <script>\n";

@@ -719,7 +719,7 @@ class Router implements RouterInterface, \ArrayAccess
             $value = '';
             $query_pair = '';
             foreach ($uri_query_array as $query_pair) {
-                if ( false !== strpos($query_pair, '=')) {
+                if (false !== strpos($query_pair, '=')) {
                     list($key, $value) = explode('=', $query_pair);
                     $uri_segments[$key] = $value;
                 }

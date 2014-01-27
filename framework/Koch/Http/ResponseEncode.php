@@ -59,7 +59,7 @@ class ResponseEncode
 
                 // if zlib.output_compression still not enabled
                 // Method 2: compression via this class
-                if ( (bool) ini_get('zlib.output_compression') === false) {
+                if ((bool) ini_get('zlib.output_compression') === false) {
                     ob_start();
                     ob_implicit_flush(0);
                 }
