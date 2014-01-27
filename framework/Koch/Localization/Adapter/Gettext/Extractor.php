@@ -26,7 +26,7 @@
 namespace Koch\Localization\Adapter\Gettext;
 
 /**
- * Gettext_Extractor_Tool
+ * Gettext Extractor
  *
  * Gettext extraction is normally performed by the "xgettext" tool.
  * http://www.gnu.org/software/hello/manual/gettext/xgettext-Invocation.html
@@ -35,7 +35,7 @@ namespace Koch\Localization\Adapter\Gettext;
  * The extractor matches certain translation functions, like translate('term') or t('term') or _('term').
  * and their counterparts in templates, often {t('term')} or {_('term')}.
  */
-class ExtractorTool
+class Extractor
 {
     /**
      * @var resource

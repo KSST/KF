@@ -24,6 +24,8 @@
 
 namespace Koch\Localization;
 
+use Koch\Localization\Adapter\Gettext\Extractor;
+
 /**
  * Koch Framework - Class for handling Gettext Extraction.
  *
@@ -39,14 +41,8 @@ namespace Koch\Localization;
  *       The extractor matches certain translation functions, like translate('term') or t('term') or _('term')
  *       and their counterparts in templates, often {t('term')} or {_('term')}.
  *    b) POT/PO/MO File Handling = reading and writing.
- *
- * The Koch_Gettext is based on and inspired by
- *  - Karel Klima's "GettextExtractor v2" (new BSD)
- *  - Drupals "translation_extraction" (GPL)
- *  - Matthias Bauer's work on PO/MO Filehandling for Wordpress during GSoC 2007 (GPL)
- *  - Heiko Rabe's "Codestyling Localization" Plugin for Wordpress (GPL)
  */
-class Gettext extends ExtractorTool
+class Gettext extends Extractor
 {
     /**
      * Setup mandatory extractors
