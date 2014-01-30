@@ -217,7 +217,7 @@ class Debug
 
         // do not use HTML tags on CLI
         if (php_sapi_name() === 'cli') {
-            if(empty($_SERVER['REMOTE_ADDR'])) {
+            if (empty($_SERVER['REMOTE_ADDR'])) {
                 $format = 'Debugging %s on line %s: %s'. "\n";
             } else {
                 $format = '<pre>';

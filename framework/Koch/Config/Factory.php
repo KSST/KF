@@ -60,7 +60,7 @@ class Factory
             throw new \Koch\Exception\Exception(_('Unknown file extension.'));
         }
         $extension = $extension[0];
-        
+
         $extensionMap = array(
           '.config.php' => 'native',
           '.info.php' => 'native',

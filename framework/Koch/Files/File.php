@@ -144,7 +144,7 @@ class File
      *
      * @param $extensions array  an array of allowed file extensions. If empty,
      * every file extension is allowed.
-     * @return object \Koch\File\File 
+     * @return object \Koch\File\File
      */
     public function setAllowedExtensions(array $extensions = array())
     {

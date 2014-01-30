@@ -26,7 +26,7 @@
 namespace Koch\Form\Elements;
 
 /**
- * 
+ *
  */
 class JqSelectImage extends Select implements FormElementInterface
 {

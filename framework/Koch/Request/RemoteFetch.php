@@ -42,18 +42,18 @@ class RemoteFetch
     public static function snoopyGetFile($url)
     {
         $remote_content = null;
-       
+
         $s = new \Snoopy();
         $s->fetch($url);
 
         if ($s->status == 200) {
             $content = $s->results;
         }
-            
+
         if (false === empty($content)) {
             return $content;
-        } 
-            
+        }
+
         return false;
     }
 
@@ -72,8 +72,8 @@ class RemoteFetch
 
         if (false === empty($content)) {
             return $content;
-        } 
-            
+        }
+
         return false;
     }
 
@@ -95,7 +95,7 @@ class RemoteFetch
         if (false === empty($content)) {
             return $content;
         }
-            
+
         return false;
     }
 

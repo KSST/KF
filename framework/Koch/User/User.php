@@ -135,7 +135,7 @@ class User
 
             // redirect
             $message = _('Your account is not yet activated.');
-            
+
             \Koch\Http\HttpResponse::redirect('/account/activation_email', 5, 403, $message);
         }
 

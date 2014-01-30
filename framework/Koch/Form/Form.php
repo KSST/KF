@@ -219,13 +219,11 @@ class Form implements FormInterface
                 'Missing argument 1. Expected a string (Name of Form) or an array (Form Description Array).'
             );
         }
-        
+
         if (is_string($name_or_attributes)) {
             // case 1: $name is a string, the name of the form
             $this->setName($name_or_attributes);
-        }
-        
-        elseif (is_array($name_or_attributes)) {
+        } elseif (is_array($name_or_attributes)) {
             // case 2: $name is an array with several attribute => value relationships
             $this->setAttributes($name_or_attributes);
         }
@@ -915,7 +913,7 @@ class Form implements FormInterface
             $this->formelements[] = $formelement;
         } elseif (is_int($position) === true) {
             // else we position the element under it's number to keep things in an order
-            
+
             // hmpf, there is already an element at this position
             if ($this->formelements[$position] !== null) {
                 // insert the new element to the requested position and reorder

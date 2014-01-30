@@ -47,7 +47,7 @@ function Smarty_function_load_module($params, $smarty)
      * Get the Ouptut of the Object->Method Call
      */
     if (method_exists($module_controller, $action)) {
-        
+
         // special handling of adminmenu
         // @todo remove this, find a way to pass params with context
         if ($classname == 'application_module_menu_admin') {
@@ -55,11 +55,11 @@ function Smarty_function_load_module($params, $smarty)
 
             if (empty($params['params']) === true) {
                 $items = null;
-            } 
-            
+            }
+
             // build array from string "param|param|etc"
             $items = explode('\|', $params['params']);
-            
+
             return $module_controller->$action($items);
         }
 
@@ -84,12 +84,12 @@ function Smarty_function_load_module($params, $smarty)
 
         if (is_file($template)) {
             return $smarty->fetch($template);
-        } 
-            
+        }
+
         $errorMsg = 'Widget Template not found.';
     }
-    
+
     $errorMsg = 'Module Action not found.';
-    
+
     return trigger_error($errorMsg . '<br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
 }

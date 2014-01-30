@@ -83,8 +83,8 @@ class ManifestManager
     /**
      * Writes the Module Registry
      *
-     * @param array $array The Module Registry Array to write.
-     * @return bool 
+     * @param  array $array The Module Registry Array to write.
+     * @return bool
      */
     public static function writeModuleRegistry($array)
     {
