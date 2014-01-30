@@ -5,7 +5,7 @@ namespace KochTest\Module;
 class AbstractControllerTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var object Controller instanceOf Koch\Module\AbstractContoller
+     * @var object Controller instanceof Koch\Module\AbstractContoller
      */
     protected $object;
 

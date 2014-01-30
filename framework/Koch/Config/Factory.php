@@ -61,7 +61,7 @@ class Factory
         }
         $extension = $extension[0];
 
-        $extensionMap = array(
+        static $extensionMap = array(
           '.config.php' => 'native',
           '.info.php' => 'native',
           '.config.ini' => 'ini',

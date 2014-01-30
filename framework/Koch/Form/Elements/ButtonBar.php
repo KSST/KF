@@ -42,7 +42,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     /**
      * Adds the objects to the buttonnames fo the initial buttons array
      *
-     * @return Koch_Formelement_Buttonbar
+     * @return   \Koch\Form\Element\Buttonbar
      */
     public function __construct()
     {
@@ -55,20 +55,15 @@ class ButtonBar extends FormElement implements FormElementInterface
     public function addButton($buttonname)
     {
         if (is_string($buttonname)) {
-            // turn buttoname to formelement name (cancelbutton => CancelButton)
-            $formelement = str_replace('button', 'Button', ucfirst($buttoname));
-            // fetch the button-formelement
+            $formelement = str_replace('button', 'Button', ucfirst($buttoname));       
             $formelement = '\Koch\Form\Elements\\' . $formelement;
-
             $formelement = new $formelement;
         }
 
-        // @todo use instanceof Koch_Formelement_Button
-        if (is_object($buttonname) and (!$buttonname instanceof Koch\Form\FormElement\Input)) {
+        if (!$formelement instanceof \Koch\Form\Element\Button) {
             throw new \Koch\Exception\Exception('The button must a be formelement object.');
         }
 
-        // attach button object to buttons array
         $this->buttons[$buttonname] = $formelement;
 
         return $this;
@@ -78,7 +73,7 @@ class ButtonBar extends FormElement implements FormElementInterface
      * Gets a button
      *
      * @param  string                     $_buttonname
-     * @return Koch_Formelement_Buttonbar
+     * @return   \Koch\Form\Element\Buttonbar
      */
     public function getButton($buttonname)
     {
@@ -105,7 +100,7 @@ class ButtonBar extends FormElement implements FormElementInterface
      * Remove a button from the stack
      *
      * @param  string                     $_buttonname
-     * @return Koch_Formelement_Buttonbar
+     * @return   \Koch\Form\Element\Buttonbar
      */
     public function removeButton($_buttonname)
     {
@@ -126,7 +121,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     /**
      * Renders the buttonbar with all registered buttons
      *
-     * @return $htmlString HTML Representation of Koch_Formelement_Buttonbar
+     * @return $htmlString HTML Representation of   \Koch\Form\Element\Buttonbar
      */
     public function render()
     {

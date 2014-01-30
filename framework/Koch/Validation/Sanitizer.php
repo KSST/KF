@@ -214,7 +214,7 @@ class Sanitizer
      * @return string
      * @see     sanitizeURL
      */
-    protected function _sanitizeURLCallback($matches)
+    protected function sanitizeURLCallback($matches)
     {
         return 'href="' . $this->sanitizeURL($matches[1]) . '"';
     }
@@ -239,7 +239,7 @@ class Sanitizer
      * @return string
      * @see     sanitizeURL
      */
-    protected function _sanitizeSrcCallback($matches)
+    protected function sanitizeSrcCallback($matches)
     {
         return 'src="' . $this->sanitizeURL($matches[1]) . '"';
     }
@@ -303,7 +303,7 @@ class Sanitizer
      * @return string
      * @see     removeDOMEvents
      */
-    protected function _removeDOMEventsCallback($matches)
+    protected function removeDOMEventsCallback($matches)
     {
         return '<' . $this->removeDOMEvents($matches[1]) . '>';
     }
