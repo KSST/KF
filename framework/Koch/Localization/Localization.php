@@ -106,7 +106,7 @@ class Localization
      * loadTextDomain
      *
      * Loads a new domain using a certain path into the domain table.
-     * 
+     *
      * Note on gettext paths:
      * Give a path/to/your/mo/files without LC_MESSAGES and locale!
      * If you use: T_bindtextdomain($this->domain, '/html/locales');

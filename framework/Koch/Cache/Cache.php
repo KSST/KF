@@ -22,7 +22,7 @@ class Cache
     /**
      * Instantiates a cache adapter
      *
-     * @param  string               $adapter The cache adapter to instantiate. Defaults to apc.
+     * @param  string              $adapter The cache adapter to instantiate. Defaults to apc.
      * @return KochCache_Interface Cache object of the requested adapter type.
      */
     public static function instantiate($adapter = 'apc')

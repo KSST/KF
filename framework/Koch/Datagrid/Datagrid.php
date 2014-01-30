@@ -769,14 +769,14 @@ class Datagrid extends Base
         $SortOrder  = '';
 
         // Set SortColumn and sortorder if in session
-        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']) and 
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']) and
             isset($_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'])) {
             $SortColumn = $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'];
             $SortOrder  = $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'];
         }
 
         // Prefer requests
-        if (isset($_REQUEST[$this->getParameterAlias('SortColumn')]) and 
+        if (isset($_REQUEST[$this->getParameterAlias('SortColumn')]) and
             isset($_REQUEST[$this->getParameterAlias('SortOrder')])) {
             $SortColumn = $_REQUEST[$this->getParameterAlias('SortColumn')];
             $SortOrder  = $_REQUEST[$this->getParameterAlias('SortOrder')];
@@ -815,13 +815,13 @@ class Datagrid extends Base
         $SearchColumn   = '';
         $SearchForValue = '';
 
-        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn']) and 
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn']) and
             isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'])) {
             $SearchColumn   = $_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn'];
             $SearchForValue = $_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'];
         }
 
-        if (isset($_REQUEST[$this->getParameterAlias('SearchColumn')]) and 
+        if (isset($_REQUEST[$this->getParameterAlias('SearchColumn')]) and
             isset($_REQUEST[$this->getParameterAlias('SearchForValue')])) {
             $SearchColumn   = $_REQUEST[$this->getParameterAlias('SearchColumn')];
             $SearchForValue = $_REQUEST[$this->getParameterAlias('SearchForValue')];

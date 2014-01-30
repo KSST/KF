@@ -161,13 +161,13 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     {
         if (true === isset($this->config[$offset])) {
             return $this->config[$offset];
-        } 
-            
+        }
+
         if (defined('DEBUG') === true and DEBUG === true) {
             throw new \InvalidArgumentException(sprintf('Array key "%s" is not defined.', $offset));
-        } 
+        }
 
-        return false;       
+        return false;
     }
 
     /**

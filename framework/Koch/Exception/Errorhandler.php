@@ -661,8 +661,8 @@ class Errorhandler
 
         return 'http://trac.clansuite.com/newticket/?' . http_build_query($array);
     }
-    
-    
+
+
 
     /**
      * This method might be registered to the shutdown handler to catch fatal errors.

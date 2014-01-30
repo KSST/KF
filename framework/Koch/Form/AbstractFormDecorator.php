@@ -161,8 +161,8 @@ abstract class AbstractFormDecorator implements DecoratorInterface
         if (method_exists($this, $method)) {
             return true;
         }
-        
-        if ($this->form instanceof Koch\Form\DecoratorInterface) {        
+
+        if ($this->form instanceof Koch\Form\DecoratorInterface) {
             return $this->form->hasMethod($method);
         }
 
