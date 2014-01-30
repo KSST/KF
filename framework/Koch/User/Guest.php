@@ -92,7 +92,7 @@ class Guest
 
         $_SESSION['user']['group']  = 1; // @todo hardcoded for now
         $_SESSION['user']['role']   = 3;
-        #$_SESSION['user']['rights'] = Koch_ACL::createRightSession( $_SESSION['user']['role'] );
+        #$_SESSION['user']['rights'] = \Koch\Permissions\Acl::fetchPermissions($_SESSION['user']['role']);
 
         #\Koch\Debug\Debug::printR($_SESSION);
         #\Koch\Debug\Debug::firebug($_SESSION);

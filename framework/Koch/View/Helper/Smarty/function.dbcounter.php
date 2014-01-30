@@ -15,7 +15,7 @@ function Smarty_function_dbcounter($params, $smarty)
          * performed on shutdown of the application.
          * We simply add one Query..
          */
-        echo Koch_Doctrine2::getNumberOfQueries() + 1;
+        echo \Koch\Doctrine\Doctrine::getNumberOfQueries() + 1;
     } else {
         echo 'Disabled';
     }

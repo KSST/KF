@@ -65,11 +65,10 @@ class Config extends AbstractConfig
         // load config from APC
         if (APC === true and apc_exists($apcAppKey)) {
             $config = apc_fetch($apcAppKey);
-
         } else {
             // load config from file
             $config = \Koch\Config\Adapter\INI::readConfig(
-                    APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
+                APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
             // set to APC
             if (APC === true) {
@@ -117,8 +116,7 @@ class Config extends AbstractConfig
         // if no modulename is set, determine the name of the current module
         $module = ($module === null) ? \Koch\Router\TargetRoute::getModule() : ucfirst($module);
 
-        $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
-        $file = realpath($file);
+        $file = realpath(APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php');
 
         return $this->writeConfig($file, $array);
     }

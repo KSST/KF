@@ -56,7 +56,7 @@ class Exception extends \Exception
 
         // we use our own exception handler here, so PHP returns exit code 0.
         // the execution will stop anyway, but let's return the correct code.
-        exit(255);
+        \Koch\Tools\ApplicationQuit::quit(255);
     }
 
     /**

@@ -82,7 +82,7 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * Array access is read only.
      *
-     * @throws Koch_Upload_Exception always
+     * @throws \Koch\Exception\Exception
      */
     public function offsetSet($offset, $value)
     {
@@ -91,8 +91,6 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
 
     /**
      * Array access is read only.
-     *
-     * @throws Koch_Upload_Exception always
      */
     public function offsetUnset($offset)
     {

@@ -28,12 +28,12 @@ class CheckboxList extends Checkbox implements FormElementInterface
         $html = '';
 
         foreach ($this->getOptions() as $key => $value) {
-            $checkbox_element = new Koch_Formelement_Checkbox();
-            $checkbox_element->setLabel($value);
-            $checkbox_element->setName($value);
-            $checkbox_element->setDescription($value);
-            $checkbox_element->setValue($key);
-            $html .= $checkbox_element;
+            $checkbox = new \Koch\Form\Element\Checkbox();
+            $checkbox->setLabel($value);
+            $checkbox->setName($value);
+            $checkbox->setDescription($value);
+            $checkbox->setValue($key);
+            $html .= $checkbox;
         }
 
         return $html;

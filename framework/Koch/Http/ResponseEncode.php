@@ -4,40 +4,52 @@
  * Koch Framework
  * Jens A. Koch © 2005 - onwards
  *
- * This file is part of https://github.com/KSST/KF
-* SPDX-License-Identifier: MIT *
+ * SPDX-License-Identifier: MIT
  *
- * *  0.68:   Applied latest fixed from the Typo3 Team.
- *  0.67:   Added Vary header to aid in caching.
- *  0.66:   Big bug fix. It wouldn't compress when it should.
- *  0.65:   Fix for PHP-4.0.5 suddenly removing the connection_timeout() function.
- *  0.62:   Fixed a typo
- *  0.61:   Detect file types more like described in the magic number files, also
- *          added detection for gzip and pk zip files.
- *  0.6:    Detect common file types that shouldn't be compressed, mainly
- *          for images and swf (Shockwave Flash doesn't really accept gzip)
- *  0.53:   Made gzip_accepted() method so everyone can detect if a page
- *          will be gzip'ed with ease.
- *  0.52:   Detection and graceful handling of improper install/missing libs
- *  0.51:   Added FreeBSD load average detection.
- *  0.5:    Passing true as the first parameter will try to calculate the
- *          compression level from the server's load average. Passing true
- *          as the second parameter will turn on debugging.
- *  0.4:    No longer uses a temp file to compress the output. Should speed
- *          thing up a bit and reduce wear on your hard disk. Also test if
- *          the http headers have been sent.
- *  0.31:   Made a small change to the tempnam() line to hopefully be more
- *          portable.
- *  0.3:    Added code for the 'x-gzip'. This is untested, I don't know of
- *          any browser that uses it but the RFC said to look out for it.
- *  0.2:    Checks for 'gzip' in the Accept-Encoding header
- *  0.1:    First working version.
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
+
+namespace Koch\Http;
+
+/**
+ * Koch Framework - Response Encode
+ *
+ * The class is used to gzip_encode the response (php output).
+ *
+ * Usage:
+ * 1. Include/require/autoload the class file (Koch_ResponseEncode).
+ * 2. Start Output buffering by calling
+ *    self::start_outputbuffering();
+ * 3. At the very end of your script you have to end the outputbuffering by calling
+ *    self::end_outputbuffering();
+ *
+ * Example:
+ *  ------------Start of file----------
+ *  |<?php
+ *  | require 'responseencode.core.php'; // or autoload
+ *  | self::start_outputbuffering();
+ *  |?>
+ *  |<html>
+ *  |... Content of Page ...
+ *  |</html>
+ *  |<?php
+ *  | self::end_outputbuffering();
+ *  |?>
+ *  -------------End of file-----------
+ *
+ * Resources:
+ *  http://www.ietf.org/rfc/rfc2616.txt (Sections: 3.5, 14.3, 14.11)
+ *  http://www.whatsmyip.org/http_compression/
+ *
+ * Requirments: PHP5 & PHP Extensions: zlib, crc
+ *
+ * Note:
+ *  TYPO3 4.5 is now using "ob_gzhandler" for compression.
+ *  That is suboptimal because using zlib.output_compression is preferred over ob_gzhandler().
  */
 class ResponseEncode
 {
-    // Version of the Koch_ResponseEncode class
-    public static $version = 0.7;
-
     /**
      * Integer holding the GZIP compression level
      * Default = -1 compressionlevel of system; normal range 0-9
@@ -188,7 +200,6 @@ class ResponseEncode
         header('Content-Encoding: ' . $encoding);
         header('Vary: Accept-Encoding');
         header('Content-Length: ' . (int) mb_strlen($gzdata));
-        header('X-Content-Encoded-By: Koch_ResponseEncode v' . self::$version);
 
         /**
          * Note by Jens-Andrï¿½ Koch:

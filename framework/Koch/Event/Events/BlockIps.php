@@ -34,9 +34,7 @@ class BlockIps implements EventInterface
 
     public function execute(\Koch\Event\Event $event)
     {
-        $request = Clansuite_CMS::getInjector()->instantiate('Koch_HttpRequest');
-
-        $ip = $request->getRemoteAddress();
+        $ip = \Koch\Http\HttpRequest::getRemoteAddress();
 
         if (in_array($ip, $this->blockedIps)) {
             $event->cancel();

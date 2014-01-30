@@ -35,7 +35,7 @@ class Profiler
         // instantiate Profiler and attach to doctrine connection
         Doctrine_Manager::connection()->setListener(new Doctrine_Connection_Profiler);
 
-        register_shutdown_function('Koch_Doctrine_Profiler::shutdown');
+        register_shutdown_function('\Koch\Doctrine\Profiler::shutdown');
     }
 
     /**

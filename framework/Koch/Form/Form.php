@@ -78,11 +78,9 @@ namespace "Koch\Form\Element\" + formelement name
         // because $data might be an object, typecast $data object to array
         if (is_object($data) === true) {
             $data = (array) $data;
-        }
-        // fetch data from POST
-        elseif (null === $data) {
-            if ('POST' === Koch_HttpRequest::getRequestMethod()) {
-                $data = Koch_HttpRequest::getPost();
+        } if (null === $data) { // fetch data from POST
+            if ('POST' === \Koch\Http\HttpRequest::getRequestMethod()) {
+                $data = \Koch\Http\HttpRequest::getPost();
             }
         }
 

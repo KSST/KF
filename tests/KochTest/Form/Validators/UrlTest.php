@@ -49,10 +49,10 @@ class UrlTest extends \PHPUnit_Framework_TestCase
         }
 
         // no dash
-        $this->assertTrue($this->validator->validate('http://clansuite.com'));
+        $this->assertTrue($this->validator->validate('http://application.com'));
 
         // 1 dash
-        $this->assertTrue($this->validator->validate('http://clan-cms.com'));
+        $this->assertTrue($this->validator->validate('http://app-lication.com'));
 
         // 2 dashes
         $this->assertTrue($this->validator->validate('http://http://a-b-c.de'));

@@ -156,7 +156,7 @@ class FormTest extends \PHPUnit_Framework_TestCase
     public function testGetNoValidation()
     {
         $this->form->setNoValidation(true);
-        $this->assertEquals('novalidate', $this->form->getNoValidation());
+        $this->assertEquals('novalidate', $this->form->isNoValidation());
     }
 
     public function testSetNoValidation()
@@ -164,12 +164,12 @@ class FormTest extends \PHPUnit_Framework_TestCase
         $this->form->setNoValidation(false);
 
         // via getter - returns empty string
-        $this->assertEquals('', $this->form->getNoValidation());
+        $this->assertEquals('', $this->form->isNoValidation());
 
         $this->form->setNoValidation(true);
 
         // via getter - returns string
-        $this->assertEquals('novalidate', $this->form->getNoValidation());
+        $this->assertEquals('novalidate', $this->form->isNoValidation());
     }
 
     public function testGetAttribute()

@@ -34,7 +34,7 @@ namespace Koch\Session;
  *
  * Inspired by Ruby on Rails Flash Messages.
  */
-class FlashMessages /* extends Koch_Session */
+class FlashMessages
 {
     /**
      * @var contains $session array of $flashmessages

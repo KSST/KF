@@ -35,14 +35,11 @@ function Smarty_function_load_module($params, $smarty)
     $classname = \Koch\Mvc\Mapper::mapControllerToClassname($module, $controller);
 
     if (class_exists($classname) === false) {
-        return '<br/>Widget Loading Error.<br/>Module missing or misspelled? <strong>' . $module .' ' . $controller . '</strong>';
+        return '<br/>Widget Loading Error. <br/>Module missing or misspelled? (' . $module .' > ' . $controller . ')';
     }
 
     // Instantiate Class
-    $module_controller = new $classname(
-                \Clansuite\Application::getInjector()->instantiate('Koch\Http\HttpRequest'),
-                \Clansuite\Application::getInjector()->instantiate('Koch\Http\HttpResponse')
-    );
+    $module_controller = new $classname(new \Koch\Http\HttpRequest, new \Koch\Http\HttpResponse);
     $module_controller->setView($smarty);
     //$module_controller->setModel($module);
 
@@ -50,18 +47,20 @@ function Smarty_function_load_module($params, $smarty)
      * Get the Ouptut of the Object->Method Call
      */
     if (method_exists($module_controller, $action)) {
-        // exceptional handling of parameters and output for adminmenu
-        if ($classname == 'clansuite_module_menu_admin') {
-            $parameters = array();
+        
+        // special handling of adminmenu
+        // @todo remove this, find a way to pass params with context
+        if ($classname == 'application_module_menu_admin') {
+            $items = array();
 
-            // Build a Parameter Array from Parameter String like: param|param|etc
-            if (empty($params['params'])) {
-                $parameters = null;
-            } else {
-                $parameters = explode('\|', $params['params']);
-            }
-
-            return $module_controller->$action($parameters);
+            if (empty($params['params']) === true) {
+                $items = null;
+            } 
+            
+            // build array from string "param|param|etc"
+            $items = explode('\|', $params['params']);
+            
+            return $module_controller->$action($items);
         }
 
         // Call the Action on the Module
@@ -85,10 +84,12 @@ function Smarty_function_load_module($params, $smarty)
 
         if (is_file($template)) {
             return $smarty->fetch($template);
-        } else {
-            return trigger_error('Widget Template not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
-        }
-    } else {
-        return trigger_error('Module Action not found. <br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
+        } 
+            
+        $errorMsg = 'Widget Template not found.';
     }
+    
+    $errorMsg = 'Module Action not found.';
+    
+    return trigger_error($errorMsg . '<br /> ' . $classname . ' -> ' . $action . '(' . $items . ')');
 }

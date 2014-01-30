@@ -23,7 +23,7 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         $this->object = new Staging;
 
         // set faked server name to environment to test getFilename()
-        $_SERVER['SERVER_NAME'] = 'www.clansuite-dev.com';
+        $_SERVER['SERVER_NAME'] = 'www.application-dev.com';
 
          vfsStreamWrapper::register();
 
@@ -93,11 +93,11 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         $this->assertEquals(Staging::getFilename(), 'development.php');
 
         Staging::setFilename(null);
-        $_SERVER['SERVER_NAME'] = 'clansuite-stage.com';
+        $_SERVER['SERVER_NAME'] = 'application-stage.com';
         $this->assertEquals(Staging::getFilename(), 'staging.php');
 
         Staging::setFilename(null);
-        $_SERVER['SERVER_NAME'] = 'clansuite-intern.com';
+        $_SERVER['SERVER_NAME'] = 'application-intern.com';
         $this->assertEquals(Staging::getFilename(), 'intern.php');
 
     }
@@ -133,7 +133,7 @@ host = "localhost"
 driver = "pdo_mysql"
 user = "root"
 password = 123
-dbname = "clansuitetest"
+dbname = "applicationtest"
 prefix = "cs_"
 charset = "UTF8"
 

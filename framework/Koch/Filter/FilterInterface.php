@@ -16,7 +16,7 @@ use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 
 /**
- * Interface Koch_Filter_Interface
+ * Interface \Koch\Filter\FilterInterface
  */
 interface FilterInterface
 {

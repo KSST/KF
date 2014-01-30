@@ -13,7 +13,7 @@
 namespace Koch\Datagrid\ColumnRenderer;
 
 /**
- * Interface for a Clansuite Datagrid Column Renderer
+ * Interface for a Datagrid Column Renderer
  */
 interface ColumnRendererInterface
 {

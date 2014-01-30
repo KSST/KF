@@ -41,7 +41,7 @@ class Localization
         self::$config = $config;
 
         // Set Locale Defaults
-        $this->domain = 'clansuite';
+        $this->domain = strtolower(APPLICATION_NAME);
         $this->encoding = self::$config['locale']['outputcharset'];
 
         // Get Locale
@@ -105,17 +105,12 @@ class Localization
     /**
      * loadTextDomain
      *
-     * This loads a new domain with a certain path into the domain table.
-     *
-     * Note: gettext paths
-     *
+     * Loads a new domain using a certain path into the domain table.
+     * 
+     * Note on gettext paths:
      * Give a path/to/your/mo/files without LC_MESSAGES and locale!
-     *
-     * If you use: T_bindtextdomain('clansuite', '/html/locales');
-     * The mo.file would be looked up in /html/locales/de_DE/LC_MESSAGES/clansuite.mo
-     * The $domain string specifies the mo-filename => "$domain.mo"
-     * So if $domain = 'clansuite'; => clansuite.mo
-     *
+     * If you use: T_bindtextdomain($this->domain, '/html/locales');
+     * The mo.file would be looked up in /html/locales/de_DE/LC_MESSAGES/{$this->domain}.mo
      * @link http://www.php.net/function.bindtextdomain
      */
     public function loadTextDomain($domain, $locale, $module = null)
@@ -157,7 +152,7 @@ class Localization
      *  getLanguage
      *
      *  This function will return a language, which is supported by both
-     *  the browser and the clansuite language system.
+     *  the browser and the application language system.
      *
      *  @param $supported   (optional) An array with the list of supported languages.
      *                      Default Setting is 'en' for english.

@@ -13,11 +13,7 @@
 namespace Koch\Form\Elements;
 
 /**
- *  Koch_Form
- *  |
- *  \- Koch_Formelement_Select
- *     |
- *     \- Koch_Formelement_JQSelectImage
+ * 
  */
 class JqSelectImage extends Select implements FormElementInterface
 {
@@ -37,7 +33,7 @@ class JqSelectImage extends Select implements FormElementInterface
     {
         $dir = new \Koch\Files\Directory();
 
-        $files = $dir->getFiles( $this->getDirectory(), true );
+        $files = $dir->getFiles($this->getDirectory(), true);
 
         return $files;
     }

@@ -68,7 +68,7 @@ abstract class AbstractGenerator extends ElementBase
     */
     public $cssStyleSheet = "";
 
-    public $items = Array();
+    public $items = array();
 
     /**
      * This feed's MIME content type.
@@ -89,7 +89,7 @@ abstract class AbstractGenerator extends ElementBase
      * if $value contains markup. This may be abused to embed tags not implemented by
      * the FeedCreator class used.
      */
-    public $additionalElements = Array();
+    public $additionalElements = array();
 
     public function __construct($identifier = '')
     {

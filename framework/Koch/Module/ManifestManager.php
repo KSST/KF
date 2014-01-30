@@ -63,19 +63,22 @@ class ManifestManager
      */
     public static function readModuleRegistry()
     {
-        return Clansuite_CMS::getInjector()->instantiate('Koch\Config')
-                ->readConfig(APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
+        return \Koch\Config\Config()->readConfig(
+            APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php'
+        );
     }
 
     /**
      * Writes the Module Registry
      *
      * @param array $array The Module Registry Array to write.
+     * @return bool 
      */
     public static function writeModuleRegistry($array)
     {
-        Clansuite_CMS::getInjector()->instantiate('Koch\Config')
-         ->writeConfig(APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php');
+        return \Koch\Config\Config()->writeConfig(
+            APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php'
+        );
     }
 
     /**
@@ -86,8 +89,7 @@ class ManifestManager
      */
     public static function readModuleConfig($modulename)
     {
-        return Clansuite_CMS::getInjector()->instantiate('Koch\Config')
-                ->readModuleConfig($modulename);
+        return \Koch\Config\Config()->readModuleConfig($modulename);
     }
 
     /**
@@ -271,12 +273,12 @@ class ManifestManager
 
             // hasInfo
             $module_infofile = $modulepath . '/' . $modulename . '.info.php';
-            $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
+            $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config);
 
             if (is_file($module_infofile) === true) {
                 #\Koch\Debug\Debug::firebug($module_infofile);
 
-                self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
+               self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
             } else { // create file in DEV MODE
                 // if the info file for a module does not exists yet, create it
                 $config_object->writeConfig($module_infofile);

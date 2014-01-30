@@ -48,15 +48,17 @@ class Factory
             throw new \Koch\Exception\Exception(_('Unknown file extension.'));
         }
         $extension = $extension[0];
+        
+        $extensionMap = array(
+          '.config.php' => 'native',
+          '.info.php' => 'native',
+          '.config.ini' => 'ini',
+          '.config.xml' => 'xml',
+          '.config.yaml' => 'yaml'
+        );
 
-        if ($extension == '.config.php' or $extension == '.info.php') {
-            $adapter = 'native';
-        } elseif ($extension == '.config.ini') {
-            $adapter = 'ini';
-        } elseif ($extension == '.config.xml') {
-            $adapter = 'xml';
-        } elseif ($extension == '.config.yaml') {
-            $adapter = 'yaml';
+        if ($extensionMap[$extension] === true) {
+            $adapter = $extensionMap[$extension];
         } else {
             throw new \Koch\Exception\Exception(
             _('No handler for that type of configuration file found (' . $extension . ')')

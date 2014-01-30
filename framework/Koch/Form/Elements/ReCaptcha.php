@@ -27,12 +27,12 @@ class ReCaptcha extends Captcha implements FormElementInterface
     private $privateKey;
 
     /**
-     * @var object Instance of Koch_HttpRequest Object.
+     * @var object Instance of \Koch\Http\HttpRequest Object.
      */
 
     public function __construct()
     {
-        $this->request = Clansuite_CMS::getInjector()->instantiate('Koch_HttpRequest');
+        $this->request = Clansuite_CMS::getInjector()->instantiate('\Koch\Http\HttpRequest');
 
         // Load Recaptcha Library
         include_once VENDOR_PATH . '/recaptcha/recaptchalib.php';

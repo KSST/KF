@@ -45,7 +45,7 @@ class File extends Input implements FormElementInterface
      * There are several different formelements available to upload files:
      *
      * @param $uploadType ajaxupload, apc, uploadify, html
-     * @return Koch_Formelement_File
+     * @return object \Koch\Form\Element\File
      */
     public function setUploadType($uploadType)
     {

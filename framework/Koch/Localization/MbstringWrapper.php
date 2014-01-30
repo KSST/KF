@@ -10,6 +10,7 @@
  * *
  * *
  * */
+
 /**
  * Class provides MB_STRING Wrapper Methods.
  *
@@ -18,8 +19,6 @@
  * Here we define some mbstring wrapper functions, which use custom utf8 methods internally
  * and rebuild the mbstring behaviour. This means that calls to mbstring functions throughout
  * the sourcecode are being replaced by our own UTF8 functions.
- *
- * The UTF8 functions are stored in the class Koch_UTF8.
  *
  * The following functions are declared for global usage:
  *

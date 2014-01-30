@@ -144,7 +144,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * ArrayAccess::offsetExists()
      *
      * @param  mixed $offset
-     * @return mixed Clansuite_Config value
+     * @return mixed value
      */
     public function offsetExists($offset)
     {
@@ -155,20 +155,19 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * ArrayAccess::offsetGet()
      *
      * @param  mixed $offset
-     * @return mixed Clansuite_Config value
+     * @return mixed value
      */
     public function offsetGet($offset)
     {
         if (true === isset($this->config[$offset])) {
             return $this->config[$offset];
-        } else {
-            /*if (defined('DEBUG') === true and DEBUG === true) {
-                throw new \InvalidArgumentException(sprintf('Array Key "%s" is not defined.', $offset));
-            } else {*/
+        } 
+            
+        if (defined('DEBUG') === true and DEBUG === true) {
+            throw new \InvalidArgumentException(sprintf('Array key "%s" is not defined.', $offset));
+        } 
 
-                return false;
-            //}
-        }
+        return false;       
     }
 
     /**

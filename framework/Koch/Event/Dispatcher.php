@@ -27,7 +27,7 @@ namespace Koch\Event;
 class Dispatcher
 {
     /**
-     * @var object Instance of Koch_Eventdispatcher (singleton)
+     * @var object Instance of \Koch\Event\Dispatcher
      */
     private static $instance = null;
 
@@ -78,7 +78,7 @@ class Dispatcher
      * function handler3() {
      * echo "C";
      * }
-     * $event = Koch_Eventdispatcher::instantiate();
+     * $event = \Koch\Event\Dispatcher::instantiate();
      * $event->addEventHandler('event_name1', 'handler1');
      * $event->triggerEvent('event_name1'); // Output: A
      * $event->addEventHandler('event_name2', 'handler2');
@@ -88,7 +88,7 @@ class Dispatcher
      * </code>
      *
      * @param $eventName    Name of the Event
-     * @param $eventobject object|string Instance of Koch_Event or filename string
+     * @param $eventobject object|string Instance of \Koch\Event\Event or filename string
      */
     public function addEventHandler($eventName, EventInterface $event_object)
     {
@@ -109,7 +109,7 @@ class Dispatcher
      * function handler1() {
      * echo "A";
      * }
-     * $event = Koch_Eventdispatcher::instantiate();
+     * $event = \Koch\Event\Dispatcher::instantiate();
      * $event->addEventHandler('event_name', 'handler1');
      * $event->triggerEvent('event_name'); // Output: A
      * $event->removeEventHandler('event_name', 'handler1');
@@ -146,7 +146,7 @@ class Dispatcher
      * function handler1() {
      * echo "A";
      * }
-     * $event = Koch_Eventdispatcher::instantiate();
+     * $event = \Koch\Event\Dispatcher::instantiate();
      * $event->addEventHandler('event_name', 'handler1');
      * $event->triggerEvent('event_name'); // Output: A
      * </code>
@@ -160,7 +160,7 @@ class Dispatcher
     {
         /**
          * init a new event object with constructor settings
-         * if $event is not an instance of Koch_Event.
+         * if $event is not an instance of \Koch\Event\Event.
          * $event string will be the $name inside $event object,
          * accessible with $event->getName();
          */

@@ -43,7 +43,7 @@ class PHPArray extends Form implements FormGeneratorInterface
 
             // unset the key form inside form_array
             // because the "form" description is no longer needed
-            // parent Koch_Form is already informed
+            // parent \Koch\Form\Form is already informed
             unset($form_array['form']);
 
             $this->validateArrayAndgenerateForm($form_array);
@@ -194,7 +194,7 @@ class PHPArray extends Form implements FormGeneratorInterface
                  * optional because: the default decorator would be active
                  */
                 if ($form_array_element['decorator'] !== null) {
-                    if ($form_array_element['decorator'] instanceOf Koch_Formelement_Decorator) {
+                    if ($form_array_element['decorator'] instanceof Koch_Formelement_Decorator) {
                         $formelement->setDecorator($form_array_element['decorator']);
                     }
                 }

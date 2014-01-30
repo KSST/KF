@@ -94,7 +94,7 @@ class Debug
 
         // do not exit, if we are inside a test run
         if (defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
-            exit;
+            \Koch\Tools\ApplicationQuit::quit();
         }
     }
 
@@ -132,7 +132,7 @@ class Debug
         // do not exit, if we are inside a test run
         if (defined('UNIT_TEST_RUN') === false or UNIT_TEST_RUN === false) {
             if ($exit === true) {
-                exit;
+                \Koch\Tools\ApplicationQuit::quit();
             }
         }
     }
@@ -204,11 +204,14 @@ class Debug
         $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
 
         // do not use HTML tags on CLI
-        if (php_sapi_name() == 'cli' && empty($_SERVER['REMOTE_ADDR'])) {
-            $format = 'Debugging %s on line %s: %s'. "\n";;
-        } else {
-            $format = '<pre><b>Debugging <font color="red">%s</font> on line <font color="red">%s</font>:</b>' . "\n";
-            $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
+        if (php_sapi_name() === 'cli') {
+            if(empty($_SERVER['REMOTE_ADDR'])) {
+                $format = 'Debugging %s on line %s: %s'. "\n";
+            } else {
+                $format = '<pre>';
+                $format .= '<b>Debugging <font color="red">%s</font> on line <font color="red">%s</font>:</b>' . "\n";
+                $format .= '<div style="background: #f5f5f5; padding: 0.2em 0em;">%s</div></pre>';
+            }
         }
 
         echo sprintf($format, basename($file), $line, htmlspecialchars($origin_of_call));

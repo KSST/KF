@@ -45,16 +45,16 @@ class Loader
                 $filename = $array[0];
 
                 // array[1] classname
-                $classname = \Koch\Functions\Functions::ensurePrefixedWith($array[1], 'Koch_Event_');
+                $classname = \Koch\Functions\Functions::ensurePrefixedWith($array[1], '\Koch\Event\Event');
 
                 // load eventhandler
-                Koch_Loader::requireFile($filename, $classname);
+                \Koch\Autoload\Loader::requireFile($filename, $classname);
 
                 // instantiate eventhandler
                 $event_object = new $classname();
 
                 // add the eventhandler to the dispatcher
-                $eventdispatcher = Koch_Eventdispatcher::instantiate();
+                $eventdispatcher = \Koch\Event\Dispatcher::instantiate();
                 $eventdispatcher->addEventHandler($event, $event_object);
             }
         }
@@ -91,7 +91,7 @@ class Loader
     public static function loadAllModuleEvents()
     {
         // fetch all activated modules
-        $modules = Koch_ModuleInfoController::getAllActivatedModules();
+        $modules = \Koch\Module\ManifestManager::getAllActivatedModules();
 
         // load eventhandlers for each module
         foreach ($modules as $module) {

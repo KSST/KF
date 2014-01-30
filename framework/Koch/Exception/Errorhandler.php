@@ -266,12 +266,12 @@ class Errorhandler
                 $html .= '<td>[A PHP Core Function Call]</td>';
             } else {
 
-                 // replace trace type string with it's operator
-                 if ($trace[$i]['type'] === 'dynamic') {
-                     $trace[$i]['type'] = '->';
-                 } else {
-                     $trace[$i]['type'] = '::';
-                 }
+                // replace trace type string with it's operator
+                if ($trace[$i]['type'] === 'dynamic') {
+                    $trace[$i]['type'] = '->';
+                } else {
+                    $trace[$i]['type'] = '::';
+                }
 
                 $html .= '<td>';
 
@@ -661,6 +661,8 @@ class Errorhandler
 
         return 'http://trac.clansuite.com/newticket/?' . http_build_query($array);
     }
+    
+    
 
     /**
      * This method might be registered to the shutdown handler to catch fatal errors.

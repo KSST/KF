@@ -371,7 +371,7 @@ class Datagrid extends Base
         foreach ($acceptedOptions as $value) {
             if (false === isset($options[$value])) {
                 throw new Koch\Exception\Exception(
-                'Datagrid Option(s) missing. Valid options are: ' . var_export($acceptedOptions, true)
+                    'Datagrid Option(s) missing. Valid options are: ' . var_export($acceptedOptions, true)
                 );
             }
         }
@@ -479,7 +479,7 @@ class Datagrid extends Base
         /**
          * get QueryBuilder so that we can append (sorting, search etc) to the Query
          */
-        $this->queryBuilder = Clansuite_CMS::getEntityManager()
+        $this->queryBuilder = \Koch\Doctrine\Doctrine::getEntityManager()
             ->createQueryBuilder()
             ->select('a')
             ->from($this->getDoctrineEntityName(), 'a');
@@ -769,19 +769,21 @@ class Datagrid extends Base
         $SortOrder  = '';
 
         // Set SortColumn and sortorder if in session
-        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']) and isset($_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'])) {
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SortColumn']) and 
+            isset($_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'])) {
             $SortColumn = $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'];
             $SortOrder  = $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder'];
         }
 
         // Prefer requests
-        if (isset($_REQUEST[$this->getParameterAlias('SortColumn')]) and isset($_REQUEST[$this->getParameterAlias('SortOrder')])) {
+        if (isset($_REQUEST[$this->getParameterAlias('SortColumn')]) and 
+            isset($_REQUEST[$this->getParameterAlias('SortOrder')])) {
             $SortColumn = $_REQUEST[$this->getParameterAlias('SortColumn')];
             $SortOrder  = $_REQUEST[$this->getParameterAlias('SortOrder')];
         }
 
         // Check for valid formats of key and value
-        if (($SortColumn != '' and $SortOrder != '') AND
+        if (($SortColumn != '' and $SortOrder != '') and
             ( preg_match('#^([0-9a-z_]+)#i', $SortColumn) and preg_match('#([a-z]+)$#i', $SortOrder) )) {
             $_SESSION['Datagrid_' . $this->getAlias()]['SortColumn'] = $SortColumn;
             $_SESSION['Datagrid_' . $this->getAlias()]['SortOrder']  = $SortOrder;
@@ -813,12 +815,14 @@ class Datagrid extends Base
         $SearchColumn   = '';
         $SearchForValue = '';
 
-        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn']) and isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'])) {
+        if (isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn']) and 
+            isset($_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'])) {
             $SearchColumn   = $_SESSION['Datagrid_' . $this->getAlias()]['SearchColumn'];
             $SearchForValue = $_SESSION['Datagrid_' . $this->getAlias()]['SearchForValue'];
         }
 
-        if (isset($_REQUEST[$this->getParameterAlias('SearchColumn')]) and isset($_REQUEST[$this->getParameterAlias('SearchForValue')])) {
+        if (isset($_REQUEST[$this->getParameterAlias('SearchColumn')]) and 
+            isset($_REQUEST[$this->getParameterAlias('SearchForValue')])) {
             $SearchColumn   = $_REQUEST[$this->getParameterAlias('SearchColumn')];
             $SearchForValue = $_REQUEST[$this->getParameterAlias('SearchForValue')];
         }
@@ -834,7 +838,8 @@ class Datagrid extends Base
                 'andWhere',
                 // string = ANDWHERE a.fieldname LIKE :SearchForValue
                 $this->queryBuilder->expr()->like(
-                    'a.' . $this->getColumn($SearchColumn)->getSortField(), '%' . $SearchForValue . '%'
+                    'a.' . $this->getColumn($SearchColumn)->getSortField(),
+                    '%' . $SearchForValue . '%'
                 )
             );
 

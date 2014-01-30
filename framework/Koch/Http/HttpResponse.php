@@ -341,7 +341,7 @@ class HttpResponse implements HttpResponseInterface
             //  split at tunneling separator
             $array = explode('#', $message);
             // results in: array[0] = type and array[1] = message)
-            Koch_Flashmessages::setMessage($array[0], $array[1]);
+            \Koch\Session\FlashMessages::setMessage($array[0], $array[1]);
             // return the message
             return $array[1];
         }
@@ -383,7 +383,7 @@ class HttpResponse implements HttpResponseInterface
     public static function redirect($url, $time = 0, $statusCode = 303, $message = null, $mode = null)
     {
         // convert from internal slashed format to external URL
-        $url = Koch_Router::buildURL($url, false);
+        $url = \Koch\Router\Router::buildURL($url, false);
 
         $filename = '';
         $linenum = '';
