@@ -29,8 +29,8 @@ function Smarty_function_triggerevent($params, $smarty)
     $context['params'] = $params;
 
     // pass the modulename as info
-    $info = array();
-    $info['modulename'] = Koch_Module_Controller_Resolver::getModuleName();
+    //$info = array();
+    //$info['modulename'] = getModuleName();
 
     /**
      * direct return to the template
@@ -39,5 +39,5 @@ function Smarty_function_triggerevent($params, $smarty)
      * @see todo at context above
      */
 
-    return Koch_Eventdispatcher::instantiate()->triggerEvent($params['name'], $context, $info);
+    return \Koch\Event\Dispatcher::instantiate()->triggerEvent($params['name'], $context, $info);
 }

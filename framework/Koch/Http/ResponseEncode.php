@@ -29,11 +29,6 @@ namespace Koch\Http;
  *
  * The class is used to gzip_encode the response (php output).
  *
- * @author      Sandy McArthur, Jr. <Leknor@Leknor.com>
- * @author      Jens-Andrï¿½ Koch <vain@clansuite.com>
- * @copyright   Copyright 2001 (c) McArthur. Copyright 2009 (c) Koch.
- * @license     GNU/GPL v2 or (at your option) any later version, see "/doc/LICENSE"
- *
  * Usage:
  * 1. Include/require/autoload the class file (Koch_ResponseEncode).
  * 2. Start Output buffering by calling
@@ -61,51 +56,12 @@ namespace Koch\Http;
  *
  * Requirments: PHP5 & PHP Extensions: zlib, crc
  *
- * Note by Jens-Andre Koch:
+ * Note:
  *  TYPO3 4.5 is now using "ob_gzhandler" for compression.
  *  That is suboptimal because using zlib.output_compression is preferred over ob_gzhandler().
- *
- * Change Log:
- *          Removed determining the compression level based on current server load.
- *  0.7:    Nearly complete rewrite and clean-up. Commented.
- *          Changed methods to "private static".
- *          Compression info comment now passed via header.
- *          Removed second/third parameter.
- *          Removed unused class properties.
- *          Added start_outputbuffering() and end_outputbuffering methods.
- *          Renamed class from gzip_encode to Koch_ResponseEncode.
- *          Relicensed under GNU/GPL v2 or (at your option) any later version.
- *  0.68:   Applied latest fixed from the Typo3 Team.
- *  0.67:   Added Vary header to aid in caching.
- *  0.66:   Big bug fix. It wouldn't compress when it should.
- *  0.65:   Fix for PHP-4.0.5 suddenly removing the connection_timeout() function.
- *  0.62:   Fixed a typo
- *  0.61:   Detect file types more like described in the magic number files, also
- *          added detection for gzip and pk zip files.
- *  0.6:    Detect common file types that shouldn't be compressed, mainly
- *          for images and swf (Shockwave Flash doesn't really accept gzip)
- *  0.53:   Made gzip_accepted() method so everyone can detect if a page
- *          will be gzip'ed with ease.
- *  0.52:   Detection and graceful handling of improper install/missing libs
- *  0.51:   Added FreeBSD load average detection.
- *  0.5:    Passing true as the first parameter will try to calculate the
- *          compression level from the server's load average. Passing true
- *          as the second parameter will turn on debugging.
- *  0.4:    No longer uses a temp file to compress the output. Should speed
- *          thing up a bit and reduce wear on your hard disk. Also test if
- *          the http headers have been sent.
- *  0.31:   Made a small change to the tempnam() line to hopefully be more
- *          portable.
- *  0.3:    Added code for the 'x-gzip'. This is untested, I don't know of
- *          any browser that uses it but the RFC said to look out for it.
- *  0.2:    Checks for 'gzip' in the Accept-Encoding header
- *  0.1:    First working version.
  */
 class ResponseEncode
 {
-    // Version of the Koch_ResponseEncode class
-    public static $version = 0.7;
-
     /**
      * Integer holding the GZIP compression level
      * Default = -1 compressionlevel of system; normal range 0-9
@@ -256,7 +212,6 @@ class ResponseEncode
         header('Content-Encoding: ' . $encoding);
         header('Vary: Accept-Encoding');
         header('Content-Length: ' . (int) mb_strlen($gzdata));
-        header('X-Content-Encoded-By: Koch_ResponseEncode v' . self::$version);
 
         /**
          * Note by Jens-Andrï¿½ Koch:

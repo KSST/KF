@@ -76,7 +76,7 @@ class Javascripts extends Layout
      * 1) incompatibilities of the latest version to dependent local javascripts
      * 2) the download depends on jquery.com and not on your own domain
      * 3) this adds one external reference to the page loading and requires a DNS-lookup
-     * 4) if you use clansuite as intranet system or offline, it's simply not loadable
+     * 4) if you use the applicaiton as an intranet system or offline, it will simply be not loadable
      *
      * The best practice usage is to provide a version number.
      * The versions are whitelisted to keep a certain compatibilty frame.

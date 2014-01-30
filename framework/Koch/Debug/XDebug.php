@@ -277,7 +277,7 @@ class XDebug
             echo '<td class="td1">Memory Usage (before)</td>';
             echo '<td class="td2">' . self::$xdebug_memory_before . ' MB</td>';
             echo '</tr><tr>';
-            echo '<td class="td1">Memory Usage by Clansuite</td>';
+            echo '<td class="td1">Memory Usage by ' . APPLICATION_NAME . ' </td>';
             echo '<td class="td2">' . self::roundMB(xdebug_memory_usage()) . ' MB</td>';
             echo '</tr><tr>';
             echo '<td class="td1">Memory Peak</td>';
@@ -320,7 +320,8 @@ class XDebug
          * (b) the order of their appearance in the constants table.
          */
         $aCategoriesToShow = array(
-            'user', // user category contains clansuite system defines - leave at first position!
+            'user', // the user category contains application system defines - leave at first position!
+            // @todo user might be renamed to application
             'apc',
             'mbstring',
             'xdebug',

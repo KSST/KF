@@ -31,7 +31,7 @@ use Koch\Event\EventInterface;
  * Koch Framework - Event for Authentication Logging.
  *
  * Usage:
- * $logger = new Koch_Logger('auth.log');
+ * $logger = new \Koch\Logger\Logger('auth.log');
  * $eventhandler->addEventHandler('onInvalidLogin', $logger);
  * $eventhandler->addEventHandler('onLogin', $logger);
  */

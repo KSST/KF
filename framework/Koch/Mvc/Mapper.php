@@ -136,7 +136,7 @@ class Mapper extends \ArrayObject
             $action = self::DEFAULT_ACTION;
         }
 
-        // all clansuite actions are prefixed with 'action'
+        // all application actions are prefixed with 'action'
         // e.g. action_<login>
         return self::ACTION_PREFIX . ucfirst($action);
     }

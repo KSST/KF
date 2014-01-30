@@ -97,5 +97,4 @@ class YAML
 
         return $array;
     }
-
 }

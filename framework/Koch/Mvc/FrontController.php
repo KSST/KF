@@ -152,7 +152,7 @@ class FrontController implements FrontControllerInterface
         $classname    = $route::getClassname();
         $method       = $route::getMethod();
         $parameters   = $route::getParameters();
-        #$request_meth = Koch_HttpRequest::getRequestMethod();
+        #$request_meth = \Koch\Http\HttpRequest::getRequestMethod();
         #$renderengine = $route::getRenderEngine();
 
         #$this->eventDispatcher->addEventHandler('onBeforeControllerMethodCall', new Koch\Event\InitializeModule());

@@ -103,7 +103,7 @@ abstract class AbstractController
     {
         $matches = array();
 
-        // takes classname, e.g. "Clansuite\Modules\News\Controller\NewsController"
+        // takes classname, e.g. "Application\Modules\News\Controller\NewsController"
         $class = get_class($this);
         preg_match("~Controller\\\(.*)Controller~is", $class, $matches);
 
@@ -531,7 +531,6 @@ abstract class AbstractController
     /**
      * Shortcut to set a Flashmessage
      *
-     * @see Koch_Flashmessages::setMessage()
      * @param string $type    string error, warning, notice, success, debug
      * @param string $message string A textmessage.
      */

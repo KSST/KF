@@ -27,7 +27,7 @@ namespace Koch\Form;
 /**
  *  * Koch Framework - Abstract base class for Form Decorators.
  *
- * The base class for all decorators. It has the same type as Koch_Form itself.
+ * The base class for all decorators. It has the same type as \Koch\Form\Form itself.
  * The decorator pattern suggests that the decorator implements all public
  * methods of the component which it decorates.
  * Being "of the same type as Koch_Form" is achieved by implementing all methods
@@ -162,24 +162,23 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * Purpose of this method is to check, if this object or a decorator implements a certain method.
+     * The method checks, if this object or a decorator implements a certain method.
      *
      * @param $method
      * @return boolean
      */
     public function hasMethod($method)
     {
-        // check if method exists in this object
+        // checks, if method exists in object or decorator
         if (method_exists($this, $method)) {
             return true;
         }
-        // check if method exists in the decorator of this object
-        elseif ($this->form instanceof Koch\Form\DecoratorInterface) {
+        
+        if ($this->form instanceof Koch\Form\DecoratorInterface) {        
             return $this->form->hasMethod($method);
-        } else { // nope, method does not exist
-
-            return false;
         }
+
+        return false;
     }
 
     /**

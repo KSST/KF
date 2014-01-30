@@ -31,7 +31,7 @@ use Koch\Logger\LoggerInterface;
  * Koch Framework - Log to EMail.
  *
  * This class is a service wrapper for sending logging messages via email.
- * The email is send using the Koch_Mailer, which is a wrapper for SwiftMailer.
+ * The email is send using the \Koch\Mailer\Mailer, which is a wrapper for SwiftMailer.
  */
 class Email extends AbstractLogger implements LoggerInterface
 {

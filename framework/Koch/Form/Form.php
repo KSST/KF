@@ -219,13 +219,14 @@ class Form implements FormInterface
                 'Missing argument 1. Expected a string (Name of Form) or an array (Form Description Array).'
             );
         }
-
-        // case 1: $name is a string, the name of the form
+        
         if (is_string($name_or_attributes)) {
+            // case 1: $name is a string, the name of the form
             $this->setName($name_or_attributes);
         }
-        // case 2: $name is an array with several attribute => value relationships
+        
         elseif (is_array($name_or_attributes)) {
+            // case 2: $name is an array with several attribute => value relationships
             $this->setAttributes($name_or_attributes);
         }
 
@@ -246,7 +247,9 @@ class Form implements FormInterface
         if ($method === 'POST' or $method === 'GET') {
             $this->method = $method;
         } else {
-            throw new \InvalidArgumentException('The method parameter is "' . $method . '", but has to be GET or POST.');
+            throw new \InvalidArgumentException(
+                _('The method parameter is "' . $method . '", but has to be GET or POST.')
+            );
         }
 
         return $this;
@@ -354,7 +357,7 @@ class Form implements FormInterface
      *
      * @return boolean Returns novalidation state of this form.
      */
-    public function getNoValidation()
+    public function isNoValidation()
     {
         return ($this->noValidation === true) ? 'novalidate' : '';
     }
@@ -870,7 +873,7 @@ class Form implements FormInterface
      * @param $attributes array Attributes for the formelement.
      * @param $position integer The position of this formelement in the formelements stack.
      *
-     * @return Koch_Form $this Form Object
+     * @return \Koch\Form\Form $this Form Object
      */
     public function addElement($formelement, $attributes = null, $position = null)
     {
@@ -910,9 +913,9 @@ class Form implements FormInterface
         // this is the default behaviour
         if ($position === null) {
             $this->formelements[] = $formelement;
-        }
-        // else we position the element under it's number to keep things in an order
-        elseif (is_int($position) === true) {
+        } elseif (is_int($position) === true) {
+            // else we position the element under it's number to keep things in an order
+            
             // hmpf, there is already an element at this position
             if ($this->formelements[$position] !== null) {
                 // insert the new element to the requested position and reorder
@@ -1155,11 +1158,9 @@ class Form implements FormInterface
         // because $data might be an object, typecast $data object to array
         if (is_object($data) === true) {
             $data = (array) $data;
-        }
-        // fetch data from POST
-        elseif (null === $data) {
-            if ('POST' === Koch_HttpRequest::getRequestMethod()) {
-                $data = Koch_HttpRequest::getPost();
+        } if (null === $data) { // fetch data from POST
+            if ('POST' === \Koch\Http\HttpRequest::getRequestMethod()) {
+                $data = \Koch\Http\HttpRequest::getPost();
             }
         }
 

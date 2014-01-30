@@ -48,7 +48,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($this->validator->validate($ipv6));
 
         // does not accept URLs -> use URL Validator
-        $this->assertFalse($this->validator->validate('clansuite.com'));
+        $this->assertFalse($this->validator->validate('application.com'));
     }
 
     public function testMethodgetErrorMessage()

@@ -33,7 +33,7 @@ use Koch\Http\HttpResponseInterface;
  * Is a Intercepting-Filter (FilterChain).
  * The var $filters is an array containing the filters to be processed.
  * The method addFilter() adds filters to the array.
- * A filter has to implement the Koch_Filter_Interface,
+ * A filter has to implement the \Koch\Filter\FilterInterface,
  * it has to provide the executeFilter() method.
  */
 class FilterManager

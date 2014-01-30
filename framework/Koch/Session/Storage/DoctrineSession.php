@@ -66,8 +66,8 @@ class DoctrineSession extends AbstractSession
      *
      * Overwrite php.ini settings
      * Start the session
-     * @param object Koch\Config
-     * @param object Koch_HttpRequest
+     * @param object \Koch\Config\Config
+     * @param object \Koch\HttpHttpRequest
      */
 
     public function __construct(\Koch\Config\Config $config)
@@ -76,7 +76,7 @@ class DoctrineSession extends AbstractSession
 
         /**
          * Set the Session Expire Time.
-         * The value comming from the clansuite config and is a minute value.
+         * Value comes from the app config and is a minute value.
          */
         if (isset($this->config['session']['session_expire_time'])
             and $this->config['session']['session_expire_time'] <= 60) {

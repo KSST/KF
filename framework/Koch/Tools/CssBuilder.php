@@ -33,7 +33,7 @@ namespace Koch\Tools;
  * Plus, you might still modify the Koch Framework - CSS Framework Core to your intents.
  *
  * Basic Usage:
- *   $builder = new Koch_Cssbuilder();
+ *   $builder = new \Koch\Tools\Cssbuilder();
  *   $builder->setBuilderOptions( $array );
  *   $builder->build();
  *

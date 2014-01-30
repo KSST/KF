@@ -42,21 +42,19 @@ class RemoteFetch
     public static function snoopyGetFile($url)
     {
         $remote_content = null;
+       
+        $s = new \Snoopy();
+        $s->fetch($url);
 
-        if (Koch_Loader::loadLibrary('snoopy')) {
-            $s = new Snoopy();
-            $s->fetch($url);
-
-            if ($s->status == 200) {
-                $content = $s->results;
-            }
+        if ($s->status == 200) {
+            $content = $s->results;
         }
-
+            
         if (false === empty($content)) {
             return $content;
-        } else {
-            return false;
-        }
+        } 
+            
+        return false;
     }
 
     /**
@@ -74,9 +72,9 @@ class RemoteFetch
 
         if (false === empty($content)) {
             return $content;
-        } else {
-            return false;
-        }
+        } 
+            
+        return false;
     }
 
     /**
@@ -96,9 +94,9 @@ class RemoteFetch
 
         if (false === empty($content)) {
             return $content;
-        } else {
-            return false;
         }
+            
+        return false;
     }
 
     /**

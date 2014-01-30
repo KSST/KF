@@ -301,9 +301,9 @@ class Cronjobs
             #echo '<br>Running     '.$job[self::CONST_PC_CRONLINE];
             #echo '<br> Last run:       '.date('r',$lastActual);
             #echo '<br> Last scheduled: '.date('r',$lastScheduled);
-            #Koch_Logger::writeLog('Running     '.$job[self::CONST_PC_CRONLINE]);
-            #Koch_Logger::writeLog('  Last run:       '.date('r',$lastActual));
-            #Koch_Logger::writeLog('  Last scheduled: '.date('r',$lastScheduled));
+            #\Koch\Logger\Logger::writeLog('Running     '.$job[self::CONST_PC_CRONLINE]);
+            #\Koch\Logger\Logger::writeLog('  Last run:       '.date('r',$lastActual));
+            #\Koch\Logger\Logger::writeLog('  Last scheduled: '.date('r',$lastScheduled));
 
             /* if ($debug) {
              */
@@ -312,7 +312,7 @@ class Cronjobs
             $jobname = mb_substr($job[self::CONST_PC_CMD], 9, -12);
 
             // instantiate job
-            $classname = 'Koch_Cronjob_' . ucfirst($jobname);
+            $classname = '\Koch\Cronjob\Jobs\\' . ucfirst($jobname);
             $job_object = new $classname;
             // execute
             $job_object->execute();
@@ -338,10 +338,10 @@ class Cronjobs
             return true;
         } else {
             if ($debug) {
-                Koch_Logger::writeLog('Skipping     ' . $job[self::CONST_PC_CRONLINE]);
-                Koch_Logger::writeLog('  Last run:       ' . date('r', $lastActual));
-                Koch_Logger::writeLog('  Last scheduled: ' . date('r', $lastScheduled));
-                Koch_Logger::writeLog('Completed    ' . $job[self::CONST_PC_CRONLINE]);
+                \Koch\Logger\Logger::writeLog('Skipping     ' . $job[self::CONST_PC_CRONLINE]);
+                \Koch\Logger\Logger::writeLog('  Last run:       ' . date('r', $lastActual));
+                \Koch\Logger\Logger::writeLog('  Last scheduled: ' . date('r', $lastScheduled));
+                \Koch\Logger\Logger::writeLog('Completed    ' . $job[self::CONST_PC_CRONLINE]);
             }
 
             return false;

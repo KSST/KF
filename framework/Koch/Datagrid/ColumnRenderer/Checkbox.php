@@ -42,13 +42,13 @@ class Checkbox extends ColumnRenderer implements ColumnRendererInterface
      */
     public function renderCell($oCell)
     {
-        $oCheckbox = new Clansuite_Formelement_Checkbox();
-        $oCheckbox->setName('Checkbox[]');
-        $oCheckbox->setID('Checkbox-' . $oCell->getValue());
-        $oCheckbox->setValue($oCell->getValue());
-        $oCheckbox->setClass('DatagridCheckbox DatagridCheckbox-' . $oCell->getColumn()->getAlias());
+        $checkbox = new \Koch\Form\Elements\Checkbox();
+        $checkbox->setName('Checkbox[]');
+        $checkbox->setID('Checkbox-' . $oCell->getValue());
+        $checkbox->setValue($oCell->getValue());
+        $checkbox->setClass('DatagridCheckbox DatagridCheckbox-' . $oCell->getColumn()->getAlias());
 
-        return $oCheckbox->render();
+        return $checkbox->render();
 
         /*
 

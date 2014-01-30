@@ -40,7 +40,7 @@ class Theme
      * Constructor, or what ;)
      *
      * @param  string     $theme Name of the Theme.
-     * @return Koch_Theme
+     * @return \Koch\View\Helper\Theme
      */
     public function __construct($theme)
     {

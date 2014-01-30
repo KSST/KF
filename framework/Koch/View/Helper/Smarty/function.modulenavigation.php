@@ -23,11 +23,11 @@
  */
 function Smarty_function_modulenavigation($params, $smarty)
 {
-    $module = Koch_HttpRequest::getRoute()->getModule();
+    $module = \Koch\Http\HttpRequest::getRoute()->getModule();
 
     $file = APPLICATION_MODULES_PATH. $module . DIRECTORY_SEPARATOR . $module . '.menu.php';
 
-    if (is_file($file)) {
+    if (is_file($file) === true) {
         // this includes the file, which contains a php array name $modulenavigation
         include $file;
 
@@ -63,7 +63,7 @@ function applyCallbacks(array $modulenavigation)
      * This replaces the values of the 'url' key (array['url']),
      * because these might be shorthands, like "/index/show".
      */
-    $modulenavigation['url'] = Koch_Router::buildURL($modulenavigation['url']);
+    $modulenavigation['url'] = \Koch\Router\Router::buildURL($modulenavigation['url']);
 
     /**
      * 2) Conditions of menu items

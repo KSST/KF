@@ -45,20 +45,15 @@ class RadioList extends Radio implements FormElementInterface
 
     public function render()
     {
-        $options = array( 'option1' => 'berlin',
-                          'option2' => 'new york');
-
-        $this->setOptions($options);
-
-        $i=0;
+        $i = 0;
         $html = '';
-        while ( list($key, $value) = each($this->options)) {
+        while (list($key, $value) = each($this->options)) {
             // setup a new radio formelement
             $radio = new Koch_Formelement_Radio();
             $radio->setValue($key)
-                  ->setName($value)
-                  ->setDescription($value)
-                  ->setLabel($value);
+                ->setName($value)
+                ->setDescription($value)
+                ->setLabel($value);
 
             // check the element, if value is "active"
             if ($this->value == $key) {
@@ -68,10 +63,8 @@ class RadioList extends Radio implements FormElementInterface
             // assign it as output
             $html .= $radio;
 
-            #\Koch\Debug\Debug::printR($html);
-
-            // if we have more options comming up, add a seperator
-            if (++$i!=count($this->options)) {
+            // if we options, add a seperator
+            if (++$i != count($this->options)) {
                 $html .= $this->separator;
             }
         }

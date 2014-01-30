@@ -34,7 +34,7 @@ use Koch\Cache\Cache;
  * The URL is segmented and restructured to fit the internal route to a controller.
  * The internal routes are described in a central routing configuration file.
  * This central config is updated on installation and deinstallation of modules and plugins.
- * @see Koch_Routes_Manager
+ * @see \Koch\Routes\Manager
  *
  * Normally all requests made map to a specific physical resource rather than a logical name.
  * With Routing you are able to map a logical name to a specific physical name.
@@ -106,7 +106,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * Several fixes are applied to the $request_uri.
      *
-     * When incomming via Koch_HttpRequest::getRequestURI()
+     * When incomming via \Koch\Http\HttpRequest::getRequestURI()
      * the $request_rui is already
      * (1) lowercased and
      * (2) urldecoded.
@@ -118,7 +118,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * A multislash removal is not needed, because of the later usage of preg_split().
      *
-     * @param  string $request_url Koch_HttpRequest::getRequestURI
+     * @param  string $request_url \Koch\Http\HttpRequest::getRequestURI
      * @return string Request URL
      */
     public function prepareRequestURI($uri)
@@ -277,7 +277,7 @@ class Router implements RouterInterface, \ArrayAccess
      * Resets the routes array.
      *
      * @param bool Load the default routes. Defaults to false.
-     * @return object Koch_Router
+     * @return object \Koch\Router\Router
      */
     public function reset($loadDefaultRoutes = false)
     {
@@ -408,7 +408,7 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Main method of Koch_Router
+     * Main method of \Koch\Router\Router
      *
      * The routing workflow is
      * 1. firstly, check if ModRewrite is enabled,

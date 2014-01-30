@@ -70,7 +70,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     /**
      * Constructor
      *
-     * @param $form Accepts a Koch_Form Object implementing the Koch_Form_Interface.
+     * @param $form Accepts a \Koch\Form\Form Object implementing the Koch_Form_Interface.
      */
     /*public function __construct(Koch_Form_Interface $form)
     {
@@ -88,24 +88,22 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     }
 
     /**
-     * Purpose of this method is to check, if this object or a decorator implements a certain method.
+     * The method checks, if this object or a decorator implements a certain method.
      *
      * @param $method
      * @return boolean
      */
     public function hasMethod($method)
     {
-        // check if method exists in this object
         if (method_exists($this, $method)) {
             return true;
         }
-        // check if method exists in the decorator of this object
-        elseif ($this->formelement instanceof Koch_Formelement_Decorator) {
-            return $this->formelement->hasMethod($method);
-        } else { // nope, method does not exist
 
-            return false;
+        if ($this->formelement instanceof Koch_Formelement_Decorator) {
+            return $this->formelement->hasMethod($method);
         }
+
+        return false;
     }
 
     /**

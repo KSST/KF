@@ -78,7 +78,7 @@ class Mapper
     /**
      * Get the template name
      *
-     * Proxies to Koch_View_Mapper::getTemplate()
+     * Proxies to \Koch\View\Mapper::getTemplate()
      *
      * @return string $template Name of the Template (full path)
      */

@@ -72,7 +72,8 @@ class Html
         } else {
             if ($this->truncateSize and is_int($this->truncateSize)) {
                 $result = \Koch\Feed\AbstractGenerator::iTrunc(
-                    htmlspecialchars($this->rawFieldContent), $this->truncateSize
+                    htmlspecialchars($this->rawFieldContent), 
+                    $this->truncateSize
                 );
             } else {
                 $result = htmlspecialchars($this->rawFieldContent);

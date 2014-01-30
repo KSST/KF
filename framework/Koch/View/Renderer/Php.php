@@ -60,7 +60,7 @@ class Php extends AbstractRenderer
      *
      * @param  mixed             $key   Object with template vars (extraction method fetch), or array or key/value pair
      * @param  mixed             $value Variable value
-     * @return Koch_Renderer_PHP
+     * @return \Koch\View\Renderer\PHP
      */
     public function assign($key, $value = null)
     {

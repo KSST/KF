@@ -63,7 +63,7 @@ class Date
                 'Jul' => 7, 'Aug' => 8, 'Sep' => 9, 'Oct' => 10, 'Nov' => 11, 'Dec' => 12
             );
             $this->unix = mktime($matches[4], $matches[5], $matches[6], $months[$matches[2]], $matches[1], $matches[3]);
-            if (substr($matches[7], 0, 1) == '+' OR substr($matches[7], 0, 1) == '-') {
+            if (substr($matches[7], 0, 1) == '+' or substr($matches[7], 0, 1) == '-') {
                 $tzOffset = (substr($matches[7], 0, 3) * 60 + substr($matches[7], -2)) * 60;
             } else {
                 if (strlen($matches[7]) == 1) {
@@ -88,7 +88,7 @@ class Date
         }
         if (preg_match("~(\\d{4})-(\\d{2})-(\\d{2})T(\\d{2}):(\\d{2}):(\\d{2})(.*)~", $dateString, $matches)) {
             $this->unix = mktime($matches[4], $matches[5], $matches[6], $matches[2], $matches[3], $matches[1]);
-            if (substr($matches[7], 0, 1) == '+' OR substr($matches[7], 0, 1) == '-') {
+            if (substr($matches[7], 0, 1) == '+' or substr($matches[7], 0, 1) == '-') {
                 $tzOffset = (substr($matches[7], 0, 3) * 60 + substr($matches[7], -2)) * 60;
             } else {
                 if ($matches[7] == 'Z') {

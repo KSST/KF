@@ -20,5 +20,5 @@
  */
 function Smarty_function_currentmodule()
 {
-    return Koch_TargetRoute::getModule();
+    return \Koch\Router\TargetRoute::getModule();
 }

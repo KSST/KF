@@ -40,7 +40,7 @@ class SmartyTemplateError
      * to the $errormessage output.
      *
      * Smarty Template Errors are only displayed, when Koch Framework is in DEBUG Mode.
-     * @see clansuite_error_handler()
+     * @see \Koch\Exception\Errorhandler
      *
      * A direct link to the template editor for editing the file with the error
      * is only displayed, when Koch Framework runs in DEVELOPMENT Mode.

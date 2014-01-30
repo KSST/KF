@@ -483,8 +483,8 @@ class RouterTest extends \PHPUnit_Framework_TestCase
     public function testMethodBuildURLWhenModRewriteOFF()
     {
         /**
-         * Do not build an URL, if FQDN is passed and mod_rewrite is off.
-         * like http://clansuite-dev.com/tests/index.php?mod=news&action=show
+         * Do not build an URL, if FQDN is passed and mod_rewrite is off,
+         * like http://application.com/tests/index.php?mod=news&action=show
          * Just return the URL (pass-through).
          */
         $urlstring    = WWW_ROOT . 'index.php?mod=news&action=show';

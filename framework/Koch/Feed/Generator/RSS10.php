@@ -34,6 +34,7 @@ use Koch\Feed\Generator;
  */
 class RSS10 extends Generator
 {
+
     /**
      * Builds the RSS feed's text. The feed will be compliant to RDF Site Summary (RSS) 1.0.
      * The feed will contain all items previously added in the same order.
@@ -79,7 +80,7 @@ class RSS10 extends Generator
         }
         $feed.= $this->createAdditionalElements($this->additionalElements, "    ");
 
-         for ($i = 0, $items = count($this->items); $i < $items; $i++) {
+        for ($i = 0, $items = count($this->items); $i < $items; $i++) {
             $feed.= "    <item rdf:about=\"" . htmlspecialchars($this->items[$i]->link) . "\">\n";
             //$feed.= "        <dc:type>Posting</dc:type>\n";
             $feed.= "        <dc:format>text/html</dc:format>\n";

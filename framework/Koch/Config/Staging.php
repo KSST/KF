@@ -69,21 +69,21 @@ class Staging
             // development configuration
             case "localhost":
             case "intranet":
-            case 'clansuite-dev.com':
-            case 'www.clansuite-dev.com':
-            case 'clansuite.dev':
+            case 'application-dev.com':
+            case 'www.application-dev.com':
+            case 'application.dev':
                 $filename = 'development.php';
                 break;
             // staging configuration
-            case 'clansuite-stage.com':
-            case 'www.clansuite-stage.com':
-            case 'clansuite.stage':
+            case 'application-stage.com':
+            case 'www.application-stage.com':
+            case 'application.stage':
                 $filename = 'staging.php';
                 break;
             // intern configuration
-            case 'clansuite-intern.com':
-            case 'www.clansuite-intern.com':
-            case 'clansuite.intern':
+            case 'application-intern.com':
+            case 'www.application-intern.com':
+            case 'application.intern':
                 $filename = 'intern.php';
                 break;
             default:
