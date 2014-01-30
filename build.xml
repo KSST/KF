@@ -11,14 +11,23 @@
     <target name="build" depends="prepare,phplint,pdepend,phpmd,phpcpd,phploc,phpcs,phpcb,apigen,phpunit" />
     <target name="build-jenkins" depends="prepare,pdepend,phpmd,phpcpd,phploc,phpcs,phpcb,apigen,phpunit-local" />
 
-    <target name="fetch-composer" description="Installing dependencies">
+    <target name="install-composer" description="Installing Composer [Package Manager]">
         <exec executable="wget" failonerror="true">
             <arg value="-nc" />
+            <arg value="-P {basedir}/bin/composer" />
             <arg value="http://getcomposer.org/composer.phar" />
         </exec>
     </target>
 
-    <target name="composer-install" description="Installing dependencies">
+    <target name="install-box" description="Install Box [phar Builder]">
+        <exec executable="wget" failonerror="true">
+            <arg value="-nc"/>
+            <arg value="-P {basedir}/bin/phar" />
+            <arg value="https://github.com/kherge/Box/releases/latest"/>
+        </exec>
+    </target>
+
+    <target name="composer-install" description="Installs project dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/bin/composer/composer.phar" />
             <arg value="install" />
