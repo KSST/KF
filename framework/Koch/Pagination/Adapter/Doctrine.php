@@ -50,7 +50,7 @@ class Doctrine implements AdapterInterface
      *
      * @return Boolean Whether the query joins a collection.
      */
-    public function getFetchJoinCollection()
+    public function isQueryJoinsCollection()
     {
         return $this->paginator->getFetchJoinCollection();
     }

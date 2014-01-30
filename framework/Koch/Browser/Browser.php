@@ -582,7 +582,7 @@ class Browser
     /**
      * This method tells whether this User Agent is unknown or not.
      *
-     * @return TRUE is the User Agent is unknown, FALSE otherwise.
+     * @return boolean true is the User Agent is unknown, false otherwise.
      */
     public function isUnknown()
     {

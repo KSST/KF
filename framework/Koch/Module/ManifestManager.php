@@ -13,25 +13,19 @@
 namespace Koch\Module;
 
 /**
- * Module_Manifest_Manager
- *
- * @todo
- * A. ModuleInfoScanner
- * B. ModuleInfoReader
+ * \Koch\Module\ManifestManager
  */
 class ManifestManager
 {
     /**
-     * @var array contains the moduleinformations
+     * @var array contains the module informations
      */
-    private static $modulesinfo = false;
+    private static $modulesInfo = false;
 
     /**
      * @var array contains the system-wide module registry
      */
-    private static $modulesregistry  = false;
-
-    private static $l10n_sys_locales = array();
+    private static $modulesRegistry  = false;
 
     /**
      * Setter for module infos
@@ -40,7 +34,7 @@ class ManifestManager
      */
     public static function setModuleInformations($module_infos_array)
     {
-        self::$modulesinfo = $module_infos_array;
+        self::$modulesInfo = $module_infos_array;
     }
 
     /**
@@ -50,7 +44,7 @@ class ManifestManager
      */
     public static function setModuleRegistry($module_registry_array)
     {
-        self::$modulesregistry = $module_registry_array;
+        self::$modulesRegistry = $module_registry_array;
     }
 
     /**
@@ -172,7 +166,7 @@ class ManifestManager
 
         foreach ($modules as $module) {
             if (true === self::isModuleActive($module)) {
-                $activated_modules_array[$module] = self::$modulesregistry[$module];
+                $activated_modules_array[$module] = self::$modulesRegistry[$module];
             }
         }
 
@@ -187,12 +181,12 @@ class ManifestManager
     public static function isModuleActive($module)
     {
         // load module registry, if not available yet
-        if (empty(self::$modulesregistry[$module])) {
-            self::$modulesregistry = self::readModuleRegistry();
+        if (empty(self::$modulesRegistry[$module])) {
+            self::$modulesRegistry = self::readModuleRegistry();
         }
 
         // check, if the module is
-        if (isset(self::$modulesregistry[$module]['active']) and self::$modulesregistry[$module]['active'] == true) {
+        if (isset(self::$modulesRegistry[$module]['active']) and self::$modulesRegistry[$module]['active'] == true) {
             return true;
         } else {
             return false;
@@ -210,8 +204,8 @@ class ManifestManager
         $modulename = strtolower($module);
 
         // check if the infos of this specific module were catched before
-        if (self::$modulesinfo[$modulename] !== null) {
-            return self::$modulesinfo[$modulename];
+        if (self::$modulesInfo[$modulename] !== null) {
+            return self::$modulesInfo[$modulename];
         }
 
         // fetch infos for the requested $module
@@ -273,7 +267,7 @@ class ManifestManager
 
             // hasInfo
             $module_infofile = $modulepath . '/' . $modulename . '.info.php';
-            $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config);
+            $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config\Config');
 
             if (is_file($module_infofile) === true) {
                 #\Koch\Debug\Debug::firebug($module_infofile);

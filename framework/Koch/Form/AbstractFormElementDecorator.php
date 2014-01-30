@@ -87,7 +87,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
             return true;
         }
 
-        if ($this->formelement instanceof Koch_Formelement_Decorator) {
+        if ($this->formelement instanceof   \Koch\Form\Element\Decorator) {
             return $this->formelement->hasMethod($method);
         }
 

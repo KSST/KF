@@ -1,4 +1,3 @@
-
 <?php
 /**
  * Smarty plugin

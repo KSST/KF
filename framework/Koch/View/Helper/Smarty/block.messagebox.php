@@ -26,32 +26,30 @@ function Smarty_block_messagebox($params, $text, $smarty)
         $textbox_type = $params['type'];
     }
 
-    // whitelist for messagebox_levels
+    // whitelist for messagebox levels
     $messagebox_level = array( 'hint', 'notice', 'alert', 'info');
 
     if ($params['level'] !== null and in_array(mb_strtolower($params['level']), $messagebox_level)) {
         $textbox_level = mb_strtolower($params['level']);
-        unset($params['level']);
     } else {
-        return trigger_error('Please define a parameter level. You have the following options: hint, notice, alert.');
+        return trigger_error('Please define a parameter level, e.g. hint, notice, alert, info.');
     }
 
     $tpl_vars = $smarty->getTemplateVars();
 
-    $sprintf_textbox_text  = '<link rel="stylesheet" type="text/css" href="' . $tpl_vars['WWW_ROOT_THEMES_CORE'] . 'css/error.css" />';
+    $sprintfTextboxMessage  = '<link rel="stylesheet" type="text/css"' . 
+        ' href="' . $tpl_vars['WWW_ROOT_THEMES_CORE'] . 'css/error.css" />';
 
     switch ($textbox_type) {
         default:
         case "div":
             $textbox_type = 'div';
-            $sprintf_textbox_text .= '<div class="messagebox %2$s">%3$s</div>';
+            $sprintfTextboxMessage .= '<div class="messagebox %2$s">%3$s</div>';
             break;
         case "fieldset":
-            $sprintf_textbox_text .= '<fieldset class="error_help %s"><legend>%s</legend><em>%s</em></fieldset>';
+            $sprintfTextboxMessage .= '<fieldset class="error_help %s"><legend>%s</legend><em>%s</em></fieldset>';
             break;
     }
 
-    $text = sprintf($sprintf_textbox_text, $textbox_type, $textbox_level, $text);
-
-    return $text;
+    return sprintf($sprintfTextboxMessage, $textbox_type, $textbox_level, $text);
 }

@@ -148,9 +148,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
             $this->purgePaths[] = $file;
         } else {
-            if (false === touch(
-                $file = $this->createDir() . DIRECTORY_SEPARATOR . $name
-            )){
+            $file = $this->createDir() . DIRECTORY_SEPARATOR . $name;
+            if (false === touch($file)) {
                 throw new \Exception('Create file error: %s', $file);
             }
         }
@@ -168,7 +167,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function findMethod($class, $name)
     {
-        $reflection = ($class instanceOf \ReflectionClass) ? $class : new \ReflectionClass($class);
+        $reflection = ($class instanceof \ReflectionClass) ? $class : new \ReflectionClass($class);
 
         while (false === $reflection->hasMethod($name)) {
             if (false === ($reflection = $reflection->getParentClass())) {
@@ -193,7 +192,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function findProperty($class, $name)
     {
-        $reflection = ($class instanceOf \ReflectionClass) ? $class : new \ReflectionClass($class);
+        $reflection = ($class instanceof \ReflectionClass) ? $class : new \ReflectionClass($class);
 
         while (false === $reflection->hasProperty($name)) {
             if (false === ($reflection = $reflection->getParentClass())) {

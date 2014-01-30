@@ -434,7 +434,7 @@ class HttpResponse implements HttpResponseInterface
             $msg  = _('Header already send in file %s in line %s. Redirecting impossible.');
             $msg .= _('You might click this link instead to redirect yourself to the <a href="%s">target url</a> an');
             sprintf($msg, $filename, $linenum, $url);
-            exit;
+            \Koch\Tools\ApplicationQuit::quit();
         }
     }
 }

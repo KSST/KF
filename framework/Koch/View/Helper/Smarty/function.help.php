@@ -1,10 +1,6 @@
 <?php
 /**
- * Smarty plugin
- */
-
-/**
- * Smarty pagination
+ * Smarty Help Tag
  * Displays help text of this module
  *
  * Examples:
@@ -24,15 +20,12 @@ function Smarty_function_help($params, $smarty)
 {
     $modulename = $smarty->getTemplateVars('template_of_module');
 
-    // check if file exists
-    if ($smarty->templateExists( $modulename. '/view/smarty/help.tpl')) {
-        // load the help template from modulepath ->  modulename/view/help.tpl
-        return $smarty->fetch( $modulename. '/view/smarty/help.tpl');
+    $tpl = $modulename . '/view/smarty/help.tpl';
+    
+    // load the help template from the module path ->  app/modules/modulename/view/help.tpl
+    if ($smarty->templateExists($tpl)) {
+        return $smarty->fetch($tpl);
     }
-    /*elseif (DEBUG == true and DEVELOPMENT == true) {
-        return $smarty->fetch( APPLICATION_PATH . 'themes/'' . 'core/view/help_not_found.tpl');
-    }*/
-    else {
-        return 'Help Template not found.';
-    }
+    
+    return 'Help Template not found.';
 }

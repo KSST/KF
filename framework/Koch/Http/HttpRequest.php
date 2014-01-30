@@ -523,9 +523,8 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         } elseif ($_SERVER['HTTP_X_FORWARDED_FOR'] !== null) {
             $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
             $ip = array_pop($ip);
-        }
-        // NGINX - with natural russian config passes the IP as REAL_IP
-        elseif ($_SERVER['HTTP_X_REAL_IP'] !== null) {
+        } elseif ($_SERVER['HTTP_X_REAL_IP'] !== null) {
+            // NGINX - with natural russian config passes the IP as REAL_IP
             $ip =  $_SERVER['HTTP_X_REAL_IP'];
         } elseif ($_SERVER['HTTP_FORWARDED_FOR'] !== null) {
             $ip =  $_SERVER['HTTP_FORWARDED_FOR'];
@@ -535,7 +534,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             $ip = $_SERVER['HTTP_X_CLUSTER_CLIENT_IP'];
         } elseif ($_SERVER['HTTP_FORWARDED'] !== null) {
             $ip = $_SERVER['HTTP_FORWARDED'];
-        } elseif (isset($_SERVER['HTTP_X_FORWARDED'])) {
+        } elseif ($_SERVER['HTTP_X_FORWARDED'] !== null) {
             $ip =  $_SERVER['HTTP_X_FORWARDED'];
         } else {
             $ip = $_SERVER['REMOTE_ADDR'];

@@ -32,10 +32,10 @@ class GravatarCache
     public $size                 = null;
     public $rating               = null;
 
-    public function __construct($gravatar_url, $gravatar_id, $size, $rating)
+    public function __construct($gravatarUrl, $gravatarId, $size, $rating)
     {
-        $this->gravatar_url = $gravatar_url;
-        $this->gravatar_id  = $gravatar_id;
+        $this->gravatar_url = $gravatarUrl;
+        $this->gravatar_id  = $gravatarId;
         $this->size         = $size;
         $this->rating       = $rating;
     }
@@ -50,8 +50,7 @@ class GravatarCache
     }
 
     /**
-     * Caching is possible, when we can
-     * url_fopen the gravatar.com URL to download from there
+     * Check if caching is possible.
      */
     public function checkIfCachable()
     {
@@ -63,60 +62,52 @@ class GravatarCache
     }
 
     /**
-     * gets a gravatar cache url
+     * Gets Gravatar from (1) cache or (2) "gavatar.com"
      */
     public function getGravatar()
     {
-        $gravatar_filename  = '';
-        $gravatar_filename .= (string) sprintf($this->gravatar_cache_url,
-                                               $this->gravatar_id,
-                                               $this->size,
-                                               $this->rating);
+        $gravatarFile = sprintf($this->gravatar_cache_url, $this->gravatar_id, $this->size, $this->rating);
 
-        // absolute
-        $absolute_cache_filename  = '';
-        $absolute_cache_filename .= APPLICATION_PATH . $this->cache_location . $gravatar_filename;
+        $cacheFileAbsolutePath = APPLICATION_PATH . $this->cache_location . $gravatarFile;
+        $cacheFileRelativePath = WWW_ROOT . $this->cache_location . $gravatarFile;
 
-        // relative
-        $relative_cache_filename  = '';
-        $relative_cache_filename .= WWW_ROOT . $this->cache_location . $gravatar_filename;
-
-        // if the cache_file is detected on an absolute path and still in the cache time
-        if (is_file($absolute_cache_filename) === true and
-           (filemtime($absolute_cache_filename) > strtotime('-' . $this->cache_expire_time)) === true)
-        {
-            // return it a relative path
-            return $relative_cache_filename;
+        // if cache file exists and is not expired
+        if (is_file($cacheFileAbsolutePath) === true and
+            (filemtime($cacheFileAbsolutePath) > strtotime('-' . $this->cache_expire_time)) === true) {
+            // return the relative path
+            return $cacheFileRelativePath;
         } else {
-            // returnfrom gravatar.com
-            return $this->setGravatar($absolute_cache_filename, $this->gravatar_url);
+            // return from gravatar.com
+            return $this->setGravatar($cacheFileAbsolutePath, $this->gravatar_url);
         }
     }
 
     /**
      * sets the specified gravatar at $gravatar_url to the $cache_filename
      */
-    public function setGravatar($cache_filename, $gravatar_url)
+    public function setGravatar($cacheFile, $gravatarUrl)
     {
         // Check if caching is possible
         if ($this->checkIfCachable() == true) {
+            
             // get the Gravatar and cache it
-            file_put_contents($cache_filename, file_get_contents($gravatar_url));
+            $gravatar = file_get_contents($gravatarUrl);
+            file_put_contents($cacheFile, $gravatar);
+            unset($gravatar);
 
-            // Set CHMOD to 755 (rwx r-x r-x)
-            chmod($cache_filename, 755);
+            chmod($cacheFile, 755);
 
             // Check if Cache file was created
-            if (is_file($cache_filename) === true) {
-                return $cache_filename;
+            if (is_file($cacheFile) === true) {
+                return $cacheFile;
             } else {
-                // passthrough the original URL
-                return $gravatar_url;
+                // pass-through the original URL
+                return $gravatarUrl;
             }
         } else {
              // caching was not possible due to lack of url_fopen
              // passthrough the original URL
-             return $gravatar_url;
+             return $gravatarUrl;
         }
     }
 }
