@@ -13,3 +13,4 @@ phpmd.xml export-ignore
 .php_cs export-ignore
 .gitignore export-ignore
 .gitattributes export-ignore
+box.json export-ignore
