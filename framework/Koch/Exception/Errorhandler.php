@@ -408,11 +408,8 @@ class Errorhandler
                 $arg .= $backtraceArgument;
                 break;
             case 'float':
-                $type .= '<span>float</span>';
-                $arg .= $backtraceArgument;
-                break;
             case 'double':
-                $type .= '<span>double</span>';
+                $type .= '<span>float/double</span>';
                 $arg .= $backtraceArgument;
                 break;
             case 'string':
@@ -676,6 +673,26 @@ class Errorhandler
         return 'http://trac.clansuite.com/newticket/?' . http_build_query($array);
     }
 
+    /**
+     * Returns a link to a new Issue on Github
+     * @link http://developer.github.com/v3/issues/#create-an-issue
+     */
+    public static function getGithubIssueURL($summary, $errorfile, $errorline)
+    {
+        // POST /repos/:owner/:repo/issues
+        
+        /*{
+            "title": "Found a bug",
+            "body": "I'm having a problem with this.",
+            "assignee": "octocat",
+            "milestone": 1,
+            "labels": [
+              "Label1",
+              "Label2"
+            ]
+          }
+         */
+    }
 
 
     /**
