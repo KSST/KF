@@ -70,7 +70,8 @@
         "phpunit/phpunit"                 : "3.7.*@dev",
         "doctrine/data-fixtures"          : "*@dev",
         "firephp/firephp-core"            : "dev-master",
-        "satooshi/php-coveralls"          : "dev-master"
+        "satooshi/php-coveralls"          : "dev-master",
+        "sebastianbergmann/phpunit-skeleton-generator"  : "*"
     },
     "suggest": {
         "ext-apc"         : "*",
