@@ -76,7 +76,7 @@ function Smarty_gettext_strarg($str)
 function Smarty_block_t($params, $text, $smarty)
 {
     // stop smarty from rendering on the opening tag
-    if (!$text) { 
+    if (!$text) {
         return;
     }
 

@@ -116,7 +116,7 @@ class Select extends FormElement implements FormElementInterface
      * This makes it a bit easier to pass actual values around via POST,
      * instead of passing the numeric index for lookup.
      *
-     * @return \  \Koch\Form\Element\Select
+     * @return \ \Koch\Form\Element\Select
      */
     public function withValuesAsKeys()
     {

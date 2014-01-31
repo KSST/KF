@@ -708,7 +708,7 @@ class Form implements FormInterface
      * Registers the default decorators for a formelement.
      * The default decorators are: label, description, div.
      *
-     * @param object $formelement   \Koch\Form\Element\Interface
+     * @param object $formelement \Koch\Form\Element\Interface
      */
     public function registerDefaultFormelementDecorators($formelement)
     {

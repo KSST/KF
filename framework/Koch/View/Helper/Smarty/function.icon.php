@@ -110,7 +110,7 @@ function Smarty_function_icon($params)
     $src = str_replace(APPLICATION_PATH . 'themes/', WWW_ROOT_THEMES, $src);
     $src = str_replace('\\', '/', $src);
 
-    $html = '<img src="' . $src . '" height="' . $height . '" width="' 
+    $html = '<img src="' . $src . '" height="' . $height . '" width="'
         . $width . '" alt="' . $alt . '" ' . $extra . ' />';
 
     return $html;
