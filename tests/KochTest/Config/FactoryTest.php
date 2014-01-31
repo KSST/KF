@@ -46,7 +46,7 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $configfile = 'file.config.php';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
-        $this->assertEquals($er, 'native');
+        $this->assertEquals($er, 'php');
 
         $configfile = 'file.config.ini';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
