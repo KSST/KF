@@ -61,7 +61,7 @@ class CSV implements AdapterInterface
      * @param   string  The filename
      * @param   array   The configuration array
      */
-    public function writeConfig($file, array $array)
+    public static function writeConfig($file, array $array)
     {
         if (($handle = fopen($file, "r+")) !== false) {
             // transform array to csv notation
