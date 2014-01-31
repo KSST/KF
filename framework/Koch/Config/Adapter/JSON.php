@@ -64,12 +64,12 @@ class JSON implements AdapterInterface
      * @param   array   The configuration array
      * @return mixed|int|bool Number of bytes written to file, or false on failure.
      */
-    public function writeConfig($file, array $array)
+    public static function writeConfig($file, array $array)
     {
         // transform array to json object notation
         $json_content = json_encode($array);
 
         // write json encoded content to file
-        return (bool) file_put_contents($file, $json_content, LOCK_EX);
+        return (bool) file_put_contents($file, $json_content);
     }
 }

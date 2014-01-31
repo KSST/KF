@@ -69,7 +69,7 @@ class Factory
             '.config.yaml' => 'yaml'
         );
 
-        if ($extensionMap[$extension] === true) {
+        if (isset($extensionMap[$extension]) === true) {
             $adapter = $extensionMap[$extension];
         } else {
             throw new \Koch\Exception\Exception(
