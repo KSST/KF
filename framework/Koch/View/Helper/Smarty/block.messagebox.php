@@ -37,7 +37,7 @@ function Smarty_block_messagebox($params, $text, $smarty)
 
     $tpl_vars = $smarty->getTemplateVars();
 
-    $sprintfTextboxMessage  = '<link rel="stylesheet" type="text/css"' . 
+    $sprintfTextboxMessage  = '<link rel="stylesheet" type="text/css"' .
         ' href="' . $tpl_vars['WWW_ROOT_THEMES_CORE'] . 'css/error.css" />';
 
     switch ($textbox_type) {

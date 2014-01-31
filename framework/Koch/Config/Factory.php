@@ -103,7 +103,7 @@ class Factory
     /**
      * getAdapter()
      *
-     * @param  string        $adapter A config adapter name "PHP", "XML", "YAML", "INI", "JSON".
+     * @param  string $adapter A config adapter name "PHP", "XML", "YAML", "INI", "JSON".
      * @return object /Koch/Config/Adapter/AdapterInterface
      */
     public static function getAdapter($adapter)

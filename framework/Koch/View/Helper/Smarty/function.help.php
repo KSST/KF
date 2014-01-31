@@ -21,11 +21,11 @@ function Smarty_function_help($params, $smarty)
     $modulename = $smarty->getTemplateVars('template_of_module');
 
     $tpl = $modulename . '/view/smarty/help.tpl';
-    
+
     // load the help template from the module path ->  app/modules/modulename/view/help.tpl
     if ($smarty->templateExists($tpl)) {
         return $smarty->fetch($tpl);
     }
-    
+
     return 'Help Template not found.';
 }

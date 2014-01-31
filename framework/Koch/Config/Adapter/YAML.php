@@ -73,7 +73,7 @@ class YAML implements AdapterInterface
         }
 
         $array = '';
-        
+
         if (extension_loaded('yaml') === true) {
             $array = yaml_parse_file($file);
         } elseif (extension_loaded('syck') === true) {

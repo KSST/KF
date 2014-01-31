@@ -666,7 +666,7 @@ class Errorhandler
     public static function getGithubIssueURL($summary, $errorfile, $errorline)
     {
         // POST /repos/:owner/:repo/issues
-        
+
         /*{
             "title": "Found a bug",
             "body": "I'm having a problem with this.",
@@ -679,7 +679,6 @@ class Errorhandler
           }
          */
     }
-
 
     /**
      * This method might be registered to the shutdown handler to catch fatal errors.

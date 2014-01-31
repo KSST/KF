@@ -89,7 +89,7 @@ class GravatarCache
     {
         // Check if caching is possible
         if ($this->checkIfCachable() == true) {
-            
+
             // get the Gravatar and cache it
             $gravatar = file_get_contents($gravatarUrl);
             file_put_contents($cacheFile, $gravatar);
