@@ -26,6 +26,6 @@ namespace Koch\Config\Adapter;
 
 interface AdapterInterface
 {
-    public function readConfig($file);
-    public function writeConfig($file, array $array);
+    public static function readConfig($file);
+    public static function writeConfig($file, array $array);
 }
