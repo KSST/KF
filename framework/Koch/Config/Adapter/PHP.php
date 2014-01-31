@@ -27,7 +27,7 @@ namespace Koch\Config\Adapter;
 /**
  * Koch Framework - Config Handler for PHP Format.
  */
-class Native
+class PHP implements AdapterInterface
 {
     /**
      * Read the config array from php file
@@ -65,6 +65,6 @@ class Native
         $content = sprintf($format, date('d-m-Y H:i'), $config_array);
 
         // write to file
-        return (bool) file_put_contents($file, $content);
+        return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 }

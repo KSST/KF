@@ -27,7 +27,7 @@ namespace Koch\Config\Adapter;
 /**
  * Koch Framework - Config Handler for CSV Format.
  */
-class CSV
+class CSV implements AdapterInterface
 {
     /**
      * Read the config array from csv file

@@ -27,7 +27,7 @@ namespace Koch\Config\Adapter;
 /**
  * Koch Framework - Config Handler for INI Format.
  */
-class INI
+class INI implements AdapterInterface
 {
     /**
      * Writes a .ini Configfile
@@ -88,7 +88,7 @@ class INI
         $content .=  "\n ; DO NOT REMOVE THIS LINE */ ?>";
 
         // write to file
-        return (bool) file_put_contents($file, $content);
+        return (bool) file_put_contents($file, $content, LOCK_EX);
     }
 
     /**
