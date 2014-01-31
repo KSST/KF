@@ -17,7 +17,7 @@ use Koch\Datatype\Conversion;
 /**
  * Config Handler for XML Format (via SimpleXML).
  */
-class XML
+class XML implements AdapterInterface
 {
     /**
      * Write the configarray to the xml file
@@ -32,7 +32,7 @@ class XML
         $xml = Conversion::arrayToXML($array);
 
         // write xml into the file
-        return (bool) file_put_contents($file, $xml);
+        return (bool) file_put_contents($file, $xml, LOCK_EX);
     }
 
     /**

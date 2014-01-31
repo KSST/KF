@@ -50,18 +50,18 @@ class Factory
         $extension = $extension[0];
 
         static $extensionMap = array(
-          '.config.php' => 'native',
-          '.info.php' => 'native',
-          '.config.ini' => 'ini',
-          '.config.xml' => 'xml',
-          '.config.yaml' => 'yaml'
+            '.config.php' => 'php',
+            '.info.php' => 'php',
+            '.config.ini' => 'ini',
+            '.config.xml' => 'xml',
+            '.config.yaml' => 'yaml'
         );
 
         if ($extensionMap[$extension] === true) {
             $adapter = $extensionMap[$extension];
         } else {
             throw new \Koch\Exception\Exception(
-            _('No handler for that type of configuration file found (' . $extension . ')')
+                _('No handler for that type of configuration file found (' . $extension . ')')
             );
         }
 
@@ -103,13 +103,11 @@ class Factory
     /**
      * getAdapter()
      *
-     * @param  string        $adapter a configuration filename type like "php", "xml", "yaml", "ini", "native"
-     * @return Configuration Handler Object with confighandler and array of configfile.
+     * @param  string        $adapter A config adapter name "PHP", "XML", "YAML", "INI", "JSON".
+     * @return object /Koch/Config/Adapter/AdapterInterface
      */
     public static function getAdapter($adapter)
     {
-        $adapter = ($adapter == 'native') ? 'Native' : strtoupper($adapter);
-
         $class = 'Koch\Config\Adapter\\' . $adapter;
 
         return new $class;

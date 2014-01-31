@@ -24,7 +24,8 @@ namespace Koch\Config;
  * The __set, __get, __isset, __unset are overloading functions to work with that array.
  */
 class Config extends AbstractConfig
-{
+{    
+    
     /**
      * Reads a configuration file
      *

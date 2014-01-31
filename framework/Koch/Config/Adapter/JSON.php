@@ -15,7 +15,7 @@ namespace Koch\Config\Adapter;
 /**
  * Config Handler for Json Format.
  */
-class JSON
+class JSON implements AdapterInterface
 {
     /**
      * Read the config array from JSON file
@@ -58,6 +58,6 @@ class JSON
         $json_content = json_encode($array);
 
         // write json encoded content to file
-        return (bool) file_put_contents($file, $json_content);
+        return (bool) file_put_contents($file, $json_content, LOCK_EX);
     }
 }

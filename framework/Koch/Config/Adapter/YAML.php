@@ -34,7 +34,7 @@ namespace Koch\Config\Adapter;
  * @link http://github.com/why/syck/tree/master PECL SYCK Repository
  * @link http://spyc.sourceforge.net/ SPYC Library Website at Sourceforge
  */
-class YAML
+class YAML implements AdapterInterface
 {
     /**
      * Write the config array to a yaml file
@@ -44,8 +44,10 @@ class YAML
      */
     public static function writeConfig($file, array $array)
     {
-        // prefer syck, else use Spyc - faster one first
-        if (extension_loaded('syck') === true) {
+        // prefer yaml, then syck, else use Spyc - faster one first
+        if (extension_loaded('yaml') === true) {
+            return yaml_emit_file($file, $array);
+        } elseif (extension_loaded('syck') === true) {
             $yaml = syck_dump($array);
         } elseif (class_exists('Spyc') === true) {
             $spyc = new Spyc();
@@ -54,7 +56,7 @@ class YAML
             throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
         }
 
-        return (bool) file_put_contents($file, $yaml);
+        return (bool) file_put_contents($file, $yaml, LOCK_EX);
     }
 
     /**
@@ -71,13 +73,15 @@ class YAML
         }
 
         $array = '';
-
-        $yaml = file_get_contents($file);
-
-        if (extension_loaded('syck') === true) {
+        
+        if (extension_loaded('yaml') === true) {
+            $array = yaml_parse_file($file);
+        } elseif (extension_loaded('syck') === true) {
+            $yaml = file_get_contents($file);
             $array = syck_load($yaml);
         } elseif (class_exists('Spyc') === true) {
             $spyc  = new Spyc();
+            $yaml = file_get_contents($file);
             $array = $spyc->load($yaml);
         } else {
             throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
