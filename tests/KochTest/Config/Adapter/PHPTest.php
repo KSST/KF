@@ -2,21 +2,21 @@
 
 namespace KochTest\Config\Adapter;
 
-use Koch\Config\Adapter\Native;
+use Koch\Config\Adapter\PHP;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
 
-class NativeTest extends \PHPUnit_Framework_TestCase
+class PHPTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Native
+     * @var PHP
      */
     protected $object;
 
     public function setUp()
     {
-        $this->object = new Native;
+        $this->object = new PHP;
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.php');
@@ -37,7 +37,7 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\Native::readConfig
+     * @covers Koch\Config\Adapter\PHP::readConfig
      */
     public function testReadConfig()
     {
@@ -64,7 +64,7 @@ class NativeTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\Native::writeConfig
+     * @covers Koch\Config\Adapter\PHP::writeConfig
      */
     public function testWriteConfig()
     {
