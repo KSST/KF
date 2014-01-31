@@ -67,26 +67,21 @@ class YAML implements AdapterInterface
      */
     public static function readConfig($file)
     {
-        // check if the filename exists
         if (is_file($file) === false or is_readable($file) === false) {
             throw new \Koch\Exception\Exception('YAML File ' . $file . ' not existing or not readable.');
         }
 
-        $array = '';
-
         if (extension_loaded('yaml') === true) {
-            $array = yaml_parse_file($file);
+            return yaml_parse_file($file);
         } elseif (extension_loaded('syck') === true) {
             $yaml = file_get_contents($file);
-            $array = syck_load($yaml);
+            return syck_load($yaml);
         } elseif (class_exists('Spyc') === true) {
             $spyc  = new Spyc();
             $yaml = file_get_contents($file);
-            $array = $spyc->load($yaml);
-        } else {
-            throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
-        }
-
-        return $array;
+            return $spyc->load($yaml);
+        } 
+                
+        throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
     }
 }
