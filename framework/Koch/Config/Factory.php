@@ -62,11 +62,11 @@ class Factory
         $extension = $extension[0];
 
         static $extensionMap = array(
-            '.config.php' => 'php',
-            '.info.php' => 'php',
-            '.config.ini' => 'ini',
-            '.config.xml' => 'xml',
-            '.config.yaml' => 'yaml'
+            '.config.php' => 'PHP',
+            '.info.php' => 'PHP',
+            '.config.ini' => 'INI',
+            '.config.xml' => 'XML',
+            '.config.yaml' => 'YAML'
         );
 
         if (isset($extensionMap[$extension]) === true) {
