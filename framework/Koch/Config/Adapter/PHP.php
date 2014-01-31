@@ -53,6 +53,6 @@ class PHP implements AdapterInterface
         $content = sprintf($format, date('d-m-Y H:i'), $config_array);
 
         // write to file
-        return (bool) file_put_contents($file, $content, LOCK_EX);
+        return (bool) file_put_contents($file, $content);
     }
 }

@@ -26,13 +26,13 @@ class XML implements AdapterInterface
      * @param array  Array to transform and write as xml
      * @return mixed array | bool false
      */
-    public static function writeConfig($file, $array)
+    public static function writeConfig($file, array $array)
     {
         // transform associative PHP array to XML
         $xml = Conversion::arrayToXML($array);
 
         // write xml into the file
-        return (bool) file_put_contents($file, $xml, LOCK_EX);
+        return (bool) file_put_contents($file, $xml);
     }
 
     /**

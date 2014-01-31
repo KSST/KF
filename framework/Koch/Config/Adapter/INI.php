@@ -76,7 +76,7 @@ class INI implements AdapterInterface
         $content .=  "\n ; DO NOT REMOVE THIS LINE */ ?>";
 
         // write to file
-        return (bool) file_put_contents($file, $content, LOCK_EX);
+        return (bool) file_put_contents($file, $content);
     }
 
     /**
