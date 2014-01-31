@@ -69,7 +69,7 @@ class Form extends AbstractFormDecorator
             $html_form .= ' autocomplete';
         }
 
-        if ($this->getNoValidation() === true) {
+        if ($this->isNoValidation() === true) {
             $html_form .= ' novalidation';
         }
 
