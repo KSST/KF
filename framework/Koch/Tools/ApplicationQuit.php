@@ -42,6 +42,7 @@ class ApplicationQuit
      *
      * @param int    $exitCode  ExitCode (defaults to 0 = success).
      * @param string $lastWords Exit Message.
+     * @SuppressWarnings(PHPMD)
      */
     public static function quit($exitCode = 0, $lastWords = '')
     {
