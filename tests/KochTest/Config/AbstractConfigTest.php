@@ -58,7 +58,7 @@ EOF;
     }
 
     /**
-     * @covers Koch\Config\Adapter\Native::readConfig
+     * @covers Koch\Config\Adapter\PHP::readConfig
      * @covers Koch\Config\AbstractConfig::toArray
      */
     public function testToArray()
