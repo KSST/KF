@@ -186,7 +186,7 @@ class PHPArray extends Form implements FormGeneratorInterface
 
                 // if we have a class attribute defined, then add it (optional)
                 if ($form_array_element['class'] !== null) {
-                    $formelement->setClass($form_array_element['class']);
+                    $formelement->setCssClass($form_array_element['class']);
                 }
 
                 /**
