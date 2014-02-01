@@ -49,7 +49,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage The config file "non-existant.file" is not existing or not readable.
      */
-    public function testReadConfig_throwsExceptionFileNotFound()
+    public function testReadConfigThrowsExceptionFileNotFound()
     {
         $this->object->readConfig('non-existant.file');
     }
@@ -58,7 +58,7 @@ class PHPTest extends \PHPUnit_Framework_TestCase
      * @expectedException RuntimeException
      * @expectedExceptionMessage The config file "vfs://root/config2.php" does not contain a PHP array.
      */
-    public function testReadConfig_throwsExceptionIfFileContentNotArray()
+    public function testReadConfigThrowsExceptionIfFileContentNotArray()
     {
         $this->object->readConfig($this->configFileURL2);
     }

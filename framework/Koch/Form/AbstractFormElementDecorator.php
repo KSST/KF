@@ -32,8 +32,9 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     // instance of formelement, which is to decorate
     protected $formelement;
 
-    private $name;
-    private $class;
+    public $name;
+    
+    public $cssClass;
 
     public function getName()
     {
@@ -46,41 +47,32 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     }
 
     /**
-    * Set class=""
+    * Set a CSS class attribute.
     *
-    * @param string $classname
+    * @param string $cssClass
+    * @return object Formelement
     */
-    public function setClass($classname)
+    public function setCssClass($cssClass)
     {
-        $this->class = $classname;
+        $this->cssClass = $cssClass;
 
         return $this->formelement;
     }
 
     /**
-    * Get class="" values
+    * Get the CSS class attribute.
     *
     * @return string
     */
     public function getClass()
     {
-        return $this->class;
+        return $this->cssClass;
     }
-
-    /**
-     * Constructor
-     *
-     * @param $form Accepts a \Koch\Form\Form Object implementing the Koch_Form_Interface.
-     */
-    /*public function __construct(Koch_Form_Interface $form)
-    {
-        $this->decorate($form);
-    }*/
 
     /**
      * Setter method to set the object which is to decorate.
      *
-     * @param $form object of type Koch_Form_Interface or Koch_Form_Decorator_Interface
+     * @param $form object of type \Koch\Form\Interface or \Koch\Form\Decorator\Interface
      */
     public function decorateWith($formelement)
     {
@@ -99,7 +91,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
             return true;
         }
 
-        if ($this->formelement instanceof   \Koch\Form\Element\Decorator) {
+        if ($this->formelement instanceof \Koch\Form\Element\Decorator) {
             return $this->formelement->hasMethod($method);
         }
 

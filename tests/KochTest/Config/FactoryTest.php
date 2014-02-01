@@ -46,19 +46,19 @@ class FactoryTest extends \PHPUnit_Framework_TestCase
     {
         $configfile = 'file.config.php';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
-        $this->assertEquals($er, 'php');
+        $this->assertEquals($er, 'PHP');
 
         $configfile = 'file.config.ini';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
-        $this->assertEquals($er, 'ini');
+        $this->assertEquals($er, 'INI');
 
         $configfile = 'file.config.xml';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
-        $this->assertEquals($er, 'xml');
+        $this->assertEquals($er, 'XML');
 
         $configfile = 'file.config.yaml';
         $er = $this->object->determineConfigurationHandlerTypeBy($configfile);
-        $this->assertEquals($er, 'yaml');
+        $this->assertEquals($er, 'YAML');
     }
 
     /**

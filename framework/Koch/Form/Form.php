@@ -714,7 +714,7 @@ class Form implements FormInterface
     {
         $formelement->addDecorator('label');
         $formelement->addDecorator('description');
-        $formelement->addDecorator('div')->setClass('formline');
+        $formelement->addDecorator('div')->setCssClass('formline');
     }
 
     /**
@@ -871,25 +871,25 @@ class Form implements FormInterface
      * @param $attributes array Attributes for the formelement.
      * @param $position integer The position of this formelement in the formelements stack.
      *
-     * @return \Koch\Form\Form $this Form Object
+     * @return object \Koch\Form\Form
      */
     public function addElement($formelement, $attributes = null, $position = null)
     {
         /**
-         * We procceed, if parameter $formelement is an formelement object, implementing
-         * the   \Koch\Form\Element\Interface. Else it's a string with the name of the formelement,
+         * Continue, if parameter $formelement is an formelement object, implementing
+         * the \Koch\Form\Element\Interface. Else it's a string with the name of the formelement,
          * which we pass to the factory to deliver that formelement object.
          *
          * Note: Checking for the interface is necessary here, because checking for type string,
          * like if(is_string(formelement)), would result in true, because all formelement
-         * objects provide the __toString() method.
+         * objects provide the __toString() method for easier rendering.
          */
         if (($formelement instanceof \Koch\Form\FormelementInterface) === false) {
             $formelement = self::formelementFactory($formelement);
         }
 
-        // little helper for easier use of the formelement "file"
-        // this switches the "encytype" attribute of form tag automatically
+        // for easier use of the formelement "file":
+        // this switches the "encytype" attribute of the form tag.
         if (($formelement instanceof \Koch\Form\Formelement\File) === true) {
             $this->setEncoding('multipart/form-data');
         }
@@ -926,7 +926,8 @@ class Form implements FormInterface
             // just add to the requested position
             $this->formelements[$position] = $formelement;
         }
-        // return object -> fluent interface / method chaining
+        
+        // return formelement object -> fluent interface / method chaining
         return $formelement;
     }
 
@@ -1507,7 +1508,7 @@ class Form implements FormInterface
      *
      * @param  string|array|object $decorator            The formelement decorator(s) to apply to the formelement.
      * @param  int|string|object   $formelement_position Position in the formelement stack or Name of formelement.
-     * @return Koch_Formdecorator  object
+     * @return object \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
@@ -1521,8 +1522,6 @@ class Form implements FormInterface
             $formelement_object = $this->getElement($formelement_pos_name_obj);
         }
 
-        // add the decorator
-        // WATCH OUT! this is a forwarding call to formelement.core.php->addDecorator()
         return $formelement_object->addDecorator($decorator);
     }
 
