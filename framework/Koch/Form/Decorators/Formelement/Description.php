@@ -26,18 +26,17 @@ class Description extends AbstractFormElementDecorator
      * @var string Name of this decorator
      */
     public $name = 'description';
+    
+    public $cssClass = 'formdescription';
 
     /**
      * Renders description *after* formelement.
-     *
-     * @todo if required form field add (*)
      */
     public function render($html_formelement)
     {
-        // add description
-        if (isset($this->formelement->description) == true) {
-            $html_formelement .= '<br />'. CR;
-            $html_formelement .= '<span class="formdescription">';
+        if (isset($this->formelement->description) === true) {
+            $html_formelement .= '<br />' . CR;
+            $html_formelement .= '<span class="' . $this->cssClass . '">';
             $html_formelement .= $this->formelement->getDescription();
             $html_formelement .= '</span>' . CR;
         }
