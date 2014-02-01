@@ -29,7 +29,7 @@ class ErrorhandlerTest extends \PHPUnit_Framework_TestCase
         // string
         $backtraceArgument = 'Kraftwerk';
         $expected = Errorhandler::formatBacktraceArgument($backtraceArgument);
-        $this->assertContains('Kraftwerk' , $expected['arg']);
+        $this->assertContains('Kraftwerk', $expected['arg']);
         $this->assertContains('string', $expected['type']);
 
         // array
