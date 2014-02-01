@@ -377,7 +377,7 @@ class Errorhandler
      *
      * @return array With keys 'arg' and 'type'.
      */
-    public static function formatBacktraceArgument($backtraceArgument, $nestingLevel = 2)
+    public static function formatBacktraceArgument($argument)
     {
         // do not throw a notice on PHP 5.3 - the constant was added with PHP 5.4 htmlspecialchars()
         defined('ENT_SUBSTITUTE') || define('ENT_SUBSTITUTE', 8);
@@ -386,44 +386,44 @@ class Errorhandler
         $arg = '';
         $type = '';
 
-        switch (gettype($backtraceArgument)) {
+        switch (gettype($argument)) {
             case 'boolean':
                 $type .= '<span>bool</span>';
-                $arg .= $backtraceArgument ? 'true' : 'false';
+                $arg .= $argument ? 'true' : 'false';
                 break;
             case 'integer':
                 $type .= '<span>int</span>';
-                $arg .= $backtraceArgument;
+                $arg .= $argument;
                 break;
             case 'float':
             case 'double':
                 $type .= '<span>float/double</span>';
-                $arg .= $backtraceArgument;
+                $arg .= $argument;
                 break;
             case 'string':
                 $type .= '<span>string</span>';
-                $backtraceArgument = htmlspecialchars($backtraceArgument, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
-                $arg .= \Koch\Functions\Functions::shortenString($backtraceArgument);
+                $argument = htmlspecialchars($argument, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+                $arg .= \Koch\Functions\Functions::shortenString($argument);
                 break;
             case 'array':
                 $type .= '<span>array</span>';
-                $arg .= count($backtraceArgument);
+                $arg .= count($argument);
                 break;
             case 'object':
                 $type .= '<span>object</span>';
-                $arg .= get_class($backtraceArgument);
+                $arg .= get_class($argument);
                 /* @todo use self::getClassProperties($backtraceArgument) */
                 break;
             case 'resource':
                 $type .= '<span>resource</span>';
                 if ($type === 'stream') {
                     $type .= '(stream)';
-                    $meta = stream_get_meta_data($backtraceArgument);
+                    $meta = stream_get_meta_data($argument);
                     if (isset($meta['uri'])) {
                         $type .= htmlspecialchars($meta['uri'], ENT_NOQUOTES, 'UTF-8');
                     }
                 }
-                $arg .= mb_strstr($backtraceArgument, '#') . ' - ' . get_resource_type($backtraceArgument);
+                $arg .= mb_strstr($argument, '#') . ' - ' . get_resource_type($argument);
                 break;
             case 'NULL':
                 $type .= '<span>null</span>';
