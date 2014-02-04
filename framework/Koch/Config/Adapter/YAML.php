@@ -87,13 +87,15 @@ class YAML implements AdapterInterface
             return yaml_parse_file($file);
         } elseif (extension_loaded('syck') === true) {
             $yaml = file_get_contents($file);
+
             return syck_load($yaml);
         } elseif (class_exists('Spyc') === true) {
             $spyc  = new Spyc();
             $yaml = file_get_contents($file);
+
             return $spyc->load($yaml);
-        } 
-                
+        }
+
         throw new \Koch\Exception\Exception('No YAML Parser available. Get Spyc or Syck!');
     }
 }
