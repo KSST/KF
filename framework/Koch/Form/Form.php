@@ -926,7 +926,7 @@ class Form implements FormInterface
             // just add to the requested position
             $this->formelements[$position] = $formelement;
         }
-        
+
         // return formelement object -> fluent interface / method chaining
         return $formelement;
     }
@@ -1508,7 +1508,7 @@ class Form implements FormInterface
      *
      * @param  string|array|object $decorator            The formelement decorator(s) to apply to the formelement.
      * @param  int|string|object   $formelement_position Position in the formelement stack or Name of formelement.
-     * @return object \Koch\Form\Decorators\Formelement\Interface
+     * @return object              \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
