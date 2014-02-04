@@ -21,7 +21,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     protected $formelement;
 
     public $name;
-    
+
     public $cssClass;
 
     public function getName()

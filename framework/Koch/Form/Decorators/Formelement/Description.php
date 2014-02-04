@@ -26,7 +26,7 @@ class Description extends AbstractFormElementDecorator
      * @var string Name of this decorator
      */
     public $name = 'description';
-    
+
     public $cssClass = 'formdescription';
 
     /**

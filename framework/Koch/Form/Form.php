@@ -429,7 +429,7 @@ namespace "Koch\Form\Element\" + formelement name
      *
      * @param  string|array|object $decorator            The formelement decorator(s) to apply to the formelement.
      * @param  int|string|object   $formelement_position Position in the formelement stack or Name of formelement.
-     * @return object \Koch\Form\Decorators\Formelement\Interface
+     * @return object              \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
