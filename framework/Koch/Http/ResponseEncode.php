@@ -77,8 +77,8 @@ class ResponseEncode
                and (ini_get('output_handler') != 'ob_gzhandler') and ob_get_length() === false) {
                 // Method 1: on-the-fly transparent zlib.output_compression
                 // Additional output handlers are not valid, when zlib.output_compression is activated.
-                #ini_set('zlib.output_compression'       , true);
-                #ini_set('zlib.output_compression_level' , self::$compression_level);
+                ini_set('zlib.output_compression'       , true);
+                ini_set('zlib.output_compression_level' , self::$compression_level);
 
                 // if zlib.output_compression still not enabled
                 // Method 2: compression via this class
