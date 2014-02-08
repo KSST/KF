@@ -215,9 +215,7 @@ class HttpResponse implements HttpResponseInterface
         // Send user specificed headers from self::$headers array
         if (false === headers_sent()) {
             foreach (self::$headers as $name => $value) {
-                $header = $name . ': ' . $value;
-                $header = str_replace(array("\n", "\r"), '', $header); // header injection
-                header($header, false);
+                header($name . ': ' . $value, false);
             }
         }
 
