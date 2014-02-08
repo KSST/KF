@@ -200,15 +200,11 @@ class HttpResponse implements HttpResponseInterface
 
         // activateOutputCompression when not in debugging mode
         if (defined('DEBUG') and DEBUG === false) {
-            \Koch\Http\ResponseEncode::startOutputBuffering('7');
+            \Koch\Http\ResponseEncode::startBuffering();
         }
 
         // Send the status line
         self::addHeader('HTTP/1.1', self::$statusCode.' '.self::getStatusCodeDescription(self::$statusCode));
-
-        // Set X-Powered-By Header to Clansuite Signature
-        $pwd_by = '[ Clansuite - just an eSport CMS ][ Version : '. APPLICATION_VERSION .' ][ http://clansuite.com/ ]';
-        self::addHeader('X-Powered-By', $pwd_by);
 
         // Suppress Framesets
         self::addHeader('X-Frame-Options', 'deny'); // not SAMEORIGIN
@@ -233,7 +229,7 @@ class HttpResponse implements HttpResponseInterface
 
         // Flush Compressed Buffer
         if (defined('DEBUG') and DEBUG === false) {
-            \Koch\Http\ResponseEncode::stopOutputBuffering();
+            \Koch\Http\ResponseEncode::flushCompressedBuffer();
         }
 
         // OK, Reset -> Package delivered! Return to Base!
