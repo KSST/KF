@@ -33,9 +33,9 @@ namespace Koch\Http;
  *  TYPO3 4.5 is now using "ob_gzhandler" for compression.
  *  That is suboptimal because using zlib.output_compression is preferred over ob_gzhandler().
  */
-class ResponseEncode
+class ResponseCompression
 {
-    public static function startBuffering()
+    public static function startBuffer()
     {
         // both methods depend on the zlib extension
         if (extension_loaded('zlib') === false) {
