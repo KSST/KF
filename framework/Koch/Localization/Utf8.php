@@ -13,42 +13,26 @@
 namespace Koch\Localization;
 
 /**
- * Class for Initalizing UTF8 (fallbacks).
+ * Class for Initalizing UTF8.
  *
- * Koch Framework relies on mbstring.
- * This class allows running the application without the mbstring extension.
- * It loads functional replacements for the mbstring methods.
- * UTF8 functions and lookup tables are based on the Dokuwiki UTF-8 library written by Andreas Gohr.
- * @link http://github.com/splitbrain/dokuwiki/raw/master/inc/utf8.php
+ * The framework requires the PHP extension mbstring.
  */
 class Utf8
 {
     public static function initialize()
     {
-        // detect, if the mbstring extension is loaded and set flag constant
-        defined('UTF8_MBSTRING') || define('UTF8_MBSTRING', extension_loaded('mbstring'));
-
-        // mbstring extension is loaded
-        if (UTF8_MBSTRING === true) {
-            // we do not accept mbstring function overloading set in php.ini
-            if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING) {
-                $msg = _(
-                    'The string functions are overloaded by mbstring. Please stop that.
-                    Check php.ini - setting: mbstring.func_overload.'
-                );
-                trigger_error($msg, E_USER_ERROR);
-            }
-
-            // if not already set, set internal encoding to UTF-8
-            mb_internal_encoding('UTF-8');
-
-        } else {
-
-            /**
-             * The PHP extension mbstring is NOT loaded.
-             * we do not provide mbstring function fallbacks.
-             */
+        if (extension_loaded('mbstring') === false) {
             throw new \Koch\Exception\Exception('The PHP extension "mbstring" is required.');
         }
+
+        // do not accept mbstring function overloading set in php.ini
+        if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING) {
+            throw new \Koch\Exception\Exception(
+                'The string functions are overloaded by mbstring. Please stop that. ' .
+                'Check the "php.ini" setting: "mbstring.func_overload".'
+            );
+        }
+
+        mb_internal_encoding('UTF-8');
     }
 }
