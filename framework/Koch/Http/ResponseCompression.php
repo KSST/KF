@@ -28,10 +28,10 @@ namespace Koch\Http;
  * Koch Framework - Response Encode
  *
  * The class is used to buffer and compress the response content.
- * 
+ *
  * Because you cannot use both ob_gzhandler() and zlib.output_compression,
  * zlib.output_compression is preferred over ob_gzhandler().
- * 
+ *
  * So two methods are used:
  * Method 1: zlib.output_compression
  * Method 2: stopBuffer
@@ -53,7 +53,7 @@ class ResponseCompression
         if (extension_loaded('zlib') === false) {
             throw new \Koch\Exception\Exception('The PHP Extension "zlib" is required.');
         }
-        
+
         if ((bool) ini_get('zlib.output_compression') === false and ob_get_length() === false
             and (ini_get('output_handler') != 'ob_gzhandler')) {
             // Method 1: on-the-fly transparent zlib.output_compression
@@ -197,8 +197,8 @@ class ResponseCompression
 
         // Perform a "qvalue" check. The Accept-Encoding "gzip;q=0" means that gzip is NOT accepted.
         // preg_matches only, if first condition is true.
-        if ((mb_strpos($http_accept_encoding, 'gzip;q=') !== false) 
-            and (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match) 
+        if ((mb_strpos($http_accept_encoding, 'gzip;q=') !== false)
+            and (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
             and ($match[4] === '' or $match[4] > 0))) {
             $encoding = 'gzip';
         }
