@@ -42,10 +42,13 @@ class Utf8
             // if not already set, set internal encoding to UTF-8
             mb_internal_encoding('UTF-8');
 
-        } else { // mbstring extension is NOT loaded, we provide mbstring function fallbacks
+        } else {
 
-            // load functional replacements for mbstring functions
-            include __DIR__ . DS . 'MbstringWrapper.php';
+            /**
+             * The PHP extension mbstring is NOT loaded.
+             * we do not provide mbstring function fallbacks.
+             */
+            throw new \Koch\Exception\Exception('The PHP extension "mbstring" is required.');
         }
     }
 }
