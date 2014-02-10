@@ -188,7 +188,7 @@ class HttpResponse implements HttpResponseInterface
 
         // activateOutputCompression when not in debugging mode
         if (defined('DEBUG') and DEBUG === false) {
-            \Koch\Http\ResponseCompression::startBuffer('7');
+            \Koch\Http\ResponseCompression::startBuffer();
         }
 
         // Send the status line
@@ -214,7 +214,8 @@ class HttpResponse implements HttpResponseInterface
         echo self::getContent();
 
         if (defined('DEBUG') and DEBUG === false) {
-            \Koch\Http\ResponseEncode::flushCompressedBResponseCompression   }
+            \Koch\Http\ResponseCompression::flushCompressedBuffer();
+        }
 
         // OK, Reset -> Package delivered! Return to Base!
         self::clearHeaders();
