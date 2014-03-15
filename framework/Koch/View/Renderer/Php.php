@@ -103,10 +103,16 @@ class Php extends AbstractRenderer
          */
         extract($this->viewdata, EXTR_REFS | EXTR_PREFIX_INVALID, 'invalid_');
 
-        ob_start();
-
-        include $this->file;
-
-        return ob_get_clean();
+        try {
+            ob_start();
+            $included = include $this->file;            
+            if ($included === false) {
+                throw new \Koch\Exception\Exception(sprintf('Including the template "%s" failed.', $this->file));
+            }            
+            return ob_get_clean();            
+        } catch (\Exception $ex) {
+            ob_end_clean();
+            throw $ex;
+        }
     }
 }
