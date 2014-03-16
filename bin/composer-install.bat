@@ -21,7 +21,7 @@ cd..
 "%PHPBIN%" "bin\composer\composer.phar" "update"
 
 :: then install the vendor packages
-"%PHPBIN%" "bin\composer\composer.phar" "install" "--dev --prefer-dist --no-interaction --optimize-autoloader"
+"%PHPBIN%" "bin\composer\composer.phar" "install" "--dev --prefer-dist --no-interaction"
 
 pause
 
