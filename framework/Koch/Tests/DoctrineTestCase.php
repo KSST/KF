@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\PHPUnit;
+namespace Koch\Tests;
 
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;

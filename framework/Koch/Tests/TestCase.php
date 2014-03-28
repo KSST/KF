@@ -10,7 +10,7 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace Koch\PHPUnit;
+namespace Koch\Tests;
 
 /**
  * An alternative base-class for PHPUnit test cases.
