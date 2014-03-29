@@ -19,23 +19,6 @@
         {
             "type": "package",
             "package": {
-                "name": "php-gettext/php-gettext",
-                "version": "1.0.11",
-                "dist": {
-                    "url": "http://launchpadlibrarian.net/61225817/php-gettext-1.0.11.tar.gz",
-                    "type": "tar"
-                },
-                "autoload": {
-                    "classmap": [
-                        "gettext.php",
-                        "streams.php"
-                    ]
-                }
-            }
-        },
-        {
-            "type": "package",
-            "package": {
                 "name": "marijnh/CodeMirror",
                 "version": "3.1",
                 "dist": {
@@ -47,14 +30,10 @@
     ],
     "require": {
         "php"                             : ">=5.3.3",
-
         "doctrine/orm"                    : "2.4.*",
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
-
-        "php-gettext/php-gettext"         : "1.0.11",
-
         "smarty/smarty"                   : "3.1.*",
         "swiftmailer/swiftmailer"         : "5.0.3"
     },
