@@ -24,12 +24,7 @@ services:
   - mongodb
 
 before_script:
-  # use HHVM nightly builds
-  - sudo apt-get remove hhvm
-  - sudo add-apt-repository -y ppa:mapnik/boost
-  - sudo apt-get -y --force-yes update
-  - sudo apt-get -y --force-yes install hhvm-nightly
-  - hhvm --version
+  - ./bin/.install.hhvm-nightly.sh
   # pecl -q install -f mongo-${MONGO_VERSION} && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   - php ./bin/travis-setup.php $OPCODE_CACHE
 
