@@ -2,7 +2,7 @@
 namespace KochTest\Pagination\Adapter;
 
 use \Koch\Pagination\Adapter\Doctrine;
-use \Koch\PHPUnit\DoctrineTestCase;
+use \Koch\Tests\DoctrineTestCase;
 
 // doctrine/data-fixtures
 use Doctrine\Common\DataFixtures\Loader;
