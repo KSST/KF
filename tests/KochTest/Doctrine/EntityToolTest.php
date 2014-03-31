@@ -2,7 +2,7 @@
 namespace KochTest\Doctrine;
 
 use Koch\Doctrine\EntityTool;
-use Koch\PHPUnit\DoctrineTestCase;
+use Koch\Tests\DoctrineTestCase;
 
 class EntityToolTest extends DoctrineTestCase
 {
