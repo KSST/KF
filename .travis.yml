@@ -24,7 +24,8 @@ services:
   - mongodb
 
 before_script:
-  - ./bin/.install.hhvm-nightly.sh
+  - sudo chmod +x ./bin/.install.hhvm-nightly.sh
+  - sudo ./bin/.install.hhvm-nightly.sh
   # pecl -q install -f mongo-${MONGO_VERSION} && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
   #- php ./bin/travis-setup.php $OPCODE_CACHE
 
