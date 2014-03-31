@@ -2,7 +2,7 @@
 
 namespace KochTest\PHPUnit;
 
-use Koch\PHPUnit\DoctrineTestCase;
+use Koch\Tests\DoctrineTestCase;
 
 class DoctrineTestCaseTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,8 +22,8 @@ class DoctrineTestCaseTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\PHPUnit\DoctrineTestCase::setUp
-     * @covers Koch\PHPUnit\DoctrineTestCase::getEntityManager
+     * @covers Koch\Tests\DoctrineTestCase::setUp
+     * @covers Koch\Tests\DoctrineTestCase::getEntityManager
      */
     public function testSetUp()
     {
