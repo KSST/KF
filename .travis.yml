@@ -6,7 +6,7 @@
 language: php
 
 env:
-  - OPCODE_CACHE=apc
+  #- OPCODE_CACHE=apc
   # MONGO_VERSION=1.3.7
 
 php:
@@ -26,7 +26,7 @@ services:
 before_script:
   - ./bin/.install.hhvm-nightly.sh
   # pecl -q install -f mongo-${MONGO_VERSION} && echo "extension=mongo.so" >> `php --ini | grep "Loaded Configuration" | sed -e "s|.*:\s*||"`
-  - php ./bin/travis-setup.php $OPCODE_CACHE
+  #- php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
   - composer self-update
