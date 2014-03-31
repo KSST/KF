@@ -91,8 +91,8 @@ class DownloadTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @runInSeparateProcess
-     * @preserveGlobalState disabled
+     * -runInSeparateProcess
+     * -preserveGlobalState disabled
      * @covers Koch\Files\Download::sendFile
      */
     public function testSendFile()
