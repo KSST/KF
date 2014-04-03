@@ -99,9 +99,11 @@ class DoctrineSession extends AbstractSession
         // session cookies are forced!
         ini_set('session.use_cookies', 1);
         ini_set('session.use_only_cookies', 1);
+        ini_set('session.cookie_httponly', 1); // stop javascript accessing the cookie (XSS)
+        ini_set('session.cookie_secure', 1);  // send cookie only over SSL
+        ini_set('session.hash_function', 'sha256');
 
-        // stop javascript accessing the cookie (XSS)
-        ini_set('session.cookie_httponly', 1);
+        // add session entropy?
 
         /**
          * Setup the custom session handler methods
