@@ -78,7 +78,7 @@ class Json extends AbstractRenderer
     /**
      * Render PHP data as X-JSON HEADER.
      * This method does not return the json encoded string for rendering,
-     * instead it applies it directly to the header.
+     * but sets it directly to the header.
      *
      * @param $data array php-array
      */
@@ -116,6 +116,13 @@ class Json extends AbstractRenderer
         if ($viewdata !== null) {
             $this->viewdata = $viewdata;
         }
+
+        /**
+         * Defense against MIME content-sniffing attacks. Supported by IE and Chrome only.
+         * For all other browsers: escape properly or force content disposition header,
+         * to open a download box on client side (as a warning).
+         */
+        \Koch\Http\HttpResponse::addHeader('X-Content-Type-Options', 'nosniff');
 
         /**
          * The MIME media type for JSON text is application/json.
