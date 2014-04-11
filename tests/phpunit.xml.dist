@@ -9,7 +9,7 @@
     convertWarningsToExceptions = "true"
     processIsolation            = "false"
     stopOnFailure               = "false"
-    strict                      = "true"
+    strict                      = "false"
     syntaxCheck                 = "false"
     verbose                     = "true"
     bootstrap                   = "./bootstrap.php">
