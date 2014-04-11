@@ -105,11 +105,12 @@ class Php extends AbstractRenderer
 
         try {
             ob_start();
-            $included = include $this->file;            
+            $included = include $this->file;
             if ($included === false) {
                 throw new \Koch\Exception\Exception(sprintf('Including the template "%s" failed.', $this->file));
-            }            
-            return ob_get_clean();            
+            }
+
+            return ob_get_clean();
         } catch (\Exception $ex) {
             ob_end_clean();
             throw $ex;
