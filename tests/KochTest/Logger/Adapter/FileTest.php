@@ -20,7 +20,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new File($config);
+        $this->object = new File();
 
         vfsStreamWrapper::register();
         # file 1
