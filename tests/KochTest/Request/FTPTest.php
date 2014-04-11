@@ -78,7 +78,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
 
         $sourceFile = 'file.txt';
         $destinationFile = 'file.txt';
-        $transferMode = 'FTP_ASCII';
+        $transferMode = '1'; // FTP_ASCII = 1, FTP_BINARY = 2
 
         $result = $this->object->upload($sourceFile, $destinationFile, $transferMode);
         //var_dump($this->object->errors);
@@ -126,7 +126,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
         // setup method mock
         $this->object->expects($this->any())->method('renameOrMove')->will($this->returnValue(true));
 
-        $this->object->upload('testfile.txt', 'testfile.txt', FTP_ASCII);
+        $this->object->upload('testfile.txt', 'testfile.txt', 1);
 
         $result = $this->object->renameOrMove('testfile.txt', 'testfile_renamed.txt');
 
@@ -219,7 +219,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->expects($this->any())->method('fileSize')->will($this->returnValue(123));
 
-        $this->object->upload('testfile.txt', 'testfile.txt', FTP_BINARY);
+        $this->object->upload('testfile.txt', 'testfile.txt', 2);
         $filesize = $this->object->fileSize('testfile.txt');
 
         $this->assertEquals($filesize, 123); /*filesize('testfile.txt')*/
