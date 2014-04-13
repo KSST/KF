@@ -170,7 +170,7 @@ class Apc extends AbstractCache implements CacheInterface
          * ========================================================
          */
         $info['sma_info'] = array();
-        
+
         if (true === function_exists('apc_sma_info')) {
             $info['sma_info'] = apc_sma_info(true);
 
