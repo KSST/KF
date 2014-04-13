@@ -1325,7 +1325,7 @@ class Form implements FormInterface
      * Set default form decorators (form)
      */
     public function registerDefaultFormDecorators()
-    {       
+    {
         $this->addDecorator('form');
         $this->addDecorator('fieldset');
         $this->addDecorator('div')->setId('forms');
