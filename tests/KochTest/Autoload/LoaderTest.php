@@ -89,7 +89,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
          // test Koch Framework Autoloader is registered in the spl_autoloader_stack at first place
         $registered_autoloaders = spl_autoload_functions();
-        $this->assertEquals('Koch\Autoload\Loader', $registered_autoloaders[0][0]);
+        $this->assertInstanceOf('Koch\Autoload\Loader', $registered_autoloaders[0][0]);
         $this->assertEquals('autoload', $registered_autoloaders[0][1]);
     }
 
