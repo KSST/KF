@@ -61,10 +61,10 @@
         "ext-yaml"        : "*"
     },
     "autoload": {
-        "psr-0": {
-            "Koch\\": "framework/",
-            "KochTest\\": "tests/"
-        }
+        "psr-4": { "Koch\\": "framework/" }
+    },
+    "autoload-dev": {
+        "psr-4": { "KochTest\\": "tests/" }
     },
     "minimum-stability": "dev"
 }
