@@ -247,7 +247,8 @@ class HttpResponse implements HttpResponseInterface
      * @param bool Only allow HTTP usage? (PHP 5.2)
      * @return true Cookie set.
      */
-    public static function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
+    public static 
+    function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
     {
         $ob = ini_get('output_buffering');
 
