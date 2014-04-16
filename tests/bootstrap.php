@@ -39,5 +39,3 @@ $autoloader->setClassMapFile(__DIR__ . '/autoloader.classmap.php'); // KF/tests/
 \Koch\Localization\Utf8::initialize();
 
 require_once __DIR__ . '/constants.php';
-
-var_dump(parse_ini_file(get_cfg_var('cfg_file_path'), true));
