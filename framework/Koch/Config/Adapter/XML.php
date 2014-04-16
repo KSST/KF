@@ -40,10 +40,8 @@ class XML implements AdapterInterface
      */
     public static function writeConfig($file, array $array)
     {
-        // transform associative PHP array to XML
         $xml = Conversion::arrayToXML($array);
 
-        // write xml into the file
         return (bool) file_put_contents($file, $xml);
     }
 
@@ -59,10 +57,8 @@ class XML implements AdapterInterface
             throw new \InvalidArgumentException('XML File ' . $file . ' not existing or not readable.');
         }
 
-        // read file
         $xml = simplexml_load_file($file);
 
-        // transform (SimpleXMLElement or XML) to PHP Array
         return \Koch\Datatype\XML::toArray($xml);
     }
 }
