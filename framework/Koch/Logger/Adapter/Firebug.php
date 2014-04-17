@@ -33,19 +33,8 @@ use Koch\Logger\LoggerInterface;
  */
 class Firebug extends AbstractLogger implements LoggerInterface
 {
-    private static $firephp = null;
-
-    public function __construct()
-    {
-        if (self::$firephp === null) {
-            self::$firephp = \FirePHP::getInstance(true);
-        }
-
-        return self::$firephp;
-    }
-
     /**
-     * geFirePHPLoglevel
+     * Returns the FirePHP Loglevel
      * Translates the system error level to a log level known by firephp.
      *
      * @param string $level (comming from $data['level'] of the $data array to log)
@@ -86,7 +75,7 @@ class Firebug extends AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = array())
     {
         $loglevel = $this->getFirePHPLoglevel($level);
-
-        return self::$firephp->fb($message, $level, $loglevel);
+       
+        return \FirePHP::getInstance(true)->fb($message, $level, $loglevel);
     }
 }
