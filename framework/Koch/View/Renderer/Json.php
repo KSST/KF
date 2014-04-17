@@ -118,8 +118,10 @@ class Json extends AbstractRenderer
          */
         \Koch\Http\HttpResponse::addHeader('Content-Type', 'application/json; charset=UTF-8');
 
-        \Koch\Http\HttpResponse::addHeader('Content-Length', mb_strlen($this->viewdata));
+        $json = $this->jsonEncode($this->viewdata);
+        
+        \Koch\Http\HttpResponse::addHeader('Content-Length', mb_strlen($json));
 
-        return $this->jsonEncode($this->viewdata);
+        return $json;
     }
 }
