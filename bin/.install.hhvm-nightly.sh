@@ -6,6 +6,7 @@ export DEBIAN_FRONTEND=noninteractive
     sudo apt-get update -q -y
     sudo apt-get install -q -y hhvm-nightly
     hhvm --version
+    php --version
 
     curl -sS https://getcomposer.org/installer > composer-installer.php
     hhvm composer-installer.php
