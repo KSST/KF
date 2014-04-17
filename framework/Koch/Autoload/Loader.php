@@ -159,7 +159,7 @@ class Loader
     public static function autoloadExclusions($classname)
     {
         // define parts of classnames for exclusion
-        foreach (array('Smarty_Internal', 'Smarty_') as $classnameToExclude) {
+        foreach (array('Smarty_Internal', 'Smarty_', 'PHPUnit', 'PHP_CodeCoverage') as $classnameToExclude) {
             if (false !== strpos($classname, $classnameToExclude)) {
                 return true;
             }
