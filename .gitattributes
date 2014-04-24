@@ -8,6 +8,7 @@
 tests export-ignore
 
 # do not git export the following files
+.coveralls.yml export-ignore
 .editorconfig export-ignore
 .gitattributes export-ignore
 .gitignore export-ignore
