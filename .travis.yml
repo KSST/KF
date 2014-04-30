@@ -11,11 +11,11 @@ env:
 php:
   - 5.4
   - 5.5
-  - hhvm
+  - hhvm-nightly
 
 matrix:
   allow_failures:
-   - php: hhvm
+   - php: - hhvm-nightly
   fast_finish: true
 
 services:
@@ -23,8 +23,6 @@ services:
   - mongodb
 
 before_script:
-  - sudo chmod +x ./bin/.install.hhvm-nightly.sh
-  - sudo ./bin/.install.hhvm-nightly.sh
   #- php ./bin/travis-setup.php $OPCODE_CACHE
 
 before_install:
