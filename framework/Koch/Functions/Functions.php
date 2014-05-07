@@ -114,6 +114,26 @@ class Functions
             return $prefix . $string;
         }
     }
+    
+    function dropNumericKeys(array $array)
+    {
+        foreach ($array as $key => $value) {
+            if (is_int($key) === true) {
+                unset($array[$key]);
+            }
+        }
+        return $array;
+    }
+
+    function issetOrDefault($var, $defaultValue = null)
+    {
+        return (isset($var) === true) ? $var : $defaultValue;
+    }
+
+    function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
+    {
+        return (isset($array[$key]) === true) ? $array[$key] : $defaultValue;
+    }
 
     /**
      * Transforms a string from underscored_lower_case to Underscored_Upper_Camel_Case.
