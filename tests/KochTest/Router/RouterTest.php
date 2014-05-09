@@ -477,7 +477,7 @@ class RouterTest extends \PHPUnit_Framework_TestCase
         $url = $this->router->generateURL($url_pattern);
         $this->assertEquals('url', $url);
          */
-        $this->markTestIncomplete('Test not implemented yet.');
+        $this->markTestSkipped('Test not implemented yet.');
     }
 
     public function testMethodBuildURLWhenModRewriteOFF()
