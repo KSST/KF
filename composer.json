@@ -34,7 +34,7 @@
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
-        "smarty/smarty"                   : "3.1.*",
+        "smarty/smarty"                   : "3.1.17",
         "swiftmailer/swiftmailer"         : "5.1.*"
     },
     "not-required-now": {
