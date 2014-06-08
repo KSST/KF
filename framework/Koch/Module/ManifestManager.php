@@ -272,7 +272,7 @@ class ManifestManager
             if (is_file($module_infofile) === true) {
                 #\Koch\Debug\Debug::firebug($module_infofile);
 
-               self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
+                self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
             } else { // create file in DEV MODE
                 // if the info file for a module does not exists yet, create it
                 $config_object->writeConfig($module_infofile);
