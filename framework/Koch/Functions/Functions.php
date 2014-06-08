@@ -86,19 +86,13 @@ class Functions
      */
     public static function ensurePrefixedWith($string, $prefix)
     {
-        $spos = null;
-        // get prefix position in string
-        $spos = mb_strpos($string, $prefix);
+        $pos = null;
 
-        // when prefix starts at string position 0,
-        if (is_int($spos) and ($spos == 0)) {
-            // ok, prefixed, do nothing
-            unset($spos);
-            // just return the string
+        $pos = mb_strpos($string, $prefix);
+
+        if (is_int($pos) and ($pos == 0)) {
             return $string;
-        } else { // add the prefix
-            unset($spos);
-
+        } else { 
             return $prefix . $string;
         }
     }
@@ -134,48 +128,6 @@ class Functions
         $upperCamelCase = str_replace(' ', '_', ucwords(str_replace('_', ' ', strtolower($string))));
 
         return $upperCamelCase;
-    }
-
-    /**
-     * Calculates the size of a directory (recursiv)
-     *
-     * Hint: use return getsize() on the return value of this function transform it to a readable format.
-     * @see getsize()
-     * @example
-     * $readable_dirsize = \Koch\Functions\Functions::getsize(\Koch\Functions\Functions::dirsize($dir));
-     *
-     * @param $dir Directory Path
-     * @return $size size of directory in bytes
-     */
-    public static function dirsize($dir)
-    {
-        if (is_dir($dir) === false) {
-            return false;
-        }
-
-        $size = 0;
-        $dh = opendir($dir);
-        while (($entry = readdir($dh)) !== false) {
-            // exclude ./..
-            if ($entry == '.' or $entry == '..') {
-                continue;
-            }
-
-            $direntry = $dir . '/' . $entry;
-
-            if (is_dir($direntry) === false) {
-                // recursion
-                $size += self::dirsize($direntry);
-            } else {
-                $size += filesize($direntry);
-            }
-
-            unset($direntry);
-        }
-
-        closedir($dh);
-
-        return $size;
     }
 
     /**
@@ -512,23 +464,6 @@ class Functions
     }
 
     /**
-     * Convert $size to readable format.
-     * This determines prefixes for binary multiples according to IEC 60027-2,
-     * Second edition, 2000-11, Letter symbols to be used in electrical technology - Part 2: Telecommunications and electronics.
-     *
-     * @author Robert Eisele
-     * @param $bytes bytes
-     * @return string
-     */
-    public static function getSize($bytes)
-    {
-        static $s = array('B', 'KB', 'MB', 'GB', 'TB'); //  'PB', 'EB', 'ZB', 'YB');
-        $e = (int) (log($bytes) / (M_LN2 * 10));
-
-        return sprintf('%.2f' . $s[$e], $bytes / pow(1024, $e));
-    }
-
-    /**
      * Get the variable name as string
      *
      * @author http://us2.php.net/manual/en/language.variables.php#76245
@@ -577,55 +512,6 @@ class Functions
     }
 
     /**
-     * Performs a chmod operation
-     *
-     * @param $path
-     * @param $chmod
-     * @param $recursive
-     */
-    public function chmod($path = '', $chmod = '755', $recursive = false)
-    {
-        if (is_dir($path) === false) {
-            $file_mode = '0' . $chmod;
-            $file_mode = octdec($file_mode);
-
-            if (chmod($path, $file_mode) === false) {
-                return false;
-            }
-        } else {
-            $dir_mode_r = '0' . $chmod;
-            $dir_mode_r = octdec($dir_mode_r);
-
-            if (chmod($path, $dir_mode_r) === false) {
-                return false;
-            }
-
-            if ($recursive === false) {
-                $dh = opendir($path);
-                while ($file = readdir($dh)) {
-                    if (mb_substr($file, 0, 1) != '.') {
-                        $fullpath = $path . '/' . $file;
-                        if (!is_dir($fullpath)) {
-                            $mode = '0' . $chmod;
-                            $mode = octdec($mode);
-                            if (chmod($fullpath, $mode) === false) {
-                                return false;
-                            }
-                        } else {
-                            if ($this->chmod($fullpath, $chmod, true) === false) {
-                                return false;
-                            }
-                        }
-                    }
-                }
-                closedir($dh);
-            }
-        }
-
-        return true;
-    }
-
-    /**
      * Remove comments prefilter
      *
      * @param $html A String with HTML Comments.
@@ -635,100 +521,6 @@ class Functions
     {
         return preg_replace('/<!--.*-->/U', '', $html);
     }
-
-    /**
-     * Copy a directory recursively
-     *
-     * @param $source
-     * @param $destination
-     * @param $overwrite boolean
-     */
-    public function dirCopy($source, $destination, $overwrite = true)
-    {
-        $folder_path = '';
-
-        $handle = opendir($source);
-
-        if ($handle === true) {
-            while (false !== ( $file = readdir($handle))) {
-                if (mb_substr($file, 0, 1) != '.') {
-                    $source_path = $source . $file;
-                    $target_path = $destination . $file;
-
-                    if (is_file($target_path) === false or $overwrite) {
-                        if (array(mb_strstr($target_path, '.') == true)) {
-                            $folder_path = dirname($target_path);
-                        } else {
-                            $folder_path = $target_path;
-                        }
-
-                        while(is_dir(dirname(end($folder_path)))
-                        and dirname(end($folder_path)) != '/'
-                        and dirname(end($folder_path)) != '.'
-                        and dirname(end($folder_path)) != ''
-                        and ! preg_match('#^[A-Za-z]+\:\\\$#', dirname(end($folder_path))))
-                        {
-                            array_push($folder_path, dirname(end($folder_path)));
-                        }
-
-                        while ($parent_folder_path = array_pop($folder_path)) {
-                            if (false === is_dir($parent_folder_path) and
-                                false === @mkdir($parent_folder_path, fileperms($parent_folder_path))) {
-                                throw new \Exception(
-                                    _('Could not create the directory that should be copied (destination).' .
-                                      'Probably a permission problem.')
-                                );
-                            }
-                        }
-
-                        $old = ini_set('error_reporting', 0);
-                        if (copy($source_path, $target_path) == false) {
-                            throw new \Exception(_('Could not copy the directory. Probably a permission problem.'));
-                        }
-                        ini_set('error_reporting', $old);
-
-                    } elseif (is_dir($source_path) === true) {
-                        if (is_dir($target_path) === false) {
-                            if (@mkdir($target_path, fileperms($source_path)) == false) {
-                              // nope, not an empty if statement :)
-                            }
-                        }
-                        $this->dir_copy($source_path, $target_path, $overwrite);
-                    }
-                }
-            }
-            closedir($handle);
-        }
-    }
-
-    /**
-     * Recursively delete directory using PHP iterators.
-     *
-     * Uses a CHILD_FIRST RecursiveIteratorIterator to sort files
-     * before directories, creating a single non-recursive loop
-     * to delete files/directories in the correct order.
-     *
-     * @param  string $directory
-     * @param  bool   $delete_dir_itself
-     * @return bool
-     */
-    public function deleteDir($directory, $delete_dir_itself = false)
-    {
-        $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
-        $ri = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
-
-        foreach ($ri as $file) {
-            if ($file->isDir()) {
-                rmdir($file->getPathname());
-            } else {
-                unlink($file->getPathname());
-            }
-        }
-
-        if ($delete_dir_itself === true) {
-            return rmdir($directory);
-        }
-     }
 
     public static function shortenString($string, $maxlength = 50, $append_string = '[...]')
     {
