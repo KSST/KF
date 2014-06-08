@@ -40,14 +40,14 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
      */
     public function testInitializeEngine()
     {
-         // Remove the following lines when you implement this test.
+        // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
 
-        /*$this->object->initializeEngine();
+        /* $this->object->initializeEngine();
 
-        $this->assertInstanceOf('Xtemplate', $this->renderer);*/
+          $this->assertInstanceOf('Xtemplate', $this->renderer); */
     }
 
     /**
@@ -57,7 +57,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -69,7 +69,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -81,7 +81,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -93,7 +93,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -105,7 +105,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -117,7 +117,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -129,7 +129,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 
@@ -141,7 +141,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
-          'This test has not been implemented yet.'
+            'This test has not been implemented yet.'
         );
     }
 }

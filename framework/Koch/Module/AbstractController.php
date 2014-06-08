@@ -511,7 +511,7 @@ abstract class AbstractController
      * @param string Name of the Event
      * @param object Eventobject
      */
-public function addEvent($eventName, \Koch\Event\Event $event)
+    public function addEvent($eventName, \Koch\Event\Event $event)
     {
         \Koch\Event\Dispatcher::instantiate()->addEventHandler($eventName, $event);
     }
