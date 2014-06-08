@@ -90,7 +90,7 @@ class LogLevel
         600 => 'EMERGENCY',
     );
 
-        /**
+    /**
      * Gets the name of the logging level.
      *
      * @param  integer $level
