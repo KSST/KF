@@ -41,51 +41,51 @@ class INITest extends \PHPUnit_Framework_TestCase
      * @expectedException        InvalidArgumentException
      * @expectedExceptionMessage File not found: not-existant-file.ini
      */
-    public function testReadConfigWithException()
+    public function testreadWithException()
     {
         $this->setExpectedException('InvalidArgumentException');
-        $this->object->readConfig('not-existant-file.ini');
+        $this->object->read('not-existant-file.ini');
     }
 
     /**
-     * @covers Koch\Config\Adapter\INI::readConfig
+     * @covers Koch\Config\Adapter\INI::read
      */
-    public function testReadConfig()
+    public function testRead()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 
     /**
-     * @covers Koch\Config\Adapter\INI::writeConfig
+     * @covers Koch\Config\Adapter\INI::write
      */
-    public function testWriteConfig()
+    public function testWrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 
-    public function testWriteConfigAddValuesToExistingConfig()
+    public function testwriteAddValuesToExistingConfig()
     {
         // test appending to the just written config
-        $writtenTwo = $this->object->writeConfig($this->configFileURL, array('newKey' => 'newValue'));
+        $writtenTwo = $this->object->write($this->configFileURL, array('newKey' => 'newValue'));
         $this->assertTrue($writtenTwo);
-        $this->assertEquals($this->object->readConfig($this->configFileURL), $this->getConfigArrayOverloaded());
+        $this->assertEquals($this->object->read($this->configFileURL), $this->getConfigArrayOverloaded());
     }
 
     /**
-     * @covers Koch\Config\Adapter\INI::writeConfig
+     * @covers Koch\Config\Adapter\INI::write
      * @expectedException Koch\Exception\Exception
      * @expectedExceptionMessage Parameter $file is not given.
      */
-    public function testWriteConfigFirstParameterGiven()
+    public function testWriteFirstParameterGiven()
     {
-        $this->object->writeConfig(null, array());
+        $this->object->write(null, array());
     }
 
     public function testReadingBooleanValues()
     {
-        $config = $this->object->readConfig($this->booleanConfigFileURL);
+        $config = $this->object->read($this->booleanConfigFileURL);
 
         $this->assertTrue((bool) $config['booleans']['test_on']);
         $this->assertFalse((bool) $config['booleans']['test_off']);
@@ -110,7 +110,7 @@ class INITest extends \PHPUnit_Framework_TestCase
         $this->root->addChild($this->fileC);
         vfsStreamWrapper::setRoot($this->root);
 
-        $config = $this->object->readConfig($this->fileCURL);
+        $config = $this->object->read($this->fileCURL);
 
         $expected = array(
             'string_key' => 'string_value',

@@ -37,36 +37,36 @@ class JSONTest extends \PHPUnit_Framework_TestCase
      * @expectedExceptiom        Koch\Exception\Exception
      * @expectedExceptionMessage JSON Config File not existing or not readable.
      */
-    public function testReadConfigThrowsExceptionFileNotFound()
+    public function testreadThrowsExceptionFileNotFound()
     {
         $this->setExpectedException('Koch\Exception\Exception');
-        $this->object->readConfig('not-existant-file.json');
+        $this->object->read('not-existant-file.json');
     }
 
     /**
-     * @covers Koch\Config\Adapter\JSON::readConfig
+     * @covers Koch\Config\Adapter\JSON::read
      * @expectedException Koch\Config\Exception\JsonException
      */
-    public function testReadConfigThrowsExceptionJsonError()
+    public function testreadThrowsExceptionJsonError()
     {
-        $this->object->readConfig($this->invalidConfigFileURL);
+        $this->object->read($this->invalidConfigFileURL);
     }
 
     /**
-     * @covers Koch\Config\Adapter\JSON::readConfig
+     * @covers Koch\Config\Adapter\JSON::read
      */
-    public function testReadConfig()
+    public function testread()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 
     /**
-     * @covers Koch\Config\Adapter\JSON::writeConfig
+     * @covers Koch\Config\Adapter\JSON::write
      */
-    public function testWriteConfig()
+    public function testwrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 

@@ -35,7 +35,7 @@ class JSON implements AdapterInterface
      * @param   string  The filename
      * @return mixed array | boolean false
      */
-    public static function readConfig($filename)
+    public static function read($filename)
     {
         if (is_file($filename) === false or is_readable($filename) === false) {
             throw new \Koch\Exception\Exception(_('JSON Config File not existing or not readable.'));
@@ -64,7 +64,7 @@ class JSON implements AdapterInterface
      * @param   array   The configuration array
      * @return mixed|int|bool Number of bytes written to file, or false on failure.
      */
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         // transform array to json object notation
         $json_content = json_encode($array);

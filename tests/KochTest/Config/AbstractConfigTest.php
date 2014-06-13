@@ -58,12 +58,12 @@ EOF;
     }
 
     /**
-     * @covers Koch\Config\Adapter\PHP::readConfig
+     * @covers Koch\Config\Adapter\PHP::read
      * @covers Koch\Config\AbstractConfig::toArray
      */
     public function testToArray()
     {
-       $array = $this->object->readConfig($this->configFileURL);
+       $array = $this->object->read($this->configFileURL);
        $this->assertEquals($this->getConfigArray(), $this->object->toArray());
 
        // unset, returns the array one last time
@@ -77,7 +77,7 @@ EOF;
     public function testMerge()
     {
         // read old config
-        $this->object->readConfig($this->configFileURL);
+        $this->object->read($this->configFileURL);
 
         // merge new values
         $newConfig = array('newKey' => 'newKeyValue');
@@ -93,7 +93,7 @@ EOF;
     public function testGetConfigValue()
     {
         // read old config
-        $this->object->readConfig($this->configFileURL);
+        $this->object->read($this->configFileURL);
 
         $this->assertEquals('value', $this->object->getConfigValue('oldKey'));
 
@@ -119,7 +119,7 @@ EOF;
     public function test__get()
     {
         // read old config
-        $this->object->readConfig($this->configFileURL);
+        $this->object->read($this->configFileURL);
         $this->assertEquals('value', $this->object->oldKey);
 
         $this->assertNull($this->object->notExistingKey);

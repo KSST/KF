@@ -35,42 +35,42 @@ class CSVTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\CSV::readConfig
+     * @covers Koch\Config\Adapter\CSV::read
      */
-    public function testReadConfig()
+    public function testRead()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 
     /**
-     * @covers Koch\Config\Adapter\CSV::readConfig
+     * @covers Koch\Config\Adapter\CSV::read
      * @expectedException Koch\Exception\Exception
      * @expectedExceptionMessage CSV Config File non-existant.file not existing or not readable.
      */
-    public function testReadConfigThrowsException()
+    public function testReadThrowsException()
     {
-        $this->object->readConfig('non-existant.file');
+        $this->object->read('non-existant.file');
     }
 
     /**
-     * @covers Koch\Config\Adapter\CSV::writeConfig
+     * @covers Koch\Config\Adapter\CSV::write
      */
-    public function testWriteConfig()
+    public function testWrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 
     /**
-     * @covers Koch\Config\Adapter\CSV::writeConfig
+     * @covers Koch\Config\Adapter\CSV::write
      */
-    public function testWriteConfig_ArrayHasValueContainsCommaSeparatedString()
+    public function testWrite_ArrayHasValueContainsCommaSeparatedString()
     {
         // array value contains a untrimmed comma separated string
         $array = array('key' => 'a, comma, separated  ,   string');
 
-        $result = $this->object->writeConfig($this->configFileURL, $array);
+        $result = $this->object->write($this->configFileURL, $array);
         $this->assertTrue($result);
     }
 

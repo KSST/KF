@@ -37,7 +37,7 @@ class INI implements AdapterInterface
      * @param  array         $array Associative Array with Ini-Values
      * @return mixed/boolean Returns the amount of bytes written to the file, or FALSE on failure.
      */
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         if (empty($file) === true) {
             throw new \Koch\Exception\Exception('Parameter $file is not given.');
@@ -119,7 +119,7 @@ class INI implements AdapterInterface
      * @param   string  The filename
      * @return array | boolean false
      */
-    public static function readConfig($file)
+    public static function read($file)
     {
         // check ini_filename exists
         if (is_file($file) === false or is_readable($file) === false) {

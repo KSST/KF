@@ -77,7 +77,7 @@ class XML extends Form implements FormGeneratorInterface
         /* $filename = APPLICATION_MODULES_PATHULES . $array['modulename'] . DIRECTORY_SEPARATOR . 'forms/';
           $filename .= $array['actionname'] . 'form.xml.php';
 
-          Koch\Config_XML::writeConfig($filename, $array);
+          \Koch\Config\XML::write($filename, $array);
          */
     }
 }

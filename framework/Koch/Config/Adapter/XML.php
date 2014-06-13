@@ -38,7 +38,7 @@ class XML implements AdapterInterface
      * @param array  Array to transform and write as xml
      * @return mixed array | boolean false
      */
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         $xml = Conversion::arrayToXML($array);
 
@@ -51,7 +51,7 @@ class XML implements AdapterInterface
      * @param   string  The filename
      * @return mixed array | boolean false
      */
-    public static function readConfig($file)
+    public static function read($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
             throw new \InvalidArgumentException('XML File ' . $file . ' not existing or not readable.');

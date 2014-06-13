@@ -59,9 +59,9 @@ class Config extends AbstractConfig
      * @param $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.
      */
-    public function writeConfig($file, $array = array())
+    public function write($file, $array = array())
     {
-        return Factory::getHandler($file)->writeConfig($file, $array);
+        return Factory::getHandler($file)->write($file, $array);
     }
 
     /**
@@ -131,6 +131,6 @@ class Config extends AbstractConfig
 
         $file = realpath(APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php');
 
-        return $this->writeConfig($file, $array);
+        return $this->write($file, $array);
     }
 }
