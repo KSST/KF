@@ -69,12 +69,12 @@ EOF;
     }
 
     /**
-     * @covers Koch\Config\Config::readConfig
-     * @todo   Implement testReadConfig().
+     * @covers Koch\Config\Config::read
+     * @todo   Implement testread().
      */
-    public function testReadConfig()
+    public function testread()
     {
-        $config = $this->object->readConfig($this->moduleConfigFileURL);
+        $config = $this->object->read($this->moduleConfigFileURL);
 
         $this->assertTrue(is_array($config));
     }
@@ -100,14 +100,14 @@ EOF;
     }
 
     /**
-     * @covers Koch\Config\Config::writeConfig
+     * @covers Koch\Config\Config::write
      */
-    public function testWriteConfig()
+    public function testwrite()
     {
         $file = 'test.config.php';
         $array = array('key' => 'value');
 
-        $this->assertTrue($this->object->writeConfig($file, $array));
+        $this->assertTrue($this->object->write($file, $array));
 
         if (is_file($file)) {
             unlink($file);
@@ -115,7 +115,7 @@ EOF;
     }
 
     /**
-     * @covers Koch\Config\Config::writeConfig
+     * @covers Koch\Config\Config::write
      */
     public function testGetApplicationConfig()
     {

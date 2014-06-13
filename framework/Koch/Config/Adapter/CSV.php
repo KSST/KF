@@ -23,7 +23,7 @@ class CSV implements AdapterInterface
      * @param   string  The filename
      * @return mixed array | bool false
      */
-    public static function readConfig($file)
+    public static function read($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
             throw new \Koch\Exception\Exception(
@@ -61,7 +61,7 @@ class CSV implements AdapterInterface
      * @param   string  The filename
      * @param   array   The configuration array
      */
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         if (($handle = fopen($file, "r+")) !== false) {
             // transform array to csv notation

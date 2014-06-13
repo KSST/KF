@@ -37,11 +37,11 @@ class PHPTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\PHP::readConfig
+     * @covers Koch\Config\Adapter\PHP::read
      */
-    public function testReadConfig()
+    public function testread()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 
@@ -49,26 +49,26 @@ class PHPTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage The config file "non-existant.file" is not existing or not readable.
      */
-    public function testReadConfigThrowsExceptionFileNotFound()
+    public function testreadThrowsExceptionFileNotFound()
     {
-        $this->object->readConfig('non-existant.file');
+        $this->object->read('non-existant.file');
     }
 
     /**
      * @expectedException RuntimeException
      * @expectedExceptionMessage The config file "vfs://root/config2.php" does not contain a PHP array.
      */
-    public function testReadConfigThrowsExceptionIfFileContentNotArray()
+    public function testreadThrowsExceptionIfFileContentNotArray()
     {
-        $this->object->readConfig($this->configFileURL2);
+        $this->object->read($this->configFileURL2);
     }
 
     /**
-     * @covers Koch\Config\Adapter\PHP::writeConfig
+     * @covers Koch\Config\Adapter\PHP::write
      */
-    public function testWriteConfig()
+    public function testwrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 

@@ -40,20 +40,20 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\YAML::writeConfig
+     * @covers Koch\Config\Adapter\YAML::write
      */
-    public function testWriteConfig()
+    public function testWrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 
     /**
-     * @covers Koch\Config\Adapter\YAML::readConfig
+     * @covers Koch\Config\Adapter\YAML::read
      */
-    public function testReadConfig()
+    public function testRead()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 

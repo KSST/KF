@@ -31,20 +31,20 @@ class XMLTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @covers Koch\Config\Adapter\XML::writeConfig
+     * @covers Koch\Config\Adapter\XML::write
      */
-    public function testWriteConfig()
+    public function testwrite()
     {
-        $result = $this->object->writeConfig($this->configFileURL, $this->getConfigArray());
+        $result = $this->object->write($this->configFileURL, $this->getConfigArray());
         $this->assertTrue($result);
     }
 
     /**
-     * @covers Koch\Config\Adapter\XML::readConfig
+     * @covers Koch\Config\Adapter\XML::read
      */
-    public function testReadConfig()
+    public function testread()
     {
-        $array = $this->object->readConfig($this->configFileURL);
+        $array = $this->object->read($this->configFileURL);
         $this->assertEquals($array, $this->getConfigArray());
     }
 
@@ -52,9 +52,9 @@ class XMLTest extends \PHPUnit_Framework_TestCase
      * @expectedException InvalidArgumentException
      * @expectedExceptionMessage XML File non-existant.xml not existing or not readable.
      */
-    public function testReadConfig_throwsExceptionFileNotFound()
+    public function testread_throwsExceptionFileNotFound()
     {
-        $this->object->readConfig('non-existant.xml');
+        $this->object->read('non-existant.xml');
     }
 
     public function getConfigArray()

@@ -42,7 +42,7 @@ class YAML implements AdapterInterface
      * @param   string The yaml file.
      * @return boolean True, if successfully written, else False.
      */
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         // prefer yaml, then syck, else use Spyc - faster one first
         if (extension_loaded('yaml') === true) {
@@ -65,7 +65,7 @@ class YAML implements AdapterInterface
      * @param  string  The yaml file.
      * @return array PHP array of the yaml file.
      */
-    public static function readConfig($file)
+    public static function read($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
             throw new \Koch\Exception\Exception('YAML File ' . $file . ' not existing or not readable.');

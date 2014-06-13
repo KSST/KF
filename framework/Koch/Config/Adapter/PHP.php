@@ -24,7 +24,7 @@ class PHP implements AdapterInterface
      *
      * @return mixed array | bool false
      */
-    public static function readConfig($file)
+    public static function read($file)
     {
         if (is_file($file) === false or is_readable($file) === false) {
             throw new \InvalidArgumentException('The config file "' . $file . '" is not existing or not readable.');
@@ -40,7 +40,7 @@ class PHP implements AdapterInterface
         return $array;
     }
 
-    public static function writeConfig($file, array $array)
+    public static function write($file, array $array)
     {
         // transform the data structure to a more readable format
         $config_array = var_export($array, true);

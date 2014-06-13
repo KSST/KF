@@ -70,7 +70,7 @@ class ManifestManager
      */
     public static function writeModuleRegistry($array)
     {
-        return \Koch\Config\Config()->writeConfig(
+        return \Koch\Config\Config()->write(
             APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php'
         );
     }
@@ -275,7 +275,7 @@ class ManifestManager
                 self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
             } else { // create file in DEV MODE
                 // if the info file for a module does not exists yet, create it
-                $config_object->writeConfig($module_infofile);
+                $config_object->write($module_infofile);
             }
 
             // hasRoutes
