@@ -72,3 +72,6 @@ build/pdepend
 ._*
 .~lock.*
 *.bak
+
+.vagrant
+vagrant
