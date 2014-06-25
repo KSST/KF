@@ -45,7 +45,7 @@ class INI implements AdapterInterface
 
         // when ini file exists, get old config array
         if (is_file($file) === true) {
-            $oldArray = self::readConfig($file);
+            $oldArray = self::read($file);
 
             // array merge: overwrite the array to the left, with the array to the right, when keys identical
             $array = array_replace_recursive($oldArray, $array);

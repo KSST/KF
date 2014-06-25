@@ -69,9 +69,7 @@ class ManifestManager
      */
     public static function readModuleRegistry()
     {
-        return \Koch\Config\Config()->readConfig(
-            APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php'
-        );
+        return \Koch\Config\Config()->read(APPLICATION_PATH . 'configuration/modules.config.php');
     }
 
     /**
@@ -82,9 +80,7 @@ class ManifestManager
      */
     public static function writeModuleRegistry($array)
     {
-        return \Koch\Config\Config()->write(
-            APPLICATION_PATH . 'configuration' . DIRECTORY_SEPARATOR . 'modules.config.php'
-        );
+        return \Koch\Config\Config()->write(APPLICATION_PATH . 'configuration/modules.config.php');
     }
 
     /**
@@ -279,15 +275,15 @@ class ManifestManager
 
             // hasInfo
             $module_infofile = $modulepath . '/' . $modulename . '.info.php';
-            $config_object = Clansuite_CMS::getInjector()->instantiate('Koch\Config\Config');
+            $config = new \Koch\Config\Config;
 
             if (is_file($module_infofile) === true) {
                 #\Koch\Debug\Debug::firebug($module_infofile);
 
-                self::$modulesinfo[$modulename]['info'] = $config_object->readConfig($module_infofile);
+                self::$modulesinfo[$modulename]['info'] = $config->read($module_infofile);
             } else { // create file in DEV MODE
                 // if the info file for a module does not exists yet, create it
-                $config_object->write($module_infofile);
+                $config->write($module_infofile);
             }
 
             // hasRoutes
