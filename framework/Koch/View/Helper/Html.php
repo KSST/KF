@@ -40,7 +40,7 @@ class Html /* extends DOMDocument */
      */
     public static function title($title)
     {
-        return '<title>'.$title.'</title>'.CR;
+        return '<title>' . $title . '</title>' . CR;
     }
 
     /**
@@ -53,7 +53,7 @@ class Html /* extends DOMDocument */
      */
     public static function meta($name, $value)
     {
-        return '<meta name="'.$name.'" content="'.$value.'">'.CR;
+        return '<meta name="' . $name . '" content="' . $value . '">' . CR;
     }
 
     /**
@@ -70,7 +70,7 @@ class Html /* extends DOMDocument */
         $html_attributes = '';
         $html_attributes .= self::renderAttributes($attributes);
 
-        return '<a href="'.$url.'" '.$html_attributes.'>'.$text.'</a>';
+        return '<a href="' . $url . '" ' . $html_attributes . '>' . $text . '</a>';
     }
 
     /**
@@ -86,7 +86,7 @@ class Html /* extends DOMDocument */
             $title = $mail;
         }
 
-        return '<a href="mailto:'.$mail.'">'.$title.'</a>';
+        return '<a href="mailto:' . $mail . '">' . $title . '</a>';
     }
 
     /**
@@ -102,7 +102,7 @@ class Html /* extends DOMDocument */
         $html_attributes = '';
         $html_attributes .= self::renderAttributes($attributes);
 
-        return '<span'.$html_attributes.'>'.$text.'</div>';
+        return '<span' . $html_attributes . '>' . $text . '</div>';
     }
 
     /**
@@ -118,7 +118,7 @@ class Html /* extends DOMDocument */
         $html_attributes = '';
         $html_attributes .= self::renderAttributes($attributes);
 
-        return '<div'.$html_attributes.'>'.$text.'</div>';
+        return '<div' . $html_attributes . '>' . $text . '</div>';
     }
 
     /**
@@ -134,33 +134,22 @@ class Html /* extends DOMDocument */
         $html_attributes = '';
         $html_attributes .= self::renderAttributes($attributes);
 
-        return '<p'.$html_attributes.'>'.$text.'</p>';
+        return '<p' . $html_attributes . '>' . $text . '</p>';
     }
 
     /**
      * Renders the HTML Tag <img></img>
      *
-     * @param  string $link_to_image
+     * @param  string $link
      * @param  array  $attributes
      * @return string html
      */
-    public static function image($link_to_image, $attributes = array())
+    public static function img($link, $attributes = array())
     {
         $html_attributes = '';
         $html_attributes .= self::renderAttributes($attributes);
 
-        return '<img' . $html_attributes . ' src="' . $link_to_image . '" />';
-    }
-
-    /**
-     * Convenience/Proxy Method for self::image()
-     *
-     * @param string $link_to_image
-     * @param array  $attributes
-     */
-    public static function img($link_to_image, $attributes = array())
-    {
-        return self::image($link_to_image, $attributes = array());
+        return '<img' . $html_attributes . ' src="' . $link . '" />';
     }
 
     /**
@@ -216,7 +205,7 @@ class Html /* extends DOMDocument */
      */
     public static function h1($text)
     {
-        return '<h1>'.$text.'</h1>';
+        return '<h1>' . $text . '</h1>';
     }
 
     /**
@@ -227,7 +216,7 @@ class Html /* extends DOMDocument */
      */
     public static function h2($text)
     {
-        return '<h2>'.$text.'</h2>';
+        return '<h2>' . $text . '</h2>';
     }
 
     /**
@@ -238,7 +227,7 @@ class Html /* extends DOMDocument */
      */
     public static function h3($text)
     {
-        return '<h3>'.$text.'</h3>';
+        return '<h3>' . $text . '</h3>';
     }
 
     /**
@@ -252,13 +241,11 @@ class Html /* extends DOMDocument */
         $html = '';
 
         if (is_array($attributes)) {
-            // insert all attributes
+            // insert all attributes, but ignore null values
             foreach ($attributes as $key => $value) {
-                // ignore null values
-                if (is_null($value)) {
+                if (is_null($value) === true) {
                     continue;
                 }
-
                 $html .= ' ' . $key . '"' . $value . '"';
             }
         }
@@ -279,34 +266,27 @@ class Html /* extends DOMDocument */
      */
     public static function renderElement($tagname, $text = null, $attributes = array())
     {
-        if (method_exists('Koch_HTML', $tagname)) {
+        if (method_exists(self, $tagname) === true) {
             if ($attributes['src'] !== null) {
-                $link = $attributes['src'];
-                unset($attributes['src']);
-
-                return self::$tagname($link, $text, $attributes);
+                return self::$tagname($attributes['src'], $text, $attributes);
             } elseif ($attributes['href'] !== null) {
-                $link = $attributes['href'];
-                unset($attributes['href']);
-
-                return self::$tagname($link, $text, $attributes);
+                return self::$tagname($attributes['href'], $text, $attributes);
             } else {
                 return self::$tagname($text, $attributes);
             }
-        } else {
-            $html = '<' . $tagname;
-            $html .= self::renderAttributes($attributes);
-
-            // close tag with slash, if we got no text to append
-            if ($text === null) {
-                $html .= '/>';
-            } else { // just close the opening tag
-                $html .= '>';
-                $html .= $text;
-                $html .= '</' . $tagname . '>' . CR;
-            }
-
-            return $html;
         }
+
+
+        $html = '<' . $tagname . self::renderAttributes($attributes);
+
+        // close tag with slash, if not appending text
+        if ($text === null) {
+            $html .= '/>';
+        } else { // close opening tag
+            $html .= '>' . $text . '</' . $tagname . '>' . CR;
+        }
+
+        return $html;
     }
+
 }
