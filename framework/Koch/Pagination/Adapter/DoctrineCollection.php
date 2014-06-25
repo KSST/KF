@@ -16,7 +16,7 @@ use Koch\Pagination\AdapterInterface;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Doctrine Collection Adapter.
+ * Pagination Adapter working with Doctrine Collections.
  */
 class DoctrineCollection implements AdapterInterface
 {

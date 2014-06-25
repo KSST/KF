@@ -34,6 +34,7 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\AbstractCache::__construct
+     * @covers Koch\Autoload\Loader::autoload
      */
     public function testConstructor()
     {

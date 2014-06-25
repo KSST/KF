@@ -23,6 +23,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Cache::instantiate
+     * @covers Koch\Autoload\Loader::autoload
      */
     public function testInstantiate()
     {
