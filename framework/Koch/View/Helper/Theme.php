@@ -149,7 +149,7 @@ class Theme
     {
         $file = $this->getThemeInfoFile($theme);
 
-        $array = \Koch\Config\Adapter\XML::readConfig($file);
+        $array = \Koch\Config\Adapter\XML::read($file);
 
         // when setting array as object property remove the inner theme array
         $this->theme_info = $array['theme'];
