@@ -50,7 +50,7 @@ class MapBuilder
 
         $dirs = (array) $dirs;
         foreach ($dirs as $dir) {
-            $files = array_merge($files, Functions::globRecursive($dir . '/*.php'));
+            $files += Functions::globRecursive($dir . '/*.php');
         }
 
         foreach ($files as $file) {

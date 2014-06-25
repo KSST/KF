@@ -95,19 +95,17 @@ class JqSelectDate extends FormElement implements FormElementInterface
      */
     public function getAttributes()
     {
-        #\Koch\Debug\Debug::printR($this->attributes);
-        $attributes_html = '';
+        $html = '';
         foreach ($this->attributes as $attribute => $value) {
-
-            $attributes_html .= $attribute.':"'.$value.'",'.CR;
+            $html .= $attribute . ':"' . $value . '",' . CR;
         }
 
-        return $attributes_html;
+        return $html;
     }
 
     public function setAttributes(array $attributes)
     {
-        $this->attributes = array_merge($this->attributes, $attributes);
+        $this->attributes += $attributes;
 
         return $this;
     }

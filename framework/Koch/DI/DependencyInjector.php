@@ -79,7 +79,7 @@ class DependencyInjector
     public function with()
     {
         $values = func_get_args();
-        $this->unnamed_parameters = array_merge($this->unnamed_parameters, $values);
+        $this->unnamed_parameters += $values;
 
         return $this;
     }
@@ -88,7 +88,7 @@ class DependencyInjector
     {
         $values = func_get_args();
         $type = array_shift($values);
-        $this->unnamed_parameters = array_merge($this->unnamed_parameters, $values);
+        $this->unnamed_parameters += $values;
         $this->repository = new ClassRepository();
         $object = $this->top->create($type);
         $this->named_parameters = array();
@@ -113,7 +113,7 @@ class DependencyInjector
 
     public function useParameters($parameters)
     {
-        $this->named_parameters = array_merge($this->named_parameters, $parameters);
+        $this->named_parameters += $parameters;
     }
 
     public function instantiateParameter($parameter, $nesting)

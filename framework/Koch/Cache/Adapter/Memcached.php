@@ -75,7 +75,7 @@ class Memcached extends AbstractCache implements CacheInterface
                     )))
         );
 
-        $options = array_merge($options, $defaultOptions);
+        $options += $defaultOptions;
 
         parent::__construct($options);
 

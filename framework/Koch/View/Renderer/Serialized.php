@@ -79,11 +79,11 @@ class Serialized extends AbstractRenderer
      */
     public function assign($key, $value = null)
     {
-        if (is_object($key)) {
+        if (is_object($key) === true) {
             // pull all non-static object properties
             $this->viewdata = get_object_vars($key);
-        } elseif (is_array($key)) {
-            $this->viewdata = array_merge($this->viewdata, $key);
+        } elseif (is_array($key) === true) {
+            $this->viewdata += $key;
         } else {
             $this->viewdata[$key] = $value;
         }

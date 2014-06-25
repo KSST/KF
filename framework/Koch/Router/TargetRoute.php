@@ -415,7 +415,6 @@ class TargetRoute extends Mapper
             'modrewrite' => false
         );
 
-        #self::$parameters = array_merge(self::$parameters, $reset_params);
         self::$parameters = $reset_params;
     }
 
