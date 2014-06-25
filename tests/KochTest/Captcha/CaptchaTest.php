@@ -51,7 +51,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setFontFolder($folders);
 
-        $expectedFolders = array_merge($expectedFolders, $folders);
+        $expectedFolders += $folders;
         $this->assertEquals($expectedFolders, $this->object->getFontFolders());
     }
 

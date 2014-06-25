@@ -298,14 +298,10 @@ class Theme
 
     public static function getThemeDirectories()
     {
-        $themes = array();
-
-        $themes = array_merge(
+        return array_merge(
             self::iterateDir(APPLICATION_PATH . 'themes/frontend/', 'frontend'),
             self::iterateDir(APPLICATION_PATH . 'themes/backend/', 'backend')
         );
-
-        return $themes;
     }
 
     /**

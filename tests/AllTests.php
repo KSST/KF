@@ -64,7 +64,7 @@ class AllTests
         $paths = glob($path . '*', GLOB_MARK | GLOB_ONLYDIR | GLOB_NOSORT) or array();
         $files = glob($path . $pattern, $flags) or array();
         foreach ($paths as $path) {
-            $files = array_merge($files, self::rglob($pattern, $path, $flags));
+            $files +=  self::rglob($pattern, $path, $flags);
         }
 
         return $files;
