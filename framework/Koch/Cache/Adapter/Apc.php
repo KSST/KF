@@ -254,7 +254,7 @@ class Apc extends AbstractCache implements CacheInterface
 
             // size
             if (isset($info['system_cache_info']['mem_size']) and $info['system_cache_info']['mem_size'] > 0) {
-                $info['system_cache_info']['size_files'] = Functions::getsize($info['system_cache_info']['mem_size']);
+                $info['system_cache_info']['size_files'] = Functions::getSize($info['system_cache_info']['mem_size']);
             } else {
                 $info['system_cache_info']['size_files'] = 0;
             }
