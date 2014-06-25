@@ -512,7 +512,7 @@ class Datagrid extends Base
      * Return true on success, false otherwise
      *
      * @see $this->_features
-     * @param mixed(string|array) $features
+     * @param string|array $features
      */
     public function enableFeature($features)
     {
@@ -529,7 +529,7 @@ class Datagrid extends Base
      * Returns true on success, false otherwise
      *
      * @see $this->_features
-     * @param  mixed(string|array) $features
+     * @param  string|array $features
      * @return boolean
      */
     public function disableFeature($features)
