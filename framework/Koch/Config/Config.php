@@ -44,7 +44,7 @@ class Config extends AbstractConfig
      * @param  string $file
      * @return object $this->config
      */
-    public function readConfig($file)
+    public function read($file)
     {
         if (false === is_object($this->config)) {
             $this->config = Factory::getConfiguration($file);
@@ -80,7 +80,7 @@ class Config extends AbstractConfig
             $config = apc_fetch($apcAppKey);
         } else {
             // load config from file
-            $config = \Koch\Config\Adapter\INI::readConfig(
+            $config = \Koch\Config\Adapter\INI::read(
                 APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
             // set to APC
