@@ -94,7 +94,7 @@ class Factory
     {
         $handler = self::getHandler($configfile);
 
-        return $handler::readConfig($configfile);
+        return $handler::read($configfile);
     }
 
     /**
