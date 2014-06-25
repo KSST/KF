@@ -29,7 +29,7 @@ use Koch\Pagination\AdapterInterface;
 use Doctrine\Common\Collections\Collection;
 
 /**
- * Doctrine Collection Adapter.
+ * Koch Framework - Pagination Adapter working with Doctrine Collections.
  */
 class DoctrineCollection implements AdapterInterface
 {

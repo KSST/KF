@@ -54,6 +54,7 @@ class ReflectionTest extends \PHPUnit_Framework_TestCase
     /**
      * @covers Koch\Code\Reflection::getMethods
      * @covers Koch\Code\Reflection::__construct
+     * @covers Koch\Autoload\Loader::autoload
      */
     public function testGetMethods()
     {

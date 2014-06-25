@@ -43,6 +43,14 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
      * @covers Koch\Autoload\MapBuilder::writeMapFile
      * @covers Koch\Autoload\MapBuilder::extractClassnames
      * @covers Koch\Functions\Functions::globRecursive
+     * @covers Koch\Autoload\Loader::autoload
+     * @covers Koch\Autoload\Loader::autoloadExclusions
+     * @covers Koch\Autoload\Loader::autoloadInclusions
+     * @covers Koch\Autoload\Loader::includeFileAndMap
+     * @covers Koch\Autoload\Loader::autoloadByApcOrFileMap
+     * @covers Koch\Autoload\Loader::autoloadIncludePath
+     * @covers Koch\Autoload\Loader::writeAutoloadingMapFile
+     * @covers Koch\Autoload\Loader::addMapping
      */
     public function testBuild()
     {
@@ -61,6 +69,14 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Autoload\MapBuilder::extractClassnames
+     * @covers Koch\Autoload\Loader::autoload
+     * @covers Koch\Autoload\Loader::autoloadExclusions
+     * @covers Koch\Autoload\Loader::autoloadInclusions
+     * @covers Koch\Autoload\Loader::includeFileAndMap
+     * @covers Koch\Autoload\Loader::autoloadByApcOrFileMap
+     * @covers Koch\Autoload\Loader::autoloadIncludePath
+     * @covers Koch\Autoload\Loader::writeAutoloadingMapFile
+     * @covers Koch\Autoload\Loader::addMapping
      */
     public function testExtractClassnames()
     {
@@ -71,6 +87,8 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Autoload\MapBuilder::extractClassnames
+     * @covers Koch\Autoload\Loader::autoload
+     * @covers Koch\Autoload\Loader::autoloadExclusions
      * @expectedException \InvalidArgumentException
      * @expectedExceptionMessage File from-not-existing-file.php does not exist.
      */

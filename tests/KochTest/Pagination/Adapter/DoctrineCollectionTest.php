@@ -1,7 +1,7 @@
 <?php
 namespace KochTest\Pagination\Adapter;
 
-use \Koch\Pagination\Adapter\DoctrineCollection;
+use Koch\Pagination\Adapter\DoctrineCollection;
 
 class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
 {

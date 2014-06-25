@@ -171,7 +171,9 @@ class Loader
          */
 
         // this means if 'Doctrine" is found, but not 'Koch\Doctrine', exclude from our autoloading
-        if (false !== strpos($classname, 'Doctrine') and false === strpos($classname, 'Koch\Doctrine')) {
+        if (false !== strpos($classname, 'Doctrine') and false === strpos($classname, 'Koch\Doctrine') 
+            and false === strpos($classname, 'Koch\Tests\DoctrineTestCase')
+            and false === strpos($classname, 'Koch\Pagination\Adapter\DoctrineCollection')) {
             return true;
         }
 
