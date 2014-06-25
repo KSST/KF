@@ -33,7 +33,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * Configuration Array
      * protected = only visible to childs
      *
-     * @var array(string==>mixed)
+     * @var array
      */
     protected $config = array();
 

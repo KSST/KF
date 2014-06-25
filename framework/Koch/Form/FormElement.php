@@ -917,7 +917,7 @@ class FormElement
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Formelement Decorator.
-     * @return Koch\Form\FormElement\Decorators\$decorator
+     * @return object Koch\Form\FormElement\Decorators\$decorator
      */
     public function decoratorFactory($decorator)
     {

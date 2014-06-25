@@ -38,7 +38,7 @@ class Conversion
      * Converts a PHP array to XML (via XMLWriter)
      *
      * @param $array PHP Array
-     * @return xml-string
+     * @return string XML string.
      */
     public static function arrayToXml($array)
     {
