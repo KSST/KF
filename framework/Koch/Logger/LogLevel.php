@@ -91,7 +91,7 @@ class LogLevel
             throw new \InvalidArgumentException(
                 sprintf(
                     'Logging level "%s" is not defined, use one of: %s',
-                    $level, 
+                    $level,
                     implode(', ', $levelkeys)
                 )
             );

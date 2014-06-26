@@ -264,7 +264,6 @@ class Html /* extends DOMDocument */
             }
         }
 
-
         $html = '<' . $tagname . self::renderAttributes($attributes);
 
         // close tag with slash, if not appending text

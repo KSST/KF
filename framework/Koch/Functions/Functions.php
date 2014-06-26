@@ -92,27 +92,28 @@ class Functions
 
         if (is_int($pos) and ($pos == 0)) {
             return $string;
-        } else { 
+        } else {
             return $prefix . $string;
         }
     }
-    
-    function dropNumericKeys(array $array)
+
+    public function dropNumericKeys(array $array)
     {
         foreach ($array as $key => $value) {
             if (is_int($key) === true) {
                 unset($array[$key]);
             }
         }
+
         return $array;
     }
 
-    function issetOrDefault($var, $defaultValue = null)
+    public function issetOrDefault($var, $defaultValue = null)
     {
         return (isset($var) === true) ? $var : $defaultValue;
     }
 
-    function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
+    public function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
     {
         return (isset($array[$key]) === true) ? $array[$key] : $defaultValue;
     }

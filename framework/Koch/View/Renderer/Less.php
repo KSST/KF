@@ -18,7 +18,7 @@ use Koch\View\AbstractRenderer;
  * View Renderer for LESS Styles Renderer.
  *
  * This class is a wrapper for the Less Compiler.
- * 
+ *
  * Composer: { "require": { "leafo/lessphp": "0.4.0" }
  *
  * @link http://leafo.net/lessphp/

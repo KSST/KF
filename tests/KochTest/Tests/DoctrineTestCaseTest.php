@@ -1,6 +1,6 @@
 <?php
 
-namespace KochTest\PHPUnit;
+namespace KochTest\Tests;
 
 use Koch\Tests\DoctrineTestCase;
 
