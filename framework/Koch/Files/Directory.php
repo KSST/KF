@@ -66,7 +66,7 @@ class Directory
 
     public function getDirectory($directory = '')
     {
-        if($directory != '') {
+        if ($directory != '') {
             $this->directory = $directory;
         }
 
@@ -119,7 +119,7 @@ class Directory
 
     /**
      * Returns the filePath with filename.
-     * 
+     *
      * @return array pathinfo
      */
     public function filePath($filePath)
@@ -132,7 +132,7 @@ class Directory
 
         return $fileParts;
     }
-    
+
     /**
      * Calculates the size of a directory (recursiv)
      *
@@ -145,7 +145,7 @@ class Directory
             return false;
         }
 
-        $size = 0;        
+        $size = 0;
         $dh = opendir($dir);
         while (($entry = readdir($dh)) !== false) {
             // exclude ./..
@@ -166,10 +166,10 @@ class Directory
         }
 
         closedir($dh);
-       
+
         return $size;
     }
-       
+
     /**
      * Copy a directory recursively
      *
@@ -263,7 +263,7 @@ class Directory
             return rmdir($directory);
         }
      }
-     
+
     /**
      * Performs a chmod operation
      *

@@ -87,7 +87,7 @@ class Firebug extends AbstractLogger implements LoggerInterface
     public function log($level, $message, array $context = array())
     {
         $loglevel = $this->getFirePHPLoglevel($level);
-       
+
         return \FirePHP::getInstance(true)->fb($message, $level, $loglevel);
     }
 }

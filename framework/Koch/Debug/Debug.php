@@ -337,7 +337,7 @@ class Debug
      * Lists all php.ini settings.
      */
     public static function getPhpIni($returnArray = false)
-    {       
+    {
         $result = parse_ini_file(get_cfg_var('cfg_file_path'), true);
 
         return ($returnArray === true) ? $result : self::printR($result);
