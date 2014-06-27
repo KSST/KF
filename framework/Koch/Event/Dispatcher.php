@@ -63,7 +63,6 @@ class Dispatcher
     /**
      * Returns an array of all registered eventhandlers for a eventName.
      *
-     * @param string $name The event name
      *
      * @return array Array of all eventhandlers for a certain event.
      */

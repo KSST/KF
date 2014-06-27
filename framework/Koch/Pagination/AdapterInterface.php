@@ -26,6 +26,9 @@ namespace Koch\Pagination;
 
 interface AdapterInterface
 {
+    /**
+     * @return integer
+     */
     public function getTotalNumberOfResults();
     public function getSlice($offset, $length);
     public function getArray();

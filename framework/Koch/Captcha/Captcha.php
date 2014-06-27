@@ -186,7 +186,7 @@ class Captcha
     /**
      * Generates a random string in requested $string_length for usage with captcha
      *
-     * @param $length The length of the captcha string.
+     * @param integer $length The length of the captcha string.
      */
     public function generateRandomString($length)
     {
@@ -380,7 +380,7 @@ class Captcha
      * Render the Captcha Image on various ways
      *
      * @param  string $render_type Types: "file", "base64", "png". Defaults to html_embedded.
-     * @return mixed  Renders the image directly or returns html string.
+     * @return null|string  Renders the image directly or returns html string.
      */
     public function render($render_type = 'file')
     {

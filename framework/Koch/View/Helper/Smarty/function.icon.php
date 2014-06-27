@@ -18,7 +18,6 @@
  * {icon theme="lullacons" name="calendar"}
  *
  * @param array $params as described above
- * @param Smarty $smarty
  * @return string
  */
 function Smarty_function_icon($params)

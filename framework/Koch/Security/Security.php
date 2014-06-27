@@ -104,6 +104,7 @@ final class Security
      *
      * @param $string String to build a HASH from
      * @param $hash_type Encoding to use for the HASH (sha1, md5) default = sha1
+     * @param string $hash_algorithm
      *
      * @return string The hashed string.
      */

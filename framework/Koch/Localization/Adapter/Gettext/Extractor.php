@@ -279,7 +279,7 @@ class Extractor
      * @param string $extension
      * @param string $extractor
      *
-     * @return Koch_Gettext_Extractor
+     * @return null|Extractor
      */
     public function setExtractor($extension, $extractor)
     {
@@ -296,7 +296,7 @@ class Extractor
     /**
      * Removes all extractor settings
      *
-     * @return Koch_Gettext_Extractor
+     * @return Extractor
      */
     public function removeAllExtractors()
     {
@@ -311,7 +311,7 @@ class Extractor
      * @param string $file
      * @param array  $data
      *
-     * @return Koch_Gettext_Extractor
+     * @return Extractor
      */
     public function save($file, $data = null)
     {

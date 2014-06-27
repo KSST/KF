@@ -125,7 +125,6 @@ class Input extends FormElement implements FormElementInterface
     /**
      * Sets the state of the input field to read-only.
      *
-     * @param boolean $disabled True or False.
      */
     public function setReadonly($readonly)
     {
@@ -147,7 +146,7 @@ class Input extends FormElement implements FormElementInterface
     /**
      * Get Placeholder <input placeholder="some placeholder">
      *
-     * @return type
+     * @return string
      */
     public function getPlaceholder()
     {
@@ -202,7 +201,7 @@ class Input extends FormElement implements FormElementInterface
      * Setting the onclick attribute.
      * $this->setAdditionalAttributeText(' onclick="window.location.href=\''.$this->cancelURL.'\'"');
      *
-     * @param $additional_attr_text of this formelement.
+     * @param string $additional_attr_text of this formelement.
      */
     public function setAdditionalAttributeAsText($additional_attr_text)
     {

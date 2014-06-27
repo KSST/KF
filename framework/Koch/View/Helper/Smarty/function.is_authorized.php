@@ -17,8 +17,7 @@
  * Purpose: Checks, if a user is authorized for accessing a resource.<br>
  *
  * @param   array $params
- * @param   Smarty $smarty
- * @return  boolean True if user has permission, false otherwise.
+ * @return  null|boolean True if user has permission, false otherwise.
  */
 function Smarty_function_is_authorized($params)
 {

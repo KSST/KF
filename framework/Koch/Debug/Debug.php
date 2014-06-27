@@ -37,7 +37,6 @@ class Debug
      * This is an enhanced version of the native php function print_r().
      *
      * @param mixed/array/object $var  Array or Object as Variable to display
-     * @param bool               $exit Stop execution after dump? Default is true (stops).
      * @returns Returns a better structured display of an array/object as native print_r().
      */
     public static function printR($var)

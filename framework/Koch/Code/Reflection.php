@@ -89,12 +89,12 @@ class Reflection
 
         foreach ($methods as $method) {
             // get the declaring classname, might be the parent class
-            $className = $method->getDeclaringClass()->getName();
+            $className = $method->class;
 
             // if the classname is not excluded
             if (false === in_array($className, $exclude_classnames)) {
                 // add the method name to the array
-                $methods_array[$className][] = $method->getName();
+                $methods_array[$className][] = $method->name;
 
                 // get parameter names
                 #foreach($method->getParameters() as $parameter)

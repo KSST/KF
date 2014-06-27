@@ -118,7 +118,7 @@ abstract class AbstractController
      *
      *
      * @param  string                        $entityName Name of an Entity, like "\Entity\User".
-     * @return Doctrine\ORM\EntityRepository
+     * @return \Doctrine\ORM\EntityRepository
      */
     public function getModel($entityName = null)
     {
@@ -134,7 +134,7 @@ abstract class AbstractController
      * Save (save one)
      * Flush (save all)
      *
-     * @param object  $model Entity.
+     * @param \Doctrine\ORM\Mapping\Entity  $model Entity.
      * @param boolean $flush Uses flush on true, save on false. Defaults to flush (true).
      */
     public function saveModel(\Doctrine\ORM\Mapping\Entity $model, $flush = true)
@@ -305,7 +305,7 @@ abstract class AbstractController
      * Returns Json if an XMLHttpRequest is given.
      * Returns Smarty as default if no rendering engine is set.
      *
-     * @return renderengine object, smarty as default
+     * @return string object, smarty as default
      */
     public function getRenderEngineName()
     {
@@ -414,7 +414,6 @@ abstract class AbstractController
      * This loads and initializes a formular from the module directory.
      *
      * @param string  $formname       The name of the formular.
-     * @param string  $controller     The name of the module.
      * @param string  $module         The name of the action.
      * @param boolean $assign_to_view If true, the form is directly assigned as formname to the view
      */
@@ -554,7 +553,7 @@ abstract class AbstractController
     /**
      * Returns the HttpRequest Object
      *
-     * @return \Koch\Core\HttpRequest
+     * @return HttpRequest
      */
     public function getHttpRequest()
     {
@@ -564,7 +563,7 @@ abstract class AbstractController
     /**
      * Returns the HttpResponse Object
      *
-     * @return \Koch\Core\HttpResponse
+     * @return \Koch\Http\HttpResponse
      */
     public function getHttpResponse()
     {

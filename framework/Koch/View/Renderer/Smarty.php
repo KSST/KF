@@ -205,7 +205,7 @@ class Smarty extends AbstractRenderer
     /**
      * Returns a clean Smarty Object
      *
-     * @return Smarty Object
+     * @return \Smarty Object
      */
     public function getEngine()
     {
@@ -258,7 +258,7 @@ class Smarty extends AbstractRenderer
      * @see __set()
      * @param  string|array $tpl_parameter Is a Key or an Array.
      * @param  mixed        $value         (optional) In case a key-value pair is used, $value is the value.
-     * @return boolean
+     * @return \Smarty_Internal_Data
      */
     public function assign($tpl_parameter, $value = null)
     {
@@ -273,7 +273,7 @@ class Smarty extends AbstractRenderer
      * Magic Method to get a already set/assigned Variable from Smarty
      *
      * @param  string $key Name of Variable
-     * @return mixed  Value of key
+     * @return string  Value of key
      */
     public function __get($key)
     {
@@ -284,8 +284,8 @@ class Smarty extends AbstractRenderer
      * Magic Method to set/assign Variable to Smarty
      *
      * @param  string  $key Name of the variable
-     * @param  mixed   $val Value of variable
-     * @return boolean
+     * @param  mixed   $value Value of variable
+     * @return \Smarty_Internal_Data
      */
     public function __set($key, $value)
     {
@@ -322,7 +322,7 @@ class Smarty extends AbstractRenderer
      * @param  mixed         $compile_id compile id to be used with this template
      * @param  object        $parent     next higher level of Smarty variables
      * @param  boolean       $display    Renders the template content on true.
-     * @return Returns       the $template content.
+     * @return null|string       the $template content.
      */
     public function fetch($template, $cache_id = null, $compile_id = null, $parent = null, $display = false)
     {
@@ -365,7 +365,7 @@ class Smarty extends AbstractRenderer
     /**
      * Returns all assigned template variables.
      *
-     * @return array
+     * @return string
      */
     public function getVars()
     {
@@ -430,9 +430,8 @@ class Smarty extends AbstractRenderer
      * 2. fetch the modultemplate and assigns it as $content
      * 3. return the wrapper layout tpl
      *
-     * @param  string       $templatename Template Filename
-     * @param  array|object $data         Data to assign to the view.
-     * @return wrapper      tpl layout
+     * @param  string       $template Template Filename
+     * @return null|string      tpl layout
      */
     public function render($template = null, $viewdata = null)
     {

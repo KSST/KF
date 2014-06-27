@@ -68,7 +68,7 @@ class Gettext extends Extractor
      *
      * @param string|array $resource
      *
-     * @return Koch_Gettext_Extractor
+     * @return Gettext
      */
     public function multiScan($resource)
     {

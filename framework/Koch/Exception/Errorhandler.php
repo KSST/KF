@@ -189,8 +189,8 @@ class Errorhandler
      * a) determines the path to the invalid template file
      * b) provides the html-link to the templateeditor for this file
      *
-     * @param $errfile Template File with the Error.
-     * @param $errline Line Number of the Error.
+     * @param string $errfile Template File with the Error.
+     * @param string $errline Line Number of the Error.
      * @todo correct link to the templateeditor
      */
     public static function getTemplateEditorLink($errfile, $errline, $errcontext)
@@ -648,6 +648,7 @@ class Errorhandler
      * Returns a link to Trac's New Ticket Dialog prefilled with error data.
      *
      * @returns string Link to Trac's Create New Ticket Dialog prefilled.
+     * @param string $summary
      */
     public static function getTracNewTicketURL($summary, $errorfile, $errorline)
     {

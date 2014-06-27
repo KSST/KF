@@ -74,6 +74,9 @@ class TargetRoute extends Mapper
         return Mapper::getApplicationNamespace();
     }
 
+    /**
+     * @param string $filename
+     */
     public static function setFilename($filename)
     {
         self::$parameters['filename'] = $filename;
@@ -92,6 +95,9 @@ class TargetRoute extends Mapper
         return self::$parameters['filename'];
     }
 
+    /**
+     * @param string $classname
+     */
     public static function setClassname($classname)
     {
         self::$parameters['classname'] = $classname;
@@ -175,6 +181,9 @@ class TargetRoute extends Mapper
         return self::$parameters['method'];
     }
 
+    /**
+     * @param string $method
+     */
     public static function setMethod($method)
     {
         self::$parameters['method'] = $method;
@@ -232,6 +241,9 @@ class TargetRoute extends Mapper
         return self::$parameters['renderer'];
     }
 
+    /**
+     * @param string $renderEngineName
+     */
     public static function setRenderEngine($renderEngineName)
     {
         self::$parameters['renderer'] = $renderEngineName;

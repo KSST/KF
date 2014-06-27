@@ -135,7 +135,7 @@ class FormElement
      * Set id of this form.
      *
      * @param $id string ID of this form.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setID($id)
     {
@@ -158,7 +158,8 @@ class FormElement
      * Set type of this form.
      *
      * @param $id string Type of this form.
-     * @return Koch\Form\FormElement
+     * @param string $type
+     * @return FormElement
      */
     public function setType($type)
     {
@@ -181,7 +182,7 @@ class FormElement
      * Set name of this form.
      *
      * @param $name string Name of this form.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setName($name)
     {
@@ -223,7 +224,7 @@ class FormElement
      * Set class of this form.
      *
      * @param  string                $class Class to set
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setClass($class)
     {
@@ -246,7 +247,7 @@ class FormElement
      * Sets value for this element
      *
      * @param  string                $value
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setValue($value)
     {
@@ -286,7 +287,7 @@ class FormElement
     /**
      * Disables this formelement.
      *
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function disable()
     {
@@ -298,7 +299,7 @@ class FormElement
     /**
      * Enables this formelement
      *
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function enable()
     {
@@ -311,7 +312,7 @@ class FormElement
      * Set label of this formelement.
      *
      * @param  string                $label Label of this formelement.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setLabel($label)
     {
@@ -356,7 +357,7 @@ class FormElement
      * A formelement is required, when the user is expected to (must) enter data into the formelement.
      *
      * @param  boolean               $required Set required state. Defaults to true.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setRequired($required = true)
     {
@@ -369,7 +370,7 @@ class FormElement
      * Set description of this formelement.
      *
      * @param  string                $description Description of this formelement.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setDescription($description)
     {
@@ -392,7 +393,7 @@ class FormElement
      * Set onclick text of this formelement.
      *
      * @param  string                $onclick Onclick text of this formelement.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setOnclick($onclick)
     {
@@ -414,7 +415,7 @@ class FormElement
     /**
      * Sets the tab index value.
      *
-     * @param type $index
+     * @param string $index
      */
     public function setTabIndex($index)
     {
@@ -491,8 +492,8 @@ class FormElement
     /**
      * Setter method for Attribute
      *
-     * @param type $attribute Attribute name
-     * @param type $value     Value
+     * @param string $attribute Attribute name
+     * @param boolean $value     Value
      */
     public function setAttribute($attribute, $value)
     {
@@ -631,7 +632,7 @@ class FormElement
      * So a formelement might have multiple validators.
      *
      * @param  Koch_Validator        $validator Accepts a Validator object.
-     * @return Koch\Form\FormElement
+     * @return FormElement
      */
     public function setValidator($validator)
     {
@@ -801,6 +802,7 @@ class FormElement
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM OBJECT
+     * @param string $decorators
      * @return Koch\Form\FormElement_Decorator
      */
     public function addDecorator($decorators)

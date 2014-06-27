@@ -40,7 +40,7 @@ class Doctrine implements AdapterInterface
     /**
      * Constructor.
      *
-     * @param \Doctrine\ORM\Query|\Doctrine\ORM\QueryBuilder $query               A Doctrine Query or the QueryBuilder.
+     * @param \Doctrine\ORM\Query $query               A Doctrine Query or the QueryBuilder.
      * @param boolean                                        $fetchJoinCollection Whether the query joins a collection (true by default).
      */
     public function __construct($query, $fetchJoinCollection = true)
@@ -51,7 +51,7 @@ class Doctrine implements AdapterInterface
     /**
      * Returns the query
      *
-     * @return Query
+     * @return \Doctrine\ORM\Query
      */
     public function getQuery()
     {

@@ -73,6 +73,9 @@ abstract class AbstractFormDecorator implements DecoratorInterface
         return $this->form->name;
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;

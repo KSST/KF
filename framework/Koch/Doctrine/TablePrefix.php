@@ -42,7 +42,7 @@ class TablePrefix implements \Doctrine\Common\EventSubscriber
     }
 
     /**
-     * @return array
+     * @return string[]
      */
     public function getSubscribedEvents()
     {

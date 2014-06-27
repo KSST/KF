@@ -136,7 +136,7 @@ class InputFilter
      * @param string $pattern Check for a specific pattern, Default empty
      * @param int    $length  Check for a specific string length, Default (int) 0
      *
-     * @return Returns boolean true or false.
+     * @return boolean boolean true or false.
      */
     public function check($string = '', $types = '', $pattern = '', $length = 0)
     {

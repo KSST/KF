@@ -238,7 +238,7 @@ class Form implements FormInterface
      * Sets the method (POST, GET) to the form.
      *
      * @param  string    $method POST or GET
-     * @return Koch_Form
+     * @return Form
      */
     public function setMethod($method)
     {
@@ -272,7 +272,7 @@ class Form implements FormInterface
      * Set action of this form (which is the target url).
      *
      * @param $action string Target URL of the action of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setAction($action)
     {
@@ -294,7 +294,7 @@ class Form implements FormInterface
     /**
      * Returns the auto-completion state of this form.
      *
-     * @return boolean Returns the auto-completion state of this form.
+     * @return string Returns the auto-completion state of this form.
      */
     public function isAutoComplete()
     {
@@ -305,8 +305,8 @@ class Form implements FormInterface
      * Set autocomplete of this form.
      * If "on" browsers can store the form's input values, to auto-fill the form if the user returns to the page.
      *
-     * @param $bool boolean state to set for autocomplete.
-     * @return Koch_Form
+     * @param boolean $bool boolean state to set for autocomplete.
+     * @return Form
      */
     public function setAutoComplete($bool)
     {
@@ -318,7 +318,7 @@ class Form implements FormInterface
     /**
      * Gets the target (_blank, _self, _parent, _top)
      *
-     * @return type string
+     * @return string string
      */
     public function getTarget()
     {
@@ -334,7 +334,7 @@ class Form implements FormInterface
      * _top
      *
      * @param  string    $target _blank, _self, _parent, _top
-     * @return Koch_Form
+     * @return Form
      */
     public function setTarget($target)
     {
@@ -353,7 +353,7 @@ class Form implements FormInterface
      * Returns novalidation state of this form.
      * If present the form should not be validated when submitted.
      *
-     * @return boolean Returns novalidation state of this form.
+     * @return string Returns novalidation state of this form.
      */
     public function isNoValidation()
     {
@@ -365,8 +365,8 @@ class Form implements FormInterface
      * If true the form should not be validated when submitted.
      *
      * @link http://dev.w3.org/html5/spec-author-view/association-of-controls-and-forms.html#attr-fs-novalidate
-     * @param $bool boolean state to set for novalidation.
-     * @return Koch_Form
+     * @param boolean $bool boolean state to set for novalidation.
+     * @return Form
      */
     public function setNoValidation($bool)
     {
@@ -393,7 +393,7 @@ class Form implements FormInterface
     /**
      * Setter method for Attribute
      *
-     * @param array $attributes attribute name
+     * @param array $attribute attribute name
      * @param array $value      value
      */
     public function setAttribute($attribute, $value)
@@ -456,7 +456,7 @@ class Form implements FormInterface
      * Set id of this form.
      *
      * @param  string         $id ID of this form.
-     * @return Koch\Form\Form
+     * @return Form
      */
     public function setID($id)
     {
@@ -479,7 +479,7 @@ class Form implements FormInterface
      * Set name of this form.
      *
      * @param  string    $name Name of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setName($name)
     {
@@ -503,7 +503,7 @@ class Form implements FormInterface
      * Like accept-charset="ISO-8859-1".
      *
      * @param  string    $charset Charset of this form (utf-8, iso-8859-1).
-     * @return Koch_Form
+     * @return Form
      */
     public function setAcceptCharset($charset)
     {
@@ -530,7 +530,7 @@ class Form implements FormInterface
      * Set class of this form.
      *
      * @param  string    $class Css Classname of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setClass($class)
     {
@@ -554,7 +554,7 @@ class Form implements FormInterface
      * The description is a p tag after the heading (form > h2 > p).
      *
      * @param  string    $description Description of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setDescription($description)
     {
@@ -578,7 +578,7 @@ class Form implements FormInterface
      * The heading is a h2 tag directly after the opening form tag.
      *
      * @param  string    $heading Heading of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setHeading($heading)
     {
@@ -610,8 +610,9 @@ class Form implements FormInterface
      * Though using method chaining is a bit nicer (fluent interface).
      *
      * @param string String for the legend tag of the fieldset.
+     * @param string $legend
      *
-     * @return object Koch_Form
+     * @return Form Koch_Form
      */
     public function setLegend($legend)
     {
@@ -637,7 +638,7 @@ class Form implements FormInterface
      *  Spaces are converted to "+" symbols, but no special characters are encoded
      *
      * @param  string    $encoding Encoding type of this form.
-     * @return Koch_Form
+     * @return Form
      */
     public function setEncoding($encoding)
     {
@@ -675,7 +676,7 @@ class Form implements FormInterface
     /**
      * Set formelements
      *
-     * @param array $formelements
+     * @param string[] $formelements
      */
     public function setFormelements(array $formelements)
     {
@@ -841,6 +842,8 @@ class Form implements FormInterface
      *
      * This is a case-insensitive file exists check.
      * This allows checking for names/file, which are not only ucfirst(), e.g. "SubmitButton".
+     * @param string $fileName
+     * @return string
      */
     public static function fileExists($fileName)
     {
@@ -1222,7 +1225,7 @@ class Form implements FormInterface
      *
      * @see $this->addDecorator()
      *
-     * @param  array              $decorators Array of decorator objects or names or just one string.
+     * @param  string              $decorators Array of decorator objects or names or just one string.
      * @param  array              $attributes Array of properties for the decorator object.
      * @return Koch_Formdecorator object
      */
@@ -1365,6 +1368,7 @@ class Form implements FormInterface
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Name of Formdecorator.
+     * @param string $decorator
      * @return Koch_Formdecorator
      */
     public function decoratorFactory($decorator)
@@ -1479,6 +1483,7 @@ class Form implements FormInterface
      * @see $this->addFormelementDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
+     * @param string $decorator
      * @return Koch_Formdecorator object
      */
     public function setFormelementDecorator($decorator, $formelement_position = null)
@@ -1506,7 +1511,7 @@ class Form implements FormInterface
      * This would attach the decorator fieldset to the last formelement of $form.
      *
      * @param  string|array|object $decorator            The formelement decorator(s) to apply to the formelement.
-     * @param  int|string|object   $formelement_position Position in the formelement stack or Name of formelement.
+     * @param  int|string|object   $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
      * @return object              \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
@@ -1527,7 +1532,7 @@ class Form implements FormInterface
     /**
      * Removes a decorator from a formelement.
      *
-     * @param type $decorator
+     * @param string $decorator
      * @param type $formelement_position
      */
     public function removeFormelementDecorator($decorator, $formelement_position = null)
@@ -1545,7 +1550,7 @@ class Form implements FormInterface
     /**
      * Adds a validator to the formelement
      *
-     * @return Koch_Formelement
+     * @return Form
      */
     public function addValidator($validator)
     {
@@ -1588,6 +1593,7 @@ class Form implements FormInterface
     /**
      * Returns the error state of the form.
      *
+     * @param boolean $boolean
      * @return boolean True, if form has an error. False, otherwise.
      */
     public function hasErrors($boolean = null)
@@ -1599,6 +1605,9 @@ class Form implements FormInterface
         return $this->error;
     }
 
+    /**
+     * @param string $errorMessage
+     */
     public function addErrorMessage($errorMessage)
     {
         $this->errorMessages[] = $errorMessage;

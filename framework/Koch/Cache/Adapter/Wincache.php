@@ -86,7 +86,6 @@ class Wincache extends AbstractCache implements CacheInterface
      *
      * @param  string  $key  Identifier for the data
      * @param  mixed   $data Data to be cached
-     * @param  integer $ttl  How long to cache the data, in minutes.
      * @return boolean True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 0)

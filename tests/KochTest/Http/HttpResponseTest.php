@@ -114,7 +114,7 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      * for which no getters are implemented in the public api.
      *
      * @param  string           $name Property name.
-     * @return \ReflectionClass
+     * @return \ReflectionProperty
      */
     protected static function reflectProperty($name)
     {

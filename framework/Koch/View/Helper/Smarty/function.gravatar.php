@@ -23,8 +23,7 @@
  * {gravatar email="example@example.com" size="40" rating="R" default="http://myhost.com/myavatar.png"}
  *
  * @param array $params as described above (emmail, size, rating, defaultimage)
- * @param Smarty $smarty
- * @return string
+ * @return null|Koch\View\Helper\Gravatar
  */
 function Smarty_function_gravatar($params)
 {

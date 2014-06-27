@@ -108,7 +108,7 @@ class File
     /**
      * Returns file extension. If file has no extension, returns null.
      *
-     * @return string|null
+     * @return string
      */
     public function getExtension()
     {
@@ -144,7 +144,7 @@ class File
      *
      * @param $extensions array  an array of allowed file extensions. If empty,
      * every file extension is allowed.
-     * @return object \Koch\File\File
+     * @return File \Koch\File\File
      */
     public function setAllowedExtensions(array $extensions = array())
     {

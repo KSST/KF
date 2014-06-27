@@ -44,6 +44,9 @@ class GravatarCache
     public $size                 = null;
     public $rating               = null;
 
+    /**
+     * @param string $gravatarUrl
+     */
     public function __construct($gravatarUrl, $gravatarId, $size, $rating)
     {
         $this->gravatar_url = $gravatarUrl;
@@ -96,6 +99,7 @@ class GravatarCache
 
     /**
      * sets the specified gravatar at $gravatar_url to the $cache_filename
+     * @param string $cacheFile
      */
     public function setGravatar($cacheFile, $gravatarUrl)
     {

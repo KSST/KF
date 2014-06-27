@@ -33,12 +33,28 @@ interface FormInterface
     public function render();
 
     // set action, method, name
+
+    /**
+     * @return Form
+     */
     public function setAction($action);
+
+    /**
+     * @return Form
+     */
     public function setMethod($method);
+
+    /**
+     * @return Form
+     */
     public function setName($method);
 
     // add/remove a formelement
     public function addElement($formelement, $position = null);
+
+    /**
+     * @return boolean
+     */
     public function delElementByName($name);
 
     // load/save the XML description of the form

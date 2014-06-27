@@ -111,7 +111,7 @@ class File extends AbstractCache implements CacheInterface
      * Stores data by key into cache
      *
      * @param string  $key      Identifier for the data
-     * @param mixed   $data     Data to be cached
+     * @param string   $data     Data to be cached
      * @param integer $lifetime How long to cache the data, in minutes
      *
      * @return boolean True if the data was successfully cached, false on failure

@@ -72,7 +72,6 @@ class Phptal extends AbstractRenderer
      *
      * @param int    $outputMode (optional) output mode (XML, XHTML, HTML5 (see PHPTAL constants). Default XHTML.
      * @param string $encoding   (optional) charset encoding for template. Default UTF-8.
-     * @param int    $lifetime   (optional) count of days to cache templates. Default 1 day.
      */
     public function configureEngine($outputMode = PHPTAL::XHTML, $encoding = 'UTF-8', $cache_lifetime_days = 1)
     {

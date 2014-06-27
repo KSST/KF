@@ -41,7 +41,7 @@ class Factory
      *  .config.yaml
      *  .info.php
      *
-     * @param $configfile string path to configuration file
+     * @param string $configfile string path to configuration file
      * @return Cache Engine Object reads the configfile -> access to values via $config
      */
     public static function determineConfigurationHandlerTypeBy($configfile)
@@ -87,7 +87,7 @@ class Factory
      * Uses the confighandler to load the configfile and return the object.
      * The returned object contains the confighandler and the config array.
      *
-     * @param $configfile Configuration file to load
+     * @param string $configfile Configuration file to load
      * @return Configuration Handler Object with confighandler and array of configfile.
      */
     public static function getConfiguration($configfile)

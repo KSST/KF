@@ -128,6 +128,9 @@ class Pagination
         return $this->totalNumberOfResults;
     }
 
+    /**
+     * @param integer $count
+     */
     public function setTotalNumberOfResults($count)
     {
         $this->totalNumberOfResults = (integer) $count;

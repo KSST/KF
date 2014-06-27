@@ -31,5 +31,8 @@ namespace Koch\Event;
  */
 interface EventInterface
 {
+    /**
+     * @return void
+     */
     public function execute(\Koch\Event\Event $event);
 }

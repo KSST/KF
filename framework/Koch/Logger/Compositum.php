@@ -44,7 +44,7 @@ class Compositum
      *
      * @param string $level   priority level (LOG, INFO, WARNING, ERROR...)
      * @param string $message
-     * @param array  $context Context Array
+     * @param string[]  $context Context Array
      */
     public function log($level, $message, array $context = array())
     {
@@ -75,7 +75,7 @@ class Compositum
     /**
      * Remove a logger from the compositum.
      *
-     * @param array $logger Logger to remove
+     * @param string $logger Logger to remove
      */
     public function removeLogger($logger)
     {

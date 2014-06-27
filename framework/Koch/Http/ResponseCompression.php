@@ -176,7 +176,7 @@ class ResponseCompression
      * Usage to test if output will be zipped:
      * if (self::gzip_accepted()) { echo "Page will be gziped"; }
      *
-     * @return mixed (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if
+     * @return false|string (string|boolean) $encoding Returns 'gzip' or 'x-gzip' if
      *               Accept-Encoding Header is found. False otherwise.
      */
     public static function gzipAccepted()

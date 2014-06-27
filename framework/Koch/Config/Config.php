@@ -56,7 +56,7 @@ class Config extends AbstractConfig
     /**
      * Write a config file
      *
-     * @param $file path and the filename you want to write
+     * @param string $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.
      */
     public function write($file, $array = array())
@@ -102,7 +102,7 @@ class Config extends AbstractConfig
     /**
      * Reads a configuration file of a module ($modulename . '.config.php')
      *
-     * @param $module Name of Module
+     * @param string $module Name of Module
      * @return array Module Configuration Array
      */
     public function readModuleConfig($module = null)
@@ -121,7 +121,7 @@ class Config extends AbstractConfig
      * Write module configuration file
      *
      * @param $array The configuration array to write.
-     * @param $module The name of a module.
+     * @param string $module The name of a module.
      * @return boolean
      */
     public function writeModuleConfig(array $array, $module = null)

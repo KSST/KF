@@ -164,6 +164,7 @@ class Javascripts extends Layout
      * addJS - Wrapper Method
      *
      * @params string javascript filename to load
+     * @param string $filename
      */
     public static function addJS($filename)
     {
@@ -194,8 +195,9 @@ class Javascripts extends Layout
      *
      * @params string filename of the cascading style sheet to load
      * @params boolean display the iehack css in case true, default is false
+     * @param string $filename
      *
-     * @return html style type css import
+     * @return string style type css import
      */
     public static function addCSS($filename, $iehack = false)
     {

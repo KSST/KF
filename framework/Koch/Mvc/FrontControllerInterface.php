@@ -35,8 +35,23 @@ use Koch\Filter\FilterInterface;
  */
 interface FrontControllerInterface
 {
+    /**
+     * @return void
+     */
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response);
+
+    /**
+     * @return void
+     */
     public function processRequest();
+
+    /**
+     * @return void
+     */
     public function addPreFilter(FilterInterface $filter);
+
+    /**
+     * @return void
+     */
     public function addPostFilter(FilterInterface $filter);
 }

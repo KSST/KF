@@ -4,7 +4,6 @@ namespace KochTest\View\Renderer;
 
 use Koch\View\Renderer\Php;
 use Koch\View\Mapper;
-
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;

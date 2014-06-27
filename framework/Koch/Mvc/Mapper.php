@@ -67,6 +67,9 @@ class Mapper extends \ArrayObject
         return self::$applicationNamespace;
     }
 
+    /**
+     * @param string $module
+     */
     public static function getModulePath($module)
     {
         return APPLICATION_MODULES_PATH . $module . '/';

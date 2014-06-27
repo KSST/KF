@@ -29,21 +29,39 @@ namespace Koch\Permissions;
  */
 class Acl
 {
+    /**
+     * @param string $roleGroup
+     * @param string $role
+     */
     public function addRole($roleGroup, $role)
     {
 
     }
 
+    /**
+     * @param string $resourceGroup
+     * @param string $resource
+     */
     public function addResource($resourceGroup, $resource)
     {
 
     }
 
+    /**
+     * @param string $role
+     * @param string $action
+     * @param string $resource
+     */
     public function ruleAllow($role, $action, $resource)
     {
 
     }
 
+    /**
+     * @param string $role
+     * @param string $action
+     * @param string $resource
+     */
     public function ruleDeny($role, $action, $resource)
     {
 

@@ -87,7 +87,7 @@ class Memcached extends AbstractCache implements CacheInterface
      *
      * @param string Key.
      * @param mixed Value.
-     * @return mixed True, if successfull.
+     * @return boolean True, if successfull.
      */
     public function setOption($key, $value)
     {
@@ -178,7 +178,7 @@ class Memcached extends AbstractCache implements CacheInterface
      * Stores data by key into cache
      *
      * @param  string  $key  Identifier for the data
-     * @param  mixed   $data Data to be cached
+     * @param  string   $data Data to be cached
      * @param  integer $ttl  How long to cache the data (in minutes).
      * @return boolean True if the data was successfully cached, false on failure.
      */

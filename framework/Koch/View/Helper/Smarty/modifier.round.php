@@ -11,7 +11,7 @@
  * Purpose:  round a numeric string to a given decimal point
  * @param string
  * @param integer
- * @return string
+ * @return double
  */
 function smarty_modifier_round($float, $precision = 0)
 {

@@ -26,5 +26,8 @@ namespace Koch\Pagination;
 
 interface StyleInterface
 {
+    /**
+     * @return string
+     */
     public function render(\Koch\Pagination\Pagination $pagination);
 }

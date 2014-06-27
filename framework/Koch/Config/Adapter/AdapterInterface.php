@@ -27,5 +27,9 @@ namespace Koch\Config\Adapter;
 interface AdapterInterface
 {
     public static function read($file);
+
+    /**
+     * @return boolean|null
+     */
     public static function write($file, array $array);
 }

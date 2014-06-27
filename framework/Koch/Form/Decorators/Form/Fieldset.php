@@ -36,6 +36,9 @@ class Fieldset extends AbstractFormDecorator
 
     public $legend;
 
+    /**
+     * @param string $legend
+     */
     public function setLegend($legend)
     {
         $this->legend = $legend;
@@ -48,6 +51,9 @@ class Fieldset extends AbstractFormDecorator
         return $this->legend;
     }
 
+    /**
+     * @param string $html_form_content
+     */
     public function render($html_form_content)
     {
         $html = '';

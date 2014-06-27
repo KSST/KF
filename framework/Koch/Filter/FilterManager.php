@@ -44,7 +44,7 @@ class FilterManager
      * addFilter method
      * $filter is type-hinted, to ensure that the array filter only contains Filter-Objects
      *
-     * @param object $filter
+     * @param FilterInterface $filter
      */
     public function addFilter(FilterInterface $filter)
     {
@@ -54,8 +54,8 @@ class FilterManager
     /**
      * processFilters executes each filter of the filters-array
      *
-     * @param request object
-     * @param response object
+     * @param request HttpRequestInterface
+     * @param response HttpResponseInterface
      */
     public function processFilters(HttpRequestInterface $request, HttpResponseInterface $response)
     {

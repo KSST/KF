@@ -124,6 +124,8 @@ class Localization
      * If you use: T_bindtextdomain($this->domain, '/html/locales');
      * The mo.file would be looked up in /html/locales/de_DE/LC_MESSAGES/{$this->domain}.mo
      * @link http://www.php.net/function.bindtextdomain
+     * @param string $domain
+     * @param string $module
      */
     public function loadTextDomain($domain, $locale, $module = null)
     {

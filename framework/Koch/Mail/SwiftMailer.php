@@ -105,7 +105,7 @@ class SwiftMailer
      * @param  string  $from    Sender email ('email' => 'name')
      * @param  string  $subject Message subject (headline)
      * @param  string  $body    Message body ('text, 'text/html')
-     * @return boolean true|false
+     * @return string true|false
      */
     public function send($to, $from, $subject, $body)
     {
@@ -126,7 +126,7 @@ class SwiftMailer
     /**
      * Getter Method for the Swiftmailer Object
      *
-     * @return object SwiftMailer
+     * @return \Swift_Mailer SwiftMailer
      */
     public function getMailer()
     {

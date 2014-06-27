@@ -36,7 +36,7 @@
  *
  * @param $utf8 string The UTF8-string to convert
  * @param $encodeTags booloean TRUE will convert "<" to "&lt;", Default = false
- * @return returns the converted HTML-string
+ * @return string the converted HTML-string
  */
 function UTF8_to_HTML($utf8, $encodeTags = false)
 {

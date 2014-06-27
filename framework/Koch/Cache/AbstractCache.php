@@ -63,7 +63,7 @@ abstract class AbstractCache
      *
      * @param string Key.
      * @param mixed Value.
-     * @return mixed True, if successfull.
+     * @return boolean True, if successfull.
      */
     public function setOption($key, $value)
     {

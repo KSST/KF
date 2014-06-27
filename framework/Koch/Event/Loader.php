@@ -44,8 +44,6 @@ class Loader
     /**
      * Registers multiple Events by Name
      *
-     * @param array $events_array  eventname => filename
-     * @param array $event_objects eventname => object
      */
     public static function loadEventHandlers($events)
     {

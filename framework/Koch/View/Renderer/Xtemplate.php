@@ -104,7 +104,7 @@ class Xtemplate extends AbstractRenderer
     /**
      * Returns a clean xTemplate Object
      *
-     * @return Smarty Object
+     * @return Xtemplate Object
      */
     public function getEngine()
     {

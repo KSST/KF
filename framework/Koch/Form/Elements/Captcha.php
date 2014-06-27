@@ -52,7 +52,7 @@ class Captcha extends FormElement implements FormElementInterface
      * Set the name of the captcha
      *
      * @param  string $captcha The captcha name.
-     * @return object \Koch\Form\Element\Captcha (THIS is not   \Koch\Form\Element\Captcha_$captcha )
+     * @return Captcha \Koch\Form\Element\Captcha (THIS is not   \Koch\Form\Element\Captcha_$captcha )
      */
     public function setCaptcha($captcha = null)
     {
@@ -78,7 +78,7 @@ class Captcha extends FormElement implements FormElementInterface
 
     /**
      * @param  \Koch\Form\Element\Interface $captchaObject
-     * @return object                       \Koch\Form\Element\Captcha
+     * @return Captcha                       \Koch\Form\Element\Captcha
      */
     public function setCaptchaFormelement(\Koch\Form\ElementInterface $captchaObject)
     {

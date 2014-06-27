@@ -32,6 +32,9 @@ class Variable
     public $preference;
     private $context;
 
+    /**
+     * @param Context $context
+     */
     public function __construct($context)
     {
         $this->context = $context;

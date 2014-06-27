@@ -50,7 +50,7 @@ class Mapper
      * Returns the Template Name
      * Maps the action name to a template.
      *
-     * @return Returns the templateName as String
+     * @return string the templateName as String
      */
     public function getTemplateName()
     {
@@ -113,7 +113,7 @@ class Mapper
     /**
      * Return Theme Template Paths
      *
-     * @return array Theme Template Paths
+     * @return string[] Theme Template Paths
      */
     public static function getThemeTemplatePaths()
     {
@@ -174,7 +174,7 @@ class Mapper
     /**
      * Returns Module Template Paths
      *
-     * @return array Module Template Paths
+     * @return string[] Module Template Paths
      */
     public static function getModuleTemplatePaths($module = null)
     {
@@ -201,6 +201,7 @@ class Mapper
      * Returns the fullpath to Template by searching in the Module Template Path
      *
      * @param  string $template Template Filename
+     * @param string $module
      * @return string
      */
     public static function getModuleTemplatePath($template, $module = null)
@@ -227,8 +228,8 @@ class Mapper
     /**
      * Checks all paths of the array for the filename
      *
-     * @param  array  $paths    Paths to check
-     * @param  strig  $filename template name
+     * @param  string[]  $paths    Paths to check
+     * @param  string  $filename template name
      * @return string Filepath.
      */
     public static function findFileInPaths($paths, $filename)

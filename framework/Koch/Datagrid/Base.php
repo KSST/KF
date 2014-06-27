@@ -76,6 +76,7 @@ class Base
 
     /**
      *  Setter Methods for a Datagrid
+     * @param string $alias
      */
     public function setAlias($alias)
     {
@@ -101,6 +102,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $name
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -108,6 +112,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $class
+     */
     public function setClass($class)
     {
         $this->class = $class;
@@ -115,6 +122,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $id
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -143,6 +153,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $description
+     */
     public function setDescription($description)
     {
         $this->description = $description;

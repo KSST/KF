@@ -257,7 +257,7 @@ class HttpResponse implements HttpResponseInterface
      * @param string Domain which can read the cookie
      * @param bool Secure mode?
      * @param bool Only allow HTTP usage? (PHP 5.2)
-     * @return true Cookie set.
+     * @return boolean Cookie set.
      */
     public static function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
     {
@@ -384,6 +384,7 @@ class HttpResponse implements HttpResponseInterface
      * @param int    http status code, default: '303' => 'See other'
      * @param text   text of redirect message
      * @param string redirect mode LOCATION, REFRESH, JS, HTML
+     * @param string $mode
      */
     public static function redirect($url, $time = 0, $statusCode = 303, $message = null, $mode = null)
     {

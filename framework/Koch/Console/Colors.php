@@ -93,6 +93,10 @@ class Colors
         'big ok'   => "✔"
     );
 
+    /**
+     * @param string $symbol
+     * @param string[] $options
+     */
     public static function unicodeSymbol($symbol, $options = null)
     {
         if (false === isset(self::$unicode[$symbol])) {
@@ -110,6 +114,10 @@ class Colors
         return is_array($options) ? self::write($symbol, $options) : $symbol;
     }
 
+    /**
+     * @param string $background
+     * @param string $modifiers
+     */
     public static function write($text, $foreground = null, $background = null, $modifiers = null)
     {
         if (is_array($foreground)) {
@@ -164,6 +172,9 @@ class Colors
      * @param string
      * @param string regexp
      * @param mixed|string|array
+     * @param string $text
+     * @param string $search_regexp
+     * @param string $color
      */
     public static function colorizePart($text, $search_regexp, $color)
     {
@@ -176,6 +187,9 @@ class Colors
         return is_null($ansi_text) ? $text : $ansi_text;
     }
 
+    /**
+     * @param integer $value
+     */
     public static function colorizeReturnValue($value)
     {
         return ($value == 0) ? self::unicodeSymbol('fail', array('red')) : self::unicodeSymbol('ok', array('green'));

@@ -90,7 +90,7 @@ class FrontController implements FrontControllerInterface
      *
      * This filter is processed *before* the Controller->Action is executed.
      *
-     * @param object $filter Object implementing the Koch_Filter_Interface.
+     * @param FilterInterface $filter Object implementing the Koch_Filter_Interface.
      */
     public function addPreFilter(FilterInterface $filter)
     {
@@ -102,7 +102,7 @@ class FrontController implements FrontControllerInterface
      *
      * This filter is processed *after* Controller->Action was executed.
      *
-     * @param object $filter Object implementing the Koch_Filter_Interface.
+     * @param FilterInterface $filter Object implementing the Koch_Filter_Interface.
      */
     public function addPostFilter(FilterInterface $filter)
     {

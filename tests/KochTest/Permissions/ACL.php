@@ -3,7 +3,7 @@ namespace KochTest\Permissions;
 
 use Koch\Permissions\Acl;
 
-class Acl extends \PHPUnit_Framework_TestCase
+class ACL extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var Acl

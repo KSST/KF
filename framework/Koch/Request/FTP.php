@@ -128,7 +128,7 @@ class FTP
      *
      * @param string $source_file      The local file to upload
      * @param string $destination_file The remote location and name of the file
-     * @param string $transfer_mode    optional Defaults to FTP_BINARY(2) connections, but can use FTP_ASCII(1).
+     * @param integer $transfer_mode    optional Defaults to FTP_BINARY(2) connections, but can use FTP_ASCII(1).
      */
     public function upload($source_file, $destination_file, $transfer_mode = 2)
     {
@@ -161,7 +161,7 @@ class FTP
      *
      * @param  string $source_file      The remote file
      * @param  string $destination_file The local file to create
-     * @param  string $transfer_mode    optional Defaults to FTP_BINARY(2) connections, but can use FTP_ASCII(1).
+     * @param  integer $transfer_mode    optional Defaults to FTP_BINARY(2) connections, but can use FTP_ASCII(1).
      * @return bool
      */
     public function download($source_file, $destination_file, $transfer_mode = 2)

@@ -109,7 +109,6 @@ class Textarea extends FormElement implements FormElementInterface
     /**
      * get defined width of textarea
      *
-     * @param int $cols
      */
     public function getCols()
     {
@@ -131,7 +130,6 @@ class Textarea extends FormElement implements FormElementInterface
     /**
      * get defined height of textarea in rows
      *
-     * @param int $rows
      */
     public function getRows()
     {

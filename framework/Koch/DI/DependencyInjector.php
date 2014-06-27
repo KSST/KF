@@ -54,16 +54,25 @@ class DependencyInjector
         $this->top->willUse($preference);
     }
 
+    /**
+     * @param string $name
+     */
     public function forVariable($name)
     {
         return $this->top->forVariable($name);
     }
 
+    /**
+     * @param string $type
+     */
     public function whenCreating($type)
     {
         return $this->top->whenCreating($type);
     }
 
+    /**
+     * @param string $type
+     */
     public function forType($type)
     {
         return $this->top->forType($type);
@@ -96,16 +105,26 @@ class DependencyInjector
         return $object;
     }
 
+    /**
+     * @param string $type
+     * @param string $candidates
+     */
     public function pickFactory($type, $candidates)
     {
         throw new \Koch\DI\Exception\CannotDetermineImplementation($type);
     }
 
+    /**
+     * @param string $class
+     */
     public function settersFor($class)
     {
         return array();
     }
 
+    /**
+     * @param string $type
+     */
     public function wrappersFor($type)
     {
         return array();
@@ -116,6 +135,9 @@ class DependencyInjector
         $this->named_parameters += $parameters;
     }
 
+    /**
+     * @param string $nesting
+     */
     public function instantiateParameter($parameter, $nesting)
     {
         $name = $parameter->getName();

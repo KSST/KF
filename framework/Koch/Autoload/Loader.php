@@ -154,7 +154,7 @@ class Loader
      *
      * @param string $classname Classname to check for exclusion.
      *
-     * @return Returns true, if the class is to exclude.
+     * @return boolean true, if the class is to exclude.
      */
     public static function autoloadExclusions($classname)
     {
@@ -178,7 +178,7 @@ class Loader
      *
      * @param string $classname Classname to check for inclusion.
      *
-     * @return true if classname was included
+     * @return boolean if classname was included
      */
     public static function autoloadInclusions($classname)
     {
@@ -195,7 +195,7 @@ class Loader
     /**
      * Loads a file by classname using the autoloader mapping array from file or apc
      *
-     * @param $classname The classname to look for in the autoloading map.
+     * @param string $classname The classname to look for in the autoloading map.
      *
      * @return boolean True on file load, otherwise false.
      */
@@ -227,6 +227,7 @@ class Loader
      * @link https://groups.google.com/group/php-standards/web/psr-0-final-proposal
      * @link http://gist.github.com/221634
      *
+     * @param string $classname
      * @return bool True on success of require, false otherwise.
      */
     public static function autoloadIncludePath($classname)
@@ -272,6 +273,7 @@ class Loader
      * is increased stepwise resulting in a decreasing number of autoloading tries.
      *
      * @param string $filename The file to be required
+     * @param string $classname
      *
      * @return bool True on success of require, false otherwise.
      */
@@ -384,7 +386,7 @@ class Loader
      * The new map array is written to apc or file.
      *
      * @param $class Classname is the lookup key for $filename.
-     * @param $file  Filename is the file to load.
+     * @param string $file  Filename is the file to load.
      * @return boolean True if added to map.
      */
     public static function addMapping($class, $file)

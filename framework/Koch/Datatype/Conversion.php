@@ -91,7 +91,6 @@ class Conversion
      * Converts a SimpleXML String recursivly to an Array
      *
      * @author Jason Sheets <jsheets at shadonet dot com>
-     * @param  string $xml SimpleXML String
      * @return Array
      */
     public static function simpleXMLToArrayLight($simplexml)

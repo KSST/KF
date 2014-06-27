@@ -201,7 +201,7 @@ class DoctrineSession extends AbstractSession
     /**
      * Opens a session
      *
-     * @return true
+     * @return boolean
      */
     public function open($path = null, $name = null)
     {
@@ -211,7 +211,7 @@ class DoctrineSession extends AbstractSession
     /**
      * Closes a session
      *
-     * @return true
+     * @return boolean
      */
     public function close()
     {
@@ -362,7 +362,7 @@ class DoctrineSession extends AbstractSession
      * @usage execution rate 1/100 (session.gc_probability/session.gc_divisor)
      *
      * @param int session life time (mins)
-     * @return boolean
+     * @return null|boolean
      */
     public function gc($maxlifetime = 30)
     {
