@@ -229,6 +229,9 @@ abstract class AbstractGenerator extends ElementBase
         return substr($fileInfo['basename'], 0, -(strlen($fileInfo['extension']) + 1)) . '.xml';
     }
 
+    /**
+     * @param string $filename
+     */
     protected function redirect($filename)
     {
         // attention, heavily-commented-out-area

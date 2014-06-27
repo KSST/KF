@@ -89,7 +89,7 @@ class PHPArray extends Form implements FormGeneratorInterface
      *   [class] => cssClass
      *
      * @param $form_array the form array
-     * @return boolean true/false
+     * @return boolean|null true/false
      */
     public static function validateFormArrayStructure($form_array)
     {

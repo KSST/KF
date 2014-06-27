@@ -44,7 +44,6 @@ interface CacheInterface
      * Cache a variable in the data store.
      *
      * @param  string $key
-     * @param  mixed  $value
      * @param  int    $ttl
      * @return bool
      */

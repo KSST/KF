@@ -50,6 +50,8 @@ class Gravatar
 
     /**
      *  Constructor
+     * @param string $email
+     * @param string $default
      */
     public function __construct($email = null, $rating = null, $size = null, $default = null, $nocaching = false)
     {

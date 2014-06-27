@@ -38,6 +38,9 @@ class JqSelectImage extends Select implements FormElementInterface
         return $files;
     }
 
+    /**
+     * @return boolean
+     */
     public function getDirectory()
     {
         return $this->directory;

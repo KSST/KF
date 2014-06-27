@@ -390,7 +390,7 @@ class XDebug
      * Rounds a $value to MegaBytes
      *
      * @param  int $value The Value to round to megabytes.
-     * @return Returns the $value rounded to megabytes, like: 1,44MB.
+     * @return double the $value rounded to megabytes, like: 1,44MB.
      */
     public static function roundMB($value)
     {
@@ -398,7 +398,6 @@ class XDebug
     }
 
     /**
-     * @param mixed $variable The variable to debug display.
      */
     public static function xDump($var)
     {
@@ -452,7 +451,7 @@ class XDebug
      * echo getSectionHeadlineHTML('System');
      * <table id="table-system">
      *
-     * @param string $section_name Name of the Section.
+     * @param string $name
      */
     public static function getSectionHeadlineHTML($name)
     {

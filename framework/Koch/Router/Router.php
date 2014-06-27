@@ -106,7 +106,6 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * A multislash removal is not needed, because of the later usage of preg_split().
      *
-     * @param  string $request_url \Koch\Http\HttpRequest::getRequestURI
      * @return string Request URL
      */
     public function prepareRequestURI($uri)
@@ -265,7 +264,7 @@ class Router implements RouterInterface, \ArrayAccess
      * Resets the routes array.
      *
      * @param bool Load the default routes. Defaults to false.
-     * @return object \Koch\Router\Router
+     * @return Router \Koch\Router\Router
      */
     public function reset($loadDefaultRoutes = false)
     {
@@ -407,7 +406,7 @@ class Router implements RouterInterface, \ArrayAccess
      * 5. if no mapping applies, then set default values from config and fallback to a static routing
      * 6. always! -> found_route -> call!
      *
-     * @return Koch\Router\TargetRoute
+     * @return TargetRoute|null
      */
     public function route()
     {
@@ -494,7 +493,7 @@ class Router implements RouterInterface, \ArrayAccess
      * Taking static, dynamic and regexp routings into account.
      * In other words, it "map matches the URI".
      *
-     * @return Koch\Router\TargetRoute
+     * @return TargetRoute|null
      */
     public function match()
     {
@@ -623,7 +622,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * This is based on htaccess rewriting with [QSA,L] (Query Append String).
      *
-     * @param  string $url The Request URL
+     * @param string $uri
      * @return array  Array with URI segments.
      */
     private static function parseUrlRewrite($uri)
@@ -687,7 +686,7 @@ class Router implements RouterInterface, \ArrayAccess
      * This URLParser has to extract mod, sub, action, id/parameters from the URI.
      * Alternate name: Standard_Request_Resolver.
      *
-     * @param  string $url The Request URL
+     * @param string $uri
      * @return array  Array with URI segments.
      */
     private function parseUrlNoRewrite($uri)
@@ -792,7 +791,7 @@ class Router implements RouterInterface, \ArrayAccess
      * with their regular expressions for later preg_matching.
      * This is used while adding a new Route.
      *
-     * @param string $route_with_placeholder A Route with a placeholder like alpha or num.
+     * @param string $route_with_placeholders A Route with a placeholder like alpha or num.
      */
     public static function placeholdersToRegexp($route_with_placeholders)
     {

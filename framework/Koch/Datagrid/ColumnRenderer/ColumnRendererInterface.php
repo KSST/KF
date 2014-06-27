@@ -19,6 +19,7 @@ interface ColumnRendererInterface
 {
     /**
      * Render the given cell of the column
+     * @return string|null
      */
     public function renderCell($_Value);
 }

@@ -37,7 +37,8 @@ class SmartyTemplateError
      * @param  string  $errstr     contains error string info
      * @param  string  $errfile    contains the filename with occuring error
      * @param  string  $errline    contains the line of error
-     * @param  array   $errcontext contains vars from error context
+     * @param  string|null   $errcontext contains vars from error context
+     * @param string $errorname
      * @return string  HTML with Smarty Error Text and Link.
      */
     public static function render($errno, $errorname, $errstr, $errfile, $errline, $errcontext)

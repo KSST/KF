@@ -183,6 +183,7 @@ class YellowScreenOfDeath
      * @param string $errline
      * @param int    $errline
      * @param string $errcontext
+     * @param string $errorname
      */
     public static function renderError($errno, $errorname, $errstr, $errfile, $errline, $errcontext)
     {

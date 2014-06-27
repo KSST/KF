@@ -88,7 +88,7 @@ class Exception extends \Exception
      * </code>
      * The file "exception-20.html" will be retrieved.
      *
-     * @param $code The exception code.
+     * @param int $code The exception code.
      */
     private static function fetchExceptionTemplate($code)
     {
@@ -112,7 +112,7 @@ class Exception extends \Exception
      * </code>
      * The file "exception-dev-20.html" will be retrieved.
      *
-     * @param $code The exception code.
+     * @param int $code The exception code.
      */
     private static function fetchExceptionDevelopmentTemplate($code)
     {
@@ -134,7 +134,7 @@ class Exception extends \Exception
     /**
      * Getter Method for the exception_development_template_content
      *
-     * @return HTML Representation of $exception_development_template_content
+     * @return string Representation of $exception_development_template_content
      */
     public static function getExceptionDevelopmentTemplate($placeholders)
     {
@@ -159,7 +159,7 @@ class Exception extends \Exception
      * Formats the debugtrace ($this->string) by applying linebreaks.
      *
      * @param $string The debug-trace string to format.
-     * @return HTML with Debugtrace String
+     * @return string with Debugtrace String
      */
     public static function formatGetTraceString($string)
     {

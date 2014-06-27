@@ -36,6 +36,9 @@ class File extends AbstractLogger implements LoggerInterface
         return (empty($this->logfile)) ? $file : $this->logfile;
     }
 
+    /**
+     * @param string $file
+     */
     public function setErrorLogFilename($file)
     {
         $this->logfile = $file;
@@ -44,7 +47,7 @@ class File extends AbstractLogger implements LoggerInterface
     /**
      * Writes a string to the logfile.
      *
-     * @param  mixed  $level
+     * @param  string  $level
      * @param  string $message
      * @param  array  $context
      * @return bool

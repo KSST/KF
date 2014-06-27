@@ -59,7 +59,7 @@ class Select extends FormElement implements FormElementInterface
      *
      * @param  array                    $options
      * @param  boolean                  $addSelectText Adds " - Select -" as first entry to the options array.
-     * @return \Koch\FormElement\Select
+     * @return Select
      */
     public function setOptions($options, $addSelectText = true)
     {
@@ -103,7 +103,7 @@ class Select extends FormElement implements FormElementInterface
      * This makes it a bit easier to pass actual values around via POST,
      * instead of passing the numeric index for lookup.
      *
-     * @return \ \Koch\Form\Element\Select
+     * @return Select \Koch\Form\Element\Select
      */
     public function withValuesAsKeys()
     {

@@ -26,6 +26,7 @@ namespace<br>";
      * is increased stepwise resulting in a decreasing number of autoloading tries.
      *
      * @param string $filename The file to be required
+     * @param string $classname
      *
      * @return bool True on success of require, false otherwise.
      */
@@ -138,7 +139,7 @@ namespace<br>";
      * The new map array is written to apc or file.
      *
      * @param $class Classname is the lookup key for $filename.
-     * @param $file  Filename is the file to load.
+     * @param string $file  Filename is the file to load.
      * @return boolean True if added to map.
      */
     public static function addMapping($class, $file)

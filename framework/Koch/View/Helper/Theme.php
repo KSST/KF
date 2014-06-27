@@ -39,6 +39,9 @@ class Theme
         return $this;
     }
 
+    /**
+     * @param string $theme
+     */
     public function setThemeName($theme)
     {
         if ($theme === null) {

@@ -20,5 +20,8 @@ use Koch\Http\HttpResponseInterface;
  */
 interface FilterInterface
 {
+    /**
+     * @return void
+     */
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response);
 }

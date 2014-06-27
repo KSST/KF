@@ -26,7 +26,7 @@ class NotEquals extends Validator
     /**
      * EqualsTo Setter
      *
-     * @param string $equalsTo The equals to field
+     * @param string $notEqualsTo The equals to field
      */
     public function setNotEqualsTo($notEqualsTo)
     {

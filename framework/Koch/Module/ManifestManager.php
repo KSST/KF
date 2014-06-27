@@ -223,6 +223,7 @@ class ManifestManager
      *
      * @staticvar array $modulesinfo
      * @param  mixed array|string $module array with modulenames or one modulename
+     * @param string $module
      * @return moduleinformations (self::$modulesinfo)
      */
     public static function loadModuleInformations($module = null)

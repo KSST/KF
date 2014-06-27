@@ -24,6 +24,7 @@ class Renderer
      * @param string $style
      * @param array  $options
      * @param object Pagination with Adapter
+     * @param Pagination $adapter
      */
     public function __construct($style = null, $options = null, $adapter = null)
     {
@@ -53,6 +54,9 @@ class Renderer
         return '\Koch\Pagination\Style\\' . $viewRendererClassMap[$style];
     }
 
+    /**
+     * @param string $style
+     */
     public function factory($style = null, $options = null)
     {
         $style = isset($style) ? $style : $this->style;

@@ -52,9 +52,9 @@ class Email extends AbstractLogger implements LoggerInterface
     /**
      * Sends the log message via E-Mail.
      *
-     * @param  mixed  $level
+     * @param  string  $level
      * @param  string $message
-     * @param  array  $context
+     * @param  string[]  $context
      * @return bool
      */
     public function log($level, $message, array $context = array())

@@ -114,7 +114,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse(Loader::autoloadExclusions('Koch\Pagination\Adapter\Doctrine'));
 
         // exclude "Smarty" classes
-        $this->assertTrue(Loader::autoloadExclusions('Smarty_'));        
+        $this->assertTrue(Loader::autoloadExclusions('Smarty_'));
 
         // but not, our own smarty class "\Smarty"
         $this->assertFalse(Loader::autoloadExclusions('Koch\View\Renderer\Smarty'));

@@ -20,6 +20,9 @@ class Generator // extends AbstractGenerator
     protected $feed = null;
     protected $format = '';
 
+    /**
+     * @param string $format
+     */
     protected function setMIME($format)
     {
         switch (strtoupper($format)) {
@@ -67,6 +70,9 @@ class Generator // extends AbstractGenerator
         }
     }
 
+    /**
+     * @param string $format
+     */
     protected function setFormat($format)
     {
         switch (strtoupper($format)) {

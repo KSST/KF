@@ -29,11 +29,17 @@ class User
      */
     private $email;
 
+    /**
+     * @param int $id
+     */
     public function setId($id)
     {
         $this->id = $id;
     }
 
+    /**
+     * @param string $password
+     */
     public function setPassword($password)
     {
         $this->password = md5($password);
@@ -44,6 +50,9 @@ class User
         return $this->password;
     }
 
+    /**
+     * @param string $email
+     */
     public function setEmail($email)
     {
         $this->email = $email;
@@ -59,6 +68,9 @@ class User
         return $this->username;
     }
 
+    /**
+     * @param string $username
+     */
     public function setUsername($username)
     {
         $this->username = $username;

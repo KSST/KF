@@ -18,6 +18,9 @@ class IncomingParameters
 
     private $names;
 
+    /**
+     * @param \Koch\DI\DependencyInjector $injector
+     */
     public function __construct($names, $injector)
     {
         $this->names = $names;

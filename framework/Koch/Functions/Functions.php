@@ -25,8 +25,8 @@ class Functions
     /**
      * Recursive glob
      *
-     * @param  type $pattern
-     * @param  type $flags
+     * @param  string $pattern
+     * @param  int $flags
      * @return type
      */
     public static function globRecursive($pattern, $flags = 0)
@@ -349,7 +349,7 @@ class Functions
      * @author: anon
      * @link: http://www.php.net/manual/de/function.time.php#85481
      *
-     * @param $fromTime starttime
+     * @param int $fromTime starttime
      * @param $toTime endtime
      * @param $showLessThanAMinute boolean
      * @return string
@@ -523,6 +523,9 @@ class Functions
         return preg_replace('/<!--.*-->/U', '', $html);
     }
 
+    /**
+     * @param string $string
+     */
     public static function shortenString($string, $maxlength = 50, $append_string = '[...]')
     {
         // already way too short...
@@ -558,7 +561,7 @@ class Functions
      *
      * @param $utf8 string The UTF8-string to convert
      * @param $encodeTags booloean TRUE will convert "<" to "&lt;", Default = false
-     * @return returns the converted HTML-string
+     * @return string the converted HTML-string
      */
     public static function utf8ToHtml($utf8, $encodeTags = false)
     {

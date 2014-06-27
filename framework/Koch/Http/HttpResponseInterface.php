@@ -18,12 +18,37 @@ namespace Koch\Http;
 interface HttpResponseInterface
 {
     // Output Methods
+
+    /**
+     * @param string $statusCode
+     *
+     * @return void
+     */
     public static function setStatusCode($statusCode);
+
+    /**
+     * @param string $name
+     * @param string $value
+     *
+     * @return void
+     */
     public static function addHeader($name, $value);
+
+    /**
+     * @return void
+     */
     public static function setContent($content, $replace = false);
+
+    /**
+     * @return boolean
+     */
     public static function sendResponse();
 
     // Cookie Methods
+
+    /**
+     * @return boolean
+     */
     public static function setCookie(
         $name,
         $value = '',
@@ -34,5 +59,8 @@ interface HttpResponseInterface
         $HTTPOnly = false
     );
 
+    /**
+     * @return void
+     */
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null);
 }

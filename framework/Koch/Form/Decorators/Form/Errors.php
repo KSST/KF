@@ -21,6 +21,9 @@ class Errors extends AbstractFormDecorator
      */
     public $name = 'errors';
 
+    /**
+     * @param string $html_form_content
+     */
     public function render($html_form_content)
     {
         $errors = '<ul id="form-errors">';

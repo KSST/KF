@@ -136,6 +136,9 @@ function smarty_function_columnsort($params, $smarty)
     return $result;
 }
 
+/**
+ * @param int $id
+ */
 function _smarty_columnsort_sort_order($id, $columns, $default_sort, $smarty)
 {
     if (!isset($columns[$id])) {

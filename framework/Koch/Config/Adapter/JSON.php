@@ -50,7 +50,7 @@ class JSON implements AdapterInterface
      *
      * @param   string  The filename
      * @param   array   The configuration array
-     * @return mixed|int|bool Number of bytes written to file, or false on failure.
+     * @return boolean Number of bytes written to file, or false on failure.
      */
     public static function write($file, array $array)
     {

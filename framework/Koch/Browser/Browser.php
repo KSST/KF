@@ -522,7 +522,7 @@ class Browser
 
     /**
      * Returns a string combined browser name plus version
-     * @return browser name plus version
+     * @return string name plus version
      */
     public function getFullName()
     {

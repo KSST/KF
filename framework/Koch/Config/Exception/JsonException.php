@@ -24,7 +24,7 @@ class JsonException extends \Exception
      * Constructor.
      *
      * @param $filename
-     * @param $error_code
+     * @param int $error_code
      */
     public function __construct($filename, $error_code = null)
     {

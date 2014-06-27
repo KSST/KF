@@ -162,7 +162,7 @@ class Sanitizer
     /**
      * Remove potential javascript in urls
      *
-     * @param  string $url
+     * @param string $str
      * @return string filtered url
      */
     protected function removeJavascriptURL($str)

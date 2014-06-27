@@ -67,9 +67,9 @@ class Firebug extends AbstractLogger implements LoggerInterface
      * It utilizes firephp's procedural API.
      * fb($var, 'Label', FirePHP::*)
      *
-     * @param  type  $level
-     * @param  type  $message
-     * @param  array $context
+     * @param  string  $level
+     * @param  string  $message
+     * @param  string[] $context
      * @return bool
      */
     public function log($level, $message, array $context = array())

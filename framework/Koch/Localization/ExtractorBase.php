@@ -25,9 +25,9 @@ class ExtractorBase
     /**
      * Add a tag (placeholder/function) to scan for
      *
-     * @param mixed|array|string $tag String or Array of Tags.
+     * @param mixed|array|string $tags String or Array of Tags.
      *
-     * @return Object Koch_Gettext_Extractor
+     * @return ExtractorBase Koch_Gettext_Extractor
      */
     public function addTags($tags)
     {
@@ -50,7 +50,7 @@ class ExtractorBase
      *
      * @param string $tag
      *
-     * @return Object Koch_Gettext_Extractor
+     * @return ExtractorBase Koch_Gettext_Extractor
      */
     public function removeTag($tag)
     {
@@ -62,7 +62,7 @@ class ExtractorBase
     /**
      * Removes all tags
      *
-     * @return object Koch_Gettext_Extractor
+     * @return ExtractorBase Koch_Gettext_Extractor
      */
     public function removeAllTags()
     {

@@ -14,10 +14,6 @@
  * {breadcrumbs}
  *
  * @param array  $params
- * @param string $params['title'] If true, renders only the title. If false, renders title with link.
- * @param string $params['trail'] The trail array, default incomming via Koch_Breadcrumb::getTrail().
- * @param string $params['separator'] The separator element between Crumb Elements "&gt;" or "&raquo;".
- * @param string $params['length'] Defines the maximum length of title (rest is truncated).
  * @param object $smarty Smarty Render Engine
  * @return string
  */

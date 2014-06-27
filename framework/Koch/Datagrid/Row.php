@@ -93,6 +93,7 @@ class Row extends Base
      * Add a cell to the row
      *
      * @param Koch\Datagrid\Datagrid\Cell
+     * @param Cell $_Cell
      */
     public function addCell(&$_Cell)
     {

@@ -26,6 +26,9 @@ class Div extends AbstractFormDecorator
      */
     public $name = 'div';
 
+    /**
+     * @param string $html_form_content
+     */
     public function render($html_form_content)
     {
         // open opening div tag (unclosed first tag)

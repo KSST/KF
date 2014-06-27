@@ -93,7 +93,7 @@ class MonolithBuilder
     /**
      * Removes any comments from string
      *
-     * @param $sourcecode The sourcecode string to clean up.
+     * @param string $sourcecode The sourcecode string to clean up.
      * @return string The sourcecode string without comments.
      */
     public static function removeCommentsFromString($sourcecode)

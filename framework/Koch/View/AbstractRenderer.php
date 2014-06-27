@@ -149,7 +149,6 @@ abstract class AbstractRenderer
      * Executes the template rendering and returns the result.
      *
      * @param  string $template Template Filename
-     * @param  mixed  $data     Additional data to process
      * @return string
      */
     abstract public function fetch($template, $viewdata = null);
@@ -158,7 +157,6 @@ abstract class AbstractRenderer
      * Executes the template rendering and displays the result.
      *
      * @param  string $template Template Filename
-     * @param  mixed  $data     Additional data to process
      * @return string
      */
     abstract public function display($template, $viewdata = null);
@@ -340,7 +338,7 @@ abstract class AbstractRenderer
      * Character encoding used is UTF-8.
      *
      * @param  string  $key The variable name.
-     * @param  mixed   $val The variable value.
+     * @param  mixed   $value The variable value.
      * @return boolean True if data was assigned to view; false if not.
      */
     public function autoEscape($key, $value)

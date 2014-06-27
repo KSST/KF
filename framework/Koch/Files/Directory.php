@@ -232,7 +232,7 @@ class Directory
      *
      * @param  string $directory
      * @param  bool   $delete_dir_itself
-     * @return bool
+     * @return boolean|null
      */
     public function deleteDir($directory, $delete_dir_itself = false)
     {

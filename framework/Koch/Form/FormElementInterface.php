@@ -18,10 +18,18 @@ namespace Koch\Form;
 interface FormElementInterface
 {
     // add/remove attributes for a formelement
+
+    /**
+     * @return null|Elements\JqSelectDate
+     */
     public function setAttribute($attribute, $value);
     public function getAttribute($attribute);
 
     // getter/ setter for the value
+
+    /**
+     * @return FormElement|null
+     */
     public function setValue($value);
     public function getValue();
 

@@ -183,6 +183,9 @@ class Datagrid extends Base
         $this->resultsPerPage = $resultsPerPage;
     }
 
+    /**
+     * @param int $count
+     */
     public function setTotalResultsCount($count)
     {
         $this->totalResultsCount = $count;
@@ -529,8 +532,8 @@ class Datagrid extends Base
      * Returns true on success, false otherwise
      *
      * @see $this->_features
-     * @param  string|array $features
-     * @return boolean
+     * @param  string[] $features
+     * @return boolean|null
      */
     public function disableFeature($features)
     {

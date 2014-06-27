@@ -19,10 +19,29 @@ namespace Koch\Router;
  */
 interface RouterInterface
 {
+    /**
+     * @return void
+     */
     public function addRoute($url_pattern, array $route_options = null);
+
+    /**
+     * @return void
+     */
     public function addRoutes(array $routes);
     public function getRoutes();
+
+    /**
+     * @return void
+     */
     public function delRoute($name);
+
+    /**
+     * @return string
+     */
     public function generateURL($url_pattern, array $params = null, $absolute = false);
+
+    /**
+     * @return TargetRoute|null
+     */
     public function route();
 }

@@ -24,7 +24,7 @@ class XML implements AdapterInterface
      *
      * @param string The filename
      * @param array  Array to transform and write as xml
-     * @return mixed array | bool false
+     * @return boolean array | boolean false
      */
     public static function write($file, array $array)
     {

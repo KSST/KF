@@ -29,7 +29,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     /**
      * Adds the objects to the buttonnames fo the initial buttons array
      *
-     * @return \Koch\Form\Element\Buttonbar
+     * @return ButtonBar
      */
     public function __construct()
     {
@@ -59,7 +59,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     /**
      * Gets a button
      *
-     * @param  string                       $_buttonname
+     * @param  string                       $buttonname
      * @return \Koch\Form\Element\Buttonbar
      */
     public function getButton($buttonname)
@@ -87,7 +87,7 @@ class ButtonBar extends FormElement implements FormElementInterface
      * Remove a button from the stack
      *
      * @param  string                       $_buttonname
-     * @return \Koch\Form\Element\Buttonbar
+     * @return ButtonBar
      */
     public function removeButton($_buttonname)
     {

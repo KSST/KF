@@ -14,7 +14,6 @@
  * Purpose:  Generates the proper URL from the href parameter given<br>
  *
  * @param array $params
- * @param Smarty $smarty
  * @return string
  */
 function Smarty_function_link_to($params)

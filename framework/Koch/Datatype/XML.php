@@ -33,7 +33,7 @@ class XML
      *
      * @param string XML data string.
      *
-     * @return Returns a string containing JSON table/tree formatted data. Otherwise, it returns an empty string.
+     * @return false|string a string containing JSON table/tree formatted data. Otherwise, it returns an empty string.
      */
     public static function toJson($xml)
     {

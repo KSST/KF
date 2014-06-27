@@ -170,7 +170,7 @@ class Bbcode
      * @param string
      * @param mixed
      * @param mixed
-     * @return return url
+     * @return boolean|string url
      *
      * @todo $params and $node_objects are unuseed check
      */
@@ -191,7 +191,7 @@ class Bbcode
      * Handle Pictures
      *
      * @todo comment params
-     * @return image string
+     * @return boolean|string string
      */
     private function doBBCodeImg($action, $attributes, $content, $params, $node_object)
     {

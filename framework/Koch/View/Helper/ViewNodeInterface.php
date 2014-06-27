@@ -22,6 +22,7 @@ interface ViewNodeInterface
 
     /**
      * Get the contents of this component in string form
+     * @return string
      */
     public function render();
 

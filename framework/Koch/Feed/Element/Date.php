@@ -92,7 +92,7 @@ class Date
     /**
      * Gets the date stored in this FeedDate as an RFC 822 date.
      *
-     * @return a date in RFC 822 format
+     * @return string date in RFC 822 format
      */
     public function rfc822()
     {
@@ -108,7 +108,7 @@ class Date
     /**
      * Gets the date stored in this FeedDate as an ISO 8601 date.
      *
-     * @return a date in ISO 8601 (RFC 3339) format
+     * @return string date in ISO 8601 (RFC 3339) format
      */
     public function iso8601()
     {
