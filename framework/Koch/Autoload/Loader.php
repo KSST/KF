@@ -148,7 +148,7 @@ class Loader
     /**
      * Excludes a certain classname from the autoloading.
      *
-     * Some libraries have their own autoloaders, like e.g. Smarty.
+     * Some libraries have their own autoloaders, like e.g. Doctrine, Smarty.
      * In these cases Koch Framework has the first autoloader in the stack,
      * but is not responsible for loading.
      *
@@ -165,15 +165,8 @@ class Loader
             }
         }
 
-        /**
-         * Exlude Doctrine, Smarty libraries from autoloading. They have their own autoloading handlers.
-         * But include our own wrapper classes for both libraries.
-         */
-
-        // this means if 'Doctrine" is found, but not 'Koch\Doctrine', exclude from our autoloading
-        if (false !== strpos($classname, 'Doctrine') and false === strpos($classname, 'Koch\Doctrine')
-            and false === strpos($classname, 'Koch\Tests\DoctrineTestCase')
-            and false === strpos($classname, 'Koch\Pagination\Adapter\DoctrineCollection')) {
+        // exlude Doctrine
+        if (substr($classname, 0, 8) === "Doctrine") {
             return true;
         }
 
