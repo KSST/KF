@@ -428,7 +428,7 @@ namespace "Koch\Form\Element\" + formelement name
      * $form->addFormelementDecorator('fieldset')->setLegend('legendname');
      * This would attach the decorator fieldset to the last formelement of $form.
      *
-     * @param  string|array|object $decorator            The formelement decorator(s) to apply to the formelement.
+     * @param  string $decorator            The formelement decorator(s) to apply to the formelement.
      * @param  int|string|object   $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
      * @return object              \Koch\Form\Decorators\Formelement\Interface
      */

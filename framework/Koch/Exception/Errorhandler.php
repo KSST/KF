@@ -179,6 +179,7 @@ class Errorhandler
      *
      * @param string $errfile Template File with the Error.
      * @param string $errline Line Number of the Error.
+     * @param string|null $errcontext
      * @todo correct link to the templateeditor
      */
     public static function getTemplateEditorLink($errfile, $errline, $errcontext)

@@ -21,8 +21,8 @@ class Renderer
     /**
      * Constructor.
      *
-     * @param string $style
-     * @param array  $options
+     * @param string     $style
+     * @param array      $options
      * @param object Pagination with Adapter
      * @param Pagination $adapter
      */
