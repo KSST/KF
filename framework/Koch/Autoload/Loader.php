@@ -343,7 +343,7 @@ class Loader
     /**
      * Reads the content of the autoloading map file and returns it unserialized.
      *
-     * @return unserialized file content of autoload.config file
+     * @return array file content of autoload.config file
      */
     public static function readAutoloadingMapFile()
     {
@@ -355,8 +355,12 @@ class Loader
 
             return array();
         } else { // load map from file
-            // Note: delete the $mapfile file, if you get an unserialization error like "error at offset xy"
-            return unserialize(file_get_contents(self::$mapfile));
+            try {
+                return (array) unserialize(file_get_contents(self::$mapfile));
+            } catch (Exception $e) {
+                // delete mapfile, on unserialization error (error at offset xy)
+                unlink(self::$mapfile);
+            }
         }
     }
 
