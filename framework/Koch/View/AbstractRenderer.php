@@ -349,7 +349,7 @@ abstract class AbstractRenderer
      * because htmlentities will cast all values to string.
      * Character encoding used is UTF-8.
      *
-     * @param  string  $key The variable name.
+     * @param  string  $key   The variable name.
      * @param  mixed   $value The variable value.
      * @return boolean True if data was assigned to view; false if not.
      */

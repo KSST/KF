@@ -52,6 +52,9 @@ class ButtonBar extends FormElement implements FormElementInterface
         return $this;
     }
 
+    /**
+     * @param string $buttonname
+     */
     public function addButton($buttonname)
     {
         if (is_string($buttonname)) {
@@ -99,7 +102,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     /**
      * Remove a button from the stack
      *
-     * @param  string                       $_buttonname
+     * @param  string    $_buttonname
      * @return ButtonBar
      */
     public function removeButton($_buttonname)

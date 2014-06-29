@@ -242,8 +242,8 @@ class Directory
      * before directories, creating a single non-recursive loop
      * to delete files/directories in the correct order.
      *
-     * @param  string $directory
-     * @param  bool   $delete_dir_itself
+     * @param  string       $directory
+     * @param  bool         $delete_dir_itself
      * @return boolean|null
      */
     public function deleteDir($directory, $delete_dir_itself = false)
