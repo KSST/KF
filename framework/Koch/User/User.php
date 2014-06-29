@@ -249,7 +249,7 @@ class User
      *
      * @param string $login_method contains the login_method ('nick' or 'email')
      * @param string $value        contains nick or email string to look for
-     * @param string $passwordhash     contains password string
+     * @param string $passwordhash contains password string
      *
      * @return int ID of User. If the user is found, the $user_id - otherwise false.
      */
@@ -297,9 +297,9 @@ class User
     /**
      * Login
      *
-     * @param integer $user_id     contains user_id
-     * @param integer $remember_me contains remember_me setting
-     * @param string  $passwordhash    contains password string
+     * @param integer $user_id      contains user_id
+     * @param integer $remember_me  contains remember_me setting
+     * @param string  $passwordhash contains password string
      */
     public function loginUser($user_id, $remember_me, $passwordhash)
     {
@@ -336,7 +336,7 @@ class User
      * Set the remember me cookie
      * If this cookie is found, the user is re-logged in automatically
      *
-     * @param integer $user_id  contains user_id
+     * @param integer $user_id      contains user_id
      * @param string  $passwordhash contains password string
      */
     private function setRememberMeCookie($user_id, $passwordhash)

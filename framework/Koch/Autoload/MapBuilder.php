@@ -40,8 +40,8 @@ class MapBuilder
      * Builds a class map file.
      *
      * @param  string[] $dirs    One or multiple directories to scan for PHP files.
-     * @param  string       $mapfile Path to the classmap file to be written.
-     * @return bool         True, if map file written, false otherwise.
+     * @param  string   $mapfile Path to the classmap file to be written.
+     * @return bool     True, if map file written, false otherwise.
      */
     public static function build($dirs, $mapfile)
     {

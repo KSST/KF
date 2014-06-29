@@ -634,7 +634,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * This is based on htaccess rewriting with [QSA,L] (Query Append String).
      *
-     * @param string $uri
+     * @param  string $uri
      * @return array  Array with URI segments.
      */
     private static function parseUrlRewrite($uri)
@@ -698,7 +698,7 @@ class Router implements RouterInterface, \ArrayAccess
      * This URLParser has to extract mod, sub, action, id/parameters from the URI.
      * Alternate name: Standard_Request_Resolver.
      *
-     * @param string $uri
+     * @param  string $uri
      * @return array  Array with URI segments.
      */
     private function parseUrlNoRewrite($uri)

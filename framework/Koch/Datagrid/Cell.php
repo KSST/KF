@@ -76,7 +76,7 @@ class Cell extends Base
     /**
      * Set the row object of this cell
      *
-     * @param Koch\Datagrid\Datagrid\Row $_Row
+     * @param Row $_Row
      */
     public function setRow($_Row)
     {

@@ -16,7 +16,7 @@ class VariablesInConstructor
 {
 
     /**
-     * @param NeededForFirst $first
+     * @param NeededForFirst  $first
      * @param NeededForSecond $second
      */
     public function __construct($first, $second)
