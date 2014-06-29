@@ -290,8 +290,6 @@ class Doctrine
 
         $model_dirs = array_keys(array_flip($model_dirs));
 
-        #\Koch\Debug\Debug::printR($model_dirs);
-
         return $model_dirs;
     }
 
@@ -330,8 +328,6 @@ class Doctrine
             $execTime += $query['executionMS'];
         }
 
-        $execTime = number_format($execTime, 5);
-
-        return $execTime;
+        return number_format($execTime, 5);        
     }
 }
