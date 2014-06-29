@@ -83,7 +83,7 @@ class Gravatar
      *  2. set email to class
      *  3. set md5 of email as gravatar_id
      *
-     * @param string|null $email
+     * @param  string|null $email
      * @return $this
      */
     public function setEmail($email)
