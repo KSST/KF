@@ -489,8 +489,8 @@ class Renderer
      * HTML: <tr>(.*)</tr>
      *
      * @param $row Koch\Datagrid\Datagrid_Row
-     * @param boolean $alternate row alternating toggle
-     * @return string Returns the html-code for a single row
+     * @param  boolean $alternate row alternating toggle
+     * @return string  Returns the html-code for a single row
      */
     private static function renderTableRow($row, $alternate)
     {

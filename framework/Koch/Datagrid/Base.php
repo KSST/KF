@@ -127,6 +127,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $label
+     */
     public function setLabel($label)
     {
         $this->label = $label;
@@ -134,6 +137,9 @@ class Base
         return $this;
     }
 
+    /**
+     * @param string $caption
+     */
     public function setCaption($caption)
     {
         $this->caption = $caption;

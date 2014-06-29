@@ -105,7 +105,7 @@ abstract class AbstractController
      * Proxy/Convenience Getter Method for the Repository of the current Module.
      *
      *
-     * @param  string                        $entityName Name of an Entity, like "\Entity\User".
+     * @param  string                         $entityName Name of an Entity, like "\Entity\User".
      * @return \Doctrine\ORM\EntityRepository
      */
     public function getModel($entityName = null)
@@ -122,8 +122,8 @@ abstract class AbstractController
      * Save (save one)
      * Flush (save all)
      *
-     * @param \Doctrine\ORM\Mapping\Entity  $model Entity.
-     * @param boolean $flush Uses flush on true, save on false. Defaults to flush (true).
+     * @param \Doctrine\ORM\Mapping\Entity $model Entity.
+     * @param boolean                      $flush Uses flush on true, save on false. Defaults to flush (true).
      */
     public function saveModel(\Doctrine\ORM\Mapping\Entity $model, $flush = true)
     {

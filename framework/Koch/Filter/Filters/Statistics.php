@@ -70,6 +70,7 @@ class Statistics implements FilterInterface
      *
      * @param String visitorIp
      * @param String targetSite
+     * @param string $visitorIp
      */
     private function updateWhoTables($visitorIp, $targetSite)
     {
@@ -102,7 +103,7 @@ class Statistics implements FilterInterface
     /**
      * updateStatistics
      *
-     * @param $visitorIp
+     * @param string $visitorIp
      */
     private function updateStatistics($visitorIp)
     {

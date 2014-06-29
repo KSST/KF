@@ -25,7 +25,7 @@ class Functions
     /**
      * Recursive glob
      *
-     * @param  string $pattern
+     * @param  string  $pattern
      * @param  int $flags
      * @return type
      */
@@ -349,7 +349,7 @@ class Functions
      * @author: anon
      * @link: http://www.php.net/manual/de/function.time.php#85481
      *
-     * @param int $fromTime starttime
+     * @param  int $fromTime starttime
      * @param $toTime endtime
      * @param $showLessThanAMinute boolean
      * @return string

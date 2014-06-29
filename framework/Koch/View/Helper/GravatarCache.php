@@ -88,6 +88,7 @@ class GravatarCache
     /**
      * sets the specified gravatar at $gravatar_url to the $cache_filename
      * @param string $cacheFile
+     * @param string $gravatarUrl
      */
     public function setGravatar($cacheFile, $gravatarUrl)
     {

@@ -28,7 +28,7 @@ class Doctrine implements AdapterInterface
      * Constructor.
      *
      * @param \Doctrine\ORM\Query $query               A Doctrine Query or the QueryBuilder.
-     * @param boolean                                        $fetchJoinCollection Whether the query joins a collection (true by default).
+     * @param boolean             $fetchJoinCollection Whether the query joins a collection (true by default).
      */
     public function __construct($query, $fetchJoinCollection = true)
     {

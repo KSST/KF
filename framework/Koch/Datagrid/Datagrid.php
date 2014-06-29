@@ -532,7 +532,7 @@ class Datagrid extends Base
      * Returns true on success, false otherwise
      *
      * @see $this->_features
-     * @param  string[] $features
+     * @param  string[]     $features
      * @return boolean|null
      */
     public function disableFeature($features)
