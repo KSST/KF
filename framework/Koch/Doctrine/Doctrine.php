@@ -334,14 +334,4 @@ class Doctrine
 
         return $execTime;
     }
-
-    /**
-     * var_dumps the logger stack
-     * for a simple overview of all queries
-     */
-    public static function getLoggerStack()
-    {
-        // @todo debug dump to firebug?
-        var_dump(self::$sqlLoggerStack);
-    }
 }
