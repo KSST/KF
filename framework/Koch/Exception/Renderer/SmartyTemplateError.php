@@ -33,13 +33,13 @@ class SmartyTemplateError
      * is only displayed, when Koch Framework runs in DEVELOPMENT Mode.
      * @see addTemplateEditorLink()
      *
-     * @param  int $errno      contains the error as integer
-     * @param  string  $errstr     contains error string info
-     * @param  string  $errfile    contains the filename with occuring error
-     * @param  string  $errline    contains the line of error
-     * @param  string|null   $errcontext contains vars from error context
-     * @param string $errorname
-     * @return string  HTML with Smarty Error Text and Link.
+     * @param  int     $errno      contains the error as integer
+     * @param  string      $errstr     contains error string info
+     * @param  string      $errfile    contains the filename with occuring error
+     * @param  string      $errline    contains the line of error
+     * @param  string|null $errcontext contains vars from error context
+     * @param  string      $errorname
+     * @return string      HTML with Smarty Error Text and Link.
      */
     public static function render($errno, $errorname, $errstr, $errfile, $errline, $errcontext)
     {

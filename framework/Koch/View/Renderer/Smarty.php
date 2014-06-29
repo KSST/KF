@@ -244,8 +244,8 @@ class Smarty extends AbstractRenderer
      * 2. Set a array with multiple Keys and Values
      *
      * @see __set()
-     * @param  string|array $tpl_parameter Is a Key or an Array.
-     * @param  mixed        $value         (optional) In case a key-value pair is used, $value is the value.
+     * @param  string|array          $tpl_parameter Is a Key or an Array.
+     * @param  mixed                 $value         (optional) In case a key-value pair is used, $value is the value.
      * @return \Smarty_Internal_Data
      */
     public function assign($tpl_parameter, $value = null)
@@ -261,7 +261,7 @@ class Smarty extends AbstractRenderer
      * Magic Method to get a already set/assigned Variable from Smarty
      *
      * @param  string $key Name of Variable
-     * @return string  Value of key
+     * @return string Value of key
      */
     public function __get($key)
     {
@@ -271,8 +271,8 @@ class Smarty extends AbstractRenderer
     /**
      * Magic Method to set/assign Variable to Smarty
      *
-     * @param  string  $key Name of the variable
-     * @param  mixed   $value Value of variable
+     * @param  string                $key   Name of the variable
+     * @param  mixed                 $value Value of variable
      * @return \Smarty_Internal_Data
      */
     public function __set($key, $value)
@@ -310,7 +310,7 @@ class Smarty extends AbstractRenderer
      * @param  mixed         $compile_id compile id to be used with this template
      * @param  object        $parent     next higher level of Smarty variables
      * @param  boolean       $display    Renders the template content on true.
-     * @return null|string       the $template content.
+     * @return null|string   the $template content.
      */
     public function fetch($template, $cache_id = null, $compile_id = null, $parent = null, $display = false)
     {
@@ -418,8 +418,8 @@ class Smarty extends AbstractRenderer
      * 2. fetch the modultemplate and assigns it as $content
      * 3. return the wrapper layout tpl
      *
-     * @param  string       $template Template Filename
-     * @return null|string      tpl layout
+     * @param  string      $template Template Filename
+     * @return null|string tpl layout
      */
     public function render($template = null, $viewdata = null)
     {

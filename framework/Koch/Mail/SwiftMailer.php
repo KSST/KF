@@ -89,10 +89,10 @@ class SwiftMailer
      * This is the sendmail command, it's a shortcut method to swiftmailer
      * Return true or false if successfully
      *
-     * @param  string  $to      Recipient email ('email => 'name')
-     * @param  string  $from    Sender email ('email' => 'name')
-     * @param  string  $subject Message subject (headline)
-     * @param  string  $body    Message body ('text, 'text/html')
+     * @param  string $to      Recipient email ('email => 'name')
+     * @param  string $from    Sender email ('email' => 'name')
+     * @param  string $subject Message subject (headline)
+     * @param  string $body    Message body ('text, 'text/html')
      * @return string true|false
      */
     public function send($to, $from, $subject, $body)

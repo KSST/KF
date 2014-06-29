@@ -224,7 +224,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * @param  string  $parameter Name of the Parameter
      * @param  string  $array     GET, POST, COOKIE. Default = GET.
      * @param  boolean $where     If set to true, method will return the name of the array the parameter was found in.
-     * @return string   boolean string arrayname
+     * @return string  boolean string arrayname
      *
      */
     public function issetParameter($parameter, $array = 'GET', $where = false)

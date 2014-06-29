@@ -390,7 +390,7 @@ class XDebug
      * Rounds a $value to MegaBytes
      *
      * @param  int $value The Value to round to megabytes.
-     * @return double the $value rounded to megabytes, like: 1,44MB.
+     * @return double  the $value rounded to megabytes, like: 1,44MB.
      */
     public static function roundMB($value)
     {

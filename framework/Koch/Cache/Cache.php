@@ -80,8 +80,8 @@ class Cache
      * Stores data by key to the cache.
      *
      * @param  string $key  The key to retrieve the data form the cache.
-     * @param  type $data The data to store in the cache.
-     * @param  int  $ttl  Cache lifetime in minutes.
+     * @param  type   $data The data to store in the cache.
+     * @param  int    $ttl  Cache lifetime in minutes.
      * @return bool
      */
     public static function store($key, $data, $ttl = 10)
@@ -113,7 +113,7 @@ class Cache
     /**
      * Retrieves an object from the cache.
      *
-     * @param string $key
+     * @param  string $key
      * @return object
      */
     public static function fetchObject($key = null)
@@ -129,9 +129,9 @@ class Cache
      * Stores an object in the cache.
      *
      * @param  string    $key    The key for retrieving the object.
-     * @param  \stdClass    $object The object to store the cache.
-     * @param  int    $ttl    Cache liftime in minutes.
-     * @return boolean True in caching success. False on caching failure.
+     * @param  \stdClass $object The object to store the cache.
+     * @param  int   $ttl    Cache liftime in minutes.
+     * @return boolean   True in caching success. False on caching failure.
      */
     public static function storeObject($key, $object, $ttl = 10)
     {

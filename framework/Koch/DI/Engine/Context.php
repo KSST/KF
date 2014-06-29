@@ -44,11 +44,17 @@ class Context
         array_unshift($this->registry, $lifecycle);
     }
 
+    /**
+     * @param string $name
+     */
     public function forVariable($name)
     {
         return $this->variables[$name] = new Variable($this);
     }
 
+    /**
+     * @param string $type
+     */
     public function whenCreating($type)
     {
         if (false === isset($this->contexts[$type])) {
@@ -58,6 +64,9 @@ class Context
         return $this->contexts[$type];
     }
 
+    /**
+     * @param string $type
+     */
     public function forType($type)
     {
         if (false === isset($this->types[$type])) {

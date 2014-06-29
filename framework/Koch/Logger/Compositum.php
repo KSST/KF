@@ -30,9 +30,9 @@ class Compositum
     /**
      * Iterates over all registered loggers and writes the log entry.
      *
-     * @param string $level   priority level (LOG, INFO, WARNING, ERROR...)
-     * @param string $message
-     * @param string[]  $context Context Array
+     * @param string   $level   priority level (LOG, INFO, WARNING, ERROR...)
+     * @param string   $message
+     * @param string[] $context Context Array
      */
     public function log($level, $message, array $context = array())
     {

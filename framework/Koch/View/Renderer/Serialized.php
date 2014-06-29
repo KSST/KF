@@ -61,8 +61,8 @@ class Serialized extends AbstractRenderer
     /**
      * Assign specific variable to the template
      *
-     * @param  mixed  $key   Object with template vars (extraction method fetch), or array or key/value pair
-     * @param  string  $value Variable value
+     * @param  mixed      $key   Object with template vars (extraction method fetch), or array or key/value pair
+     * @param  string     $value Variable value
      * @return Serialized \Koch\View\Renderer\Serialized
      */
     public function assign($key, $value = null)

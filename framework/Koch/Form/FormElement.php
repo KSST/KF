@@ -146,7 +146,7 @@ class FormElement
      * Set type of this form.
      *
      * @param $id string Type of this form.
-     * @param string $type
+     * @param  string      $type
      * @return FormElement
      */
     public function setType($type)
@@ -211,7 +211,7 @@ class FormElement
     /**
      * Set class of this form.
      *
-     * @param  string                $class Class to set
+     * @param  string      $class Class to set
      * @return FormElement
      */
     public function setClass($class)
@@ -234,7 +234,7 @@ class FormElement
     /**
      * Sets value for this element
      *
-     * @param  string                $value
+     * @param  string      $value
      * @return FormElement
      */
     public function setValue($value)
@@ -299,7 +299,7 @@ class FormElement
     /**
      * Set label of this formelement.
      *
-     * @param  string                $label Label of this formelement.
+     * @param  string      $label Label of this formelement.
      * @return FormElement
      */
     public function setLabel($label)
@@ -344,7 +344,7 @@ class FormElement
      * Set required state for the formelement.
      * A formelement is required, when the user is expected to (must) enter data into the formelement.
      *
-     * @param  boolean               $required Set required state. Defaults to true.
+     * @param  boolean     $required Set required state. Defaults to true.
      * @return FormElement
      */
     public function setRequired($required = true)
@@ -357,7 +357,7 @@ class FormElement
     /**
      * Set description of this formelement.
      *
-     * @param  string                $description Description of this formelement.
+     * @param  string      $description Description of this formelement.
      * @return FormElement
      */
     public function setDescription($description)
@@ -380,7 +380,7 @@ class FormElement
     /**
      * Set onclick text of this formelement.
      *
-     * @param  string                $onclick Onclick text of this formelement.
+     * @param  string      $onclick Onclick text of this formelement.
      * @return FormElement
      */
     public function setOnclick($onclick)
@@ -480,7 +480,7 @@ class FormElement
     /**
      * Setter method for Attribute
      *
-     * @param string $attribute Attribute name
+     * @param string  $attribute Attribute name
      * @param boolean $value     Value
      */
     public function setAttribute($attribute, $value)
@@ -619,7 +619,7 @@ class FormElement
      * The Validator is stored into the validators array.
      * So a formelement might have multiple validators.
      *
-     * @param  Koch_Validator        $validator Accepts a Validator object.
+     * @param  Koch_Validator $validator Accepts a Validator object.
      * @return FormElement
      */
     public function setValidator($validator)
@@ -790,7 +790,7 @@ class FormElement
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM OBJECT
-     * @param string $decorators
+     * @param  string                          $decorators
      * @return Koch\Form\FormElement_Decorator
      */
     public function addDecorator($decorators)
@@ -907,7 +907,7 @@ class FormElement
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Formelement Decorator.
-     * @return object Koch\Form\FormElement\Decorators\$decorator
+     * @return string Koch\Form\FormElement\Decorators\$decorator
      */
     public function decoratorFactory($decorator)
     {

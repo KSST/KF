@@ -23,7 +23,7 @@ class Registry
      * Set instance to registry.
      *
      * @param string $name            Name of instance.
-     * @param type $classOrResolver Class or Closure (resolver).
+     * @param type   $classOrResolver Class or Closure (resolver).
      */
     public static function set($name, $classOrResolver)
     {
@@ -44,7 +44,7 @@ class Registry
     /**
      * Getter for instance
      *
-     * @param  string                      $name       Name of instance.
+     * @param  string                    $name       Name of instance.
      * @param  type                      $parameters
      * @return object
      * @throws \InvalidArgumentException
