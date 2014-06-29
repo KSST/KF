@@ -110,21 +110,6 @@ namespace and path to search in
          */
         $D2Config->addCustomNumericFunction('RAND', 'Koch\Doctrine\Extensions\Query\Mysql\Rand');
 
-        /**
-         * Set UTF-8 handling of database data via Doctrine Event for MySQL.
-         */
-        if ($config['database']['driver'] !== null
-        and $config['database']['driver'] == 'pdo_mysql') {
-            if ($config['database']['charset'] !== null) {
-                $event->addEventSubscriber(
-                    new \Doctrine\DBAL\Event\Listeners\MysqlSessionInit(
-                        $config['database']['charset'],
-                        'utf8_unicode_ci'
-                    )
-                );
-            }
-        }
-
         // Entity manager
         $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $D2Config, $event);
 
