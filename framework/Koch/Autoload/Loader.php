@@ -25,7 +25,7 @@ namespace<br>";
      * This procedure ensures, that the autoload mapping array dataset
      * is increased stepwise resulting in a decreasing number of autoloading tries.
      *
-     * @param string $filename The file to be required
+     * @param string $filename  The file to be required
      * @param string $classname
      *
      * @return bool True on success of require, false otherwise.
@@ -138,8 +138,8 @@ namespace<br>";
      * Adds a new $classname to $filename mapping to the map array.
      * The new map array is written to apc or file.
      *
-     * @param string $class Classname is the lookup key for $filename.
-     * @param string $file  Filename is the file to load.
+     * @param  string  $class Classname is the lookup key for $filename.
+     * @param  string  $file  Filename is the file to load.
      * @return boolean True if added to map.
      */
     public static function addMapping($class, $file)

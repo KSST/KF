@@ -143,7 +143,7 @@ namespace "Koch\Form\Element\" + formelement name
      *
      * @see $this->addDecorator()
      *
-     * @param  string              $decorators Array of decorator objects or names or just one string.
+     * @param  string             $decorators Array of decorator objects or names or just one string.
      * @param  array              $attributes Array of properties for the decorator object.
      * @return Koch_Formdecorator object
      */
@@ -286,7 +286,7 @@ namespace "Koch\Form\Element\" + formelement name
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Name of Formdecorator.
-     * @param string $decorator
+     * @param  string             $decorator
      * @return Koch_Formdecorator
      */
     public function decoratorFactory($decorator)
@@ -401,7 +401,7 @@ namespace "Koch\Form\Element\" + formelement name
      * @see $this->addFormelementDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @param string $decorator
+     * @param  string             $decorator
      * @return Koch_Formdecorator object
      */
     public function setFormelementDecorator($decorator, $formelement_position = null)
@@ -428,9 +428,9 @@ namespace "Koch\Form\Element\" + formelement name
      * $form->addFormelementDecorator('fieldset')->setLegend('legendname');
      * This would attach the decorator fieldset to the last formelement of $form.
      *
-     * @param  string $decorator            The formelement decorator(s) to apply to the formelement.
-     * @param  int|string|object   $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
-     * @return object              \Koch\Form\Decorators\Formelement\Interface
+     * @param  string            $decorator                The formelement decorator(s) to apply to the formelement.
+     * @param  int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
+     * @return object            \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
@@ -451,7 +451,7 @@ namespace "Koch\Form\Element\" + formelement name
      * Removes a decorator from a formelement.
      *
      * @param string $decorator
-     * @param type $formelement_position
+     * @param type   $formelement_position
      */
     public function removeFormelementDecorator($decorator, $formelement_position = null)
     {
@@ -511,7 +511,7 @@ namespace "Koch\Form\Element\" + formelement name
     /**
      * Returns the error state of the form.
      *
-     * @param boolean $boolean
+     * @param  boolean $boolean
      * @return boolean True, if form has an error. False, otherwise.
      */
     public function hasErrors($boolean = null)
