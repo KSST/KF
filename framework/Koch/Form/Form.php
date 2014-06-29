@@ -237,7 +237,7 @@ class Form implements FormInterface
     /**
      * Sets the method (POST, GET) to the form.
      *
-     * @param  string    $method POST or GET
+     * @param  string $method POST or GET
      * @return Form
      */
     public function setMethod($method)
@@ -305,7 +305,7 @@ class Form implements FormInterface
      * Set autocomplete of this form.
      * If "on" browsers can store the form's input values, to auto-fill the form if the user returns to the page.
      *
-     * @param boolean $bool boolean state to set for autocomplete.
+     * @param  boolean $bool boolean state to set for autocomplete.
      * @return Form
      */
     public function setAutoComplete($bool)
@@ -333,7 +333,7 @@ class Form implements FormInterface
      * _parent  Open in the parent frameset
      * _top
      *
-     * @param  string    $target _blank, _self, _parent, _top
+     * @param  string $target _blank, _self, _parent, _top
      * @return Form
      */
     public function setTarget($target)
@@ -365,7 +365,7 @@ class Form implements FormInterface
      * If true the form should not be validated when submitted.
      *
      * @link http://dev.w3.org/html5/spec-author-view/association-of-controls-and-forms.html#attr-fs-novalidate
-     * @param boolean $bool boolean state to set for novalidation.
+     * @param  boolean $bool boolean state to set for novalidation.
      * @return Form
      */
     public function setNoValidation($bool)
@@ -394,7 +394,7 @@ class Form implements FormInterface
      * Setter method for Attribute
      *
      * @param array $attribute attribute name
-     * @param array $value      value
+     * @param array $value     value
      */
     public function setAttribute($attribute, $value)
     {
@@ -455,7 +455,7 @@ class Form implements FormInterface
     /**
      * Set id of this form.
      *
-     * @param  string         $id ID of this form.
+     * @param  string $id ID of this form.
      * @return Form
      */
     public function setID($id)
@@ -478,7 +478,7 @@ class Form implements FormInterface
     /**
      * Set name of this form.
      *
-     * @param  string    $name Name of this form.
+     * @param  string $name Name of this form.
      * @return Form
      */
     public function setName($name)
@@ -502,7 +502,7 @@ class Form implements FormInterface
      * Set accept-charset of this form.
      * Like accept-charset="ISO-8859-1".
      *
-     * @param  string    $charset Charset of this form (utf-8, iso-8859-1).
+     * @param  string $charset Charset of this form (utf-8, iso-8859-1).
      * @return Form
      */
     public function setAcceptCharset($charset)
@@ -529,7 +529,7 @@ class Form implements FormInterface
     /**
      * Set class of this form.
      *
-     * @param  string    $class Css Classname of this form.
+     * @param  string $class Css Classname of this form.
      * @return Form
      */
     public function setClass($class)
@@ -553,7 +553,7 @@ class Form implements FormInterface
      * Sets the description text of this form.
      * The description is a p tag after the heading (form > h2 > p).
      *
-     * @param  string    $description Description of this form.
+     * @param  string $description Description of this form.
      * @return Form
      */
     public function setDescription($description)
@@ -577,7 +577,7 @@ class Form implements FormInterface
      * Set a heading for this form.
      * The heading is a h2 tag directly after the opening form tag.
      *
-     * @param  string    $heading Heading of this form.
+     * @param  string $heading Heading of this form.
      * @return Form
      */
     public function setHeading($heading)
@@ -637,7 +637,7 @@ class Form implements FormInterface
      * - text/plain
      *  Spaces are converted to "+" symbols, but no special characters are encoded
      *
-     * @param  string    $encoding Encoding type of this form.
+     * @param  string $encoding Encoding type of this form.
      * @return Form
      */
     public function setEncoding($encoding)
@@ -842,7 +842,7 @@ class Form implements FormInterface
      *
      * This is a case-insensitive file exists check.
      * This allows checking for names/file, which are not only ucfirst(), e.g. "SubmitButton".
-     * @param string $fileName
+     * @param  string $fileName
      * @return string
      */
     public static function fileExists($fileName)
@@ -1225,7 +1225,7 @@ class Form implements FormInterface
      *
      * @see $this->addDecorator()
      *
-     * @param  string              $decorators Array of decorator objects or names or just one string.
+     * @param  string             $decorators Array of decorator objects or names or just one string.
      * @param  array              $attributes Array of properties for the decorator object.
      * @return Koch_Formdecorator object
      */
@@ -1368,7 +1368,7 @@ class Form implements FormInterface
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Name of Formdecorator.
-     * @param string $decorator
+     * @param  string             $decorator
      * @return Koch_Formdecorator
      */
     public function decoratorFactory($decorator)
@@ -1483,7 +1483,7 @@ class Form implements FormInterface
      * @see $this->addFormelementDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @param string $decorator
+     * @param  string             $decorator
      * @return Koch_Formdecorator object
      */
     public function setFormelementDecorator($decorator, $formelement_position = null)
@@ -1510,9 +1510,9 @@ class Form implements FormInterface
      * $form->addFormelementDecorator('fieldset')->setLegend('legendname');
      * This would attach the decorator fieldset to the last formelement of $form.
      *
-     * @param  string $decorator            The formelement decorator(s) to apply to the formelement.
-     * @param  int|string|object   $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
-     * @return object              \Koch\Form\Decorators\Formelement\Interface
+     * @param  string            $decorator                The formelement decorator(s) to apply to the formelement.
+     * @param  int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
+     * @return object            \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
@@ -1533,7 +1533,7 @@ class Form implements FormInterface
      * Removes a decorator from a formelement.
      *
      * @param string $decorator
-     * @param type $formelement_position
+     * @param type   $formelement_position
      */
     public function removeFormelementDecorator($decorator, $formelement_position = null)
     {
@@ -1593,7 +1593,7 @@ class Form implements FormInterface
     /**
      * Returns the error state of the form.
      *
-     * @param boolean $boolean
+     * @param  boolean $boolean
      * @return boolean True, if form has an error. False, otherwise.
      */
     public function hasErrors($boolean = null)

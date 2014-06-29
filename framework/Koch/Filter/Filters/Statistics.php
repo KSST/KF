@@ -97,7 +97,7 @@ class Statistics implements FilterInterface
     /**
      * updateWhoIs
      *
-     * @param $ip
+     * @param string $ip
      * @param $targetSite
      * @param $userID
      */

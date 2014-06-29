@@ -189,8 +189,8 @@ class Errorhandler
      * a) determines the path to the invalid template file
      * b) provides the html-link to the templateeditor for this file
      *
-     * @param string $errfile Template File with the Error.
-     * @param string $errline Line Number of the Error.
+     * @param string      $errfile    Template File with the Error.
+     * @param string      $errline    Line Number of the Error.
      * @param string|null $errcontext
      * @todo correct link to the templateeditor
      */
