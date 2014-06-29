@@ -162,7 +162,7 @@ class Mapper
     /**
      * Returns Module Template Paths
      *
-     * @param string $module
+     * @param  string   $module
      * @return string[] Module Template Paths
      */
     public static function getModuleTemplatePaths($module = null)

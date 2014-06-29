@@ -46,7 +46,7 @@ class Csv extends AbstractRenderer
     }
 
     /**
-     * @param array $data   the array with the data to write as csv
+     * @param array    $data    the array with the data to write as csv
      * @param string[] $headers additional array with column headings (first row of the data)
      */
     public function assign($data, $headers = array())
