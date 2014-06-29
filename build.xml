@@ -30,6 +30,10 @@
     <target name="composer-install" description="Installs project dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/bin/composer/composer.phar" />
+            <arg value="self-update" />
+        </exec>
+        <exec executable="php" failonerror="true">
+            <arg value="${basedir}/bin/composer/composer.phar" />
             <arg value="install" />
             <arg value="--dev" />
         </exec>
