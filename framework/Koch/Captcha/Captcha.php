@@ -379,8 +379,8 @@ class Captcha
     /**
      * Render the Captcha Image on various ways
      *
-     * @param  string $render_type Types: "file", "base64", "png". Defaults to html_embedded.
-     * @return null|string  Renders the image directly or returns html string.
+     * @param  string      $render_type Types: "file", "base64", "png". Defaults to html_embedded.
+     * @return null|string Renders the image directly or returns html string.
      */
     public function render($render_type = 'file')
     {

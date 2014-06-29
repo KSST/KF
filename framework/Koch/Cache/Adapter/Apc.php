@@ -87,7 +87,7 @@ class Apc extends AbstractCache implements CacheInterface
      * Stores data by key into cache
      *
      * @param  string  $key       Identifier for the data
-     * @param  string   $data      Data to be cached
+     * @param  string  $data      Data to be cached
      * @param  integer $ttl       How long to cache the data, in minutes.
      * @param  boolean $overwrite If overwrite true, key will be overwritten.
      * @return boolean True if the data was successfully cached, false on failure
@@ -112,7 +112,7 @@ class Apc extends AbstractCache implements CacheInterface
      * Removes a stored variable from the
      *
      * @link http://php.net/manual/en/function.apc-delete.php
-     * @param  string|array $keys Identifier for the data
+     * @param  string $keys Identifier for the data
      * @return int          Number of keys deleted.
      */
     public function delete($keys)

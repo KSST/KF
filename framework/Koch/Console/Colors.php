@@ -94,7 +94,7 @@ class Colors
     );
 
     /**
-     * @param string $symbol
+     * @param string   $symbol
      * @param string[] $options
      */
     public static function unicodeSymbol($symbol, $options = null)

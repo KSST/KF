@@ -59,7 +59,7 @@ class File extends AbstractLogger implements LoggerInterface
     /**
      * Writes a string to the logfile.
      *
-     * @param  string  $level
+     * @param  string $level
      * @param  string $message
      * @param  array  $context
      * @return bool

@@ -385,7 +385,7 @@ class Loader
      * Adds a new $classname to $filename mapping to the map array.
      * The new map array is written to apc or file.
      *
-     * @param $class Classname is the lookup key for $filename.
+     * @param string $class Classname is the lookup key for $filename.
      * @param string $file  Filename is the file to load.
      * @return boolean True if added to map.
      */

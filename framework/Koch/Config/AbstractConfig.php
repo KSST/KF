@@ -130,7 +130,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * Method allows 'isset' to work on $this->data
      *
-     * @param  string $name Name of Variable Key $this->data[$name]
+     * @param  string  $name Name of Variable Key $this->data[$name]
      * @return boolean mixed
      */
     public function __isset($name)
@@ -155,7 +155,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * ArrayAccess::offsetExists()
      *
-     * @param  mixed $offset
+     * @param  mixed   $offset
      * @return boolean value
      */
     public function offsetExists($offset)

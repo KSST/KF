@@ -59,7 +59,7 @@ class Php extends AbstractRenderer
      * Assign specific variable to the template
      *
      * @param  mixed                   $key   Object with template vars (extraction method fetch), or array or key/value pair
-     * @param  string                   $value Variable value
+     * @param  string                  $value Variable value
      * @return \Koch\View\Renderer\PHP
      */
     public function assign($key, $value = null)
