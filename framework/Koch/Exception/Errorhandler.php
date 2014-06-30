@@ -569,52 +569,26 @@ class Errorhandler
     /**
      * Returns a link to the file:line with the error.
      *
-     * a) returns a link in the xdebug file_link_format.
-     *    this will opens your IDE at file/line.
-     * b) returns a link in clansuite format.
-     *    this will open the module editor at file/line.
-     * c) returns NO link, just file:line.
+     * a) This uses the file "xdebug.file_link_format" php.ini configuration directive,
+     *    which defines a link template for calling your Editor/IDE with file and line.
+     * b) returns NO link, just file:line.
      *
      * @return string Link to file and line with error.
      */
     public static function getFileLink($file, $line)
     {
-        $fileLinkFormatString = '';
+        $file = str_replace(APPLICATION_PATH, '..' . DIRECTORY_SEPARATOR, $file);
 
-        /***
-         * a) "xdebug.file_link_format"
-         *
-         * This uses the file "xdebug.file_link_format" php.ini configuration directive,
-         * which defines a link template (sprintf) for calling your Editor/IDE.
-         */
+        // a
         $fileLinkFormatString = ini_get('xdebug.file_link_format');
-
-        if (isset($fileLinkFormatString)) {
-
-            // insert file and line into the fileLinkFormatString
+        if (isset($fileLinkFormatString) === true) {
             $link = strtr($fileLinkFormatString, array('%f' => $file, '%l' => $line));
 
-            // shorten file string by removing the root path
-            $file = str_replace(APPLICATION_PATH, '..' . DIRECTORY_SEPARATOR, $file);
-
-            // build an edit link
-            return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
-        } else {
-            /*
-             * elseif (DEVELOPMENT) {
-              // link to our editor
-              $fileLinkFormatString = 'index.php?module=editor&action=edit&file=%f&line=%l';
-
-              // insert file:line into the fileLinkFormatString
-              $link = strtr($fileLinkFormatString, array('%f' => $file, '%l' => $line));
-
-              return sprintf(' in <a href="%s" title="Edit file">%s line #%s</a>', $link, $file, $line);
-              } else { */
-            // shorten file string by removing the root path
-            $file = str_replace(APPLICATION_PATH, '..' . DIRECTORY_SEPARATOR, $file);
-
-            return sprintf(' in %s line #%s', $file, $line);
+            return sprintf(' in <a href="%s" title="Edit file">%s line #%d</a>', $link, $file, $line);
         }
+
+        // b
+        return sprintf(' in %s line #%d', $file, $line);
     }
 
     /**
