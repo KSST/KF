@@ -316,44 +316,39 @@ class XDebug
 
         /**
          * This array defines
-         * (a) the categories to show and
+         * (a) the categories to show (whitelist) and
          * (b) the order of their appearance in the constants table.
+         * Let user (application constants) be at first position.
          */
         $aCategoriesToShow = array(
-            'user', // the user category contains application system defines - leave at first position!
-            // @todo user might be renamed to application
+            'application', 
             'apc',
             'mbstring',
             'xdebug',
         );
 
-        echo self::getSectionHeadlineHTML('Konstanten');
+        echo self::getSectionHeadlineHTML('Constants');
 
         echo '<table class="xdebug-console" id="table-konstanten" style="display:none;">';
 
         foreach ($aCategoriesToShow as $category) {
-            // display only the categories to show / whitelist
+            // display only the categories from the whitelist array
             if (isset($aConsts[$category])) {
-                // adjust headline
-                if ($category == 'user') {
-                    echo '<tr><th colspan="2">Application Constants</th></tr>';
-                } else {
-                    echo '<tr><th colspan="2">Constants for [' . $category . ']</th></tr>';
-                }
 
-                // table row for the constant
+                // table row "headline"
+                $headline = ($category == 'user') ? 'Application Constants' : 'Constants for [' . $category . ']';
+                echo sprintf('<tr><th colspan="2">%s</th></tr>', $headline);
+
+                // table row "constant"
                 foreach ($aConsts[$category] as $name => $value) {
-                    echo '<tr><td class="td1">' . $name . '</td>';
 
-                    // handle true and false
-                    if (gettype($value) === 'boolean') {
-                        echo '<td class="td2">' . (int) $value . '</td></tr>';
-                    } else {
-                        echo '<td class="td2">' . self::formatter($value) . '</td></tr>';
-                    }
+                    // format value handle true and false
+                    $val = (gettype($value) === 'boolean') ? (int) $value : self::formatter($value);
+                    echo sprintf('<tr><td class="td1">%s</td><td class="td2">%s</td></tr>', $headline, $val);
                 }
             }
         }
+
         echo '</table>';
     }
 
