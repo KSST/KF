@@ -79,8 +79,8 @@ class Phptal extends AbstractRenderer
         $this->SetEncoding($encoding);
         $this->setLifetime($cache_lifetime_days);
 
-        $this->renderer->setTemplateRepository(dirname(__FILE__).'/../view/');
-        $this->tenderer->setPhpCodeDestination(dirname(__FILE__).'/../viewc/');
+        $this->renderer->setTemplateRepository(__DIR__ . '/../../view/');
+        $this->tenderer->setPhpCodeDestination(__DIR__ . '/../../viewc/');
 
         if (DEBUG == true) {
             $this->tpl->setForceReparse(true);
