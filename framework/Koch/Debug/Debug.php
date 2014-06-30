@@ -203,8 +203,8 @@ class Debug
         $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
 
         // do not use HTML tags on CLI
-        if (php_sapi_name() === 'cli') {
-            if (empty($_SERVER['REMOTE_ADDR'])) {
+        if (PHP_SAPI === 'cli') {
+            if (empty($_SERVER['REMOTE_ADDR']) === true) {
                 $format = 'Debugging %s on line %s: %s'. "\n";
             } else {
                 $format = '<pre>';
