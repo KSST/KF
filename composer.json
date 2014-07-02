@@ -20,9 +20,9 @@
             "type": "package",
             "package": {
                 "name": "marijnh/CodeMirror",
-                "version": "3.1",
+                "version": "4.3.0",
                 "dist": {
-                    "url": "https://github.com/marijnh/CodeMirror/archive/v3.1.zip",
+                    "url": "https://github.com/marijnh/CodeMirror/archive/v4.3.0.zip",
                     "type": "zip"
                 }
             }
@@ -34,14 +34,14 @@
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
-        "smarty/smarty"                   : "3.1.17",
+        "smarty/smarty"                   : "3.1.18",
         "swiftmailer/swiftmailer"         : "5.2.*"
     },
     "not-required-now": {
         "imagine/imagine"                 : "~0.5.0",
         "mpdf/mpdf"                       : "dev-master",
         "tcpdf/tcpdf"                     : "dev-master",
-        "marijnh/CodeMirror"              : "3.1",
+        "marijnh/CodeMirror"              : "4.3.0",
         "simplepie/simplepie"             : "dev-master"
     },
     "require-dev": {
