@@ -66,5 +66,13 @@
     "autoload-dev": {
         "psr-4": { "KochTest\\": "tests/" }
     },
+    "scripts": {
+        "post-update-cmd": [
+            "composer dump-autoload --optimize"
+        ],
+        "post-install-cmd": [
+            "composer dump-autoload --optimize"
+        ]
+    },
     "minimum-stability": "dev"
 }
