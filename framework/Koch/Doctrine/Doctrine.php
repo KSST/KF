@@ -328,6 +328,6 @@ class Doctrine
             $execTime += $query['executionMS'];
         }
 
-        return number_format($execTime, 5);        
+        return number_format($execTime, 5);
     }
 }
