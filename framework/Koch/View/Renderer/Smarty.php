@@ -444,9 +444,9 @@ class Smarty extends AbstractRenderer
         /**
          * Rendering depends on the RenderMode.
          *
-         * RenderMode "PARTIAL" means that only the (module) content template is rendered.
+         * The RenderMode "PARTIAL" means, that only the content template is rendered.
          *
-         * RenderMode "LAYOUT" means that the (module) content template is embedded,
+         * The RenderMode "LAYOUT" means, that the content template is embedded,
          * into a layout template, by replacing the {$content} placeholder.
          */
         if ($this->getRenderMode() === 'PARTIAL') {
