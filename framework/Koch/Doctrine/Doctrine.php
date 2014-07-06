@@ -254,6 +254,6 @@ namespace and path to search in
             $execTime += $query['executionMS'];
         }
 
-        return number_format($execTime, 5);        
+        return number_format($execTime, 5);
     }
 }
