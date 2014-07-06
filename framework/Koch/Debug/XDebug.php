@@ -321,7 +321,7 @@ class XDebug
          * Let user (application constants) be at first position.
          */
         $aCategoriesToShow = array(
-            'application', 
+            'application',
             'apc',
             'mbstring',
             'xdebug',
