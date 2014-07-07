@@ -141,8 +141,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // try to load an unknown class
         $this->assertFalse(Loader::autoloadByApcOrFileMap('SomeUnknownClass'));
 
-        Loader::addMapping('Sysinfo', realpath(__DIR__ . '/../../../framework/Koch/Tools/SysInfo.php'));
-        $this->assertTrue(Loader::autoloadByApcOrFileMap('Sysinfo'));
+        Loader::addMapping('Captcha', realpath(__DIR__ . '/../../../framework/Koch/Captcha/Captcha.php'));
+        $this->assertTrue(Loader::autoloadByApcOrFileMap('Captcha'));
     }
 
     /**
