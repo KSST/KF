@@ -276,12 +276,6 @@ abstract class AbstractRenderer
         // Page Title
         $templateConstants['pagetitle'] = $this->config['template']['pagetitle'];
 
-        // Normal CSS (mainfile)
-        $templateConstants['css'] = $this->getTheme()->getCSSFile();
-
-        // Normal Javascript (mainfile)
-        $templateConstants['javascript'] = $this->getTheme()->getJSFile();
-
         // Breadcrumb
         $templateConstants['trail'] = \Koch\View\Helper\Breadcrumb::getTrail();
 
