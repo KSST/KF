@@ -30,8 +30,7 @@ class SysInfoCache
             'apc'           => self::hasApc(),
             'eaccelerator'  => self::hasEaccelerator(),
             'ioncube'       => self::hasIoncube(),
-            'zend'          => self::hasZend(),
-            'nusphere'      => self::hasNusphere()
+            'zend'          => self::hasZend()
         );
     }
 
@@ -99,16 +98,5 @@ class SysInfoCache
     public static function hasZend()
     {
         return (bool) strlen(ini_get('zend_optimizer.enable_loader'));
-    }
-
-    /**
-     * Check for nuSphere's phpExpress
-     *
-     * @link http://www.nusphere.com/products/phpexpress.htm
-     * @return bool
-     */
-    public static function hasNusphere()
-    {
-        return Koch_SystemInfo::isLoadedExtension('phpexpress');
     }
 }
