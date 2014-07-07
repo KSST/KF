@@ -211,38 +211,6 @@ class Theme
         return $this->theme_info['css'];
     }
 
-    public function getCSSFile()
-    {
-        $browser = new \Koch\Browser\Browser();
-
-        /* @todo get rid of all this IE stuff */
-        $cssPostfix = ($browser->isIE() === true) ? '_ie' : '';
-
-        if (isset($this->theme_info['css']['mainfile']) === true) {
-            $part = explode('.', $this->theme_info['css']['mainfile']);
-            $cssname = $part[0] . $cssPostfix . '.' . $part[1];
-
-            return $this->getWebPath() . 'css/' . $cssname;
-        } elseif (false === isset($this->theme_info['css']['mainfile'])) {
-            // maybe we have a theme css file named after the theme
-            $css_file = $this->getWebPath() . 'css/' . $this->getName() . '.css';
-
-            if (is_file($css_file)) {
-                return $css_file;
-            }
-
-            // maybe we have a "import.css" file inside the theme dir
-            $css_file = $this->getWebPath() . 'css/import.css';
-
-            if (is_file($css_file)) {
-                return $css_file;
-            }
-        } else {
-            // css is hopefully hardcoded or missing !
-            return null;
-        }
-    }
-
     public function getLayoutFile()
     {
         if ($this->theme_info['layout']['mainfile'] !== null) {
@@ -259,23 +227,6 @@ class Theme
             }
         } else { // no main layout found !
             throw new \Exception('No Layout File defined. Check ThemeInfo File of ' . $this->getName(), 9090);
-        }
-    }
-
-    public function getJSFile()
-    {
-        if (isset($this->theme_info['javascript']['mainfile']) === true) {
-            return $this->getWebPath() . 'javascript/' . $this->theme_info['javascript']['mainfile'];
-        } elseif (false === isset($this->theme_info['javascript']['mainfile'])) {
-            // maybe we have a main javascript file named after the theme
-            $js_file = $this->getWebPath() . 'javascript/' . $this->getName() . '.js';
-
-            if (is_file($js_file)) {
-                return $js_file;
-            }
-        } else { // no main javascript file found !
-
-            return null;
         }
     }
 
