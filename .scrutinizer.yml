@@ -69,6 +69,7 @@ tools:
     # because huge number of false-positives and no real value
     php_cpd: false
     php_sim: false
+    php_changetracking: true
     php_hhvm:
         enabled: false
         #command: hhvm -vRepo.Authoritative=false
