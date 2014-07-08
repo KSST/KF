@@ -16,6 +16,7 @@
         }
     ],
     "git-commit": "git-commit",
+    "git-version": "git-version",
     "stub": "bin/phar/phar-stub.php",
     "web": false
 }
