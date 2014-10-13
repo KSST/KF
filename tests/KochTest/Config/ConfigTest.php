@@ -23,9 +23,9 @@ class ConfigTest extends \PHPUnit_Framework_TestCase
         $this->object = new Config;
 
         vfsStreamWrapper::register();
-        
+
         $root = vfsStream::setup('root');
-        
+
         $this->moduleConfigFileURL = vfsStream::url('root/module.config.php');
         $this->file = vfsStream::newFile('module.config.php', 0777)->at($root)
             ->withContent($this->getModuleConfigFileContent());
