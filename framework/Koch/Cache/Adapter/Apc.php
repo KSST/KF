@@ -101,7 +101,7 @@ class Apc extends AbstractCache implements CacheInterface
      *
      * @link http://php.net/manual/en/function.apc-delete.php
      * @param  string $keys Identifier for the data
-     * @return int    Number of keys deleted.
+     * @return bool   Returns true on success or false on failure.
      */
     public function delete($keys)
     {
@@ -114,7 +114,7 @@ class Apc extends AbstractCache implements CacheInterface
             }
         }
 
-        return $keys_deleted;
+        return (bool) $keys_deleted;
     }
 
     /**
