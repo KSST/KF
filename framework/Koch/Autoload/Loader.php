@@ -124,7 +124,7 @@ namespace<br>";
     /**
      * Writes the autoload mapping array to APC.
      *
-     * @return boolean   automatically generated classmap
+     * @return boolean automatically generated classmap
      * @return boolean True if stored.
      */
     public static function writeAutoloadingMapApc($array)
