@@ -56,7 +56,7 @@ class Config extends AbstractConfig
     /**
      * Write a config file
      *
-     * @param string $file path and the filename you want to write
+     * @param  string  $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.
      * @return boolean
      */
