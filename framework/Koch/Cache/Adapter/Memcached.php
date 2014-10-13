@@ -204,7 +204,7 @@ class Memcached extends AbstractCache implements CacheInterface
     /**
      * Clears the Cache
      *
-     * @return a flushed cache
+     * @return boolean flushed cache
      */
     public function clear()
     {
