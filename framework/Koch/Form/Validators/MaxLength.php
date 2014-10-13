@@ -59,10 +59,6 @@ class MaxLength extends Validator
      */
     public static function getStringLength($string)
     {
-        if (function_exists('iconv_strlen')) {
-            return iconv_strlen($string, 'UTF-8');
-        }
-
         if (function_exists('mb_strlen')) {
             return mb_strlen($string, 'utf8');
         }
