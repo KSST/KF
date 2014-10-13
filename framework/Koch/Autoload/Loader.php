@@ -111,9 +111,7 @@ class Loader
          *
          * Note: If classname was included, autoloadInclusions returns true.
          */
-        if (true === self::autoloadInclusions($classname)) {
-            return true;
-        }
+         return true === self::autoloadInclusions($classname);
 
         /**
          * try to load the file by searching the
@@ -121,9 +119,7 @@ class Loader
          *
          * Note: the mapping table is loaded from APC or file.
          */
-        if (true === self::autoloadByApcOrFileMap($classname)) {
-            return true;
-        }
+        return true === self::autoloadByApcOrFileMap($classname);
 
         /**
          * Try to load the file via include path lookup.
@@ -133,9 +129,7 @@ class Loader
          * The next time the file is requested, it will be loaded
          * via the method above (3)!
          */
-        if (true === self::autoloadIncludePath($classname)) {
-            return true;
-        }
+        return true === self::autoloadIncludePath($classname);
 
         /**
          * If classname was not found by any of the above methods, it's an
@@ -187,9 +181,9 @@ class Loader
             include self::$inclusionsClassmap[$classname];
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -213,9 +207,9 @@ class Loader
             include_once self::$autoloaderMap[$classname];
 
             return true;
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -261,9 +255,9 @@ class Loader
 
         if (is_string($filename) === true) {
             return self::includeFileAndMap($filename, $classname);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -304,18 +298,12 @@ class Loader
         if (is_file($filename) === true) {
             include $filename;
 
-            if (null === $classname) { // just a file include, classname unimportant
-
+            if (null === $classname or (class_exists($classname, false) === true)) {
                 return true;
-            } elseif (class_exists($classname, false) === true) {
-                return true;
-            } else {
-                // file included, but class not found
-                return false;
             }
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -399,9 +387,9 @@ class Loader
 
         if (defined('APC') and APC == true) {
             return self::writeAutoloadingMapApc(self::$autoloaderMap);
-        } else {
-            return self::writeAutoloadingMapFile(self::$autoloaderMap);
         }
+
+        return self::writeAutoloadingMapFile(self::$autoloaderMap);
     }
 
     /**
