@@ -14,9 +14,9 @@ namespace<br>";
 
         if (is_string($filename) === true) {
             return self::includeFileAndMap($filename, $classname);
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -57,18 +57,12 @@ namespace<br>";
         if (is_file($filename) === true) {
             include $filename;
 
-            if (null === $classname) { // just a file include, classname unimportant
-
+            if (null === $classname or (class_exists($classname, false) === true)) {
                 return true;
-            } elseif (class_exists($classname, false) === true) {
-                return true;
-            } else {
-                // file included, but class not found
-                return false;
             }
-        } else {
-            return false;
         }
+
+        return false;
     }
 
     /**
@@ -152,9 +146,9 @@ namespace<br>";
 
         if (defined('APC') and APC == true) {
             return self::writeAutoloadingMapApc(self::$autoloaderMap);
-        } else {
-            return self::writeAutoloadingMapFile(self::$autoloaderMap);
         }
+
+        return self::writeAutoloadingMapFile(self::$autoloaderMap);
     }
 
     /**
