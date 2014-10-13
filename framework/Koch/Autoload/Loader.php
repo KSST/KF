@@ -111,6 +111,7 @@ class Loader
          *
          * Note: If classname was included, autoloadInclusions returns true.
          */
+
          return true === self::autoloadInclusions($classname);
 
         /**
@@ -119,6 +120,7 @@ class Loader
          *
          * Note: the mapping table is loaded from APC or file.
          */
+
         return true === self::autoloadByApcOrFileMap($classname);
 
         /**
@@ -129,6 +131,7 @@ class Loader
          * The next time the file is requested, it will be loaded
          * via the method above (3)!
          */
+
         return true === self::autoloadIncludePath($classname);
 
         /**
@@ -365,7 +368,7 @@ class Loader
     /**
      * Writes the autoload mapping array to APC.
      *
-     * @return boolean   automatically generated classmap
+     * @return boolean automatically generated classmap
      * @return boolean True if stored.
      */
     public static function writeAutoloadingMapApc($array)
