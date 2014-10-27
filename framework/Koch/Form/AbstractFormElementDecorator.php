@@ -38,7 +38,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     * Set a CSS class attribute.
     *
     * @param string $cssClass
-    * @return object Formelement
+    * @return Elements\Checkbox Formelement
     */
     public function setCssClass($cssClass)
     {
