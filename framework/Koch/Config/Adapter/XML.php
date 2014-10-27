@@ -37,6 +37,7 @@ class XML implements AdapterInterface
      * Read the config array from xml file
      *
      * @param   string  The filename
+     * @param string $file
      * @return mixed array | bool false
      */
     public static function read($file)
