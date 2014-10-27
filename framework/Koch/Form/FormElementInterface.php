@@ -40,7 +40,7 @@ interface FormElementInterface
     // getter/ setter for the value
 
     /**
-     * @param integer $value
+     * @param  integer          $value
      * @return FormElement|null
      */
     public function setValue($value);
