@@ -73,6 +73,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
      * Setter method to set the object which is to decorate.
      *
      * @param $form object of type \Koch\Form\Interface or \Koch\Form\Decorator\Interface
+     * @param Elements\Checkbox $formelement
      */
     public function decorateWith($formelement)
     {

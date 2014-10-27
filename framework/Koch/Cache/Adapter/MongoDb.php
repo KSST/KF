@@ -146,6 +146,9 @@ class MongoDb extends AbstractCache implements CacheInterface
         return (isset($data) === true) ? $data : false;
     }
 
+    /**
+     * @param string $value
+     */
     public function store($key, $value, $ttl = null)
     {
         $item = array(

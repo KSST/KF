@@ -148,8 +148,9 @@ class Phptal extends AbstractRenderer
     /**
      * Renders a template and returns the content.
      *
-     * @param $template
+     * @param string $template
      * @param $returnOutput
+     * @param boolean $viewdata
      * @return string Rendered Template Content
      */
     public function render($template = null, $viewdata = null)
