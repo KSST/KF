@@ -271,7 +271,7 @@ class Form implements FormInterface
     /**
      * Set action of this form (which is the target url).
      *
-     * @param string $action string Target URL of the action of this form.
+     * @param  string $action string Target URL of the action of this form.
      * @return Form
      */
     public function setAction($action)
