@@ -97,7 +97,7 @@ class Json extends AbstractRenderer
      * This method returns the json encoded string.
      *
      * @param $data array
-     * @param string $template
+     * @param  string             $template
      * @return $json_encoded_data
      */
     public function render($template = null, $viewdata = null)
