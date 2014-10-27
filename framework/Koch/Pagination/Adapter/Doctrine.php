@@ -60,6 +60,10 @@ class Doctrine implements AdapterInterface
         return count($this->paginator);
     }
 
+    /**
+     * @param int $offset
+     * @param int $length
+     */
     public function getSlice($offset, $length)
     {
         $this->paginator->getQuery()

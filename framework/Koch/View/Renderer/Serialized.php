@@ -44,7 +44,7 @@ class Serialized extends AbstractRenderer
     /**
      * Render serialized PHP data
      *
-     * @param $template Unused.
+     * @param string $template Unused.
      * @param $viewdata Data to serialize.
      *
      * @return string Serialized data.
