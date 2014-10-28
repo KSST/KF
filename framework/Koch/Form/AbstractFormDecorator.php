@@ -121,7 +121,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     /**
      * Setter method to set the form object, which is to decorate.
      *
-     * @param $form object of type Koch\Form\FormInterface or Koch\Form\FormDecoratorInterface
+     * @param FormInterface $form object of type Koch\Form\FormInterface or Koch\Form\FormDecoratorInterface
      */
     public function decorateWith($form)
     {
