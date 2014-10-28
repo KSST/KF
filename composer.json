@@ -61,10 +61,10 @@
         "ext-yaml"        : "*"
     },
     "autoload": {
-        "psr-4": { "Koch\\": "framework/" }
+        "psr-0": { "Koch\\": "framework/" }
     },
     "autoload-dev": {
-        "psr-4": { "KochTest\\": "tests/" }
+        "psr-0": { "KochTest\\": "tests/" }
     },
     "scripts": {
         "post-update-cmd": [
@@ -74,5 +74,11 @@
             "composer dump-autoload --optimize"
         ]
     },
-    "minimum-stability": "dev"
+    "minimum-stability": "dev",
+    "config": {
+      "preferred-install": "dist",
+      "github-oauth": {
+          "github.com": "754f8af6145eb3bb532feff61e9c29611174ebea"
+      }
+    }
 }
