@@ -83,9 +83,9 @@ EOF;
      */
     public function testSetStylesheet()
     {
-       $s = 'abc';
-       $this->object->setStylesheet($s);
-       $this->assertEquals($s, $this->object->getStylesheet());
+       $xslfile = 'abc';
+       $this->object->setStylesheet($xslfile);
+       $this->assertEquals($xslfile, $this->object->getStylesheet());
     }
 
     /**

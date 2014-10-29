@@ -27,7 +27,9 @@ before_script:
   #- php ./bin/travis-setup.php $OPCODE_CACHE
 
 script:
-  - ant php-cs-fixer
+  - ./bin/fix-codingstyle.sh
+  - ant set-exec-permissions -v
+  - ant php-cs-fixer -v
   # ant utf8-encoding-check
   # ant phpcs
   - ant phpunit
