@@ -155,6 +155,11 @@
         </exec>
     </target>
 
+    <target name="upload-codecoverage-to-scrutinizer" description="Upload PHPUnit Code Coverage data to https://scrutinizer-ci.com/.">
+        <get src="https://scrutinizer-ci.com/ocular.phar" dest="ocular.phar"/>
+        <exec executable="php ocular.phar code-coverage:upload --format=php-clover ${builddir}/logs/clover.xml">
+    </target>
+
     <target name="phpcb" description="Aggregate tool output using PHP_CodeBrowser">
         <exec executable="phpcb${executableExtension}">
             <arg value="--log" />

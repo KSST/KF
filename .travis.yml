@@ -10,7 +10,6 @@ env:
 
 php: [5.4, 5.5, 5.6, hhvm, hhvm-nightly]
 
-# some vfsstream tests still fail on hhvm
 matrix:
   allow_failures:
    - php: hhvm
@@ -19,16 +18,16 @@ matrix:
 
 services: [memcached, mongodb]
 
-before_script:
-  #- php ./bin/travis-setup.php $OPCODE_CACHE
-
 before_install:
   - composer self-update
   - composer install --dev --prefer-dist --no-interaction --optimize-autoloader
   - git submodule update --init --recursive
 
+before_script:
+  #- php ./bin/travis-setup.php $OPCODE_CACHE
+
 script:
-  # ant php-cs-fixer
+  - ant php-cs-fixer
   # ant utf8-encoding-check
   # ant phpcs
   - ant phpunit
@@ -36,6 +35,7 @@ script:
 
 after_script:
   - php vendor/bin/coveralls -v
+  - ant upload-codecoverage-to-scrutinizer
 
 notifications:
   email: false
