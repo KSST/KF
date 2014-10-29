@@ -1,8 +1,8 @@
 ### Koch Framework
 
-| Branch | Unit Tests | Code Coverage | Code Quality | Dependencies
-| ------ | ---------- | -------- | ------- | ------- |?style=flat-square
-| [![Latest Stable Version](http://img.shields.io/packagist/v/ksst/kf.svg?style=flat-square)](https://packagist.org/packages/ksst/kf) | [![Build Status](https://travis-ci.org/KSST/KF.svg)](https://travis-ci.org/KSST/KF) | [![Coverage Status](https://coveralls.io/repos/KSST/KF/badge.png?branch=master)](https://coveralls.io/r/KSST/KF?branch=master) [![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/KSST/KF/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/KSST/KF/)| [![Scrutinizer Quality Score](http://img.shields.io/scrutinizer/g/KSST/KF.svg?style=flat-square)](https://scrutinizer-ci.com/g/KSST/KF/) | [![Dependency Status](https://www.versioneye.com/php/ksst:kf/dev-master/badge.svg)](https://www.versioneye.com/php/ksst:kf/dev-master)
+| Branch | Tests | Coverage | Quality | Dependencies |
+| ------ | ---------- | -------- | ------- | ------- |
+| [![Latest Stable Version](http://img.shields.io/packagist/v/ksst/kf.svg?style=flat-square)](https://packagist.org/packages/ksst/kf) | [![Build Status](http://img.shields.io/travis/KSST/KF.svg?style=flat-square)](https://travis-ci.org/KSST/KF) | [![Coverage Status](http://img.shields.io/coveralls/KSST/KF.svg?style=flat-square)](https://coveralls.io/r/KSST/KF?branch=master) [![Code Coverage](http://img.shields.io/scrutinizer/coverage/g/KSST/KF/master.svg?style=flat-square)](https://scrutinizer-ci.com/g/KSST/KF/)| [![Scrutinizer Quality Score](http://img.shields.io/scrutinizer/g/KSST/KF.svg?style=flat-square)](https://scrutinizer-ci.com/g/KSST/KF/) | [![Dependency Status](https://www.versioneye.com/php/ksst:kf/dev-master/badge.svg)](https://www.versioneye.com/php/ksst:kf/dev-master) |
 
 This repository contains the source code for the Koch Framework, a PHP full-stack web framework.
 
@@ -20,9 +20,8 @@ It is not ready for production use yet.
 
 ## Installation
 
-Please use [Composer](http://getcomposer.org/) to download and install Koch Framework as well as all of its dependencies.
-To add Koch Framework as a local, per-project dependency to your project,
-you simply add the following line to your project's `composer.json` file.
+Please use [Composer](http://getcomposer.org/) to download and install Koch Framework and its dependencies.
+To install Koch Framework as a local, per-project dependency to your project, add the following lines to your project's `composer.json` file:
 
     {
         "require": {

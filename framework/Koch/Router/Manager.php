@@ -13,8 +13,11 @@
 namespace Koch\Router;
 
 /**
- * Koch FrameworkRouter Management
+ * Koch Framework - Router Management
  *
+ * These are helper functions for the EventHandler,
+ * when adding or deleting routes coming from modules to the application.
+ * 
  * On Installation
  *      new routes are added via the method addRoutesOfModule($modulename).
  * On Deinstallation

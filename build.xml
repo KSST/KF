@@ -11,10 +11,15 @@
     <target name="build" depends="prepare,phplint,pdepend,phpmd,phpcpd,phploc,phpcs,phpcb,apigen,phpunit" />
     <target name="build-jenkins" depends="prepare,pdepend,phpmd,phpcpd,phploc,phpcs,phpcb,apigen,phpunit-local" />
 
+    <target name="set-exec-permissions">
+        <chmod dir="bin" perm="ugo+rx" includes="**/*.sh"/>
+        <chmod dir="bin" perm="ugo+rx" includes="**/*.phar"/>
+    </target>
+
     <target name="install-composer" description="Installing Composer [Package Manager]">
         <exec executable="wget" failonerror="true">
             <arg value="-nc" />
-            <arg value="-P {basedir}/bin/composer" />
+            <arg value="-P ${basedir}/bin/composer" />
             <arg value="http://getcomposer.org/composer.phar" />
         </exec>
     </target>
@@ -22,7 +27,7 @@
     <target name="install-box" description="Install Box [phar Builder]">
         <exec executable="wget" failonerror="true">
             <arg value="-nc"/>
-            <arg value="-P {basedir}/bin/phar" />
+            <arg value="-P ${basedir}/bin/phar" />
             <arg value="https://github.com/kherge/Box/releases/latest"/>
         </exec>
     </target>
@@ -40,11 +45,11 @@
     </target>
 
     <target name="php-cs-fixer" description="Check CodingStandard with php-cs-fixer">
-        <exec executable="./bin/fix-codingstyle.sh" />
+        <exec executable="${basedir}/bin/fix-codingstyle.sh" dir="${basedir}/bin" failonerror="true" />
     </target>
 
     <target name="utf8-encoding-check" description="Check UTF-8 encoding of files">
-        <exec executable="./bin/checkEncodingUTF8.sh">
+        <exec executable="${basedir}/bin/checkEncodingUTF8.sh" dir="${basedir}/bin" failonerror="true">
             <arg value="framework" />
         </exec>
     </target>
@@ -157,7 +162,10 @@
 
     <target name="upload-codecoverage-to-scrutinizer" description="Upload PHPUnit Code Coverage data to https://scrutinizer-ci.com/.">
         <get src="https://scrutinizer-ci.com/ocular.phar" dest="ocular.phar"/>
-        <exec executable="php ocular.phar code-coverage:upload --format=php-clover ${builddir}/logs/clover.xml">
+        <exec executable="php ${basedir}/ocular.phar">
+            <arg value="code-coverage:upload" />
+            <arg value="--format=php-clover ${builddir}/logs/clover.xml" />
+        </exec>
     </target>
 
     <target name="phpcb" description="Aggregate tool output using PHP_CodeBrowser">
