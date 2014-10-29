@@ -72,11 +72,24 @@ tools:
         filter:
             paths: ['framework/*', 'tests/*']
             #excluded_paths: ['vendor/*']
-    php_code_coverage:
-         test_command: 'phpunit -c tests/phpunit.xml.dist --stderr'
-         filter:
-             paths: ['framework/*', 'tests/*']
+    php_code_coverage: false
+    external_code_coverage:
+        timeout: 600
+        runs: 4
 checks:
     php:
         code_rating: true
         duplication: true
+        remove_extra_empty_lines: true
+        remove_php_closing_tag: true
+        remove_trailing_whitespace: true
+        fix_use_statements:
+            remove_unused: true
+            preserve_multiple: false
+            preserve_blanklines: true
+            order_alphabetically: true
+        fix_php_opening_tag: true
+        fix_linefeed: true
+        fix_line_ending: true
+        fix_identation_4spaces: true
+        fix_doc_comments: true
