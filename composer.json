@@ -35,7 +35,7 @@
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
         "smarty/smarty"                   : "3.1.*",
-        "swiftmailer/swiftmailer"         : "5.3.0"
+        "swiftmailer/swiftmailer"         : "5.*"
     },
     "not-required-now": {
         "imagine/imagine"                 : "~0.5.0",
