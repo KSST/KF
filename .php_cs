@@ -29,4 +29,16 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->exclude('nbproject') // netbeans project files
     ->in(__DIR__);
 
-return Symfony\CS\Config\Config::create()->finder($finder);
+return Symfony\CS\Config\Config::create()
+    // use SYMFONY_LEVEL:
+    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
+    // and extra fixers:
+    ->fixers(array(
+        'align_equals',
+        'align_double_arrow',
+        'concat_with_spaces',
+        'ordered_use',
+        'strict',
+        'strict_param',
+        'short_array_syntax'
+    ));
