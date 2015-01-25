@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project name="Koch Framework" default="build" basedir=".">
 
     <property name="sourcedir" value="${basedir}/framework" />
@@ -150,6 +150,17 @@
         <exec executable="${basedir}/vendor/bin/phpunit${executableExtension}" failonerror="true">
             <arg value="--configuration" />
             <arg path="${basedir}/tests/phpunit.xml.dist" />
+        </exec>
+    </target>
+
+    <target name="phpunit-coverage" description="Runs PHPUnit with XDebug enabled">
+        <copy todir="${dir.phpd}">
+            <fileset dir="${dir.phpd.original}"/>
+        </copy>
+        <move file="${dir.phpd}/xdebug.ini.disabled" tofile="${dir.phpd}/xdebug.ini"/>
+        <echo file="${dir.phpd}/coverage.ini">memory_limit = 1536M</echo>
+        <exec executable="phpunit" failonerror="true">
+            <env key="PHP_INI_SCAN_DIR" path="${dir.phpd}"/>
         </exec>
     </target>
 
