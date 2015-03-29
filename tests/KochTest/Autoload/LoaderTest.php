@@ -10,12 +10,10 @@ use Koch\Autoload\Loader;
  */
 interface ThisInterfaceExists
 {
-
 }
 
 class ThisClassExists
 {
-
 }
 
 class LoaderTest extends \PHPUnit_Framework_TestCase
@@ -29,7 +27,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // add Fixtures folder, only if not already on the include_path
         $path = realpath(__DIR__ . '/fixtures');
         if (strpos(get_include_path(), $path) === false) {
-            set_include_path($path. PATH_SEPARATOR . get_include_path());
+            set_include_path($path . PATH_SEPARATOR . get_include_path());
         }
 
         /**
@@ -65,8 +63,8 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         // 2. existing interface
         $this->assertFalse(Loader::autoload('ThisInterfaceExists'));
         // 3. existing trait
-        if (version_compare(PHP_VERSION, '5.4.0', '<=') === false) {
-            $this->assertTrue(Loader::autoload('ClassADefinesTraitA'));
+        if (PHP_VERSION_ID <= 50400) {
+            $this->assertFalse(Loader::autoload('ClassADefinesTraitA'));
         }
         // PHP 5.4.6 Bug... trait_exists does not return anything (true|false|null).
         // So a "cannot redeclare class TraitA" fatal error is thrown.
@@ -82,10 +80,10 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testMethodconstruct()
     {
         // unregister first (autoloader was registered during test setup)
-        $r = spl_autoload_unregister(array('Koch\Autoload\Loader', 'autoload'));
+        $r = spl_autoload_unregister(['Koch\Autoload\Loader', 'autoload']);
 
         // registers autoloader via constructor
-        new Loader;
+        new Loader();
 
          // test Koch Framework Autoloader is registered in the spl_autoloader_stack at first place
         $registered_autoloaders = spl_autoload_functions();
@@ -159,19 +157,19 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         // try to load existing namespaced class
         $this->assertTrue(Loader::autoloadIncludePath('NamespacedClass'));
-   }
+    }
 
-   public function testMethodwriteAutoloadingMapFile()
-   {
+    public function testMethodwriteAutoloadingMapFile()
+    {
         if (is_file($this->classMapFile)) {
             unlink($this->classMapFile);
         }
 
         // file will be created
-        $this->assertSame(array(), Loader::readAutoloadingMapFile());
+        $this->assertSame([], Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classMapFile));
 
-        $array = array('class' => 'file');
+        $array = ['class' => 'file'];
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
@@ -182,10 +180,10 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             unlink($this->classMapFile);
         }
         // file will be created
-        $this->assertSame(array(), Loader::readAutoloadingMapFile());
+        $this->assertSame([], Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classMapFile));
 
-        $array = array ( 'class' => 'file' );
+        $array = [ 'class' => 'file' ];
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
@@ -196,7 +194,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "apc".');
         }
 
-        $array = array ( 'class' => 'file' );
+        $array = [ 'class' => 'file' ];
         $this->assertTrue(Loader::writeAutoloadingMapApc($array));
         $this->assertSame($array, Loader::readAutoloadingMapApc());
     }
@@ -213,7 +211,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     public function testMethodaddMapping()
     {
         $class = 'addToMappingClass';
-        $file = realpath(__DIR__ . '/fixtures/notloaded/addToMapping.php');
+        $file  = realpath(__DIR__ . '/fixtures/notloaded/addToMapping.php');
 
         $this->assertTrue(Loader::addMapping($class, $file));
 
@@ -235,7 +233,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodincludeFileAndMap()
     {
-        $file = realpath(__DIR__ . '/fixtures/includeFileAndMap.php');
+        $file  = realpath(__DIR__ . '/fixtures/includeFileAndMap.php');
         $class = 'includeFileAndMapClass';
 
         Loader::includeFileAndMap($file, $class);
@@ -245,7 +243,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
         $this->assertTrue(true, array_key_exists($class, $map));
 
-        $this->assertEquals($map[$class],$file);
+        $this->assertEquals($map[$class], $file);
 
         // file already loaded
         $this->assertTrue(class_exists($class, false));
@@ -268,7 +266,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
 
     public function testsetInclusionMap()
     {
-        $classmap = array('class' => 'file');
+        $classmap = ['class' => 'file'];
         Loader::setInclusionsClassMap($classmap);
         $this->assertEquals(Loader::$inclusionsClassmap, $classmap);
     }

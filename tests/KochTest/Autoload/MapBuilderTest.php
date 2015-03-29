@@ -15,16 +15,16 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new MapBuilder;
+        $this->object = new MapBuilder();
 
         vfsStreamWrapper::register();
 
         $this->vfsFileURL = vfsStream::url('root/classmap.file');
-        $this->file = vfsStream::newFile('classmap.file', 0777);
+        $this->file       = vfsStream::newFile('classmap.file', 0777);
 
         $this->vfsFileWithPHPClass = vfsStream::url('root/class.php');
-        $content = '<?php namespace SomeNamespace; class MyClass(){} ?>';
-        $this->file2 = vfsStream::newFile('class.php', 0777)->setContent($content);
+        $content                   = '<?php namespace SomeNamespace; class MyClass(){} ?>';
+        $this->file2               = vfsStream::newFile('class.php', 0777)->setContent($content);
 
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
@@ -54,17 +54,17 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testBuild()
     {
-       // create classmap
+        // create classmap
        $this->object->build(
-           array(__DIR__ . '/../../../framework/Koch/Config/Adapter'),
+           [__DIR__ . '/../../../framework/Koch/Config/Adapter'],
            $this->vfsFileURL
        );
 
        // include classmap array
        $classmap = include $this->vfsFileURL;
 
-       $this->assertTrue(is_array($classmap));
-       $this->assertArrayHasKey('Koch\Config\Adapter\CSV', $classmap);
+        $this->assertTrue(is_array($classmap));
+        $this->assertArrayHasKey('Koch\Config\Adapter\CSV', $classmap);
     }
 
     /**
@@ -102,9 +102,9 @@ class MapBuilderTest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteMapFile()
     {
-        $classmap = array('classname' => 'filename');
-        $mapfile = $this->vfsFileURL;
-        $res = $this->object->writeMapFile($classmap, $mapfile);
+        $classmap = ['classname' => 'filename'];
+        $mapfile  = $this->vfsFileURL;
+        $res      = $this->object->writeMapFile($classmap, $mapfile);
         $this->assertTrue($res);
     }
 }
