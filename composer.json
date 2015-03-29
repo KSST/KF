@@ -30,7 +30,7 @@
     ],
     "require": {
         "php"                             : ">=5.3.3",
-        "doctrine/orm"                    : "2.4.*",
+        "doctrine/orm"                    : "2.*",
         "doctrine/migrations"             : "dev-master",
         "beberlei/DoctrineExtensions"     : "dev-master",
         "gedmo/doctrine-extensions"       : "dev-master",
@@ -45,10 +45,10 @@
         "simplepie/simplepie"             : "dev-master"
     },
     "require-dev": {
-        "mikey179/vfsStream"              : "1.4.*",
-        "phpunit/phpunit"                 : "4.4.*@dev",
-        "phpunit/dbunit"                  : "1.3.*",
-        "doctrine/data-fixtures"          : "*@dev",
+        "mikey179/vfsStream"              : "*",
+        "phpunit/phpunit"                 : "4.*",
+        "phpunit/dbunit"                  : "*",
+        "doctrine/data-fixtures"          : "*",
         "firephp/firephp-core"            : "dev-master",
         "satooshi/php-coveralls"          : "dev-master"
     },
