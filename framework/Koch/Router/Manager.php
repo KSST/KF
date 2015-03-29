@@ -17,7 +17,7 @@ namespace Koch\Router;
  *
  * These are helper functions for the EventHandler,
  * when adding or deleting routes coming from modules to the application.
- * 
+ *
  * On Installation
  *      new routes are added via the method addRoutesOfModule($modulename).
  * On Deinstallation
@@ -52,7 +52,6 @@ class Manager
         //$this->deleteRoute($route_name);
 
         // update / write merged content to application config
-
     }
 
     /**
@@ -66,9 +65,9 @@ class Manager
         $routesCount = count($this->routes);
 
         // loop over all routes
-        for ($i == 0; $i < $routesCount; $i++) {
+        for ($i = 0; $i < $routesCount; $i++) {
             // check if there is a route with the given name
-            if ($this->routes[$i]['name'] == $route_name) {
+            if ($this->routes[$i]['name'] === $route_name) {
                 // got one? then remove it from the routes array and stop
                 array_splice($this->routes, $i, 1);
                 break;
@@ -85,10 +84,10 @@ class Manager
      */
     public function updateApplicationRoutes($module = null)
     {
-        $activatedModules = array();
+        $activatedModules = [];
 
         if ($module === null) {
-            $activatedModules[] = array($module);
+            $activatedModules[] = [$module];
         } else { // get all activated modules
             // $activated_modules =
         }
