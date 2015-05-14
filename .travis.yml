@@ -8,6 +8,10 @@ language: php
 # use container based infrastructure (no sudo possible)
 sudo: false
 
+cache:
+  directory:
+    - $HOME/.composer/cache
+
 env:
   #- OPCODE_CACHE=apc
 
