@@ -172,7 +172,8 @@
     </target>
 
     <target name="upload-codecoverage-to-scrutinizer" description="Upload PHPUnit Code Coverage data to https://scrutinizer-ci.com/.">
-        <get src="https://scrutinizer-ci.com/ocular.phar" dest="ocular.phar"/>
+        <!-- formerly https://scrutinizer-ci.com/ocular.phar -->
+        <get src="https://s3-eu-west-1.amazonaws.com/scrutinizer-static/ocular.phar" dest="ocular.phar"/>
         <exec executable="php ${basedir}/ocular.phar">
             <arg value="code-coverage:upload" />
             <arg value="--format=php-clover ${builddir}/logs/clover.xml" />
