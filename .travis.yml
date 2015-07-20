@@ -12,10 +12,7 @@ cache:
   directory:
     - $HOME/.composer/cache
 
-env:
-  #- OPCODE_CACHE=apc
-
-php: [5.4, 5.5, 5.6, 7, hhvm]
+php: [5.5, 5.6, 7, hhvm]
 
 matrix:
   allow_failures:
