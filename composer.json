@@ -2,7 +2,7 @@
     "name": "ksst/kf",
     "description": "Koch Framework",
     "license": "MIT",
-    "keywords": ["framework", "full-stack", "cms", "cmf"],
+    "keywords": ["framework", "full-stack", "cmf"],
     "type": "library",
     "authors": [
         {
