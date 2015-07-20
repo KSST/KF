@@ -42,6 +42,7 @@
         "phpunit/phpunit"                 : "4.*",
         "phpunit/dbunit"                  : "*",
         "doctrine/data-fixtures"          : "*",
+        "firephp/firephp-core"            : "*",
         "satooshi/php-coveralls"          : "dev-master"
     },
     "suggest": {
