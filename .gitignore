@@ -54,9 +54,9 @@ nbproject
 # PHPUnit
 # phpunit.xml
 
-# PHP composer related
-composer.lock
-vendor
+# Composer related
+.composer
+vendor/
 
 # php-cs-fixer
 php-cs-fixer*.txt
