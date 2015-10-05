@@ -9,6 +9,8 @@ build:
         postgresql: false
         redis: false
         rabbitmq: false
+        php:
+            version: 5.6
 filter:
     excluded_paths:
         - 'vendor/*'
