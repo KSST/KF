@@ -3,6 +3,12 @@
 #
 # https://scrutinizer-ci.com/docs/
 #
+build:
+    environment:
+        mysql: false
+        postgresql: false
+        redis: false
+        rabbitmq: false
 filter:
     excluded_paths:
         - 'vendor/*'
