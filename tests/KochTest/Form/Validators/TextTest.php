@@ -2,9 +2,9 @@
 
 namespace KochTest\Form\Validators;
 
-use Koch\Form\Validators\String;
+use Koch\Form\Validators\Text;
 
-class StringTest extends \PHPUnit_Framework_TestCase
+class TextTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * @var String
@@ -17,8 +17,8 @@ class StringTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        // Test Subject
-        $this->validator = new String;
+        // Subject Under Test
+        $this->validator = new Text;
     }
 
     /**
