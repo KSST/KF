@@ -40,6 +40,7 @@
     },
     "require-dev": {
         "mikey179/vfsStream"              : "*",
+        "fabpot/php-cs-fixer"             : "dev-master",
         "phpunit/phpunit"                 : "^4.5",
         "phpunit/dbunit"                  : "*",
         "doctrine/data-fixtures"          : "*",
