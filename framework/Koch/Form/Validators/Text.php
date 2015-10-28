@@ -14,7 +14,7 @@ namespace Koch\Form\Validators;
 
 use Koch\Form\Validator;
 
-class String extends Validator
+class Text extends Validator
 {
     public function getValidationHint()
     {
