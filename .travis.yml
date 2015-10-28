@@ -31,8 +31,8 @@ before_script:
 
 script:
   - ant set-exec-permissions
-  - ant php-cs-fixer
-  - ant phpunit
+  - php-cs-fixer
+  - phpunit --configuration ./tests/phpunit.xml.dist
   # - php ./bin/coverage-check.php ./build/logs/clover.xml 70
 
 after_script:
