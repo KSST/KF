@@ -18,7 +18,7 @@ class AllTests
     {
         $suite = new PHPUnit_Framework_TestSuite('Koch Framework - TestSuite');
         foreach (self::getTestFiles() as $file) {
-            $suite->addTestFile($file);
+            $suite->addFile$file);
         }
 
         return $suite;
