@@ -11,7 +11,6 @@
         }
     ],
     "support": {
-
         "source": "https://github.com/KSST/KF/",
         "issues": "https://github.com/KSST/KF/issues/"
     },
@@ -20,9 +19,9 @@
             "type": "package",
             "package": {
                 "name": "codemirror/CodeMirror",
-                "version": "4.12.0",
+                "version": "5.10.0",
                 "dist": {
-                    "url": "https://github.com/codemirror/CodeMirror/archive/v4.12.0.zip",
+                    "url": "https://github.com/codemirror/CodeMirror/archive/v5.10.0.zip",
                     "type": "zip"
                 }
             }
@@ -30,22 +29,22 @@
     ],
     "require": {
         "php"                             : ">=5.5",
-        "pyrech/composer-changelogs"      : "^1.1",
-        "doctrine/orm"                    : "*",
-        "doctrine/migrations"             : "1.1.0",
-        "beberlei/DoctrineExtensions"     : "dev-master",
-        "gedmo/doctrine-extensions"       : "dev-master",
+        "pyrech/composer-changelogs"      : "^1.3",
+        "doctrine/orm"                    : "^2.5",
+        "doctrine/migrations"             : "^1.2",
+        "beberlei/DoctrineExtensions"     : "^1.0",
+        "gedmo/doctrine-extensions"       : "^2.4",
         "smarty/smarty"                   : "^3.1",
-        "swiftmailer/swiftmailer"         : "^5.0"
+        "swiftmailer/swiftmailer"         : "^5.4"
     },
     "require-dev": {
-        "mikey179/vfsStream"              : "*",
-        "fabpot/php-cs-fixer"             : "dev-master",
+        "mikey179/vfsStream"              : "^1.6",
+        "fabpot/php-cs-fixer"             : "^1.11",
         "phpunit/phpunit"                 : "^4.5",
         "phpunit/dbunit"                  : "*",
         "doctrine/data-fixtures"          : "*",
         "firephp/firephp-core"            : "*",
-        "satooshi/php-coveralls"          : "dev-master"
+        "satooshi/php-coveralls"          : "^0.7"
     },
     "suggest": {
         "ext-apc"         : "*",
@@ -69,7 +68,6 @@
             "composer dump-autoload --optimize"
         ]
     },
-    "minimum-stability": "dev",
     "config": {
       "preferred-install": "dist",
       "github-oauth": {
