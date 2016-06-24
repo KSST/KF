@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -33,12 +33,12 @@ class Event implements \ArrayAccess
     private $info;
 
     /**
-     * @var boolean The cancel state of the event
+     * @var bool The cancel state of the event
      */
     private $cancelled = false;
 
     /**
-     * Event constructor
+     * Event constructor.
      *
      * @param $name     Event Name
      * @param $context  The context of the event triggering. Often the object from where we are calling. Default null.
@@ -47,8 +47,8 @@ class Event implements \ArrayAccess
     public function __construct($name, $context = null, $info = null)
     {
         $this->eventname = $name;
-        $this->context = $context;
-        $this->info = $info;
+        $this->context   = $context;
+        $this->info      = $info;
     }
 
     /**
@@ -72,7 +72,7 @@ class Event implements \ArrayAccess
     }
 
     /**
-     * getInfo returns
+     * getInfo returns.
      *
      * @return string
      */
@@ -82,7 +82,7 @@ class Event implements \ArrayAccess
     }
 
     /**
-     * isCancelled returns the cancelled-status of the event
+     * isCancelled returns the cancelled-status of the event.
      *
      * @returns boolean
      */
@@ -92,7 +92,7 @@ class Event implements \ArrayAccess
     }
 
     /**
-     * sets the cancelled flag to true
+     * sets the cancelled flag to true.
      */
     public function cancel()
     {
@@ -100,7 +100,7 @@ class Event implements \ArrayAccess
     }
 
     /**
-     * ArrayAccess Implementation
+     * ArrayAccess Implementation.
      */
 
     /**
@@ -108,7 +108,7 @@ class Event implements \ArrayAccess
      *
      * @param string $name The parameter name
      *
-     * @return Boolean true if the parameter exists, false otherwise
+     * @return bool true if the parameter exists, false otherwise
      */
     public function offsetExists($name)
     {
@@ -124,7 +124,7 @@ class Event implements \ArrayAccess
      */
     public function offsetGet($name)
     {
-        if (isset($this->context[$name]) === true || true === array_key_exists($name, $this->context)) {
+        if (isset($this->context[$name]) || array_key_exists($name, $this->context)) {
             return $this->context[$name];
         } else {
             throw new \Koch\Exception\Exception(

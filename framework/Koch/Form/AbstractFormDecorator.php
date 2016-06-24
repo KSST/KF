@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -75,7 +75,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * Set css class
+     * Set css class.
      *
      * @param string $classname
      */
@@ -87,7 +87,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * Get css class
+     * Get css class.
      *
      * @return string
      */
@@ -97,7 +97,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * Set html id attribute
+     * Set html id attribute.
      *
      * @param string $id
      */
@@ -109,7 +109,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * Get html id attribute value
+     * Get html id attribute value.
      *
      * @return string
      */
@@ -156,7 +156,8 @@ abstract class AbstractFormDecorator implements DecoratorInterface
      * The method checks, if this object or a decorator implements a certain method.
      *
      * @param $method
-     * @return boolean
+     *
+     * @return bool
      */
     public function hasMethod($method)
     {
@@ -173,7 +174,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
     }
 
     /**
-     * __call Magic Method
+     * __call Magic Method.
      *
      * In general this calls a certain method with parameters on the object which is to decorate ($form).
      *
@@ -182,8 +183,8 @@ abstract class AbstractFormDecorator implements DecoratorInterface
      */
     public function __call($method, $parameters)
     {
-        if (is_object($this->form) === true) {
-            return call_user_func_array(array($this->form, $method), $parameters);
+        if (is_object($this->form)) {
+            return call_user_func_array([$this->form, $method], $parameters);
         }
     }
 }

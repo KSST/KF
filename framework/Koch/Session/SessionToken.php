@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -33,14 +33,14 @@ class SessionToken extends Session
     }
 
     /**
-     * Get a CSRF Token value as stored in the session, or create one if it doesn't yet exist
+     * Get a CSRF Token value as stored in the session, or create one if it doesn't yet exist.
      *
      * @return string
      */
     public function getToken()
     {
         $tokenName = $this->getTokenName();
-        $token = $this->session->get('_' . $tokenName);
+        $token     = $this->session->get('_' . $tokenName);
 
         if (empty($token)) {
             $token = md5(uniqid(rand(), true));
@@ -53,7 +53,7 @@ class SessionToken extends Session
 
     public function getTokenTime()
     {
-        return ;
+        return;
     }
 
     /**
@@ -67,7 +67,7 @@ class SessionToken extends Session
     public function validateToken()
     {
         $tokenName = $this->getTokenName();
-        $token = $this->getToken();
+        $token     = $this->getToken();
 
         // is token outdated?
         if ($this->session->get('_token_time') + $this->config->session_token_maxtime <= time()) {

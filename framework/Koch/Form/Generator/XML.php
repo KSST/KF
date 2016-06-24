@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,7 +25,7 @@ use Koch\Form\FormGeneratorInterface;
 class XML extends Form implements FormGeneratorInterface
 {
     /**
-     * Facade/Shortcut
+     * Facade/Shortcut.
      */
     public function generate($array)
     {
@@ -35,13 +35,14 @@ class XML extends Form implements FormGeneratorInterface
     /**
      * Generates a formular from a XML description file.
      *
-     * @param  string                    $filename XML file with formular description.
+     * @param string $filename XML file with formular description.
+     *
      * @return \Koch_Array_Formgenerator
      */
     public function generateFormByXML($filename)
     {
         // XML -> toArray -> Koch_Array_Formgenerator->generate($array)
-        $array = array();
+        $array = [];
         $array = new Koch\Config($filename);
 
         #\Koch\Debug\Debug::firebug($filename);
@@ -55,7 +56,7 @@ class XML extends Form implements FormGeneratorInterface
     }
 
     /**
-     * Generates a XML Form Description File from an form describing array
+     * Generates a XML Form Description File from an form describing array.
      *
      * @param $array
      */

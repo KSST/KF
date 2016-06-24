@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,7 @@ use Koch\Form\FormElementInterface;
 class Radio extends Input implements FormElementInterface
 {
     /**
-     * label next to element
+     * label next to element.
      *
      * @var string
      */
@@ -26,8 +26,7 @@ class Radio extends Input implements FormElementInterface
     protected $description;
 
     /**
-     * constructor
-     *
+     * constructor.
      */
     public function __construct()
     {
@@ -37,7 +36,7 @@ class Radio extends Input implements FormElementInterface
     }
 
     /**
-     * checks or unchecks radio button
+     * checks or unchecks radio button.
      *
      * @param bool checked
      */
@@ -49,19 +48,19 @@ class Radio extends Input implements FormElementInterface
     }
 
     /**
-     * sets clickable label next to element
+     * sets clickable label next to element.
      *
      * @param string $text
      */
     public function setLabel($text)
     {
-        $this->label = '<label for="'.$this->id.'">'.$text.'</label>';
+        $this->label = '<label for="' . $this->id . '">' . $text . '</label>';
 
         return $this;
     }
 
     /**
-     * sets description
+     * sets description.
      *
      * @param string $description
      */

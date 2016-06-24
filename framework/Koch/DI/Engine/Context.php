@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,19 +13,19 @@
 namespace Koch\DI\Engine;
 
 use Koch\DI\AbstractLifecycle;
+use Koch\DI\Exception\CannotFindImplementation;
 use Koch\DI\Lifecycle\Factory;
 use Koch\DI\Lifecycle\Value;
-use Koch\DI\Exception\CannotFindImplementation;
 
 class Context
 {
     private $parent;
     /*private $repository;*/
-    private $registry = array();
-    private $variables = array();
-    private $contexts = array();
-    private $types = array();
-    private $wrappers = array();
+    private $registry  = [];
+    private $variables = [];
+    private $contexts  = [];
+    private $types     = [];
+    private $wrappers  = [];
 
     public function __construct($parent)
     {
@@ -58,7 +58,7 @@ class Context
     public function whenCreating($type)
     {
         if (false === isset($this->contexts[$type])) {
-            $this->contexts[$type] = new Context($this);
+            $this->contexts[$type] = new self($this);
         }
 
         return $this->contexts[$type];
@@ -81,11 +81,11 @@ class Context
         array_push($this->wrappers, $type);
     }
 
-    public function create($type, $nesting = array())
+    public function create($type, $nesting = [])
     {
-        $lifecycle  = $this->pickFactory($type, $this->repository()->candidatesFor($type));
-        $context    = $this->determineContext($lifecycle->class);
-        $wrapper    = $context->hasWrapper($type, $nesting);
+        $lifecycle = $this->pickFactory($type, $this->repository()->candidatesFor($type));
+        $context   = $this->determineContext($lifecycle->class);
+        $wrapper   = $context->hasWrapper($type, $nesting);
 
         if ($wrapper) {
             return $this->create($wrapper, $this->cons($wrapper, $nesting));
@@ -125,7 +125,7 @@ class Context
     {
         $wrappers = $this->wrappersFor($type);
         foreach ($wrappers as $wrapper) {
-            if (false === in_array($wrapper, $already_applied)) {
+            if (false === in_array($wrapper, $already_applied, true)) {
                 return $wrapper;
             }
         }
@@ -149,7 +149,7 @@ class Context
 
     private function settersFor($class)
     {
-        $setters = isset($this->types[$class]) ? $this->types[$class]->setters : array();
+        $setters = isset($this->types[$class]) ? $this->types[$class]->setters : [];
 
         return array_values(array_keys(array_flip(array_merge($setters, $this->parent->settersFor($class)))));
     }
@@ -161,7 +161,7 @@ class Context
 
     public function createDependencies($parameters, $nesting)
     {
-        $values = array();
+        $values = [];
         foreach ($parameters as $parameter) {
             try {
                 $values[] = $this->instantiateParameter($parameter, $nesting);
@@ -185,7 +185,7 @@ class Context
 
         if (true === isset($this->variables[$parameter->getName()])) {
             if ($this->variables[$parameter->getName()]->preference instanceof AbstractLifecycle) {
-                return $this->variables[$parameter->getName()]->preference->instantiate(array());
+                return $this->variables[$parameter->getName()]->preference->instantiate([]);
             }
 
             if (false === is_string($this->variables[$parameter->getName()]->preference)) {
@@ -211,7 +211,7 @@ class Context
 
     private function invoke($instance, $method, $arguments)
     {
-        call_user_func_array(array($instance, $method), $arguments);
+        call_user_func_array([$instance, $method], $arguments);
     }
 
     private function preferFrom($candidates)

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -65,11 +65,11 @@ class Form extends AbstractFormDecorator
             $html_form .= 'accept-charset="' . $this->getAcceptCharset() . '" ';
         }
 
-        if ($this->getAcceptCharset() === true) {
+        if ($this->getAcceptCharset()) {
             $html_form .= ' autocomplete';
         }
 
-        if ($this->isNoValidation() === true) {
+        if ($this->isNoValidation()) {
             $html_form .= ' novalidation';
         }
 
@@ -112,11 +112,11 @@ class Form extends AbstractFormDecorator
     public function render($html_form_content)
     {
         // put the pieces of html together
-        $html_form_content = $this->openFormTag().                // <form
-                             $this->getFormTagAttributesAsHTML(). //  id/method/action/...>
-                             $this->addHeading().                 // heading
-                             $this->addDescription().             // description
-                             $html_form_content.                  // formelements
+        $html_form_content = $this->openFormTag() . // <form
+                             $this->getFormTagAttributesAsHTML() . //  id/method/action/...>
+                             $this->addHeading() . // heading
+                             $this->addDescription() . // description
+                             $html_form_content . // formelements
                              $this->closeFormTag();               // </form>
 
         return $html_form_content;

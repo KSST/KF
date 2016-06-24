@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -20,14 +20,14 @@ class ConfirmSubmitButton extends Input implements FormElementInterface
 
     public function __construct($message = null)
     {
-        $this->type = 'submit';
+        $this->type  = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
-        if ($message != null) {
+        if ($message !== null) {
             $this->message = $message;
         }
 
-        /**
+        /*
          * Add the Form Submit Confirmation Javascript.
          * This is a pure Javacript Return Confirm.
          * To add the value of specific "form.elements" to the message

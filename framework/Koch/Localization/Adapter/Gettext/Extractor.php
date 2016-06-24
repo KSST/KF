@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -31,7 +31,7 @@ namespace
             }
         }
 
-        $this->extractors[$extractor] = new $class;
+        $this->extractors[$extractor] = new $class();
 
         $this->log('Extractor ' . $extractor . ' loaded.');
 
@@ -39,7 +39,7 @@ namespace
     }
 
     /**
-     * Assigns an extractor to an extension
+     * Assigns an extractor to an extension.
      *
      * @param string $extension
      * @param string $extractor
@@ -50,7 +50,7 @@ namespace
     {
         // not already set
         if (false === isset($this->extractor[$extension]) and
-            false === in_array($extractor, $this->extractor[$extension])) {
+            false === in_array($extractor, $this->extractor[$extension], true)) {
             $this->extractor[$extension][] = $extractor;
         } else { // already set
 
@@ -59,19 +59,19 @@ namespace
     }
 
     /**
-     * Removes all extractor settings
+     * Removes all extractor settings.
      *
      * @return Extractor
      */
     public function removeAllExtractors()
     {
-        $this->extractor = array();
+        $this->extractor = [];
 
         return $this;
     }
 
     /**
-     * Saves extracted data into gettext file
+     * Saves extracted data into gettext file.
      *
      * @param string $file
      * @param array  $data
@@ -106,13 +106,13 @@ namespace
     /**
      * Returns a fileheader for a gettext portable object file.
      *
-     * @param boolean $return_as_string True, returns a string (default) and false returns an array.
+     * @param bool $return_as_string True, returns a string (default) and false returns an array.
      *
      * @return mixed Array or String. Returns string by default.
      */
     public static function getPOFileHeader($return_as_string = true)
     {
-        $output = array();
+        $output   = [];
         $output[] = '# Gettext Portable Object Translation File.';
         $output[] = '#';
         $output[] = '# Koch Framework';
@@ -129,7 +129,7 @@ namespace
         $output[] = '"Plural-Forms: nplurals=2; plural=(n != 1);\n"';
         $output[] = '';
 
-        if ($return_as_string === true) {
+        if ($return_as_string) {
             return implode("\n", $output);
         } else { // return array
 
@@ -138,7 +138,7 @@ namespace
     }
 
     /**
-     * Formats fetched data to gettext portable object syntax
+     * Formats fetched data to gettext portable object syntax.
      *
      * @param array $data
      *
@@ -148,7 +148,7 @@ namespace
     {
         $pluralMatchRegexp = '#\%([0-9]+\$)*d#';
 
-        $output = array();
+        $output = [];
         $output = self::getPOFileHeader(false);
 
         ksort($data);
@@ -176,7 +176,7 @@ namespace
             $output[] = '';
         }
 
-        return join("\n", $output);
+        return implode("\n", $output);
     }
 
     /**

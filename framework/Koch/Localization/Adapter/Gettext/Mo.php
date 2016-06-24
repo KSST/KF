@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -34,8 +34,8 @@ class Mo
         $mo = '';
 
         // header data
-        $offsets = array();
-        $ids = '';
+        $offsets = [];
+        $ids     = '';
         $strings = '';
 
         foreach ($hash as $entry) {
@@ -46,7 +46,7 @@ class Mo
             }
 
             // context is merged into id, separated by EOT (\x04)
-            if (($entry['msgctxt'] !== null) or (array_key_exists('msgctxt', $entry) === true)) {
+            if (($entry['msgctxt'] !== null) || array_key_exists('msgctxt', $entry)) {
                 $id = $entry['msgctxt'] . "\x04" . $id;
             }
 
@@ -54,7 +54,7 @@ class Mo
             $str = implode("\x00", $entry['msgstr']);
 
             // keep track of offsets
-            $offsets[] = array(mb_strlen($ids), mb_strlen($id), mb_strlen($strings), mb_strlen($str));
+            $offsets[] = [mb_strlen($ids), mb_strlen($id), mb_strlen($strings), mb_strlen($str)];
 
             // plural msgids are not stored (?)
             $ids .= $id . "\x00";
@@ -70,16 +70,16 @@ class Mo
         $value_start = $key_start + mb_strlen($ids);
 
         // first all key offsets, then all value offsets
-        $key_offsets = array();
-        $value_offsets = array();
+        $key_offsets   = [];
+        $value_offsets = [];
 
         // calculate
         foreach ($offsets as $v) {
-            list ($o1, $l1, $o2, $l2) = $v;
-            $key_offsets[] = $l1;
-            $key_offsets[] = $o1 + $key_start;
-            $value_offsets[] = $l2;
-            $value_offsets[] = $o2 + $value_start;
+            list($o1, $l1, $o2, $l2) = $v;
+            $key_offsets[]           = $l1;
+            $key_offsets[]           = $o1 + $key_start;
+            $value_offsets[]         = $l2;
+            $value_offsets[]         = $o2 + $value_start;
         }
 
         $offsets = array_merge($key_offsets, $value_offsets);

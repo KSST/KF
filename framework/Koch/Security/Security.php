@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Security;
 
 /**
- * Koch Framework - Class for Security Handling
+ * Class for Security Handling.
  *
  * The class contains helper functions for hashing and salting strings (e.g. passwords).
  * Password hashing is not "password encryption".
@@ -34,13 +34,13 @@ final class Security
      * @param string $salt           The salt from db.
      * @param string $hash_algorithm The hashing algorithm to use.
      *
-     * @return boolean true if the incomming hashed password matches the hashed+salted in db,
-     *                 false otherwise
+     * @return bool true if the incomming hashed password matches the hashed+salted in db,
+     *              false otherwise
      */
     public static function checkSaltedHash($passwordhash, $databasehash, $salt, $hash_algorithm)
     {
         // combine incomming $salt and $passwordhash (which is already sha1)
-        $salted_string =  $salt . $passwordhash;
+        $salted_string = $salt . $passwordhash;
 
         // get hash_algo from config and generate hash from $salted_string
         $hash = self::generateHash($hash_algorithm, $salted_string);
@@ -70,7 +70,7 @@ final class Security
     public static function buildSaltedHash($string = '', $hash_algorithm = '')
     {
         // set up the array
-        $salted_hash_array = array();
+        $salted_hash_array = [];
         // generate the salt with fixed length 6 and place it into the array
         $salted_hash_array['salt'] = self::generateSalt(6);
         // combine salt and string
@@ -98,13 +98,13 @@ final class Security
      */
     public static function generateHash($hash_algorithm = null, $string = '')
     {
-        /**
+        /*
          * check, if we can use skein_hash()
          *
          * therefore the php extension "skein" has to be installed.
          * website: http://www.skein-hash.info/downloads
          */
-        if (extension_loaded('skein') and ($hash_algorithm == 'skein')) {
+        if (extension_loaded('skein') && ($hash_algorithm === 'skein')) {
             // get the binary 512-bits hash of string
             return skein_hash($string, 512);
         }
@@ -113,7 +113,7 @@ final class Security
     }
 
     /**
-     * Get random string/salt of size $length
+     * Get random string/salt of size $length.
      *
      * @param int $length Length of random string to return
      *
@@ -139,7 +139,7 @@ final class Security
             return $salt;
         }
 
-        /**
+        /*
          * If "ext/mcrypt" is available, then we gather entropy from the
          * operating system's PRNG. This is better than reading /dev/urandom
          * directly since it avoids reading larger blocks of data than needed.
@@ -156,7 +156,7 @@ final class Security
             return $salt;
         }
 
-        /**
+        /*
          * use mt_srand
          *
          * mt_srand() and mt_rand() are used to generate even better randoms,
@@ -167,11 +167,11 @@ final class Security
          */
 
         // seed the randoms generator with microseconds since last "whole" second
-        mt_srand((double) microtime()*1000000);
+        mt_srand((double) microtime() * 1000000);
         // set up the random chars to choose from
         $chars = './0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
         // count the number of random_chars
-        $number_of_random_chars = strlen($chars)-1;
+        $number_of_random_chars = strlen($chars) - 1;
         // add a char from the random_chars to the salt, until we got the wanted $length
         while (strlen($salt) < $length) {
             // get a random char of $chars
@@ -184,6 +184,5 @@ final class Security
         }
 
         return $salt;
-
     }
 }

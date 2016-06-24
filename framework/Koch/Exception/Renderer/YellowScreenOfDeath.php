@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -24,7 +24,7 @@ class YellowScreenOfDeath
     {
         ob_start();
 
-        /**
+        /*
          * @todo add backlink to the exception codes list
          */
         if ($code > 0) {
@@ -59,33 +59,33 @@ class YellowScreenOfDeath
         // Exception Table
         $html .= '<table width="80%"><tr><td>';
 
-        /**
+        /*
          * Panel 1
          *
          * Exception Message and File
          */
 
         $html .= '<div id="panel1" class="panel">';
-        $html .= '<h3>Exception '.$code.'</h3><h4>'.$message.'</h4>';
+        $html .= '<h3>Exception ' . $code . '</h3><h4>' . $message . '</h4>';
         $html .= '<strong>' . Errorhandler::getFileLink($file, $line) . '.</strong>';
         $html .= '</div>';
 
-        /**
+        /*
          * Panel 2
          *
          * Debug Backtrace
          */
-        if (defined('DEBUG') and DEBUG == 1) {
+        if (defined('DEBUG') and DEBUG === 1) {
             // lets get the backtrace as html table
             $html .= Errorhandler::getDebugBacktrace($trace);
         }
 
-        /**
+        /*
          * Panel 3
          *
          * Server Environment Informations
          */
-        if (defined('DEBUG') and DEBUG == 1) {
+        if (defined('DEBUG') and DEBUG === 1) {
             $html .= '<div id="panel3" class="panel">';
             $html .= '<h3>Server Environment</h3>';
             $html .= '<table width="95%">';
@@ -101,7 +101,7 @@ class YellowScreenOfDeath
             $html .= '</table></div>';
         }
 
-        /**
+        /*
          * Panel 4
          *
          * Additional Information
@@ -112,12 +112,12 @@ class YellowScreenOfDeath
             $html .= self::$exception_template . '</div>';
         }
 
-        /**
+        /*
          * Panel 5
          *
          * Rapid Development
          */
-        $placeholders = array();
+        $placeholders = [];
         // assign placeholders for replacements in the html
         if (strpos($message, 'action_')) {
             $placeholders['actionname'] = substr($message, strpos($message, 'action_'));
@@ -125,20 +125,20 @@ class YellowScreenOfDeath
             $placeholders['classname'] = substr($message, strpos($message, 'module_'));
         }
 
-        if (empty($_GET['mod']) == false) {
+        if (empty($_GET['mod']) === false) {
             $placeholders['modulename'] = (string) stripslashes($_GET['mod']);
         } else {
             $placeholders['modulename'] = '';
         }
 
         // add development helper template to exceptions
-        if (defined('DEVELOPMENT') and DEVELOPMENT == 1 and defined('RAPIDDEVTPL') and RAPIDDEVTPL == 1) {
+        if (defined('DEVELOPMENT') and DEVELOPMENT === 1 and defined('RAPIDDEVTPL') and RAPIDDEVTPL === 1) {
             $html .= '<div id="panel5" class="panel">';
             $html .= '<h3>Rapid Application Development</h3>';
-            $html .= Exception::getExceptionDevelopmentTemplate($placeholders).'</div>';
+            $html .= Exception::getExceptionDevelopmentTemplate($placeholders) . '</div>';
         }
 
-        /**
+        /*
          * Panel 6
          *
          * Backlink to Bugtracker with Exception Message.
@@ -148,7 +148,7 @@ class YellowScreenOfDeath
         // close all html element table
         $html   .= '</table>';
 
-        /**
+        /*
          * Panel 7
          *
          * Footer with Support-Backlinks
@@ -188,7 +188,7 @@ class YellowScreenOfDeath
     public static function renderError($errno, $errorname, $errstr, $errfile, $errline, $errcontext)
     {
         // shorten errorfile string by removing the root path
-        $errfile_short = str_replace(APPLICATION_PATH, '', $errfile);
+        $errfile_short     = str_replace(APPLICATION_PATH, '', $errfile);
         $short_errorstring = \Koch\Functions\Functions::shortenString($errfile, 70, '...');
 
         // Header
@@ -214,10 +214,10 @@ class YellowScreenOfDeath
 
         // Panel 1 - Errormessage
         $html .= '<div id="panel1" class="panel">';
-        $html .= '<h3>Error - '.$errorname.' (' . $errno . ')</h3> ';
+        $html .= '<h3>Error - ' . $errorname . ' (' . $errno . ')</h3> ';
         $html .= '<p style="font-weight: bold;">' . $errstr . '</p>';
         $html .= '<p>in file "<span style="font-weight: bold;">' . $errfile_short . '</span>"';
-        $html .= ' on line #<span style="font-weight: bold;">' . $errline.'.</span></p>';
+        $html .= ' on line #<span style="font-weight: bold;">' . $errline . '.</span></p>';
         $html .= '</div>';
 
         // Panel 2 - Error Context

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -30,22 +30,23 @@ class Captcha extends FormElement implements FormElementInterface
     public function __construct()
     {
         // formfield type
-        $this->type  = 'captcha';
+        $this->type = 'captcha';
 
         return $this;
     }
 
     /**
-     * Set the name of the captcha
+     * Set the name of the captcha.
      *
-     * @param  string  $captcha The captcha name.
+     * @param string $captcha The captcha name.
+     *
      * @return Captcha \Koch\Form\Element\Captcha (THIS is not   \Koch\Form\Element\Captcha_$captcha )
      */
     public function setCaptcha($captcha = null)
     {
         // if no captcha is given, take the one definied in configuration
-        if ($captcha == null) {
-            $config = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
+        if ($captcha === null) {
+            $config  = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
             $captcha = $config['antispam']['captchatype'];
             unset($config);
         }
@@ -60,12 +61,12 @@ class Captcha extends FormElement implements FormElementInterface
      */
     public function getCaptcha()
     {
-
     }
 
     /**
-     * @param  \Koch\Form\Element\Interface $captchaObject
-     * @return Captcha                      \Koch\Form\Element\Captcha
+     * @param \Koch\Form\Element\Interface $captchaObject
+     *
+     * @return Captcha \Koch\Form\Element\Captcha
      */
     public function setCaptchaFormelement(\Koch\Form\ElementInterface $captchaObject)
     {
@@ -75,7 +76,7 @@ class Captcha extends FormElement implements FormElementInterface
     }
 
     /**
-     * Getter for the captchaObject
+     * Getter for the captchaObject.
      *
      * @return object \Koch\Form\Element\XYNAMECaptcha
      */
@@ -89,14 +90,14 @@ class Captcha extends FormElement implements FormElementInterface
     }
 
     /**
-     * The CaptchaFactory loads and instantiates a captcha object
+     * The CaptchaFactory loads and instantiates a captcha object.
      */
     private function captchaFactory()
     {
         // camelCase rename,  cut the last 7 chars = "captcha"
         $name = mb_substr($this->captcha, 0, -7);
 
-        $classname = 'Koch\Form\Formelements\\'. ucfirst($name) . 'Captcha';
+        $classname = 'Koch\Form\Formelements\\' . ucfirst($name) . 'Captcha';
 
         $editor_formelement = new $classname();
 
@@ -146,7 +147,7 @@ class Captcha extends FormElement implements FormElementInterface
         $html = '';
         $html = $this->getCaptchaFormelement()->transferPropertiesToCaptcha()->render();
 
-        /**
+        /*
          * at this point we have $_SESSION['user']['simple_captcha_string']
          * it's needed as string for the validation rule to the captcha formelement
          */

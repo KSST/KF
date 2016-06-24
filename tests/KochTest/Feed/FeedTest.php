@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Feed;
 
 use Koch\Feed\Feed;
@@ -21,7 +22,7 @@ class FeedTest extends \PHPUnit_Framework_TestCase
         $this->feedUrl = __DIR__ . '/fixtures/clansuite_rss_v2_0_msgs.xml';#
 
         $this->cacheFolder = __DIR__ . '/fixtures/';
-        $this->cacheFile = $this->cacheFolder . md5($this->feedUrl);
+        $this->cacheFile   = $this->cacheFolder . md5($this->feedUrl);
     }
 
     /**

@@ -1,11 +1,10 @@
 <?php
 /**
- * Koch Framework Smarty View Helper
- *
+ * Koch Framework Smarty View Helper.
  */
 
 /**
- * This smarty function is part of "Koch Framework"
+ * This smarty function is part of "Koch Framework".
  *
  * Smarty {move_to} block plugin
  *
@@ -27,19 +26,20 @@
  * @param array
  * @param string
  * @param Smarty
- * @param boolean
+ * @param bool
+ *
  * @return string
  */
 function Smarty_block_move_to($params, $content, $smarty, &$repeat)
 {
-    if (empty($content) === true) {
+    if (empty($content)) {
         return;
     }
 
-    if (isset($params['target']) === true) {
+    if (isset($params['target'])) {
         $target = mb_strtoupper($params['target']);
     } else {
-        /**
+        /*
          * the full errormessage is created by appending the first string
          * (one line would be over 130 chars long and the whitespaces matter)
          */
@@ -54,18 +54,18 @@ function Smarty_block_move_to($params, $content, $smarty, &$repeat)
         return;
     }
 
-    /**
+    /*
      * define possible moveto positions
      * The x marks the position, the content will be moved to.
      */
-    $valid_movement_positions = array(
+    $valid_movement_positions = [
         'PRE_HEAD_CLOSE', //  x</head>
         'POST_BODY_OPEN', //  <body>x
-        'PRE_BODY_CLOSE'
-    ); //  x</body>
+        'PRE_BODY_CLOSE',
+    ]; //  x</body>
 
     // whitelist: check if tag is a valid movement position
-    if (!in_array($target, $valid_movement_positions)) {
+    if (!in_array($target, $valid_movement_positions, true)) {
         trigger_error(
             "Parameter 'target' needs one of the following values: pre_head_close, post_body_open, pre_body_close"
         );
@@ -73,7 +73,7 @@ function Smarty_block_move_to($params, $content, $smarty, &$repeat)
         return;
     }
 
-    /**
+    /*
      * This inserts a comment, showing from which template a certain move is performed.
      * This makes it easier to determine the origin of the move operation.
      */

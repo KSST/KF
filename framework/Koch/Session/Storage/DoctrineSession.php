@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -24,24 +24,24 @@ class DoctrineSession extends AbstractSession
 
     /**
      * Session Expire time in seconds.
-     * 1800 seconds / 60 = 30 Minutes
+     * 1800 seconds / 60 = 30 Minutes.
      *
-     * @var integer
+     * @var int
      */
     public $session_expire_time = 1800;
 
     /**
      * Probabliity of trashing the Session as percentage.
-     * (This implies that gc_divisor is fixed to 100.)
+     * (This implies that gc_divisor is fixed to 100.).
      *
-     * @var integer
+     * @var int
      */
     public $session_probability = 10;
 
     /**
      * @var array
      */
-    private $config = array();
+    private $config = [];
 
     /**
      * This creates the session.
@@ -54,15 +54,15 @@ class DoctrineSession extends AbstractSession
      *
      * Overwrite php.ini settings
      * Start the session
+     *
      * @param object \Koch\Config\Config
      * @param object \Koch\HttpHttpRequest
      */
-
     public function __construct(\Koch\Config\Config $config)
     {
         $this->config = $config->getApplicationConfig();
 
-        /**
+        /*
          * Set the Session Expire Time.
          * Value comes from the app config and is a minute value.
          */
@@ -74,13 +74,13 @@ class DoctrineSession extends AbstractSession
         // configuration not needed any longer, free some memory
         unset($this->config);
 
-        /**
+        /*
          * Configure Session
          */
         ini_set('session.name', self::SESSION_NAME);
         ini_set('session.save_handler', 'user');
 
-        /**
+        /*
          * Configure Garbage Collector
          * This will call the GC in 10% of the requests.
          * Calculation : gc_probability/gc_divisor = 10/100 = 0,1 = 10%
@@ -105,17 +105,17 @@ class DoctrineSession extends AbstractSession
 
         // add session entropy?
 
-        /**
+        /*
          * Setup the custom session handler methods
          * Userspace Session Storage
          */
         session_set_save_handler(
-            array($this, 'open'),
-            array($this, 'close'),
-            array($this, 'read'),
-            array($this, 'write'),
-            array($this, 'destroy'),
-            array($this, 'gc')
+            [$this, 'open'],
+            [$this, 'close'],
+            [$this, 'read'],
+            [$this, 'write'],
+            [$this, 'destroy'],
+            [$this, 'gc']
         );
 
         // prevents unexpected effects when using objects as save handlers
@@ -129,7 +129,7 @@ class DoctrineSession extends AbstractSession
     }
 
     /**
-     * Start Session and throw Error on failure
+     * Start Session and throw Error on failure.
      */
     private static function startSession($time = 1800)
     {
@@ -156,8 +156,8 @@ class DoctrineSession extends AbstractSession
      */
     private static function validateAndSecureSession()
     {
-        if (mb_strlen(session_id()) != 32 or false === isset($_SESSION['application']['initiated'])) {
-            /**
+        if (mb_strlen(session_id()) !== 32 or false === isset($_SESSION['application']['initiated'])) {
+            /*
              * Make a new session_id and destroy old session
              *
              * From PHP 5.1 on, if set to true, it will force the
@@ -168,7 +168,7 @@ class DoctrineSession extends AbstractSession
             // session fixation
             $_SESSION['application']['initiated'] = true;
 
-            /**
+            /*
              * Session Security Token
              * CSRF: http://shiflett.org/articles/cross-site-request-forgeries
              */
@@ -183,13 +183,13 @@ class DoctrineSession extends AbstractSession
     /**
      * =========================================
      *      Custom Session Handler Methods
-     * =========================================
+     * =========================================.
      */
 
     /**
-     * Opens a session
+     * Opens a session.
      *
-     * @return boolean
+     * @return bool
      */
     public function open($path = null, $name = null)
     {
@@ -197,9 +197,9 @@ class DoctrineSession extends AbstractSession
     }
 
     /**
-     * Closes a session
+     * Closes a session.
      *
-     * @return boolean
+     * @return bool
      */
     public function close()
     {
@@ -209,22 +209,23 @@ class DoctrineSession extends AbstractSession
     }
 
     /**
-     * Reads a session
+     * Reads a session.
      *
-     * @param  int $session_id contains the session_id
-     * @return string  string of the session data
+     * @param int $session_id contains the session_id
+     *
+     * @return string string of the session data
      */
     public function read($session_id)
     {
         try {
-            $em = \Clansuite\Application::getEntityManager();
+            $em    = \Clansuite\Application::getEntityManager();
             $query = $em->createQuery(
                 'SELECT s.session_data, s.session_starttime
                 FROM \Entity\Session s
                 WHERE s.session_name = :name
                 AND s.session_id = :id'
             );
-            $query->setParameters(array('name' => self::SESSION_NAME, 'id' => $session_id));
+            $query->setParameters(['name' => self::SESSION_NAME, 'id' => $session_id]);
             $result = $query->getResult();
 
             if ($result) {
@@ -233,7 +234,7 @@ class DoctrineSession extends AbstractSession
         } catch (Exception $e) {
             $msg = '';
 
-            if (defined('DEBUG') and DEBUG == true) {
+            if (defined('DEBUG') and DEBUG === true) {
                 $msg .= get_class($e) . ' thrown within the session handler.';
                 $msg .= '<br /> Message: ' . $e->getMessage();
             }
@@ -256,17 +257,18 @@ class DoctrineSession extends AbstractSession
     }
 
     /**
-     * Write a session
+     * Write a session.
      *
      * This redefines php's session_write_close()
      *
-     * @param  int $session_id contains session_id
-     * @param  array   $data       contains session_data
+     * @param int   $session_id contains session_id
+     * @param array $data       contains session_data
+     *
      * @return bool
      */
     public function write($session_id, $data)
     {
-        /**
+        /*
          * Try to INSERT Session Data or REPLACE Session Data in case session_id already exists
          */
         $em = \Clansuite\Application::getEntityManager();
@@ -284,15 +286,15 @@ class DoctrineSession extends AbstractSession
         );
 
         $query->setParameters(
-            array(
-                'id' => $session_id,
-                'name' => self::SESSION_NAME,
-                'time' => (int) time(),
-                'data' => $data, // @todo serialize($data)
+            [
+                'id'         => $session_id,
+                'name'       => self::SESSION_NAME,
+                'time'       => (int) time(),
+                'data'       => $data, // @todo serialize($data)
                 'visibility' => '1', // @todo ghost mode
-                'where' => 'session_start',
-                'user_id' => '0'
-            )
+                'where'      => 'session_start',
+                'user_id'    => '0',
+            ]
         );
 
         $query->execute();
@@ -310,14 +312,14 @@ class DoctrineSession extends AbstractSession
     public function destroy($session_id)
     {
         // Unset all of the session variables.
-        $_SESSION = array();
+        $_SESSION = [];
 
         //  Unset Cookie Vars
-        if (isset($_COOKIE[self::SESSION_NAME]) === true) {
+        if (isset($_COOKIE[self::SESSION_NAME])) {
             setcookie(self::SESSION_NAME, false);
         }
 
-        /**
+        /*
          * Delete session from DB
          */
         $em = \Clansuite\Application::getEntityManager();
@@ -329,36 +331,38 @@ class DoctrineSession extends AbstractSession
         );
 
         $query->setParameters(
-            array(
+            [
                 'name' => self::SESSION_NAME,
-                'id' => $session_id
-            )
+                'id'   => $session_id,
+            ]
         );
 
         $query->execute();
     }
 
-     /**
-     * Session Garbage Collector
+    /**
+     * Session Garbage Collector.
      *
      * Removes the current session, if:
      * a) gc probability is reached (ini_set)
      * b) time() is reached (DB has timestamp stored, that is time() + expiration )
+     *
      * @see session.gc_divisor      100
      * @see session.gc_maxlifetime  1800 = 30*60
      * @see session.gc_probability    1
      * @usage execution rate 1/100 (session.gc_probability/session.gc_divisor)
      *
      * @param int session life time (mins)
-     * @return null|boolean
+     *
+     * @return null|bool
      */
     public function gc($maxlifetime = 30)
     {
-        if ($maxlifetime == 0) {
+        if ($maxlifetime === 0) {
             return;
         }
 
-        /**
+        /*
          * Determine expiration time of the session
          *
          * $maxlifetime is a minute time value
@@ -366,7 +370,7 @@ class DoctrineSession extends AbstractSession
          * $sessionLifetime is in seconds
          */
         $sessionlifetime = $maxlifetime * 60;
-        $expire_time = time() + $sessionlifetime;
+        $expire_time     = time() + $sessionlifetime;
 
         $em = \Clansuite\Application::getEntityManager();
 
@@ -377,15 +381,14 @@ class DoctrineSession extends AbstractSession
         );
 
         $query->setParameters(
-            array(
+            [
                 'name' => self::SESSION_NAME,
-                'time' => (int) $expire_time
-            )
+                'time' => (int) $expire_time,
+            ]
         );
 
         $query->execute();
 
         return true;
     }
-
 }

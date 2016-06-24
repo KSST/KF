@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,8 +23,8 @@ use Koch\Http\HttpResponseInterface;
  */
 class ProcessCronJobs implements FilterInterface
 {
-    private $config     = null;
-    private $cronjobs    = null;
+    private $config   = null;
+    private $cronjobs = null;
 
     public function __construct(Koch\Config $config, Koch\Cronjobs $cronjobs)
     {
@@ -35,7 +35,7 @@ class ProcessCronJobs implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // take the initiative, if cronjob processing is enabled in configuration
-        if ($this->config['cronjobs']['enabled'] == 1) {
+        if ($this->config['cronjobs']['enabled'] === 1) {
             $this->cronjobs->execute();
         }
     }

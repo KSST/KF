@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -27,7 +27,6 @@ namespace Koch\View\Helper;
  */
 class Javascripts extends Layout
 {
-
     public static function addJQuery()
     {
         self::addJS('jquery/jquery.js');
@@ -56,7 +55,7 @@ class Javascripts extends Layout
     }
 
     /**
-     * Adds a JQuery Link, which fetches directly from jquery.com
+     * Adds a JQuery Link, which fetches directly from jquery.com.
      *
      * If you don't specifiy the version parameter, the latest version will be fetched.
      * This procedure is implemented to provide an easy of developing with the latest release of JQuery.
@@ -75,18 +74,18 @@ class Javascripts extends Layout
     public static function addJQueryService($version = null, $service = 'google')
     {
         // determine service
-        if ($service == 'jquery') {
+        if ($service === 'jquery') {
             // load from jquery.com
             if ($version === null) {
                 self::addJS('http://code.jquery.com/jquery-latest.pack.js');
             } else {
-                /**
+                /*
                  * JQuery version whitelist ensures a certain compatibilty frame
                  */
-                $jquery_version_whitelist = array( '1.4.2', '1.4.1' ); // not 'latest'
+                $jquery_version_whitelist = ['1.4.2', '1.4.1']; // not 'latest'
 
-                if (in_array($version, $jquery_version_whitelist)) {
-                    self::addJS('http://code.jquery.com/jquery-'.$version.'.pack.js');
+                if (in_array($version, $jquery_version_whitelist, true)) {
+                    self::addJS('http://code.jquery.com/jquery-' . $version . '.pack.js');
                 }
             }
         } else {
@@ -96,7 +95,7 @@ class Javascripts extends Layout
     }
 
     /**
-     * Adds a JQuery Link, which fetches directly from google.com CDN
+     * Adds a JQuery Link, which fetches directly from google.com CDN.
      *
      * If you don't specifiy the version parameter, the latest version will be fetched.
      * For problems with this approach, @see addJS_JQuery_Service.
@@ -111,13 +110,13 @@ class Javascripts extends Layout
         if ($version === null) {
             $version = 'latest';
         } else {
-            /**
+            /*
              * JQuery version whitelist ensures a certain compatibilty frame
              */
-            $jquery_version_whitelist = array( '1.7.2', '1.8.1' ); // not 'latest'
+            $jquery_version_whitelist = ['1.7.2', '1.8.1']; // not 'latest'
 
-            if (in_array($version, $jquery_version_whitelist)) {
-                $this->jquery_initscript  = '';
+            if (in_array($version, $jquery_version_whitelist, true)) {
+                $this->jquery_initscript = '';
                 $this->jquery_initscript .= "    <script src=\"http://www.google.com/jsapi\"></script>\n";
                 $this->jquery_initscript .= "    <script>\n";
                 $this->jquery_initscript .= "      google.load('jquery', '{$version}');\n";
@@ -132,7 +131,7 @@ class Javascripts extends Layout
     /** Wrapper Methods **/
 
     /**
-     * addMultipleJS - Wrapper Method
+     * addMultipleJS - Wrapper Method.
      *
      * @params array  array with several filenames and their paths
      * $filenames['path','filename']
@@ -149,9 +148,10 @@ class Javascripts extends Layout
     }
 
     /**
-     * addJS - Wrapper Method
+     * addJS - Wrapper Method.
      *
      * @params string javascript filename to load
+     *
      * @param string $filename
      */
     public static function addJS($filename)
@@ -162,7 +162,7 @@ class Javascripts extends Layout
     }
 
     /**
-     * addJSInit - Wrapper Method
+     * addJSInit - Wrapper Method.
      *
      * @params string name of the javascript to initialize
      * @params string init-string to initialize the js
@@ -179,10 +179,11 @@ class Javascripts extends Layout
     }
 
     /**
-     * addCSS - Wrapper Method
+     * addCSS - Wrapper Method.
      *
      * @params string filename of the cascading style sheet to load
      * @params boolean display the iehack css in case true, default is false
+     *
      * @param string $filename
      *
      * @return string style type css import

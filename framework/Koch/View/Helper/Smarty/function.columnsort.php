@@ -1,31 +1,33 @@
 <?php
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty {columnsort} function plugin
+ * Smarty {columnsort} function plugin.
  *
  * Type:     function
  * Name:     columnsort
  * Purpose:  easy sorting of a html table by columns
+ *
  * @param array parameters (cid, html, selected_class, id, asc_image, desc_image)
  * @param Smarty
+ *
  * @return string|null
  */
 function smarty_function_columnsort($params, $smarty)
 {
     $selected_class = null;
-    $current_id = 0;
-    $SMCS_id = 'default';
+    $current_id     = 0;
+    $SMCS_id        = 'default';
     //static $sort_asc_image = null;
     //static $sort_desc_image = null;
-    $sort_asc_image = WWW_ROOT_THEMES_CORE . 'images/icons/asc.png';
+    $sort_asc_image  = WWW_ROOT_THEMES_CORE . 'images/icons/asc.png';
     $sort_desc_image = WWW_ROOT_THEMES_CORE . 'images/icons/desc.png';
 
     if ($params['cid'] !== null) {
-        if ($SMCS_id != $params['cid']) {
+        if ($SMCS_id !== $params['cid']) {
             $current_id = 0;
         }
 
@@ -96,18 +98,18 @@ function smarty_function_columnsort($params, $smarty)
 
     // The column is selected if the get vars exists and is the current column OR
     // if the get vars does not exist and the current column is default.
-    if ($columnsort['current_column'] !== null and $columnsort['current_column'] == $id) {
+    if ($columnsort['current_column'] !== null and $columnsort['current_column'] === $id) {
         $selected = true;
     }
 
     // Reverse sort order for the output.
     if ($columnsort['current_sort']) {
-        $sort_order = mb_strtolower($columnsort['current_sort']) == 'asc' ? 'desc' : 'asc';
-    } elseif ($columnsort['current_column'] === null and $id == $columnsort['default_column']) {
+        $sort_order = mb_strtolower($columnsort['current_sort']) === 'asc' ? 'desc' : 'asc';
+    } elseif ($columnsort['current_column'] === null and $id === $columnsort['default_column']) {
         $selected = true;
 
         // Reverse sort order for the output.
-        $sort_order = $sort_order == 'asc' ? 'desc' : 'asc';
+        $sort_order = $sort_order === 'asc' ? 'desc' : 'asc';
     } else {
         $selected = false;
     }
@@ -121,8 +123,8 @@ function smarty_function_columnsort($params, $smarty)
 
     // If asc/desc image exists, append it.
     if ($selected && $sort_asc_image !== null) {
-        $image_src = $sort_order == 'asc' ? $sort_desc_image : $sort_asc_image;
-        $image = " <img src=\"$image_src\" alt=\"$img_alt\" border=\"0\" />";
+        $image_src = $sort_order === 'asc' ? $sort_desc_image : $sort_asc_image;
+        $image     = " <img src=\"$image_src\" alt=\"$img_alt\" border=\"0\" />";
     } else {
         $image = '';
     }
@@ -149,7 +151,7 @@ function _smarty_columnsort_sort_order($id, $columns, $default_sort, $smarty)
         return $default_sort;
     }
 
-    if (count($columns[$id]) != 2) {
+    if (count($columns[$id]) !== 2) {
         trigger_error('columnsort: column array must be array("value", "asc|desc")');
 
         return false;

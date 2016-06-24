@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,7 +22,6 @@ namespace Koch\View\Helper;
  */
 class Bbcode
 {
-
     /**
      * @var object instance of StringParser_BBCode
      */
@@ -47,86 +46,85 @@ class Bbcode
      * Setup some default BBCodes
      * - Conversions and Filters
      * - Standard Elements like
-     *   - url, link, img, code
-     *
+     *   - url, link, img, code.
      */
     public function setupDefaultBBCodes()
     {
-        /**
+        /*
          * Conversions & Filters
          */
-        $this->bbcode->addFilter(STRINGPARSER_FILTER_PRE, array($this, 'convertlinebreaks'));
-        $this->bbcode->addParser(array('block', 'inline', 'link', 'listitem',), 'htmlspecialchars');
-        $this->bbcode->addParser(array('block', 'inline', 'link', 'listitem',), 'nl2br');
+        $this->bbcode->addFilter(STRINGPARSER_FILTER_PRE, [$this, 'convertlinebreaks']);
+        $this->bbcode->addParser(['block', 'inline', 'link', 'listitem'], 'htmlspecialchars');
+        $this->bbcode->addParser(['block', 'inline', 'link', 'listitem'], 'nl2br');
 
-        /**
+        /*
          * Generate Standard BB Codes
          */
-        /**
+        /*
          * BB Code: [url][/url]
          */
         $this->bbcode->addCode(
             'url',
             'usecontent?',
-            array($this, 'do_bbcode_url'),
-            array('usecontent_param' => 'default'),
+            [$this, 'do_bbcode_url'],
+            ['usecontent_param' => 'default'],
             'link',
-            array('listitem', 'block', 'inline'),
-            array('link')
+            ['listitem', 'block', 'inline'],
+            ['link']
         );
 
-        /**
+        /*
          * BB Code: [link][/link]
          */
         $this->bbcode->addCode(
             'link',
             'callback_replace_single',
-            array($this, 'do_bbcode_url'),
-            array(),
+            [$this, 'do_bbcode_url'],
+            [],
             'link',
-            array('listitem', 'block', 'inline'),
-            array('link')
+            ['listitem', 'block', 'inline'],
+            ['link']
         );
 
-        /**
+        /*
          * BB Code: [link][/link]
          */
         $this->bbcode->addCode(
             'img',
             'usecontent',
-            array($this, 'do_bbcode_img'),
-            array(),
+            [$this, 'do_bbcode_img'],
+            [],
             'image',
-            array('listitem', 'block', 'inline','link'),
-            array()
+            ['listitem', 'block', 'inline', 'link'],
+            []
         );
 
-        /**
+        /*
          * BB Code: [code][/code]
          * This uses geshi syntax highlighting.
          */
         $this->bbcode->addCode(
             'code',
             'usecontent?',
-            array($this, 'do_bbcode_code'),
-            array('usecontent_param' => 'default'),
+            [$this, 'do_bbcode_code'],
+            ['usecontent_param' => 'default'],
             'code',
-            array('listitem', 'block', 'inline'),
-            array('code')
+            ['listitem', 'block', 'inline'],
+            ['code']
         );
 
         $this->bbcode->setOccurrenceType('img', 'image');
     }
 
     /**
-     * loads all bbcodes stored in database and assigns them to the bbcode parser object
+     * loads all bbcodes stored in database and assigns them to the bbcode parser object.
      */
     public function initializeBBCodesFromDatabase()
     {
         // Load all BB Code Definition from Database
         $bbcodes = Doctrine_Query::create()->select('*')->from('CsBbCode')->execute();
 
-        /**
+        /*
          * Add the BBCodes from DB via addCode
          */
         foreach ($bbcodes as $key => $code) {
@@ -136,14 +134,14 @@ class Bbcode
             // not allowed
             $not_allowed_in = explode(',', $code['not_allowed_in']);
 
-            /**
+            /*
              * assign the code via stringparser object and its method addCode()
              */
             $this->bbcode->addCode(
                 $code['name'],
                 'simple_replace',
                 null,
-                array('start_tag' => $code['start_tag'], 'end_tag' => $code['end_tag']),
+                ['start_tag' => $code['start_tag'], 'end_tag' => $code['end_tag']],
                 $code['content_type'],
                 $allowed_in,
                 $not_allowed_in
@@ -152,9 +150,10 @@ class Bbcode
     }
 
     /**
-     * Parse the text and apply BBCode
+     * Parse the text and apply BBCode.
      *
      * @param $text the string to parse and to apply the bbcode formatting to
+     *
      * @return bbcode parsed text
      */
     public function parse($text)
@@ -163,20 +162,21 @@ class Bbcode
     }
 
     /**
-     * Handle BB Code URLs
+     * Handle BB Code URLs.
      *
      * @param string
      * @param array
      * @param string
      * @param mixed
      * @param mixed
-     * @return boolean|string url
+     *
+     * @return bool|string url
      *
      * @todo $params and $node_objects are unuseed check
      */
     private function doBBCodeUrl($action, $attributes, $content, $params, $node_object)
     {
-        if ($action == 'validate') {
+        if ($action === 'validate') {
             return true;
         }
 
@@ -188,14 +188,15 @@ class Bbcode
     }
 
     /**
-     * Handle Pictures
+     * Handle Pictures.
      *
      * @todo comment params
-     * @return boolean|string string
+     *
+     * @return bool|string string
      */
     private function doBBCodeImg($action, $attributes, $content, $params, $node_object)
     {
-        if ($action == 'validate') {
+        if ($action === 'validate') {
             return true;
         }
 
@@ -203,19 +204,19 @@ class Bbcode
     }
 
     /**
-     * Handle PHP Code Hightlightning with GeShi
+     * Handle PHP Code Hightlightning with GeShi.
      *
      * @return codehighlighted string
      */
     private function doBBCodeCode($action, $attributes, $content, $params, $node_object)
     {
-        if ($action == 'validate') {
+        if ($action === 'validate') {
             return true;
         }
 
         // Include & Instantiate GeSHi
         if (false === class_exists('GeSHi', false)) {
-            include VENDOR_PATH  . '/geshi/geshi.php';
+            include VENDOR_PATH . '/geshi/geshi.php';
         }
 
         $geshi = new GeSHi($content, $attributes['default']);

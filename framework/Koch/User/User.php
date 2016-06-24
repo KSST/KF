@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,11 +13,10 @@
 namespace Koch\User;
 
 /**
- * Koch Framework - Class for User Handling
+ * Class for User Handling.
  */
 class User
 {
-
     /**
      * @var object User Object
      */
@@ -29,7 +28,7 @@ class User
     private $config = null;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(\Koch\Config\Config $config)
     {
@@ -37,15 +36,16 @@ class User
     }
 
     /**
-     * getUser by user_id
+     * getUser by user_id.
      *
-     * @param  int $user_id The ID of the User. Defaults to the user_id from session.
-     * @return array   $userdata (Dataset of CsUsers + CsProfile)
+     * @param int $user_id The ID of the User. Defaults to the user_id from session.
+     *
+     * @return array $userdata (Dataset of CsUsers + CsProfile)
      */
     public function getUser($user_id = null)
     {
         // init user_id
-        if ($user_id == null and $_SESSION['user']['user_id'] > 0) {
+        if ($user_id === null and $_SESSION['user']['user_id'] > 0) {
             // incomming via session
             $user_id = $_SESSION['user']['user_id'];
         } else {
@@ -57,7 +57,7 @@ class User
             ->from('CsUsers u')
             ->leftJoin('CsProfiles')
             ->where('u.user_id = ?')
-            ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+            ->fetchOne([$user_id], Doctrine::HYDRATE_ARRAY);
 
         if (is_array($userdata)) {
             return $userdata;
@@ -67,7 +67,7 @@ class User
     }
 
     /**
-     * Creates the User-Object and the $session['user'] Array
+     * Creates the User-Object and the $session['user'] Array.
      *
      * @param $user_id The ID of the User.
      * @param $email The email of the User.
@@ -78,7 +78,7 @@ class User
         // Initialize the User Object
         $this->user = null;
 
-        /**
+        /*
          * Get User via DB Queries
          *
          * 1) user_id
@@ -93,7 +93,7 @@ class User
                 ->leftJoin('u.CsOptions o')
                 #->leftJoin('u.CsGroups g')
                 ->where('u.user_id = ?')
-                ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$user_id], Doctrine::HYDRATE_ARRAY);
         } elseif (empty($email) === false) {
             // Get the user from the email
             $this->user = Doctrine_Query::create()
@@ -102,7 +102,7 @@ class User
                 ->leftJoin('u.CsOptions o')
                 #->leftJoin('u.CsGroups g')
                 ->where('u.email = ?')
-                ->fetchOne(array($email), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$email], Doctrine::HYDRATE_ARRAY);
         } elseif (empty($nick) === false) {
             // Get the user from the nick
             $this->user = Doctrine_Query::create()
@@ -111,14 +111,14 @@ class User
                 ->leftJoin('u.CsOptions o')
                 #->leftJoin('u.CsGroups g')
                 ->where('u.nick = ?')
-                ->fetchOne(array($nick), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$nick], Doctrine::HYDRATE_ARRAY);
         }
 
-        /**
+        /*
          * Check if this user is activated,
          * else reset cookie, session and redirect
          */
-        if (is_array($this->user) and $this->user['activated'] == 0) {
+        if (is_array($this->user) and $this->user['activated'] === 0) {
             $this->logoutUser();
 
             // redirect
@@ -127,27 +127,27 @@ class User
             \Koch\Http\HttpResponse::redirect('/account/activation_email', 5, 403, $message);
         }
 
-        /**
+        /*
          * Create $_SESSION['user'] array, containing user data
          */
-        if (is_array($this->user) === true) {
-            /**
+        if (is_array($this->user)) {
+            /*
              * Transfer User Data into Session
              */
             #\Koch\Debug\Debug::firebug($_SESSION);
             #\Koch\Debug\Debug::firebug($this->config);
 
-            $_SESSION['user']['authed'] = 1;
+            $_SESSION['user']['authed']  = 1;
             $_SESSION['user']['user_id'] = $this->user['user_id'];
 
             $_SESSION['user']['passwordhash'] = $this->user['passwordhash'];
-            $_SESSION['user']['email'] = $this->user['email'];
-            $_SESSION['user']['nick'] = $this->user['nick'];
+            $_SESSION['user']['email']        = $this->user['email'];
+            $_SESSION['user']['nick']         = $this->user['nick'];
 
-            $_SESSION['user']['disabled'] = $this->user['disabled'];
+            $_SESSION['user']['disabled']  = $this->user['disabled'];
             $_SESSION['user']['activated'] = $this->user['activated'];
 
-            /**
+            /*
              * SetLanguage
              *
              * At this position the language might already by set by
@@ -165,9 +165,10 @@ class User
             }
 
             /**
-             * Frontend-Theme
+             * Frontend-Theme.
              *
              * first take standard theme as defined by $config->theme
+             *
              * @todo remove $_REQUEST, frontend theme is selectable via frontend
              */
             if (false === isset($_REQUEST['theme'])) {
@@ -176,7 +177,7 @@ class User
                 : $this->config['template']['frontend_theme'];
             }
 
-            /**
+            /*
              * Backend-Theme
              */
             if (empty($this->user['backend_theme']) === false) {
@@ -185,12 +186,12 @@ class User
                 $_SESSION['user']['backend_theme'] = $this->config['template']['backend_theme'];
             }
 
-            /**
+            /*
              * Permissions
              *
              * Get Group & Rights of user_id
              */
-            /**
+            /*
               User-Datensatz beinhaltet ein CsGroups-Array
               user => Array (
               [user_id] => 1
@@ -205,12 +206,12 @@ class User
               )
              */
             // Initialize User Session Arrays
-            $_SESSION['user']['group'] = '';
+            $_SESSION['user']['group']  = '';
             $_SESSION['user']['rights'] = '';
 
             if (false === empty($this->user['CsGroups'])) {
-                $_SESSION['user']['group'] = $this->user['CsGroups'][0]['group_id'];
-                $_SESSION['user']['role'] = $this->user['CsGroups'][0]['role_id'];
+                $_SESSION['user']['group']  = $this->user['CsGroups'][0]['group_id'];
+                $_SESSION['user']['role']   = $this->user['CsGroups'][0]['role_id'];
                 $_SESSION['user']['rights'] = Koch\ACL::createRightSession(
                     $_SESSION['user']['role'],
                     $this->user['user_id']
@@ -227,7 +228,7 @@ class User
     }
 
     /**
-     * Check the user
+     * Check the user.
      *
      * Validates the existance of the user via nick or email and the passwordhash
      * This is done in two steps:
@@ -246,23 +247,23 @@ class User
         $user = null;
 
         // check if a given nick or email exists
-        if ($login_method == 'nick') {
+        if ($login_method === 'nick') {
             // get user_id and passwordhash with the nick
             $user = Doctrine_Query::create()
                 ->select('u.user_id, u.passwordhash, u.salt')
                 ->from('CsUsers u')
                 ->where('u.nick = ?')
-                ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$value], Doctrine::HYDRATE_ARRAY);
         }
 
         // check if a given email exists
-        if ($login_method == 'email') {
+        if ($login_method === 'email') {
             // get user_id and passwordhash with the email
             $user = Doctrine_Query::create()
                 ->select('u.user_id, u.passwordhash, u.salt')
                 ->from('CsUsers u')
                 ->where('u.email = ?')
-                ->fetchOne(array($value), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$value], Doctrine::HYDRATE_ARRAY);
         }
 
         $this->moduleconfig = $this->config->readModuleConfig('account');
@@ -283,38 +284,38 @@ class User
     }
 
     /**
-     * Login
+     * Login.
      *
-     * @param int $user_id      contains user_id
-     * @param int $remember_me  contains remember_me setting
-     * @param string  $passwordhash contains password string
+     * @param int    $user_id      contains user_id
+     * @param int    $remember_me  contains remember_me setting
+     * @param string $passwordhash contains password string
      */
     public function loginUser($user_id, $remember_me, $passwordhash)
     {
-        /**
+        /*
          * 1. Create the User Data Array and the Session via $user_id
          */
         $this->createUserSession($user_id);
 
-        /**
+        /*
          * 2. Remember-Me ( set Logindata via Cookie )
          */
         if ($remember_me === true) {
             $this->setRememberMeCookie($user_id, $passwordhash);
         }
 
-        /**
+        /*
          * 3. user_id is now inserted into the session
          * This transforms the so called Guest-Session to a User-Session
          */
         $this->sessionSetUserId($user_id);
 
-        /**
+        /*
          * 4. Delete Login attempts
          */
         unset($_SESSION['login_attempts']);
 
-        /**
+        /*
          * 5. Stats-Updaten
          * @todo stats update after login?
          */
@@ -322,16 +323,16 @@ class User
 
     /**
      * Set the remember me cookie
-     * If this cookie is found, the user is re-logged in automatically
+     * If this cookie is found, the user is re-logged in automatically.
      *
-     * @param int $user_id      contains user_id
-     * @param string  $passwordhash contains password string
+     * @param int    $user_id      contains user_id
+     * @param string $passwordhash contains password string
      */
     private function setRememberMeCookie($user_id, $passwordhash)
     {
         // calculate cookie lifetime and combine cookie string
         $cookie_lifetime = time() + round($this->moduleconfig['login']['remember_me_time'] * 24 * 60 * 60);
-        $cookie_string = $user_id . '#' . $passwordhash;
+        $cookie_string   = $user_id . '#' . $passwordhash;
 
         setcookie('cs_cookie', $cookie_string, $cookie_lifetime);
 
@@ -339,7 +340,7 @@ class User
     }
 
     /**
-     * Logout
+     * Logout.
      */
     public function logoutUser()
     {
@@ -351,14 +352,14 @@ class User
     }
 
     /**
-     * Checks if a login cookie is set
+     * Checks if a login cookie is set.
      */
     public function checkLoginCookie()
     {
         // Check for login cookie
         if (isset($_COOKIE['cs_cookie'])) {
-            $cookie_array = explode('#', $_COOKIE['cs_cookie']);
-            $cookie_user_id = (int) $cookie_array['0'];
+            $cookie_array    = explode('#', $_COOKIE['cs_cookie']);
+            $cookie_user_id  = (int) $cookie_array['0'];
             $cookie_password = (string) $cookie_array['1'];
 
             #Koch_Module_Controller::initModel('users');
@@ -367,7 +368,7 @@ class User
                 ->select('u.user_id, u.passwordhash, u.salt')
                 ->from('CsUsers u')
                 ->where('u.user_id = ?')
-                ->fetchOne(array($user_id), Doctrine::HYDRATE_ARRAY);
+                ->fetchOne([$user_id], Doctrine::HYDRATE_ARRAY);
 
             $this->moduleconfig = $this->config->readModuleConfig('account');
 
@@ -378,7 +379,7 @@ class User
                 $this->moduleconfig['login']['hash_algorithm']
             );
 
-            if (is_array($this->user) and $hash_ok and $_COOKIE['cs_cookie_user_id'] == $this->user['user_id']) {
+            if (is_array($this->user) and $hash_ok and $_COOKIE['cs_cookie_user_id'] === $this->user['user_id']) {
                 // Update the cookie
                 $this->setRememberMeCookie($_COOKIE['cs_cookie_user_id'], $_COOKIE['cs_cookie_password']);
 
@@ -396,7 +397,7 @@ class User
     }
 
     /**
-     * Sets user_id to current session
+     * Sets user_id to current session.
      *
      * @param $user_id int The user_id to set to the session.
      */
@@ -406,9 +407,9 @@ class User
             ->select('user_id')
             ->from('CsSession')
             ->where('session_id = ?')
-            ->fetchOne(array(session_id()));
+            ->fetchOne([session_id()]);
 
-        /**
+        /*
          * Update Session, because we know that session_id already exists
          */
         if ($result) {
@@ -423,11 +424,12 @@ class User
 
     /**
      * Checks, if the user is authorized to access a resource.
-     * It's a proxy method forwarding to Authorization::isAuthorized()
+     * It's a proxy method forwarding to Authorization::isAuthorized().
      *
-     * @param  string  $module     Module name, e.g. 'guestbook'.
-     * @param  string  $permission Permission name, e.g. 'actionList'.
-     * @return boolean True, if the user is authorized. Otherwise, false.
+     * @param string $module     Module name, e.g. 'guestbook'.
+     * @param string $permission Permission name, e.g. 'actionList'.
+     *
+     * @return bool True, if the user is authorized. Otherwise, false.
      */
     public static function isAuthorized($module = '', $permission = '')
     {
@@ -445,13 +447,13 @@ class User
             ->delete('CsUsers')
             ->from('CsUsers')
             ->where('activated = ? AND joined < ?')
-            ->execute(array(0, time() - 259200));
+            ->execute([0, time() - 259200]);
     }
 
     /**
      * Check, whether a user is authenticated (logged in).
      *
-     * @return boolean Returns Tru,e if user is authenticated. Otherwise, false.
+     * @return bool Returns Tru,e if user is authenticated. Otherwise, false.
      */
     public function isUserAuthenticated()
     {
@@ -463,7 +465,7 @@ class User
     }
 
     /**
-     * Returns the user_id from Session
+     * Returns the user_id from Session.
      *
      * @return int user_id
      */

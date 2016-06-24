@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,13 +12,13 @@
 
 namespace Koch\Mvc;
 
-use Koch\View\Helper\Breadcrumb; // @todo move usage into prefilter
+use Koch\Filter\FilterInterface; // @todo move usage into prefilter
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Filter\FilterInterface;
+use Koch\View\Helper\Breadcrumb;
 
 /**
- * Koch Framework FrontController
+ * Koch Framework FrontController.
  *
  * It's basically a FrontController (which should better be named RequestController)
  * with fassade to both filtermanagers (addPreFilter, addPostFilter) on top.
@@ -61,7 +61,7 @@ class FrontController implements FrontControllerInterface
     private $eventDispatcher;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
     {
@@ -74,7 +74,7 @@ class FrontController implements FrontControllerInterface
     }
 
     /**
-     * Add a Prefilter
+     * Add a Prefilter.
      *
      * This filter is processed *before* the Controller->Action is executed.
      *
@@ -86,7 +86,7 @@ class FrontController implements FrontControllerInterface
     }
 
     /**
-     * Add a Postfilter
+     * Add a Postfilter.
      *
      * This filter is processed *after* Controller->Action was executed.
      *
@@ -98,7 +98,7 @@ class FrontController implements FrontControllerInterface
     }
 
     /**
-     * Front_Controller::processRequest() = dispatch()
+     * Front_Controller::processRequest() = dispatch().
      *
      * Speaking in very basic concepts: this is a RequestHandler.
      * The C in MVC. It handles the dispatching of the request.
@@ -137,9 +137,9 @@ class FrontController implements FrontControllerInterface
     {
         $route = $this->request->getRoute();
 
-        $classname    = $route::getClassname();
-        $method       = $route::getMethod();
-        $parameters   = $route::getParameters();
+        $classname  = $route::getClassname();
+        $method     = $route::getMethod();
+        $parameters = $route::getParameters();
         #$request_meth = \Koch\Http\HttpRequest::getRequestMethod();
         #$renderengine = $route::getRenderEngine();
 
@@ -149,7 +149,7 @@ class FrontController implements FrontControllerInterface
 
         $controllerInstance = new $classname($this->request, $this->response);
 
-        /**
+        /*
          * Initialize the Module
          *
          * by calling the "_initializeModule" method on the controller.
@@ -159,11 +159,11 @@ class FrontController implements FrontControllerInterface
          * Note the underscore! The method name is intentionally underscored.
          * This places the method on top in the method navigator of your IDE.
          */
-        if (true === method_exists($controllerInstance, '_initializeModule')) {
+        if (method_exists($controllerInstance, '_initializeModule')) {
             $controllerInstance->_initializeModule();
         }
 
-        /**
+        /*
          * "Before Module Filter" is a prefilter on the module controller level.
          *
          * It calls the "_beforeFilter" method on the module controller.
@@ -173,25 +173,25 @@ class FrontController implements FrontControllerInterface
          * Note the underscore! The method name is intentionally underscored.
          * This places the method on top in the method navigator of your IDE.
          */
-        if (true === method_exists($controllerInstance, '_beforeFilter')) {
-            $controllerInstance->_beforeFilter();
+        if (method_exists($controllerInstance, '_beforeModuleFilter')) {
+            $controllerInstance->_beforeModeFilter();
         }
 
         // @todo auto-attach a Module::onBootstrap method as event
 
-        // @todo move into a prefilter / and consider the request being ajax :) = no breadcrumbs
+        // @todo move into a prefilter / and consider the request being ajax = no breadcrumbs
         Breadcrumb::initialize($route->getModule(), $route->getController());
 
-        /**
+        /*
          * Finally: dispatch to the requested controller method
          */
-        if (true === method_exists($controllerInstance, $method)) {
+        if (method_exists($controllerInstance, $method)) {
             $controllerInstance->$method($parameters);
         } else {
-            echo 'Class '.$classname.'->Method '.$method.' not found.';
+            echo 'Class ' . $classname . '->Method ' . $method . ' not found.';
         }
 
-         /**
+         /*
          * "After Module Filter" is a postfilter on the module controller level.
          *
          * It calls the "_afterFilter" method on the module controller.
@@ -201,9 +201,8 @@ class FrontController implements FrontControllerInterface
          * Note the underscore! The method name is intentionally underscored.
          * This places the method on top in the method navigator of your IDE.
          */
-        if (true === method_exists($controllerInstance, '_afterFilter')) {
-
-            $controllerInstance->_afterFilter();
+        if (method_exists($controllerInstance, '_afterModuleFilter')) {
+            $controllerInstance->_afterModuleFilter();
         }
 
         // @todo auto-attach a Module::onShutdown method as event

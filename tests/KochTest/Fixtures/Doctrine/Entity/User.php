@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Fixtures\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;

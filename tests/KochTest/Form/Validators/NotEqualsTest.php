@@ -13,7 +13,7 @@ class NotEqualsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->validator = new NotEquals;
+        $this->validator = new NotEquals();
     }
 
     public function tearDown()
@@ -34,13 +34,13 @@ class NotEqualsTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodsetNotEqualsTo()
     {
-         // setter accepts numeric
+        // setter accepts numeric
          $this->validator->setNotEqualsTo(19);
-         $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
+        $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
 
          // setter accepts string
          $this->validator->setNotEqualsTo('19');
-         $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
+        $this->assertNotEquals(18, $this->validator->getNotEqualsTo());
     }
 
     public function testMethodprocessValidationLogic()

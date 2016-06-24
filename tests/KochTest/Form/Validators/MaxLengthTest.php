@@ -6,7 +6,6 @@ use Koch\Form\Validators\MaxLength;
 
 class MaxLengthTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Maxlength
      */
@@ -19,7 +18,7 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new MaxLength;
+        $this->validator = new MaxLength();
     }
 
     /**
@@ -63,7 +62,7 @@ class MaxLengthTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

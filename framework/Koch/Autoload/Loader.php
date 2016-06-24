@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,7 +12,7 @@
 
 namespace<br>";
 
-        if (is_string($filename) === true) {
+        if (is_string($filename)) {
             return self::includeFileAndMap($filename, $classname);
         }
 
@@ -20,7 +20,7 @@ namespace<br>";
     }
 
     /**
-     * Include File (and register it to the autoloading map file)
+     * Include File (and register it to the autoloading map file).
      *
      * This procedure ensures, that the autoload mapping array dataset
      * is increased stepwise resulting in a decreasing number of autoloading tries.
@@ -46,18 +46,19 @@ namespace<br>";
     /**
      * Includes a file, if found.
      *
-     * @param  string $filename  The file to be included
-     * @param  string $classname (Optional) The classname expected inside this file.
-     * @return bool   True on success of include, false otherwise.
+     * @param string $filename  The file to be included
+     * @param string $classname (Optional) The classname expected inside this file.
+     *
+     * @return bool True on success of include, false otherwise.
      */
     public static function includeFile($filename, $classname = null)
     {
         $filename = realpath($filename);
 
-        if (is_file($filename) === true) {
+        if (is_file($filename)) {
             include $filename;
 
-            if (null === $classname or (class_exists($classname, false) === true)) {
+            if (null === $classname || class_exists($classname, false)) {
                 return true;
             }
         }
@@ -80,7 +81,7 @@ namespace<br>";
             self::readAutoloadingMapFile();
         }
 
-        if (is_writable(self::$mapfile) === true) {
+        if (is_writable(self::$mapfile)) {
             return (bool) file_put_contents(self::$mapfile, serialize($array), LOCK_EX);
         } else {
             throw new \RuntimeException('Autoload cache file not writable: ' . self::$mapfile);
@@ -95,12 +96,12 @@ namespace<br>";
     public static function readAutoloadingMapFile()
     {
         // create file, if not existant
-        if (is_file(self::$mapfile) === false) {
+        if (is_file(self::$mapfile)) {
             $file_resource = fopen(self::$mapfile, 'a', false);
             fclose($file_resource);
             unset($file_resource);
 
-            return array();
+            return [];
         } else { // load map from file
             try {
                 return (array) unserialize(file_get_contents(self::$mapfile));
@@ -124,8 +125,8 @@ namespace<br>";
     /**
      * Writes the autoload mapping array to APC.
      *
-     * @return boolean automatically generated classmap
-     * @return boolean True if stored.
+     * @return bool automatically generated classmap
+     * @return bool True if stored.
      */
     public static function writeAutoloadingMapApc($array)
     {
@@ -136,15 +137,16 @@ namespace<br>";
      * Adds a new $classname to $filename mapping to the map array.
      * The new map array is written to apc or file.
      *
-     * @param  string  $class Classname is the lookup key for $filename.
-     * @param  string  $file  Filename is the file to load.
-     * @return boolean True if added to map.
+     * @param string $class Classname is the lookup key for $filename.
+     * @param string $file  Filename is the file to load.
+     *
+     * @return bool True if added to map.
      */
     public static function addMapping($class, $file)
     {
-        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, array($class => $file));
+        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, [$class => $file]);
 
-        if (defined('APC') and APC == true) {
+        if (defined('APC') and APC === true) {
             return self::writeAutoloadingMapApc(self::$autoloaderMap);
         }
 
@@ -162,7 +164,7 @@ namespace<br>";
     }
 
     /**
-     * Setter for the classmap file
+     * Setter for the classmap file.
      *
      * @param string classmap filepath.
      */
@@ -188,14 +190,14 @@ namespace<br>";
     {
         self::setClassMapFile($mapfile);
 
-        spl_autoload_register(array(__CLASS__, 'autoload'), true, true);
+        spl_autoload_register([__CLASS__, 'autoload'], true, true);
     }
 
     /**
-     * Unregisters the autoloader
+     * Unregisters the autoloader.
      */
     public static function unregister()
     {
-        spl_autoload_unregister(array(__CLASS__, 'autoload'));
+        spl_autoload_unregister([__CLASS__, 'autoload']);
     }
 }

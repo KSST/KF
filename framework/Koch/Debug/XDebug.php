@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Debug;
 
 /**
- * XDebug
+ * XDebug.
  *
  * This class initializes xdebug at system start-up and displays debug
  * and runtime-informations at application shutdown.
@@ -24,25 +24,25 @@ class XDebug
 
     protected static $initialized = false;
 
-    protected static $initSettings = array(
+    protected static $initSettings = [
         'var_display_max_children' => 128,
-        'var_display_max_data' => 512,
-        'var_display_max_depth' => 10,
-        'overload_var_dump' => 'on',
-        'collect_params' => 2,
-        'collect_vars' => true,
-        'dump_globals' => true,
-        'dump.GET' => '*',
-        'dump.POST' => '*',
-        'dump.COOKIE' => '*',
-        'dump.SESSION' => '*',
-        'show_local_vars' => false,
-        'show_mem_delta' => true,
-        'show_exception_trace' => false,
-        'auto_trace' => false,
-    );
+        'var_display_max_data'     => 512,
+        'var_display_max_depth'    => 10,
+        'overload_var_dump'        => 'on',
+        'collect_params'           => 2,
+        'collect_vars'             => true,
+        'dump_globals'             => true,
+        'dump.GET'                 => '*',
+        'dump.POST'                => '*',
+        'dump.COOKIE'              => '*',
+        'dump.SESSION'             => '*',
+        'show_local_vars'          => false,
+        'show_mem_delta'           => true,
+        'show_exception_trace'     => false,
+        'auto_trace'               => false,
+    ];
 
-    protected static $outputConstants     = true;
+    protected static $outputConstants = true;
 
     public static function configure()
     {
@@ -58,7 +58,7 @@ class XDebug
     }
 
     /**
-     * XDebug Helper Functions
+     * XDebug Helper Functions.
      */
     public static function isXdebugActive()
     {
@@ -70,7 +70,7 @@ class XDebug
     }
 
     /**
-     * Initializes XDEBUG
+     * Initializes XDEBUG.
      */
     public static function startXdebug()
     {
@@ -95,13 +95,13 @@ class XDebug
     }
 
     /**
-     * Rendering function on Shutdown of XDEBUG
+     * Rendering function on Shutdown of XDEBUG.
      */
     public static function render()
     {
         // Start XDEBUG Tracing and Coverage
         if (self::isXdebugActive()) {
-            /**
+            /*
              * This is the CSS for XDebug Fatal Error
              */
             echo '<!-- Disable XDebug Mode to remove this!-->
@@ -144,7 +144,7 @@ class XDebug
                 /*]]>*/
                 </style>';
 
-            /**
+            /*
              * Reset for hardcoded bgcolor attributes in the "xdebug-error" table.
              * This will select all <td> elements and reset the bgcolor attribute on each element.
              */
@@ -158,7 +158,7 @@ class XDebug
                     }
                   }";
 
-            /**
+            /*
              * Visibility Toggle + Toggle Text Change
              */
             echo 'function toggleXDebugTable(a) {document.getElementById(a).style.display=="none"
@@ -168,7 +168,7 @@ class XDebug
                     document.getElementById("toggle-icon-"+a).innerHTML="&#9658;")};';
             echo '</script>';
 
-            /**
+            /*
              * This is the CSS for XDebug Console via xdebug_dump_superglobals()
              */
             echo '<!-- Disable XDebug Mode to remove this!-->
@@ -285,7 +285,7 @@ class XDebug
 
             echo '</fieldset>';
 
-            /**
+            /*
              * Reset for hardcoded bgcolor attributes in the "xdebug-superglobals" table.
              * This will select all <td> elements and reset the bgcolor attribute on each element.
              */
@@ -302,18 +302,18 @@ class XDebug
         // fetch all defined constants ordered by categories as key
         $aConsts = get_defined_constants(true);
 
-        /**
+        /*
          * This array defines
          * (a) the categories to show (whitelist) and
          * (b) the order of their appearance in the constants table.
          * Let user (application constants) be at first position.
          */
-        $aCategoriesToShow = array(
+        $aCategoriesToShow = [
             'application',
             'apc',
             'mbstring',
             'xdebug',
-        );
+        ];
 
         echo self::getSectionHeadlineHTML('Constants');
 
@@ -324,7 +324,7 @@ class XDebug
             if (isset($aConsts[$category])) {
 
                 // table row "headline"
-                $headline = ($category == 'user') ? 'Application Constants' : 'Constants for [' . $category . ']';
+                $headline = ($category === 'user') ? 'Application Constants' : 'Constants for [' . $category . ']';
                 echo sprintf('<tr><th colspan="2">%s</th></tr>', $headline);
 
                 // table row "constant"
@@ -342,7 +342,7 @@ class XDebug
 
     public static function showBrowserInfo()
     {
-        $browser = new \Koch\Browser\Browser();
+        $browser     = new \Koch\Browser\Browser();
         $browserInfo = $browser->getBrowserInfo();
 
         echo self::getSectionHeadlineHTML('Browserinfo');
@@ -351,11 +351,11 @@ class XDebug
 
         echo '<td class="td1"><b>Browser-Information</b></td>';
         echo '<td class="td2">';
-        echo 'Browser: <b>' . $browserInfo['name'] . "</b><br/>";
-        echo 'Version:&nbsp;&nbsp;<b>' . $browserInfo['version'] . "</b><br/>";
-        echo 'Engine:&nbsp;&nbsp;&nbsp;' . $browserInfo['engine'] . "<br/>";
-        echo 'Browser ist Bot: ' . ($browser->isBot() ? 'Ja' : 'Nein') . "<br/>";
-        echo 'Betriebssystem: ' . $browserInfo['os'] . "<br/>";
+        echo 'Browser: <b>' . $browserInfo['name'] . '</b><br/>';
+        echo 'Version:&nbsp;&nbsp;<b>' . $browserInfo['version'] . '</b><br/>';
+        echo 'Engine:&nbsp;&nbsp;&nbsp;' . $browserInfo['engine'] . '<br/>';
+        echo 'Browser ist Bot: ' . ($browser->isBot() ? 'Ja' : 'Nein') . '<br/>';
+        echo 'Betriebssystem: ' . $browserInfo['os'] . '<br/>';
         echo '</td></tr>';
     }
 
@@ -371,7 +371,7 @@ class XDebug
              * a header like "Expires: Thu, 19 Nov 1981 08:52:00 GMT" has several doublecolons (:)
              * we split the string by exploding it, at the first colon and returning a limited result set (2 items):
              * $headers['0'] = 'Expires';
-             * $headers['1'] = 'Thu, 19 Nov 1981 08:52:00 GMT';
+             * $headers['1'] = 'Thu, 19 Nov 1981 08:52:00 GMT';.
              */
             $headers = explode(':', $header, 2);
 
@@ -382,14 +382,15 @@ class XDebug
     }
 
     /**
-     * Rounds a $value to MegaBytes
+     * Rounds a $value to MegaBytes.
      *
-     * @param  int $value The Value to round to megabytes.
-     * @return double  the $value rounded to megabytes, like: 1,44MB.
+     * @param int $value The Value to round to megabytes.
+     *
+     * @return float the $value rounded to megabytes, like: 1,44MB.
      */
     public static function roundMB($value)
     {
-        return round(($value/1048576), 2);
+        return round(($value / 1048576), 2);
     }
 
     /**
@@ -406,11 +407,11 @@ class XDebug
 
     public static function showCallStack()
     {
-        echo 'CallStack - File: '       . xdebug_call_file();
-        echo '<br />Class: '            . xdebug_call_class();
-        echo '<br />Function: '         . xdebug_call_function();
-        echo '<br />Line: '             . xdebug_call_line();
-        echo '<br />Depth of Stacks: '  . xdebug_get_stack_depth();
+        echo 'CallStack - File: ' . xdebug_call_file();
+        echo '<br />Class: ' . xdebug_call_class();
+        echo '<br />Function: ' . xdebug_call_function();
+        echo '<br />Line: ' . xdebug_call_line();
+        echo '<br />Depth of Stacks: ' . xdebug_get_stack_depth();
         echo '<br />Content of Stack: ' . xdebug_var_dump(xdebug_get_function_stack());
     }
 
@@ -425,9 +426,9 @@ class XDebug
 
     public static function formatter($buffer)
     {
-        $buffer = str_replace("\r", "\\r", $buffer);
-        $buffer = str_replace("\n", "\\n", $buffer);
-        $buffer = str_replace("\t", "\\t", $buffer);
+        $buffer = str_replace("\r", '\\r', $buffer);
+        $buffer = str_replace("\n", '\\n', $buffer);
+        $buffer = str_replace("\t", '\\t', $buffer);
         $buffer = str_replace('<', '&lt;', $buffer);
         $buffer = str_replace('>', '&gt;', $buffer);
 
@@ -435,7 +436,7 @@ class XDebug
     }
 
     /**
-     * Returns the HTML for a Section Headline of the XDEBUG Console
+     * Returns the HTML for a Section Headline of the XDEBUG Console.
      *
      * Note:
      * If you want to use visibility toggle for a table, you have to

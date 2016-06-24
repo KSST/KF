@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,13 +13,14 @@
 namespace Koch\Console;
 
 /**
- * Command Line Colors
+ * Command Line Colors.
  *
  * The PHP Command Line Interface (CLI) has not built-in coloring for script output.
  * This class adds some color to PHP CLI output by using ANSI escape codes/sequences.
  *
  * These escape codes work on Linux BASH shells.
  * For ANSI coloring on the Windows console, you might consider using ANSICON.
+ *
  * @link https://github.com/adoxa/ansicon
  *
  * Ansi Escape Sequences takes from
@@ -29,7 +30,7 @@ namespace Koch\Console;
 class Colors
 {
     // Ansi foreground colors
-    private static $foreground = array(
+    private static $foreground = [
         'black'       => '0;30',
         'dark_gray'   => '1;30',
         'red'         => '0;31',
@@ -46,10 +47,10 @@ class Colors
         'bold_cyan'   => '1;36',
         'white'       => '1;37',
         'bold_gray'   => '0;37',
-    );
+    ];
 
     // Ansi background colors
-    private static $background = array(
+    private static $background = [
         'black'   => '40',
         'red'     => '41',
         'magenta' => '45',
@@ -58,10 +59,10 @@ class Colors
         'blue'    => '44',
         'cyan'    => '46',
         'grey'    => '47',
-    );
+    ];
 
     // Ansi Modifiers
-    private static $modifier = array(
+    private static $modifier = [
         'reset'         => '0',
         'bold'          => '1',
         'dark'          => '2',
@@ -70,16 +71,16 @@ class Colors
         'blink'         => '5',
         'blinkfast'     => '6',
         'inverse'       => '7',
-        'strikethrough' => '9'
-    );
+        'strikethrough' => '9',
+    ];
 
     // Unicode Symbol Name to Octal Escape Sequence
-    private static $unicode = array(
-        'ok'       => "✓", // "check mark" - \u221A
-        'fail'     => "✖", // "ballot x" - \u00D7
-        'big fail' => "✖",
-        'big ok'   => "✔"
-    );
+    private static $unicode = [
+        'ok'       => '✓', // "check mark" - \u221A
+        'fail'     => '✖', // "ballot x" - \u00D7
+        'big fail' => '✖',
+        'big ok'   => '✔',
+    ];
 
     /**
      * @param string   $symbol
@@ -115,7 +116,7 @@ class Colors
             $modifiers  = $options;
         }
 
-        $codes = array();
+        $codes = [];
 
         if (null !== $foreground and isset(self::$foreground[$foreground])) {
             $codes[] = self::$foreground[$foreground];
@@ -147,7 +148,7 @@ class Colors
     public static function setOptions($options)
     {
         // string to array
-        if (is_string($options) === true) {
+        if (is_string($options)) {
             $options = explode(',', $options);
         }
 
@@ -180,6 +181,6 @@ class Colors
      */
     public static function colorizeReturnValue($value)
     {
-        return ($value == 0) ? self::unicodeSymbol('fail', array('red')) : self::unicodeSymbol('ok', array('green'));
+        return ($value === 0) ? self::unicodeSymbol('fail', ['red']) : self::unicodeSymbol('ok', ['green']);
     }
 }

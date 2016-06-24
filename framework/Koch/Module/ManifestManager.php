@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Module;
 
 /**
- * \Koch\Module\ManifestManager
+ * \Koch\Module\ManifestManager.
  */
 class ManifestManager
 {
@@ -25,10 +25,10 @@ class ManifestManager
     /**
      * @var array contains the system-wide module registry
      */
-    private static $modulesRegistry  = false;
+    private static $modulesRegistry = false;
 
     /**
-     * Setter for module infos
+     * Setter for module infos.
      *
      * @param array $module_infos_array
      */
@@ -38,7 +38,7 @@ class ManifestManager
     }
 
     /**
-     * Setter for modules registry
+     * Setter for modules registry.
      *
      * @param array $module_registry_array
      */
@@ -48,7 +48,7 @@ class ManifestManager
     }
 
     /**
-     * Reads the CMS Module Registry
+     * Reads the CMS Module Registry.
      *
      * This is the right method if you want to know if
      * a module is installed and active or deactivated.
@@ -61,9 +61,10 @@ class ManifestManager
     }
 
     /**
-     * Writes the Module Registry
+     * Writes the Module Registry.
      *
-     * @param  array $array The Module Registry Array to write.
+     * @param array $array The Module Registry Array to write.
+     *
      * @return bool
      */
     public static function writeModuleRegistry($array)
@@ -72,10 +73,11 @@ class ManifestManager
     }
 
     /**
-     * Returns the module configuration as array
+     * Returns the module configuration as array.
      *
-     * @param  string $modulename
-     * @return array  Module Configuration Array
+     * @param string $modulename
+     *
+     * @return array Module Configuration Array
      */
     public static function readModuleConfig($modulename)
     {
@@ -85,21 +87,22 @@ class ManifestManager
     /**
      * Checks if a modulename belongs to the core modules.
      *
-     * @param  string  $modulename The modulename
-     * @return boolean True if modulename is a core module, false otherwise.
+     * @param string $modulename The modulename
+     *
+     * @return bool True if modulename is a core module, false otherwise.
      */
     public static function isCoreModule($modulename)
     {
         // hardcoded map with core modules
-        static $core_modules = array( 'account', 'categories', 'controlcenter', 'doctrine', 'menu', 'modulemanager',
-                                      'users', 'settings', 'systeminfo', 'thememanager', 'templatemanager');
+        static $core_modules = ['account', 'categories', 'controlcenter', 'doctrine', 'menu', 'modulemanager',
+                                      'users', 'settings', 'systeminfo', 'thememanager', 'templatemanager', ];
 
         // @todo extract from module info file if core module or not
-        return in_array($modulename, $core_modules);
+        return in_array($modulename, $core_modules, true);
     }
 
     /**
-     * Get a list of all the module directories
+     * Get a list of all the module directories.
      *
      * @return array
      */
@@ -109,7 +112,7 @@ class ManifestManager
     }
 
     /**
-     * Get a list of all the module names
+     * Get a list of all the module names.
      *
      * 4 in 1 method, handling the following cases:
      * 1. array with module names
@@ -117,13 +120,14 @@ class ManifestManager
      * 3. array with module names and paths
      * 4. named array with modulenames and paths
      *
-     * @param  boolean $only_modulenames Toggle between only_names (true) and names+paths.
-     * @param  boolean $named_array      Toggle between named (true) and unnamed array.
-     * @return array(  $modulename => $module_path )
+     * @param bool $only_modulenames Toggle between only_names (true) and names+paths.
+     * @param bool $named_array      Toggle between named (true) and unnamed array.
+     *
+     * @return array( $modulename => $module_path )
      */
     public static function getModuleNames($named_array = false, $only_modulenames = false)
     {
-        $modules = array();
+        $modules = [];
 
         $module_dirs = self::getModuleDirectories();
 
@@ -135,13 +139,13 @@ class ManifestManager
                 if ($named_array === false) {
                     $modules[] = $modulename;
                 } else {
-                    $modules[] = array('name' => $modulename);
+                    $modules[] = ['name' => $modulename];
                 }
             } else {
                 if ($named_array === false) {
-                    $modules[] = array($modulename => $module_path );
+                    $modules[] = [$modulename => $module_path];
                 } else {
-                    $modules[] = array('name' => $modulename, 'path' => $module_path);
+                    $modules[] = ['name' => $modulename, 'path' => $module_path];
                 }
             }
         }
@@ -150,13 +154,13 @@ class ManifestManager
     }
 
     /**
-     * Returns all activated modules
+     * Returns all activated modules.
      *
      * @return array $activated_modules_array
      */
     public static function getAllActivatedModules()
     {
-        $activated_modules_array = array();
+        $activated_modules_array = [];
 
         $modules = self::getModuleNames(true);
 
@@ -172,7 +176,7 @@ class ManifestManager
     /**
      * Checks if a module is active or deactived.
      *
-     * @param boolean $module True if module activated, false otherwise.
+     * @param bool $module True if module activated, false otherwise.
      */
     public static function isModuleActive($module)
     {
@@ -182,7 +186,7 @@ class ManifestManager
         }
 
         // check, if the module is
-        if (isset(self::$modulesRegistry[$module]['active']) and self::$modulesRegistry[$module]['active'] == true) {
+        if (isset(self::$modulesRegistry[$module]['active']) and self::$modulesRegistry[$module]['active'] === true) {
             return true;
         } else {
             return false;
@@ -190,10 +194,11 @@ class ManifestManager
     }
 
     /**
-     * Fetches all pieces of information of a certain module
+     * Fetches all pieces of information of a certain module.
      *
-     * @param  string $module
-     * @return array  Module Informations
+     * @param string $module
+     *
+     * @return array Module Informations
      */
     public static function getModuleInformations($module = null)
     {
@@ -219,22 +224,24 @@ class ManifestManager
     }
 
     /**
-     * Gather Module Informations from Manifest Files
+     * Gather Module Informations from Manifest Files.
      *
      * @staticvar array $modulesinfo
-     * @param  mixed array|string $module array with modulenames or one modulename
-     * @param  string             $module
+     *
+     * @param mixed array|string $module array with modulenames or one modulename
+     * @param string             $module
+     *
      * @return moduleinformations (self::$modulesinfo)
      */
     public static function loadModuleInformations($module = null)
     {
         // Init vars
-        $module_directories = array();
-        $number_of_modules = 0;
+        $module_directories = [];
+        $number_of_modules  = 0;
 
         /**
          * either fetch the module requested via parameter $module
-         * fetch all modules
+         * fetch all modules.
          */
         if ($module === null) {
             $module_directories = self::getModuleDirectories();
@@ -244,17 +251,17 @@ class ManifestManager
         }
 
         foreach ($module_directories as $modulepath) {
-            /**
+            /*
              * create array with pieces of information about a module
              */
 
             // 1) get the modulename, by stripping off the path info
             $modulename = str_replace(APPLICATION_MODULES_PATH, '', $modulepath);
 
-            self::$modulesinfo[$modulename]['name']   = $modulename;
-            self::$modulesinfo[$modulename]['id']     = $number_of_modules;
-            self::$modulesinfo[$modulename]['path']   = $modulepath;
-            self::$modulesinfo[$modulename]['core']   = self::isCoreModule($modulename);
+            self::$modulesinfo[$modulename]['name'] = $modulename;
+            self::$modulesinfo[$modulename]['id']   = $number_of_modules;
+            self::$modulesinfo[$modulename]['path'] = $modulepath;
+            self::$modulesinfo[$modulename]['core'] = self::isCoreModule($modulename);
 
             // active - based on /configuration/modules.config.php
             self::$modulesinfo[$modulename]['active'] = self::isModuleActive($modulename);
@@ -264,9 +271,9 @@ class ManifestManager
 
             // hasInfo
             $module_infofile = $modulepath . '/' . $modulename . '.info.php';
-            $config = new \Koch\Config\Config;
+            $config          = new \Koch\Config\Config();
 
-            if (is_file($module_infofile) === true) {
+            if (is_file($module_infofile)) {
                 #\Koch\Debug\Debug::firebug($module_infofile);
 
                 self::$modulesinfo[$modulename]['info'] = $config->read($module_infofile);
@@ -307,7 +314,7 @@ class ManifestManager
 
     public static function getLanguageInfosForModule($modulepath)
     {
-        $lang = array();
+        $lang = [];
 
         // we are looking at the languages folder for the given module path
         $moduleLangDir = $modulepath . DIRECTORY_SEPARATOR . 'languages';
@@ -327,7 +334,7 @@ class ManifestManager
         foreach ($iterator as $file) {
             // proceed with iteration instantly, if file is not a gettext file
             if (0 === preg_match('/.(mo|po)$/', $file->getFileName())) {
-                 continue;
+                continue;
             }
 
             // fetch locale from path (en_UK, de_DE)
@@ -345,20 +352,19 @@ class ManifestManager
             $isReadable = $file->isReadable() ? 'r' : '';
             $isWritable = $file->isWritable() ? 'w' : '';
 
-            /**
+            /*
              * Add some more pieces of information about the file
              */
-            $lang[$locale][$ext]['pathName'] = realpath($file->getPathName());
-            $lang[$locale][$ext]['fileName'] = $file->getFileName();
+            $lang[$locale][$ext]['pathName']       = realpath($file->getPathName());
+            $lang[$locale][$ext]['fileName']       = $file->getFileName();
             $lang[$locale][$ext]['filePermString'] = self::filePermissions($lang[$locale][$ext]['pathName']);
-            $lang[$locale][$ext]['fileReadable'] = $file->isReadable();
-            $lang[$locale][$ext]['fileWriteable'] = $file->isWritable();
-            $lang[$locale][$ext]['timestamp'] = date(DATE_FORMAT, $file->getCTime());
-            $lang[$locale][$ext]['cssClass'] = '-' . $isReadable . $isWritable;
-
+            $lang[$locale][$ext]['fileReadable']   = $file->isReadable();
+            $lang[$locale][$ext]['fileWriteable']  = $file->isWritable();
+            $lang[$locale][$ext]['timestamp']      = date(DATE_FORMAT, $file->getCTime());
+            $lang[$locale][$ext]['cssClass']       = '-' . $isReadable . $isWritable;
         }
 
-        /**
+        /*
          * Add some more pieces of information about the locale
          */
 
@@ -371,16 +377,16 @@ class ManifestManager
 
         foreach ($lang as $locale => $filedata) {
             // get more data about that locale from the locales array
-            if (isset(self::$l10n_sys_locales[$locale]) == true) {
-                $lang[$locale]['country_www']   = self::$l10n_sys_locales[$locale]['country-www'];
-                $lang[$locale]['lang_native']   = self::$l10n_sys_locales[$locale]['lang-native'];
-                $lang[$locale]['lang_www']      = self::$l10n_sys_locales[$locale]['lang-www'];
-                $lang[$locale]['lang']          = self::$l10n_sys_locales[$locale]['lang'];
+            if (isset(self::$l10n_sys_locales[$locale]) === true) {
+                $lang[$locale]['country_www'] = self::$l10n_sys_locales[$locale]['country-www'];
+                $lang[$locale]['lang_native'] = self::$l10n_sys_locales[$locale]['lang-native'];
+                $lang[$locale]['lang_www']    = self::$l10n_sys_locales[$locale]['lang-www'];
+                $lang[$locale]['lang']        = self::$l10n_sys_locales[$locale]['lang'];
             } else { // locale not in locales array
-                $lang[$locale]['country_www']   = 'unknown';
-                $lang[$locale]['lang_native']   = '<em>locale: </em>' . $locale;
-                $lang[$locale]['lang_www']  = '';
-                $lang[$locale]['lang']   = $locale;
+                $lang[$locale]['country_www'] = 'unknown';
+                $lang[$locale]['lang_native'] = '<em>locale: </em>' . $locale;
+                $lang[$locale]['lang_www']    = '';
+                $lang[$locale]['lang']        = $locale;
             }
         }
 
@@ -390,16 +396,18 @@ class ManifestManager
     }
 
     /**
-     * Returns file permissions as string
+     * Returns file permissions as string.
      *
      * @staticvar array $permissions
-     * @param  type   $filename
+     *
+     * @param type $filename
+     *
      * @return string File Permissions as string, e.h. "rwx", "rw-"
      */
     private static function filePermissions($filename)
     {
-        static $permissions = array("---", "--x", "-w-", "-wx", "r--", "r-x", "rw-", "rwx");
-        $perm_oct = substr(decoct(fileperms($filename)), 3);
+        static $permissions = ['---', '--x', '-w-', '-wx', 'r--', 'r-x', 'rw-', 'rwx'];
+        $perm_oct           = substr(decoct(fileperms($filename)), 3);
 
         $string = '[';
         $string .= $permissions[(int) $perm_oct[0]] . '|';

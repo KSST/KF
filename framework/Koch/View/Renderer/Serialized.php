@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,11 +22,11 @@ use Koch\View\AbstractRenderer;
 class Serialized extends AbstractRenderer
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
     }
@@ -42,7 +42,7 @@ class Serialized extends AbstractRenderer
     }
 
     /**
-     * Render serialized PHP data
+     * Render serialized PHP data.
      *
      * @param string $template Unused.
      * @param $viewdata Data to serialize.
@@ -59,18 +59,19 @@ class Serialized extends AbstractRenderer
     }
 
     /**
-     * Assign specific variable to the template
+     * Assign specific variable to the template.
      *
-     * @param  mixed      $key   Object with template vars (extraction method fetch), or array or key/value pair
-     * @param  string     $value Variable value
+     * @param mixed  $key   Object with template vars (extraction method fetch), or array or key/value pair
+     * @param string $value Variable value
+     *
      * @return Serialized \Koch\View\Renderer\Serialized
      */
     public function assign($key, $value = null)
     {
-        if (is_object($key) === true) {
+        if (is_object($key)) {
             // pull all non-static object properties
             $this->viewdata = get_object_vars($key);
-        } elseif (is_array($key) === true) {
+        } elseif (is_array($key)) {
             $this->viewdata += $key;
         } else {
             $this->viewdata[$key] = $value;

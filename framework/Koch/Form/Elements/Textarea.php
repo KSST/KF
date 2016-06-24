@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -11,7 +11,7 @@
  */
 
 namespace
-        $classname = 'Koch\Form\Elements\\'. $name;
+        $classname = 'Koch\Form\Elements\\' . $name;
 
         // load file
         if (class_exists($classname, false) === false) {
@@ -61,38 +61,38 @@ namespace
     {
         $html = '';
 
-        /**
+        /*
          * Opening of textarea tag
          */
         $html .= '<textarea';
-        $html .= (bool) $this->id ? ' id="'.$this->id.'"' : null;
-        $html .= (bool) $this->name ? ' name="'.$this->name.'"' : null;
-        $html .= (bool) $this->size ? ' size="'.$this->size.'"' : null;
-        $html .= (bool) $this->cols ? ' cols="'.$this->cols.'"' : null;
-        $html .= (bool) $this->rows ? ' rows="'.$this->rows.'"' : null;
-        $html .= (bool) $this->class ? ' class="'.$this->class.'"' : null;
+        $html .= (bool) $this->id ? ' id="' . $this->id . '"' : null;
+        $html .= (bool) $this->name ? ' name="' . $this->name . '"' : null;
+        $html .= (bool) $this->size ? ' size="' . $this->size . '"' : null;
+        $html .= (bool) $this->cols ? ' cols="' . $this->cols . '"' : null;
+        $html .= (bool) $this->rows ? ' rows="' . $this->rows . '"' : null;
+        $html .= (bool) $this->class ? ' class="' . $this->class . '"' : null;
         $html .= (bool) $this->disabled ? ' disabled="disabled"' : null;
-        $html .= (bool) $this->maxlength ? ' maxlength="'.$this->maxlength.'"' : null;
-        $html .= (bool) $this->style ? ' style="'.$this->style.'"' : null;
+        $html .= (bool) $this->maxlength ? ' maxlength="' . $this->maxlength . '"' : null;
+        $html .= (bool) $this->style ? ' style="' . $this->style . '"' : null;
         $html .= '>';
 
-        /**
+        /*
          * Content between tags (value)
          */
         $html .= Functions::UTF8_to_HTML($this->getValue());
 
-        /**
+        /*
          * Closing of textarea tag
          */
         $html .= '</textarea>';
 
-        /**
+        /*
          * Attach HTML content of WYSIWYG Editor
          *
          * Always after the textarea !
          * Because html elements are served first, before javascript dom selections are applied upon them!
          */
-        if (empty($this->editor) == false) {
+        if (empty($this->editor) === false) {
             $html .= $this->getEditorFormelement()->transferPropertiesToEditor()->render();
         }
 

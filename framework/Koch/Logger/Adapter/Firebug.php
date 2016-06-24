@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -67,12 +67,13 @@ class Firebug extends AbstractLogger implements LoggerInterface
      * It utilizes firephp's procedural API.
      * fb($var, 'Label', FirePHP::*)
      *
-     * @param  string   $level
-     * @param  string   $message
-     * @param  string[] $context
+     * @param string   $level
+     * @param string   $message
+     * @param string[] $context
+     *
      * @return bool
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $loglevel = $this->getFirePHPLoglevel($level);
 

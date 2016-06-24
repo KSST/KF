@@ -1,13 +1,13 @@
 <?php
+
 namespace KochTest\Pagination\Adapter;
 
+use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
+use Doctrine\Common\DataFixtures\Loader;
+// doctrine/data-fixtures
+use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 use Koch\Pagination\Adapter\Doctrine;
 use Koch\Tests\DoctrineTestCase;
-
-// doctrine/data-fixtures
-use Doctrine\Common\DataFixtures\Loader;
-use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
-use Doctrine\Common\DataFixtures\Purger\ORMPurger;
 
 class DoctrineTest extends DoctrineTestCase
 {
@@ -21,8 +21,8 @@ class DoctrineTest extends DoctrineTestCase
         $fixtures = $loader->getFixtures();
 
         // execute fixtures
-        $em = $this->getEntityManager();
-        $purger = new ORMPurger();
+        $em       = $this->getEntityManager();
+        $purger   = new ORMPurger();
         $executor = new ORMExecutor($em, $purger);
         $executor->execute($fixtures);
     }
@@ -37,7 +37,7 @@ class DoctrineTest extends DoctrineTestCase
      */
     public function testGetTotalNumberOfResults()
     {
-        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $dql   = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);
@@ -49,13 +49,13 @@ class DoctrineTest extends DoctrineTestCase
      */
     public function testGetSlice()
     {
-        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $dql   = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);
-        $this->assertEquals(1, count( $adapter->getSlice(0, 1)) );
-        $this->assertEquals(2, count( $adapter->getSlice(0, 10)) );
-        $this->assertEquals(1, count( $adapter->getSlice(1, 1)) );
+        $this->assertEquals(1, count($adapter->getSlice(0, 1)));
+        $this->assertEquals(2, count($adapter->getSlice(0, 10)));
+        $this->assertEquals(1, count($adapter->getSlice(1, 1)));
     }
 
     /**
@@ -63,7 +63,7 @@ class DoctrineTest extends DoctrineTestCase
      */
     public function testGetQuery()
     {
-        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $dql   = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);
@@ -75,7 +75,7 @@ class DoctrineTest extends DoctrineTestCase
      */
     public function testGetArray()
     {
-        $dql = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
+        $dql   = "SELECT u FROM KochTest\Fixtures\Doctrine\Entity\User u";
         $query = $this->entityManager->createQuery($dql);
 
         $adapter = new Doctrine($query);

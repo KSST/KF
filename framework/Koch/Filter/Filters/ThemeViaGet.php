@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,10 +12,10 @@
 
 namespace Koch\Filter\Filters;
 
+use Koch\Config\Config;
 use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Config\Config;
 use Koch\Validation\InputFilter;
 
 /**
@@ -28,9 +28,9 @@ use Koch\Validation\InputFilter;
 class ThemeViaGet implements FilterInterface
 {
     // default setting
-    private $config = array(
-        'theme_via_get' => 0
-    );
+    private $config = [
+        'theme_via_get' => 0,
+    ];
 
     private $input = null;
 
@@ -38,7 +38,7 @@ class ThemeViaGet implements FilterInterface
     {
         $config = $config->getApplicationConfig();
 
-        if (isset($config['prefilter']) === true) {
+        if (isset($config['prefilter'])) {
             $this->config = $config['prefilter'];
         }
 
@@ -48,7 +48,7 @@ class ThemeViaGet implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // theme switching must be enabled in configuration
-        if ($this->config['theme_via_get'] == 0) {
+        if ($this->config['theme_via_get'] === 0) {
             return;
         }
 

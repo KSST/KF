@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,7 +18,7 @@ namespace . $classname, '\\');
     }
 
     /**
-     * Writes the classmap array to file
+     * Writes the classmap array to file.
      *
      * @param array  $classmap Array containing the classname to file relation.
      * @param string $mapfile  Path to the classmap file to be written.

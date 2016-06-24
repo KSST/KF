@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,11 +13,11 @@
 namespace Koch\Files;
 
 /**
- * Koch Framework - Class for Upload Handling
+ * Class for Upload Handling.
  */
 class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
 {
-    protected $files = array();
+    protected $files = [];
 
     /**
      * Constructor.
@@ -34,9 +34,9 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
     {
         foreach ($files as $formId => $fileInfo) {
             if (is_array($fileInfo['name'])) {
-                $this->files[$formId] = array();
+                $this->files[$formId] = [];
 
-                for ($i = 0, $filesTotal = count($files); $i < $filesTotal; $i++) {
+                for ($i = 0, $filesTotal = count($files); $i < $filesTotal; ++$i) {
                     $this->files[$formId][$i] = new Koch_File(
                         $fileInfo['name'][$i],
                         $fileInfo['type'][$i],
@@ -61,7 +61,8 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
      * Checks whether there is files uploaded with specified name.
      *
      * @param $offset string  form name of file upload
-     * @return boolean
+     *
+     * @return bool
      */
     public function offsetExists($offset)
     {
@@ -72,6 +73,7 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
      * Returns the uploaded files that have the specified form name.
      *
      * @param $offset string  form name of file upload
+     *
      * @return Koch_Upload_File|array an uploaded file object or an array of them
      */
     public function offsetGet($offset)
@@ -110,7 +112,7 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
     /**
      * Returns the count of uploaded files with different form names.
      *
-     * @return integer
+     * @return int
      */
     public function count()
     {

@@ -16,7 +16,7 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new Compositum;
+        $this->object = new Compositum();
     }
 
     public function tearDown()
@@ -32,20 +32,20 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
         // create a virtual error log file
         vfsStreamWrapper::register();
         $this->configFile = vfsStream::url('root/errorlog.txt');
-        $this->file = vfsStream::newFile('errorlog.txt', 0777)->withContent('someContent');
-        $this->root = new vfsStreamDirectory('root');
+        $this->file       = vfsStream::newFile('errorlog.txt', 0777)->withContent('someContent');
+        $this->root       = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
 
         // add file logger and add virtual log file
-        $logger = new \Koch\Logger\Adapter\File;
+        $logger = new \Koch\Logger\Adapter\File();
         $logger->setErrorLogFilename($this->configFile);
         $this->object->addLogger($logger);
 
         // setup message to log
         $message = 'TestMessage';
-        $context = array('Context Info');
-        $level = 'ERROR';
+        $context = ['Context Info'];
+        $level   = 'ERROR';
 
         $this->assertTrue($this->object->log($level, $message, $context));
     }
@@ -57,12 +57,12 @@ class CompositumTest extends \PHPUnit_Framework_TestCase
     public function testAddLogger()
     {
         // add
-        $firebug = new \Koch\Logger\Adapter\Firebug;
+        $firebug = new \Koch\Logger\Adapter\Firebug();
         $this->object->addLogger($firebug);
         $this->assertEquals($firebug, $this->object->loggers[0]);
 
         // remove
         $this->object->removeLogger('firebug');
-        $this->assertEquals(array(), $this->object->loggers);
+        $this->assertEquals([], $this->object->loggers);
     }
 }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -15,7 +15,7 @@ namespace Koch\Form\Decorators\Form;
 use Koch\Form\AbstractFormDecorator;
 
 /**
- * Form_Decorator_Div
+ * Form_Decorator_Div.
  *
  * Wraps a <div> element around the html_form_content.
  */
@@ -36,12 +36,12 @@ class Div extends AbstractFormDecorator
 
         // add class
         if (mb_strlen($this->getClass()) > 0) {
-             $html_deco .= ' class="' . $this->getClass() .'"';
+            $html_deco .= ' class="' . $this->getClass() . '"';
         }
 
         // add class
         if (mb_strlen($this->getId()) > 0) {
-             $html_deco .= ' id="' . $this->getId() .'"';
+            $html_deco .= ' id="' . $this->getId() . '"';
         }
 
         // close opening div tag (close unclosed first tag)

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -21,7 +21,7 @@ use Koch\Form\FormElementInterface;
 class JqSelectColor extends FormElement implements FormElementInterface
 {
     /**
-     * JQSelectColor uses jQuery Farbtastic Colorpicker
+     * JQSelectColor uses jQuery Farbtastic Colorpicker.
      */
     public function __construct()
     {
@@ -42,16 +42,16 @@ class JqSelectColor extends FormElement implements FormElementInterface
     {
         // add the javascripts to the queue of the page (@todo queue, duplication check)
         $javascript = '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.farbtastic.js"></script>';
-        $javascript .= '<link rel="stylesheet" href="'.WWW_ROOT_THEMES_CORE . 'css/farbtastic.css" type="text/css" />';
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.farbtastic.js"></script>';
+        $javascript .= '<link rel="stylesheet" href="' . WWW_ROOT_THEMES_CORE . 'css/farbtastic.css" type="text/css" />';
 
-        /**
+        /*
          * Add the jQuery UI Date Select Dialog.
          *
          * WARNING: the div dialog must be present in the dom,
          *          before you assign a js function to it via $('#datepicker')
          */
-        $datepickerJs   = "<script type=\"text/javascript\">
+        $datepickerJs = "<script type=\"text/javascript\">
                                           $(document).ready(function () {
                                             $('#colorpicker').farbtastic('#color');
                                             $('#colorpicker').hide();
@@ -61,10 +61,10 @@ class JqSelectColor extends FormElement implements FormElementInterface
                                           });
                                         </script>";
 
-        $html = '<input type="text" id="color" name="'.$this->getName().'" value="'.$this->getValue().'" />';
-        $html .= '<img src="'.WWW_ROOT_THEMES_CORE . 'images/icons/colors.png"';
+        $html = '<input type="text" id="color" name="' . $this->getName() . '" value="' . $this->getValue() . '" />';
+        $html .= '<img src="' . WWW_ROOT_THEMES_CORE . 'images/icons/colors.png"';
         $html .= ' align="top" style="margin-top:1px; margin-left:3px;" id="color"></img><div id="colorpicker"></div>';
 
-        return $javascript.$datepickerJs.$html;
+        return $javascript . $datepickerJs . $html;
     }
 }

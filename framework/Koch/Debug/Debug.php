@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Debug;
 
 /**
- * Debug
+ * Debug.
  *
  * This class initializes debugging helpers like xdebug, the doctrine profiler,
  * firebug and printR at system start-up and displays debug
@@ -34,28 +34,27 @@ class Debug
             $vars = func_get_args();
         }
 
-        $backtrace_array = array();
+        $backtrace_array = [];
         $backtrace_array = debug_backtrace();
-        $trace = array_shift($backtrace_array);
-        $file = file($trace['file']);
-        $trace_line = $file[$trace['line']-1];
+        $trace           = array_shift($backtrace_array);
+        $file            = file($trace['file']);
+        $trace_line      = $file[$trace['line'] - 1];
 
         echo '<pre>';
         echo '<b>Debugging ';
-        echo '<font color=red>'.basename($trace['file']).'</font>';
-        echo ' on line <font color=red>'.$trace['line'].'</font></b>:' . "\n";
-        echo "<div style='background: #f5f5f5; padding: 0.2em 0em;'>".htmlspecialchars($trace_line).'</div>' . "\n";
+        echo '<font color=red>' . basename($trace['file']) . '</font>';
+        echo ' on line <font color=red>' . $trace['line'] . '</font></b>:' . "\n";
+        echo "<div style='background: #f5f5f5; padding: 0.2em 0em;'>" . htmlspecialchars($trace_line) . '</div>' . "\n";
 
         echo '<b>Type</b>: ' . gettype($var) . "\n"; // uhhh.. gettype is slow like hell
 
         // handle more than one parameter
         foreach ($vars as $var) {
-
-            if (is_string($var) === true) {
+            if (is_string($var)) {
                 echo '<b>Length</b>: ' . strlen($var) . "\n";
             }
 
-            if (is_array($var) === true) {
+            if (is_array($var)) {
                 echo '<b>Length</b>: ' . count($var) . "\n";
             }
 
@@ -69,19 +68,18 @@ class Debug
                 echo '<font color=red><b>null</b></font>';
             } elseif ($var === 0) {
                 echo '0';
-            } elseif (is_string($var) and strlen($var) == '0') {
+            } elseif (is_string($var) and strlen($var) === '0') {
                 echo '<font color=green>*EMPTY STRING*</font>';
             } elseif (is_string($var)) {
                 echo htmlspecialchars($var);
             } else {
                 $print_r = print_r($var, true);
                 // str_contains < or >
-                if ((strstr($print_r, '<') !== false) or (strstr($print_r, '>') !== false)) {
+                if ((strstr($print_r, '<') !== false) || (strstr($print_r, '>') !== false)) {
                     $print_r = htmlspecialchars($print_r);
                 }
                 echo $print_r;
             }
-
         }
 
         echo '</pre>';
@@ -111,7 +109,7 @@ class Debug
         var_dump($var);
         $var_dump = ob_get_clean();
 
-        /**
+        /*
          * if xdebug is on and overloaded the var_dump function,
          * then the output is already properly escaped and prepared for direct output.
          * if xdebug is off, we need to apply escaping ourself.
@@ -139,8 +137,9 @@ class Debug
     /**
      * Debug logs the output of $var to the firebug console in your browser.
      *
-     * @param  mixed   $var The variable to debug.
+     * @param mixed $var The variable to debug.
      * @param $logmethod The firebug method to call for logging (log,info,warn, error). Defaults to "log".
+     *
      * @return FirePHP object.
      */
     public static function firebug($var, $logmethod = 'log')
@@ -151,7 +150,7 @@ class Debug
 
         $firephp = \FirePHP::getInstance(true);
 
-        /**
+        /*
          * Adds an info message about the position of the firebug call (origin).
          * This is very helpful if you spread Debug::firebug() calls all over your code.
          */
@@ -180,32 +179,33 @@ class Debug
      * The default level is 2 (0,1,2), because we have to skip
      * the 3 calls to dump() and getWhereDebugWasCalled().
      *
-     * @param  int    $level Default 1.
+     * @param int $level Default 1.
+     *
      * @return string Message with origin of the debug call.
      */
     public static function getOriginOfDebugCall($level = 1)
     {
-        $trace  = array();
-        $file = $line = $function = $class = $object = $trace_line = '';
+        $trace = [];
+        $file  = $line  = $function  = $class  = $object  = $trace_line  = '';
 
         // Get the backtrace and the caller information.
         $trace = debug_backtrace();
-        $file = $trace[$level]['file'];
-        $line = $trace[$level]['line'];
+        $file  = $trace[$level]['file'];
+        $line  = $trace[$level]['line'];
         #$function = $trace[$level]['function'];
         #$class = $trace[$level]['class'];
 
-        /**
+        /*
          * Get the file, to show the exact origin of the debug call.
          * The line with the call, is one line above.
          */
-        $file_content = file($file);
-        $origin_of_call = trim($file_content[ $trace[$level]['line']-1 ]);
+        $file_content   = file($file);
+        $origin_of_call = trim($file_content[ $trace[$level]['line'] - 1 ]);
 
         // do not use HTML tags on CLI
         if (PHP_SAPI === 'cli') {
-            if (empty($_SERVER['REMOTE_ADDR']) === true) {
-                $format = 'Debugging %s on line %s: %s'. "\n";
+            if (empty($_SERVER['REMOTE_ADDR'])) {
+                $format = 'Debugging %s on line %s: %s' . "\n";
             } else {
                 $format = '<pre>';
                 $format .= '<b>Debugging <font color="red">%s</font> on line <font color="red">%s</font>:</b>' . "\n";
@@ -225,8 +225,8 @@ class Debug
     public static function getIncludedFiles($returnArray = false)
     {
         // init vars
-        $includedFiles = $files = $result = array();
-        $totalSize = 0;
+        $includedFiles = $files = $result = [];
+        $totalSize     = 0;
 
         // fetch all included files
         $files = get_included_files();
@@ -236,22 +236,22 @@ class Debug
 
             // if system under test, skip virtual file system files,
             // as they might be already deleted by tearDown() methods.
-            if (defined('UNIT_TEST_RUN') === true or UNIT_TEST_RUN === true) {
-                if (stripos($file, "vfs:/") !== false) {
+            if (defined('UNIT_TEST_RUN') or UNIT_TEST_RUN) {
+                if (stripos($file, 'vfs:/') !== false) {
                     continue;
                 }
             }
 
-            $size = filesize($file);
-            $includedFiles[] = array('name' => $file, 'size' => $size);
+            $size            = filesize($file);
+            $includedFiles[] = ['name' => $file, 'size' => $size];
             $totalSize += $size;
         }
 
-        $result = array(
+        $result = [
             'count' => count($files),
-            'size' => \Koch\Functions\Functions::getSize($totalSize),
-            'files' => $includedFiles
-        );
+            'size'  => \Koch\Functions\Functions::getSize($totalSize),
+            'files' => $includedFiles,
+        ];
 
         return ($returnArray === true) ? $result : self::printR($result);
     }
@@ -262,7 +262,7 @@ class Debug
     public static function getApplicationConstants($returnArray = false)
     {
         $constants = get_defined_constants(true);
-        $result = $constants['user'];
+        $result    = $constants['user'];
 
         return ($returnArray === true) ? $result : self::printR($result);
     }
@@ -331,18 +331,18 @@ class Debug
     }
 
     /**
-     * Lists all available wrappers
+     * Lists all available wrappers.
      */
     public static function getWrappers($returnArray = false)
     {
-        $result = array();
+        $result = [];
 
         $wrappers = stream_get_wrappers();
 
         $result['openssl'] = (extension_loaded('openssl')) ? 'yes' : 'no';
-        $result['http'] = in_array('http', $wrappers) ? 'yes' : 'no';
-        $result['https'] = in_array('https', $wrappers) ? 'yes' : 'no';
-        $result['all'] = $wrappers;
+        $result['http']    = in_array('http', $wrappers, true) ? 'yes' : 'no';
+        $result['https']   = in_array('https', $wrappers, true) ? 'yes' : 'no';
+        $result['all']     = $wrappers;
 
         return ($returnArray === true) ? $result : self::printR($result);
     }

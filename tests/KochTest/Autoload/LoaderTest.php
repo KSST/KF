@@ -30,7 +30,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             set_include_path($path . PATH_SEPARATOR . get_include_path());
         }
 
-        /**
+        /*
          * The APC user cache needs a reset, so that the map is generated freshly each run.
          * APC is used by readAutoloadingMapApc() / writeAutoloadingMapApc().
          */
@@ -52,7 +52,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodautoload()
+     * testMethodautoload().
      */
     public function testMethodautoload()
     {
@@ -96,7 +96,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodautoloadExclusions()
+     * testMethodautoloadExclusions().
      */
     public function testMethodautoloadExclusions()
     {
@@ -119,7 +119,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodautoloadInclusions()
+     * testMethodautoloadInclusions().
      */
     public function testMethodautoloadInclusions()
     {
@@ -132,7 +132,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodautoloadByApcOrFileMap
+     * testMethodautoloadByApcOrFileMap.
      */
     public function testMethodautoloadByApcOrFileMap()
     {
@@ -144,7 +144,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodautoloadIncludePath()
+     * testMethodautoloadIncludePath().
      */
     public function testMethodautoloadIncludePath()
     {
@@ -183,7 +183,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame([], Loader::readAutoloadingMapFile());
         $this->assertTrue(is_file($this->classMapFile));
 
-        $array = [ 'class' => 'file' ];
+        $array = ['class' => 'file'];
         $this->assertTrue(Loader::writeAutoloadingMapFile($array));
         $this->assertSame($array, Loader::readAutoloadingMapFile());
     }
@@ -194,7 +194,7 @@ class LoaderTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "apc".');
         }
 
-        $array = [ 'class' => 'file' ];
+        $array = ['class' => 'file'];
         $this->assertTrue(Loader::writeAutoloadingMapApc($array));
         $this->assertSame($array, Loader::readAutoloadingMapApc());
     }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,24 +18,24 @@ namespace Koch\Logger;
 class LogLevel
 {
     /**
-     * Detailed debug information
+     * Detailed debug information.
      */
     const DEBUG = 100;
 
     /**
-     * Interesting events
+     * Interesting events.
      *
      * Examples: User logs in, SQL logs.
      */
     const INFO = 200;
 
     /**
-     * Uncommon events
+     * Uncommon events.
      */
     const NOTICE = 250;
 
     /**
-     * Exceptional occurrences that are not errors
+     * Exceptional occurrences that are not errors.
      *
      * Examples: Use of deprecated APIs, poor use of an API,
      * undesirable things that are not necessarily wrong.
@@ -43,19 +43,19 @@ class LogLevel
     const WARNING = 300;
 
     /**
-     * Runtime errors
+     * Runtime errors.
      */
     const ERROR = 400;
 
     /**
-     * Critical conditions
+     * Critical conditions.
      *
      * Example: Application component unavailable, unexpected exception.
      */
     const CRITICAL = 500;
 
     /**
-     * Action must be taken immediately
+     * Action must be taken immediately.
      *
      * Example: Entire website down, database unavailable, etc.
      * This should trigger the SMS alerts and wake you up.
@@ -67,7 +67,7 @@ class LogLevel
      */
     const EMERGENCY = 600;
 
-    protected static $levels = array(
+    protected static $levels = [
         100 => 'DEBUG',
         200 => 'INFO',
         250 => 'NOTICE',
@@ -76,12 +76,13 @@ class LogLevel
         500 => 'CRITICAL',
         550 => 'ALERT',
         600 => 'EMERGENCY',
-    );
+    ];
 
     /**
      * Gets the name of the logging level.
      *
-     * @param  int $level
+     * @param int $level
+     *
      * @return string
      */
     public static function getLevelName($level)

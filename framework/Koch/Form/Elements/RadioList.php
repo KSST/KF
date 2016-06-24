@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -32,7 +32,7 @@ class RadioList extends Radio implements FormElementInterface
 
     public function render()
     {
-        $i = 0;
+        $i    = 0;
         $html = '';
         while (list($key, $value) = each($this->options)) {
             // setup a new radio formelement
@@ -43,7 +43,7 @@ class RadioList extends Radio implements FormElementInterface
                 ->setLabel($value);
 
             // check the element, if value is "active"
-            if ($this->value == $key) {
+            if ($this->value === $key) {
                 $radio->setChecked();
             }
 
@@ -51,7 +51,7 @@ class RadioList extends Radio implements FormElementInterface
             $html .= $radio;
 
             // if we options, add a seperator
-            if (++$i != count($this->options)) {
+            if (++$i !== count($this->options)) {
                 $html .= $this->separator;
             }
         }

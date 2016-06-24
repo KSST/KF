@@ -1,14 +1,14 @@
 <?php
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
  * Smarty skype status function plugin
  * Display skype status (unknown, offline, online, away, not_available, do_not_disturb, skype_me)
  * Type:     function<br>
- * Name:     skype_status<br>
+ * Name:     skype_status<br>.
  *
  * Examples:
  * <pre>
@@ -20,14 +20,15 @@
  * Name:     skype<br>
  * Purpose:  display skype status<br>
  *
- * @param array $params username parameter required
+ * @param array  $params username parameter required
  * @param Smarty $smarty
+ *
  * @return string
  */
 function smarty_function_skype($params, $smarty)
 {
     if (empty($params['username'])) {
-        trigger_error("skype: missing skype parameter");
+        trigger_error('skype: missing skype parameter');
 
         return;
     }

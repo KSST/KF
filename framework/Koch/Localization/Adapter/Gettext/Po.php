@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,12 +18,13 @@ namespace Koch\Localization\Adapter\Gettext;
 class Po
 {
     /**
-     * Reads a Gettext .po file
+     * Reads a Gettext .po file.
      *
      * @link http://www.gnu.org/software/gettext/manual/gettext.html#PO-Files
      *
-     * @param  string              $file Path to PO file.
-     * @return mixed|boolean|array
+     * @param string $file Path to PO file.
+     *
+     * @return mixed|bool|array
      */
     public static function read($file)
     {
@@ -35,25 +36,24 @@ class Po
             return false;
         }
 
-        $result = array();
-        $temp = array();
-        $state = null;
-        $fuzzy = false;
+        $result = [];
+        $temp   = [];
+        $state  = null;
+        $fuzzy  = false;
 
         // iterate over lines
         while (($line = fgets($fh, 65536)) !== false) {
-
             $line = trim($line);
 
             if ($line === '') {
                 continue;
             }
 
-            list ($key, $data) = preg_split('/\s/', $line, 2);
+            list($key, $data) = preg_split('/\s/', $line, 2);
 
             switch ($key) {
                 case '#,': // flag...
-                    $fuzzy = in_array('fuzzy', preg_split('/,\s*/', $data));
+                    $fuzzy = in_array('fuzzy', preg_split('/,\s*/', $data), true);
                     // fall-through
                 case '#':  // translator-comments
                 case '#.': // extracted-comments
@@ -65,7 +65,7 @@ class Po
                             $result[] = $temp;
                         }
 
-                        $temp = array();
+                        $temp  = [];
                         $state = null;
                         $fuzzy = false;
                     }
@@ -73,17 +73,17 @@ class Po
                 case 'msgctxt': // context
                 case 'msgid': // untranslated-string
                 case 'msgid_plural': // untranslated-string-plural
-                    $state = $key;
+                    $state        = $key;
                     $temp[$state] = $data;
                     break;
                 case 'msgstr': // translated-string
-                    $state = 'msgstr';
+                    $state          = 'msgstr';
                     $temp[$state][] = $data;
                     break;
                 default:
                     if (strpos($key, 'msgstr[') !== false) {
                         // translated-string-case-n
-                        $state = 'msgstr';
+                        $state          = 'msgstr';
                         $temp[$state][] = $data;
                     } else {
                         // continued lines
@@ -115,11 +115,11 @@ class Po
         }
 
         // Cleanup data, merge multiline entries, reindex result for ksort
-        $temp = $result;
-        $result = array();
+        $temp   = $result;
+        $result = [];
 
         foreach ($temp as $entry) {
-            foreach ($entry as & $v) {
+            foreach ($entry as &$v) {
                 $v = self::poCleaner($v);
 
                 if ($v === false) {
@@ -127,7 +127,7 @@ class Po
                     return false;
                 }
             }
-            $result[$entry['msgid']]= $entry;
+            $result[$entry['msgid']] = $entry;
         }
 
         return $result;
@@ -136,15 +136,16 @@ class Po
     /**
      * Cleans the po.
      *
-     * @param  string|array $x
-     * @return string       Cleaned PO element.
+     * @param string|array $x
+     *
+     * @return string Cleaned PO element.
      */
     private static function poCleaner($x)
     {
         if (true === is_array($x)) {
             foreach ($x as $k => $v) {
                 // WATCH IT! RECURSION!
-                $x[$k]= self::poCleaner($v);
+                $x[$k] = self::poCleaner($v);
             }
         } else {
             if ($x[0] === '"') {

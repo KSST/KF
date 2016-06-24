@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Request;
 
 /**
- * Koch Framework Remote Request Manager
+ * Koch Framework Remote Request Manager.
  *
  * 1: Snoppy
  * 2: cURL
@@ -23,7 +23,7 @@ namespace Koch\Request;
 class RemoteFetch
 {
     /**
-     * Fetches remote content with Snoopy
+     * Fetches remote content with Snoopy.
      *
      * @param $url URL of remote content to fetch
      */
@@ -34,7 +34,7 @@ class RemoteFetch
         $s = new \Snoopy();
         $s->fetch($url);
 
-        if ($s->status == 200) {
+        if ($s->status === 200) {
             $content = $s->results;
         }
 
@@ -46,7 +46,7 @@ class RemoteFetch
     }
 
     /**
-     * Fetches remote content with cURL
+     * Fetches remote content with cURL.
      *
      * @param $url URL of remote content to fetch
      */
@@ -66,7 +66,7 @@ class RemoteFetch
     }
 
     /**
-     * Fetches remote content with file_get_contents
+     * Fetches remote content with file_get_contents.
      *
      * @param $url URL of remote content to fetch
      * @param $flags
@@ -76,8 +76,8 @@ class RemoteFetch
     {
         #if(true === ini_get('allow_url_fopen'))
         #{
-            $context = stream_context_create(array('http' => array('timeout' => 15)));
-            $content = file_get_contents($url, $flags, $context);
+            $context = stream_context_create(['http' => ['timeout' => 15]]);
+        $content     = file_get_contents($url, $flags, $context);
         #}
 
         if (false === empty($content)) {

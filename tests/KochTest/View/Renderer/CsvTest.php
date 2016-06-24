@@ -35,7 +35,7 @@ class CsvTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $setOptions = array('key' => 'value');
+        $setOptions   = ['key' => 'value'];
         $this->object = new Csv($setOptions);
 
         $options = $this->object->getOptions();
@@ -64,13 +64,13 @@ class CsvTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         /* @todo use phpunit dataprovider */
-        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+        $headers = ['ABC', 'NUMS', 'QUOTATEDABC'];
 
-        $data = array(
-            array('aaa', 'bbb', 'ccc', 'dddd'),
-            array('123', '456', '789'),
-            array('"aaa"', '"bbb"')
-        );
+        $data = [
+            ['aaa', 'bbb', 'ccc', 'dddd'],
+            ['123', '456', '789'],
+            ['"aaa"', '"bbb"'],
+        ];
 
         $this->object->assign($data, $headers);
 
@@ -87,11 +87,11 @@ class CsvTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender_withData()
     {
-        $data = array(
-            array('aaa', 'bbb', 'ccc', 'dddd'),
-            array('123', '456', '789'),
-            array('"aaa"', '"bbb"')
-        );
+        $data = [
+            ['aaa', 'bbb', 'ccc', 'dddd'],
+            ['123', '456', '789'],
+            ['"aaa"', '"bbb"'],
+        ];
 
         // template is in the case the output file to write to
         $file = 'output.csv';
@@ -107,13 +107,13 @@ class CsvTest extends \PHPUnit_Framework_TestCase
     public function testAssign()
     {
         /* @todo use phpunit dataprovider */
-        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+        $headers = ['ABC', 'NUMS', 'QUOTATEDABC'];
 
-        $data = array(
-            array('aaa', 'bbb', 'ccc', 'dddd'),
-            array('123', '456', '789'),
-            array('"aaa"', '"bbb"')
-        );
+        $data = [
+            ['aaa', 'bbb', 'ccc', 'dddd'],
+            ['123', '456', '789'],
+            ['"aaa"', '"bbb"'],
+        ];
 
         $this->object->assign($data, $headers);
 
@@ -127,13 +127,13 @@ class CsvTest extends \PHPUnit_Framework_TestCase
     public function testDisplay()
     {
         /* @todo use phpunit dataprovider */
-        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+        $headers = ['ABC', 'NUMS', 'QUOTATEDABC'];
 
-        $data = array(
-            array('aaa', 'bbb', 'ccc', 'dddd'),
-            array('123', '456', '789'),
-            array('"aaa"', '"bbb"')
-        );
+        $data = [
+            ['aaa', 'bbb', 'ccc', 'dddd'],
+            ['123', '456', '789'],
+            ['"aaa"', '"bbb"'],
+        ];
 
         $this->object->assign($data, $headers);
 
@@ -156,19 +156,19 @@ EOF;
     public function testFetch()
     {
         /* @todo use phpunit dataprovider */
-        $headers = array('ABC', 'NUMS', 'QUOTATEDABC');
+        $headers = ['ABC', 'NUMS', 'QUOTATEDABC'];
 
-        $data = array(
-            array('aaa', 'bbb', 'ccc', 'dddd'),
-            array('123', '456', '789'),
-            array('"aaa"', '"bbb"')
-        );
+        $data = [
+            ['aaa', 'bbb', 'ccc', 'dddd'],
+            ['123', '456', '789'],
+            ['"aaa"', '"bbb"'],
+        ];
 
         $this->object->assign($data, $headers);
 
         $result = $this->object->fetch('');
 
-       $expectedString = '123,456,789';
+        $expectedString = '123,456,789';
 
         $this->assertContains($expectedString, $result);
     }

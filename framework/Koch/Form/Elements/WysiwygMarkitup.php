@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -15,7 +15,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Wysiwygmarkitup
+ * Formelement_Wysiwygmarkitup.
  *
  * @see http://markitup.jaysalvat.com/home/ Official Website of markItUp!
  */
@@ -45,17 +45,17 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
         //$javascript = '<script type="text/javascript"';
         //$javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.js"></script>';
         $javascript = '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/jquery.markitup.js"></script>'.CR;
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/jquery.markitup.js"></script>' . CR;
 
         // b) load JSON default settings
         $javascript .= '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/set.js"></script>'.CR;
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/set.js"></script>' . CR;
 
         // c) include CSS
         $css = '<link rel="stylesheet" type="text/css"';
-        $css .= ' href="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/skins/markitup/style.css" />'.CR.'
+        $css .= ' href="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/skins/markitup/style.css" />' . CR . '
                  <link rel="stylesheet" type="text/css"';
-        $css .= ' href="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/style.css" />'.CR;
+        $css .= ' href="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/style.css" />' . CR;
 
         // d) plug it to an specific textarea by ID
         $javascript .= '<script type="text/javascript">// <![CDATA[
@@ -63,6 +63,7 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
                               $("textarea:visible").markItUp(mySettings);
                            });
                         // ]]></script>';
-        return $javascript.$css;
+
+        return $javascript . $css;
     }
 }

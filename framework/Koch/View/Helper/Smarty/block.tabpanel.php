@@ -2,24 +2,22 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  *
  * This file is part of https://github.com/KSST/KF
 * SPDX-License-Identifier: MIT *
  *
  * *
  * *
- * *
- */
+ * */
 
 /**
- * Koch Framework Smarty Viewhelper
+ * Koch Framework Smarty Viewhelper.
  *
  *
  * Name:        tabpanel
  * Type:        function
  * Purpose:     This TAG inserts a jquery tabpanel
- *
  */
 function Smarty_block_tabpanel($params, $content, $smarty, &$repeat)
 {
@@ -32,7 +30,7 @@ function Smarty_block_tabpanel($params, $content, $smarty, &$repeat)
     // Initialize
     // @todo addJavascript('header', 'once', $js)
     // @todo addCss('once', $css);
-    $start_tabpane  = '<!-- Tabs with jQuery + YAML Accessible Tabs Plugin -->' . CR;
+    $start_tabpane = '<!-- Tabs with jQuery + YAML Accessible Tabs Plugin -->' . CR;
     $start_tabpane .= '<link rel="stylesheet" type="text/css" href="' . WWW_ROOT_THEMES_CORE . 'css/tabs.css" />' . CR;
     $start_tabpane .= '<script type="text/javascript" src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.tabs.js"></script>' . CR;
 
@@ -54,14 +52,14 @@ EOF;
     $start_tabpane .= $js . CR;
 
     // Start TAB Pane
-    $start_tabpane .= '<!-- START - TAB PANEL "'.$name.'" -->' . CR;
-    $start_tabpane .= '<div class="tabs" id="tab-panel-'.$name.'"> ' . CR;
+    $start_tabpane .= '<!-- START - TAB PANEL "' . $name . '" -->' . CR;
+    $start_tabpane .= '<div class="tabs" id="tab-panel-' . $name . '"> ' . CR;
 
     // End TAB Pane
-    $end_tabpane = '</div><!-- END - TAB PANEL "'.$name.'" -->' . CR;
+    $end_tabpane = '</div><!-- END - TAB PANEL "' . $name . '" -->' . CR;
 
     // Construct content for whole BLOCK
-    /**
+    /*
      * As of Smarty v3.1.6 the block tag is rendered at the opening AND closing tag
      * This results in a duplication of content.
      * To prevent this, we need to check that the content is oCRy rendered when the inner block (content)

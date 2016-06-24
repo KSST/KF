@@ -2,20 +2,20 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  *
  * This file is part of https://github.com/KSST/KF
 * SPDX-License-Identifier: MIT *
  *
  * *
  * *
- * *
- */
+ * */
 
 /**
- * Shortens a URL via TinyURL Service
+ * Shortens a URL via TinyURL Service.
  *
  * @param <type> $long_url The long URL you want to shorten.
+ *
  * @return string A Shortened URL via TinyURL Service
  */
 function shortUrl($long_url)
@@ -27,7 +27,7 @@ function shortUrl($long_url)
 
     if ($handle) {
         $short_url = '';
-        while (false == feof($handle)) {
+        while (false === feof($handle)) {
             $short_url .= fgets($handle, 2000);
         }
         fclose($handle);

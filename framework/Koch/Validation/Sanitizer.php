@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -30,7 +30,7 @@ class Sanitizer
     protected $additionalTags;
 
     /**
-     * Constructor
+     * Constructor.
      */
     public function __construct()
     {
@@ -38,28 +38,28 @@ class Sanitizer
     }
 
     /**
-     * (re)set all options to default value
+     * (re)set all options to default value.
      */
     public function resetAll()
     {
-        $this->allowDOMEvents = false;
+        $this->allowDOMEvents        = false;
         $this->allowJavascriptInUrls = false;
-        $this->allowStyle = false;
-        $this->allowScript = false;
-        $this->allowObjects = false;
-        $this->allowInlineStyle = false;
+        $this->allowStyle            = false;
+        $this->allowScript           = false;
+        $this->allowObjects          = false;
+        $this->allowInlineStyle      = false;
 
         // HTML5 Tags
         // @link http://www.w3schools.com/html5/html5_reference.asp
         $this->allowedTags = '<a><abbr><address><area><article><aside>'        // <audio>
-                . '<b><base><bdo><blockquote><body><br><button>
+ . '<b><base><bdo><blockquote><body><br><button>
                    <canvas><caption><cite><code><col><colgroup><command>
                    <datalist><dd><details><del><dfn><div><dl><dt>'
                 . '<em><eventsource>'                                           // <embed>
-                . '<fieldset><figcaption><figure><footer><form>
+ . '<fieldset><figcaption><figure><footer><form>
                    <head><header><hgroup><hr><html><h1><h2><h3><h4><h5><h6>'
                 . '<i><img><input><ins>'                                        // <iframe>
-                . '<kbd><keygen>
+ . '<kbd><keygen>
                    <label><legend><li><link>
                    <mark><map><menu><meta><meter>
                    <nav><noscript>
@@ -67,7 +67,7 @@ class Sanitizer
                    <p><param><pre><progress>
                    <q>'
                 . '<rp><rt>'                                                    // add <ruby> chinese characters
-                . '<samp><script><section><select><small><source><span><strong><style><sub><summary><sup>
+ . '<samp><script><section><select><small><source><span><strong><style><sub><summary><sup>
                    <table><tbody><td><textarea><tfoot><th><thead><time><title><tr>
                    <ul>
                    <var><video>
@@ -77,7 +77,7 @@ class Sanitizer
     }
 
     /**
-     * Add additional tags to allowed tags
+     * Add additional tags to allowed tags.
      *
      * @param string $tags
      */
@@ -87,7 +87,7 @@ class Sanitizer
     }
 
     /**
-     * Allow object, embed, applet and param tags in html
+     * Allow object, embed, applet and param tags in html.
      */
     public function allowObjects()
     {
@@ -95,7 +95,7 @@ class Sanitizer
     }
 
     /**
-     * Allow DOM event on DOM elements
+     * Allow DOM event on DOM elements.
      */
     public function allowDOMEvents()
     {
@@ -103,7 +103,7 @@ class Sanitizer
     }
 
     /**
-     * Allow script tags
+     * Allow script tags.
      */
     public function allowScript()
     {
@@ -111,7 +111,7 @@ class Sanitizer
     }
 
     /**
-     * Allow the use of javascript: in urls
+     * Allow the use of javascript: in urls.
      */
     public function allowJavascriptInUrls()
     {
@@ -119,7 +119,7 @@ class Sanitizer
     }
 
     /**
-     * Allow style tags and attributes
+     * Allow style tags and attributes.
      */
     public function allowStyle()
     {
@@ -127,7 +127,7 @@ class Sanitizer
     }
 
     /**
-     * Helper to allow all javascript related tags and attributes
+     * Helper to allow all javascript related tags and attributes.
      */
     public function allowAllJavascript()
     {
@@ -137,7 +137,7 @@ class Sanitizer
     }
 
     /**
-     * Allow all tags and attributes
+     * Allow all tags and attributes.
      */
     public function allowAll()
     {
@@ -147,9 +147,10 @@ class Sanitizer
     }
 
     /**
-     * Filter URLs to avoid HTTP response splitting attacks
+     * Filter URLs to avoid HTTP response splitting attacks.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return string filtered url
      */
     protected function filterHTTPResponseSplitting($url)
@@ -160,9 +161,10 @@ class Sanitizer
     }
 
     /**
-     * Remove potential javascript in urls
+     * Remove potential javascript in urls.
      *
-     * @param  string $str
+     * @param string $str
+     *
      * @return string filtered url
      */
     protected function removeJavascriptURL($str)
@@ -175,9 +177,10 @@ class Sanitizer
     }
 
     /**
-     * Remove potential flaws in urls
+     * Remove potential flaws in urls.
      *
-     * @param  string $url
+     * @param string $url
+     *
      * @return string filtered url
      */
     protected function sanitizeURL($url)
@@ -192,10 +195,12 @@ class Sanitizer
     }
 
     /**
-     * Callback for PCRE
+     * Callback for PCRE.
      *
-     * @param  array  $matches
+     * @param array $matches
+     *
      * @return string
+     *
      * @see     sanitizeURL
      */
     protected function sanitizeURLCallback($matches)
@@ -204,23 +209,26 @@ class Sanitizer
     }
 
     /**
-     * Remove potential flaws in href attributes
+     * Remove potential flaws in href attributes.
      *
-     * @param  string $str html tag
+     * @param string $str html tag
+     *
      * @return string filtered html tag
      */
     protected function sanitizeHref($str)
     {
         $HTML_Sanitizer_URL = 'href="([^"]+)"';
 
-        return preg_replace_callback("/$HTML_Sanitizer_URL/i", array(&$this, '_sanitizeURLCallback'), $str);
+        return preg_replace_callback("/$HTML_Sanitizer_URL/i", [&$this, '_sanitizeURLCallback'], $str);
     }
 
     /**
-     * Callback for PCRE
+     * Callback for PCRE.
      *
-     * @param  array  $matches
+     * @param array $matches
+     *
      * @return string
+     *
      * @see     sanitizeURL
      */
     protected function sanitizeSrcCallback($matches)
@@ -229,41 +237,44 @@ class Sanitizer
     }
 
     /**
-     * Remove potential flaws in href attributes
+     * Remove potential flaws in href attributes.
      *
-     * @param  string $str html tag
+     * @param string $str html tag
+     *
      * @return string filtered html tag
      */
     protected function sanitizeSrc($str)
     {
         $HTML_Sanitizer_URL = 'src="([^"]+)"';
 
-        return preg_replace_callback("/$HTML_Sanitizer_URL/i", array(&$this, '_sanitizeSrcCallback'), $str);
+        return preg_replace_callback("/$HTML_Sanitizer_URL/i", [&$this, '_sanitizeSrcCallback'], $str);
     }
 
     /**
-     * Remove dangerous attributes from html tags
+     * Remove dangerous attributes from html tags.
      *
-     * @param  string $str html tag
+     * @param string $str html tag
+     *
      * @return string filtered html tag
      */
     protected function removeEvilAttributes($str)
     {
         if (!$this->allowDOMEvents) {
-            $str = preg_replace_callback('/<(.*?)>/i', array(&$this, '_removeDOMEventsCallback'), $str);
+            $str = preg_replace_callback('/<(.*?)>/i', [&$this, '_removeDOMEventsCallback'], $str);
         }
 
         if (!$this->allowStyle) {
-            $str = preg_replace_callback('/<(.*?)>/i' , array(&$this, '_removeStyleCallback'), $str);
+            $str = preg_replace_callback('/<(.*?)>/i', [&$this, '_removeStyleCallback'], $str);
         }
 
         return $str;
     }
 
     /**
-     * Remove DOM events attributes from html tags
+     * Remove DOM events attributes from html tags.
      *
-     * @param  string $str html tag
+     * @param string $str html tag
+     *
      * @return string filtered html tag
      */
     protected function removeDOMEvents($str)
@@ -281,10 +292,12 @@ class Sanitizer
     }
 
     /**
-     * Callback for PCRE
+     * Callback for PCRE.
      *
-     * @param  array  $matches
+     * @param array $matches
+     *
      * @return string
+     *
      * @see     removeDOMEvents
      */
     protected function removeDOMEventsCallback($matches)
@@ -293,9 +306,10 @@ class Sanitizer
     }
 
     /**
-     * Remove style attributes from html tags
+     * Remove style attributes from html tags.
      *
-     * @param  string $str html tag
+     * @param string $str html tag
+     *
      * @return string filtered html tag
      */
     protected function removeStyle($str)
@@ -310,10 +324,12 @@ class Sanitizer
     }
 
     /**
-     * Callback for PCRE
+     * Callback for PCRE.
      *
-     * @param  array  $matches
+     * @param array $matches
+     *
      * @return string
+     *
      * @see     removeStyle
      */
     protected function removeStyleCallback($matches)
@@ -322,7 +338,7 @@ class Sanitizer
     }
 
     /**
-     * Remove dangerous HTML tags
+     * Remove dangerous HTML tags.
      *
      * @param string $str html code
      *
@@ -354,7 +370,7 @@ class Sanitizer
     }
 
     /**
-     * Remove unwanted tags
+     * Remove unwanted tags.
      *
      * @param string $str     html
      * @param string $tagList allowed tag list
@@ -362,19 +378,19 @@ class Sanitizer
     protected function stripTags($str, $tagList)
     {
         // 1. prepare allowed tags list
-        $search = array('<', '>', '><');
-        $replace = array('', '', '|');
+        $search  = ['<', '>', '><'];
+        $replace = ['', '', '|'];
         $tagList = str_replace($search, $replace, $tagList);
 
         // 2. replace </tag> by [[/tag]] in close tags for allowed tags
         $closeTags = '~' . '\</(' . $tagList . ')([^\>\<]*)\>' . '~'; // close tag
 
-        $str = preg_replace($closeTags, "[[/\\1]]", $str);
+        $str = preg_replace($closeTags, '[[/\\1]]', $str);
 
         // ?! = do not match
         $autoAndOpenTags = '~('
                 . '\<(?!' . $tagList . ')[^\>\<]*(/){0,1}\>' // auto
-                . ')~';
+ . ')~';
 
         // 3. replace not allowed tags by ''
         $str = preg_replace($autoAndOpenTags, '', $str);
@@ -382,18 +398,19 @@ class Sanitizer
         // 4. replace [[/tag]] by </tag> for allowed tags
         $closeTags = '~' . '\[\[/(' . $tagList . ')([^\]]*)\]\]' . '~'; // close tag
 
-        $str = preg_replace($closeTags, "</\\1>", $str);
+        $str = preg_replace($closeTags, '</\\1>', $str);
 
         return $str;
     }
 
     /**
-     * Sanitize HTML
+     * Sanitize HTML.
      *
      * - removes  dangerous tags and attributes
      * - cleand urls
      *
-     * @param  string $html html code
+     * @param string $html html code
+     *
      * @return string sanitized html code
      */
     public function sanitize($html)

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,7 +23,7 @@ class SimpleCaptcha extends Captcha implements FormElementInterface
     public $type = 'captcha';
 
     /**
-     * display captcha
+     * display captcha.
      */
     public function render()
     {
@@ -34,7 +34,7 @@ class SimpleCaptcha extends Captcha implements FormElementInterface
     }
 
     /**
-     * validate captcha
+     * validate captcha.
      *
      * In the code that processes the form submission, you need to add code to validate the CAPTCHA.
      */

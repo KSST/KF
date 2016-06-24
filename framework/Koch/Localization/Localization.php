@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -33,7 +33,7 @@ class Localization
     private $encoding = null;
 
     // References
-    private static $config    = null;
+    private static $config = null;
 
     public function __construct(Config $config)
     {
@@ -41,20 +41,20 @@ class Localization
         self::$config = $config;
 
         // Set Locale Defaults
-        $this->domain = strtolower(APPLICATION_NAME);
+        $this->domain   = strtolower(APPLICATION_NAME);
         $this->encoding = self::$config['locale']['outputcharset'];
 
         // Get Locale
         $locale = $this->getLocale();
 
-        /**
+        /*
          * Important Notice:
          *
          * List new available languages in the method head of getLanguage( $supported=array( 'en', 'de' ))
          * to make them a valid target for a browser detected language!
          */
 
-        /**
+        /*
          * Require PHP-gettext's emulative functions, if PHP gettext extension is off
          *
          * The library provides a simple gettext replacement that works independently from
@@ -77,7 +77,7 @@ class Localization
     }
 
     /**
-     * Get Locale
+     * Get Locale.
      *
      * Order of Language-Detection:
      * URL (language filter) -> SESSION -> BROWSER -> DEFAULT LANGUAGE (from Config)
@@ -85,7 +85,7 @@ class Localization
     public function getLocale()
     {
         // if language_via_url was used, the filter set the URL value to the session
-        if (isset($_SESSION['user']['language_via_url']) === true and ($_SESSION['user']['language_via_url'] == 1)) {
+        if (isset($_SESSION['user']['language_via_url']) && ($_SESSION['user']['language_via_url'] === 1)) {
             // use language setting from session
             $this->locale = $_SESSION['user']['language'];
         } else {
@@ -103,7 +103,7 @@ class Localization
     }
 
     /**
-     * loadTextDomain
+     * loadTextDomain.
      *
      * Loads a new domain using a certain path into the domain table.
      *
@@ -111,14 +111,16 @@ class Localization
      * Give a path/to/your/mo/files without LC_MESSAGES and locale!
      * If you use: T_bindtextdomain($this->domain, '/html/locales');
      * The mo.file would be looked up in /html/locales/de_DE/LC_MESSAGES/{$this->domain}.mo
+     *
      * @link http://www.php.net/function.bindtextdomain
+     *
      * @param string $domain
      * @param string $module
      */
     public function loadTextDomain($domain, $locale, $module = null)
     {
         // if, $locale string is not over 3 chars long -> $locale = "en", build "en_EN"
-        if (isset($locale{3}) == false) {
+        if (isset($locale{3}) === false) {
             $locale = mb_strtolower($locale) . '_' . mb_strtoupper($locale);
         }
 
@@ -128,7 +130,7 @@ class Localization
         setlocale(LC_ALL, $locale . '.UTF-8');
         T_setlocale(LC_ALL, $locale . '.UTF8', $locale);
 
-        /**
+        /*
          * Set the domain_directory (where look for MO files named $domain.po)
          */
         if ($module === null) {
@@ -151,16 +153,17 @@ class Localization
     }
 
     /**
-     *  getLanguage
+     *  getLanguage.
      *
      *  This function will return a language, which is supported by both
      *  the browser and the application language system.
      *
      *  @param $supported   (optional) An array with the list of supported languages.
      *                      Default Setting is 'en' for english.
+     *
      *  @return $language Returns a $language string, which is supported by browser and system.
      */
-    public function getLanguage($supported = array('en', 'de'))
+    public function getLanguage($supported = ['en', 'de'])
     {
         // start with the default language
         $language = $supported[0];
@@ -171,7 +174,7 @@ class Localization
         // look if the browser language is a supported language, by checking the array entries
         foreach ($browserLanguages as $browserLanguage) {
             // if a supported language is found, set it and stop
-            if (in_array($browserLanguage, $supported)) {
+            if (in_array($browserLanguage, $supported, true)) {
                 $language = $browserLanguage;
                 break;
             }
@@ -182,7 +185,7 @@ class Localization
     }
 
     /**
-     * Browser Locale Detection
+     * Browser Locale Detection.
      *
      * This functions check the HTTP_ACCEPT_LANGUAGE HTTP-Header
      * for the supported browser languages and returns an array.
@@ -199,20 +202,20 @@ class Localization
      *              secondary and further selections have a lower Q value (value <1).
      * EXAMPLE:     de-de,de;q=0.8,en-us;q=0.5,en;q=0.3
      *
-     * @return Array containing the list of supported languages
+     * @return array containing the list of supported languages
      */
     public function getBrowserLanguages()
     {
         // check if environment variable HTTP_ACCEPT_LANGUAGE exists
         if (isset($_SERVER['HTTP_ACCEPT_LANGUAGE']) === false) {
             // if not return an empty language array
-            return array();
-        } elseif (extension_loaded('intl') === true) {
-            /**
+            return [];
+        } elseif (extension_loaded('intl')) {
+            /*
              * Try to find best available locale based on HTTP "Accept-Language" header
              * via Locale class, which is part INTL, a php default extension as of php 5.3.
              */
-            $lang =  \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            $lang = \Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
             return (array) mb_substr($lang, 0, 2);
         } else { // fallback for non "ext/intl" environments
@@ -222,7 +225,7 @@ class Localization
             // convert the headers string to an array
             $browserLanguagesSize = count($browserLanguages);
 
-            for ($i = 0; $i < $browserLanguagesSize; $i++) {
+            for ($i = 0; $i < $browserLanguagesSize; ++$i) {
                 // explode string at ;
                 $browserLanguage = explode(';', $browserLanguages[$i]);
                 // cut string and place into array

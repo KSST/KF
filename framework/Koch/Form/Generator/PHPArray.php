@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,7 +25,7 @@ class PHPArray extends Form implements FormGeneratorInterface
 {
     public function __construct(array $form_array = null, $form_object = null)
     {
-        if (null != $form_array) {
+        if (null !== $form_array) {
             if ($form_object === null) {
                 // init parent Koch\Form\Form with name, method and action
                 parent::__construct(
@@ -64,7 +64,7 @@ class PHPArray extends Form implements FormGeneratorInterface
     }
 
     /**
-     * Level 1 - The form
+     * Level 1 - The form.
      *
      * $form_array_section is an array of the following structure:
      *
@@ -89,12 +89,13 @@ class PHPArray extends Form implements FormGeneratorInterface
      *   [class] => cssClass
      *
      * @param $form_array the form array
-     * @return boolean|null true/false
+     *
+     * @return bool|null true/false
      */
     public static function validateFormArrayStructure($form_array)
     {
-        $obligatory_form_array_elements = array('id', 'name', 'label', 'description', 'formfieldtype', 'value');
-        $optional_form_array_elements   = array('class', 'decorator');
+        $obligatory_form_array_elements = ['id', 'name', 'label', 'description', 'formfieldtype', 'value'];
+        $optional_form_array_elements   = ['class', 'decorator'];
 
         // loop over all elements of the form description array
         foreach ($form_array as $form_array_section => $form_array_elements) {
@@ -112,7 +113,7 @@ class PHPArray extends Form implements FormGeneratorInterface
                 );
 
                 // errorcheck for valid formfield elements
-                if (is_array($report_differences_or_true) == false) {
+                if (is_array($report_differences_or_true) === false) {
                     // form description arrays are identical
                     return true;
                 } else {
@@ -155,7 +156,7 @@ class PHPArray extends Form implements FormGeneratorInterface
 
                 // provide array access to the form data (in $_POST) by prefixing it with the formulars name
                 // @todo if you group formelements, add the name of the group here
-                $formelement->setName($this->getName().'['.$form_array_section.']['.$form_array_element['name'].']');
+                $formelement->setName($this->getName() . '[' . $form_array_section . '][' . $form_array_element['name'] . ']');
                 $formelement->setDescription($form_array_element['description']);
 
                 // @todo consider this as formdebug display (sets formname as label)
@@ -172,15 +173,15 @@ class PHPArray extends Form implements FormGeneratorInterface
                 /**
                  * check if $form_array_element['value'] is of type array or single value
                  * array indicates, that we have a request for
-                 * something like a multiselect formfield with several options
+                 * something like a multiselect formfield with several options.
                  */
-                if (is_array($form_array_element['value']) == false) {
+                if (is_array($form_array_element['value']) === false) {
                     $formelement->setValue($form_array_element['value']);
                 } else {
                     $formelement->setOptions($form_array_element['value']);
                 }
 
-                /**
+                /*
                  * OPTIONAL ELEMENTS
                  */
 
@@ -189,7 +190,7 @@ class PHPArray extends Form implements FormGeneratorInterface
                     $formelement->setCssClass($form_array_element['class']);
                 }
 
-                /**
+                /*
                  * set a decorator for the formelement
                  * optional because: the default decorator would be active
                  */
@@ -208,7 +209,7 @@ class PHPArray extends Form implements FormGeneratorInterface
     }
 
     /**
-     * Facade/Shortcut
+     * Facade/Shortcut.
      */
     public function generate($array)
     {

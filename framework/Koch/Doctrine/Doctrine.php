@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace and path to search in
         $classLoader = new \Doctrine\Common\ClassLoader('Doctrine', VENDOR_PATH);
         $classLoader->register();
-        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', VENDOR_PATH .  'Doctrine/Symfony');
+        $classLoader = new \Doctrine\Common\ClassLoader('Symfony', VENDOR_PATH . 'Doctrine/Symfony');
         $classLoader->register();
         $classLoader = new \Doctrine\Common\ClassLoader('Entity', APPLICATION_PATH . 'Doctrine');
         $classLoader->register();
@@ -38,10 +38,10 @@ namespace and path to search in
         $D2Config = new \Doctrine\ORM\Configuration();
 
         // fetch cache driver - APC in production and Array in development mode
-        if (extension_loaded('apc') and DEBUG == false) {
-            $cache = new \Doctrine\Common\Cache\ApcCache;
+        if (extension_loaded('apc') and DEBUG === false) {
+            $cache = new \Doctrine\Common\Cache\ApcCache();
         } else {
-            $cache = new \Doctrine\Common\Cache\ArrayCache;
+            $cache = new \Doctrine\Common\Cache\ArrayCache();
         }
 
         // set cache driver
@@ -51,7 +51,7 @@ namespace and path to search in
         // set annotation driver for entities
         $D2Config->setMetadataDriverImpl($D2Config->newDefaultAnnotationDriver(self::getModelPathsForAllModules()));
 
-        /**
+        /*
          * This is slow like hell, because getAllClassNames traverses all
          * dirs and files and includes them. Its a workaround, till i find
          * a better way to acquire all the models.
@@ -65,34 +65,34 @@ namespace and path to search in
         $D2Config->setProxyNamespace('Proxy');
 
         // regenerate proxies only in debug and not in production mode
-        if (DEBUG == true) {
+        if (DEBUG === true) {
             $D2Config->setAutoGenerateProxyClasses(true);
         } else {
             $D2Config->setAutoGenerateProxyClasses(false);
         }
 
         // use main configuration values for setting up the connection
-        $connectionOptions = array(
-            'driver'    => $config['database']['driver'],
-            'user'      => $config['database']['user'],
-            'password'  => $config['database']['password'],
-            'dbname'    => $config['database']['dbname'],
-            'host'      => $config['database']['host'],
-            'charset'   => $config['database']['charset'],
-            'driverOptions' => array(
-                'charset' => $config['database']['charset']
-            )
-        );
+        $connectionOptions = [
+            'driver'        => $config['database']['driver'],
+            'user'          => $config['database']['user'],
+            'password'      => $config['database']['password'],
+            'dbname'        => $config['database']['dbname'],
+            'host'          => $config['database']['host'],
+            'charset'       => $config['database']['charset'],
+            'driverOptions' => [
+                'charset' => $config['database']['charset'],
+            ],
+        ];
 
         // set up Logger
         #$config->setSqlLogger(new \Doctrine\DBAL\Logging\EchoSqlLogger);
 
-        /**
+        /*
          * Events
          */
-        $event = new \Doctrine\Common\EventManager;
+        $event = new \Doctrine\Common\EventManager();
 
-        /**
+        /*
          * Database Prefix
          *
          * The constant definition is for building (raw) sql queries manually.
@@ -103,7 +103,7 @@ namespace and path to search in
         $tablePrefix = new TablePrefix(DB_PREFIX);
         $event->addEventListener(\Doctrine\ORM\Events::loadClassMetadata, $tablePrefix);
 
-        /**
+        /*
          * Custom Functions
          *
          * We need some more functions for MySQL, like RAND for random values.
@@ -114,7 +114,7 @@ namespace and path to search in
         $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $D2Config, $event);
 
         // set DBAL DebugStack Logger (also needed for counting queries)
-        if (defined('DEBUG') and DEBUG == 1) {
+        if (defined('DEBUG') and DEBUG === 1) {
             self::$sqlLoggerStack = new \Doctrine\DBAL\Logging\DebugStack();
             $em->getConfiguration()->setSQLLogger(self::$sqlLoggerStack);
             // Echo SQL Queries directly on the page.
@@ -130,7 +130,7 @@ namespace and path to search in
     }
 
     /**
-     * Gets the entity manager to use for all tests
+     * Gets the entity manager to use for all tests.
      *
      * @return \Doctrine\ORM\EntityManager
      */
@@ -140,7 +140,7 @@ namespace and path to search in
     }
 
     /**
-     * Loads the schema for the given classes
+     * Loads the schema for the given classes.
      *
      * @param array $classes Classes to create the schema for. Defaults to getAllMetadata();
      */
@@ -157,22 +157,22 @@ namespace and path to search in
     }
 
     /**
-     * Development / Helper Method for Schema Validation
+     * Development / Helper Method for Schema Validation.
      */
     public static function validateSchema()
     {
-        $em = self::getEntityManager();
+        $em        = self::getEntityManager();
         $validator = new \Doctrine\ORM\Tools\SchemaValidator($em);
-        $errors = $validator->validateMapping();
+        $errors    = $validator->validateMapping();
         \Koch\Debug\Debug::printR($errors);
     }
 
     /**
-     * Development / Helper Method for displaying loaded Models
+     * Development / Helper Method for displaying loaded Models.
      */
     public static function debugLoadedClasses()
     {
-        $em = self::getEntityManager();
+        $em     = self::getEntityManager();
         $config = $em->getConfiguration();
         #$config->addEntityNamespace('Core', $module_models_path); // = Core:Session
         #$config->addEntityNamespace('Module', $module_models_path); // = Module:News
@@ -181,19 +181,19 @@ namespace and path to search in
     }
 
     /**
-     * Fetches Model Paths for all modules
+     * Fetches Model Paths for all modules.
      *
      * @return array Array with all model directories
      */
     public static function getModelPathsForAllModules()
     {
-        $model_dirs = array();
+        $model_dirs = [];
 
         // get all module directories
         $dirs = glob(APPLICATION_MODULES_PATH . '[a-zA-Z]*', GLOB_ONLYDIR);
 
         foreach ($dirs as $key => $dir_path) {
-            /**
+            /*
              * It's easier to include dirpath models (subfolder and files will be autoloaded)
              * therefor the records have to be removed
              */
@@ -220,7 +220,7 @@ namespace and path to search in
     }
 
     /**
-     * Returns Query Counter and the exec time
+     * Returns Query Counter and the exec time.
      */
     public static function getStats()
     {
@@ -232,7 +232,7 @@ namespace and path to search in
     }
 
     /**
-     * Returns the Number of Queries
+     * Returns the Number of Queries.
      *
      * @return int Number of Queries
      */
@@ -242,7 +242,7 @@ namespace and path to search in
     }
 
     /**
-     * Returns the total exec time for queries
+     * Returns the total exec time for queries.
      *
      * @return string Number formatted time string.
      */

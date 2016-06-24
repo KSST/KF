@@ -3,7 +3,7 @@
  * Name:         break
  * Type:         compiler
  * Purpose:     this TAG breaks foreach loops
- * Alternative: {php} break; {/php}
+ * Alternative: {php} break; {/php}.
  *
  * Example usage:
  *
@@ -11,6 +11,7 @@
  *
  * @param string $contents
  * @param Smarty $smarty
+ *
  * @return string
  */
 function Smarty_compiler_break($contents, $smarty)

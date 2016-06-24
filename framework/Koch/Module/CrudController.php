@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,17 +17,17 @@ class CrudController extends Controller implements ModuleInterface
     public function actionList()
     {
         $collection = $this->getCollection();
-        $template = $this->getListTemplate();
+        $template   = $this->getListTemplate();
 
         return $this->render($template, $collection);
     }
 
     public function actionShow($id)
     {
-        $model = $this->getModel()->find($id);
+        $model    = $this->getModel()->find($id);
         $template = $this->getViewTemplate();
 
-        return $this->render($template, array('model' => $model));
+        return $this->render($template, ['model' => $model]);
     }
 
     public function actionNew()
@@ -40,12 +40,12 @@ class CrudController extends Controller implements ModuleInterface
         $model = $this->getModel()->find($id);
 
         if (false === $confirm) {
-            return $this->render($this->getDeleteConfirmTemplate(), array('model' => $model));
+            return $this->render($this->getDeleteConfirmTemplate(), ['model' => $model]);
         }
 
         $model->delete();
 
-        return $this->render($this->getDeleteSuccessTemplate(), array('model' => $model));
+        return $this->render($this->getDeleteSuccessTemplate(), ['model' => $model]);
     }
 
     public function actionCreate($id)
@@ -66,7 +66,7 @@ class CrudController extends Controller implements ModuleInterface
     public function actionEdit($id = false)
     {
         $request = $this->getRequest();
-        $form = $this->getForm();
+        $form    = $this->getForm();
 
         // model bleibt leer, wenn nichts geladen werden kann
         $model = $this->getModel()->find($id);
@@ -81,6 +81,6 @@ class CrudController extends Controller implements ModuleInterface
             }
         }
 
-        return $this->render($this->getEditTemplate(), array('form' => $form));
+        return $this->render($this->getEditTemplate(), ['form' => $form]);
     }
 }

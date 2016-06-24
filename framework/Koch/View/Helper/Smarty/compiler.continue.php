@@ -3,7 +3,7 @@
  * Name:         continue
  * Type:         compiler
  * Purpose:     this TAG continues foreach loops
- * Alternative: {php} continue; {/php}
+ * Alternative: {php} continue; {/php}.
  *
  * Example usage:
  *
@@ -11,6 +11,7 @@
  *
  * @param string $contents
  * @param Smarty $smarty
+ *
  * @return string
  */
 function smarty_compiler_continue($contents, $smarty)

@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Form\Decorators\Formelement;
 
 use Koch\Form\Decorators\Formelement\Description;
@@ -17,7 +18,7 @@ class DescriptionTest extends \PHPUnit_Framework_TestCase
         $this->formelement = new \Koch\Form\Elements\Checkbox();
         $this->formelement->setDescription('My Description');
 
-        $this->object = new Description;
+        $this->object = new Description();
         $this->object->decorateWith($this->formelement);
     }
 

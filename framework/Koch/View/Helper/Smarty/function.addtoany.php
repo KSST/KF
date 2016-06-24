@@ -1,11 +1,11 @@
 <?php
 /**
- * Koch Framework Smarty View Helper
- *
+ * Koch Framework Smarty View Helper.
  */
 
 /**
  * Smarty Function to output the addtoany social bookmark/sharing button.
+ *
  * @link http://www.addtoany.com
  *
  * @example

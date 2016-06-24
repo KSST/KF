@@ -7,6 +7,7 @@
  * Module                = \Index
  * Controller            = \Controller\IndexController
  */
+
 namespace KochTest\Fixtures\Application\Modules\Index\Controller;
 
 // use Koch\Module\ModuleInterface;
@@ -15,7 +16,6 @@ class IndexController //implements ModuleInterface
 {
     public function actionList()
     {
-
     }
 
     public function carefullyHandcrafted()

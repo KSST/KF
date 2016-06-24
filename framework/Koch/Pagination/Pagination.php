@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,6 +25,7 @@ class Pagination
 {
     /**
      * The pagination adapter (data provider).
+     *
      * @var object \AdapterInterface
      */
     public $adapter;
@@ -68,6 +69,7 @@ class Pagination
      * Sets the pagination adapter (which is the data provider).
      *
      * @param object AdapterInterface
+     *
      * @return Pagination The pagination.
      */
     public function setAdapter(AdapterInterface $adapter)
@@ -160,8 +162,8 @@ class Pagination
     public function getCurrentPageResults()
     {
         if (null === $this->currentPageResults) {
-            $offset = ($this->getCurrentPage() - 1) * $this->getMaxResultsPerPage();
-            $length = $this->getMaxResultsPerPage();
+            $offset                   = ($this->getCurrentPage() - 1) * $this->getMaxResultsPerPage();
+            $length                   = $this->getMaxResultsPerPage();
             $this->currentPageResults = $this->adapter->getSlice($offset, $length);
         }
 

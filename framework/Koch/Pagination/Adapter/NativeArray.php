@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -44,7 +44,7 @@ class NativeArray implements AdapterInterface
     /**
      * Returns the total number of results.
      *
-     * @return integer The total number of results.
+     * @return int The total number of results.
      */
     public function getTotalNumberOfResults()
     {
@@ -54,8 +54,9 @@ class NativeArray implements AdapterInterface
     /**
      * Returns a slice of the result set.
      *
-     * @param  int            $offset The offset.
-     * @param  int            $length The length.
+     * @param int $offset The offset.
+     * @param int $length The length.
+     *
      * @return array|\Traversable The slice.
      */
     public function getSlice($offset, $length)

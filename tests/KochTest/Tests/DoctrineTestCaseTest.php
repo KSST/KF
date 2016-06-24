@@ -13,7 +13,7 @@ class DoctrineTestCaseTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new DoctrineTestCase;
+        $this->object = new DoctrineTestCase();
     }
 
     public function tearDown()

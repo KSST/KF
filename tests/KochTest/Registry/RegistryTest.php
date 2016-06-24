@@ -6,7 +6,6 @@ use Koch\Registry\Registry;
 
 class RegistryTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Registry
      */
@@ -18,7 +17,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Registry;
+        $this->object = new Registry();
     }
 
     /**
@@ -36,7 +35,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testSet()
     {
         // set object to registry
-        $a = new \stdClass;
+        $a = new \stdClass();
         $this->object->set('A', $a);
 
         $this->assertTrue($this->object->has('A'));
@@ -47,7 +46,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
         // set closure (as a resolver) to registry
         $closure = function () {
-            return new \stdClass;
+            return new \stdClass();
         };
         $this->object->set('C', $closure);
 
@@ -60,7 +59,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testHas()
     {
         // set object to registry
-        $a = new \stdClass;
+        $a = new \stdClass();
         $this->object->set('A', $a);
 
         $this->assertTrue($this->object->has('A'));
@@ -83,7 +82,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         // set object to registry
-        $a = new \stdClass;
+        $a = new \stdClass();
         $this->object->set('A', $a);
 
         $resultA = $this->object->get('A');
@@ -99,7 +98,7 @@ class RegistryTest extends \PHPUnit_Framework_TestCase
 
         // set closure (as a resolver) to registry
         $closure = function () {
-            return new \stdClass;
+            return new \stdClass();
         };
         $this->object->set('C', $closure);
 

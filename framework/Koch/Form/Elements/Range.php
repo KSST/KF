@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -24,7 +24,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies the minimum value allowed
+     * Specifies the minimum value allowed.
      */
     public function setMin($min)
     {
@@ -34,7 +34,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies the maximum value allowed
+     * Specifies the maximum value allowed.
      */
     public function setMax($max)
     {
@@ -44,7 +44,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies legal number intervals (if step="2", legal numbers could be -2,0,2,4, etc)
+     * Specifies legal number intervals (if step="2", legal numbers could be -2,0,2,4, etc).
      */
     public function setStep($step)
     {

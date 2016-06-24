@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,37 +23,38 @@ namespace Koch\Files;
  */
 class Download
 {
-        /**
+    /**
      * Returns the mime type of the file.
      *
-     * @param  string $file Full path to file.
+     * @param string $file Full path to file.
      * @param  int 0 (full check), 1 (extension check only)
+     *
      * @return string MimeType of File.
      */
     public static function getMimeType($file, $mode = 0)
     {
-        $mime_types = array(
-            'txt' => 'text/plain',
-            'htm' => 'text/html',
+        $mime_types = [
+            'txt'  => 'text/plain',
+            'htm'  => 'text/html',
             'html' => 'text/html',
-            'php' => 'text/html',
-            'css' => 'text/css',
-            'js' => 'application/javascript',
+            'php'  => 'text/html',
+            'css'  => 'text/css',
+            'js'   => 'application/javascript',
             'json' => 'application/json',
-            'xml' => 'application/xml',
-            'swf' => 'application/x-shockwave-flash',
-            'flv' => 'video/x-flv',
+            'xml'  => 'application/xml',
+            'swf'  => 'application/x-shockwave-flash',
+            'flv'  => 'video/x-flv',
             // images
-            'png' => 'image/png',
-            'jpe' => 'image/jpeg',
+            'png'  => 'image/png',
+            'jpe'  => 'image/jpeg',
             'jpeg' => 'image/jpeg',
-            'jpg' => 'image/jpeg',
-            'gif' => 'image/gif',
-            'bmp' => 'image/bmp',
-            'ico' => 'image/vnd.microsoft.icon',
+            'jpg'  => 'image/jpeg',
+            'gif'  => 'image/gif',
+            'bmp'  => 'image/bmp',
+            'ico'  => 'image/vnd.microsoft.icon',
             'tiff' => 'image/tiff',
-            'tif' => 'image/tiff',
-            'svg' => 'image/svg+xml',
+            'tif'  => 'image/tiff',
+            'svg'  => 'image/svg+xml',
             'svgz' => 'image/svg+xml',
             // archives
             'zip' => 'application/zip',
@@ -64,7 +65,7 @@ class Download
             // audio/video
             'mp3' => 'audio/mpeg',
             'mp4' => 'video/mp4',
-            'qt' => 'video/quicktime',
+            'qt'  => 'video/quicktime',
             'mov' => 'video/quicktime',
             '3gp' => 'video/3gpp',
             'avi' => 'video/x-msvideo',
@@ -72,26 +73,26 @@ class Download
             // adobe
             'pdf' => 'application/pdf',
             'psd' => 'image/vnd.adobe.photoshop',
-            'ai' => 'application/postscript',
+            'ai'  => 'application/postscript',
             'eps' => 'application/postscript',
-            'ps' => 'application/postscript',
+            'ps'  => 'application/postscript',
             // ms office
-            'doc' => 'application/msword',
-            'rtf' => 'application/rtf',
-            'xls' => 'application/vnd.ms-excel',
-            'ppt' => 'application/vnd.ms-powerpoint',
+            'doc'  => 'application/msword',
+            'rtf'  => 'application/rtf',
+            'xls'  => 'application/vnd.ms-excel',
+            'ppt'  => 'application/vnd.ms-powerpoint',
             'docx' => 'application/msword',
             'xlsx' => 'application/vnd.ms-excel',
             'pptx' => 'application/vnd.ms-powerpoint',
             // open office
             'odt' => 'application/vnd.oasis.opendocument.text',
             'ods' => 'application/vnd.oasis.opendocument.spreadsheet',
-        );
+        ];
 
         $extension = pathinfo($file, PATHINFO_EXTENSION);
 
-        if (function_exists('finfo_open') === true && $mode == 0) {
-            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        if (function_exists('finfo_open') && $mode === 0) {
+            $finfo    = finfo_open(FILEINFO_MIME_TYPE);
             $mimetype = finfo_file($finfo, $file);
             finfo_close($finfo);
 
@@ -104,7 +105,7 @@ class Download
     }
 
     /**
-     * Sends a file as a download to the browser
+     * Sends a file as a download to the browser.
      *
      * @param string $file Filepath.
      * @param int    $rate The speedlimit in KB/s
@@ -118,20 +119,20 @@ class Download
         try {
             // get more information about the file
             $filename = basename($file);
-            $size = filesize($file);
+            $size     = filesize($file);
             $mimetype = self::getMimeType($file);
 
             // create file handle
             $fp = fopen($file, 'rb');
 
             $seekStart = 0;
-            $seekEnd = $size;
+            $seekEnd   = $size;
 
-            /**
+            /*
              * Check if only a specific part of the file should be sent.
              * The feature names are "multipart-download" and "resumeable-download".
              */
-            if (isset($_SERVER['HTTP_RANGE']) === true) {
+            if (isset($_SERVER['HTTP_RANGE'])) {
                 // calculate the range to use
                 $range = explode('-', mb_substr($_SERVER['HTTP_RANGE'], 6));
 

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -28,7 +28,7 @@ class Text extends Validator
 
     protected function processValidationLogic($value)
     {
-        if (is_string($value) === true or is_numeric($value) === true) {
+        if (is_string($value) || is_numeric($value)) {
             return true;
         } else {
             return false;

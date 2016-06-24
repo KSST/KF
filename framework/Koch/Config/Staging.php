@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -41,7 +41,7 @@ class Staging
     }
 
     /**
-     * Getter for the staging config filename, which is determined by the servername
+     * Getter for the staging config filename, which is determined by the servername.
      *
      * @return string filename of staging config
      */
@@ -55,8 +55,8 @@ class Staging
 
         switch ($_SERVER['SERVER_NAME']) {
             // development configuration
-            case "localhost":
-            case "intranet":
+            case 'localhost':
+            case 'intranet':
             case 'application-dev.com':
             case 'www.application-dev.com':
             case 'application.dev':

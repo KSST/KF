@@ -1,18 +1,18 @@
 <?php
+
 namespace KochTest\Fixtures\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Product Entity
+ * Product Entity.
  *
  * @ORM\Entity
  */
 class Product
 {
-
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      * @ORM\Id
@@ -28,7 +28,7 @@ class Product
     private $name;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="integer")
      */

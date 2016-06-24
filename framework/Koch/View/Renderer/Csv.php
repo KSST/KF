@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,17 +22,16 @@ use Koch\View\AbstractRenderer;
  */
 class Csv extends AbstractRenderer
 {
-    public $headers = array();
+    public $headers = [];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
-
     }
 
     public function initializeEngine($template = null)
@@ -49,10 +48,10 @@ class Csv extends AbstractRenderer
      * @param array    $data    the array with the data to write as csv
      * @param string[] $headers additional array with column headings (first row of the data)
      */
-    public function assign($data, $headers = array())
+    public function assign($data, $headers = [])
     {
         $this->viewdata = $data;
-        $this->headers = $headers;
+        $this->headers  = $headers;
     }
 
     public function display($template, $viewdata = null)
@@ -94,7 +93,7 @@ class Csv extends AbstractRenderer
         return $this->writeCSV($this->viewdata, $this->headers);
     }
 
-    private function writeCSV($data, $column_headers = array(), $display = false)
+    private function writeCSV($data, $column_headers = [], $display = false)
     {
         $stream = ($display === true) ? fopen('php://temp/maxmemory', 'w+') : fopen('php://output', 'w');
 

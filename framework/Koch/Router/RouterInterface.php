@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,25 +13,22 @@
 namespace Koch\Router;
 
 /**
- * Interface for Router(s)
+ * Interface for Router(s).
  *
  * A router has to implement the following methods to resolve the Request to a Module and the Action/Command.
  */
 interface RouterInterface
 {
     /**
-     * @return void
      */
     public function addRoute($url_pattern, array $route_options = null);
 
     /**
-     * @return void
      */
     public function addRoutes(array $routes);
     public function getRoutes();
 
     /**
-     * @return void
      */
     public function delRoute($name);
 

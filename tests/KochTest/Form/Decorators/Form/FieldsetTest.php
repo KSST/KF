@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Form\Decorators\Form;
 
 use Koch\Form\Decorators\Form\Fieldset;
@@ -12,7 +13,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new Fieldset;
+        $this->object = new Fieldset();
     }
 
     protected function tearDown()
@@ -36,7 +37,7 @@ class FieldsetTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $html_form_content = 'Form Content';
-        $r = $this->object->render($html_form_content);
+        $r                 = $this->object->render($html_form_content);
 
         $expectedOutput = '<fieldset class="form"><legend class="form"><em></em></legend>Form Content</fieldset>';
 

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -35,12 +35,12 @@ class ClassRepository
     public function isSupertype($class, $type)
     {
         $supertypes = array_merge(
-            array($class),
+            [$class],
             self::$reflection->interfacesOf($class),
             self::$reflection->parentsOf($class)
         );
 
-        return in_array($type, $supertypes);
+        return in_array($type, $supertypes, true);
     }
 
     public function getConstructorParameters($class)
@@ -53,14 +53,14 @@ class ClassRepository
             return $constructor->getParameters();
         }
 
-        return array();
+        return [];
     }
 
     public function getParameters($class, $method)
     {
         $reflection = self::$reflection->reflection($class);
         if (false === $reflection->hasMethod($method)) {
-            throw new \Koch\DI\Exception\SetterDoesNotExist;
+            throw new \Koch\DI\Exception\SetterDoesNotExist();
         }
 
         return $reflection->getMethod($method)->getParameters();

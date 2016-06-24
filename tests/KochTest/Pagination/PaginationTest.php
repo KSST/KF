@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Pagination;
 
 use Koch\Pagination\Pagination;
@@ -51,7 +52,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     public function testSetMaxResultsPerPage()
     {
         $maxResultsPerPage = '15';
-        $r = $this->object->setMaxResultsPerPage($maxResultsPerPage);
+        $r                 = $this->object->setMaxResultsPerPage($maxResultsPerPage);
 
         $this->assertEquals($this->object->getMaxResultsPerPage(), $maxResultsPerPage);
 
@@ -68,7 +69,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
         $this->object->setMaxResultsPerPage(-10);
     }
 
-     /**
+    /**
      * @covers Koch\Pagination\Pagination::setCurrentPage
      * @covers Koch\Pagination\Pagination::getCurrentPage
      */
@@ -81,16 +82,16 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
 
         // int
         $currentPage = 15;
-        $r = $this->object->setCurrentPage($currentPage);
+        $r           = $this->object->setCurrentPage($currentPage);
         $this->assertEquals($this->object->getCurrentPage(), $currentPage);
 
         // fluent
         $this->assertInstanceOf('Koch\Pagination\Pagination', $r);
     }
 
-     /**
-      * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
-      */
+    /**
+     * @covers Koch\Pagination\Pagination::getTotalNumberOfResults
+     */
     public function getTotalNumberOfResults()
     {
         // hmm, phpunit bug? calls to the mock are not covered
@@ -156,10 +157,10 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetCurrentPageResults()
     {
-        $returnValues = array(
-            array('foo' => 'bar', 'bar' => 'foo'),
-            array('fanta', 'reiner', 'kristall', 'weizen'),
-        );
+        $returnValues = [
+            ['foo' => 'bar', 'bar' => 'foo'],
+            ['fanta', 'reiner', 'kristall', 'weizen'],
+        ];
 
         $this->adapter->expects($this->once())->method('getSlice')
             ->with($this->equalTo(20), $this->equalTo(10))
@@ -183,7 +184,7 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetPreviousPage()
     {
-         $this->adapter->expects($this->any())
+        $this->adapter->expects($this->any())
             ->method('getTotalNumberOfResults')->will($this->returnValue(25));
 
         $this->object->setMaxResultsPerPage(5);
@@ -230,8 +231,8 @@ class PaginationTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         // dataset
-        $this->array = array();
-        for ($i = 0; $i < 10; $i++) {
+        $this->array = [];
+        for ($i = 0; $i < 10; ++$i) {
             $this->array[] = rand(1, 999);
         }
 

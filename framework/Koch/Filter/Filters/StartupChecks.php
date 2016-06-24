@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,10 +12,10 @@
 
 namespace Koch\Filter\Filters;
 
+use Koch\Exception\Exception;
 use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Exception\Exception;
 
 /**
  * Filter performing Startup Checks.
@@ -26,10 +26,10 @@ class StartupChecks implements FilterInterface
 {
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        /**
+        /*
          * Deny service, if the system load is too high.
          */
-        if (defined('DEBUG') and DEBUG == false) {
+        if (defined('DEBUG') and DEBUG === false) {
             $maxServerLoad = isset(self::$config['load']['max']) ? (float) self::$config['load']['max'] : 80;
 
             if (\Koch\Functions\Functions::getServerLoad() > $maxServerLoad) {

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -14,17 +14,17 @@ namespace "Koch\Form\Element\" + formelement name
         $class = '\Koch\Form\Elements\\' . $classname;
 
         // instantiate the new formelement and return
-        return new $class;
+        return new $class();
     }
 
     /**
      * ===================================================================================
      *      Form Processing
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * processForm
+     * processForm.
      *
      * This is the main formular processing loop.
      * If the form does not validate, then redisplay it,
@@ -33,15 +33,15 @@ namespace "Koch\Form\Element\" + formelement name
     public function processForm()
     {
         // check, if form has been submitted properly
-        if ($this->validateForm() === true) {
-             /**
+        if ($this->validateForm()) {
+            /*
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('NoError');
         } else {
-            /**
+            /*
              * Failure - form was not filled properly.
              * Redisplay the form with error decorator added.
              */
@@ -50,17 +50,16 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Get the data array
+     * Get the data array.
      *
      * @return array containing all the form data.
      */
     protected function bind()
     {
-
     }
 
     /**
-     * Set Values to Form
+     * Set Values to Form.
      *
      * An associative array is used to pre-populate form elements.
      * The keys of this array correspond with the element names.
@@ -76,9 +75,10 @@ namespace "Koch\Form\Element\" + formelement name
     public function setValues($data = null)
     {
         // because $data might be an object, typecast $data object to array
-        if (is_object($data) === true) {
+        if (is_object($data)) {
             $data = (array) $data;
-        } if (null === $data) { // fetch data from POST
+        }
+        if (null === $data) { // fetch data from POST
             if ('POST' === \Koch\Http\HttpRequest::getRequestMethod()) {
                 $data = \Koch\Http\HttpRequest::getPost();
             }
@@ -88,12 +88,12 @@ namespace "Koch\Form\Element\" + formelement name
         foreach ($data as $key => $value) {
             foreach ($this->formelements as $formelement) {
 
-                /**
+                /*
                  * Exclude some formelements from setValue() by type, e.g. Buttons, etc.
                  * Setting the value would just change the visible "name" of these elements.
                  */
                 $type = $formelement->getType();
-                if (true === in_array($type, array('submit', 'button', 'cancelbutton', 'resetbutton'))) {
+                if (true === in_array($type, ['submit', 'button', 'cancelbutton', 'resetbutton'], true)) {
                     continue;
                 }
 
@@ -118,10 +118,10 @@ namespace "Koch\Form\Element\" + formelement name
      */
     public function getValues()
     {
-        $values = array();
+        $values = [];
 
         foreach ($this->formelements as $formelement) {
-            /**
+            /*
              * Create an associative array $value[id] => value
              */
             $values[$formelement->getId()] = $formelement->getValue();
@@ -134,17 +134,18 @@ namespace "Koch\Form\Element\" + formelement name
     /**
      * ===================================================================================
      *      Form Decoration
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Is a shortcut/proxy/convenience method for addDecorator()
-     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>
+     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>.
      *
      * @see $this->addDecorator()
      *
-     * @param  string             $decorators Array of decorator objects or names or just one string.
-     * @param  array              $attributes Array of properties for the decorator object.
+     * @param string $decorators Array of decorator objects or names or just one string.
+     * @param array  $attributes Array of properties for the decorator object.
+     *
      * @return Koch_Formdecorator object
      */
     public function setDecorator($decorators, $attributes = null)
@@ -153,7 +154,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Add multiple decorators at once
+     * Add multiple decorators at once.
      *
      * @param array $decorators Array of decorator objects or names.
      */
@@ -167,13 +168,14 @@ namespace "Koch\Form\Element\" + formelement name
 
     /**
      * Adds a decorator to the form
-     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>
+     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>.
      *
      * @example
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
-     * @param  array              $decorator  Array of decorator objects or names or just one string.
-     * @param  array              $attributes Array of properties for the decorator object.
+     * @param array $decorator  Array of decorator objects or names or just one string.
+     * @param array $attributes Array of properties for the decorator object.
+     *
      * @return Koch_Formdecorator object
      */
     public function addDecorator($decorator, $attributes = null)
@@ -206,7 +208,7 @@ namespace "Koch\Form\Element\" + formelement name
         }
 
         // now check if this decorator is not already set (prevent decorator duplications)
-        if (false === in_array($decorator, $this->formdecorators)) {
+        if (false === in_array($decorator, $this->formdecorators, true)) {
             // set this decorator object under its name into the array
             $this->formdecorators[$decoratorname] = $decorator;
         }
@@ -219,7 +221,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Getter Method for the formdecorators
+     * Getter Method for the formdecorators.
      *
      * @return array with registered formdecorators
      */
@@ -230,7 +232,7 @@ namespace "Koch\Form\Element\" + formelement name
 
     /**
      * Toggles the Usage of Default Form Decorators
-     * If set to false, registerDefaultFormDecorators() is not called during render()
+     * If set to false, registerDefaultFormDecorators() is not called during render().
      *
      * @see render()
      * @see registerDefaultFormDecorators()
@@ -243,7 +245,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Set default form decorators (form)
+     * Set default form decorators (form).
      */
     public function registerDefaultFormDecorators()
     {
@@ -268,14 +270,14 @@ namespace "Koch\Form\Element\" + formelement name
         }
 
         // here variable $decorator must be string
-        if (isset($this->formdecorators[$decorator]) === true || array_key_exists($decorator, $this->formdecorators)) {
+        if (isset($this->formdecorators[$decorator]) || array_key_exists($decorator, $this->formdecorators)) {
             unset($this->formdecorators[$decorator]);
         }
     }
 
     public function getDecorator($decorator)
     {
-        if (isset($this->formdecorators[$decorator]) === true) {
+        if (isset($this->formdecorators[$decorator])) {
             return $this->formdecorators[$decorator];
         } else {
             throw new \InvalidArgumentException('The Form does not have a Decorator called "' . $decorator . '".');
@@ -286,17 +288,18 @@ namespace "Koch\Form\Element\" + formelement name
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Name of Formdecorator.
-     * @param  string             $decorator
+     * @param string $decorator
+     *
      * @return Koch_Formdecorator
      */
     public function decoratorFactory($decorator)
     {
-        $classmap = array(
+        $classmap = [
             'html5validation' => 'Html5Validation',
-            'noerror' => 'NoError'
-        );
+            'noerror'         => 'NoError',
+        ];
 
-        if (isset($classmap[$decorator]) === true || array_key_exists($decorator, $classmap) === true) {
+        if (isset($classmap[$decorator]) || array_key_exists($decorator, $classmap)) {
             $decorator = $classmap[$decorator];
         } else {
             $decorator = ucfirst($decorator);
@@ -308,7 +311,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Sets the Decorator Attributes Array
+     * Sets the Decorator Attributes Array.
      *
      * Decorators are not instantiated at the time of the form definition via an array.
      * So configuration can only be applied indirtly to these objects.
@@ -322,7 +325,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Returns the Decorator Attributes Array
+     * Returns the Decorator Attributes Array.
      *
      * Decorators are not instantiated at the time of the form definition via an array.
      * So configuration can only be applied indirtly to these objects.
@@ -336,7 +339,7 @@ namespace "Koch\Form\Element\" + formelement name
     }
 
     /**
-     * Array Structure
+     * Array Structure.
      *
      * $decorator_attributes = array(
      *  Level 1 - key = decorator type
@@ -391,17 +394,20 @@ namespace "Koch\Form\Element\" + formelement name
     /**
      * ===================================================================================
      *      Formelement Decoration
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * setFormelementDecorator
+     * setFormelementDecorator.
      *
      * Is a shortcut/proxy/convenience method for addFormelementDecorator()
+     *
      * @see $this->addFormelementDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @param  string             $decorator
+     *
+     * @param string $decorator
+     *
      * @return Koch_Formdecorator object
      */
     public function setFormelementDecorator($decorator, $formelement_position = null)
@@ -417,6 +423,7 @@ namespace "Koch\Form\Element\" + formelement name
      * (a) by its name or
      * (b) multiple decorators as an array or
      * (c) a instantied decorator object might me handed to this method.
+     *
      * @see addDecorator()
      *
      * The second parameter specifies the formelement_position.
@@ -428,9 +435,10 @@ namespace "Koch\Form\Element\" + formelement name
      * $form->addFormelementDecorator('fieldset')->setLegend('legendname');
      * This would attach the decorator fieldset to the last formelement of $form.
      *
-     * @param  string            $decorator                The formelement decorator(s) to apply to the formelement.
-     * @param  int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
-     * @return object            \Koch\Form\Decorators\Formelement\Interface
+     * @param string            $decorator                The formelement decorator(s) to apply to the formelement.
+     * @param int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
+     *
+     * @return object \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
@@ -462,18 +470,17 @@ namespace "Koch\Form\Element\" + formelement name
     /**
      * ===================================================================================
      *      Form Validation
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * Adds a validator to the formelement
+     * Adds a validator to the formelement.
      *
      * @return Form
      */
     public function addValidator($validator)
     {
         if (is_object($validator) and is_a($validator, Koch\Form\ValidatorInterface)) {
-
         }
 
         return $this;
@@ -487,7 +494,7 @@ namespace "Koch\Form\Element\" + formelement name
      * If a formelement is not valid, the error flag on the form is raised and the error message
      * of the formelement is transferred to the error message stack of the form.
      *
-     * @return boolean Returns true if form validates, false if validation fails, because errors exist.
+     * @return bool Returns true if form validates, false if validation fails, because errors exist.
      */
     public function validateForm()
     {
@@ -499,24 +506,25 @@ namespace "Koch\Form\Element\" + formelement name
         }
 
         // if form has errors, it does not validate
-        return ($this->hasErrors() === true) ? false : true;
+        return $this->hasErrors() ? false : true;
     }
 
     /**
      * ===================================================================================
      *      Form Errormessages
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Returns the error state of the form.
      *
-     * @param  boolean $boolean
-     * @return boolean True, if form has an error. False, otherwise.
+     * @param bool $boolean
+     *
+     * @return bool True, if form has an error. False, otherwise.
      */
     public function hasErrors($boolean = null)
     {
-        if (is_bool($boolean) === true) {
+        if (is_bool($boolean)) {
             $this->error = $boolean;
         }
 
@@ -538,7 +546,7 @@ namespace "Koch\Form\Element\" + formelement name
 
     public function resetErrorMessages()
     {
-        $this->errorMessages = array();
+        $this->errorMessages = [];
     }
 
     public function getErrorMessages()
@@ -549,22 +557,22 @@ namespace "Koch\Form\Element\" + formelement name
     /**
      * ============================
      *    Magic Methods: get/set
-     * ============================
+     * ============================.
      */
 
     /**
-     * Magic Method: set
+     * Magic Method: set.
      *
      * @param $name Name of the attribute to set to the form.
      * @param $value The value of the attribute.
      */
     public function __set($name, $value)
     {
-        $this->setAttributes(array($name => $value));
+        $this->setAttributes([$name => $value]);
     }
 
     /**
-     * Magic Method: get
+     * Magic Method: get.
      *
      * @param $name
      */

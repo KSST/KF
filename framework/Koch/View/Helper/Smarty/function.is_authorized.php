@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
@@ -16,13 +16,14 @@
  * Name:    is_authorized<br>
  * Purpose: Checks, if a user is authorized for accessing a resource.<br>
  *
- * @param   array $params
- * @return  null|boolean True if user has permission, false otherwise.
+ * @param array $params
+ *
+ * @return null|bool True if user has permission, false otherwise.
  */
 function Smarty_function_is_authorized($params)
 {
     // ensure we got parameter name
-    if (empty($params['name']) or is_string($params['name']) == false) {
+    if (empty($params['name']) or is_string($params['name']) === false) {
         trigger_error(
             'Parameter "name" is not a string or empty. Please provide a name in the format "module.action".'
         );

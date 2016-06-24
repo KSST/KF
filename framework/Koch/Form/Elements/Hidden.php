@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -20,7 +20,7 @@ class Hidden extends Input implements FormElementInterface
     {
         $this->type = 'hidden';
 
-        /**
+        /*
          * Convention: Default decorators are disabled on hidden formelements!
          *
          * When useDefaultDecorators() is activated on the form,
@@ -63,14 +63,14 @@ class Hidden extends Input implements FormElementInterface
             // transform the array to a string by imploding it with comma
             $data = implode(',', $value);
 
-            /**
+            /*
              * Add imploded_array to the name.
              *
              * By appending the state of the array to the name, it's marked
              * to be exploded again, when incomming as $_POST data.
              */
             $this->setName('_imploded_array');
-        } elseif ((is_string($value) === true) or (is_numeric($value) === true)) {
+        } elseif (is_string($value) or is_numeric($value)) {
             $data = $value;
         } else {
             $msg = _('%s() only accepts array, string or numeric as $value. Your input was (%s) %s.');
@@ -84,7 +84,7 @@ class Hidden extends Input implements FormElementInterface
     }
 
     /**
-     * Proxy / Convenience Method for setName() and setValue() (a two in one call)
+     * Proxy / Convenience Method for setName() and setValue() (a two in one call).
      *
      * @param type         $name
      * @param string|array $value The data you want to pass through POST.

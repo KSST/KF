@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,9 +23,9 @@ class Classic implements StyleInterface
 {
     public function render(\Koch\Pagination\Pagination $pagination)
     {
-        $lastPage = $pagination->getLastPage();
+        $lastPage      = $pagination->getLastPage();
         $numberOfPages = $pagination->getNumberOfPages();
-        $current_page = $pagination->getCurrentPage();
+        $current_page  = $pagination->getCurrentPage();
 
         $url = /* Router*/ 'URL';
 
@@ -38,8 +38,8 @@ class Classic implements StyleInterface
         }
 
         // render page range around the current page
-        for ($i = 1; $i <= $numberOfPages; $i++) {
-            if ($i == $current_page) {
+        for ($i = 1; $i <= $numberOfPages; ++$i) {
+            if ($i === $current_page) {
                 $html .= sprintf('<li class="active">%s</li>', $i);
             } else {
                 $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);

@@ -15,8 +15,8 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $request = new \Koch\Http\HttpRequest;
-        $response = new \Koch\Http\HttpResponse;
+        $request  = new \Koch\Http\HttpRequest();
+        $response = new \Koch\Http\HttpResponse();
 
         // we can't test abstract base classes directly, so we test against a child
         $this->object = new \KochTest\Fixtures\Application\Modules\News\Controller\NewsController($request, $response);
@@ -37,5 +37,4 @@ class AbstractControllerTest extends \PHPUnit_Framework_TestCase
 
         $this->assertEquals('Entity\News', $entity);
     }
-
 }

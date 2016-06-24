@@ -17,7 +17,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $options = array();
+        $options = [];
 
         $this->object = new Json($options);
     }
@@ -52,13 +52,13 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testJsonEncode()
     {
-       // default value
+        // default value
        $this->assertEquals('[]', $this->object->jsonEncode());
 
        // with data
-       $data = array('key' => 'value');
-       $result = $this->object->jsonEncode($data);
-       $this->assertEquals('{"key":"value"}', $result);
+       $data    = ['key' => 'value'];
+        $result = $this->object->jsonEncode($data);
+        $this->assertEquals('{"key":"value"}', $result);
     }
 
     /**
@@ -66,7 +66,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderAsHeader()
     {
-        $data = array('key' => 'value');
+        $data = ['key' => 'value'];
         $this->assertTrue($this->object->renderAsHeader($data));
     }
 
@@ -75,7 +75,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testRender()
     {
-        $r = $this->object->render('', array('key' => 'value'));
+        $r = $this->object->render('', ['key' => 'value']);
         $this->assertEquals('{"key":"value"}', $r);
     }
 
@@ -93,7 +93,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testDisplay()
     {
-        $this->object->display('', array('key' => 'value'));
+        $this->object->display('', ['key' => 'value']);
 
         $this->expectOutputString('{"key":"value"}');
     }
@@ -103,7 +103,7 @@ class JsonTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetch()
     {
-       $r = $this->object->fetch('', array('key' => 'value'));
-       $this->assertEquals('{"key":"value"}', $r);
+        $r = $this->object->fetch('', ['key' => 'value']);
+        $this->assertEquals('{"key":"value"}', $r);
     }
 }

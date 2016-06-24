@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,12 +18,11 @@ namespace Koch\View\Helper;
 class Partial extends Layout
 {
     // var $_blocks contains all block elements as Separate Objects
-    private $blockObjects = array();
+    private $blockObjects = [];
 
     // no constructor
     public function __construct()
     {
-
     }
 
     // add block object
@@ -41,7 +40,7 @@ class Partial extends Layout
     }
 
     /**
-     * Render Blocks
+     * Render Blocks.
      */
     public function render($params, $smarty)
     {
@@ -59,7 +58,7 @@ class Partial extends Layout
     }
 
     /**
-     * Getter for $this->_blockObjects
+     * Getter for $this->_blockObjects.
      */
     public function getBlocks()
     {

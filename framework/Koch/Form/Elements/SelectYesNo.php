@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,7 +18,7 @@ class SelectYesNo extends Select implements FormElementInterface
 {
     public function getYesNo()
     {
-        $options = array('yes' => '1', 'no' => '0');
+        $options = ['yes' => '1', 'no' => '0'];
 
         return $options;
     }
@@ -26,7 +26,7 @@ class SelectYesNo extends Select implements FormElementInterface
     public function render()
     {
         // check if we have options
-        if ($this->options == null) {
+        if ($this->options === null) {
             // if we don't have options, we set only 'yes' and 'no'
             $this->setOptions($this->getYesNo());
         } else {

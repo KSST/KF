@@ -39,7 +39,7 @@
     },
     "require-dev": {
         "mikey179/vfsStream"              : "^1.6",
-        "fabpot/php-cs-fixer"             : "^1.11",
+        "fabpot/php-cs-fixer"             : "*",
         "phpunit/phpunit"                 : "^4.5",
         "phpunit/dbunit"                  : "*",
         "doctrine/data-fixtures"          : "*",
@@ -69,9 +69,6 @@
         ]
     },
     "config": {
-      "preferred-install": "dist",
-      "github-oauth": {
-          "github.com": "754f8af6145eb3bb532feff61e9c29611174ebea"
-      }
+      "preferred-install": "dist"
     }
 }

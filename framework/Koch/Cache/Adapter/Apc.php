@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -31,13 +31,12 @@ use Koch\Functions\Functions;
  */
 class Apc extends AbstractCache implements CacheInterface
 {
-
-     /**
-     * Constructor
+    /**
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('apc') === false) {
             throw new \Koch\Exception\Exception(
@@ -46,13 +45,13 @@ class Apc extends AbstractCache implements CacheInterface
         }
 
         $enabled = ini_get('apc.enabled');
-        if (PHP_SAPI == 'cli') {
+        if (PHP_SAPI === 'cli') {
             $enabled = $enabled && (bool) ini_get('apc.enable_cli');
         }
 
         if ($enabled === false) {
             throw new \Koch\Exception\Exception(
-                "The PHP extension APC (Alternative PHP Cache) is not loaded." .
+                'The PHP extension APC (Alternative PHP Cache) is not loaded.' .
                 "You may enable it with 'apc.enabled=1' and 'apc.enable_cli=1'!"
             );
         }
@@ -61,10 +60,11 @@ class Apc extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean True if the data was successfully fetched from the cache, false on failure
+     * @param string $key Identifier for the data
+     *
+     * @return bool True if the data was successfully fetched from the cache, false on failure
      */
     public function fetch($key)
     {
@@ -72,13 +72,14 @@ class Apc extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param  string  $key       Identifier for the data
-     * @param  string  $data      Data to be cached
-     * @param  int $ttl       How long to cache the data, in minutes.
-     * @param  boolean $overwrite If overwrite true, key will be overwritten.
-     * @return boolean True if the data was successfully cached, false on failure
+     * @param string $key       Identifier for the data
+     * @param string $data      Data to be cached
+     * @param int    $ttl       How long to cache the data, in minutes.
+     * @param bool   $overwrite If overwrite true, key will be overwritten.
+     *
+     * @return bool True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $ttl = null, $overwrite = false)
     {
@@ -88,7 +89,7 @@ class Apc extends AbstractCache implements CacheInterface
 
         if ($key === null) {
             return false;
-        } elseif ($overwrite == false) {
+        } elseif ($overwrite === false) {
             return apc_add($key, $data, $ttl);
         } else { // overwrite
 
@@ -97,20 +98,22 @@ class Apc extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Removes a stored variable from the
+     * Removes a stored variable from the.
      *
      * @link http://php.net/manual/en/function.apc-delete.php
-     * @param  string $keys Identifier for the data
-     * @return bool   Returns true on success or false on failure.
+     *
+     * @param string $keys Identifier for the data
+     *
+     * @return bool Returns true on success or false on failure.
      */
     public function delete($keys)
     {
-        $keys = (array) $keys;
+        $keys         = (array) $keys;
         $keys_deleted = 0;
 
         foreach ($keys as $key) {
             if (true === apc_delete($key)) {
-                $keys_deleted++;
+                ++$keys_deleted;
             }
         }
 
@@ -118,17 +121,19 @@ class Apc extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Clears the APC cache
+     * Clears the APC cache.
      *
      * @link http://php.net/manual/en/function.apc-clear-cache.php
-     * @param  string $cache_type [optional] all, user, opcode <p>
-     *                            If cache_type is "user", the user cache will be cleared;
-     *                            otherwise, the system cache (cached files) will be cleared. </p>
-     * @return bool   Returns true on success or false on failure.
+     *
+     * @param string $cache_type [optional] all, user, opcode <p>
+     *                           If cache_type is "user", the user cache will be cleared;
+     *                           otherwise, the system cache (cached files) will be cleared. </p>
+     *
+     * @return bool Returns true on success or false on failure.
      */
     public function clear($cache_type = 'user')
     {
-        if (extension_loaded('apcu') === true) {
+        if (extension_loaded('apcu')) {
             return apc_clear_cache();
         }
 
@@ -142,10 +147,11 @@ class Apc extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Checks if a key exists in the cache
+     * Checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
@@ -155,36 +161,36 @@ class Apc extends AbstractCache implements CacheInterface
     /**
      * Get stats and usage Informations for display from APC
      * 1. Shared Memory Allocation
-     * 2. Cache Infos / Meta-Data
+     * 2. Cache Infos / Meta-Data.
      */
     public function stats()
     {
-        $info = array();
+        $info = [];
         // Retrieve APC Version
-        $info['version'] = phpversion('apc');
+        $info['version']    = phpversion('apc');
         $info['phpversion'] = phpversion();
 
-        /**
+        /*
          * ========================================================
          *   Retrieves APC's Shared Memory Allocation information
          * ========================================================
          */
-        $info['sma_info'] = array();
+        $info['sma_info'] = [];
 
         if (true === function_exists('apc_sma_info')) {
             $info['sma_info'] = apc_sma_info(true);
 
             // Calculate "APC Memory Size" (Number of Segments * Size of Segment)
-            $memsize = $info['sma_info']['num_seg'] * $info['sma_info']['seg_size'];
+            $memsize                      = $info['sma_info']['num_seg'] * $info['sma_info']['seg_size'];
             $info['sma_info']['mem_size'] = $memsize;
 
             // Calculate "APC Memory Usage" ( mem_size - avail_mem )
-            $memusage = $info['sma_info']['mem_size'] - $info['sma_info']['avail_mem'];
+            $memusage                     = $info['sma_info']['mem_size'] - $info['sma_info']['avail_mem'];
             $info['sma_info']['mem_used'] = $memusage;
 
             // Calculate "APC Free Memory Percentage" ( mem_size*100/mem_used )
-            $memsize_total = $info['sma_info']['avail_mem'] * 100;
-            $avail_mem_percent = sprintf('(%.1f%%)', $memsize_total  / $info['sma_info']['mem_size']);
+            $memsize_total                            = $info['sma_info']['avail_mem'] * 100;
+            $avail_mem_percent                        = sprintf('(%.1f%%)', $memsize_total  / $info['sma_info']['mem_size']);
             $info['sma_info']['mem_avail_percentage'] = $avail_mem_percent;
         }
 
@@ -194,10 +200,10 @@ class Apc extends AbstractCache implements CacheInterface
             $info['cache_info'] = apc_cache_info();
 
             #\Koch\Debug\Debug::printR(apc_cache_info());
-            $info['cache_info']['cached_files'] = count($info['cache_info']['cache_list']);
+            $info['cache_info']['cached_files']  = count($info['cache_info']['cache_list']);
             $info['cache_info']['deleted_files'] = count($info['cache_info']['deleted_list']);
 
-            /**
+            /*
              * ========================================================
              *   System Cache Informations
              * ========================================================
@@ -207,37 +213,37 @@ class Apc extends AbstractCache implements CacheInterface
             $hits = ($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']);
 
             // div by zero fix
-            if ($hits == 0) {
+            if ($hits === 0) {
                 $hits = 1;
             }
 
-            $hit_rate_percentage = $info['system_cache_info']['num_hits'] * 100 / $hits;
+            $hit_rate_percentage                              = $info['system_cache_info']['num_hits'] * 100 / $hits;
             $info['system_cache_info']['hit_rate_percentage'] = sprintf('(%.1f%%)', $hit_rate_percentage);
 
             // Calculate "APC Miss Rate Percentage"
-            $miss_percentage = $info['system_cache_info']['num_misses'] * 100 / $hits;
+            $miss_percentage                                   = $info['system_cache_info']['num_misses'] * 100 / $hits;
             $info['system_cache_info']['miss_rate_percentage'] = sprintf('(%.1f%%)', $miss_percentage);
-            $info['system_cache_info']['files_cached'] = count($info['system_cache_info']['cache_list']);
-            $info['system_cache_info']['files_deleted'] = count($info['system_cache_info']['deleted_list']);
+            $info['system_cache_info']['files_cached']         = count($info['system_cache_info']['cache_list']);
+            $info['system_cache_info']['files_deleted']        = count($info['system_cache_info']['deleted_list']);
 
             // Request Rate (hits, misses) / cache requests/second
             $start_time = (time() - $info['system_cache_info']['start_time']);
 
             // div by zero fix
-            if ($start_time == 0) {
+            if ($start_time === 0) {
                 $start_time = 1;
             }
 
-            $rate = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
+            $rate                                  = (($info['system_cache_info']['num_hits'] + $info['system_cache_info']['num_misses']) / $start_time);
             $info['system_cache_info']['req_rate'] = sprintf('%.2f', $rate);
 
-            $hit_rate = ($info['system_cache_info']['num_hits']) / $start_time;
+            $hit_rate                              = ($info['system_cache_info']['num_hits']) / $start_time;
             $info['system_cache_info']['hit_rate'] = sprintf('%.2f', $hit_rate);
 
-            $miss_rate = ($info['system_cache_info']['num_misses'] / $start_time);
+            $miss_rate                              = ($info['system_cache_info']['num_misses'] / $start_time);
             $info['system_cache_info']['miss_rate'] = sprintf('%.2f', $miss_rate);
 
-            $insert_rate = (($info['system_cache_info']['num_inserts']) / $start_time);
+            $insert_rate                              = (($info['system_cache_info']['num_inserts']) / $start_time);
             $info['system_cache_info']['insert_rate'] = sprintf('%.2f', $insert_rate);
 
             // size
@@ -250,27 +256,27 @@ class Apc extends AbstractCache implements CacheInterface
 
         $info['settings'] = ini_get_all('apc');
 
-        /**
+        /*
          * ini_get_all array mod: for each accessvalue
          * add the name of the PHP ACCESS CONSTANTS as 'accessname'
          * @todo: cleanup?
          */
         foreach ($info['settings'] as $key => $value) {
             foreach ($value as $key2 => $value2) {
-                if ($key2 == 'access') {
+                if ($key2 === 'access') {
                     $name = '';
 
                     // accessvalue => constantname
-                    if ($value2 == '1') {
+                    if ($value2 === '1') {
                         $name = 'PHP_INI_USER';
                     }
-                    if ($value2 == '2') {
+                    if ($value2 === '2') {
                         $name = 'PHP_INI_PERDIR';
                     }
-                    if ($value2 == '4') {
+                    if ($value2 === '4') {
                         $name = 'PHP_INI_SYSTEM';
                     }
-                    if ($value2 == '7') {
+                    if ($value2 === '7') {
                         $name = 'PHP_INI_ALL';
                     }
 

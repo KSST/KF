@@ -3,7 +3,7 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  *
  * This file is part of https://github.com/KSST/KF
 * SPDX-License-Identifier: MIT *
@@ -11,7 +11,6 @@
  * *
  * *
  * */
-
 Phar::mapPhar('koch-framework.phar');
 
 require_once 'phar://koch-framework.phar/vendor/autoload.php';

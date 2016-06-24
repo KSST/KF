@@ -12,7 +12,7 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * testMethodgenerate_salt()
+     * testMethodgenerate_salt().
      */
     public function testMethodgenerateSalt()
     {
@@ -42,7 +42,7 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
         $salted_hash = \Koch\Security\Security::buildSaltedHash('admin', 'md5');
 
         $this->assertTrue(is_array($salted_hash), true);
-     }
+    }
 
     public function testMethodcheckSaltedHash()
     {
@@ -51,7 +51,7 @@ class SecurityTest extends \PHPUnit_Framework_TestCase
         // expected, from db
         $databasehash = '7ff3adfa18a8ad7f115e90ce2c44a0ec';
         // from db
-        $salt = 'Sko5ie';
+        $salt           = 'Sko5ie';
         $hash_algorithm = 'md5';
 
         $bool = \Koch\Security\Security::checkSaltedHash($passwordhash, $databasehash, $salt, $hash_algorithm);

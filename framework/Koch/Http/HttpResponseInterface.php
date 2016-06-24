@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -21,33 +21,28 @@ interface HttpResponseInterface
 
     /**
      * @param string $statusCode
-     *
-     * @return void
      */
     public static function setStatusCode($statusCode);
 
     /**
      * @param string $name
      * @param string $value
-     *
-     * @return void
      */
     public static function addHeader($name, $value);
 
     /**
-     * @return void
      */
     public static function setContent($content, $replace = false);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function sendResponse();
 
     // Cookie Methods
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function setCookie(
         $name,
@@ -60,7 +55,6 @@ interface HttpResponseInterface
     );
 
     /**
-     * @return void
      */
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null);
 }

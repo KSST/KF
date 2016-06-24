@@ -21,7 +21,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "wincache".');
         }
 
-        $this->object = new \Wincache;
+        $this->object = new \Wincache();
     }
 
     /**
@@ -34,6 +34,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::contains
+     *
      * @todo   Implement testContains().
      */
     public function testContains()
@@ -46,6 +47,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::fetch
+     *
      * @todo   Implement testFetch().
      */
     public function testFetch()
@@ -58,6 +60,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::store
+     *
      * @todo   Implement testStore().
      */
     public function testStore()
@@ -70,6 +73,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::delete
+     *
      * @todo   Implement testDelete().
      */
     public function testDelete()
@@ -82,6 +86,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::stats
+     *
      * @todo   Implement testStats().
      */
     public function testStats()
@@ -94,6 +99,7 @@ class WincacheTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Wincache::clear
+     *
      * @todo   Implement testClear().
      */
     public function testClear()

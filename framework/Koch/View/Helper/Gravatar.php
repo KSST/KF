@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -32,15 +32,15 @@ class Gravatar
     private $gravatar_baseurl = 'http://www.gravatar.com/avatar/%s?&size=%s&rating=%s&default=%s';
 
     // Gravatar Ratings
-    private $gravatar_ratings = array("g", "pg", "r", "x");
+    private $gravatar_ratings = ['g', 'pg', 'r', 'x'];
 
     // Gravatar Properties
-    protected $gravatar_properties = array(
-        "gravatar_id"	=> null,      // = md5(email)
-        "default"		=> null,      // default avatar
-        "size"			=> 80,        // default value = 80
-        "rating"		=> null,      // rating
-    );
+    protected $gravatar_properties = [
+        'gravatar_id' => null,      // = md5(email)
+        'default'     => null,      // default avatar
+        'size'        => 80,        // default value = 80
+        'rating'      => null,      // rating
+    ];
 
     // Email
     public $email = '';
@@ -49,7 +49,8 @@ class Gravatar
     public $useCaching = true;
 
     /**
-     *  Constructor
+     *  Constructor.
+     *
      * @param string $email
      * @param string $default
      */
@@ -60,7 +61,7 @@ class Gravatar
         $this->setSize($size);
         $this->setDefaultAvatar($default);
 
-        if (true == $nocaching) {
+        if (true === $nocaching) {
             $this->disableCaching();
         }
     }
@@ -69,9 +70,10 @@ class Gravatar
      *  setEmail
      *  1. convert email to lowercase
      *  2. set email to class
-     *  3. set md5 of email as gravatar_id
+     *  3. set md5 of email as gravatar_id.
      *
-     * @param  string|null $email
+     * @param string|null $email
+     *
      * @return $this
      */
     public function setEmail($email)
@@ -90,16 +92,17 @@ class Gravatar
     /**
      * setRating
      * $rating has to be one of the predefined elements from GRAVATAR_RATINGS array
-     * otherwise it sets the rating to default [g]
+     * otherwise it sets the rating to default [g].
      *
      * @param $rating
+     *
      * @return $this
      */
     public function setRating($rating = 'g')
     {
         $rating = strtolower($rating);
 
-        if (in_array($rating, $this->gravatar_ratings) === true) {
+        if (in_array($rating, $this->gravatar_ratings, true)) {
             $this->gravatar_properties['rating'] = $rating;
         } else {
             $this->gravatar_properties['rating'] = 'g';
@@ -109,9 +112,10 @@ class Gravatar
     }
 
     /**
-     *  setDefaultAvatar
+     *  setDefaultAvatar.
      *
      *  sets a default avatar image
+     *
      * @param string|null $image_url
      */
     public function setDefaultAvatar($image_url)
@@ -122,13 +126,14 @@ class Gravatar
     }
 
     /**
-     *  setSize
+     *  setSize.
      *
      *  Th maximum size for a Gravatar is 512px.
      *  This will make sure you set it between 16px and 512px.
      *  If not, Gravatar will return a size of 80px as default value.
      *
      * @param $size
+     *
      * @return $this
      */
     public function setSize($size)
@@ -162,7 +167,7 @@ class Gravatar
     }
 
     /**
-     *  Construct a valid Gravatar URL
+     *  Construct a valid Gravatar URL.
      */
     public function getGravatarURL()
     {
@@ -178,15 +183,15 @@ class Gravatar
     }
 
     /**
-     *  Constructs and output's the complete gravatar <img /> html-tag
+     *  Constructs and output's the complete gravatar <img /> html-tag.
      */
     public function getHTML()
     {
         // init html string variable
-        $html  = '';
+        $html = '';
 
         // check for caching and construct html from cached gravatar url
-        if (true == $this->useCaching) {
+        if (true === $this->useCaching) {
             // initialize cache class
             $cache = new GravatarCache(
                 $this->getGravatarURL(),
@@ -196,26 +201,26 @@ class Gravatar
             );
 
             // getGravatar URL from cache
-            $html .= '<img src="'. $cache->getGravatar() .'"';
+            $html .= '<img src="' . $cache->getGravatar() . '"';
         } else {
             // construct html for non-cached gravatar
-            $html .= '<img src="'. $this->getGravatarURL() .'"';
+            $html .= '<img src="' . $this->getGravatarURL() . '"';
 
             // add additional width and height
             if ($this->gravatar_properties['size'] !== null) {
-                $html .= ' width="'.$this->gravatar_properties['size'].'"';
-                $html .= ' height="'.$this->gravatar_properties['size'].'"';
+                $html .= ' width="' . $this->gravatar_properties['size'] . '"';
+                $html .= ' height="' . $this->gravatar_properties['size'] . '"';
             }
         }
 
         // add alt and title tags on both (cached, non-cached) html
-        $html .= ' alt="Gravatar for '.$this->email.'" title="Gravatar for '.$this->email.'" />';
+        $html .= ' alt="Gravatar for ' . $this->email . '" title="Gravatar for ' . $this->email . '" />';
 
         return $html;
     }
 
     /**
-     *  toString
+     *  toString.
      */
     public function __toString()
     {

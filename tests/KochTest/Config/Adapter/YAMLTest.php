@@ -26,8 +26,8 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.yml');
-        $this->file = vfsStream::newFile('config.yml', 0777)->withContent($this->getConfigFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file          = vfsStream::newFile('config.yml', 0777)->withContent($this->getConfigFileContent());
+        $this->root          = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
 
@@ -59,18 +59,18 @@ class YAMLTest extends \PHPUnit_Framework_TestCase
 
     public function getConfigArray()
     {
-        return array(
+        return [
 
-        );
+        ];
     }
 
     public function getConfigFileContent()
     {
-        return "--- # Favorite movies, block format
+        return '--- # Favorite movies, block format
         - Casablanca
         - Spellbound
         - Notorious
         --- # Shopping list, inline format
-        [milk, bread, eggs]";
+        [milk, bread, eggs]';
     }
 }

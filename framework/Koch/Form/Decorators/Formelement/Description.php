@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -34,7 +34,7 @@ class Description extends AbstractFormElementDecorator
      */
     public function render($html_formelement)
     {
-        if (isset($this->formelement->description) === true) {
+        if (isset($this->formelement->description)) {
             $html_formelement .= '<br />' . CR;
             $html_formelement .= '<span class="' . $this->cssClass . '">';
             $html_formelement .= $this->formelement->getDescription();

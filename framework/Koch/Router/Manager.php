@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Router;
 
 /**
- * Koch Framework - Router Management
+ * Router Management.
  *
  * These are helper functions for the EventHandler,
  * when adding or deleting routes coming from modules to the application.
@@ -57,7 +57,8 @@ class Manager
     /**
      * Delete a specific route.
      *
-     * @param  type  $route_name
+     * @param type $route_name
+     *
      * @return array Routes.
      */
     public function deleteRoute($route_name)
@@ -65,7 +66,7 @@ class Manager
         $routesCount = count($this->routes);
 
         // loop over all routes
-        for ($i = 0; $i < $routesCount; $i++) {
+        for ($i = 0; $i < $routesCount; ++$i) {
             // check if there is a route with the given name
             if ($this->routes[$i]['name'] === $route_name) {
                 // got one? then remove it from the routes array and stop
@@ -108,9 +109,10 @@ class Manager
     }
 
     /**
-     * Load Routes from any Route Configuration File
+     * Load Routes from any Route Configuration File.
      *
      * @param string Name of a module. Default: main routes config.
+     *
      * @return array Array of Routes.
      */
     public static function loadRoutesFromConfig($module = '')
@@ -123,7 +125,7 @@ class Manager
             $file = APPLICATION_MODULES_PATH . $module . '/' . $module . '.routes.php';
         }
 
-        if (is_file($file) === true) {
+        if (is_file($file)) {
             return include $file;
         }
     }

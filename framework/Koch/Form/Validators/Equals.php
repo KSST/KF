@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,14 +17,14 @@ use Koch\Form\Validator;
 class Equals extends Validator
 {
     /**
-     * The equals to field
+     * The equals to field.
      *
      * @var string
      */
     public $equalsTo;
 
     /**
-     * EqualsTo Setter
+     * EqualsTo Setter.
      *
      * @param string $equalsTo The equals to field
      */
@@ -34,7 +34,7 @@ class Equals extends Validator
     }
 
     /**
-     * EqualsTo Getter
+     * EqualsTo Getter.
      *
      * @return string the equals to field
      */
@@ -55,7 +55,7 @@ class Equals extends Validator
 
     protected function processValidationLogic($value)
     {
-        if ($this->equalsTo == $value) {
+        if ($this->equalsTo === $value) {
             return true;
         } else {
             return false;

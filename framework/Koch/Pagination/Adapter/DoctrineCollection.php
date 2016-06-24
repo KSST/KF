@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,8 +12,8 @@
 
 namespace Koch\Pagination\Adapter;
 
-use Koch\Pagination\AdapterInterface;
 use Doctrine\Common\Collections\Collection;
+use Koch\Pagination\AdapterInterface;
 
 /**
  * Pagination Adapter working with Doctrine Collections.

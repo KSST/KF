@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -45,6 +45,7 @@ class File extends Input implements FormElementInterface
      * There are several different formelements available to upload files:
      *
      * @param $uploadType ajaxupload, apc, uploadify, html
+     *
      * @return File \Koch\Form\Element\File
      */
     public function setUploadType($uploadType)
@@ -68,7 +69,7 @@ class File extends Input implements FormElementInterface
                 return new \Koch\Form\Elements\Uploadify();
                 break;
             case 'html':
-                /**
+                /*
                  * Fallback to normal <input type="file"> upload
                  * Currently not using the render method of the parent class
                  * return parent::render();

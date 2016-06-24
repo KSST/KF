@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,14 +17,14 @@ use Koch\Form\Validator;
 class NotEquals extends Validator
 {
     /**
-     * The not equals to field
+     * The not equals to field.
      *
      * @var string
      */
     public $notEqualsTo;
 
     /**
-     * EqualsTo Setter
+     * EqualsTo Setter.
      *
      * @param string $notEqualsTo The equals to field
      */
@@ -34,7 +34,7 @@ class NotEquals extends Validator
     }
 
     /**
-     * EqualsTo Getter
+     * EqualsTo Getter.
      *
      * @return string the equals to field
      */
@@ -55,7 +55,7 @@ class NotEquals extends Validator
 
     protected function processValidationLogic($value)
     {
-        if ($this->notEqualsTo != $value) {
+        if ($this->notEqualsTo !== $value) {
             return true;
         } else {
             return false;

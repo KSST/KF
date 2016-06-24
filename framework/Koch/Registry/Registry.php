@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,11 +13,11 @@
 namespace Koch\Registry;
 
 /**
- * Koch Framework - Registry
+ * Registry.
  */
 class Registry
 {
-    public static $registry = array();
+    public static $registry = [];
 
     /**
      * Set instance to registry.
@@ -33,7 +33,8 @@ class Registry
     /**
      * Isset check, if instance,classname or resolver is set to registry.
      *
-     * @param  string $name Name of instance.
+     * @param string $name Name of instance.
+     *
      * @return bool
      */
     public static function has($name)
@@ -42,11 +43,13 @@ class Registry
     }
 
     /**
-     * Getter for instance
+     * Getter for instance.
      *
-     * @param  string                    $name       Name of instance.
-     * @param  type                      $parameters
+     * @param string $name       Name of instance.
+     * @param type   $parameters
+     *
      * @return object
+     *
      * @throws \InvalidArgumentException
      */
     public static function get($name, $parameters = null)

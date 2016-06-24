@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -16,7 +16,7 @@ use Koch\Form\Form;
 use Koch\Form\FormGeneratorInterface;
 
 /**
- * Koch Framework - Form Generator via Doctrine Record
+ * Form Generator via Doctrine Record.
  *
  * Purpose: automatic form generation from doctrine records/tables.
  *
@@ -30,43 +30,43 @@ class Doctrine extends Form implements FormGeneratorInterface
      *
      * @var array
      */
-    protected $typeMap = array(
-            'boolean'    => 'checkbox',
-            'integer'    => 'text',
-            'float'      => 'text',
-            'decimal'    => 'string',
-            'string'     => 'text',
-            'text'       => 'textarea',
-            'enum'       => 'select',
-            'array'      => null,
-            'object'     => null,
-            'blob'       => null,
-            'clob'       => null,
-            'time'       => 'text',
-            'timestamp'  => 'text',
-            'date'       => 'text',
-            'gzip'       => null
-    );
+    protected $typeMap = [
+            'boolean'   => 'checkbox',
+            'integer'   => 'text',
+            'float'     => 'text',
+            'decimal'   => 'string',
+            'string'    => 'text',
+            'text'      => 'textarea',
+            'enum'      => 'select',
+            'array'     => null,
+            'object'    => null,
+            'blob'      => null,
+            'clob'      => null,
+            'time'      => 'text',
+            'timestamp' => 'text',
+            'date'      => 'text',
+            'gzip'      => null,
+    ];
 
     /**
      * Database columns which should not appear in the form.
      *
      * @var array
      */
-    protected $excludedColumns   = array();
+    protected $excludedColumns = [];
 
     /**
-     * Generates a Form from a Table
+     * Generates a Form from a Table.
      *
      * @param string $DoctrineTableName Name of the Doctrine Tablename to build the form from.
      */
     public function generateFormByTable($DoctrineTableName)
     {
         // init form
-        $form = array();
+        $form = [];
 
         // fetch doctrine table by record name
-        $table = Doctrine::getTable($DoctrineTableName);
+        $table = self::getTable($DoctrineTableName);
 
         // fetch all columns of that table
         $tableColumns = $table->getColumnNames();
@@ -75,7 +75,7 @@ class Doctrine extends Form implements FormGeneratorInterface
         foreach ($tableColumns as $columnName) {
             // => $columnType
             // and check wheather the $columnName is to exclude
-            if (in_array($columnName, $this->excludeColumns)) {
+            if (in_array($columnName, $this->excludeColumns, true)) {
                 // stop the foreach-loop here and reenter it
                 continue;
             }
@@ -100,7 +100,7 @@ class Doctrine extends Form implements FormGeneratorInterface
     }
 
     /**
-     * Facade/Shortcut
+     * Facade/Shortcut.
      */
     public function generate($array)
     {

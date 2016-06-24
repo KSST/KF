@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -28,8 +28,8 @@ class DependencyInjector
 {
     public $repository;
     private $top;
-    public $named_parameters = array();
-    public $unnamed_parameters = array();
+    public $named_parameters   = [];
+    public $unnamed_parameters = [];
 
     public function __construct()
     {
@@ -83,11 +83,11 @@ class DependencyInjector
     public function instantiate()
     {
         $values = func_get_args();
-        $type = array_shift($values);
+        $type   = array_shift($values);
         $this->unnamed_parameters += $values;
-        $this->repository = new ClassRepository();
-        $object = $this->top->create($type);
-        $this->named_parameters = array();
+        $this->repository       = new ClassRepository();
+        $object                 = $this->top->create($type);
+        $this->named_parameters = [];
 
         return $object;
     }
@@ -106,7 +106,7 @@ class DependencyInjector
      */
     public function settersFor($class)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -114,7 +114,7 @@ class DependencyInjector
      */
     public function wrappersFor($type)
     {
-        return array();
+        return [];
     }
 
     public function useParameters($parameters)
@@ -133,7 +133,7 @@ class DependencyInjector
             return $this->named_parameters[$name];
         }
 
-        $value = array();
+        $value = [];
         $value = array_shift($this->unnamed_parameters);
         if ($value) {
             return $value;

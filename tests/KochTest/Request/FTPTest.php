@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Request;
 
 // use Koch\Request\FTP;
@@ -11,17 +12,17 @@ class FTPTest extends \PHPUnit_Framework_TestCase
     protected $object;
 
     /**
-     * Test config data
+     * Test config data.
      *
      * @var array
      */
-    protected $config = array(
-        'server' => 'localhost',
+    protected $config = [
+        'server'   => 'localhost',
         'username' => 'jens',
-        'password' => 'pw123'/*,
+        'password' => 'pw123', /*,
         'port' => 21,
         'passive' => false*/
-    );
+    ];
 
     /**
      * Sets up the fixture, for example, opens a network connection.
@@ -30,12 +31,12 @@ class FTPTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         //$this->object = new FTP($this->config['server'], $this->config['username'], $this->config['password']);
-        $this->generator = new \PHPUnit_Framework_MockObject_Generator;
-        $mock = $this->generator->getMock(
+        $this->generator = new \PHPUnit_Framework_MockObject_Generator();
+        $mock            = $this->generator->getMock(
             // classname
             'FTPMock',
             // methods
-            array(
+            [
                 'upload',
                 'download',
                 'deleteFile',
@@ -46,10 +47,10 @@ class FTPTest extends \PHPUnit_Framework_TestCase
                 'deleteDirectory',
                 'setPermissions',
                 'fileSize',
-                'getDirectoryContent'
-            ),
+                'getDirectoryContent',
+            ],
             // constructor args
-            array(),
+            [],
             // classname
             '',
             // invoke (parent)constructor
@@ -76,9 +77,9 @@ class FTPTest extends \PHPUnit_Framework_TestCase
         // setup method mock
         $this->object->expects($this->any())->method('upload')->will($this->returnValue(true));
 
-        $sourceFile = 'file.txt';
+        $sourceFile      = 'file.txt';
         $destinationFile = 'file.txt';
-        $transferMode = '1'; // FTP_ASCII = 1, FTP_BINARY = 2
+        $transferMode    = '1'; // FTP_ASCII = 1, FTP_BINARY = 2
 
         $result = $this->object->upload($sourceFile, $destinationFile, $transferMode);
         //var_dump($this->object->errors);
@@ -148,6 +149,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Request\FTP::deleteDirectory
+     *
      * @todo   Implement testDeleteDirectory().
      */
     public function testDeleteDirectory()
@@ -169,17 +171,17 @@ class FTPTest extends \PHPUnit_Framework_TestCase
      */
     public function setPermissionsDataprovider()
     {
-       return array(
-            array('111', '111'),
-            array('110', '110'),
-            array('444', '555'),
-            array('412', '512'),
-            array('641', '751'),
-            array('666', '777'),
-            array('400', '500'),
-            array('040', '050'),
-            array('004', '005'),
-        );
+        return [
+            ['111', '111'],
+            ['110', '110'],
+            ['444', '555'],
+            ['412', '512'],
+            ['641', '751'],
+            ['666', '777'],
+            ['400', '500'],
+            ['040', '050'],
+            ['004', '005'],
+        ];
     }
     /**
      * @dataProvider setPermissionsDataprovider
@@ -227,6 +229,7 @@ class FTPTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Request\FTP::isDir
+     *
      * @todo   Implement testIsDir().
      */
     public function testIsDir()

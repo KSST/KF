@@ -1,17 +1,19 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
  * Smarty Modifier to purify the html output via HTMLPurifier.
  * The library filters HTML tags by using a tag whitelist.
+ *
  * @link http://htmlpurifier.org/
  *
  * @example
  * {$htmlcontent|purify}
  *
  * @param mixed Variable to firedebug
+ *
  * @return string
  */
 function smarty_modifier_purify($string)
@@ -21,7 +23,7 @@ function smarty_modifier_purify($string)
      */
     static $purifier;
 
-    if (isset($purifier) == false or class_exists('HTMLPurifier', false) === false) {
+    if (isset($purifier) === false or class_exists('HTMLPurifier', false) === false) {
         include ROOT_LIBRARIES . 'IDS/vendors/htmlpurifier/HTMLPurifier.php';
 
         $config = HTMLPurifier_Config::createDefault();

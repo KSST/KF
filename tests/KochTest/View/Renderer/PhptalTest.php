@@ -18,10 +18,10 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
     protected function setUp()
     {
         if (class_exists('PHPTAL') === false) {
-           $this->markTestSkipped('This test requires the vendor library "PHPTal".');
+            $this->markTestSkipped('This test requires the vendor library "PHPTal".');
         }
 
-        $options = array();
+        $options = [];
 
         $this->object = new PHPTAL($options);
     }
@@ -37,6 +37,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::initializeEngine
+     *
      * @todo   Implement testInitializeEngine().
      */
     public function testInitializeEngine()
@@ -49,6 +50,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::assign
+     *
      * @todo   Implement testAssign().
      */
     public function testAssign()
@@ -61,6 +63,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::configureEngine
+     *
      * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
@@ -73,6 +76,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::render
+     *
      * @todo   Implement testRender().
      */
     public function testRender()
@@ -85,6 +89,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::display
+     *
      * @todo   Implement testDisplay().
      */
     public function testDisplay()
@@ -97,6 +102,7 @@ class PhptalTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Phptal::fetch
+     *
      * @todo   Implement testFetch().
      */
     public function testFetch()

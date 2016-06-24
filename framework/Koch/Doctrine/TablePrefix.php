@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,7 +12,7 @@
 
 namespace Koch\Doctrine;
 
-use \Doctrine\ORM\Event\LoadClassMetadataEventArgs;
+use Doctrine\ORM\Event\LoadClassMetadataEventArgs;
 
 class TablePrefix implements \Doctrine\Common\EventSubscriber
 {
@@ -34,7 +34,7 @@ class TablePrefix implements \Doctrine\Common\EventSubscriber
      */
     public function getSubscribedEvents()
     {
-        return array('loadClassMetadata');
+        return ['loadClassMetadata'];
     }
 
     /**
@@ -47,9 +47,9 @@ class TablePrefix implements \Doctrine\Common\EventSubscriber
         $classMetadata->setTableName($this->prefix . $classMetadata->getTableName());
 
         foreach ($classMetadata->getAssociationMappings() as $fieldName => $mapping) {
-            if ($mapping['type'] == \Doctrine\ORM\Mapping\ClassMetadataInfo::MANY_TO_MANY
+            if ($mapping['type'] === \Doctrine\ORM\Mapping\ClassMetadataInfo::MANY_TO_MANY
                 && isset($classMetadata->associationMappings[$fieldName]['joinTable']['name'])) {
-                $mappedTableName = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];
+                $mappedTableName                                                     = $classMetadata->associationMappings[$fieldName]['joinTable']['name'];
                 $classMetadata->associationMappings[$fieldName]['joinTable']['name'] = $this->prefix . $mappedTableName;
             }
         }

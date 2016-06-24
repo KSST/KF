@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -20,11 +20,12 @@ use Koch\Datatype\Conversion;
 class XML implements AdapterInterface
 {
     /**
-     * Write the configarray to the xml file
+     * Write the configarray to the xml file.
      *
      * @param string The filename
      * @param array  Array to transform and write as xml
-     * @return boolean array | boolean false
+     *
+     * @return bool array | boolean false
      */
     public static function write($file, array $array)
     {
@@ -34,11 +35,12 @@ class XML implements AdapterInterface
     }
 
     /**
-     * Read the config array from xml file
+     * Read the config array from xml file.
      *
      * @param   string  The filename
-     * @param  string $file
-     * @return mixed  array | boolean false
+     * @param string $file
+     *
+     * @return mixed array | bool false
      */
     public static function read($file)
     {

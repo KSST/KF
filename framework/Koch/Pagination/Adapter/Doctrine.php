@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,8 +12,8 @@
 
 namespace Koch\Pagination\Adapter;
 
-use Koch\Pagination\AdapterInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Koch\Pagination\AdapterInterface;
 
 /**
  * Pagination Adapter for Doctrine Models.
@@ -28,7 +28,7 @@ class Doctrine implements AdapterInterface
      * Constructor.
      *
      * @param \Doctrine\ORM\Query $query               A Doctrine Query or the QueryBuilder.
-     * @param boolean             $fetchJoinCollection Whether the query joins a collection (true by default).
+     * @param bool                $fetchJoinCollection Whether the query joins a collection (true by default).
      */
     public function __construct($query, $fetchJoinCollection = true)
     {
@@ -36,7 +36,7 @@ class Doctrine implements AdapterInterface
     }
 
     /**
-     * Returns the query
+     * Returns the query.
      *
      * @return \Doctrine\ORM\Query
      */
@@ -48,7 +48,7 @@ class Doctrine implements AdapterInterface
     /**
      * Returns whether the query joins a collection.
      *
-     * @return Boolean Whether the query joins a collection.
+     * @return bool Whether the query joins a collection.
      */
     public function isQueryJoinsCollection()
     {

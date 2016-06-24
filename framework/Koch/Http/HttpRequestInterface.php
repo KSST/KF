@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -29,13 +29,10 @@ interface HttpRequestInterface
 
     /**
      * @param string $array
-     *
-     * @return void
      */
     public function expectParameter($parameter, $array);
 
     /**
-     * @return void
      */
     public function expectParameters(array $parameters);
 
@@ -58,12 +55,11 @@ interface HttpRequestInterface
     public static function getRequestMethod();
 
     /**
-     * @return void
      */
     public static function setRequestMethod($method);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function isAjax();
 
@@ -75,7 +71,7 @@ interface HttpRequestInterface
     public static function getServerProtocol();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function isSecure();
 

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,7 +12,7 @@
 
 namespace Koch\Exception;
 
-use \Koch\Exception\Renderer\YellowScreenOfDeath;
+use Koch\Exception\Renderer\YellowScreenOfDeath;
 
 class SmartyTemplateException extends \Exception
 {

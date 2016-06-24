@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -37,19 +37,20 @@ namespace Koch\Config\Adapter;
 class YAML implements AdapterInterface
 {
     /**
-     * Write the config array to a yaml file
+     * Write the config array to a yaml file.
      *
      * @param   string The yaml file.
-     * @return boolean True, if successfully written, else False.
+     *
+     * @return bool True, if successfully written, else False.
      */
     public static function write($file, array $array)
     {
         // prefer yaml, then syck, else use Spyc - faster one first
-        if (extension_loaded('yaml') === true) {
+        if (extension_loaded('yaml')) {
             return yaml_emit_file($file, $array);
-        } elseif (extension_loaded('syck') === true) {
+        } elseif (extension_loaded('syck')) {
             $yaml = syck_dump($array);
-        } elseif (class_exists('Spyc') === true) {
+        } elseif (class_exists('Spyc')) {
             $spyc = new Spyc();
             $yaml = $spyc->dump($array);
         } else {
@@ -60,9 +61,10 @@ class YAML implements AdapterInterface
     }
 
     /**
-     * Read the complete config file *.yaml
+     * Read the complete config file *.yaml.
      *
      * @param  string  The yaml file.
+     *
      * @return array PHP array of the yaml file.
      */
     public static function read($file)
@@ -71,14 +73,14 @@ class YAML implements AdapterInterface
             throw new \Koch\Exception\Exception('YAML File ' . $file . ' not existing or not readable.');
         }
 
-        if (extension_loaded('yaml') === true) {
+        if (extension_loaded('yaml')) {
             return yaml_parse_file($file);
-        } elseif (extension_loaded('syck') === true) {
+        } elseif (extension_loaded('syck')) {
             $yaml = file_get_contents($file);
 
             return syck_load($yaml);
-        } elseif (class_exists('Spyc') === true) {
-            $spyc  = new Spyc();
+        } elseif (class_exists('Spyc')) {
+            $spyc = new Spyc();
             $yaml = file_get_contents($file);
 
             return $spyc->load($yaml);

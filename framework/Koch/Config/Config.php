@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,11 +25,11 @@ namespace Koch\Config;
  */
 class Config extends AbstractConfig
 {
-
     /**
-     * Reads a configuration file
+     * Reads a configuration file.
      *
-     * @param  string $file
+     * @param string $file
+     *
      * @return object $this->config
      */
     public function read($file)
@@ -42,13 +42,14 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Write a config file
+     * Write a config file.
      *
-     * @param  string  $file path and the filename you want to write
+     * @param string $file path and the filename you want to write
      * @param $array the configuration array to write. Defaults to null = empty array.
-     * @return boolean
+     *
+     * @return bool
      */
-    public function write($file, $array = array())
+    public function write($file, $array = [])
     {
         return Factory::getHandler($file)->write($file, $array);
     }
@@ -60,12 +61,12 @@ class Config extends AbstractConfig
      */
     public function getApplicationConfig()
     {
-        $config = array();
+        $config = [];
 
         $apcAppKey = APPLICATION_NAME . '.config';
 
         // load config from APC
-        if (APC === true and apc_exists($apcAppKey)) {
+        if (APC && apc_exists($apcAppKey)) {
             $config = apc_fetch($apcAppKey);
         } else {
             // load config from file
@@ -73,7 +74,7 @@ class Config extends AbstractConfig
                 APPLICATION_PATH . 'Configuration/' . APPLICATION_NAME . '.php'
             );
             // set to APC
-            if (APC === true) {
+            if (APC) {
                 apc_add($apcAppKey, $config);
             }
         }
@@ -81,7 +82,7 @@ class Config extends AbstractConfig
         unset($apcAppKey);
 
         // merge config with a staging configuration
-        if (isset($config['config']['staging']) === true and true === (bool) $config['config']['staging']) {
+        if (isset($config['config']['staging']) && (bool) $config['config']['staging']) {
             $config = \Koch\Config\Staging::overloadWithStagingConfig($config);
         }
 
@@ -89,10 +90,11 @@ class Config extends AbstractConfig
     }
 
     /**
-     * Reads a configuration file of a module ($modulename . '.config.php')
+     * Reads a configuration file of a module ($modulename . '.config.php').
      *
-     * @param  string $module Name of Module
-     * @return array  Module Configuration Array
+     * @param string $module Name of Module
+     *
+     * @return array Module Configuration Array
      */
     public function readModuleConfig($module = null)
     {
@@ -101,17 +103,18 @@ class Config extends AbstractConfig
 
         $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.config.php';
 
-        $result = (is_file($file) === true) ? Factory::getConfiguration($file) : array();
+        $result = is_file($file) ? Factory::getConfiguration($file) : [];
 
         return $result;
     }
 
     /**
-     * Write module configuration file
+     * Write module configuration file.
      *
      * @param $array The configuration array to write.
-     * @param  string  $module The name of a module.
-     * @return boolean
+     * @param string $module The name of a module.
+     *
+     * @return bool
      */
     public function writeModuleConfig(array $array, $module = null)
     {

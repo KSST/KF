@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -19,17 +19,17 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
     protected $message = 'Please Confirm';
 
     /**
-     * @var string $formid Takes the name of the form (to trigger the original sumbit).
+     * @var string Takes the name of the form (to trigger the original sumbit).
      */
     protected $formid;
 
     public function __construct()
     {
-        $this->type = 'submit';
+        $this->type  = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
 
-        /**
+        /*
          * Add the Form Submit Confirmation Javascript.
          * This is a jQuery UI Modal Confirm Dialog.
          *
@@ -53,7 +53,7 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
                                     resizable: false,
                                     buttons: {
                                         \"Submit Form\": function () {
-                                            document.".$this->formid.".submit();
+                                            document." . $this->formid . ".submit();
                                         },
                                         \"Cancel\": function () {
                                             $(this).dialog(\"close\");
@@ -62,7 +62,7 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
                                 });
 
 
-                              $('form#".$this->formid."').submit(function () {
+                              $('form#" . $this->formid . "').submit(function () {
                                 $('#dialog').dialog('open');
 
                                  return false;

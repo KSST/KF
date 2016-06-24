@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Session;
 
 /**
- * Koch Framework - Flashmessages
+ * Flashmessages.
  *
  * The sending of messages is very simple for GET-Requests.
  * You can use echo or the template to output the messages.
@@ -37,21 +37,22 @@ namespace Koch\Session;
 class FlashMessages
 {
     /**
-     * @var contains $session array of $flashmessages
+     * @var contains array of
      */
-    private static $flashmessages = array();
+    private static $flashmessages = [];
 
     /**
      * @var array types of flashmessages (whitelist)
      */
-    private static $flashmessagetypes = array(
-        'error', 'warning', 'notice', 'success', 'debug'
-    );
+    private static $flashmessagetypes = [
+        'error', 'warning', 'notice', 'success', 'debug',
+    ];
 
     /**
-     * Sets a message to the session
+     * Sets a message to the session.
      *
      * Supported Messagetypes are error, warning, notice, success, debug
+     *
      * @see self::$flashmessagetypes
      *
      * @param $message the actual message
@@ -59,14 +60,14 @@ class FlashMessages
      */
     public static function setMessage($message, $type = 'notice')
     {
-        if (in_array($type, self::$flashmessagetypes) === true) {
-            self::$flashmessages[$type][] = $message;
+        if (in_array($type, self::$flashmessagetypes, true)) {
+            self::$flashmessages[$type][]      = $message;
             $_SESSION['user']['flashmessages'] = self::$flashmessages;
         }
     }
 
     /**
-     * Sets an error flash message
+     * Sets an error flash message.
      *
      * @param string $message
      */
@@ -84,7 +85,7 @@ class FlashMessages
      */
     public static function getMessages($type = null, $unset = true)
     {
-        if (isset($_SESSION['user']['flashmessages']) === true) {
+        if (isset($_SESSION['user']['flashmessages'])) {
             self::$flashmessages = $_SESSION['user']['flashmessages'];
 
             if ($unset === true) {
@@ -100,11 +101,11 @@ class FlashMessages
     }
 
     /**
-     * Resets the whole flashmessage array
+     * Resets the whole flashmessage array.
      */
     public static function reset()
     {
-        self::$flashmessages = array();
+        self::$flashmessages = [];
     }
 
     /**
@@ -114,14 +115,14 @@ class FlashMessages
      */
     public static function render($type = null)
     {
-        $html = '';
+        $html          = '';
         $flashmessages = self::getMessages($type, true);
 
         if ($flashmessages !== null) {
             foreach ($flashmessages as $flashmessage) {
                 foreach ($flashmessage as $type => $message) {
                     $html .= '<link rel="stylesheet" type="text/css"';
-                    $html .= ' href="'. WWW_ROOT_THEMES_CORE .  'css/error.css" />';
+                    $html .= ' href="' . WWW_ROOT_THEMES_CORE . 'css/error.css" />';
                     $html .= '<div id="flashmessage" class="flashmessage ' . $type . '">' . $message . '</div>';
                 }
             }

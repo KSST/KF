@@ -1,13 +1,12 @@
 <?php
 
 /**
- * Koch Framework Smarty View Helper
- *
+ * Koch Framework Smarty View Helper.
  */
 
 /**
  * Smarty Array function plugin
- * Defines an array from template side
+ * Defines an array from template side.
  *
  * Examples:
  * <pre>
@@ -18,14 +17,15 @@
  * Name:     array<br>
  * Purpose:  Defines an array from template side<br>
  *
- * @param array $params icq and title parameters required
+ * @param array  $params icq and title parameters required
  * @param Smarty $smarty
+ *
  * @return string
  */
 function smarty_function_array($params, $smarty)
 {
     // be sure array has a name
-    if (empty($params['name']) or is_string($params['name']) == false) {
+    if (empty($params['name']) or is_string($params['name']) === false) {
         trigger_error('array: name as parameter');
 
         return;
@@ -55,7 +55,7 @@ function smarty_function_array($params, $smarty)
     }
 
     // set up temporary array
-    $temporary_array = array();
+    $temporary_array = [];
     // explode values at delimiter into the array
     $temporary_array = explode($params['delimiter'], $params['values']);
 

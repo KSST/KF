@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,13 +22,13 @@ class SelectCountry extends Select implements FormElementInterface
     }
 
     /**
-     * getCountries()
+     * getCountries().
      *
      * @return array with country names
      */
     public static function getCountries()
     {
-        $countries = array (
+        $countries = [
             _('Afghanistan'),
             _('Albania'),
             _('Algeria'),
@@ -264,9 +264,9 @@ class SelectCountry extends Select implements FormElementInterface
             _('Western Sahara'),
             _('Yemen'),
             _('Zambia'),
-            _('Zimbabwe')
-         );
+            _('Zimbabwe'),
+         ];
 
-         return $countries;
+        return $countries;
     }
 }

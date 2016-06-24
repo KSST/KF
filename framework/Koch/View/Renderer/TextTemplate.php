@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -24,7 +24,8 @@ class TextTemplate extends AbstractRenderer
     /**
      * Sets the template file.
      *
-     * @param  string                   $file
+     * @param string $file
+     *
      * @throws InvalidArgumentException
      */
     public function setTemplate($file)
@@ -43,6 +44,7 @@ class TextTemplate extends AbstractRenderer
      *
      * @param string Template File.
      * @param array Viewdata
+     *
      * @return string
      */
     public function render($template = null, $viewdata = null)
@@ -54,7 +56,7 @@ class TextTemplate extends AbstractRenderer
             $this->assign($viewdata);
         }
 
-        $keys = array();
+        $keys = [];
 
         // transform viewdata keys into placeholders
         foreach ($this->viewdata as $key => $value) {
@@ -68,7 +70,8 @@ class TextTemplate extends AbstractRenderer
     /**
      * Renders template content to file.
      *
-     * @param  string $file Output file.
+     * @param string $file Output file.
+     *
      * @return bool
      */
     public function renderToFile($file)

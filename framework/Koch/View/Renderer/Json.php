@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,6 +23,7 @@ use Koch\View\AbstractRenderer;
  * It's an lightweight, text-based, language-independent data interchange format.
  * It was derived from the ECMAScript Programming Language Standard.
  * JSON defines formatting rules for the portable representation of structured data.
+ *
  * @see http://www.ietf.org/rfc/rfc4627.
  *
  * This class implements two ways of rendering data as json.
@@ -32,14 +33,13 @@ use Koch\View\AbstractRenderer;
 class Json extends AbstractRenderer
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
-
     }
 
     public function initializeEngine($template = null)
@@ -53,9 +53,10 @@ class Json extends AbstractRenderer
     }
 
     /**
-     * jsonEncode
+     * jsonEncode.
      *
-     * @param  mixed|array        $data The data to be json encoded.
+     * @param mixed|array $data The data to be json encoded.
+     *
      * @return $json_encoded_data
      */
     public function jsonEncode($data = null)
@@ -72,7 +73,7 @@ class Json extends AbstractRenderer
      */
     public function renderAsHeader($data)
     {
-        \Koch\Http\HttpResponse::addHeader('X-JSON', '('.$this->jsonEncode($data).')');
+        \Koch\Http\HttpResponse::addHeader('X-JSON', '(' . $this->jsonEncode($data) . ')');
 
         return true;
     }
@@ -97,7 +98,8 @@ class Json extends AbstractRenderer
      * This method returns the json encoded string.
      *
      * @param $data array
-     * @param  string             $template
+     * @param string $template
+     *
      * @return $json_encoded_data
      */
     public function render($template = null, $viewdata = null)
@@ -106,14 +108,14 @@ class Json extends AbstractRenderer
             $this->viewdata = $viewdata;
         }
 
-        /**
+        /*
          * Defense against MIME content-sniffing attacks. Supported by IE and Chrome only.
          * For all other browsers: escape properly or force content disposition header,
          * to open a download box on client side (as a warning).
          */
         \Koch\Http\HttpResponse::addHeader('X-Content-Type-Options', 'nosniff');
 
-        /**
+        /*
          * The MIME media type for JSON text is application/json.
          * @see http://www.ietf.org/rfc/rfc4627
          */

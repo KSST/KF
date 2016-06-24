@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Config\Adapter;
 
 use Koch\Config\Adapter\CSV;
@@ -19,12 +20,12 @@ class CSVTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new CSV;
+        $this->object = new CSV();
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.csv');
-        $this->file = vfsStream::newFile('config.csv', 0777)->withContent($this->getConfigFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file          = vfsStream::newFile('config.csv', 0777)->withContent($this->getConfigFileContent());
+        $this->root          = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -68,7 +69,7 @@ class CSVTest extends \PHPUnit_Framework_TestCase
     public function testWrite_ArrayHasValueContainsCommaSeparatedString()
     {
         // array value contains a untrimmed comma separated string
-        $array = array('key' => 'a, comma, separated  ,   string');
+        $array = ['key' => 'a, comma, separated  ,   string'];
 
         $result = $this->object->write($this->configFileURL, $array);
         $this->assertTrue($result);
@@ -81,6 +82,6 @@ class CSVTest extends \PHPUnit_Framework_TestCase
 
     public function getConfigArray()
     {
-        return array( 0 => array('1', '2', '3') );
+        return [0 => ['1', '2', '3']];
     }
 }

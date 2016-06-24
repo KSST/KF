@@ -4,7 +4,6 @@ namespace KochTest\DI;
 
 class ClassWithParameters
 {
-
     /**
      * @param int $a
      * @param int $b
@@ -14,5 +13,4 @@ class ClassWithParameters
         $this->a = $a;
         $this->b = $b;
     }
-
 }

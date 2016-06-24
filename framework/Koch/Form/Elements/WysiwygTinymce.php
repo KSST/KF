@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -15,7 +15,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Wysiwygtinymce
+ * Formelement_Wysiwygtinymce.
  *
  * @link http://tinymce.moxiecode.com/ Official Website
  * @link http://tinymce.moxiecode.com/js/tinymce/docs/api/index.html API Documentation
@@ -44,7 +44,7 @@ class WysiwygTinymce extends Textarea implements FormElementInterface
     public function render()
     {
         // a) loads the tinymce javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/tiny_mce/tiny_mce.js"';
+        $javascript = '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/tiny_mce/tiny_mce.js"';
         $javascript .= ' type="text/javascript"></script>';
 
         // b) handler to attach tinymce to a textarea named "mceSimple" and "mceAdvanced"
@@ -61,6 +61,7 @@ class WysiwygTinymce extends Textarea implements FormElementInterface
                                 editor_selector : "mceAdvanced"
                             });
                         // ]]></script>';
+
         return $javascript;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Mail;
 
 use Koch\Config\Config;
@@ -17,7 +18,7 @@ class SwiftMailerTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new SwiftMailer(new Config);
+        $this->object = new SwiftMailer(new Config());
     }
 
     /**
@@ -34,11 +35,11 @@ class SwiftMailerTest extends \PHPUnit_Framework_TestCase
      */
     public function testSend()
     {
-        $from = 'kf-tests@trash-mail.com';
-        $to = 'kf-tests@trash-mail.com';
+        $from    = 'kf-tests@trash-mail.com';
+        $to      = 'kf-tests@trash-mail.com';
         $subject = 'TestMail';
-        $body = 'TestMail';
-        $r = $this->object->send($to, $from, $subject, $body);
+        $body    = 'TestMail';
+        $r       = $this->object->send($to, $from, $subject, $body);
 
         $this->assertEquals("Sent 0 messages\n", $r);
     }

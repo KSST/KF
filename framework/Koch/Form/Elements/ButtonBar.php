@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,12 +22,12 @@ class ButtonBar extends FormElement implements FormElementInterface
      * It defines the buttons to add as formelements to the buttonbar.
      * The default buttons are submit, reset and cancel.
      *
-     * @var array $_buttons buttonname => button object
+     * @var array buttonname => button object
      */
-    private $buttons = array('submitbutton' => '', 'resetbutton' => '', 'cancelbutton' => '');
+    private $buttons = ['submitbutton' => '', 'resetbutton' => '', 'cancelbutton' => ''];
 
     /**
-     * Adds the objects to the buttonnames fo the initial buttons array
+     * Adds the objects to the buttonnames fo the initial buttons array.
      *
      * @return ButtonBar
      */
@@ -47,7 +47,7 @@ class ButtonBar extends FormElement implements FormElementInterface
         if (is_string($buttonname)) {
             $formelement = str_replace('button', 'Button', ucfirst($buttoname));
             $formelement = '\Koch\Form\Elements\\' . $formelement;
-            $formelement = new $formelement;
+            $formelement = new $formelement();
         }
 
         if (!$formelement instanceof \Koch\Form\Element\Button) {
@@ -60,9 +60,10 @@ class ButtonBar extends FormElement implements FormElementInterface
     }
 
     /**
-     * Gets a button
+     * Gets a button.
      *
-     * @param  string                       $buttonname
+     * @param string $buttonname
+     *
      * @return \Koch\Form\Element\Buttonbar
      */
     public function getButton($buttonname)
@@ -87,9 +88,10 @@ class ButtonBar extends FormElement implements FormElementInterface
     }
 
     /**
-     * Remove a button from the stack
+     * Remove a button from the stack.
      *
-     * @param  string    $_buttonname
+     * @param string $_buttonname
+     *
      * @return ButtonBar
      */
     public function removeButton($_buttonname)
@@ -109,7 +111,7 @@ class ButtonBar extends FormElement implements FormElementInterface
     }
 
     /**
-     * Renders the buttonbar with all registered buttons
+     * Renders the buttonbar with all registered buttons.
      *
      * @return $htmlString HTML Representation of   \Koch\Form\Element\Buttonbar
      */
@@ -123,7 +125,7 @@ class ButtonBar extends FormElement implements FormElementInterface
             } else {
                 // does this ever happen???, see addButton!
                 $formelement = '\Koch\Form\Elements\\' . ucfirst($buttonname);
-                $formelement = new $formelement;
+                $formelement = new $formelement();
                 $htmlString .= $formelement->render();
             }
         }

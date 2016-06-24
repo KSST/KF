@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -38,12 +38,12 @@ class AuthenticationLogging implements EventInterface
     {
         $authdata = $event->getInfo();
 
-        $logdata = array(
+        $logdata = [
                 date(),                              // date
                 $this->request->getRemoteAddress(),  // remote adress
                 $event->getName(),                   // onLogin etc.
-                $authdata['username']                // username
-        );
+                $authdata['username'],                // username
+        ];
 
         $this->logger->log($logdata);
     }

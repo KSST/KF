@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -32,15 +32,16 @@ class EntityTool
     /**
      * Creates an entity with the given data.
      *
-     * @param  string|object $entity
-     * @param  array         $data
+     * @param string|object $entity
+     * @param array         $data
+     *
      * @return object
      */
     public function createEntity($entity, array $data)
     {
-        $class = is_object($entity) ? get_class($entity) : $entity;
+        $class    = is_object($entity) ? get_class($entity) : $entity;
         $metadata = $this->em->getClassMetadata($class);
-        $entity = $metadata->newInstance();
+        $entity   = $metadata->newInstance();
 
         foreach ($data as $property => $value) {
             if (!$metadata->reflClass->hasProperty($property)) {

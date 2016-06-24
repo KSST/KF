@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -30,39 +30,39 @@ use Koch\Http\HttpResponseInterface;
  */
 class SessionSecurity implements FilterInterface
 {
-    private $config     = null;
+    private $config = null;
 
     public function __construct(Koch\Config $config)
     {
-        $this->config     = $config;
+        $this->config = $config;
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         $this->response = $response;
 
-        /**
+        /*
          * 1. Check for IP
          */
 
-        if ($this->config['session']['check_ip'] == true) {
+        if ($this->config['session']['check_ip'] === true) {
             if (!isset($_SESSION['client_ip'])) {
                 $_SESSION['client_ip'] = $_SERVER['REMOTE_ADDR'];
-            } elseif ($_SERVER['REMOTE_ADDR'] != $_SESSION['client_ip']) {
+            } elseif ($_SERVER['REMOTE_ADDR'] !== $_SESSION['client_ip']) {
                 session_destroy(session_id());
 
                 $this->response->redirect('index.php?mod=login');
             }
         }
 
-        /**
+        /*
          * 2. Check for Browser
          */
 
-        if ($this->config['session']['check_browser'] == true) {
+        if ($this->config['session']['check_browser'] === true) {
             if (!isset($_SESSION['client_browser'])) {
                 $_SESSION['client_browser'] = $_SERVER['HTTP_USER_AGENT'];
-            } elseif ($_SERVER['HTTP_USER_AGENT'] != $_SESSION['client_browser']) {
+            } elseif ($_SERVER['HTTP_USER_AGENT'] !== $_SESSION['client_browser']) {
                 session_unset();
                 session_destroy();
 
@@ -70,15 +70,15 @@ class SessionSecurity implements FilterInterface
             }
         }
 
-        /**
+        /*
          * 3. Check for Host Address
          */
 
-        if ($this->config['session']['check_host'] == true) {
+        if ($this->config['session']['check_host'] === true) {
             if (isset($_SESSION['client_host']) === false) {
                 $_SESSION['client_host'] = gethostbyaddr($_SERVER['REMOTE_ADDR']);
             } else {
-                if (gethostbyaddr($_SERVER['REMOTE_ADDR']) != $_SESSION['client_host']) {
+                if (gethostbyaddr($_SERVER['REMOTE_ADDR']) !== $_SESSION['client_host']) {
                     session_unset();
                     session_destroy();
 
@@ -87,7 +87,7 @@ class SessionSecurity implements FilterInterface
             }
         }
 
-        /**
+        /*
          * 4. Check maximal password tries
          */
 

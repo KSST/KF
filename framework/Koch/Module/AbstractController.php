@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,7 @@ use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 
 /**
- * ModuleController
+ * ModuleController.
  *
  * The ModuleController is an abstract class (parent class)
  * to share some common features on/for all (Module/Action)-Controllers.
@@ -62,12 +62,12 @@ abstract class AbstractController
 
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        $this->request = $request;
+        $this->request  = $request;
         $this->response = $response;
     }
 
     /**
-     * Returns the Doctrine Entity Manager
+     * Returns the Doctrine Entity Manager.
      *
      * @return \Doctrine\ORM\EntityManager
      */
@@ -85,11 +85,12 @@ abstract class AbstractController
      * The name of the entity extracted from the classname.
      *
      * @param string Classname
+     *
      * @return string The name of the entity extracted from classname
      */
     public function getEntityNameFromClassname()
     {
-        $matches = array();
+        $matches = [];
 
         // takes classname, e.g. "Application\Modules\News\Controller\NewsController"
         $class = get_class($this);
@@ -105,7 +106,8 @@ abstract class AbstractController
      * Proxy/Convenience Getter Method for the Repository of the current Module.
      *
      *
-     * @param  string                         $entityName Name of an Entity, like "\Entity\User".
+     * @param string $entityName Name of an Entity, like "\Entity\User".
+     *
      * @return \Doctrine\ORM\EntityRepository
      */
     public function getModel($entityName = null)
@@ -120,10 +122,10 @@ abstract class AbstractController
     /**
      * Saves this and all others models (calls persist + flush)
      * Save (save one)
-     * Flush (save all)
+     * Flush (save all).
      *
      * @param \Doctrine\ORM\Mapping\Entity $model Entity.
-     * @param boolean                      $flush Uses flush on true, save on false. Defaults to flush (true).
+     * @param bool                         $flush Uses flush on true, save on false. Defaults to flush (true).
      */
     public function saveModel(\Doctrine\ORM\Mapping\Entity $model, $flush = true)
     {
@@ -137,7 +139,7 @@ abstract class AbstractController
     }
 
     /**
-     * Initializes the model (active records/entities/repositories) of the module
+     * Initializes the model (active records/entities/repositories) of the module.
      *
      * @param $modulename Modulname
      * @param $recordname Recordname
@@ -146,7 +148,7 @@ abstract class AbstractController
     {
         $module_models_path = '';
 
-        /**
+        /*
          * Load the Records for the current module, if no modulename is specified.
          * This is for lazy usage in the modulecontroller: $this->initModel();
          */
@@ -157,7 +159,7 @@ abstract class AbstractController
         $module_models_path = APPLICATION_MODULES_PATH . mb_strtolower($modulename) . '/model/';
 
         // check if the module has a models dir
-        if (is_dir($module_models_path) === true) {
+        if (is_dir($module_models_path)) {
             if ($entity !== null) {
                 // use second parameter of method
                 $entity = $module_models_path . 'Entities/' . ucfirst($entity) . '.php';
@@ -166,13 +168,13 @@ abstract class AbstractController
                 $entity = $module_models_path . 'Entities/' . ucfirst($modulename) . '.php';
             }
 
-            if (is_file($entity) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
+            if (is_file($entity) && class_exists('Entity\\' . ucfirst($modulename), false)) {
                 include $entity;
             }
 
             $repos = $module_models_path . 'Repositories/' . ucfirst($modulename) . 'Repository.php';
 
-            if (is_file($repos) === true and class_exists('Entity\\' . ucfirst($modulename), false) === false) {
+            if (is_file($repos) && class_exists('Entity\\' . ucfirst($modulename), false)) {
                 include $repos;
             }
         }
@@ -180,10 +182,11 @@ abstract class AbstractController
     }
 
     /**
-     * Gets a Module Config
+     * Gets a Module Config.
      *
-     * @param  string $modulename Modulename.
-     * @return array  configuration array of module
+     * @param string $modulename Modulename.
+     *
+     * @return array configuration array of module
      */
     public static function getModuleConfig($modulename = null)
     {
@@ -193,7 +196,7 @@ abstract class AbstractController
     }
 
     /**
-     * Gets a Config Value or sets a default value
+     * Gets a Config Value or sets a default value.
      *
      * @example
      * Usage for one default variable:
@@ -205,9 +208,10 @@ abstract class AbstractController
      * Gets the value for the key items_newswidget from the moduleconfig or sets the value
      * incomming via GET, if nothing is incomming, sets the default value of 8.
      *
-     * @param  string $keyname     The keyname to find in the array.
-     * @param  mixed  $default_one A default value returned, when keyname was not found.
-     * @param  mixed  $default_two A default value returned, when keyname was not found and default_one is null.
+     * @param string $keyname     The keyname to find in the array.
+     * @param mixed  $default_one A default value returned, when keyname was not found.
+     * @param mixed  $default_two A default value returned, when keyname was not found and default_one is null.
+     *
      * @return mixed
      */
     public static function getConfigValue($keyname, $default_one = null, $default_two = null)
@@ -223,17 +227,17 @@ abstract class AbstractController
         // return value or default
         if (empty($value) === false) {
             return $value;
-        } elseif ($default_one != null) {
+        } elseif ($default_one !== null) {
             return $default_one;
-        } elseif ($default_two != null) {
+        } elseif ($default_two !== null) {
             return $default_two;
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Get the dependency injector
+     * Get the dependency injector.
      *
      * @return Returns a static reference to the Dependency Injector
      */
@@ -243,7 +247,7 @@ abstract class AbstractController
     }
 
     /**
-     * Set view
+     * Set view.
      *
      * @param object $view RenderEngine Object
      */
@@ -253,9 +257,10 @@ abstract class AbstractController
     }
 
     /**
-     * Get view returns the render engine
+     * Get view returns the render engine.
      *
-     * @param  string  $renderEngineName Name of the render engine, like smarty, phptal.
+     * @param string $renderEngineName Name of the render engine, like smarty, phptal.
+     *
      * @return Returns the View Object (Rendering Engine)
      */
     public function getView($renderEngineName = null)
@@ -277,7 +282,7 @@ abstract class AbstractController
     }
 
     /**
-     * sets the Rendering Engine
+     * sets the Rendering Engine.
      *
      * @param string $renderEngineName Name of the RenderEngine
      */
@@ -298,12 +303,12 @@ abstract class AbstractController
     public function getRenderEngineName()
     {
         // check if the requesttype is xmlhttprequest (ajax) is incomming, then we will return data in json format
-        if ($this->request->isAjax() === true) {
+        if ($this->request->isAjax()) {
             $this->setRenderEngine('json');
         }
 
         // use smarty as default, if renderEngine is not set and it's not an ajax request
-        if (empty($this->renderEngineName) === true) {
+        if (empty($this->renderEngineName)) {
             $this->setRenderEngine('smarty');
         }
 
@@ -311,7 +316,7 @@ abstract class AbstractController
     }
 
     /**
-     * Returns the Rendering Engine Object via view_factory
+     * Returns the Rendering Engine Object via view_factory.
      *
      * @return renderengine object
      */
@@ -321,7 +326,7 @@ abstract class AbstractController
     }
 
     /**
-     * Sets the Render Mode
+     * Sets the Render Mode.
      *
      * @param string $mode The RenderModes are LAYOUT or PARTIAL.
      */
@@ -331,13 +336,13 @@ abstract class AbstractController
     }
 
     /**
-     * Get the Render Mode
+     * Get the Render Mode.
      *
      * @return string LAYOUT|PARTIAL
      */
     public function getRenderMode()
     {
-        if (empty($this->getView()->renderMode) === true) {
+        if (empty($this->getView()->renderMode)) {
             $this->getView()->renderMode = 'LAYOUT';
         }
 
@@ -345,7 +350,7 @@ abstract class AbstractController
     }
 
     /**
-     * modulecontroller->display();
+     * modulecontroller->display();.
      *
      * All Output is done via the Response Object.
      * ModelData -> View -> Response Object
@@ -367,7 +372,7 @@ abstract class AbstractController
         $view_mapper = $this->view->getViewMapper();
 
         // set layout and content template by parameter array
-        if (is_array($templates) === true) {
+        if (is_array($templates)) {
             if ($templates['layout_template'] !== null) {
                 $view_mapper->setLayoutTemplate($templates['layout_template']);
             }
@@ -401,9 +406,9 @@ abstract class AbstractController
     /**
      * This loads and initializes a formular from the module directory.
      *
-     * @param string  $formname       The name of the formular.
-     * @param string  $module         The name of the action.
-     * @param boolean $assign_to_view If true, the form is directly assigned as formname to the view
+     * @param string $formname       The name of the formular.
+     * @param string $module         The name of the action.
+     * @param bool   $assign_to_view If true, the form is directly assigned as formname to the view
      */
     public function loadForm($formname = null, $module = null, $action = null, $assign_to_view = true)
     {
@@ -428,7 +433,7 @@ abstract class AbstractController
         Loader::requireFile($directory . $filename, $classname);
 
         // form preparation stage (combine description and add additional formelements)
-        $form = new $classname;
+        $form = new $classname();
 
         // assign form object directly to the view or return to work with it
         if ($assign_to_view === true) {
@@ -440,7 +445,7 @@ abstract class AbstractController
     }
 
     /**
-     * Redirect to Referer
+     * Redirect to Referer.
      */
     public function redirectToReferer()
     {
@@ -458,7 +463,7 @@ abstract class AbstractController
             $submodule = $route->getSubModuleName();
 
             if (empty($submodule) === false) {
-                $redirect_to .= '/'. $submodule;
+                $redirect_to .= '/' . $submodule;
             }
 
             // redirect() builds the url
@@ -467,7 +472,7 @@ abstract class AbstractController
     }
 
     /**
-     * Shortcut for Redirect with an 404 Response Code
+     * Shortcut for Redirect with an 404 Response Code.
      *
      * @param string $url  Redirect to this URL
      * @param int    $time seconds before redirecting (for the html tag "meta refresh")
@@ -493,7 +498,7 @@ abstract class AbstractController
     }
 
     /**
-     * addEvent (shortcut for usage in modules)
+     * addEvent (shortcut for usage in modules).
      *
      * @param string Name of the Event
      * @param object Eventobject
@@ -504,7 +509,7 @@ abstract class AbstractController
     }
 
     /**
-     * triggerEvent is shortcut/convenience method for Eventdispatcher->triggerEvent
+     * triggerEvent is shortcut/convenience method for Eventdispatcher->triggerEvent.
      *
      * @param mixed (string|object) $event   Name of Event or Event object to trigger.
      * @param object                $context Context of the event triggering, often simply ($this). Default Null.
@@ -516,7 +521,7 @@ abstract class AbstractController
     }
 
     /**
-     * Shortcut to set a Flashmessage
+     * Shortcut to set a Flashmessage.
      *
      * @param string $type    string error, warning, notice, success, debug
      * @param string $message string A textmessage.
@@ -527,7 +532,7 @@ abstract class AbstractController
     }
 
     /**
-     * Adds a new breadcrumb
+     * Adds a new breadcrumb.
      *
      * @param string $title                  Name of the trail element. Use Gettext _('Title')!
      * @param string $link                   Link of the trail element
@@ -539,7 +544,7 @@ abstract class AbstractController
     }
 
     /**
-     * Returns the HttpRequest Object
+     * Returns the HttpRequest Object.
      *
      * @return HttpRequest
      */
@@ -549,7 +554,7 @@ abstract class AbstractController
     }
 
     /**
-     * Returns the HttpResponse Object
+     * Returns the HttpResponse Object.
      *
      * @return \Koch\Http\HttpResponse
      */

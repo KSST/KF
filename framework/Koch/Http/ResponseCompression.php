@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Http;
 
 /**
- * Koch Framework - Response Encode
+ * Response Encode.
  *
  * The class is used to buffer and compress the response content.
  *
@@ -26,6 +26,7 @@ namespace Koch\Http;
  * Method 3: ob_start('gz_handler')
  *
  * Resources:
+ *
  * @link http://www.ietf.org/rfc/rfc2616.txt (Sections: 3.5, 14.3, 14.11)
  * @link http://www.whatsmyip.org/http_compression/
  *
@@ -43,7 +44,7 @@ class ResponseCompression
         }
 
         if ((bool) ini_get('zlib.output_compression') === false and ob_get_length() === false
-            and (ini_get('output_handler') != 'ob_gzhandler')) {
+            && (ini_get('output_handler') !== 'ob_gzhandler')) {
             // Method 1: on-the-fly transparent zlib.output_compression
             // Additional output handlers are not valid, when zlib.output_compression is activated.
             ini_set('zlib.output_compression', true);
@@ -67,7 +68,7 @@ class ResponseCompression
      */
     public static function flushCompressedBuffer()
     {
-        if (headers_sent() === true) {
+        if (headers_sent()) {
             return;
         }
 
@@ -77,7 +78,7 @@ class ResponseCompression
 
         $encoding = self::gzipAccepted();
 
-        if ($encoding == false) {
+        if ($encoding === false) {
             return;
         }
 
@@ -134,7 +135,7 @@ class ResponseCompression
         header('Vary: Accept-Encoding');
         header('Content-Length: ' . (int) mb_strlen($gzdata));
 
-        /**
+        /*
          * Note by Jens A. Koch:
          *
          * The Content Compression Info Comment was originally added by Kasper Skaarhoj for Typo3.
@@ -159,7 +160,7 @@ class ResponseCompression
 
     /**
      * gzip_accepted()
-     * Purpose: test headers for Accept-Encoding: gzip/x-gzip
+     * Purpose: test headers for Accept-Encoding: gzip/x-gzip.
      *
      * Usage to test if output will be zipped:
      * if (self::gzip_accepted()) { echo "Page will be gziped"; }
@@ -186,12 +187,12 @@ class ResponseCompression
         // Perform a "qvalue" check. The Accept-Encoding "gzip;q=0" means that gzip is NOT accepted.
         // preg_matches only, if first condition is true.
         if ((mb_strpos($http_accept_encoding, 'gzip;q=') !== false)
-            and (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
-            and ($match[4] === '' or $match[4] > 0))) {
+            && (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
+            && ($match[4] === '' or $match[4] > 0))) {
             $encoding = 'gzip';
         }
 
-        /**
+        /*
          * Determine file type by checking the first bytes of the content buffer.
          */
         $magic = mb_substr(ob_get_contents(), 0, 4);
@@ -218,5 +219,4 @@ class ResponseCompression
 
         return $encoding;
     }
-
 }

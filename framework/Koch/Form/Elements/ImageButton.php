@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,21 +17,21 @@ use Koch\Form\FormElementInterface;
 class ImageButton extends Input implements FormElementInterface
 {
     /**
-     * width of image (px)
+     * width of image (px).
      *
      * @var int
      */
     public $width;
 
     /**
-     * height of image (px)
+     * height of image (px).
      *
      * @var int
      */
     public $height;
 
     /**
-     * URL of image
+     * URL of image.
      *
      * @var string
      */
@@ -43,7 +43,7 @@ class ImageButton extends Input implements FormElementInterface
     }
 
     /**
-     * sets URL of image
+     * sets URL of image.
      *
      * @param string $source
      */
@@ -53,14 +53,14 @@ class ImageButton extends Input implements FormElementInterface
     }
 
     /**
-     * sets width and height of image (px)
+     * sets width and height of image (px).
      *
      * @param int $width
      * @param int $height
      */
     public function setDimensions($width, $height)
     {
-        $this->width = $width;
+        $this->width  = $width;
         $this->height = $height;
     }
 }

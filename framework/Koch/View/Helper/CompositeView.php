@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\View\Helper;
 
 /**
- * Koch Framework - Class for Layout Handling
+ * Class for Layout Handling.
  *
  * The Layout Object provides a document tree for the output elements.
  * Speaking in patterns: this is a "composite" view (GoF - German Edition - Page 239).
@@ -35,16 +35,15 @@ namespace Koch\View\Helper;
  */
 class CompositeView implements ViewNodeInterface
 {
-
     /**
      * Representation of the tree with leaf-nodes.
      *
      * @var array
      */
-    private $components = array();
+    private $components = [];
 
     /**
-     * Adds / appends a new view-node (leaf-object) to the bottom of the stack
+     * Adds / appends a new view-node (leaf-object) to the bottom of the stack.
      */
     public function appendNode(ViewNodeInterface $component)
     {
@@ -52,7 +51,7 @@ class CompositeView implements ViewNodeInterface
     }
 
     /**
-     * Fetches an iterator to traverse the nodes
+     * Fetches an iterator to traverse the nodes.
      */
     public function getIterator()
     {
@@ -60,7 +59,7 @@ class CompositeView implements ViewNodeInterface
     }
 
     /**
-     * Loops over all components / nodes and renders
+     * Loops over all components / nodes and renders.
      */
     public function render($response)
     {

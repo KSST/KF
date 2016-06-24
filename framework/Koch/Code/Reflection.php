@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,7 +23,7 @@ class Reflection
     private $classname = '';
 
     /**
-     * constructor
+     * constructor.
      *
      * @param string $classname
      */
@@ -33,7 +33,7 @@ class Reflection
     }
 
     /**
-     * Set the name of the class to reflect
+     * Set the name of the class to reflect.
      *
      * @param string $classname
      */
@@ -43,7 +43,7 @@ class Reflection
     }
 
     /**
-     * Get the name of the class to reflect
+     * Get the name of the class to reflect.
      *
      * @return string
      */
@@ -56,11 +56,12 @@ class Reflection
      * Returns all methods of a class, excluding the ones specified in param.
      *
      * @param $exclude_classnames
+     *
      * @return array Methods of the class.
      */
     public function getMethods($exclude_classnames = null)
     {
-        $methods_array = array();
+        $methods_array = [];
 
         // if exlcude_classnames is a string, turn into array
         $exclude_classnames = (array) $exclude_classnames;
@@ -69,7 +70,7 @@ class Reflection
         if (class_exists($this->classname)) {
             $class = new \ReflectionClass($this->classname);
         } else {
-            throw new \RuntimeException(_('Class not existing: ' . $this->classname));
+            throw new \RuntimeException('Class not existing: ' . $this->classname);
         }
 
         // get all methods of that class
@@ -80,7 +81,7 @@ class Reflection
             $className = $method->class;
 
             // if the classname is not excluded
-            if (false === in_array($className, $exclude_classnames)) {
+            if (false === in_array($className, $exclude_classnames, true)) {
                 // add the method name to the array
                 $methods_array[$className][] = $method->name;
 

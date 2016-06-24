@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,33 +23,33 @@ use Koch\Http\HttpResponseInterface;
  */
 class Statistics implements FilterInterface
 {
-    private $config = null;
-    private $user = null;
-    private $curTimestamp = null;
-    private $curDate = null;
+    private $config             = null;
+    private $user               = null;
+    private $curTimestamp       = null;
+    private $curDate            = null;
     private $statsWhoDeleteTime = null;
-    private $statsWhoTimeout = null;
+    private $statsWhoTimeout    = null;
 
     public function __construct(Koch\Config $config, Koch\User\User $user)
     {
-        $this->config = $config;
+        $this->config       = $config;
         $this->curTimestamp = time();
-        $this->curDate = date('d.m.Y', $this->curTimestamp);
-        $this->user = $user;
+        $this->curDate      = date('d.m.Y', $this->curTimestamp);
+        $this->user         = $user;
 
         // Load Models
         Doctrine::loadModels(APPLICATION_MODULES_PATH . 'statistics/model/records/generated/');
         Doctrine::loadModels(APPLICATION_MODULES_PATH . 'statistics/model/records/');
 
-        $cfg = $config->readModuleConfig('statistics');
+        $cfg                      = $config->readModuleConfig('statistics');
         $this->statsWhoDeleteTime = $cfg['statistics']['deleteTimeWho'];
-        $this->statsWhoTimeout = $cfg['statistics']['timoutWho'];
+        $this->statsWhoTimeout    = $cfg['statistics']['timoutWho'];
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // take the initiative or pass through (do nothing)
-        if (isset ($this->config['statistics']['enabled']) and $this->config['statistics']['enabled'] == 1) {
+        if (isset($this->config['statistics']['enabled']) and $this->config['statistics']['enabled'] === 1) {
             return;
         }
 
@@ -57,7 +57,7 @@ class Statistics implements FilterInterface
         // Determine the client's browser and system information based on
         // $_SERVER['HTTP_USER_AGENT']
 
-        /**
+        /*
             * The Who logics, must be processed in a seperate filter
             */
         Doctrine::getTable('CsStatistic')->deleteWhoEntriesOlderThen($this->statsWhoDeleteTime);
@@ -66,10 +66,10 @@ class Statistics implements FilterInterface
     }
 
     /**
-     * update and/or create/insert a entry to the WhoIs and WhoWasOnline Tables
+     * update and/or create/insert a entry to the WhoIs and WhoWasOnline Tables.
      *
-     * @param String visitorIp
-     * @param String targetSite
+     * @param string visitorIp
+     * @param string targetSite
      * @param string $visitorIp
      */
     private function updateWhoTables($visitorIp, $targetSite)
@@ -83,7 +83,7 @@ class Statistics implements FilterInterface
     }
 
     /**
-     * updateWhoIs
+     * updateWhoIs.
      *
      * @param string $ip
      * @param $targetSite
@@ -95,20 +95,20 @@ class Statistics implements FilterInterface
 
         $result = Doctrine::getTable('CsStatistic')->updateWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
 
-        if ($result == 0) {
+        if ($result === 0) {
             Doctrine::getTable('CsStatistic')->insertWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
         }
     }
 
     /**
-     * updateStatistics
+     * updateStatistics.
      *
      * @param string $visitorIp
      */
     private function updateStatistics($visitorIp)
     {
         // if there is no entry for this ip, increment hits
-        if (false == Doctrine::getTable('CsStatistic')->existsIpEntryWithIp($visitorIp)) {
+        if (false === Doctrine::getTable('CsStatistic')->existsIpEntryWithIp($visitorIp)) {
             Doctrine::getTable('CsStatistic')->incrementHitsByOne();
             $this->updateStatisticStats();
         }
@@ -119,7 +119,7 @@ class Statistics implements FilterInterface
     }
 
     /**
-     * updateStatisticStats
+     * updateStatisticStats.
      */
     private function updateStatisticStats()
     {
@@ -128,6 +128,5 @@ class Statistics implements FilterInterface
         } else {
             Doctrine::getTable('CsStatistic')->insertStats();
         }
-
     }
 }

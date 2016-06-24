@@ -1,11 +1,10 @@
 <?php
 /**
- * Koch Framework Smarty View Helper
- *
+ * Koch Framework Smarty View Helper.
  */
 
 /**
- * block.t.php - Smarty gettext block plugin
+ * block.t.php - Smarty gettext block plugin.
  *
  * ------------------------------------------------------------------------- *
  * This library is free software; you can redistribute it and/or             *
@@ -24,6 +23,7 @@
  * ------------------------------------------------------------------------- *
  *
  * @link    http://smarty-gettext.sourceforge.net/
+ *
  * @author  Sagi Bashari <sagi@boom.org.il>
  * @copyright 2004-2005 Sagi Bashari
  */
@@ -38,20 +38,20 @@
  */
 function Smarty_gettext_strarg($str)
 {
-    $tr = array();
-    $p = 0;
+    $tr   = [];
+    $p    = 0;
     $args = 0;
 
     $args = func_num_args();
-    for ($i=1; $i < $args; $i++) {
+    for ($i = 1; $i < $args; ++$i) {
         $arg = func_get_arg($i);
 
         if (is_array($arg)) {
             foreach ($arg as $aarg) {
-                $tr['%'.++$p] = $aarg;
+                $tr['%' . ++$p] = $aarg;
             }
         } else {
-            $tr['%'.++$p] = $arg;
+            $tr['%' . ++$p] = $arg;
         }
     }
 
@@ -83,25 +83,25 @@ function Smarty_block_t($params, $text, $smarty)
     $text = stripslashes($text);
 
     // set escape mode
-    if (isset($params['escape']) === true) {
+    if (isset($params['escape'])) {
         $escape = $params['escape'];
         unset($params['escape']);
     }
 
     // set plural version
-    if (isset($params['plural']) === true) {
+    if (isset($params['plural'])) {
         $plural = $params['plural'];
         unset($params['plural']);
 
         // set count
-        if (isset($params['count']) === true) {
+        if (isset($params['count'])) {
             $count = $params['count'];
             unset($params['count']);
         }
     }
 
     // use plural if required parameters are set
-    if (isset($count) === true and isset($plural) === true) {
+    if (isset($count) && isset($plural)) {
         $text = T_ngettext($text, $plural, $count); // vain: prefixed "T_" for usage of php-gettext
     } else {   // use normal
         $text = T_gettext($text);                   // vain: prefixed "T_" for usage of php-gettext
@@ -112,7 +112,7 @@ function Smarty_block_t($params, $text, $smarty)
         $text = smarty_gettext_strarg($text, $params);
     }
 
-    if (false === isset($escape) or $escape == 'html') {
+    if (false === isset($escape) or $escape === 'html') {
         // html escape, default
         $text = nl2br(htmlspecialchars($text));
     } elseif ($escape !== null) {

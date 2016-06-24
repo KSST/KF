@@ -9,7 +9,6 @@ use org\bovigo\vfs\vfsStreamWrapper;
 
 class SmartyTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Smarty
      */
@@ -21,7 +20,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $options = array();
+        $options = [];
 
         $this->object = new Smarty($options);
 
@@ -31,7 +30,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->templateFileURL = vfsStream::url('root/smarty-renderer.tpl');
         $this->file            = vfsStream::newFile('smarty-renderer.tpl', 0777)
             ->withContent($this->getTemplateContent());
-        $this->root            = new vfsStreamDirectory('root');
+        $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -63,6 +62,7 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Smarty::configureEngine
+     *
      * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()
@@ -115,20 +115,20 @@ class SmartyTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($this->object->key1, 'value');
 
         /* array */
-        $array1 = array(
+        $array1 = [
             'A' => '1',
-            'B' => '2'
-        );
+            'B' => '2',
+        ];
         $this->object->assign($array1);
 
         $this->assertEquals($this->object->A, 1);
         $this->assertEquals($this->object->B, 2);
 
         /* multi-dim array */
-        $array2 = array(
-            'C' => array(
-                'D' => '4'
-        ));
+        $array2 = [
+            'C' => [
+                'D' => '4',
+        ], ];
         $this->object->assign($array2);
 
         $this->assertTrue(is_array($this->object->C));
@@ -303,6 +303,7 @@ EOF;
 
     /**
      * @covers Koch\View\Renderer\Smarty::render
+     *
      * @todo   Implement testRender().
      */
     public function testRender()
@@ -322,5 +323,4 @@ Hello World.
 EOF;
         $this->assertEquals($expectedTemplateContent, $result);
     }
-
 }

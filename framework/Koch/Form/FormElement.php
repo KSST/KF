@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,6 @@ namespace Koch\Form;
  */
 class FormElement
 {
-
     /**
      * @var string
      */
@@ -79,7 +78,7 @@ class FormElement
     public $position;
 
     /**
-     * @var boolean
+     * @var bool
      */
     public $required;
 
@@ -91,10 +90,10 @@ class FormElement
     /**
      * @var array
      */
-    protected $formelementdecorators = array();
+    protected $formelementdecorators = [];
 
     /**
-     * @var boolean
+     * @var bool
      */
     protected $disableDefaultDecorators;
 
@@ -103,19 +102,19 @@ class FormElement
      *
      * @var array
      */
-    protected $validators = array();
+    protected $validators = [];
 
     /**
      * The error messages array stores the incomming errors fromelement validators.
      *
      * @var array
      */
-    protected $errormessages = array();
+    protected $errormessages = [];
 
     /**
      * Error status (flag variable) of the formelement.
      *
-     * @var boolean
+     * @var bool
      */
     protected $error = false;
 
@@ -123,6 +122,7 @@ class FormElement
      * Set id of this form.
      *
      * @param $id string ID of this form.
+     *
      * @return FormElement
      */
     public function setID($id)
@@ -146,7 +146,8 @@ class FormElement
      * Set type of this form.
      *
      * @param $id string Type of this form.
-     * @param  string      $type
+     * @param string $type
+     *
      * @return FormElement
      */
     public function setType($type)
@@ -170,6 +171,7 @@ class FormElement
      * Set name of this form.
      *
      * @param $name string Name of this form.
+     *
      * @return FormElement
      */
     public function setName($name)
@@ -211,7 +213,8 @@ class FormElement
     /**
      * Set class of this form.
      *
-     * @param  string      $class Class to set
+     * @param string $class Class to set
+     *
      * @return FormElement
      */
     public function setClass($class)
@@ -232,9 +235,10 @@ class FormElement
     }
 
     /**
-     * Sets value for this element
+     * Sets value for this element.
      *
-     * @param  string      $value
+     * @param string $value
+     *
      * @return FormElement
      */
     public function setValue($value)
@@ -251,7 +255,7 @@ class FormElement
      */
     public function getValue()
     {
-        if (is_array($this->value) === true) {
+        if (is_array($this->value)) {
             foreach ($this->value as $key => $value) {
                 $this->value[$key] = htmlspecialchars($value);
             }
@@ -263,7 +267,7 @@ class FormElement
     }
 
     /**
-     * Returns the (unescaped!) value
+     * Returns the (unescaped!) value.
      *
      * @return string Unescaped string
      */
@@ -285,7 +289,7 @@ class FormElement
     }
 
     /**
-     * Enables this formelement
+     * Enables this formelement.
      *
      * @return FormElement
      */
@@ -299,7 +303,8 @@ class FormElement
     /**
      * Set label of this formelement.
      *
-     * @param  string      $label Label of this formelement.
+     * @param string $label Label of this formelement.
+     *
      * @return FormElement
      */
     public function setLabel($label)
@@ -322,7 +327,7 @@ class FormElement
     /**
      * Returns boolean true if a label exists for this formelement.
      *
-     * @return boolean True if label exists, false if not.
+     * @return bool True if label exists, false if not.
      */
     public function hasLabel()
     {
@@ -333,7 +338,7 @@ class FormElement
      * This method provides a shortcut for checking if an formelement is required.
      * You might use this in conditional checks.
      *
-     * @return boolean True if formelement is required, false if not.
+     * @return bool True if formelement is required, false if not.
      */
     public function isRequired()
     {
@@ -344,12 +349,13 @@ class FormElement
      * Set required state for the formelement.
      * A formelement is required, when the user is expected to (must) enter data into the formelement.
      *
-     * @param  boolean     $required Set required state. Defaults to true.
+     * @param bool $required Set required state. Defaults to true.
+     *
      * @return FormElement
      */
     public function setRequired($required = true)
     {
-        $this->required = ($required === true) ? true : false;
+        $this->required = $required;
 
         return $this;
     }
@@ -357,7 +363,8 @@ class FormElement
     /**
      * Set description of this formelement.
      *
-     * @param  string      $description Description of this formelement.
+     * @param string $description Description of this formelement.
+     *
      * @return FormElement
      */
     public function setDescription($description)
@@ -380,7 +387,8 @@ class FormElement
     /**
      * Set onclick text of this formelement.
      *
-     * @param  string      $onclick Onclick text of this formelement.
+     * @param string $onclick Onclick text of this formelement.
+     *
      * @return FormElement
      */
     public function setOnclick($onclick)
@@ -425,13 +433,14 @@ class FormElement
     /**
      * ===================================================================================
      *      Formelement Attribute Handling
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Returns the requested attribute if existing else null.
      *
      * @param $parametername
+     *
      * @return mixed null or value of the attribute
      */
     public function getAttribute($attribute)
@@ -439,26 +448,26 @@ class FormElement
         if ($this->{$attribute} !== null) {
             return $this->{$attribute};
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Setter method for Attributes
+     * Setter method for Attributes.
      *
      * @param array $attributes Array with one or several attributename => value relationships.
      */
     public function setAttributes($attributes)
     {
-        if (is_array($attributes) === true and empty($attributes) === false) {
+        if (is_array($attributes) and empty($attributes)) {
             foreach ($attributes as $attribute => $value) {
-                /**
+                /*
                  * In DEBUG mode the attributes are set via a setter method.
                  * So one might even set a wrong one by accident, like $attribute = 'maxxxlength'.
                  * To protect the developer a bit more, we are focing the usage of a setter method.
                  * If the setter method exists most likely the property will exist too, i guess.
                  */
-                if (defined('DEBUG') and DEBUG == true) {
+                if (defined('DEBUG') and DEBUG === true) {
                     $method = 'set' . ucfirst($attribute);
                     if (method_exists($this, $method)) {
                         $this->$method($value);
@@ -478,10 +487,10 @@ class FormElement
     }
 
     /**
-     * Setter method for Attribute
+     * Setter method for Attribute.
      *
-     * @param string  $attribute Attribute name
-     * @param boolean $value     Value
+     * @param string $attribute Attribute name
+     * @param bool   $value     Value
      */
     public function setAttribute($attribute, $value)
     {
@@ -491,12 +500,13 @@ class FormElement
     /**
      * Renders an array of key=>value pairs as an HTML attributes string.
      *
-     * @param  array  $attributes key=>value pairs corresponding to HTML attributes name="value"
+     * @param array $attributes key=>value pairs corresponding to HTML attributes name="value"
+     *
      * @return string Attributes as HTML
      */
-    public function renderAttributes(array $attributes = array())
+    public function renderAttributes(array $attributes = [])
     {
-        if (empty($attributes) === true) {
+        if (empty($attributes)) {
             return '';
         }
 
@@ -512,7 +522,7 @@ class FormElement
     /**
      * ===================================================================================
      *      Formelement Validation
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
@@ -522,6 +532,7 @@ class FormElement
      * "required, email"
      *
      * @param string One or more (comma separated) validation rules to perform.
+     *
      * @return \Koch\Form\FormElement
      */
     public function setRules($rule)
@@ -538,16 +549,15 @@ class FormElement
 
             // handle values (a property name to value relationship, like maxlength=20)
             if (strpos($rule, '=') !== false) {
-
                 $array = explode('=', $rule);
                 $rule  = $array[0];
                 $value = $array[1];
 
-                if (in_array($rule, array('maxvalue'))) {
+                if (in_array($rule, ['maxvalue'], true)) {
                     $value = (int) $value;
                 }
 
-                $this->addValidator($rule, array($rule => $value));
+                $this->addValidator($rule, [$rule => $value]);
             } else {
                 $this->addValidator($rule);
             }
@@ -557,14 +567,15 @@ class FormElement
     }
 
     /**
-     * Maps a validator rule to a validator classname
+     * Maps a validator rule to a validator classname.
      *
-     * @param  type   $rule Lowercased rule
+     * @param type $rule Lowercased rule
+     *
      * @return string Validator Classname based on rule
      */
     public function mapRulenameToClassname($rule)
     {
-        $array = array(
+        $array = [
             'email'     => 'Email',
             'equals'    => 'Equals',
             'ip'        => 'Ip',
@@ -577,20 +588,21 @@ class FormElement
             'regexp'    => 'RegExp',
             'required'  => 'Required',
             'string'    => 'String',
-            'url'       => 'Url'
-        );
+            'url'       => 'Url',
+        ];
 
-        return (isset($array[$rule]) === true) ? $array[$rule] : $rule;
+        return isset($array[$rule]) ? $array[$rule] : $rule;
     }
 
     /**
-     * addValidator
+     * addValidator.
      *
      * Is a shortcut/proxy/convenience method for addValidator()
      *
      * @param object|string Formelement Validator
      * @param mixed A Validator Property Value.
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
+     *
      * @return Koch\Form\FormElement_Validator
      */
     public function addValidator($validator, $properties = null)
@@ -619,7 +631,8 @@ class FormElement
      * The Validator is stored into the validators array.
      * So a formelement might have multiple validators.
      *
-     * @param  Koch_Validator $validator Accepts a Validator object.
+     * @param Koch_Validator $validator Accepts a Validator object.
+     *
      * @return FormElement
      */
     public function setValidator($validator)
@@ -643,7 +656,7 @@ class FormElement
         $class = '\Koch\Form\Validators\\' . $class;
 
         // return early, if this object is already stored
-        if (isset($this->validators[$class]) === true) {
+        if (isset($this->validators[$class])) {
             return $this->validators[$class];
         } elseif (true === class_exists($class)) {
             return new $class();
@@ -662,14 +675,15 @@ class FormElement
      * each of the element's validation rules.
      *
      * @see $validators array
-     * @return boolean
+     *
+     * @return bool
      */
     public function validate()
     {
         $value = $this->getValue();
 
         // return early, if value empty|null and not required
-        if ((('' === $value) or (null === $value)) and false === $this->isRequired()) {
+        if ((('' === $value) || (null === $value)) and false === $this->isRequired()) {
             return true;
         }
 
@@ -681,7 +695,7 @@ class FormElement
         // iterate over all validators
         foreach ($this->validators as $validator) {
             // ensure element validates
-            if ($validator->validate($value) === true) {
+            if ($validator->validate($value)) {
                 // everything is fine, proceed
                 continue;
             } else {
@@ -740,7 +754,7 @@ class FormElement
     /**
      * Sets the error state of the form (formHasError).
      *
-     * @param boolean $boolean
+     * @param bool $boolean
      */
     public function setError($boolean = true)
     {
@@ -750,7 +764,7 @@ class FormElement
     /**
      * Returns the error state of the form.
      *
-     * @return boolean False, if form has an error. True, otherwise.
+     * @return bool False, if form has an error. True, otherwise.
      */
     public function hasError()
     {
@@ -760,7 +774,7 @@ class FormElement
     /**
      * ===================================================================================
      *      Formelement Rendering
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
@@ -780,17 +794,19 @@ class FormElement
     /**
      * ===================================================================================
      *      Formelement Decoration
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * Adds a decorator to the formelement
+     * Adds a decorator to the formelement.
      *
      * Usage:
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM OBJECT
-     * @param  string                          $decorators
+     *
+     * @param string $decorators
+     *
      * @return Koch\Form\FormElement_Decorator
      */
     public function addDecorator($decorators)
@@ -800,11 +816,11 @@ class FormElement
         $decorator     = '';
 
         // check if multiple decorators are incomming at once
-        if (is_array($decorators) === true) {
+        if (is_array($decorators)) {
             // address each one of those decorators
             foreach ($decorators as $decorator) {
                 // and check if it is an object implementing the right interface
-                if (($decorator instanceof Koch\Form\DecoratorInterface) === true) {
+                if ($decorator instanceof Koch\Form\DecoratorInterface) {
                     // if so, fetch this decorator objects name
                     $decoratorname = $decorator->name;
                 } else {
@@ -816,20 +832,20 @@ class FormElement
                     $this->addDecorator($decorator);
                 }
             }
-        } elseif (is_object($decorators) === true) { // one element is incomming via recursion
+        } elseif (is_object($decorators)) { // one element is incomming via recursion
             $decorator     = $decorators;
             $decoratorname = $decorator->name;
         }
 
         // if we got a string (ignore the plural, it's a one element string, like 'fieldset')
-        if (is_string($decorators) === true) {
+        if (is_string($decorators)) {
             // turn it into an decorator object
             $decorator     = $this->decoratorFactory($decorators);
             $decoratorname = $decorator->name;
         }
 
         // now check if this decorator is not already set (prevent decorator duplications)
-        if (in_array($decoratorname, $this->formelementdecorators) === false) {
+        if (in_array($decoratorname, $this->formelementdecorators, true) === false) {
             // set this decorator object under its name into the array
             $this->formelementdecorators[$decoratorname] = $decorator;
         }
@@ -849,8 +865,9 @@ class FormElement
     /**
      * Getter Method for a decorators of this formelement by it's name..
      *
-     * @param  string $decoratorname The formelement decorator to look for in the stack of decorators.
-     * @return array  Returns the object Koch\Form\FormElement_Decorator_$decoratorname if registered.
+     * @param string $decoratorname The formelement decorator to look for in the stack of decorators.
+     *
+     * @return array Returns the object Koch\Form\FormElement_Decorator_$decoratorname if registered.
      */
     public function getDecoratorByName($decoratorname)
     {
@@ -870,7 +887,8 @@ class FormElement
     /**
      * Removes the requested decorator from the decorators stack.
      *
-     * @param  string     $decoratorname
+     * @param string $decoratorname
+     *
      * @throws \Exception
      */
     public function removeDecorator($decoratorname)
@@ -900,35 +918,36 @@ class FormElement
 
     public function useDefaultDecorators()
     {
-        return ($this->disableDefaultDecorators == true) ? false : true;
+        return ($this->disableDefaultDecorators === true) ? false : true;
     }
 
     /**
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Formelement Decorator.
+     *
      * @return string Koch\Form\FormElement\Decorators\$decorator
      */
     public function decoratorFactory($decorator)
     {
         $class = '\Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
 
-        return new $class;
+        return new $class();
     }
 
     /**
-     * Magic Method: set
+     * Magic Method: set.
      *
      * @param $name Name of the attribute to set to the form.
      * @param $value The value of the attribute.
      */
     public function __set($name, $value)
     {
-        $this->setAttributes(array($name => $value));
+        $this->setAttributes([$name => $value]);
     }
 
     /**
-     * Magic Method: get
+     * Magic Method: get.
      *
      * @param $name
      */

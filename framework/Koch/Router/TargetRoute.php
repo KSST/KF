@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,34 +12,34 @@
 
 namespace Koch\Router;
 
-use Koch\Mvc\Mapper;
 use Koch\Http\HttpRequest;
+use Koch\Mvc\Mapper;
 
 /**
- * Router_TargetRoute (processed RequestObject)
+ * Router_TargetRoute (processed RequestObject).
  */
 class TargetRoute extends Mapper
 {
-    public static $parameters = array(
+    public static $parameters = [
         // File
-        'filename'      => null,
-        'classname'     => null,
+        'filename'  => null,
+        'classname' => null,
         // Call
-        'module'        => 'index',
-        'controller'    => null,
-        'action'        => 'list',
-        'method'        => null,
-        'params'        => array(),
+        'module'     => 'index',
+        'controller' => null,
+        'action'     => 'list',
+        'method'     => null,
+        'params'     => [],
         // Output
-        'format'        => 'html',
-        'language'      => 'en',
-        'request'       => 'get',
-        'layout'        => true,
-        'ajax'          => false,
-        'renderer'      => 'smarty',
-        'themename'     => 'default',
-        'modrewrite'    => false
-    );
+        'format'     => 'html',
+        'language'   => 'en',
+        'request'    => 'get',
+        'layout'     => true,
+        'ajax'       => false,
+        'renderer'   => 'smarty',
+        'themename'  => 'default',
+        'modrewrite' => false,
+    ];
 
     /**
      * Get singleton instance of TargetRoute.
@@ -51,7 +51,7 @@ class TargetRoute extends Mapper
         static $instance = null;
 
         if ($instance === null) {
-            $instance = new self;
+            $instance = new self();
         }
 
         return $instance;
@@ -93,7 +93,7 @@ class TargetRoute extends Mapper
 
     public static function getClassname()
     {
-        if (empty(self::$parameters['classname']) === true) {
+        if (empty(self::$parameters['classname'])) {
             $classname = self::mapControllerToClassname(self::getModule(), self::getController());
             self::setClassname($classname);
         }
@@ -107,7 +107,7 @@ class TargetRoute extends Mapper
     }
 
     /**
-     * Returns Name of the Controller
+     * Returns Name of the Controller.
      *
      * @return string Controller/Modulename
      */
@@ -115,7 +115,7 @@ class TargetRoute extends Mapper
     {
         // the default "controller" name is the "module" name
         // this is the case if a route "/:module", e.g. "/users" is used
-        if (empty(self::$parameters['controller']) === true) {
+        if (empty(self::$parameters['controller'])) {
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
@@ -160,7 +160,7 @@ class TargetRoute extends Mapper
     }
 
     /**
-     * Method to get the Action with Prefix
+     * Method to get the Action with Prefix.
      *
      * @return $string
      */
@@ -195,8 +195,8 @@ class TargetRoute extends Mapper
     {
         // transfer parameters from HttpRequest Object to TargetRoute
         if (HttpRequest::getRequestMethod() === 'POST') {
-            $request = new HttpRequest;
-            $params = $request->getPost();
+            $request = new HttpRequest();
+            $params  = $request->getPost();
 
             self::setParameters($params);
         }
@@ -239,12 +239,12 @@ class TargetRoute extends Mapper
 
     public static function getBackendTheme()
     {
-        return (isset($_SESSION['user']['backend_theme']) === true) ? $_SESSION['user']['backend_theme'] : 'default';
+        return (isset($_SESSION['user']['backend_theme'])) ? $_SESSION['user']['backend_theme'] : 'default';
     }
 
     public static function getFrontendTheme()
     {
-        return (isset($_SESSION['user']['frontend_theme']) === true)  ? $_SESSION['user']['frontend_theme'] : 'default';
+        return (isset($_SESSION['user']['frontend_theme']))  ? $_SESSION['user']['frontend_theme'] : 'default';
     }
 
     public static function getThemeName()
@@ -276,12 +276,12 @@ class TargetRoute extends Mapper
      * Dispatchable ensures that the "logical" route is "physically" valid.
      * The method checks, if the TargetRoute relates to correct file, controller and action.
      *
-     * @return boolean True if TargetRoute is dispatchable, false otherwise.
+     * @return bool True if TargetRoute is dispatchable, false otherwise.
      */
     public static function dispatchable()
     {
-        $class = self::getClassname();
-        $file = self::getFilename();
+        $class  = self::getClassname();
+        $file   = self::getFilename();
         $method = self::getMethod();
 
         // prevent redeclaration, by checking "method in class" (implicit class_exist())
@@ -300,7 +300,7 @@ class TargetRoute extends Mapper
     }
 
     /**
-     * setSegmentsToTargetRoute
+     * setSegmentsToTargetRoute.
      *
      * This takes the requirements array or the uri_segments array
      * and sets the proper parameters on the Target Route,
@@ -325,12 +325,12 @@ class TargetRoute extends Mapper
          * [requirements] array is relevant. overwriting $array drops the keys
          * [regexp] and [number_of_segments] because they are no longer needed.
          */
-        if ((isset($array['requirements']) === true) || (array_key_exists('requirements', $array))) {
+        if ((isset($array['requirements'])) || (array_key_exists('requirements', $array))) {
             $array = $array['requirements'];
         }
 
         // Module
-        if (isset($array['module']) === true) {
+        if (isset($array['module'])) {
             self::setModule($array['module']);
             // yes, set the controller of the module, too
             // if it is e.g. AdminController on Module News, then it will be overwritten below
@@ -339,7 +339,7 @@ class TargetRoute extends Mapper
         }
 
         // Controller
-        if (isset($array['controller']) === true) {
+        if (isset($array['controller'])) {
             self::setController($array['controller']);
             // if a module was not set yet, then set the current controller also as module
             if (self::$parameters['module'] === 'index') {
@@ -349,19 +349,18 @@ class TargetRoute extends Mapper
         }
 
         // Action
-        if (isset($array['action']) === true) {
+        if (isset($array['action'])) {
             self::setAction($array['action']);
             unset($array['action']);
         }
 
         // Id
-        if (isset($array['id']) === true) {
+        if (isset($array['id'])) {
             self::setId($array['id']);
 
             // if we set an ID and the action is still empty (=default: list),
             // then we automatically set the action name according to the request method
             if (self::$parameters['action'] === 'list') {
-
                 $request_method = self::getRequestMethod();
 
                 if ($request_method === 'GET') {
@@ -394,26 +393,26 @@ class TargetRoute extends Mapper
 
     public static function reset()
     {
-        $reset_params = array(
+        $reset_params = [
             // File
-            'filename' => null,
+            'filename'  => null,
             'classname' => null,
             // Call
-            'module' => 'index',
+            'module'     => 'index',
             'controller' => 'index',
-            'action' => 'list',
-            'method' => 'actionList',
-            'params' => array(),
+            'action'     => 'list',
+            'method'     => 'actionList',
+            'params'     => [],
             // Output
-            'format' => 'html',
-            'language' => 'en',
-            'request' => 'get',
-            'layout' => true,
-            'ajax' => false,
-            'renderer' => 'smarty',
-            'themename' => 'default',
-            'modrewrite' => false
-        );
+            'format'     => 'html',
+            'language'   => 'en',
+            'request'    => 'get',
+            'layout'     => true,
+            'ajax'       => false,
+            'renderer'   => 'smarty',
+            'themename'  => 'default',
+            'modrewrite' => false,
+        ];
 
         self::$parameters = $reset_params;
     }

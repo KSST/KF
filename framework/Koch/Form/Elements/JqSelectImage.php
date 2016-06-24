@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -22,7 +22,7 @@ class JqSelectImage extends Select implements FormElementInterface
     private $directory;
 
     /**
-     * JQSelectImage uses a simple jquery selection to insert the img src into a preview div
+     * JQSelectImage uses a simple jquery selection to insert the img src into a preview div.
      */
     public function __construct()
     {
@@ -39,7 +39,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDirectory()
     {
@@ -47,7 +47,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * Setter for directory
+     * Setter for directory.
      */
     public function setDirectory($directory)
     {
@@ -57,7 +57,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * Shortcut to $this->setDirectory
+     * Shortcut to $this->setDirectory.
      */
     public function fromDirectory($directory)
     {

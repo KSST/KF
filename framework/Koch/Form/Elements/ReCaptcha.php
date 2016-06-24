@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -29,7 +29,6 @@ class ReCaptcha extends Captcha implements FormElementInterface
     /**
      * @var object Instance of \Koch\Http\HttpRequest Object.
      */
-
     public function __construct()
     {
         $this->request = Clansuite_CMS::getInjector()->instantiate('\Koch\Http\HttpRequest');
@@ -37,21 +36,21 @@ class ReCaptcha extends Captcha implements FormElementInterface
         // Load Recaptcha Library
         include_once VENDOR_PATH . '/recaptcha/recaptchalib.php';
 
-        /**
+        /*
          * Fetch publickey from config
          *
          * [recaptcha]
          * public_key  = ""
          * private_key = ""
          */
-        $config = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
+        $config           = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
         $this->publicKey  = $config['recaptcha']['public_key'];
         $this->privateKey = $config['recaptcha']['private_key'];
         unset($config);
     }
 
     /**
-     * Displays a ReCaptcha
+     * Displays a ReCaptcha.
      */
     public function render()
     {
@@ -59,7 +58,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
     }
 
     /**
-     * Validates a ReCaptcha
+     * Validates a ReCaptcha.
      *
      * In the code that processes the form submission, you need to add code to validate the CAPTCHA.
      */
@@ -72,13 +71,13 @@ class ReCaptcha extends Captcha implements FormElementInterface
             $this->request->getPost('recaptcha_response_field')
         );
 
-        if ($response->is_valid == false) {
+        if ($response->is_valid === false) {
             return _('The reCAPTCHA was not entered correctly. Try again. (recaptcha error ' . $response->error . ')');
         }
     }
 
     /**
-     * Administrative Functions for ReCaptcha
+     * Administrative Functions for ReCaptcha.
      */
     public function getAPIKey()
     {

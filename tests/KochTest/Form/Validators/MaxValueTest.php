@@ -6,7 +6,6 @@ use Koch\Form\Validators\MaxValue;
 
 class MaxValueTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var MaxValue
      */
@@ -19,7 +18,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\MaxValue;
+        $this->validator = new \Koch\Form\Validators\MaxValue();
     }
 
     /**
@@ -65,7 +64,7 @@ class MaxValueTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

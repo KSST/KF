@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -28,19 +28,15 @@ class Url extends Validator
 
     protected function processValidationLogic($value)
     {
-        /**
+        /*
          * Note: filter_var() does not support IDNA.
          * The INTL extension provides the method idn_to_ascii().
          * It converts a multibyte URL to a punycode ASCII string.
          */
-        if (extension_loaded('intl') === true) {
+        if (extension_loaded('intl')) {
             $value = idn_to_ascii($value);
         }
 
-        if (true === (bool) filter_var($value, FILTER_VALIDATE_URL, $this->getOptions())) {
-            return true;
-        } else {
-            return false;
-        }
+        return filter_var($value, FILTER_VALIDATE_URL, $this->getOptions());
     }
 }

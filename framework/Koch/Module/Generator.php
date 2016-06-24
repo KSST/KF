@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Module;
 
 /**
- * Module Generator
+ * Module Generator.
  *
  * Handles
  * - creation of folders,
@@ -23,10 +23,10 @@ namespace Koch\Module;
  */
 class Generator
 {
-    public $structure = array(
-        'folders' => array(),
-        'files' => array()
-    );
+    public $structure = [
+        'folders' => [],
+        'files'   => [],
+    ];
 
     public $module = null;
 

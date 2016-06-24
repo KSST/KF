@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -27,11 +27,11 @@ class Pdf extends AbstractRenderer
     public $renderer = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
         // composer autoload not working, due to missing autoload section in mpdfs composer.json
@@ -43,31 +43,25 @@ class Pdf extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-
     }
 
     public function configureEngine()
     {
-
     }
 
     public function assign($tpl_parameter, $value = null)
     {
-
     }
 
     public function display($template, $viewdata = null)
     {
-
     }
 
     public function fetch($template, $viewdata = null)
     {
-
     }
 
     public function render($template = null, $viewdata = null)
     {
-
     }
 }

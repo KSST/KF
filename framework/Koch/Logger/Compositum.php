@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,7 +25,7 @@ class Compositum
     /**
      * @var array Array constains a object composition of all loggers
      */
-    public $loggers = array();
+    public $loggers = [];
 
     /**
      * Iterates over all registered loggers and writes the log entry.
@@ -34,7 +34,7 @@ class Compositum
      * @param string   $message
      * @param string[] $context Context Array
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $bool = true;
 
@@ -53,7 +53,7 @@ class Compositum
      */
     public function addLogger($logger)
     {
-        if ((in_array($logger, $this->loggers) === false)) {
+        if ((in_array($logger, $this->loggers, true) === false)) {
             $this->loggers[] = $logger;
         }
 

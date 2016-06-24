@@ -23,7 +23,7 @@ class RangeTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new Range;
+        $this->validator = new Range();
     }
 
     /**
@@ -89,6 +89,5 @@ class RangeTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame('Please enter a value within the range of 1 <> 1980.',
                 $this->validator->getValidationHint());
-
     }
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
@@ -17,23 +17,24 @@
  * Name:     modulenavigation<br>
  * Purpose:  display modulenavigation<br>
  *
- * @param array $params
+ * @param array  $params
  * @param Smarty $smarty
+ *
  * @return string
  */
 function Smarty_function_modulenavigation($params, $smarty)
 {
     $module = \Koch\Http\HttpRequest::getRoute()->getModule();
 
-    $file = APPLICATION_MODULES_PATH. $module . DIRECTORY_SEPARATOR . $module . '.menu.php';
+    $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.menu.php';
 
-    if (is_file($file) === true) {
+    if (is_file($file)) {
         // this includes the file, which contains a php array name $modulenavigation
         include $file;
 
         // push the $modulenavigation array to a callback function
         // for further processing of the menu items
-        $modulenavigation = array_map("applyCallbacks", $modulenavigation);
+        $modulenavigation = array_map('applyCallbacks', $modulenavigation);
 
         $smarty->assign('modulenavigation', $modulenavigation);
 
@@ -47,7 +48,7 @@ function Smarty_function_modulenavigation($params, $smarty)
 }
 
 /**
- * array_map callback function
+ * array_map callback function.
  *
  * 1) convert short urls
  * 2) execute callback conditions of menu items
@@ -57,7 +58,7 @@ function Smarty_function_modulenavigation($params, $smarty)
  */
 function applyCallbacks(array $modulenavigation)
 {
-    /**
+    /*
      * 1) Convert Short Urls
      *
      * This replaces the values of the 'url' key (array['url']),
@@ -65,14 +66,14 @@ function applyCallbacks(array $modulenavigation)
      */
     $modulenavigation['url'] = \Koch\Router\Router::buildURL($modulenavigation['url']);
 
-    /**
+    /*
      * 2) Conditions of menu items
      *
      * If the condition of the menu item is not met,
      * then condition is set to false, otherwise true.
      */
     if ($modulenavigation['condition'] !== null) {
-        /**
+        /*
          * the if statement evaluates the content of the key condition
          * and compares it to false, then reassigns the boolean value as
          * the condition value.
@@ -88,10 +89,10 @@ function applyCallbacks(array $modulenavigation)
         }
     }
 
-    /**
+    /*
      * 3) use name as title, if title is not defined
      */
-    if ($modulenavigation['title'] == '') {
+    if ($modulenavigation['title'] === '') {
         $modulenavigation['title'] = $modulenavigation['name'];
     }
 

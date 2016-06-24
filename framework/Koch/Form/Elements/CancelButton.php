@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -17,7 +17,7 @@ use Koch\Form\FormElementInterface;
 class CancelButton extends Input implements FormElementInterface
 {
     /**
-     * Holds the url when canceling
+     * Holds the url when canceling.
      *
      * @var string
      */
@@ -39,7 +39,7 @@ class CancelButton extends Input implements FormElementInterface
     }
 
     /**
-     * Sets the cancel URL (the url to redirect the user to, after clicking cancel)
+     * Sets the cancel URL (the url to redirect the user to, after clicking cancel).
      *
      * @example
      * $form->addElement('buttonbar')

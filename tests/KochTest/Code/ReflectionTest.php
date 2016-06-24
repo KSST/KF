@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Code;
 
 use Koch\Code\Reflection;

@@ -21,7 +21,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the vendor library "XTemplate".');
         }
 
-        $options = array();
+        $options = [];
 
         $this->object = new Xtemplate($options);
     }
@@ -63,6 +63,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::renderPartial
+     *
      * @todo   Implement testRenderPartial().
      */
     public function testRenderPartial()
@@ -75,6 +76,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::clearVars
+     *
      * @todo   Implement testClearVars().
      */
     public function testClearVars()
@@ -87,6 +89,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::clearCache
+     *
      * @todo   Implement testClearCache().
      */
     public function testClearCache()
@@ -99,6 +102,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::fetch
+     *
      * @todo   Implement testFetch().
      */
     public function testFetch()
@@ -111,6 +115,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::display
+     *
      * @todo   Implement testDisplay().
      */
     public function testDisplay()
@@ -123,6 +128,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::render
+     *
      * @todo   Implement testRender().
      */
     public function testRender()
@@ -135,6 +141,7 @@ class XtemplateTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Xtemplate::assign
+     *
      * @todo   Implement testAssign().
      */
     public function testAssign()

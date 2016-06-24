@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,10 +23,10 @@ class ImagesOnlyFileFilterIterator extends \FilterIterator
     /**
      * @var array Whitelist of allowed image filetypes, lowercase.
      */
-    private $allowed_image_filetypes = array('png', 'gif', 'jpeg', 'jpg');
+    private $allowed_image_filetypes = ['png', 'gif', 'jpeg', 'jpg'];
 
     /**
-     * Implements method from FilterIterator (SPL.php)
+     * Implements method from FilterIterator (SPL.php).
      */
     public function accept()
     {
@@ -39,10 +39,10 @@ class ImagesOnlyFileFilterIterator extends \FilterIterator
         }
 
         // set filename and pathinfo
-        $filename = $current->getFilename();
+        $filename  = $current->getFilename();
         $extension = pathinfo($filename, PATHINFO_EXTENSION);
 
         // if false, it's not a whitelisted extension
-        return (in_array($extension, $this->allowed_image_filetypes)) ? true : false;
+        return (in_array($extension, $this->allowed_image_filetypes, true)) ? true : false;
     }
 }

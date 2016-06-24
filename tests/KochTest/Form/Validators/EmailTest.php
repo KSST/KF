@@ -18,7 +18,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new Email;
+        $this->validator = new Email();
     }
 
     /**
@@ -35,26 +35,26 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function isValidEMailDataprovider()
     {
-        return array(
+        return [
             //incomplete
-            array('foo', false),
-            array('äää', false),
-            array('@', false),
+            ['foo', false],
+            ['äää', false],
+            ['@', false],
             //umlaut in topleveldomain
             //array('test@test.öü', false), // @todo this is valid? punycode?
             //invalid character in name
             //array('foo/dsd@bar.de', false), // @todo this validates? with slash in name?
             //own toplevel domain, but valid
-            array('max.mustermann@company.intranet', true),
+            ['max.mustermann@company.intranet', true],
             // umlauts in name
-            array('karl.müller@123test.de', false), // @todo this is valid?
+            ['karl.müller@123test.de', false], // @todo this is valid?
             // perfect
-            array('charles@bronson.com', true),
+            ['charles@bronson.com', true],
             //long domainname with subdomains
             #array('herber-müller@servers.campus.univercity.edu', true), // @todo this does not validate.. why?
             // brackets in string
-            array('billy[at]microsoft[dot]com', false)
-        );
+            ['billy[at]microsoft[dot]com', false],
+        ];
     }
 
     /**
@@ -64,7 +64,7 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodprocessValidationLogic($email, $expectedValidationState)
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Module;
 
 /**
- * Decorator for the ModuleController
+ * Decorator for the ModuleController.
  *
  * Purpose: attach plugins and methods at runtime to the module by nesting (wrapping) them.
  * Pattern: @book "GOF:175" - Decorator (structural pattern)
@@ -24,7 +24,7 @@ class Decorator
     protected $moduleController;
 
     /**
-     * Decorate
+     * Decorate.
      */
     public function decorate(Koch_Module_Interface $moduleController)
     {
@@ -54,7 +54,7 @@ class Decorator
     }
 
     /**
-     * Magic Method __call()
+     * Magic Method __call().
      *
      * When a method call to the current decorator is not defined, it is catched by __call().
      * So the purpose of this method is to delegate method calls to the different decorators.

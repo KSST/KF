@@ -29,11 +29,11 @@
 function smarty_function_png_image($params, $smarty)
 {
     $height = '';
-    $width = '';
-    $src = '';
-    $alt = '';
-    $extra = '';
-    $html = '';
+    $width  = '';
+    $src    = '';
+    $alt    = '';
+    $extra  = '';
+    $html   = '';
 
     extract($params);
 
@@ -51,13 +51,13 @@ function smarty_function_png_image($params, $smarty)
         $width = 0;
     }
 
-    if (($height == 0) or ($width == 0)) {
+    if (($height === 0) || ($width === 0)) {
         $currentimagesize = getimagesize($src);
-        $width = $currentimagesize[0];
-        $height = $currentimagesize[1];
+        $width            = $currentimagesize[0];
+        $height           = $currentimagesize[1];
     }
 
-    if (false == (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
+    if (false === (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
         $html = "<img src='$src' height='$height' width='$width' alt='$alt' $extra />";
     } else {
         $html = "<SPAN $extra STYLE='position:relative;height:$height;width:$width;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\"$src\",sizingMethod=\"scale\");'></SPAN>";

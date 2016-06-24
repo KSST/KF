@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Permissions;
 
 /**
- * ACL
+ * ACL.
  */
 class Acl
 {
@@ -23,7 +23,6 @@ class Acl
      */
     public function addRole($roleGroup, $role)
     {
-
     }
 
     /**
@@ -32,7 +31,6 @@ class Acl
      */
     public function addResource($resourceGroup, $resource)
     {
-
     }
 
     /**
@@ -42,7 +40,6 @@ class Acl
      */
     public function ruleAllow($role, $action, $resource)
     {
-
     }
 
     /**
@@ -52,6 +49,5 @@ class Acl
      */
     public function ruleDeny($role, $action, $resource)
     {
-
     }
 }

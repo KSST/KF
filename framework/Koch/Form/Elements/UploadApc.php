@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -29,11 +29,11 @@ class UploadApc extends File
     public function render()
     {
         // APC RFC1867 File Upload Progress Hook check
-        if (ini_get('apc.rfc1867') == false) {
+        if (ini_get('apc.rfc1867') === false) {
             echo 'No Upload with APC possible.';
         }
 
-        /**
+        /*
          * This javascript handler for fetching the json results array from apc_fetch method.
          * @see get-progress.php
          */
@@ -94,8 +94,8 @@ class UploadApc extends File
                             //]]></script>";
 
         // add an iframe, so that the upload happens in there and is not blocking the website
-        $html = '<!-- Hidden iframe for performing the Upload -->'.CR.'
-                     <iframe style="display:none" name="hidden_upload" src="'.WWW_ROOT . 'upload-file.php"></iframe>';
+        $html = '<!-- Hidden iframe for performing the Upload -->' . CR . '
+                     <iframe style="display:none" name="hidden_upload" src="' . WWW_ROOT . 'upload-file.php"></iframe>';
 
         // add ajax status (upload_status, uploadFile, uploadSize, progressBar)
         $html .= '<!-- Ajax Upload Status -->
@@ -109,14 +109,14 @@ class UploadApc extends File
                       </div>
                     ';
 
-        /**
+        /*
          * APC needs a hidden element
          * a) with a certain name
          * b) with a unique tracking id for the file
          * c) placed before the input file element.
          */
         $uniqueID = md5(uniqid(mt_rand(), true));
-        $hidden = new Hidden();
+        $hidden   = new Hidden();
         $html .= $hidden->setName('APC_UPLOAD_PROGRESS')->setID('upload_status')->setValue($uniqueID);
 
         // add the input element
@@ -126,12 +126,12 @@ class UploadApc extends File
         $submit = new Submitbutton();
         $submit->setValue(_('Upload File'));
         $submit->setAdditionalAttributeAsText(
-            "onclick=\"this.disabled=true;" .
+            'onclick="this.disabled=true;' .
             "setInterval('getUploadProgress(\''+this.form.APC_UPLOAD_PROGRESS.value+'\')', 750); \" "
         );
         $html .= $submit;
 
-        return $javascript.$html;
+        return $javascript . $html;
     }
 
     public function setValue($value)

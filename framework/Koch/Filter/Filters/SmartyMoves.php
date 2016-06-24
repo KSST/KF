@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,9 +12,9 @@
 
 namespace Koch\Filter\Filters;
 
-use \Koch\Filter\FilterInterface;
-use \Koch\Http\HttpRequestInterface;
-use \Koch\Http\HttpResponseInterface;
+use Koch\Filter\FilterInterface;
+use Koch\Http\HttpRequestInterface;
+use Koch\Http\HttpResponseInterface;
 
 /**
  * Filter for Smarty2 subtemplate moves.
@@ -40,58 +40,58 @@ class SmartyMoves implements FilterInterface
 {
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        /**
+        /*
          * If the renderer is not smarty, then bypass the filter.
          */
-        if ($request->getRoute()->getRenderEngine() != 'smarty') {
+        if ($request->getRoute()->getRenderEngine() !== 'smarty') {
             return;
         }
 
-        /**
+        /*
          * Get HttpResponse output buffer
          */
         $content = $response->getContent();
 
-        /**
+        /*
          * This matches the PRE_HEAD_CLOSE tag.
          * The X marks the position: X</head>
          */
-        $matches = array();
+        $matches = [];
         $regexp1 = '!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is';
         preg_match_all($regexp1, $content, $matches);
         $content = preg_replace($regexp1, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $value) {
-            $content = str_replace('</head>', $value."\n".'</head>', $content);
+            $content = str_replace('</head>', $value . "\n" . '</head>', $content);
         }
 
-        /**
+        /*
          * This matches the POST_BODY_OPEN tag.
          * The X marks the position: <body>X
          */
-        $matches = array();
+        $matches = [];
         $regexp2 = '!@@@SMARTY:POST_BODY_OPEN:BEGIN@@@(.*?)@@@SMARTY:POST_BODY_OPEN:END@@@!is';
         preg_match_all($regexp2, $content, $matches);
         $content = preg_replace($regexp2, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $values) {
-            $content = str_replace('<body>', '<body>'."\n".$value, $content);
+            $content = str_replace('<body>', '<body>' . "\n" . $value, $content);
         }
 
-        /**
+        /*
          * This matches the POST_BODY_OPEN tag.
          * The X marks the position: X</body>
          */
-        $matches = array();
+        $matches = [];
         $regexp3 = '!@@@SMARTY:PRE_BODY_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_BODY_CLOSE:END@@@!is';
         preg_match_all($regexp3, $content, $matches);
         $content = preg_replace($regexp3, '', $content);
         $matches = array_keys(array_flip($matches[1]));
         foreach ($matches as $values) {
-            $content = str_replace('</body>', $value."\n".'</body>', $content);
+            $content = str_replace('</body>', $value . "\n" . '</body>', $content);
         }
 
-        /**
+        /*
          * Replace the http response buffer
          */
         $response->setContent($content, true);

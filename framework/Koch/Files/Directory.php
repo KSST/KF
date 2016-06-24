@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -15,7 +15,7 @@ namespace Koch\Files;
 class Directory
 {
     private $filtername = 'ImagesOnly';
-    private $directory = '';
+    private $directory  = '';
 
     public function __construct($directory = null)
     {
@@ -27,7 +27,7 @@ class Directory
     }
 
     /**
-     * Available Filter types: image
+     * Available Filter types: image.
      */
     public function setFilter($filtername)
     {
@@ -43,7 +43,7 @@ class Directory
         $directory = str_replace('\\', DIRECTORY_SEPARATOR, $directory);
 
         // prefix directory with ROOT for security purposes
-        if (stristr($directory, ROOT) == false) {
+        if (stristr($directory, ROOT) === false) {
             $directory = APPLICATION_PATH . $directory;
         }
 
@@ -54,7 +54,7 @@ class Directory
 
     public function getDirectory($directory = '')
     {
-        if ($directory != '') {
+        if ($directory !== '') {
             $this->directory = $directory;
         }
 
@@ -81,7 +81,7 @@ class Directory
 
             // while iterating
             foreach ($iterator as $file) {
-                /**
+                /*
                  * push the SPL FileInfo Objects into the array
                  * @see http://www.php.net/~helly/php/ext/spl/classSplFileInfo.html
                  */
@@ -91,12 +91,12 @@ class Directory
             $data->ksort();
         } else { // return array
             // create array
-            $data = array();
+            $data = [];
 
             // while iterating
             foreach ($iterator as $file) {
-                $wwwpath = WWW_ROOT . '/' . $this->getDirectory() . '/' . $file->getFilename();
-                $wwwpath = str_replace('//', '/', $wwwpath);
+                $wwwpath        = WWW_ROOT . '/' . $this->getDirectory() . '/' . $file->getFilename();
+                $wwwpath        = str_replace('//', '/', $wwwpath);
                 $data[$wwwpath] = $file->getFilename();
             }
         }
@@ -122,9 +122,10 @@ class Directory
     }
 
     /**
-     * Calculates the size of a directory (recursiv)
+     * Calculates the size of a directory (recursiv).
      *
      * @param $dir Directory Path
+     *
      * @return $size size of directory in bytes
      */
     public static function size($dir)
@@ -134,10 +135,10 @@ class Directory
         }
 
         $size = 0;
-        $dh = opendir($dir);
+        $dh   = opendir($dir);
         while (($entry = readdir($dh)) !== false) {
             // exclude ./..
-            if ($entry == '.' or $entry == '..') {
+            if ($entry === '.' or $entry === '..') {
                 continue;
             }
 
@@ -159,7 +160,7 @@ class Directory
     }
 
     /**
-     * Copy a directory recursively
+     * Copy a directory recursively.
      *
      * @param $source
      * @param $destination
@@ -171,25 +172,24 @@ class Directory
 
         $handle = opendir($source);
 
-        if ($handle === true) {
-            while (false !== ( $file = readdir($handle))) {
-                if (mb_substr($file, 0, 1) != '.') {
+        if ($handle) {
+            while (false !== ($file = readdir($handle))) {
+                if (mb_substr($file, 0, 1) !== '.') {
                     $source_path = $source . $file;
                     $target_path = $destination . $file;
 
                     if (is_file($target_path) === false or $overwrite) {
-                        if (array(mb_strstr($target_path, '.') == true)) {
+                        if ([mb_strstr($target_path, '.') === true]) {
                             $folder_path = dirname($target_path);
                         } else {
                             $folder_path = $target_path;
                         }
 
-                        while(is_dir(dirname(end($folder_path)))
-                        and dirname(end($folder_path)) != '/'
-                        and dirname(end($folder_path)) != '.'
-                        and dirname(end($folder_path)) != ''
-                        and ! preg_match('#^[A-Za-z]+\:\\\$#', dirname(end($folder_path))))
-                        {
+                        while (is_dir(dirname(end($folder_path)))
+                        and dirname(end($folder_path)) !== '/'
+                        and dirname(end($folder_path)) !== '.'
+                        and dirname(end($folder_path)) !== ''
+                        and !preg_match('#^[A-Za-z]+\:\\\$#', dirname(end($folder_path)))) {
                             array_push($folder_path, dirname(end($folder_path)));
                         }
 
@@ -204,15 +204,14 @@ class Directory
                         }
 
                         $old = ini_set('error_reporting', 0);
-                        if (copy($source_path, $target_path) == false) {
-                            throw new \Exception(_('Could not copy the directory. Probably a permission problem.'));
+                        if (copy($source_path, $target_path) === false) {
+                            throw new \Exception('Could not copy the directory. Probably a permission problem.');
                         }
                         ini_set('error_reporting', $old);
-
-                    } elseif (is_dir($source_path) === true) {
+                    } elseif (is_dir($source_path)) {
                         if (is_dir($target_path) === false) {
-                            if (@mkdir($target_path, fileperms($source_path)) == false) {
-                              // nope, not an empty if statement :)
+                            if (@mkdir($target_path, fileperms($source_path)) === false) {
+                                // nope, not an empty if statement :)
                             }
                         }
                         $this->dir_copy($source_path, $target_path, $overwrite);
@@ -230,9 +229,10 @@ class Directory
      * before directories, creating a single non-recursive loop
      * to delete files/directories in the correct order.
      *
-     * @param  string       $directory
-     * @param  bool         $delete_dir_itself
-     * @return boolean|null
+     * @param string $directory
+     * @param bool   $delete_dir_itself
+     *
+     * @return bool|null
      */
     public function deleteDir($directory, $delete_dir_itself = false)
     {
@@ -250,10 +250,10 @@ class Directory
         if ($delete_dir_itself === true) {
             return rmdir($directory);
         }
-     }
+    }
 
     /**
-     * Performs a chmod operation
+     * Performs a chmod operation.
      *
      * @param $path
      * @param $chmod
@@ -279,7 +279,7 @@ class Directory
             if ($recursive === false) {
                 $dh = opendir($path);
                 while ($file = readdir($dh)) {
-                    if (mb_substr($file, 0, 1) != '.') {
+                    if (mb_substr($file, 0, 1) !== '.') {
                         $fullpath = $path . '/' . $file;
                         if (!is_dir($fullpath)) {
                             $mode = '0' . $chmod;

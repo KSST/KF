@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -25,7 +25,7 @@ class File extends AbstractLogger implements LoggerInterface
     private $logfile;
 
     /**
-     * This method gives back the filename for logging
+     * This method gives back the filename for logging.
      *
      * @return $filename string
      */
@@ -47,25 +47,27 @@ class File extends AbstractLogger implements LoggerInterface
     /**
      * Writes a string to the logfile.
      *
-     * @param  string $level
-     * @param  string $message
-     * @param  array  $context
+     * @param string $level
+     * @param string $message
+     * @param array  $context
+     *
      * @return bool
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         return (bool) file_put_contents($this->getErrorLogFilename(), $message, FILE_APPEND & LOCK_EX);
     }
 
     /**
-     * readLog returns the content of a logfile
+     * readLog returns the content of a logfile.
      *
      * @param $logfile The name of the logfile to read.
+     *
      * @return $string Content of the logfile.
      */
     public function readLog($logfile = null)
     {
-        if ($logfile == null) {
+        if ($logfile === null) {
             // hardcoded errorlog filename
             $logfile = $this->getErrorLogFilename();
         }
@@ -76,7 +78,7 @@ class File extends AbstractLogger implements LoggerInterface
         // size greater zero, means we have entries in that file
         if ($logfilesize > 0) {
             // so open and read till eof
-            $logfile = fopen($logfile, 'r');
+            $logfile         = fopen($logfile, 'r');
             $logfile_content = fread($logfile, $logfilesize);
 
             // @todo: split or explode logfile_content into an array
@@ -90,10 +92,11 @@ class File extends AbstractLogger implements LoggerInterface
     }
 
     /**
-     * Returns a specific number of logfile entries (last ones first)
+     * Returns a specific number of logfile entries (last ones first).
      *
-     * @param  int    $entriesToFetch
-     * @param  string $logfile
+     * @param int    $entriesToFetch
+     * @param string $logfile
+     *
      * @return string HTML representation of logfile entries
      */
     public function getEntriesFromLogfile($entriesToFetch = 5, $logfile = null)
@@ -103,12 +106,12 @@ class File extends AbstractLogger implements LoggerInterface
             $logfile = $this->getErrorLogFilename();
         }
 
-         $entries = '';
+        $entries = '';
 
         if (true === is_file($logfile)) {
             // get logfile as array
             $logfileArray = file($logfile);
-            $logfile_cnt = count($logfileArray);
+            $logfile_cnt  = count($logfileArray);
 
             if ($logfile_cnt > 0) {
                 // subtract from total number of logfile entries the number to fetch
@@ -117,13 +120,13 @@ class File extends AbstractLogger implements LoggerInterface
                 $i = $logfile_cnt - 1;
 
                 // reverse for loop over the logfile_array to get the last few (new ones) log entries
-                for ($i; $i >= $maxEntries; $i--) {
+                for ($i; $i >= $maxEntries; --$i) {
                     // remove linebreaks
-                    $entry = str_replace(array('\r', '\n'), '', $logfileArray[$i]);
+                    $entry = str_replace(['\r', '\n'], '', $logfileArray[$i]);
                     $entry = htmlentities($entry);
 
                     $tpl = '<span class="log-id">Entry %s</span><span class="log-entry">%s</span>' . "\n";
-                    $entries .= sprintf($tpl, $i+1, $entry);
+                    $entries .= sprintf($tpl, $i + 1, $entry);
                 }
 
                 // cleanup

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Files;
 
 /**
- * Koch Framework - Class for the File Object
+ * Class for the File Object.
  */
 class File
 {
@@ -22,7 +22,7 @@ class File
     protected $size;
     protected $temporaryName;
     protected $error;
-    protected $allowedExtensions = array();
+    protected $allowedExtensions = [];
 
     /**
      * Constructor.
@@ -35,11 +35,11 @@ class File
      */
     public function __construct($name, $type, $size, $temporaryName, $error)
     {
-        $this->name = basename($name);
-        $this->type = $type;
-        $this->size = $size;
+        $this->name          = basename($name);
+        $this->type          = $type;
+        $this->size          = $size;
         $this->temporaryName = $temporaryName;
-        $this->error = $error;
+        $this->error         = $error;
     }
 
     /**
@@ -65,7 +65,7 @@ class File
     /**
      * Returns the size of the uploaded file in bytes.
      *
-     * @return integer
+     * @return int
      */
     public function getSize()
     {
@@ -86,7 +86,8 @@ class File
      * Returns the error code associated with this file upload.
      *
      * @see http://www.php.net/manual/en/features.file-upload.errors.php
-     * @return integer
+     *
+     * @return int
      */
     public function getError()
     {
@@ -106,7 +107,7 @@ class File
     /**
      * Checks if this file was uploaded successfully.
      *
-     * @return boolean
+     * @return bool
      */
     public function isValid()
     {
@@ -116,14 +117,14 @@ class File
     /**
      * Checks if this uploaded file has a valid file extension.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasValidExtension()
     {
         if (count($this->allowedExtensions) === 0) {
             return true;
         } else {
-            return in_array($this->getExtension(), $this->allowedExtensions);
+            return in_array($this->getExtension(), $this->allowedExtensions, true);
         }
     }
 
@@ -132,9 +133,10 @@ class File
      *
      * @param $extensions array  an array of allowed file extensions. If empty,
      * every file extension is allowed.
+     *
      * @return File \Koch\File\File
      */
-    public function setAllowedExtensions(array $extensions = array())
+    public function setAllowedExtensions(array $extensions = [])
     {
         $this->allowedExtensions = $extensions;
 
@@ -156,43 +158,44 @@ class File
      *
      * @param $destination string  destination directory
      * @param $overwrite boolean overwrite
+     *
      * @throws \Koch\Exception\Exception on failure
      */
     public function moveTo($destination, $overwrite = false)
     {
         // ensure upload was valid
-        if (false == $this->isValid()) {
+        if (false === $this->isValid()) {
             throw new \Koch\Exception\Exception('File upload was not successful.', $this->getError());
         }
 
         // ensure a valid file extension was used
-        if (false == $this->hasValidExtension()) {
+        if (false === $this->hasValidExtension()) {
             throw new \Koch\Exception\Exception('File does not have an allowed extension.');
         }
 
         // ensure destination directory exists
-        if (false == is_dir($destination)) {
+        if (false === is_dir($destination)) {
             throw new \Koch\Exception\Exception($destination . ' is not a directory.');
         }
 
         // ensure destination directory is writeable
-        if (false == is_writable($destination)) {
+        if (false === is_writable($destination)) {
             throw new \Koch\Exception\Exception('Cannot write to destination directory ' . $destination);
         }
 
         // check if the destination as a file exists
         if (is_file($destination)) {
             // exit here, if overwrite is not requested
-            if (false == $overwrite) {
+            if (false === $overwrite) {
                 throw new \Koch\Exception\Exception('File ' . $destination . ' already exists.');
             }
 
-            if (false == is_writable($destination)) {
+            if (false === is_writable($destination)) {
                 throw new \Koch\Exception\Exception('Cannot overwrite ' . $destination);
             }
         }
 
-        if (false == move_uploaded_file($this->temporayName, $destination)) {
+        if (false === move_uploaded_file($this->temporayName, $destination)) {
             throw new \Koch\Exception\Exception('Moving uploaded file failed.');
         }
     }

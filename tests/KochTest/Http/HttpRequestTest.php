@@ -17,7 +17,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->request = new HttpRequest;
+        $this->request = new HttpRequest();
     }
 
     /**
@@ -40,7 +40,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodgetRequestMethod()
     {
-        $_SERVER['REQUEST_METHOD'] = 'someMethod';
+        $_SERVER['REQUEST_METHOD']              = 'someMethod';
         $_SERVER['HTTP_X_HTTP_METHOD_OVERRIDE'] = 'OverrideMethodName';
         $this->assertEquals('OverrideMethodName', HttpRequest::getRequestMethod());
 
@@ -90,11 +90,11 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
         $this->assertFalse($isAjax);
 
         $_SERVER['X-Requested-With'] = 'XMLHttpRequest';
-        $isAjax = $this->request->isAjax();
+        $isAjax                      = $this->request->isAjax();
         $this->assertTrue($isAjax);
 
         $_SERVER['HTTP_X_REQUESTED_WITH'] = 'XMLHttpRequest';
-        $isAjax = $this->request->isAjax();
+        $isAjax                           = $this->request->isAjax();
         $this->assertTrue($isAjax);
 
         unset($_SERVER['X-Requested-With']);
@@ -137,7 +137,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodgetBaseURL()
     {
-        $_SERVER['HTTPS'] = 'off';
+        $_SERVER['HTTPS']       = 'off';
         $_SERVER['SERVER_NAME'] = 'localhost';
         $_SERVER['SERVER_PORT'] = 80;
         $this->assertEquals($this->request->getBaseURL(), 'http://localhost');
@@ -155,7 +155,7 @@ class HttpRequestTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodgetServerName()
     {
-        $name = 'ServerName';
+        $name                   = 'ServerName';
         $_SERVER['SERVER_NAME'] = $name;
         $this->assertEquals($this->request->getServerName(), $name);
     }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,16 +12,17 @@
 
 namespace Koch\Router;
 
-use Koch\Http\HttpRequestInterface;
 use Koch\Cache\Cache;
+use Koch\Http\HttpRequestInterface;
 
 /**
- * Router
+ * Router.
  *
  * Router does URL Formatting and internal Rewriting.
  * The URL is segmented and restructured to fit the internal route to a controller.
  * The internal routes are described in a central routing configuration file.
  * This central config is updated on installation and deinstallation of modules and plugins.
+ *
  * @see \Koch\Routes\Manager
  *
  * Normally all requests made map to a specific physical resource rather than a logical name.
@@ -44,12 +45,12 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Whether to use caching for routes or not.
      *
-     * @var boolean
+     * @var bool
      */
     private static $useCache = false;
 
     /**
-     * The Request URI (came in from the HttpRequest object)
+     * The Request URI (came in from the HttpRequest object).
      *
      * @var string
      */
@@ -60,7 +61,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @var array
      */
-    public $uriSegments = array();
+    public $uriSegments = [];
 
     /**
      * The "extension" on the URI
@@ -76,7 +77,7 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * @var array Routes Array
      */
-    private $routes = array();
+    private $routes = [];
 
     /**
      * Constructor.
@@ -90,7 +91,7 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Get and prepare the SERVER_URL/URI
+     * Get and prepare the SERVER_URL/URI.
      *
      * Several fixes are applied to the $request_uri.
      *
@@ -111,14 +112,14 @@ class Router implements RouterInterface, \ArrayAccess
     public function prepareRequestURI($uri)
     {
         // remove xdebug_session_start parameter from uri
-        if (function_exists('xdebug_break') === true) {
+        if (function_exists('xdebug_break')) {
             $uri = str_replace('xdebug_session_start=netbeans-xdebug', '', $uri);
             // remove trailing '?' or '&'
             $uri = rtrim($uri, '?&');
         }
 
         // add slash in front + remove slash at the end
-        if ($uri !== "/") {
+        if ($uri !== '/') {
             $uri = '/' . trim($uri, '/');
         }
 
@@ -135,14 +136,14 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function addRoute($url_pattern, array $requirements = null)
     {
-        /**
+        /*
          * 1) Preprocess the route
          */
 
         $url_pattern = ltrim($url_pattern, '/');
 
-        /**
-         * Replace all static placeholders, like (:num) or (:id)
+        /*
+         * Replace all static placeholders, like (:num) || (:id)
          * with their equivalent regular expression ([0-9]+).
          *
          * All static placeholders not having a regexp equivalent,
@@ -160,16 +161,16 @@ class Router implements RouterInterface, \ArrayAccess
         // combines all regexp patterns of segements to one regexp pattern for the route
         $regexp = $this->processSegmentsRegExp($segments, $requirements);
 
-        $options = array(
-            'regexp' => $regexp,
+        $options = [
+            'regexp'             => $regexp,
             'number_of_segments' => count($segments),
-            'requirements' => $requirements
-        );
+            'requirements'       => $requirements,
+        ];
 
-        /**
+        /*
          * 2) Finally add the now *preprocessed* Route.
          */
-        $this->routes['/'.$url_pattern] = $options;
+        $this->routes['/' . $url_pattern] = $options;
     }
 
     /**
@@ -178,8 +179,9 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * It's basically string concatenation of regexp strings.
      *
-     * @param  array  $segments     Array with URI segments.
-     * @param  array  $requirements Array with
+     * @param array $segments     Array with URI segments.
+     * @param array $requirements Array with
+     *
      * @return string Regular Expression for the route.
      */
     public function processSegmentsRegExp(array $segments, array $requirements = null)
@@ -190,7 +192,7 @@ class Router implements RouterInterface, \ArrayAccess
         // process all segments
         foreach ($segments as $segment) {
 
-            /**
+            /*
              * Process "Static Named Parameters".
              *
              * Static named parameters starts with a ":".
@@ -200,7 +202,7 @@ class Router implements RouterInterface, \ArrayAccess
                 $name = substr($segment, 1); // remove :
 
                 // is there a requirement for this param? 'id' => '([0-9])'
-                if (isset($requirements[$name]) === true) {
+                if (isset($requirements[$name])) {
                     // add it to the regex
                     $regexp .= '(?P<' . $name . '>' . $requirements[$name] . ')';
                     // and remove the now processed requirement
@@ -209,7 +211,7 @@ class Router implements RouterInterface, \ArrayAccess
                     $regexp .= '(?P<' . $name . '>[a-z_-]+)';
                 }
             } else {
-                /**
+                /*
                  * Process "Static Parameter".
                  *
                  * Static parameters starts with a "/".
@@ -229,7 +231,7 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Add multiple route
+     * Add multiple route.
      *
      * @param array $routes Array with multiple routes.
      */
@@ -251,7 +253,7 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Delete a route by its url pattern
+     * Delete a route by its url pattern.
      *
      * @param string $url_pattern
      */
@@ -264,11 +266,12 @@ class Router implements RouterInterface, \ArrayAccess
      * Resets the routes array.
      *
      * @param bool Load the default routes. Defaults to false.
+     *
      * @return Router \Koch\Router\Router
      */
     public function reset($loadDefaultRoutes = false)
     {
-        $this->routes = array();
+        $this->routes = [];
 
         TargetRoute::reset();
 
@@ -299,16 +302,14 @@ class Router implements RouterInterface, \ArrayAccess
         $params = $params;
 
         if ($absolute) {
-
         } else {
-
         }
 
         return $url;
     }
 
     /**
-     * Builds a url string
+     * Builds a url string.
      *
      * @param $url Array or String to build the url from (e.g. '/news/admin/show')
      * @param $encode bool True (default) encodes the "&" in the url (amp).
@@ -317,7 +318,7 @@ class Router implements RouterInterface, \ArrayAccess
     {
         // if urlstring is array, then a relation (urlstring => parameter_order) is given
         if (is_array($url)) {
-            $parameterOrder = '';
+            $parameterOrder             = '';
             list($url, $parameterOrder) = each($url);
         }
 
@@ -328,7 +329,7 @@ class Router implements RouterInterface, \ArrayAccess
 
         // only the http prefix is missing
         if (false !== strpos($url, 'index.php?')) {
-            return "http://" . $url;
+            return 'http://' . $url;
         }
 
         // cleanup: remove all double slashes
@@ -339,17 +340,17 @@ class Router implements RouterInterface, \ArrayAccess
         // cleanup: remove space and slashes from begin and end of string
         $url = trim($url, ' /');
 
-        /**
+        /*
          * Mod_Rewrite is ON.
          *
          * The requested url style is:
          * ROOT/news/2
          */
-        if (self::isRewriteEngineOn() == true) { /* self::checkEnvForModRewrite() */
+        if (self::isRewriteEngineOn() === true) { /* self::checkEnvForModRewrite() */
 
             return WWW_ROOT . ltrim($url, '/');
         } else {
-            /**
+            /*
              * Mod_Rewrite is OFF.
              *
              * The requested url style is:
@@ -368,17 +369,17 @@ class Router implements RouterInterface, \ArrayAccess
             // do we have a parameter_order given?
             if (isset($parameterOrder)) {
                 // replace parameter names with shorthands used in the url
-                $search = array('module', 'controller', 'action');
-                $replace = array('mod', 'ctrl', 'action');
+                $search         = ['module', 'controller', 'action'];
+                $replace        = ['mod', 'ctrl', 'action'];
                 $parameterOrder = str_replace($search, $replace, $parameterOrder);
 
                 $urlKeys = explode('/', $parameterOrder);
             } else {
                 // default static whitelist for url parameter keys
-                $urlKeys = array('mod', 'ctrl', 'action', 'id', 'type');
+                $urlKeys = ['mod', 'ctrl', 'action', 'id', 'type'];
             }
 
-            /**
+            /*
              * This turns the indexed url parameters array into a named one.
              * [0]=> "news"  to  [mod]    => "news"
              * [1]=> "show"  to  [action] => "show"
@@ -395,7 +396,7 @@ class Router implements RouterInterface, \ArrayAccess
     }
 
     /**
-     * Main method of \Koch\Router\Router
+     * Main method of \Koch\Router\Router.
      *
      * The routing workflow is
      * 1. firstly, check if ModRewrite is enabled,
@@ -410,7 +411,7 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function route()
     {
-        /**
+        /*
          * If there are no uri segments, loading routes and matching is pointless.
          * Instead dispatch to the default route and return the according TargetRoute object.
          */
@@ -421,13 +422,13 @@ class Router implements RouterInterface, \ArrayAccess
         // initialize Routes
         $this->loadDefaultRoutes();
 
-        /**
+        /*
          * Now match the URI against the Routes.
          * The result is either a "dispatchable target route object" or "No target route found.".
          */
         $targetRoute = $this->match();
 
-       /**
+       /*
          * Inject the target route object back to the request.
          * Thereby the request gains full knowledge about the URL mapping (external to internal).
          * We might ask the request object later, where the requests maps to.
@@ -442,7 +443,7 @@ class Router implements RouterInterface, \ArrayAccess
         $targetRoute = TargetRoute::instantiate();
         // was the default route configured correctly
         // @todo this is only possible if set from config to target route
-        //if ($targetRoute::dispatchable() === true) {
+        //if ($targetRoute::dispatchable()) {
         // default route is dispatchable, set it to the request
         $this->request->setRoute($targetRoute);
 
@@ -466,11 +467,12 @@ class Router implements RouterInterface, \ArrayAccess
      * We need this to be "module" => "news" for setting it to the TargetRoute.
      *
      * @param $array
+     *
      * @return $array
      */
     public static function fixNoRewriteShorthands($array)
     {
-        if (isset($array['mod']) === true) {
+        if (isset($array['mod'])) {
             $array['module'] = $array['mod'];
             unset($array['mod']);
         }
@@ -499,17 +501,16 @@ class Router implements RouterInterface, \ArrayAccess
     {
         // do we have some routes now?
         if (0 === count($this->routes)) {
-            throw new \OutOfBoundsException(_('The routes lookup table is empty. Define some routes.'));
+            throw new \OutOfBoundsException('The routes lookup table is empty. Define some routes.');
         }
 
-        /**
+        /*
          * Detects if Mod_Rewrite engine is active and
          * calls the proper URL Parser/Segmentizer method for the extraction of uri segments.
          */
-        if ((true === $this->isRewriteEngineOn() or isset($_ENV['FORCE_MOD_REWRITE_ON'])) and
+        if ($this->isRewriteEngineOn() or isset($_ENV['FORCE_MOD_REWRITE_ON']) and
                 true === empty($_GET['mod']) and true === empty($_GET['ctrl'])) {
             $this->uriSegments = $this->parseUrlRewrite($this->uri);
-
         } else {
             $this->uriSegments = $this->parseUrlNoRewrite($this->uri);
 
@@ -517,12 +518,12 @@ class Router implements RouterInterface, \ArrayAccess
 
             $targetRoute = TargetRoute::setSegmentsToTargetRoute($this->uriSegments);
 
-            if ($targetRoute::dispatchable() === true) {
+            if ($targetRoute::dispatchable()) {
                 return $targetRoute;
             }
         }
 
-        /**
+        /*
          * Reduce the map lookup table, by dropping all routes
          * with more segments than the current requested uri.
          */
@@ -530,7 +531,7 @@ class Router implements RouterInterface, \ArrayAccess
             self::reduceRoutesToSegmentCount();
         }
 
-        /**
+        /*
          * Process:     Static Route
          *
          * Do we have a direct match ?
@@ -540,30 +541,28 @@ class Router implements RouterInterface, \ArrayAccess
          * The request URI "/news/index" relates 1:1 to $routes['/news/index'].
          * The request URI "/login"      relates 1:1 to $routes['/login']
          */
-        if (isset($this->routes[$this->uri]) === true) {
+        if (isset($this->routes[$this->uri])) {
 
             // we have a direct match
             $found_route = $this->routes[$this->uri];
 
             // return the TargetRoute object
             return TargetRoute::setSegmentsToTargetRoute($found_route);
-
         } else {
 
-            /**
+            /*
              * No, there wasn't a 1:1 match.
              * Now we have to check the uri segments.
              *
              * Let's loop over the remaining routes and try to map match the uri_segments.
              */
             foreach ($this->routes as $route_pattern => $route_values) {
-
                 unset($route_pattern);
 
                 $matches = '';
 
                 /**
-                 * Process:     Dynamic Regular Expression Parameters
+                 * Process:     Dynamic Regular Expression Parameters.
                  *
                  * Example:
                  * URI: /news
@@ -589,7 +588,7 @@ class Router implements RouterInterface, \ArrayAccess
                             // with name from requirements array
                             // and value from matches array
                             // ([id] => 42)
-                            $pos = $array_position+1;
+                            $pos                = $array_position + 1;
                             $matches[$key_name] = $matches[$pos];
 
                             // remove the old not-named key ([2] => 42)
@@ -601,7 +600,7 @@ class Router implements RouterInterface, \ArrayAccess
                     TargetRoute::setSegmentsToTargetRoute($matches);
                 }
 
-                if (TargetRoute::dispatchable() === true) {
+                if (TargetRoute::dispatchable()) {
                     // route found, stop foreach
                     break;
                 } else {
@@ -622,14 +621,15 @@ class Router implements RouterInterface, \ArrayAccess
      *
      * This is based on htaccess rewriting with [QSA,L] (Query Append String).
      *
-     * @param  string $uri
-     * @return array  Array with URI segments.
+     * @param string $uri
+     *
+     * @return array Array with URI segments.
      */
     private static function parseUrlRewrite($uri)
     {
         $uri = str_replace(strtolower($_SERVER['SCRIPT_NAME']), '', $uri);
 
-        /**
+        /*
          * The query string up to the question mark (?)
          *
          * Removes everything after a "?".
@@ -640,7 +640,7 @@ class Router implements RouterInterface, \ArrayAccess
             $uri = mb_substr($uri, 0, $pos);
         }
 
-        /**
+        /*
          * The last dot (.)
          *
          * This detects the extension and removes it from the uri string.
@@ -650,7 +650,7 @@ class Router implements RouterInterface, \ArrayAccess
          */
         $pos = mb_strpos($uri, '.');
         if ($pos !== false) {
-            $uri_dot_array = array();
+            $uri_dot_array = [];
             // Segmentize the url into an array
             $uri_dot_array = explode('.', $uri);
             // chop off the last piece as the extension
@@ -664,7 +664,7 @@ class Router implements RouterInterface, \ArrayAccess
         }
         unset($pos);
 
-        /**
+        /*
          * The slashes (/) and empty segments (double slashes)
          *
          * This segmentizes the URI by splitting at slashes.
@@ -672,7 +672,7 @@ class Router implements RouterInterface, \ArrayAccess
         $uri_segments = preg_split('#/#', $uri, -1, PREG_SPLIT_NO_EMPTY);
         unset($uri);
 
-        /**
+        /*
          * Finished!
          */
 
@@ -686,40 +686,41 @@ class Router implements RouterInterface, \ArrayAccess
      * This URLParser has to extract mod, sub, action, id/parameters from the URI.
      * Alternate name: Standard_Request_Resolver.
      *
-     * @param  string $uri
-     * @return array  Array with URI segments.
+     * @param string $uri
+     *
+     * @return array Array with URI segments.
      */
     private function parseUrlNoRewrite($uri)
     {
         if (false !== strpos('?', $uri)) {
-            return array(0 => $uri);
+            return [0 => $uri];
         }
 
         // use some parse_url magic to get the url_query part from the uri
         $uri_query_string = parse_url($uri, PHP_URL_QUERY);
         unset($uri);
 
-        /**
+        /*
          * The ampersand (&)
          *
          * Use ampersand as the split char for string to array conversion.
          */
         $uri_query_array = explode('&', $uri_query_string);
 
-        /**
+        /*
          * The equals sign (=)
          *
          * This addresses the pair relationship between parameter name and value, like "id=77".
          */
-        $uri_segments = array();
+        $uri_segments = [];
 
         if (count($uri_query_array) > 0) {
-            $key = '';
-            $value = '';
+            $key        = '';
+            $value      = '';
             $query_pair = '';
             foreach ($uri_query_array as $query_pair) {
                 if (false !== strpos($query_pair, '=')) {
-                    list($key, $value) = explode('=', $query_pair);
+                    list($key, $value)  = explode('=', $query_pair);
                     $uri_segments[$key] = $value;
                 }
             }
@@ -734,17 +735,17 @@ class Router implements RouterInterface, \ArrayAccess
     /**
      * Check if Apache "mod_rewrite" is activated in configuration.
      *
-     * @return boolean True, if "mod_rewrite" enabled. False otherwise.
+     * @return bool True, if "mod_rewrite" enabled. False otherwise.
      */
     public static function isRewriteEngineOn()
     {
         // via constant
-        if (defined('REWRITE_ENGINE_ON') === true and REWRITE_ENGINE_ON == true) {
+        if (defined('REWRITE_ENGINE_ON') && REWRITE_ENGINE_ON === true) {
             return true;
         }
 
         // via config
-        /*if (isset($this->config['router']['mod_rewrite']) === true) {
+        /*if (isset($this->config['router']['mod_rewrite'])) {
             $bool = (bool) $this->config['router']['mod_rewrite'];
             define('REWRITE_ENGINE_ON', $bool);
 
@@ -756,19 +757,19 @@ class Router implements RouterInterface, \ArrayAccess
 
     /**
      * Checks if Apache Module "mod_rewrite" is loaded/enabled
-     * and Rewrite Engine is enabled in .htaccess"
+     * and Rewrite Engine is enabled in .htaccess".
      *
-     * @return boolean True, if mod_rewrite on.
+     * @return bool True, if mod_rewrite on.
      */
     public static function checkEnvForModRewrite()
     {
         // ensure apache has module mod_rewrite active
         if (true === function_exists('apache_get_modules') and
-            true === in_array('mod_rewrite', apache_get_modules())) {
+            true === in_array('mod_rewrite', apache_get_modules(), true)) {
             if (true === is_file(APPLICATION_PATH . '.htaccess')) {
                 // load htaccess and check if RewriteEngine is enabled
                 $htaccess_content = file_get_contents(APPLICATION_PATH . '.htaccess');
-                $rewriteEngineOn = preg_match('/.*[^#][\t ]+RewriteEngine[\t ]+On/i', $htaccess_content);
+                $rewriteEngineOn  = preg_match('/.*[^#][\t ]+RewriteEngine[\t ]+On/i', $htaccess_content);
 
                 if (true === (bool) $rewriteEngineOn) {
                     return true;
@@ -795,11 +796,11 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public static function placeholdersToRegexp($route_with_placeholders)
     {
-        $placeholders = array('(:id)', '(:num)', '(:alpha)', '(:alphanum)', '(:any)', '(:word)',
-                              '(:year)', '(:month)', '(:day)');
+        $placeholders = ['(:id)', '(:num)', '(:alpha)', '(:alphanum)', '(:any)', '(:word)',
+                              '(:year)', '(:month)', '(:day)', ];
 
-        $replacements = array('([0-9]+)', '([0-9]+)', '([a-zA-Z]+)', '([a-zA-Z0-9]+)', '(.*)', '(\w+)',
-                              '([12][0-9]{3})', '(0[1-9]|1[012])', '(0[1-9]|1[012])');
+        $replacements = ['([0-9]+)', '([0-9]+)', '([a-zA-Z]+)', '([a-zA-Z0-9]+)', '(.*)', '(\w+)',
+                              '([12][0-9]{3})', '(0[1-9]|1[012])', '(0[1-9]|1[012])', ];
 
         return str_replace($placeholders, $replacements, $route_with_placeholders);
     }
@@ -810,8 +811,8 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function reduceRoutesToSegmentCount()
     {
-        $route_pattern = '';
-        $route_values = '';
+        $route_pattern           = '';
+        $route_values            = '';
         $number_of_uri_segements = count($this->uriSegments);
 
         foreach ($this->routes as $route_pattern => $route_values) {
@@ -831,7 +832,7 @@ class Router implements RouterInterface, \ArrayAccess
     public function loadDefaultRoutes()
     {
         // Is Routes Caching is enabled in config?
-        if (isset($this->config['router']['caching']) === true) {
+        if (isset($this->config['router']['caching'])) {
             self::$useCache = ($this->config['router']['caching'] === true) ? true : false;
         }
 
@@ -854,12 +855,12 @@ class Router implements RouterInterface, \ArrayAccess
             }
         }
 
-        /**
+        /*
          * Connect some default fallback Routes
          *
          * Example for Route definition with ArrayAccess: $r['/:controller'];
          */
-        if (empty($this->routes) === true) {
+        if (empty($this->routes)) {
             # one segment
             //// "/news" (list)
             $this->addRoute('/:module');
@@ -869,36 +870,36 @@ class Router implements RouterInterface, \ArrayAccess
             // "/news/news" (list)
             $this->addRoute('/:module/:controller');
             // "/news/31" (show/update/delete)
-            $this->addRoute('/:controller/(:id)', array(1 => 'id'));
+            $this->addRoute('/:controller/(:id)', [1 => 'id']);
             // "/news/news/31" (show/update/delete)
-            $this->addRoute('/:module/(:id)', array(1 => 'id'));
+            $this->addRoute('/:module/(:id)', [1 => 'id']);
             # three segments
             // "/news/news/new" (new)
             $this->addRoute('/:module/:controller/:action');
             // "/news/edit/42" (edit)
-            $this->addRoute('/:controller/:action/(:id)', array(2 => 'id'));
+            $this->addRoute('/:controller/:action/(:id)', [2 => 'id']);
             // "/news/42/edit" (edit)
-            $this->addRoute('/:module/(:id)/:action', array(1 => 'id'));
+            $this->addRoute('/:module/(:id)/:action', [1 => 'id']);
             // "/news/news/31" (show/update/delete)
-            $this->addRoute('/:module/:controller/(:id)', array(2 => 'id'));
+            $this->addRoute('/:module/:controller/(:id)', [2 => 'id']);
             # four segments
             // "/news/news/31/edit" (edit)
-            $this->addRoute('/:module/:controller/(:id)/:action', array(2 => 'id'));
+            $this->addRoute('/:module/:controller/(:id)/:action', [2 => 'id']);
             // "/news/news/edit/31" (edit)
-            $this->addRoute('/:module/:controller/:action/(:id)', array(3 => 'id'));
+            $this->addRoute('/:module/:controller/:action/(:id)', [3 => 'id']);
             # five segments
             // "/news/news/edit/31.html" (edit)
-            $this->addRoute('/:module/:controller/:action/(:id)/:format', array(4 => 'id'));
+            $this->addRoute('/:module/:controller/:action/(:id)/:format', [4 => 'id']);
         }
     }
 
     /**
-     * Implementation of SPL ArrayAccess
+     * Implementation of SPL ArrayAccess.
      */
 
     /**
      * Instead of working with $router->addRoute(name,map);
-     * you may now access the routing table as an array $router[$route] = $map;
+     * you may now access the routing table as an array $router[$route] = $map;.
      */
     final public function offsetSet($route, $target)
     {
@@ -907,16 +908,16 @@ class Router implements RouterInterface, \ArrayAccess
 
     final public function offsetGet($name)
     {
-        if ((isset($this->routes[$name]) === true) || (array_key_exists($name, $this->routes) === true)) {
+        if ((isset($this->routes[$name])) || (array_key_exists($name, $this->routes))) {
             return $this->routes[$name];
         } else {
-            return null;
+            return;
         }
     }
 
     final public function offsetExists($name)
     {
-        return (isset($this->routes[$name]) === true || array_key_exists($name, $this->routes));
+        return isset($this->routes[$name]) === true || array_key_exists($name, $this->routes);
     }
 
     final public function offsetUnset($name)

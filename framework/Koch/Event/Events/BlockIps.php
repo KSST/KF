@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -21,7 +21,6 @@ use Koch\Event\EventInterface;
  * $blockip = new BlockIps(array('127.0.0.1'));
  * $dispatcher->addEventHandler('onLogin', $blockip);
  * if ($event->isCancelled()) { }
- *
  */
 class BlockIps implements EventInterface
 {
@@ -36,7 +35,7 @@ class BlockIps implements EventInterface
     {
         $ip = \Koch\Http\HttpRequest::getRemoteAddress();
 
-        if (in_array($ip, $this->blockedIps)) {
+        if (in_array($ip, $this->blockedIps, true)) {
             $event->cancel();
         }
     }

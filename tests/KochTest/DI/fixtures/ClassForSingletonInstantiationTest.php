@@ -4,5 +4,4 @@ namespace KochTest\DI;
 
 class CreateMeOnce
 {
-
 }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -16,7 +16,7 @@ use Koch\Form\FormElement;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Timetoken
+ * Formelement_Timetoken.
  */
 class TimeToken extends FormElement implements FormElementInterface
 {

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -53,12 +53,12 @@ class Locale extends Validator
 
             // finally the lowercase fix, turns "de_de" into "de_DE" ()
             $locale[1] = strtoupper($locale[1]);
-            $locale = implode('_', $locale);
+            $locale    = implode('_', $locale);
         }
 
-        if ((isset($l10n_langs[$short_code]) === true) || (array_key_exists($short_code, $l10n_langs) === true)) {
+        if (isset($l10n_langs[$short_code]) || array_key_exists($short_code, $l10n_langs)) {
             // return if locale is just short_code, e.g. "de"
-            if (strlen($locale) == 2) {
+            if (strlen($locale) === 2) {
                 return true;
             }
              // fetch sublocales (looks in "de" array, returns "de_AT", "de_CH", "de_DE"...)
@@ -69,7 +69,7 @@ class Locale extends Validator
         }
 
         // is valid sublocale, e.g. de has de_DE?
-        if ((isset($sublocales[$locale]) === true) || (array_key_exists($locale, array_flip($sublocales)))) {
+        if (isset($sublocales[$locale]) || array_key_exists($locale, array_flip($sublocales))) {
             return true;
         } else {
             return false;

@@ -13,7 +13,7 @@ class CacheTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new Cache;
+        $this->object = new Cache();
     }
 
     public function tearDown()
@@ -62,10 +62,10 @@ class CacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testFetchObject()
     {
-       // create obj
-       $object = new \stdClass;
-       $object->key = 'value';
-       $object->key2 = 'value2';
+        // create obj
+       $object        = new \stdClass();
+        $object->key  = 'value';
+        $object->key2 = 'value2';
 
        // store in cache
        $this->assertTrue(Cache::storeObject('stdClass', $object));

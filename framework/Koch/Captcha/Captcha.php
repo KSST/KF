@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -26,6 +26,7 @@ namespace Koch\Captcha;
  *
  * Remember: Captchas are deafeatable!
  * It's a matter of artificial intelligence and pattern recognition.
+ *
  * @link http://www.cs.sfu.ca/~mori/research/gimpy/ Greg Mori's - Breaking Captchas
  * @link http://www.pwntcha.net/test.html PwnTcha : Test the Captcha - Strength
  * @link http://captcha.megaleecher.net/ Megaleecher Captcha Kill Pro Class
@@ -43,9 +44,9 @@ class Captcha
     public $image_width = 140;
 
     /**
-     * @var array $fonts Available Fonts.
+     * @var array Available Fonts.
      */
-    private $fonts = array();
+    private $fonts = [];
 
     /*
      * @var string The selected font for the captcha.
@@ -55,7 +56,7 @@ class Captcha
     /**
      * @var array List of font folders.
      */
-    public $font_folders = array();
+    public $font_folders = [];
 
     /**
      * @var resource The captcha image.
@@ -63,7 +64,7 @@ class Captcha
     public $captcha;
 
     /**
-     * Options
+     * Options.
      *
      * @var array
      */
@@ -71,19 +72,18 @@ class Captcha
 
     /**
      * Constructor.
-     *
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('gd') === false) {
-            throw new \Koch\Exception\Exception(_('GD Library missing.'));
+            throw new \Koch\Exception\Exception('GD Library missing.');
         }
 
         $this->setOptions($options);
     }
 
     /**
-     * Options
+     * Options.
      *
      * "captcha_dir"
      * "font"
@@ -95,10 +95,10 @@ class Captcha
     {
         $this->options = $options;
 
-        if (isset($options['font']) === true) {
+        if (isset($options['font'])) {
             $this->font = $options['font'];
         } else {
-            if (isset($options['fontfolders']) === true) {
+            if (isset($options['fontfolders'])) {
                 $this->setFontFolder($options['fontfolders']);
             }
 
@@ -153,7 +153,7 @@ class Captcha
         }
 
         // random select one of multiple font folders
-        if (is_array($fonts_dir) === true) {
+        if (is_array($fonts_dir)) {
             $fonts_dir = $fonts_dir[array_rand($fonts_dir)];
         }
 
@@ -162,7 +162,7 @@ class Captcha
 
         foreach ($iterator as $file) {
             // add font files (*.ttf) to the array
-            if ($file->isFile() and (strrchr($file->getPathname(), '.') == '.ttf')) {
+            if ($file->isFile() && (strrchr($file->getPathname(), '.') === '.ttf')) {
                 $this->fonts[] = $file->getPathname();
             }
         }
@@ -172,7 +172,7 @@ class Captcha
     }
 
     /**
-     * Generates a random string in requested $string_length for usage with captcha
+     * Generates a random string in requested $string_length for usage with captcha.
      *
      * @param int $length The length of the captcha string.
      */
@@ -180,7 +180,7 @@ class Captcha
     {
         // Excluded-Chars: 0, 1, 7, I, O
         // why? because they are too simple to recognize even when effects applied upon.)
-        $excludeChars = array(48, 49, 55, 73, 79);
+        $excludeChars = [48, 49, 55, 73, 79];
 
         $string = '';
 
@@ -189,8 +189,8 @@ class Captcha
             $random = mt_rand(48, 122);
 
             // not the excluded chars and only special chars segments
-            if (in_array($random, $excludeChars) == false and
-                    ( ($random >= 50 && $random <= 57)   // ASCII 48->57:  numbers   0-9
+            if (in_array($random, $excludeChars, true) === false and
+                    (($random >= 50 && $random <= 57)   // ASCII 48->57:  numbers   0-9
                     | ($random >= 65 && $random <= 90))  // ASCII 65->90:  uppercase A-Z
                     | ($random >= 97 && $random <= 122)  // ASCII 97->122: lowercase a-z
             ) {
@@ -203,12 +203,12 @@ class Captcha
     }
 
     /**
-     * Generates the captcha image
+     * Generates the captcha image.
      */
     public function generateCaptchaImage()
     {
         // a random captcha string
-        $string_length = rand(3, 6);
+        $string_length  = rand(3, 6);
         $captcha_string = $this->generateRandomString($string_length);
 
         // set string class (user needs set this to session)
@@ -216,19 +216,19 @@ class Captcha
 
         $this->captcha = imagecreatetruecolor($this->image_width, $this->image_height);
 
-        /**
+        /*
          * Switch between Captcha Types
          */
         // rand(1,2)
         switch (1) {
             // captcha with some effects
             case 1:
-                /**
+                /*
                  *  Create Background-Color from random RGB colors
                  */
                 $background_color = imagecolorallocate($this->captcha, rand(100, 255), rand(100, 255), rand(0, 255));
 
-                /**
+                /*
                  * Background Fill Effects
                  */
                 switch (rand(1, 2)) {
@@ -241,14 +241,14 @@ class Captcha
                         $rd = mt_rand(0, 100);
                         $gr = mt_rand(0, 100);
                         $bl = mt_rand(0, 100);
-                        for ($i = 0; $i <= $this->image_height; $i++) {
-                            $g = imagecolorallocate($this->captcha, $rd+=2, $gr+=2, $bl+=2);
+                        for ($i = 0; $i <= $this->image_height; ++$i) {
+                            $g = imagecolorallocate($this->captcha, $rd += 2, $gr += 2, $bl += 2);
                             imageline($this->captcha, 0, $i, $this->image_width, $i, $g);
                         }
                         break;
                 }
 
-                /**
+                /*
                  * Create Text-Color from random RGB colors
                  */
                 $textcolor = imagecolorallocate(
@@ -259,7 +259,7 @@ class Captcha
                 );
 
                 // add some noise
-                for ($i = 1; $i <= 4; $i++) {
+                for ($i = 1; $i <= 4; ++$i) {
                     imageellipse(
                         $this->captcha,
                         mt_rand(1, 200),
@@ -270,7 +270,7 @@ class Captcha
                     );
                 }
 
-                for ($i = 1; $i <= 4; $i++) {
+                for ($i = 1; $i <= 4; ++$i) {
                     imageellipse(
                         $this->captcha,
                         mt_rand(1, 200),
@@ -281,11 +281,11 @@ class Captcha
                     );
                 }
 
-                /**
+                /*
                  * Process the Captcha String charwise, so that each character has a random font-effect.
                  */
-                for ($i = 0; $i < $string_length; $i++) {
-                    /**
+                for ($i = 0; $i < $string_length; ++$i) {
+                    /*
                      * Font Rotation Effect
                      */
                     switch (mt_rand(1, 2)) {
@@ -298,20 +298,20 @@ class Captcha
                     }
 
                     $defaultSize = min($this->image_width, $this->image_height * 2) / strlen($captcha_string);
-                    $spacing = (int) ($this->image_width * 0.9 / strlen($captcha_string));
+                    $spacing     = (int) ($this->image_width * 0.9 / strlen($captcha_string));
 
-                    /**
+                    /*
                      * Font Size
                      */
                     $size = $defaultSize / 10 * mt_rand(12, 15);
 
-                    /**
+                    /*
                      * Determine cordinates X and Y
                      *
                      * This is done using the bounding box of a text via imageftbbox.
                      */
                     $bbox = imageftbbox($size, $angle, $this->font, $captcha_string[$i]);
-                    $x = $spacing / 4 + $i * $spacing + 2;
+                    $x    = $spacing / 4 + $i * $spacing + 2;
                     /*
                      * @todo $height is undefined
                      */
@@ -320,12 +320,12 @@ class Captcha
                     #$y = $bbox[1] + (imagesy($this->captcha) / 2) - ($bbox[5] / 2) - 5;
                     unset($bbox);
 
-                    /**
+                    /*
                      * Font Color
                      */
                     $color = imagecolorallocate($this->captcha, mt_rand(0, 160), mt_rand(0, 160), mt_rand(0, 160));
 
-                    /**
+                    /*
                      * Finally: Add the CHAR from the captcha string to the image
                      */
                     imagettftext($this->captcha, $size, $angle, $x, $y, $color, $this->font, $captcha_string[$i]);
@@ -335,7 +335,7 @@ class Captcha
                 // $this->interlace($captcha);
 
                 // add image rotation
-                /**
+                /*
                   if (function_exists('imagerotate')) {
                   #$im2 = imagerotate($captcha,rand(-20,30),$background_color);
                   // imagedestroy($captcha);
@@ -365,9 +365,10 @@ class Captcha
     }
 
     /**
-     * Render the Captcha Image on various ways
+     * Render the Captcha Image on various ways.
      *
-     * @param  string      $render_type Types: "file", "base64", "png". Defaults to html_embedded.
+     * @param string $render_type Types: "file", "base64", "png". Defaults to html_embedded.
+     *
      * @return null|string Renders the image directly or returns html string.
      */
     public function render($render_type = 'file')
@@ -375,7 +376,7 @@ class Captcha
         switch ($render_type) {
             case 'png':
                 // PNG direct via header
-                header("Content-type: image/png");
+                header('Content-type: image/png');
                 imagepng($this->captcha);
                 imagedestroy($this->captcha);
                 break;
@@ -414,12 +415,12 @@ class Captcha
     public function collectGarbage()
     {
         // randomize (perform the garbage_collection in 10 % of all calls)
-        if (mt_rand(0, 9) == 0) {
+        if (mt_rand(0, 9) === 0) {
             // get file iterator
             $iterator = new \DirectoryIterator($this->options['captcha_dir']);
             foreach ($iterator as $file) {
                 // and delete all png files
-                if ($file->isFile() and (strrchr($file->getPathname(), '.') == '.png')) {
+                if ($file->isFile() && (strrchr($file->getPathname(), '.') === '.png')) {
                     unlink($file->getPathname());
                 }
             }
@@ -438,7 +439,7 @@ class Captcha
     {
         $imagex = imagesx($image);
         $imagey = imagesy($image);
-        $black = imagecolorallocate($image, 255, 255, 255);
+        $black  = imagecolorallocate($image, 255, 255, 255);
         for ($y = 0; $y < $imagey; $y += 2) {
             imageline($image, 0, $y, $imagex, $y, $black);
         }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -13,7 +13,7 @@
 namespace Koch\Module;
 
 /**
- * Module Manager
+ * Module Manager.
  *
  * Handles
  * - enable,
@@ -36,9 +36,9 @@ class Manager
     }
 
     /**
-     * Enables a module
+     * Enables a module.
      *
-     * @return boolean True, if module was enabled. False otherwise.
+     * @return bool True, if module was enabled. False otherwise.
      */
     public function enable()
     {
@@ -50,9 +50,9 @@ class Manager
     }
 
     /**
-     * Disables a module
+     * Disables a module.
      *
-     * @return boolean True, if module was enabled. False otherwise.
+     * @return bool True, if module was enabled. False otherwise.
      */
     public function disable()
     {
@@ -60,9 +60,9 @@ class Manager
     }
 
     /**
-     * Install module
+     * Install module.
      *
-     * @return boolean True, if module was installed. False otherwise.
+     * @return bool True, if module was installed. False otherwise.
      */
     public function install()
     {
@@ -70,9 +70,9 @@ class Manager
     }
 
     /**
-     * Uninstall module
+     * Uninstall module.
      *
-     * @return boolean
+     * @return bool
      */
     public function uninstall()
     {
@@ -80,9 +80,9 @@ class Manager
     }
 
     /**
-     * Update module
+     * Update module.
      *
-     * @return boolean
+     * @return bool
      */
     public function update()
     {

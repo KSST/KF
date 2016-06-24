@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -23,8 +23,8 @@ class Digg implements StyleInterface
 {
     public function render(\Koch\Pagination\Pagination $pagination)
     {
-        $current_page = $pagination->getCurrentPage();
-        $next_page = $pagination->getNextPage();
+        $current_page  = $pagination->getCurrentPage();
+        $next_page     = $pagination->getNextPage();
         $previous_page = $pagination->getPreviousPage();
 
         $html = '<nav class="pagination">';
@@ -41,8 +41,8 @@ class Digg implements StyleInterface
 
             /* « Previous  1 2 3 4 5 6 7 8 9 10 11 12  Next » */
 
-            for ($i = 1; $i <= $total_pages; $i++) {
-                if ($i == $current_page) {
+            for ($i = 1; $i <= $total_pages; ++$i) {
+                if ($i === $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
@@ -52,8 +52,8 @@ class Digg implements StyleInterface
 
             /* « Previous  1 2 3 4 5 6 7 8 9 10 … 25 26  Next » */
 
-            for ($i = 1; $i <= 10; $i++) {
-                if ($i == $current_page) {
+            for ($i = 1; $i <= 10; ++$i) {
+                if ($i === $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
@@ -65,7 +65,6 @@ class Digg implements StyleInterface
             );
             $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages, $url), $total_pages
             );
-
         } elseif ($current_page > $total_pages - 8) {
 
             /* « Previous  1 2 … 17 18 19 20 21 22 23 24 25 26  Next » */
@@ -74,14 +73,13 @@ class Digg implements StyleInterface
             $html .= sprintf('<a href="%s">2</a>', str_replace('{page}', 2, $url));
             $html .= '&hellip;';
 
-            for ($i = $total_pages - 9; $i <= $total_pages; $i++) {
-                if ($i == $current_page) {
+            for ($i = $total_pages - 9; $i <= $total_pages; ++$i) {
+                if ($i === $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);
                 }
             }
-
         } else {
 
             /* « Previous  1 2 … 5 6 7 8 9 10 11 12 13 14 … 25 26  Next » */
@@ -91,8 +89,8 @@ class Digg implements StyleInterface
             $html .= '&hellip;';
 
             // render page range around the current page
-            for ($i = $current_page - 5; $i <= $current_page + 5; $i++) {
-                if ($i == $current_page) {
+            for ($i = $current_page - 5; $i <= $current_page + 5; ++$i) {
+                if ($i === $current_page) {
                     $html .= sprintf('<li class="active">%s</li>', $i);
                 } else {
                     $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);

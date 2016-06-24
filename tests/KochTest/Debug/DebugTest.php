@@ -17,7 +17,7 @@ class DebugTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new Debug;
+        $this->object = new Debug();
     }
 
     /**
@@ -58,8 +58,8 @@ EOD;
 
         $this->expectOutputString($expectedOutput);
 
-        $var = array('Key' => 'Value');
-        $var2 = array('Key2' => 'Value2');
+        $var    = ['Key' => 'Value'];
+        $var2   = ['Key2' => 'Value2'];
         $string = 'Just a string';
         \Koch\Debug\Debug::printR($var, $var2, $string);
     }
@@ -69,7 +69,7 @@ EOD;
      */
     public function testDump()
     {
-/**
+        /*
  * finally after 18 or something years, someone decided to add <pre> tags to var_dump()
  * in PHP 5.5.0alpha1! thats utterly impressive!
  * are you fucking serious? Come get some!
@@ -86,10 +86,10 @@ array(1) {
 
 EOD;
 
-       $this->expectOutputString($expectedOutput);
+        $this->expectOutputString($expectedOutput);
 
-       $var = array('Key' => 'Value');
-       \Koch\Debug\Debug::dump($var);
+        $var = ['Key' => 'Value'];
+        \Koch\Debug\Debug::dump($var);
     }
 
     /**
@@ -97,7 +97,7 @@ EOD;
      */
     public function testGetOriginOfDebugCall()
     {
-// NOTE: this is NOWDOC instead of HEREDOC
+        // NOTE: this is NOWDOC instead of HEREDOC
 // so its without parsing, because of the inlined $var
 $expectedOutput = <<<'EOD'
 Debugging DebugTest.php on line 109: \Koch\Debug\Debug::getOriginOfDebugCall(0);
@@ -115,7 +115,7 @@ EOD;
     public function testGetIncludedFiles()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getIncludedFiles($returnArray);
+        $array       = \Koch\Debug\Debug::getIncludedFiles($returnArray);
 
         $this->assertTrue(is_array($array));
         $this->assertArrayHasKey('count', $array);
@@ -134,7 +134,7 @@ EOD;
     public function testGetApplicationConstants()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getApplicationConstants($returnArray);
+        $array       = \Koch\Debug\Debug::getApplicationConstants($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -145,8 +145,8 @@ EOD;
     public function testGetBacktrace()
     {
         $returnArray = true;
-        $limit = 1;
-        $array = \Koch\Debug\Debug::getBacktrace($limit, $returnArray);
+        $limit       = 1;
+        $array       = \Koch\Debug\Debug::getBacktrace($limit, $returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -156,8 +156,8 @@ EOD;
      */
     public function testGetInterfaces()
     {
-       $returnArray = true;
-        $array = \Koch\Debug\Debug::getInterfaces($returnArray);
+        $returnArray = true;
+        $array       = \Koch\Debug\Debug::getInterfaces($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -167,8 +167,8 @@ EOD;
      */
     public function testGetClasses()
     {
-       $returnArray = true;
-        $array = \Koch\Debug\Debug::getClasses($returnArray);
+        $returnArray = true;
+        $array       = \Koch\Debug\Debug::getClasses($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -179,7 +179,7 @@ EOD;
     public function testGetFunctions()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getFunctions($returnArray);
+        $array       = \Koch\Debug\Debug::getFunctions($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -190,7 +190,7 @@ EOD;
     public function testGetExtensions()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getExtensions($returnArray);
+        $array       = \Koch\Debug\Debug::getExtensions($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -201,7 +201,7 @@ EOD;
     public function testGetPhpIni()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getPhpIni($returnArray);
+        $array       = \Koch\Debug\Debug::getPhpIni($returnArray);
 
         $this->assertTrue(is_array($array));
     }
@@ -212,7 +212,7 @@ EOD;
     public function testGetWrappers()
     {
         $returnArray = true;
-        $array = \Koch\Debug\Debug::getWrappers($returnArray);
+        $array       = \Koch\Debug\Debug::getWrappers($returnArray);
 
         $this->assertTrue(is_array($array));
         $this->assertArrayHasKey('openssl', $array);

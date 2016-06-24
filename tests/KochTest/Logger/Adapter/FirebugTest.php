@@ -17,7 +17,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new Firebug;
+        $this->object = new Firebug();
     }
 
     /**
@@ -34,7 +34,7 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetFirePHPLoglevel()
     {
-        $loglevels = array('LOG', 'INFO', 'WARN', 'ERROR', 'TABLE', 'TRACE', 'DUMP');
+        $loglevels = ['LOG', 'INFO', 'WARN', 'ERROR', 'TABLE', 'TRACE', 'DUMP'];
         foreach ($loglevels as $loglevel) {
             // lowercased
             $this->assertEquals($loglevel, $this->object->getFirePHPLoglevel(strtolower($loglevel)));
@@ -53,9 +53,9 @@ class FirebugTest extends \PHPUnit_Framework_TestCase
      */
     public function testLog()
     {
-        $level = 'ERROR';
+        $level   = 'ERROR';
         $message = 'Error Message';
-        $context = array('Yarp!', 'Some Content', 'Yarp! Yarp!');
+        $context = ['Yarp!', 'Some Content', 'Yarp! Yarp!'];
 
         $r = $this->object->log($level, $message, $context);
 

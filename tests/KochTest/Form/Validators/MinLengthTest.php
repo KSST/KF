@@ -9,7 +9,6 @@ use Koch\Form\Validators\MinLength;
  */
 class MinLengthTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var MinLength
      */
@@ -22,7 +21,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\MinLength;
+        $this->validator = new \Koch\Form\Validators\MinLength();
     }
 
     /**
@@ -67,7 +66,7 @@ class MinLengthTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

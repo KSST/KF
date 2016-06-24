@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -18,15 +18,16 @@ namespace Koch\Config\Adapter;
 class JSON implements AdapterInterface
 {
     /**
-     * Read the config array from JSON file
+     * Read the config array from JSON file.
      *
      * @param   string  The filename
+     *
      * @return mixed array | bool false
      */
     public static function read($filename)
     {
         if (is_file($filename) === false or is_readable($filename) === false) {
-            throw new \Koch\Exception\Exception(_('JSON Config File not existing or not readable.'));
+            throw new \Koch\Exception\Exception('JSON Config File not existing or not readable.');
         }
 
         // read file to get the JSON content
@@ -46,11 +47,12 @@ class JSON implements AdapterInterface
     }
 
     /**
-     * Write the config array to json file
+     * Write the config array to json file.
      *
      * @param   string  The filename
      * @param   array   The configuration array
-     * @return boolean Number of bytes written to file, or false on failure.
+     *
+     * @return bool Number of bytes written to file, or false on failure.
      */
     public static function write($file, array $array)
     {

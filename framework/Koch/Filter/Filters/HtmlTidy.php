@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -26,17 +26,17 @@ use Koch\Http\HttpResponseInterface;
  */
 class HtmlTidy implements FilterInterface
 {
-    private $config     = null;
+    private $config = null;
 
     public function __construct(Koch\Config $config)
     {
-        $this->config     = $config;
+        $this->config = $config;
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // htmltidy must be enabled in configuration
-        if ($this->config['htmltidy']['enabled'] == 1 and extension_loaded('tidy')) {
+        if ($this->config['htmltidy']['enabled'] === 1 and extension_loaded('tidy')) {
             // bypass
             return;
         }
@@ -45,7 +45,7 @@ class HtmlTidy implements FilterInterface
         $content = $response->getContent();
 
         // init tidy
-        $tidy = new tidy;
+        $tidy = new tidy();
 
         /*
         $tidyoptions = array(
@@ -69,19 +69,19 @@ class HtmlTidy implements FilterInterface
             'drop-proprietary-attributes' => true);
         */
 
-        $tidyoptions = array(
+        $tidyoptions = [
             'clean' => true,
             #'doctype' => 'strict',
-            'doctype' => 'transitional',
-            'output-xhtml' => true,
+            'doctype'                     => 'transitional',
+            'output-xhtml'                => true,
             'drop-proprietary-attributes' => true,
-            'lower-literals' => true,
+            'lower-literals'              => true,
             #'quote-ampersand' => true,
             'show-body-only' => false,
-            'indent-spaces' => 4,
-            'wrap' => 130,
-            'indent' => 'auto'
-        );
+            'indent-spaces'  => 4,
+            'wrap'           => 130,
+            'indent'         => 'auto',
+        ];
 
         // tidy the output
         $tidy->parseString($content, $tidyoptions, 'utf8');

@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Pagination\Adapter;
 
 use Koch\Pagination\Adapter\DoctrineCollection;
@@ -61,17 +62,17 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
             ->expects($this->once())
             ->method('slice')
             ->with($offset, $length)
-            ->will($this->returnValue($all = array(new \DateTime(), new \DateTime())));
+            ->will($this->returnValue($all = [new \DateTime(), new \DateTime()]));
 
         $this->assertSame($all, $this->object->getSlice($offset, $length));
     }
 
     public function getResultsProvider()
     {
-        return array(
-            array(3, 8),
-            array(3, 6),
-        );
+        return [
+            [3, 8],
+            [3, 6],
+        ];
     }
 
     /**
@@ -82,8 +83,8 @@ class DoctrineCollectionTest extends \PHPUnit_Framework_TestCase
         $this->collection
             ->expects($this->once())
             ->method('toArray')
-            ->will($this->returnValue(array('a', 'b')));
+            ->will($this->returnValue(['a', 'b']));
 
-        $this->assertEquals(array('a', 'b'), $this->object->getArray());
+        $this->assertEquals(['a', 'b'], $this->object->getArray());
     }
 }

@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -31,16 +31,16 @@ class PhpDebugConsole implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // webdebug must be enabled in configuration
-        if (isset($this->config['error']['webdebug']) and $this->config['error']['webdebug'] == 1) {
+        if (isset($this->config['error']['webdebug']) and $this->config['error']['webdebug'] === 1) {
             return;
         }
 
         // DEBUG mode must be on
-        if (defined('DEBUG') and DEBUG == true) {
+        if (defined('DEBUG') and DEBUG === true) {
             return;
         }
 
-        /**
+        /*
          * ================================================
          *  Initialize PHP_Debug Web-Debugging Console
          * ================================================
@@ -56,7 +56,7 @@ class PhpDebugConsole implements FilterInterface
         }
 
         // Setup Options for the PHPDebug Object
-        $options = array(
+        $options = [
             // General Options
             'render_type'          => 'HTML',    // Renderer type
             'render_mode'          => 'div',     // Renderer mode
@@ -69,13 +69,13 @@ class PhpDebugConsole implements FilterInterface
             'lang'                 => 'EN',      // Lang
 
             // Renderer specific
-            'HTML_DIV_view_source_script_name' => APPLICATION_PATH . 'libraries/phpdebug/PHP_Debug_ShowSource.php',
-            'HTML_DIV_images_path' =>  WWW_ROOT . 'libraries/phpdebug/images',
-            'HTML_DIV_css_path' =>  WWW_ROOT . 'libraries/phpdebug/css',
-            'HTML_DIV_js_path' =>  WWW_ROOT . 'libraries/phpdebug/js',
+            'HTML_DIV_view_source_script_name'  => APPLICATION_PATH . 'libraries/phpdebug/PHP_Debug_ShowSource.php',
+            'HTML_DIV_images_path'              => WWW_ROOT . 'libraries/phpdebug/images',
+            'HTML_DIV_css_path'                 => WWW_ROOT . 'libraries/phpdebug/css',
+            'HTML_DIV_js_path'                  => WWW_ROOT . 'libraries/phpdebug/js',
             'HTML_DIV_remove_templates_pattern' => true,
             #'HTML_DIV_templates_pattern' => array('/var/www-protected/php-debug.com' => '/var/www/php-debug')
-        );
+        ];
 
         // Initialiaze Object
         $debug = new PHP_Debug($options);
@@ -83,12 +83,12 @@ class PhpDebugConsole implements FilterInterface
         // Set Title to Debug Console
         $debug->add('Koch Framework DEBUG INFO');
 
-        /**
+        /*
          *  Load JS / CSS for PHP Debug Console into the Output Buffer
          */
-        $html  = '<script type="text/javascript" src="'.$options['HTML_DIV_js_path'].'/html_div.js"></script>';
+        $html = '<script type="text/javascript" src="' . $options['HTML_DIV_js_path'] . '/html_div.js"></script>';
         $html .= '<link rel="stylesheet" type="text/css"';
-        $html .= ' media="screen" href="'.$options['HTML_DIV_css_path'].'/html_div.css" />';
+        $html .= ' media="screen" href="' . $options['HTML_DIV_css_path'] . '/html_div.css" />';
 
         unset($options);
 

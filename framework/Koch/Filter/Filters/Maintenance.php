@@ -2,8 +2,8 @@
 
 /**
  * Koch Framework
- * Jens A. Koch © 2005 - onwards
  *
+ * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
  * SPDX-License-Identifier: MIT
  *
  * For the full copyright and license information, please view
@@ -12,10 +12,10 @@
 
 namespace Koch\Filter\Filters;
 
+use Koch\Config;
 use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Config;
 use Koch\View\Renderer\Smarty;
 
 /**
@@ -36,7 +36,7 @@ class Maintenance implements FilterInterface
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
         // the maintenance mode must be enabled in configuration in order to be displayed
-        if ($this->config['maintenance']['enabled'] == 1) {
+        if ($this->config['maintenance']['enabled'] === 1) {
             return;
         }
 

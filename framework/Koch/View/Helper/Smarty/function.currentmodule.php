@@ -1,10 +1,10 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty Currentmodule
+ * Smarty Currentmodule.
  *
  * Displays the name of the current module
  *
@@ -16,6 +16,7 @@
  * Type:     function<br>
  * Name:     currentmodule<br>
  * Purpose:  display name of current module<br>
+ *
  * @return string
  */
 function Smarty_function_currentmodule()

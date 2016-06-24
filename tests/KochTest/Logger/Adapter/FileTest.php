@@ -25,11 +25,11 @@ class FileTest extends \PHPUnit_Framework_TestCase
         vfsStreamWrapper::register();
         # file 1
         $this->configFileURL1 = vfsStream::url('root/errorlog.txt');
-        $this->file1 = vfsStream::newFile('errorlog.txt', 0777);
+        $this->file1          = vfsStream::newFile('errorlog.txt', 0777);
         # file 2
         $this->configFileURL2 = vfsStream::url('root/errorlog-full.txt');
-        $this->file2 = vfsStream::newFile('errorlog-full.txt', 0777)->withContent($this->getFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file2          = vfsStream::newFile('errorlog-full.txt', 0777)->withContent($this->getFileContent());
+        $this->root           = new vfsStreamDirectory('root');
         $this->root->addChild($this->file1);
         $this->root->addChild($this->file2);
         vfsStreamWrapper::setRoot($this->root);
@@ -57,14 +57,14 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testLog()
     {
-        $level = 'ERROR';
+        $level   = 'ERROR';
         $message = 'String to log';
         $this->object->log($level, $message);
 
         $this->assertEquals($message, $this->object->readLog());
     }
 
-      /**
+    /**
      * @covers Koch\Logger\Adapter\File::getErrorLogFilename
      * @covers Koch\Logger\Adapter\File::setErrorLogFilename
      */
@@ -105,6 +105,5 @@ EOD;
 
         $e = $this->object->getEntriesFromLogfile('5', 'not-existing-log.file');
         $this->assertEquals('<b>No Logfile found. No entries yet.</b>', $e);
-
     }
 }
