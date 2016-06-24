@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Mvc;
 
 /**
- * Mapper
+ * Mapper.
  *
  * Provides helper methods to transform (map)
  * (a) the controller name into the specific application classname and filename
@@ -52,13 +52,13 @@ class Mapper extends \ArrayObject
 
     /**
      * Set the application namespace.
-     * Usage: setApplicationNamespace(__NAMESPACE__);
+     * Usage: setApplicationNamespace(__NAMESPACE__);.
      *
      * @param string $namespace
      */
     public static function setApplicationNamespace($namespace)
     {
-        $namespace = ltrim($namespace, '\\');
+        $namespace                  = ltrim($namespace, '\\');
         self::$applicationNamespace = '\\' . $namespace;
     }
 
@@ -76,10 +76,11 @@ class Mapper extends \ArrayObject
     }
 
     /**
-     * Maps the controller and subcontroller (optional) to filename
+     * Maps the controller and subcontroller (optional) to filename.
      *
-     * @param  string $module_path Path to Module
-     * @param  string $controller  Name of Controller
+     * @param string $module_path Path to Module
+     * @param string $controller  Name of Controller
+     *
      * @return string filename
      */
     public static function mapControllerToFilename($module_path, $controller = null)
@@ -93,10 +94,11 @@ class Mapper extends \ArrayObject
     }
 
     /**
-     * Maps Controller to Classname
+     * Maps Controller to Classname.
      *
-     * @param  string $module     Name of Module
-     * @param  string $controller Name of Controller (optional)
+     * @param string $module     Name of Module
+     * @param string $controller Name of Controller (optional)
+     *
      * @return string classname
      */
     public static function mapControllerToClassname($module, $controller = '')
@@ -109,7 +111,7 @@ class Mapper extends \ArrayObject
             $controller = $module;
         }
 
-        /**
+        /*
          * (<Modulename|DefaultController>\Controller\<Controller>Controller)
          * e.g. "News\Controller\NewsController"
          */
@@ -129,7 +131,8 @@ class Mapper extends \ArrayObject
      * The convention is action<action> !
      *
      *
-     * @param  string $action the action
+     * @param string $action the action
+     *
      * @return string the mapped method name
      */
     public static function mapActionToMethodname($action = null)

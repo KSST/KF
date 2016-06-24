@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -38,7 +37,7 @@ class SelectDate extends Input implements FormElementInterface
     }
 
     /**
-     * HTML 5 has several Types of input formfields for date and time selection
+     * HTML 5 has several Types of input formfields for date and time selection.
      *
      * date             - Selects date, month and year
      * month            - Selects month and year
@@ -49,9 +48,9 @@ class SelectDate extends Input implements FormElementInterface
      */
     public function setType($type)
     {
-        $types = array('date', 'month', 'week', 'time', 'datetime', 'datetime-local');
+        $types = ['date', 'month', 'week', 'time', 'datetime', 'datetime-local'];
 
-        if (in_array($type, $types) === true) {
+        if (in_array($type, $types, true)) {
             $this->type = $type;
         } else {
             throw new \Koch\Exception\Exception(

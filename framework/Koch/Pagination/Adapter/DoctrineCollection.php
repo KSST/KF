@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,13 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Pagination\Adapter;
 
-use Koch\Pagination\AdapterInterface;
 use Doctrine\Common\Collections\Collection;
+use Koch\Pagination\AdapterInterface;
 
 /**
  * Koch Framework - Pagination Adapter working with Doctrine Collections.

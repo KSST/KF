@@ -28,7 +28,7 @@ class JsonExceptionTest extends \PHPUnit_Framework_TestCase
      */
     public function testgetJsonErrorMessage()
     {
-        $errmsg = JsonException::getJsonErrorMessage(JSON_ERROR_DEPTH);
+        $errmsg   = JsonException::getJsonErrorMessage(JSON_ERROR_DEPTH);
         $expected = 'The maximum stack depth has been exceeded.';
         $this->assertEquals($expected, $errmsg);
     }

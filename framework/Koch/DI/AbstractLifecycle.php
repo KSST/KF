@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -41,7 +41,7 @@ abstract class AbstractLifecycle
 
     public function isOneOf($candidates)
     {
-        return in_array($this->class, $candidates);
+        return in_array($this->class, $candidates, true);
     }
 
     abstract public function instantiate($dependencies);

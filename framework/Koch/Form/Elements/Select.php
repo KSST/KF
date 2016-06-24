@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -50,7 +49,8 @@ class Select extends FormElement implements FormElementInterface
 
     /**
      * 0 = pure dropdown with 1 field
-     * 3 = 3 elements shown, rest available via scrollbar
+     * 3 = 3 elements shown, rest available via scrollbar.
+     *
      * @var int number of displayed items
      */
     public $size;
@@ -70,8 +70,9 @@ class Select extends FormElement implements FormElementInterface
     /**
      * Sets the array with options for the dropdown element.
      *
-     * @param  array   $options
-     * @param  boolean $addSelectText Adds " - Select -" as first entry to the options array.
+     * @param array $options
+     * @param bool  $addSelectText Adds " - Select -" as first entry to the options array.
+     *
      * @return Select
      */
     public function setOptions($options, $addSelectText = true)
@@ -95,7 +96,7 @@ class Select extends FormElement implements FormElementInterface
 
     /**
      * This sets the default value.
-     * Value is used to mark that option as "selected"
+     * Value is used to mark that option as "selected".
      */
     public function setDefaultValue($default)
     {
@@ -105,7 +106,7 @@ class Select extends FormElement implements FormElementInterface
     }
 
     /**
-     * Render option tags with value => value relation
+     * Render option tags with value => value relation.
      *
      * <option value="' . $value. '">' . $value . '</option>
      *
@@ -130,10 +131,10 @@ class Select extends FormElement implements FormElementInterface
         // open the html select tag
         $html = '';
         $html .= '<select ';
-        $html .= (bool) $this->name ? 'name="'.$this->name.'"' : null;
-        $html .= (bool) $this->id ? 'id="'.$this->id.'"' : null;
-        $html .= (bool) $this->class ? 'class="'.$this->class.'"' : null;
-        $html .= (bool) $this->size ? 'size="'.$this->size.'"' : null;
+        $html .= (bool) $this->name ? 'name="' . $this->name . '"' : null;
+        $html .= (bool) $this->id ? 'id="' . $this->id . '"' : null;
+        $html .= (bool) $this->class ? 'class="' . $this->class . '"' : null;
+        $html .= (bool) $this->size ? 'size="' . $this->size . '"' : null;
         $html .= '>';
 
         /**
@@ -175,17 +176,17 @@ class Select extends FormElement implements FormElementInterface
 
     private function renderOptionTag($key, $value)
     {
-        /**
+        /*
          * the addSelectText would be posted as value.
          * in order to be able to use empty() on the incomming post array variables,
          * we need to remove it. this makes it just a select helper, without data.
          */
-        if ($key == 'Select...') {
+        if ($key === 'Select...') {
             $key = '';
         }
 
         // check if the value is the default one and in case it is, add html "selected"
-        if ($key == $this->default) {
+        if ($key === $this->default) {
             return '<option value="' . $key . '" selected="selected">' . $value . '</option>';
         } else { // a normal select element is rendered
 

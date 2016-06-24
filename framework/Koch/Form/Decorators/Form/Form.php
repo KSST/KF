@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Form;
@@ -78,11 +77,11 @@ class Form extends AbstractFormDecorator
             $html_form .= 'accept-charset="' . $this->getAcceptCharset() . '" ';
         }
 
-        if ($this->getAcceptCharset() === true) {
+        if ($this->getAcceptCharset()) {
             $html_form .= ' autocomplete';
         }
 
-        if ($this->isNoValidation() === true) {
+        if ($this->isNoValidation()) {
             $html_form .= ' novalidation';
         }
 
@@ -125,11 +124,11 @@ class Form extends AbstractFormDecorator
     public function render($html_form_content)
     {
         // put the pieces of html together
-        $html_form_content = $this->openFormTag().                // <form
-                             $this->getFormTagAttributesAsHTML(). //  id/method/action/...>
-                             $this->addHeading().                 // heading
-                             $this->addDescription().             // description
-                             $html_form_content.                  // formelements
+        $html_form_content = $this->openFormTag() . // <form
+                             $this->getFormTagAttributesAsHTML() . //  id/method/action/...>
+                             $this->addHeading() . // heading
+                             $this->addDescription() . // description
+                             $html_form_content . // formelements
                              $this->closeFormTag();               // </form>
 
         return $html_form_content;

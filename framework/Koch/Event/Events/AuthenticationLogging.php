@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event\Events;
@@ -51,12 +50,12 @@ class AuthenticationLogging implements EventInterface
     {
         $authdata = $event->getInfo();
 
-        $logdata = array(
+        $logdata = [
                 date(),                              // date
                 $this->request->getRemoteAddress(),  // remote adress
                 $event->getName(),                   // onLogin etc.
-                $authdata['username']                // username
-        );
+                $authdata['username'],                // username
+        ];
 
         $this->logger->log($logdata);
     }

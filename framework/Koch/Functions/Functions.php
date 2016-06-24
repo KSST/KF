@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,13 +32,14 @@ class Functions
     /**
      * @var array This array contains the names of the loaded functions from directory /core/functions.
      */
-    public static $alreadyLoaded = array();
+    public static $alreadyLoaded = [];
 
     /**
-     * Recursive glob
+     * Recursive glob.
      *
-     * @param  string  $pattern
-     * @param  integer $flags
+     * @param string $pattern
+     * @param int    $flags
+     *
      * @return type
      */
     public static function globRecursive($pattern, $flags = 0)
@@ -60,21 +61,21 @@ class Functions
     public static function getServerLoad()
     {
         if (stristr(PHP_OS, 'win')) {
-            $wmi = new COM("Winmgmts://");
-            $cpus = $wmi->execquery("SELECT LoadPercentage FROM Win32_Processor");
+            $wmi  = new COM('Winmgmts://');
+            $cpus = $wmi->execquery('SELECT LoadPercentage FROM Win32_Processor');
 
-            $cpu_num = 0;
+            $cpu_num    = 0;
             $load_total = 0;
 
             foreach ($cpus as $cpu) {
-                $cpu_num++;
+                ++$cpu_num;
                 $load_total += $cpu->loadpercentage;
             }
 
             $load = round($load_total / $cpu_num);
         } else {
             $sys_load = sys_getloadavg();
-            $load = $sys_load[0];
+            $load     = $sys_load[0];
         }
 
         return (int) $load;
@@ -92,8 +93,9 @@ class Functions
     /**
      * Checks a string for a certain prefix or adds it, if missing.
      *
-     * @param  string $string
-     * @param  string $prefix
+     * @param string $string
+     * @param string $prefix
+     *
      * @return string prefixed classname
      */
     public static function ensurePrefixedWith($string, $prefix)
@@ -102,7 +104,7 @@ class Functions
 
         $pos = mb_strpos($string, $prefix);
 
-        if (is_int($pos) and ($pos == 0)) {
+        if (is_int($pos) && ($pos === 0)) {
             return $string;
         } else {
             return $prefix . $string;
@@ -112,7 +114,7 @@ class Functions
     public function dropNumericKeys(array $array)
     {
         foreach ($array as $key => $value) {
-            if (is_int($key) === true) {
+            if (is_int($key)) {
                 unset($array[$key]);
             }
         }
@@ -122,18 +124,19 @@ class Functions
 
     public function issetOrDefault($var, $defaultValue = null)
     {
-        return (isset($var) === true) ? $var : $defaultValue;
+        return isset($var) ? $var : $defaultValue;
     }
 
     public function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
     {
-        return (isset($array[$key]) === true) ? $array[$key] : $defaultValue;
+        return isset($array[$key]) ? $array[$key] : $defaultValue;
     }
 
     /**
      * Transforms a string from underscored_lower_case to Underscored_Upper_Camel_Case.
      *
-     * @param  string  $string String in underscored_lower_case format.
+     * @param string $string String in underscored_lower_case format.
+     *
      * @return $string String in Upper_Camel_Case.
      */
     public static function toUnderscoredUpperCamelCase($string)
@@ -144,7 +147,7 @@ class Functions
     }
 
     /**
-     * cut_string_backwards
+     * cut_string_backwards.
      *
      * haystack = abc_def
      * needle = _def
@@ -155,6 +158,7 @@ class Functions
      *
      * @param $haystack string
      * @param $needle string
+     *
      * @return string
      */
     public static function cutStringBackwards($haystack, $needle)
@@ -169,19 +173,20 @@ class Functions
     }
 
     /**
-     * @param  string  $haystack
-     * @param  string  $replace
-     * @param  string  $needle
-     * @param  int     $times
+     * @param string $haystack
+     * @param string $replace
+     * @param string $needle
+     * @param int    $times
+     *
      * @return $needle
      */
     public static function strReplaceCount($haystack, $replace, $needle, $times)
     {
         $subject_original = $needle;
-        $length = mb_strlen($haystack);
-        $pos = 0;
+        $length           = mb_strlen($haystack);
+        $pos              = 0;
 
-        for ($i = 1; $i<=$times; $i++) {
+        for ($i = 1; $i <= $times; ++$i) {
             $pos = mb_strpos($needle, $haystack, $pos);
 
             if ($pos !== false) {
@@ -209,7 +214,7 @@ class Functions
     public static function findKeyInArray($needle, array $haystack)
     {
         // take a look for the needle
-        if ((isset($haystack[$needle]) === true) or (array_key_exists($needle, $haystack))) {
+        if (isset($haystack[$needle]) or array_key_exists($needle, $haystack)) {
             // if found, return it
             return $haystack[$needle];
         }
@@ -226,11 +231,13 @@ class Functions
     }
 
     /**
-     * array_compare
+     * array_compare.
      *
      * @author  55 dot php at imars dot com
      * @author  dwarven dot co dot uk
+     *
      * @link    http://www.php.net/manual/de/function.array-diff-assoc.php#89635
+     *
      * @param $array1
      * @param $array2
      */
@@ -250,10 +257,12 @@ class Functions
                     $new = self::array_compare($value, $array2[$key]);
 
                     if ($new !== false) {
-                        if($new[0] !== null)
+                        if ($new[0] !== null) {
                             $diff[0][$key] = $new[0];
-                        if($new[1] !== null)
+                        }
+                        if ($new[1] !== null) {
                             $diff[1][$key] = $new[1];
+                        }
                     }
                 }
             } elseif ($array2[$key] !== $value) {
@@ -268,7 +277,7 @@ class Functions
                 $diff[1][$key] = $value;
             }
 
-            /**
+            /*
              * No direct comparsion because matching keys were compared in the
              * left-to-right loop earlier, recursively.
              */
@@ -291,15 +300,16 @@ class Functions
      * $combined = self::array_unequal_combine($keys, $values);
      * Results in: array('mod'=>'news', 'sub'=>'admin');
      *
-     * @param  array $keyArray
-     * @param  array $valueArray
+     * @param array $keyArray
+     * @param array $valueArray
+     *
      * @return array Combined Array
      */
     public static function arrayUnequalCombine($keyArray, $valueArray)
     {
-        $returnArray = array();
-        $key = '';
-        $index = 0;
+        $returnArray = [];
+        $key         = '';
+        $index       = 0;
 
         // more keys than values, reduce keys array
         while (count($keyArray) > count($valueArray)) {
@@ -324,30 +334,32 @@ class Functions
      * The array might have several keys, so you might map value of key2 to value of key5 ;)
      * Simple, but impressive!
      *
-     * @param  type $array
-     * @param  type $map_value_of_key1
-     * @param  type $to_value_of_key2
+     * @param type $array
+     * @param type $map_value_of_key1
+     * @param type $to_value_of_key2
+     *
      * @return type array
      */
     public static function mapArrayKeysToValues($array, $map_value_of_key1, $to_value_of_key2)
     {
-        $new_array = array();
+        $new_array = [];
         foreach ($array as $inner_array) {
-           $new_array[$inner_array[$map_value_of_key1]] = $inner_array[$to_value_of_key2];
+            $new_array[$inner_array[$map_value_of_key1]] = $inner_array[$to_value_of_key2];
         }
 
         return $new_array;
     }
 
     /**
-     * flatten multi-dimensional array
+     * flatten multi-dimensional array.
      *
-     * @param  array $array
+     * @param array $array
+     *
      * @return array
      */
     public static function arrayFlatten(array $array)
     {
-        $flatened_array = array();
+        $flatened_array = [];
         foreach (new \RecursiveIteratorIterator(new \RecursiveArrayIterator($array)) as $value) {
             $flatened_array[] = $value;
         }
@@ -356,14 +368,15 @@ class Functions
     }
 
     /**
-     * distanceOfTimeInWords
+     * distanceOfTimeInWords.
      *
      * @author: anon
      * @link: http://www.php.net/manual/de/function.time.php#85481
      *
-     * @param  integer $fromTime starttime
+     * @param int $fromTime starttime
      * @param $toTime endtime
      * @param $showLessThanAMinute boolean
+     *
      * @return string
      */
     public static function distanceOfTimeInWords($fromTime, $toTime = 0, $showLessThanAMinute = false)
@@ -372,8 +385,8 @@ class Functions
         $distanceInMinutes = round($distanceInSeconds / 60);
 
         if ($distanceInMinutes <= 1) {
-            if ($showLessThanAMinute == false) {
-                return ($distanceInMinutes == 0) ? 'less than a minute' : '1 minute';
+            if ($showLessThanAMinute === false) {
+                return ($distanceInMinutes === 0) ? 'less than a minute' : '1 minute';
             } else {
                 if ($distanceInSeconds < 5) {
                     return 'less than 5 seconds';
@@ -424,11 +437,13 @@ class Functions
 
     /**
      * Performs a dateToWord transformation via gettext.
-     * uses idate() to format a local time/date as integer and gettext functions _n(), _t()
+     * uses idate() to format a local time/date as integer and gettext functions _n(), _t().
+     *
      * @see http://www.php.net/idate
      *
-     * @param  string $from
-     * @param  string $now
+     * @param string $from
+     * @param string $now
+     *
      * @return string Word representation of
      */
     public static function dateToWord($from, $now = null)
@@ -439,11 +454,9 @@ class Functions
 
         $between = $now - $from;
 
-        if ($between < 86400 and idate('d', $from) == idate('d', $now)) {
-
-            if ($between < 3600 and idate('H', $from) == idate('H', $now)) {
-
-                if ($between < 60 and idate('i', $from) == idate('i', $now)) {
+        if ($between < 86400 and idate('d', $from) === idate('d', $now)) {
+            if ($between < 3600 and idate('H', $from) === idate('H', $now)) {
+                if ($between < 60 and idate('i', $from) === idate('i', $now)) {
                     $second = idate('s', $now) - idate('s', $from);
 
                     return sprintf(_n('%d', '%d', $second), $second);
@@ -459,17 +472,17 @@ class Functions
             return sprintf(_n('%d', '%d', $hour), $hour);
         }
 
-        if ($between < 172800 and ( idate('z', $from) + 1 == idate('z', $now) or idate('z', $from) > 2 + idate('z', $now))) {
+        if ($between < 172800 && (idate('z', $from) + 1 === idate('z', $now) or idate('z', $from) > 2 + idate('z', $now))) {
             return _t('.. %s', date('H:i', $from));
         }
 
-        if ($between < 604800 and idate('W', $from) == idate('W', $now)) {
+        if ($between < 604800 and idate('W', $from) === idate('W', $now)) {
             $day = intval($between / (3600 * 24));
 
             return sprintf(_n('...', '...', $day), $day);
         }
 
-        if ($between < 31622400 and idate('Y', $from) == idate('Y', $now)) {
+        if ($between < 31622400 and idate('Y', $from) === idate('Y', $now)) {
             return date(_t('...'), $from);
         }
 
@@ -477,11 +490,13 @@ class Functions
     }
 
     /**
-     * Get the variable name as string
+     * Get the variable name as string.
      *
      * @author http://us2.php.net/manual/en/language.variables.php#76245
+     *
      * @param $var variable as reference
      * @param $scope scope
+     *
      * @return string
      */
     public static function vname($var, $scope = false, $prefix = 'unique', $suffix = 'value')
@@ -492,8 +507,8 @@ class Functions
             $values = $scope;
         }
 
-        $old = $var;
-        $var = $new = $prefix . rand() . $suffix;
+        $old   = $var;
+        $var   = $new   = $prefix . rand() . $suffix;
         $vname = false;
 
         foreach ($values as $key => $val) {
@@ -507,9 +522,10 @@ class Functions
     }
 
     /**
-     * format_seconds_to_shortstring
+     * format_seconds_to_shortstring.
      *
      * @param $seconds int
+     *
      * @return string Ouput: 4D 10:12:20
      */
     public static function formatSecondsToShortstring($seconds = 0)
@@ -525,9 +541,10 @@ class Functions
     }
 
     /**
-     * Remove comments prefilter
+     * Remove comments prefilter.
      *
      * @param $html A String with HTML Comments.
+     *
      * @return string $html String without Comments.
      */
     public function removeCommentsFromTemplate($html)
@@ -547,7 +564,7 @@ class Functions
 
         // ok, lets shorten
         if (mb_strlen($string) > $maxlength) {
-            /**
+            /*
              * do not short the string, when maxlength would split a word!
              * that would make things unreadable.
              * so search for the next space after the requested maxlength.
@@ -561,7 +578,7 @@ class Functions
     }
 
     /**
-     * Converts a UTF8-string into HTML entities
+     * Converts a UTF8-string into HTML entities.
      *
      * When using UTF-8 as a charset you want to convert multi-byte characters.
      * This function takes multi-byte characters up to level 4 into account.
@@ -569,10 +586,12 @@ class Functions
      * Use this function if you want to convert 3-byte and 4-byte characters also.
      *
      * @author silverbeat gmx  at
+     *
      * @link http://www.php.net/manual/de/function.htmlentities.php#96648
      *
      * @param $utf8 string The UTF8-string to convert
      * @param $encodeTags booloean TRUE will convert "<" to "&lt;", Default = false
+     *
      * @return string the converted HTML-string
      */
     public static function utf8ToHtml($utf8, $encodeTags = false)
@@ -597,10 +616,10 @@ class Functions
         // Making it easier to see which static method is called magically
         //\Koch\Debug\Debug::firebug('DEBUG (Overloading): Calling static method "'.$method.'" '. implode(', ', $arguments). "\n");
         // construct the filename of the command
-        $filename = __DIR__  . '/Pool/' . $method . '.php';
+        $filename = __DIR__ . '/Pool/' . $method . '.php';
 
         // check if name is valid
-        if (is_file($filename) === true and is_readable($filename) === true) {
+        if (is_file($filename) && is_readable($filename)) {
             // dynamically include the command
             include_once $filename;
 
@@ -633,10 +652,10 @@ class Functions
         // Making it easier to see which method is called magically
         // \Koch\Debug\Debug::fbg('DEBUG (Overloading): Calling object method "'.$method.'" '. implode(', ', $arguments). "\n");
         // construct the filename of the command
-        $filename = __DIR__  . '/pool/' . $method . '.php';
+        $filename = __DIR__ . '/pool/' . $method . '.php';
 
         // check if name is valid
-        if (is_file($filename) === true and is_readable($filename) === true) {
+        if (is_file($filename) && is_readable($filename)) {
             // dynamically include the command
             include_once $filename;
 
@@ -647,5 +666,4 @@ class Functions
             );
         }
     }
-
 }

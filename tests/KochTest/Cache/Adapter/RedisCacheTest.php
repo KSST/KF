@@ -17,7 +17,7 @@ class RedisCacheTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "redis".');
         }
 
-        $this->object = new Redis;
+        $this->object = new Redis();
     }
 
     protected function tearDown()

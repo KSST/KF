@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -30,7 +30,7 @@ namespace Koch\Doctrine;
 class Profiler
 {
     /**
-     * Returns Doctrine's connection profiler
+     * Returns Doctrine's connection profiler.
      *
      * @return Doctrine_Connection_Profiler
      */
@@ -40,30 +40,31 @@ class Profiler
     }
 
     /**
-     * Attached the Doctrine Profiler as Listener to the connection
+     * Attached the Doctrine Profiler as Listener to the connection.
      */
     public static function attachProfiler()
     {
         // instantiate Profiler and attach to doctrine connection
-        Doctrine_Manager::connection()->setListener(new Doctrine_Connection_Profiler);
+        Doctrine_Manager::connection()->setListener(new Doctrine_Connection_Profiler());
 
         register_shutdown_function('\Koch\Doctrine\Profiler::shutdown');
     }
 
     /**
-     * Displayes all Doctrine Querys with profiling Informations
+     * Displayes all Doctrine Querys with profiling Informations.
      *
      * Because this is debug output, it's ok that direct output breaks the abstraction.
+     *
      * @return Direct HTML Output
      */
     public static function displayProfilingHTML()
     {
-        /**
+        /*
          * @var int total number of database queries performed
          */
         $query_counter = 0;
 
-        /**
+        /*
          * @var int time in seconds, counting the elapsed time for all queries
          */
         $time = 0;
@@ -115,7 +116,7 @@ class Profiler
               </tr>';
 
         foreach (self::getProfiler() as $event) {
-            /**
+            /*
              * By activiating the following lines, only the "execute" queries are shown.
              * It's usefull for debugging a certain type of database statement.
              */
@@ -126,7 +127,7 @@ class Profiler
             */
 
             // increase query counter
-            $query_counter++;
+            ++$query_counter;
 
             // increase time
             $time += $event->getElapsedSecs();
@@ -138,9 +139,9 @@ class Profiler
             $html .= '<td>' . $event->getQuery() . '</td>';
 
             $params = $event->getParams();
-            if (empty($params) == false) {
+            if (empty($params) === false) {
                 $html .= '<td>';
-                $html .= wordwrap(join(', ', $params), 150, "\n", true);
+                $html .= wordwrap(implode(', ', $params), 150, "\n", true);
                 $html .= '</td>';
             } else {
                 $html .= '<td>';
@@ -160,7 +161,7 @@ class Profiler
     }
 
     /**
-     * shutdown function for register_shutdown_function
+     * shutdown function for register_shutdown_function.
      */
     public static function shutdown()
     {

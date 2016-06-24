@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Config\Adapter;
 
 use Koch\Config\Adapter\JSON;
@@ -15,14 +16,14 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new JSON;
+        $this->object = new JSON();
 
         vfsStreamWrapper::register();
-        $this->configFileURL = vfsStream::url('root/config.json');
+        $this->configFileURL        = vfsStream::url('root/config.json');
         $this->invalidConfigFileURL = vfsStream::url('root/invalid-config.json');
-        $this->file = vfsStream::newFile('config.json', 0777)->withContent($this->getConfigFileContent());
-        $this->invalidFile = vfsStream::newFile('invalid-config.json', 0777)->withContent($this->getInvalidConfigFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file                 = vfsStream::newFile('config.json', 0777)->withContent($this->getConfigFileContent());
+        $this->invalidFile          = vfsStream::newFile('invalid-config.json', 0777)->withContent($this->getInvalidConfigFileContent());
+        $this->root                 = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         $this->root->addChild($this->invalidFile);
         vfsStreamWrapper::setRoot($this->root);
@@ -81,7 +82,7 @@ class JSONTest extends \PHPUnit_Framework_TestCase
 
     public function getConfigArray()
     {
-        return array('section-1' => array('key1' => 'value1'));
+        return ['section-1' => ['key1' => 'value1']];
     }
 
     public function getInvalidConfigFileContent()

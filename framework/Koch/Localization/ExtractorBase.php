@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Localization;
 
 /**
- * Base Class of all Gettext Extractors
+ * Base Class of all Gettext Extractors.
  */
 class ExtractorBase
 {
@@ -35,7 +35,7 @@ class ExtractorBase
     protected $tags_to_scan;
 
     /**
-     * Add a tag (placeholder/function) to scan for
+     * Add a tag (placeholder/function) to scan for.
      *
      * @param mixed|array|string $tags String or Array of Tags.
      *
@@ -44,7 +44,7 @@ class ExtractorBase
     public function addTags($tags)
     {
         // multiple tags to add
-        if (is_array($tags) === true) {
+        if (is_array($tags)) {
             foreach ($tags as $tag) {
                 if (false === array_key_exists($tag, array_flip($this->tags_to_scan))) {
                     $this->tags_to_scan[] = $tag;
@@ -58,7 +58,7 @@ class ExtractorBase
     }
 
     /**
-     * Excludes a tag from scanning
+     * Excludes a tag from scanning.
      *
      * @param string $tag
      *
@@ -72,13 +72,13 @@ class ExtractorBase
     }
 
     /**
-     * Removes all tags
+     * Removes all tags.
      *
      * @return ExtractorBase Koch_Gettext_Extractor
      */
     public function removeAllTags()
     {
-        $this->tags_to_scan = array();
+        $this->tags_to_scan = [];
 
         return $this;
     }

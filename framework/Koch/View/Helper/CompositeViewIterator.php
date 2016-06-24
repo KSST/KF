@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,12 +25,11 @@
 namespace Koch\View\Helper;
 
 /**
- * CompositeView_Iterator
+ * CompositeView_Iterator.
  */
 class CompositeViewIterator implements \ArrayAccess, \Countable, \Iterator
 {
-
-    private $composite = array();
+    private $composite = [];
 
     public function __construct($composite)
     {
@@ -56,7 +55,7 @@ class CompositeViewIterator implements \ArrayAccess, \Countable, \Iterator
      */
     public function offsetGet($offset)
     {
-        if (isset($this->composite[$offset]) === true) {
+        if (isset($this->composite[$offset])) {
             return $this->composite[$offset];
         } else {
             throw new \InvalidArgumentException(sprintf('Array Key "%s" is not defined.', $offset));
@@ -98,7 +97,7 @@ class CompositeViewIterator implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * Return the current Iterator node element
+     * Return the current Iterator node element.
      *
      * Implementation of {@see Iterator::current()}.
      *

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -43,11 +43,11 @@ use Koch\Cache\CacheInterface;
 class Xcache extends AbstractCache implements CacheInterface
 {
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (!extension_loaded('xcache')) {
             throw new Exception('The PHP extension "xcache" is not loaded. You may enable it in "php.ini"!');
@@ -57,10 +57,11 @@ class Xcache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Contains checks if a key exists in the cache
+     * Contains checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
@@ -68,10 +69,11 @@ class Xcache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string $key Identifier for the data
-     * @return mixed  boolean FALSE if the data was not fetched from the cache, DATA on success
+     * @param string $key Identifier for the data
+     *
+     * @return mixed boolean FALSE if the data was not fetched from the cache, DATA on success
      */
     public function fetch($key)
     {
@@ -79,12 +81,13 @@ class Xcache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param  string  $key  Identifier for the data
-     * @param  mixed   $data Data to be cached
-     * @param  integer $ttl  How long to cache the data, in minutes
-     * @return boolean True if the data was successfully cached, false on failure
+     * @param string $key  Identifier for the data
+     * @param mixed  $data Data to be cached
+     * @param int    $ttl  How long to cache the data, in minutes
+     *
+     * @return bool True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $ttl = 0)
     {
@@ -96,10 +99,11 @@ class Xcache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Delete data by key from cache
+     * Delete data by key from cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean True if the data was successfully removed, false on failure
+     * @param string $key Identifier for the data
+     *
+     * @return bool True if the data was successfully removed, false on failure
      */
     public function delete($key)
     {
@@ -107,9 +111,9 @@ class Xcache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Clears the cache
+     * Clears the cache.
      *
-     * @return boolean
+     * @return bool
      */
     public function clear()
     {
@@ -129,17 +133,17 @@ class Xcache extends AbstractCache implements CacheInterface
 
         $info = xcache_info(XC_TYPE_VAR, 0);
 
-        return array(
-            CacheInterface::STATS_HITS => $info['hits'],
-            CacheInterface::STATS_MISSES => $info['misses'],
-            CacheInterface::STATS_UPTIME => null,
-            CacheInterface::STATS_MEMORY_USAGE => $info['size'],
+        return [
+            CacheInterface::STATS_HITS             => $info['hits'],
+            CacheInterface::STATS_MISSES           => $info['misses'],
+            CacheInterface::STATS_UPTIME           => null,
+            CacheInterface::STATS_MEMORY_USAGE     => $info['size'],
             CacheInterface::STATS_MEMORY_AVAILABLE => $info['avail'],
-        );
+        ];
     }
 
     /**
-     * Checks that xcache.admin.enable_auth is Off
+     * Checks that xcache.admin.enable_auth is Off.
      *
      * @throws \BadMethodCallException When xcache.admin.enable_auth is On
      */

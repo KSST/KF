@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -34,12 +33,12 @@ use Koch\Form\FormElementInterface;
 class JqSelectDate extends FormElement implements FormElementInterface
 {
     /**
-     * Flag Variable for the output of the datepicker as an icon (if true)
+     * Flag Variable for the output of the datepicker as an icon (if true).
      */
     protected $asIcon = false;
 
     /**
-     * contains the datepicker html string for output
+     * contains the datepicker html string for output.
      */
     protected $html = '<div type="text" id="datepicker"></div>';
 
@@ -48,10 +47,11 @@ class JqSelectDate extends FormElement implements FormElementInterface
      *
      * @var array
      */
-    private $attributes = array();
+    private $attributes = [];
 
     /**
-     * Contains a sprintf javascript function string
+     * Contains a sprintf javascript function string.
+     *
      * @var string
      */
     private $sprintf_datepicker_js = '<script type="text/javascript">
@@ -61,7 +61,7 @@ class JqSelectDate extends FormElement implements FormElementInterface
                                          }); });</script>';
 
     /**
-     * contains the javascript libraries
+     * contains the javascript libraries.
      *
      * @var string
      */
@@ -77,19 +77,19 @@ class JqSelectDate extends FormElement implements FormElementInterface
         // <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
         $this->jsLibraries = '<link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css"'
             . 'rel="stylesheet" /><script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js">'
-            .'</script>';
+            . '</script>';
     }
 
     /**
-     * Returns the generated
+     * Returns the generated.
      */
     public function getJavascript()
     {
-        return $this->jsLibraries.sprintf($this->sprintf_datepicker_js, $this->getName(), $this->getAttributes());
+        return $this->jsLibraries . sprintf($this->sprintf_datepicker_js, $this->getName(), $this->getAttributes());
     }
 
     /**
-     * Gets the datepicker attributes array
+     * Gets the datepicker attributes array.
      *
      * @see setAttributes
      */
@@ -111,13 +111,13 @@ class JqSelectDate extends FormElement implements FormElementInterface
     }
 
     /**
-     * Sets a single attribute to the datepicker attributes array
+     * Sets a single attribute to the datepicker attributes array.
      *
      * @see setAttributes
      */
     public function setAttribute($attribute, $value)
     {
-        $new_attribute = array();
+        $new_attribute             = [];
         $new_attribute[$attribute] = $value;
         $this->setAttributes($new_attribute);
 
@@ -130,14 +130,14 @@ class JqSelectDate extends FormElement implements FormElementInterface
     public function asIcon()
     {
         // define relevat attributes to display the datepicker as an icon
-        $datepickerAttributes = array(
-            'firstDay' => '1',
-            'format' => 'yy-mm-dd',
-            'showOn' => 'button',
-            'buttonImage' => 'themes/core/images/lullacons/calendar.png',
+        $datepickerAttributes = [
+            'firstDay'        => '1',
+            'format'          => 'yy-mm-dd',
+            'showOn'          => 'button',
+            'buttonImage'     => 'themes/core/images/lullacons/calendar.png',
             'buttonImageOnly' => 'true',
-            'constrainInput' => 'false',
-        );
+            'constrainInput'  => 'false',
+        ];
 
         // set the relevant attributes
         $this->setAttributes($datepickerAttributes);
@@ -149,14 +149,14 @@ class JqSelectDate extends FormElement implements FormElementInterface
     }
 
     /**
-     * Adds the jQuery UI Date Select Dialog
+     * Adds the jQuery UI Date Select Dialog.
      */
     public function render()
     {
         $html = '';
         $html .= $this->html;
 
-        /**
+        /*
          * Watch out!
          * The div dialog must be present in the dom,
          * before you assign JS functions to it via $('#datepicker')

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -36,7 +36,8 @@ class TextTemplate extends AbstractRenderer
     /**
      * Sets the template file.
      *
-     * @param  string                   $file
+     * @param string $file
+     *
      * @throws InvalidArgumentException
      */
     public function setTemplate($file)
@@ -55,6 +56,7 @@ class TextTemplate extends AbstractRenderer
      *
      * @param string Template File.
      * @param array Viewdata
+     *
      * @return string
      */
     public function render($template = null, $viewdata = null)
@@ -66,7 +68,7 @@ class TextTemplate extends AbstractRenderer
             $this->assign($viewdata);
         }
 
-        $keys = array();
+        $keys = [];
 
         // transform viewdata keys into placeholders
         foreach ($this->viewdata as $key => $value) {
@@ -80,7 +82,8 @@ class TextTemplate extends AbstractRenderer
     /**
      * Renders template content to file.
      *
-     * @param  string $file Output file.
+     * @param string $file Output file.
+     *
      * @return bool
      */
     public function renderToFile($file)

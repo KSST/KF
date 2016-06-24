@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -24,10 +24,10 @@
 
 namespace Koch\Filter\Filters;
 
+use Koch\Config\Config;
 use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Config\Config;
 
 /**
  * Koch Framework - Filter for Language Selection via URL.
@@ -59,7 +59,7 @@ class LanguageViaGet implements FilterInterface
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)
     {
-        /**
+        /*
          * take the initiative of filtering, if language switching is enabled in CONFIG
          * or pass through (do nothing) if disabled
          */
@@ -70,13 +70,13 @@ class LanguageViaGet implements FilterInterface
         // fetch URL parameter "&lang=" from $_GET['lang']
         $language = $request->getParameterFromGet('lang');
 
-        if (isset($language) === true and (mb_strlen($language) == 2)) {
-            /**
+        if (isset($language) && (mb_strlen($language) === 2)) {
+            /*
              * memorize in the user session
              * a) the selected language
              * b) that the language was set via $_GET parameter
              */
-            $_SESSION['user']['language'] = mb_strtolower($language);
+            $_SESSION['user']['language']         = mb_strtolower($language);
             $_SESSION['user']['language_via_get'] = 1;
         }
     }

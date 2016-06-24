@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -29,7 +28,7 @@ use Koch\Form\FormElement;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Timetoken
+ * Formelement_Timetoken.
  */
 class TimeToken extends FormElement implements FormElementInterface
 {

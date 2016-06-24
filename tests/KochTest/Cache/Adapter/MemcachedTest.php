@@ -21,7 +21,7 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "memcached".');
         }
 
-        $this->object = new Memcached;
+        $this->object = new Memcached();
     }
 
     public function tearDown()
@@ -31,10 +31,10 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 
     public static function SetOptionDataprovider()
     {
-        return array(
-          array('useConnection', 'default'),
-          array('connection', array('default' => array()))
-        );
+        return [
+          ['useConnection', 'default'],
+          ['connection', ['default' => []]],
+        ];
     }
 
     /**
@@ -89,6 +89,7 @@ class MemcachedTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\Memcached::stats
+     *
      * @todo   Implement testStats().
      */
     public function testStats()

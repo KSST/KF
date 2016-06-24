@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,7 +32,7 @@ abstract class AbstractSession implements SessionInterface, \ArrayAccess
     /**
      * =======================
      *       Get and Set
-     * =======================
+     * =======================.
      */
 
     /**
@@ -43,7 +43,7 @@ abstract class AbstractSession implements SessionInterface, \ArrayAccess
      */
     public function set($key, $value)
     {
-        if (is_resource($value) === true) {
+        if (is_resource($value)) {
             throw new \LogicException('Do not store resources in the SESSION! Keep it light!');
         }
 
@@ -54,6 +54,7 @@ abstract class AbstractSession implements SessionInterface, \ArrayAccess
      * Gets Data from the Session.
      *
      * @param string key
+     *
      * @return mixed value/boolean false
      */
     public function get($key)
@@ -68,9 +69,8 @@ abstract class AbstractSession implements SessionInterface, \ArrayAccess
     /**
      * =====================================
      *   Implementation of SPL ArrayAccess
-     * =====================================
+     * =====================================.
      */
-
     public function offsetExists($offset)
     {
         return isset($_SESSION[$offset]);
@@ -78,7 +78,7 @@ abstract class AbstractSession implements SessionInterface, \ArrayAccess
 
     public function offsetGet($offset)
     {
-        if (isset($_SESSION[$offset]) === true) {
+        if (isset($_SESSION[$offset])) {
             return $_SESSION[$offset];
         } else {
             throw new \InvalidArgumentException(sprintf('Array Key "%s" is not defined.', $offset));

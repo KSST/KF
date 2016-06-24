@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -33,13 +33,14 @@ use Koch\View\AbstractRenderer;
  */
 class Theme
 {
-    public $theme = '';
-    public $theme_info = array();
+    public $theme      = '';
+    public $theme_info = [];
 
     /**
-     * Constructor, or what ;)
+     * Constructor, or what ;).
      *
-     * @param  string                  $theme Name of the Theme.
+     * @param string $theme Name of the Theme.
+     *
      * @return \Koch\View\Helper\Theme
      */
     public function __construct($theme)
@@ -76,7 +77,7 @@ class Theme
         foreach ($paths as $path) {
             $file = $path . DIRECTORY_SEPARATOR . 'theme_info.xml';
 
-            if (is_file($file) === true) {
+            if (is_file($file)) {
                 return $file;
             }
         }
@@ -86,7 +87,8 @@ class Theme
      * Looks for the requested theme in the frontend and backend theme folder
      * and returns the theme path.
      *
-     * @param  string $theme Theme name.
+     * @param string $theme Theme name.
+     *
      * @return string Path to theme.
      */
     public function getPath($theme = null)
@@ -100,12 +102,12 @@ class Theme
         }
 
         $frontend = APPLICATION_PATH . 'Themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
-        if (is_dir($frontend) === true) {
+        if (is_dir($frontend)) {
             return $frontend;
         }
 
         $backend = APPLICATION_PATH . 'Themes/backend/' . $theme . DIRECTORY_SEPARATOR;
-        if (is_dir($backend) === true) {
+        if (is_dir($backend)) {
             return $backend;
         }
 
@@ -116,22 +118,23 @@ class Theme
      * Looks for the requested theme in the frontend and backend theme folder
      * and returns the web path of the theme.
      *
-     * @param  string $theme Theme name.
+     * @param string $theme Theme name.
+     *
      * @return string Webpath of theme (for usage in templates).
      */
     public function getWebPath($theme = null)
     {
-        if ($theme == null) {
+        if ($theme === null) {
             $theme = $this->getName();
         }
 
         // check absolute, return www
-        if (is_dir(APPLICATION_PATH . 'Themes/frontend/' . $theme) === true) {
-             return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
+        if (is_dir(APPLICATION_PATH . 'Themes/frontend/' . $theme)) {
+            return WWW_ROOT_THEMES_FRONTEND . $theme . '/';
         }
 
         // check absolute, return www
-        if (is_dir(APPLICATION_PATH . 'Themes/backend/' . $theme) === true) {
+        if (is_dir(APPLICATION_PATH . 'Themes/backend/' . $theme)) {
             return WWW_ROOT_THEMES_BACKEND . $theme . '/';
         }
     }
@@ -139,15 +142,17 @@ class Theme
     /**
      * Returns "theme_info.xml" for the requested theme.
      *
-     * @param  string                    $theme Theme name.
-     * @return string                    File path to "theme_info.xml" file.
+     * @param string $theme Theme name.
+     *
+     * @return string File path to "theme_info.xml" file.
+     *
      * @throws \Koch\Exception\Exception
      */
     public function getThemeInfoFile($theme)
     {
         $file = $this->getPath($theme) . 'theme_info.xml';
 
-        if (is_file($file) === true) {
+        if (is_file($file)) {
             return $file;
         }
 
@@ -157,8 +162,9 @@ class Theme
     /**
      * Returns Theme Infos as array.
      *
-     * @param  string $theme Name of the Theme.
-     * @return array  Theme_Info.xml as Array.
+     * @param string $theme Name of the Theme.
+     *
+     * @return array Theme_Info.xml as Array.
      */
     public function getInfoArray($theme = null)
     {
@@ -175,7 +181,7 @@ class Theme
     /**
      * --------------------------------------------------------------------------------------------
      *  GETTERS
-     * --------------------------------------------------------------------------------------------
+     * --------------------------------------------------------------------------------------------.
      */
 
     /**
@@ -273,22 +279,23 @@ class Theme
     /**
      * Iterates over a theme dir (backend / frontend) and fetches some data.
      *
-     * @param  string  $dir             APPLICATION_FRONTEND_THEMES_PATH, APPLICATION_BACKEND_THEMES_PATH
-     * @param  string  $type            'frontend' or 'backend'
-     * @param  boolean $only_index_name
+     * @param string $dir             APPLICATION_FRONTEND_THEMES_PATH, APPLICATION_BACKEND_THEMES_PATH
+     * @param string $type            'frontend' or 'backend'
+     * @param bool   $only_index_name
+     *
      * @return string
      */
     protected static function iterateDir($dir, $type, $only_index_name = true)
     {
-        $dirs = '';
+        $dirs    = '';
         $dir_tmp = '';
-        $i = 0;
-        $themes = array();
+        $i       = 0;
+        $themes  = [];
 
         $dirs = new \DirectoryIterator($dir);
 
         foreach ($dirs as $dir) {
-            /**
+            /*
              * Skip early on dots, like "." or ".." or ".svn", by cheching the first char.
              * we can not use DirectoryIterator::isDot() here, because it only checks "." and "..".
              */
@@ -298,7 +305,7 @@ class Theme
                 continue;
             }
 
-            /**
+            /*
              * take only directories in account, which contain a "theme_info.xml" file
              */
             if (is_file($dir->getPathName() . DIRECTORY_SEPARATOR . 'theme_info.xml')) {
@@ -309,10 +316,10 @@ class Theme
                     $themes[$i]['path'] = $dir->getPathName();
 
                     // set frontend as type
-                    $themes[$i]['type']    = $type;
+                    $themes[$i]['type'] = $type;
 
                     // add dirname
-                    $themes[$i]['name'] = $type . DIRECTORY_SEPARATOR .  (string) $dir;
+                    $themes[$i]['name'] = $type . DIRECTORY_SEPARATOR . (string) $dir;
                 } else {
                     // add dirname
                     $themes[$i] = $type . DIRECTORY_SEPARATOR . (string) $dir;

@@ -3,14 +3,14 @@
 error_reporting(E_ALL | E_STRICT);
 
 // add framework and tests to include path
-$framework  = realpath(__DIR__ . '/../framework');
-$tests      = realpath(__DIR__ . '/../tests');
+$framework = realpath(__DIR__ . '/../framework');
+$tests     = realpath(__DIR__ . '/../tests');
 
-$paths = array(
+$paths = [
     $framework,
     $tests,
-    get_include_path() // attach original include paths
-);
+    get_include_path(), // attach original include paths
+];
 set_include_path(implode(PATH_SEPARATOR, $paths));
 
 // gettext fall through

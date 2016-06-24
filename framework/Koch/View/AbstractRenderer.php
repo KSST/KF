@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -37,10 +37,10 @@ abstract class AbstractRenderer
      *
      * @var array
      */
-    public $options = array();
+    public $options = [];
 
     /**
-     * @var Object Holds instance of the Rendering Engine Object
+     * @var object Holds instance of the Rendering Engine Object
      */
     public $renderer = null;
 
@@ -67,7 +67,7 @@ abstract class AbstractRenderer
     /**
      * @var array|object Viewdata
      */
-    public $viewdata = array();
+    public $viewdata = [];
 
     /**
      * @var object Koch\View\Mapper
@@ -76,21 +76,23 @@ abstract class AbstractRenderer
 
     /**
      * Directive for auto-escaping of template variables before rendering.
+     *
      * @todo
-     * @var boolean
+     *
+     * @var bool
      */
     #public $autoEscape = true;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->setOptions($options);
 
-        $this->viewMapper = new \Koch\View\Mapper;
+        $this->viewMapper = new \Koch\View\Mapper();
     }
 
     /**
@@ -116,7 +118,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Returns the render engine object
+     * Returns the render engine object.
      *
      * @return Renderer
      */
@@ -128,23 +130,25 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Initialize the render engine object
+     * Initialize the render engine object.
      *
-     * @param  string $template Template Name for "Frontloader" Rendering Engines (xtpl).
+     * @param string $template Template Name for "Frontloader" Rendering Engines (xtpl).
+     *
      * @return Engine Object
      */
     abstract public function initializeEngine($template = null);
 
     /**
-     * Configure the render engine object
+     * Configure the render engine object.
      */
     abstract public function configureEngine();
 
     /**
-     * Renders the given Template with renderMode wrapped (with Layout)
+     * Renders the given Template with renderMode wrapped (with Layout).
      *
      * @param string Template
      * @param array|object Data to assign to the template.
+     *
      * @return string
      */
     abstract public function render($template = null, $viewdata = null);
@@ -160,7 +164,8 @@ abstract class AbstractRenderer
     /**
      * Executes the template rendering and returns the result.
      *
-     * @param  string $template Template Filename
+     * @param string $template Template Filename
+     *
      * @return string
      */
     abstract public function fetch($template, $viewdata = null);
@@ -168,13 +173,14 @@ abstract class AbstractRenderer
     /**
      * Executes the template rendering and displays the result.
      *
-     * @param  string $template Template Filename
+     * @param string $template Template Filename
+     *
      * @return string
      */
     abstract public function display($template, $viewdata = null);
 
     /**
-     * Clear all assigned Variables
+     * Clear all assigned Variables.
      */
     public function clearVars()
     {
@@ -212,7 +218,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Get the template name
+     * Get the template name.
      *
      * Proxies to Koch\View\Mapper::getTemplate()
      *
@@ -224,7 +230,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Constants for overall usage in all templates of all render engines
+     * Constants for overall usage in all templates of all render engines.
      *
      * a) Assign Web Paths
      * b) Meta
@@ -237,9 +243,9 @@ abstract class AbstractRenderer
     {
         $modulename = \Koch\Router\TargetRoute::getModule();
 
-        $templateConstants = array();
+        $templateConstants = [];
 
-        /**
+        /*
          * a) Assign Web Paths
          *
          *    Watch it! These are relative (not absolute) paths. They are based on WWW_ROOT!
@@ -253,12 +259,12 @@ abstract class AbstractRenderer
         $templateConstants['www_root_themes_backend']  = WWW_ROOT_THEMES_BACKEND;
         $templateConstants['www_root_themes_frontend'] = WWW_ROOT_THEMES_FRONTEND;
 
-        /**
+        /*
          * b) Meta Informations
          */
         $templateConstants['meta'] = $this->config['meta'];
 
-        /**
+        /*
          * c) Application Version
          *
          *    Note: This is doubled functionality.
@@ -269,7 +275,7 @@ abstract class AbstractRenderer
         $templateConstants['application_version_name']  = APPLICATION_VERSION_NAME;
         $templateConstants['application_url']           = APPLICATION_URL;
 
-        /**
+        /*
          * d) Page related
          */
 
@@ -285,7 +291,7 @@ abstract class AbstractRenderer
         // Help Tracking
         $templateConstants['helptracking'] = $this->config['help']['tracking'];
 
-        /**
+        /*
          * Debug Display
          */
         #\Koch\Debug\Debug::printR($templateConstants);
@@ -312,7 +318,7 @@ abstract class AbstractRenderer
      */
     public function getLayoutTemplate()
     {
-        if ($this->layoutTemplate == null) {
+        if ($this->layoutTemplate === null) {
             $this->setLayoutTemplate($this->getTheme()->getLayoutFile());
         }
 
@@ -320,7 +326,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Returns the object Koch_Theme for accessing Configuration Values
+     * Returns the object Koch_Theme for accessing Configuration Values.
      *
      * @return object Koch_Theme
      */
@@ -343,14 +349,15 @@ abstract class AbstractRenderer
      * because htmlentities will cast all values to string.
      * Character encoding used is UTF-8.
      *
-     * @param  string  $key   The variable name.
-     * @param  mixed   $value The variable value.
-     * @return boolean True if data was assigned to view; false if not.
+     * @param string $key   The variable name.
+     * @param mixed  $value The variable value.
+     *
+     * @return bool True if data was assigned to view; false if not.
      */
     public function autoEscape($key, $value)
     {
         if (is_array($value)) {
-            $clean = array();
+            $clean = [];
             foreach ($value as $key2 => $value2) {
                 $clean[$key2] = htmlentities($value2, ENT_QUOTES, 'utf-8');
             }
@@ -376,11 +383,11 @@ abstract class AbstractRenderer
      */
     public function __call($method, $arguments)
     {
-        if (method_exists($this->renderer, $method) === true) {
-            return call_user_func_array(array($this->renderer, $method), $arguments);
+        if (method_exists($this->renderer, $method)) {
+            return call_user_func_array([$this->renderer, $method], $arguments);
         } else {
             throw new \InvalidArgumentException(
-                'Method "'. $method .'()" not existant in Render Engine "' . get_class($this->renderer) .'"!'
+                'Method "' . $method . '()" not existant in Render Engine "' . get_class($this->renderer) . '"!'
             );
         }
     }
@@ -392,7 +399,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Set renderer variables
+     * Set renderer variables.
      *
      * @param string $key   variable name
      * @param string $value variable value
@@ -403,10 +410,11 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Get renderer Variable Value
+     * Get renderer Variable Value.
      *
-     * @param  string $key variable name
-     * @return mixed  variable value
+     * @param string $key variable name
+     *
+     * @return mixed variable value
      */
     public function __get($key)
     {
@@ -414,7 +422,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Check if renderer variable is set
+     * Check if renderer variable is set.
      *
      * @param string $key variable name
      */
@@ -424,7 +432,7 @@ abstract class AbstractRenderer
     }
 
     /**
-     * Unset renderer variable
+     * Unset renderer variable.
      *
      * @param string $key variable name
      */

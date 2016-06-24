@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -35,14 +35,15 @@ use Koch\DI\Storage\ClassRepository;
  *
  * @author Markus Baker
  * @license Public Domain
+ *
  * @link http://phemto.sourceforge.net/index.php
  */
 class DependencyInjector
 {
     public $repository;
     private $top;
-    public $named_parameters = array();
-    public $unnamed_parameters = array();
+    public $named_parameters   = [];
+    public $unnamed_parameters = [];
 
     public function __construct()
     {
@@ -96,11 +97,11 @@ class DependencyInjector
     public function instantiate()
     {
         $values = func_get_args();
-        $type = array_shift($values);
+        $type   = array_shift($values);
         $this->unnamed_parameters += $values;
-        $this->repository = new ClassRepository();
-        $object = $this->top->create($type);
-        $this->named_parameters = array();
+        $this->repository       = new ClassRepository();
+        $object                 = $this->top->create($type);
+        $this->named_parameters = [];
 
         return $object;
     }
@@ -119,7 +120,7 @@ class DependencyInjector
      */
     public function settersFor($class)
     {
-        return array();
+        return [];
     }
 
     /**
@@ -127,7 +128,7 @@ class DependencyInjector
      */
     public function wrappersFor($type)
     {
-        return array();
+        return [];
     }
 
     public function useParameters($parameters)
@@ -146,7 +147,7 @@ class DependencyInjector
             return $this->named_parameters[$name];
         }
 
-        $value = array();
+        $value = [];
         $value = array_shift($this->unnamed_parameters);
         if ($value) {
             return $value;

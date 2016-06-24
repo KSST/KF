@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Pagination\Style;
@@ -43,28 +42,26 @@ class PunBB implements StyleInterface
 
         if ($current_page > 3) {
             $html .= sprintf('<a href="%s">1</a>', str_replace('{page}', 1, $url));
-            if ($current_page != 4) {
+            if ($current_page !== 4) {
                 $html .= '&hellip;';
             }
         }
 
         // render page range around the current page
         for ($i = $current_page - 2, $stop = $current_page + 3; $i < $stop; ++$i) {
-
             if ($i < 1 or $i > $total_pages) {
                 continue;
             }
 
-            if ($current_page == $i) {
+            if ($current_page === $i) {
                 $html .= sprintf('<li class="active">%s</li>', $i);
             } else {
                 $html .= sprintf('<a href="%s">$s</a>', str_replace('{page}', $i, $url), $i);
             }
-
         }
 
         if ($current_page <= $total_pages - 3) {
-            if ($current_page != $total_pages - 3) {
+            if ($current_page !== $total_pages - 3) {
                 $html .= '&hellip;';
             }
             $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $total_pages, $url), $total_pages);

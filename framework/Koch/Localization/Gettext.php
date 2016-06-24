@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -45,7 +45,7 @@ use Koch\Localization\Adapter\Gettext\Extractor;
 class Gettext extends Extractor
 {
     /**
-     * Setup mandatory extractors
+     * Setup mandatory extractors.
      */
     public function __construct()
     {
@@ -57,14 +57,14 @@ class Gettext extends Extractor
              ->setExtractor('tpl', 'Template');
 
         // register the tags/functions to extract
-        $this->getExtractor('PHP')->addTags(array('translate', 't', '_'));
+        $this->getExtractor('PHP')->addTags(['translate', 't', '_']);
 
         // register the tags/placeholders to extract
-        $this->getExtractor('Template')->addTags(array('_', 't'));
+        $this->getExtractor('Template')->addTags(['_', 't']);
     }
 
     /**
-     * Scans given files or directories and extracts gettext keys from the content
+     * Scans given files or directories and extracts gettext keys from the content.
      *
      * @param string|array $resource
      *
@@ -72,10 +72,10 @@ class Gettext extends Extractor
      */
     public function multiScan($resource)
     {
-        $this->inputFiles = array();
+        $this->inputFiles = [];
 
         if (false === is_array($resource)) {
-            $resource = array($resource);
+            $resource = [$resource];
         }
 
         foreach ($resource as $item) {

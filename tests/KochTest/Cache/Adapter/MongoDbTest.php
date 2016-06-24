@@ -23,10 +23,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "mongo" >= 1.3.0.');
         }
 
-        $options = array(
+        $options = [
             'database'   => 'test',
-            'collection' => 'test'
-        );
+            'collection' => 'test',
+        ];
 
         $this->mongo      = $this->getMockMongo();
         $this->collection = $this->getMockMongoCollection();
@@ -41,7 +41,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($this->db));
 
         // @todo mock injection via options.. omg
-        $options['mock'] = array('mongo' => $this->mongo, 'mongodb' => $this->db);
+        $options['mock'] = ['mongo' => $this->mongo, 'mongodb' => $this->db];
 
         $this->object = new MongoDb($options);
     }
@@ -53,10 +53,10 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
 
     public static function SetOptionDataprovider()
     {
-        return array(
-            array('database', 'default'),
-            array('collection', 'default')
-        );
+        return [
+            ['database', 'default'],
+            ['collection', 'default'],
+        ];
     }
 
     /**
@@ -75,7 +75,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     public function testInitialize()
     {
         // instant return
-        $this->object->collection = new \stdClass;
+        $this->object->collection = new \stdClass();
         $this->assertNull($this->object->initialize());
     }
 
@@ -111,7 +111,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
     {
         $this->collection->expects($this->once())
             ->method('remove')
-            ->with($this->equalTo(array('key' => 'key1')))
+            ->with($this->equalTo(['key' => 'key1']))
             ->will($this->returnValue(false));
 
         // assert that, key does not exist before
@@ -154,16 +154,16 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         $value = 'somevalue';
         $ttl   = 900;
 
-        $item = array(
+        $item = [
             'key'   => $key,
             'value' => $value,
             'ttl'   => time() + $ttl,
-        );
+        ];
 
         $this->collection
             ->expects($this->once())
             ->method('findOne')
-            ->with($this->equalTo(array('key' => $key)))
+            ->with($this->equalTo(['key' => $key]))
             ->will($this->returnValue($item));
 
         // assert that, we can get that value by key
@@ -197,16 +197,16 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         $value = 'somevalue';
         $ttl   = 900;
 
-        $item = array(
+        $item = [
             'key'   => $key,
             'value' => $value,
             'ttl'   => time() + $ttl,
-        );
+        ];
 
         $this->collection
             ->expects($this->once())
             ->method('findOne')
-            ->with($this->equalTo(array('key' => $key)))
+            ->with($this->equalTo(['key' => $key]))
             ->will($this->returnValue($item));
 
         $this->assertEquals($value, $this->object->getData($key));
@@ -221,16 +221,16 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         $value = 'somevalue';
         $ttl   = -10000;
 
-        $item = array(
+        $item = [
             'key'   => $key,
             'value' => $value,
             'ttl'   => time() + $ttl,
-        );
+        ];
 
         $this->collection
             ->expects($this->once())
             ->method('findOne')
-            ->with($this->equalTo(array('key' => $key)))
+            ->with($this->equalTo(['key' => $key]))
             ->will($this->returnValue($item));
 
         $this->assertEquals(false, $this->object->getData($key));
@@ -246,7 +246,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
         $this->collection
             ->expects($this->once())
             ->method('findOne')
-            ->with($this->equalTo(array('key' => $key)))
+            ->with($this->equalTo(['key' => $key]))
             ->will($this->returnValue(false));
 
         $this->assertEquals(false, $this->object->getData($key));
@@ -257,7 +257,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      */
     public function testStats()
     {
-        $this->assertEquals(array(), $this->object->stats());
+        $this->assertEquals([], $this->object->stats());
     }
 
     /**
@@ -265,7 +265,7 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
      */
     private function getMockMongo()
     {
-        return $this->getMock('Mongo', array(), array(), '', false, false);
+        return $this->getMock('Mongo', [], [], '', false, false);
     }
 
     private function getMockMongoClient()
@@ -277,11 +277,11 @@ class MongoDbTest extends \PHPUnit_Framework_TestCase
 
     private function getMockMongoDB()
     {
-        return $this->getMock('MongoDB', array(), array(), '', false, false);
+        return $this->getMock('MongoDB', [], [], '', false, false);
     }
 
     private function getMockMongoCollection()
     {
-        return $this->getMock('MongoCollection', array(), array(), '', false, false);
+        return $this->getMock('MongoCollection', [], [], '', false, false);
     }
 }

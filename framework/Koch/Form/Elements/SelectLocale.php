@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -30,7 +29,7 @@ use Koch\Form\FormElementInterface;
 class SelectLocale extends Select implements FormElementInterface
 {
     /**
-     * A locale drop-down select list
+     * A locale drop-down select list.
      *
      * You will find the value of the drop down in $_POST['locale']!
      */
@@ -39,13 +38,13 @@ class SelectLocale extends Select implements FormElementInterface
         // include locale arrays
         include __DIR__ . '/../../Localization/Locales.php';
 
-        /**
+        /*
          * prepare array structure for dropdown ( key => value )
          */
-        $options = array();
+        $options = [];
 
         foreach ($l10n_sys_locales as $locale => $locale_array) {
-            /**
+            /*
              * Key is the locale name.
              *
              * a locale name has the form ll_CC.
@@ -57,7 +56,7 @@ class SelectLocale extends Select implements FormElementInterface
              */
             $key = $locale;
 
-            /**
+            /*
              * Value consists of a long form of the language name and the locale code with hyphen.
              * This string will be displayed in the dropdown.
              * For example, "Deutsch/Deutschland (de-DE)" or "Suomi (fi-FI)".

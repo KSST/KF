@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -42,8 +42,7 @@ class Loader
     }
 
     /**
-     * Registers multiple Events by Name
-     *
+     * Registers multiple Events by Name.
      */
     public static function loadEventHandlers($events)
     {
@@ -90,7 +89,7 @@ class Loader
      */
     public static function loadModuleEvents($modulename)
     {
-        $events = include APPLICATION_MODULES_PATH . $modulename . '/'. $modulename . '.events.php';
+        $events = include APPLICATION_MODULES_PATH . $modulename . '/' . $modulename . '.events.php';
 
         self::loadEventHandlers($events);
     }

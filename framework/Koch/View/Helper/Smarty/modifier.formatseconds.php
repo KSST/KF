@@ -1,10 +1,10 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  *
  * Type:     modifier<br>
  * Name:     duration<br>
@@ -13,7 +13,9 @@
  * Input:
  *
  * Example:  {$seconds|formatseconds}
+ *
  * @param string
+ *
  * @return string
  */
 function smarty_modifier_formatseconds($seconds)

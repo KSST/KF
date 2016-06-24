@@ -7,7 +7,7 @@ use Koch\Form\Validators\Text;
 class TextTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var String
+     * @var string
      */
     protected $validator;
 
@@ -18,7 +18,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Subject Under Test
-        $this->validator = new Text;
+        $this->validator = new Text();
     }
 
     /**
@@ -32,7 +32,7 @@ class TextTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

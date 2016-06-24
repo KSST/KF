@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -31,7 +30,7 @@ class SelectYesNo extends Select implements FormElementInterface
 {
     public function getYesNo()
     {
-        $options = array('yes' => '1', 'no' => '0');
+        $options = ['yes' => '1', 'no' => '0'];
 
         return $options;
     }
@@ -39,7 +38,7 @@ class SelectYesNo extends Select implements FormElementInterface
     public function render()
     {
         // check if we have options
-        if ($this->options == null) {
+        if ($this->options === null) {
             // if we don't have options, we set only 'yes' and 'no'
             $this->setOptions($this->getYesNo());
         } else {

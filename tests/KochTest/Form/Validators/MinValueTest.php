@@ -9,7 +9,6 @@ use Koch\Form\Validators\MinValue;
  */
 class MinValueTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var MinValue
      */
@@ -22,7 +21,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\MinValue;
+        $this->validator = new \Koch\Form\Validators\MinValue();
     }
 
     /**
@@ -63,7 +62,7 @@ class MinValueTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

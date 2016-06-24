@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -48,7 +47,7 @@ class SecurityToken extends Hidden implements FormElementInterface
             $validHash = null;
         }
 
-        $this->addValidator('Identical', true, array($validHash));
+        $this->addValidator('Identical', true, [$validHash]);
 
         return $this;
     }
@@ -60,6 +59,5 @@ class SecurityToken extends Hidden implements FormElementInterface
 
     public function render()
     {
-
     }
 }

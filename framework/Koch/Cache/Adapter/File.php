@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -34,32 +34,33 @@ use Koch\Cache\CacheInterface;
  */
 class File extends AbstractCache implements CacheInterface
 {
-     /**
-     * Constructor
+    /**
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
     }
 
     /**
-     * Contains checks if a key exists in the cache
+     * Contains checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
         $lifetime = -1;
-        $file = realpath($this->createFilenameFromKey($key));
+        $file     = realpath($this->createFilenameFromKey($key));
 
         if (is_file($file) === false) {
             return false;
         }
 
-        $resource = fopen($file, "r");
+        $resource = fopen($file, 'r');
 
         if (false !== ($line = fgets($resource))) {
             $lifetime = (integer) $line;
@@ -71,10 +72,11 @@ class File extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string $key Identifier for the data
-     * @return mixed  boolean FALSE if the data was not fetched from the cache, DATA on success
+     * @param string $key Identifier for the data
+     *
+     * @return mixed boolean FALSE if the data was not fetched from the cache, DATA on success
      */
     public function fetch($key)
     {
@@ -108,13 +110,13 @@ class File extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param string  $key      Identifier for the data
-     * @param string  $data     Data to be cached
-     * @param integer $lifetime How long to cache the data, in minutes
+     * @param string $key      Identifier for the data
+     * @param string $data     Data to be cached
+     * @param int    $lifetime How long to cache the data, in minutes
      *
-     * @return boolean True if the data was successfully cached, false on failure
+     * @return bool True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 3600)
     {
@@ -141,11 +143,11 @@ class File extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Delete data by key from cache
+     * Delete data by key from cache.
      *
      * @param string $key Identifier for the data
      *
-     * @return boolean True if the data was successfully removed, false on failure
+     * @return bool True if the data was successfully removed, false on failure
      */
     public function delete($key)
     {
@@ -155,9 +157,9 @@ class File extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Clears the cache
+     * Clears the cache.
      *
-     * @return boolean True if cache cleared.
+     * @return bool True if cache cleared.
      */
     public function clear()
     {
@@ -167,20 +169,20 @@ class File extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Get stats and usage Informations for display
+     * Get stats and usage Informations for display.
      */
     public function stats()
     {
         // @todo implement statistics for file cache usage
         // usage 'filecache_' prefix to identify files
         // return number of files and total size of files, disk space left
-        return array(
-            CacheInterface::STATS_HITS => null,
-            CacheInterface::STATS_MISSES => null,
-            CacheInterface::STATS_UPTIME => null,
-            CacheInterface::STATS_MEMORY_USAGE => null,
-            CacheInterface::STATS_MEMORY_AVAILABLE => null
-        );
+        return [
+            CacheInterface::STATS_HITS             => null,
+            CacheInterface::STATS_MISSES           => null,
+            CacheInterface::STATS_UPTIME           => null,
+            CacheInterface::STATS_MEMORY_USAGE     => null,
+            CacheInterface::STATS_MEMORY_AVAILABLE => null,
+        ];
     }
 
     /**

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -37,7 +36,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies the minimum value allowed
+     * Specifies the minimum value allowed.
      */
     public function setMin($min)
     {
@@ -47,7 +46,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies the maximum value allowed
+     * Specifies the maximum value allowed.
      */
     public function setMax($max)
     {
@@ -57,7 +56,7 @@ class Range extends Input implements FormElementInterface
     }
 
     /**
-     * Specifies legal number intervals (if step="2", legal numbers could be -2,0,2,4, etc)
+     * Specifies legal number intervals (if step="2", legal numbers could be -2,0,2,4, etc).
      */
     public function setStep($step)
     {

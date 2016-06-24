@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -44,11 +44,11 @@ class Xslt extends AbstractRenderer
     public $xslfile = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('libxml') === false or extension_loaded('xsl') === false) {
             throw new Exception(
@@ -60,21 +60,19 @@ class Xslt extends AbstractRenderer
 
         // instantiate the render engine
         // @link http://php.net/manual/en/class.xsltprocessor.php
-        $this->renderer = new \XSLTProcessor;
+        $this->renderer = new \XSLTProcessor();
     }
 
     public function initializeEngine($template = null)
     {
-
     }
 
     public function configureEngine()
     {
-
     }
 
     /**
-     * Set XSL Stylesheet
+     * Set XSL Stylesheet.
      *
      * @param $xslfile The fullpath to the XSL StyleSheet file for later combination with the xml data.
      */
@@ -84,7 +82,7 @@ class Xslt extends AbstractRenderer
     }
 
     /**
-     * Get XSL Stylesheet
+     * Get XSL Stylesheet.
      *
      * @return $xslfile
      */
@@ -104,13 +102,13 @@ class Xslt extends AbstractRenderer
         // $this->response()->setContentType('text/html');
 
         if (!empty($this->xslfile)) {
-            $dom_stylesheet = new \DOMDocument;
+            $dom_stylesheet = new \DOMDocument();
             $dom_stylesheet->load($this->xslfile);
             // import the stylesheet for later transformation
             $this->renderer->importStyleSheet($dom_stylesheet);
         }
 
-        $dom_xml = new \DOMDocument;
+        $dom_xml = new \DOMDocument();
         $dom_xml->load($template);
 
         // then import the xml data (or file) into the XSLTProcessor and start the transform

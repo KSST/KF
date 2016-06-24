@@ -7,7 +7,6 @@ use Koch\DI\Lifecycle\Reused;
 
 class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var DependencyInjector
      */
@@ -19,7 +18,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new DependencyInjector;
+        $this->object = new DependencyInjector();
     }
 
     /**
@@ -286,7 +285,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     public function testSettersFor()
     {
         $class = '';
-        $this->assertEquals(array(), $this->object->settersFor($class));
+        $this->assertEquals([], $this->object->settersFor($class));
     }
 
     /**
@@ -295,7 +294,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     public function testWrappersFor()
     {
         $type = '';
-        $this->assertEquals(array(), $this->object->wrappersFor($type));
+        $this->assertEquals([], $this->object->wrappersFor($type));
     }
 
     /**
@@ -303,7 +302,7 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
      */
     public function testUseParameters()
     {
-        $parameters = array('A' => '1');
+        $parameters = ['A' => '1'];
         $this->object->useParameters($parameters);
         $this->assertEquals($parameters, $this->object->named_parameters);
     }
@@ -314,11 +313,11 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     public function testInstantiateParameter()
     {
         // prepare param 1
-        $parameter                              = $this->getMock('parameter', array('getName'));
+        $parameter = $this->getMock('parameter', ['getName']);
         // Calling $parameter->getName() will now return 'name'.
         $parameter->expects($this->any())->method('getName')->will($this->returnValue('name'));
         // prepare param 2
-        $nesting                                = '';
+        $nesting = '';
         // prepare class
         $this->object->named_parameters['name'] = 'someValue';
 
@@ -335,11 +334,11 @@ class DependencyInjectorTest extends \PHPUnit_Framework_TestCase
     public function testInstantiateParameterThrowsException()
     {
         // prepare param 1
-        $parameter = $this->getMock('parameter', array('getName'));
+        $parameter = $this->getMock('parameter', ['getName']);
         // Calling $parameter->getName() will now return 'name'.
         $parameter->expects($this->any())->method('getName')->will($this->returnValue('theMissingDependency'));
         // prepare param 2
-        $nesting   = '';
+        $nesting = '';
 
         $erv = $this->object->instantiateParameter($parameter, $nesting);
 

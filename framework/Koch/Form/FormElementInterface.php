@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -40,7 +40,8 @@ interface FormElementInterface
     // getter/ setter for the value
 
     /**
-     * @param  integer          $value
+     * @param int $value
+     *
      * @return FormElement|null
      */
     public function setValue($value);

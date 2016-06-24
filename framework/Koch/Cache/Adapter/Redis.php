@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -35,22 +35,23 @@ use Koch\Cache\CacheInterface;
  * keys can contain strings, hashes, lists, sets and sorted sets.
  *
  * composer.json > require { "predis/service-provider": "dev-master" }
+ *
  * @link http://redis.io/
  * @link https://github.com/nicolasff/phpredis
  */
 class Redis extends AbstractCache implements CacheInterface
 {
-     /**
+    /**
      * @var object PHP Redis instance
      */
     private $redis;
 
-     /**
-     * Constructor
+    /**
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('redis') === false) {
             throw new Exception(
@@ -66,15 +67,16 @@ class Redis extends AbstractCache implements CacheInterface
         }
 
         // configure
-        $this->redis->setOption(Redis::OPT_SERIALIZER, Redis::SERIALIZER_IGBINARY);
-        $this->redis->setOption(Redis::OPT_PREFIX, 'KochFramework:'); // use custom prefix on all keys
+        $this->redis->setOption(self::OPT_SERIALIZER, self::SERIALIZER_IGBINARY);
+        $this->redis->setOption(self::OPT_PREFIX, 'KochFramework:'); // use custom prefix on all keys
     }
 
     /**
-     * Contains checks if a key exists in the cache
+     * Contains checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
@@ -82,10 +84,11 @@ class Redis extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string $key Identifier for the data
-     * @return mixed  string|boolean If key not found, returns FALSE. Otherwise, returns the value of the key.
+     * @param string $key Identifier for the data
+     *
+     * @return mixed string|boolean If key not found, returns FALSE. Otherwise, returns the value of the key.
      */
     public function fetch($key)
     {
@@ -93,12 +96,13 @@ class Redis extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param  string  $key      Identifier for the data
-     * @param  mixed   $data     Data to be cached
-     * @param  integer $lifetime How long to cache the data, in minutes
-     * @return boolean True if the data was successfully cached, false on failure
+     * @param string $key      Identifier for the data
+     * @param mixed  $data     Data to be cached
+     * @param int    $lifetime How long to cache the data, in minutes
+     *
+     * @return bool True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 0)
     {
@@ -112,8 +116,9 @@ class Redis extends AbstractCache implements CacheInterface
     /**
      * Remove specified keys.
      *
-     * @param  array|string $key The key(s) to delete.
-     * @return boolean      True, if one or more keys deleted. False otherwise.
+     * @param array|string $key The key(s) to delete.
+     *
+     * @return bool True, if one or more keys deleted. False otherwise.
      */
     public function delete($key)
     {
@@ -123,7 +128,7 @@ class Redis extends AbstractCache implements CacheInterface
     /**
      * Removes all entries from the current database.
      *
-     * @return boolean Always True.
+     * @return bool Always True.
      */
     public function clear()
     {
@@ -134,12 +139,12 @@ class Redis extends AbstractCache implements CacheInterface
     {
         $info = $this->redis->info();
 
-        return array(
-            Cache::STATS_HITS   => false,
-            Cache::STATS_MISSES => false,
-            Cache::STATS_UPTIME => $info['uptime_in_seconds'],
-            Cache::STATS_MEMORY_USAGE       => $info['used_memory'],
-            Cache::STATS_MEMORY_AVAILIABLE  => false
-        );
+        return [
+            Cache::STATS_HITS              => false,
+            Cache::STATS_MISSES            => false,
+            Cache::STATS_UPTIME            => $info['uptime_in_seconds'],
+            Cache::STATS_MEMORY_USAGE      => $info['used_memory'],
+            Cache::STATS_MEMORY_AVAILIABLE => false,
+        ];
     }
 }

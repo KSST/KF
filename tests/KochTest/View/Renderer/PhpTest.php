@@ -2,8 +2,8 @@
 
 namespace KochTest\View\Renderer;
 
-use Koch\View\Renderer\Php;
 use Koch\View\Mapper;
+use Koch\View\Renderer\Php;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
 use org\bovigo\vfs\vfsStreamWrapper;
@@ -25,18 +25,18 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     {
         // With the PHP renderer one might use short_open_tags in templates.
         // They are enabled by default from PHP 5.4 on, but were disabled by default in PHP 5.3.
-        if (version_compare(PHP_VERSION, '5.4.0', '<') and (ini_get('short_open_tag') == false)) {
+        if (version_compare(PHP_VERSION, '5.4.0', '<') and (ini_get('short_open_tag') === false)) {
             $this->markTestSkipped('This test requires the php.ini option "short_open_tag=on".');
         }
 
-        $options = array();
+        $options = [];
 
         $this->object = new Php($options);
 
         vfsStreamWrapper::register();
         $this->templateFileURL = vfsStream::url('root/php-renderer.tpl');
-        $this->file = vfsStream::newFile('php-renderer.tpl', 0777)->withContent($this->getTemplateContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file            = vfsStream::newFile('php-renderer.tpl', 0777)->withContent($this->getTemplateContent());
+        $this->root            = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -57,7 +57,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testPassingOptionsViaConstructor()
     {
-        $options = array('optionA' => 'value');
+        $options      = ['optionA' => 'value'];
         $this->object = new Php($options);
 
         $this->assertTrue(isset($this->object->options['optionA']));
@@ -78,7 +78,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function testFetch()
     {
         $template = $this->templateFileURL;
-        $data = array('placeholder' => 'World');
+        $data     = ['placeholder' => 'World'];
 
         $result = $this->object->fetch($template, $data);
 
@@ -96,12 +96,12 @@ class PhpTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value', $this->object->viewdata['key']);
 
         // array
-        $array = array('key' => 'value');
+        $array = ['key' => 'value'];
         $this->object->assign($array);
         $this->assertEquals('value', $this->object->viewdata['key']);
 
         // object
-        $object = new \stdClass;
+        $object      = new \stdClass();
         $object->key = 'value';
         $this->object->assign($object);
         $this->assertEquals('value', $this->object->viewdata['key']);
@@ -114,7 +114,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function testRender()
     {
         $template = $this->templateFileURL;
-        $viewdata = array('placeholder' => 'World');
+        $viewdata = ['placeholder' => 'World'];
 
         $result = $this->object->render($template, $viewdata);
 
@@ -137,7 +137,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     public function testDisplay()
     {
         $template = $this->templateFileURL;
-        $viewdata = array('placeholder' => 'World');
+        $viewdata = ['placeholder' => 'World'];
 
         $this->object->display($template, $viewdata);
 
@@ -153,7 +153,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test methods of the AbstractRenderer
+     * Test methods of the AbstractRenderer.
      */
 
     /**
@@ -190,7 +190,7 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetSetViewMapper()
     {
-        $viewMapper = new Mapper;
+        $viewMapper = new Mapper();
         $this->object->setViewMapper($viewMapper);
         $this->assertEquals($viewMapper, $this->object->getViewMapper());
     }
@@ -211,21 +211,20 @@ class PhpTest extends \PHPUnit_Framework_TestCase
      */
     public function testAutoEscape()
     {
-        $key1 = 'key1';
+        $key1   = 'key1';
         $value1 = 'value1';
 
         $this->object->autoEscape($key1, $value1);
-        $this->assertEquals(array('key1' => 'value1'), $this->object->getVars());
+        $this->assertEquals(['key1' => 'value1'], $this->object->getVars());
 
         $this->object->clearVars();
 
         // array
-        $key2 = 'key2';
-        $value2 = array('value2a', 'value2b');
+        $key2   = 'key2';
+        $value2 = ['value2a', 'value2b'];
         $this->object->autoEscape($key2, $value2);
 
-        $expected = array('key2' => array(0 => 'value2a', 1 => 'value2b'));
+        $expected = ['key2' => [0 => 'value2a', 1 => 'value2b']];
         $this->assertEquals($expected, $this->object->getVars());
     }
-
 }

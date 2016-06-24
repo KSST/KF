@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -53,7 +53,7 @@ interface FormInterface
     public function addElement($formelement, $position = null);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function delElementByName($name);
 

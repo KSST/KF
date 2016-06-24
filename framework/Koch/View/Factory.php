@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -33,10 +33,11 @@ namespace Koch\View;
 class Factory
 {
     /**
-     * getRenderer
+     * getRenderer.
      *
      * @param $adapter String (A Renderer Name like "smarty", "phptal", "native")
      * @param $injector DI
+     *
      * @return Renderer Object
      */
     public static function getRenderer($adapter = 'smarty', $injector = null)
@@ -45,7 +46,7 @@ class Factory
 
         $file = realpath(__DIR__ . '/Renderer/' . $adapter . '.php');
 
-        if (is_file($file) === true) {
+        if (is_file($file)) {
             $class = 'Koch\View\Renderer\\' . $adapter;
 
             if (false === class_exists($class, false)) {

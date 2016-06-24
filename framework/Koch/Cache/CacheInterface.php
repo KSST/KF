@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -30,24 +30,26 @@ namespace Koch\Cache;
 interface CacheInterface
 {
     // keys of the statistic array, returned by stats()
-    const STATS_HITS = 'hits';
-    const STATS_MISSES = 'misses';
-    const STATS_UPTIME = 'uptime';
-    const STATS_MEMORY_USAGE = 'memory_usage';
+    const STATS_HITS             = 'hits';
+    const STATS_MISSES           = 'misses';
+    const STATS_UPTIME           = 'uptime';
+    const STATS_MEMORY_USAGE     = 'memory_usage';
     const STATS_MEMORY_AVAILABLE = 'memory_available';
 
     /**
      * Checks cache for a stored variable.
      *
-     * @param  string $key
-     * @return bool   True, if key found, otherwise false.
+     * @param string $key
+     *
+     * @return bool True, if key found, otherwise false.
      */
     public function contains($key);
 
     /**
      * Fetch a stored variable from the cache.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function fetch($key);
@@ -55,8 +57,9 @@ interface CacheInterface
     /**
      * Cache a variable in the data store.
      *
-     * @param  string $key
-     * @param  int    $ttl
+     * @param string $key
+     * @param int    $ttl
+     *
      * @return bool
      */
     public function store($key, $data, $ttl = 0);
@@ -64,7 +67,8 @@ interface CacheInterface
     /**
      * Removes a stored variable from the cache.
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return bool
      */
     public function delete($key);
@@ -72,7 +76,7 @@ interface CacheInterface
     /**
      * Clears the cache.
      *
-     * @return boolean
+     * @return bool
      */
     public function clear();
 

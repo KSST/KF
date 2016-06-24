@@ -13,7 +13,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new File;
+        $this->object = new File();
 
         @unlink($this->object->createFilenameFromKey('key1'));
     }
@@ -28,7 +28,7 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testConstructor()
     {
-        $options = array('prefix' => 'value');
+        $options      = ['prefix' => 'value'];
         $this->object = new File($options);
         $this->assertEquals('value', $this->object->options['prefix']);
     }
@@ -73,10 +73,10 @@ class FileTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateFilenameFromKey()
     {
-       $key = 'ABC';
-       $er = $this->object->createFilenameFromKey($key);
+        $key = 'ABC';
+        $er  = $this->object->createFilenameFromKey($key);
        // not testing the actual middle part (composed of dir/dir/filename)
        $this->assertContains(APPLICATION_CACHE_PATH, $er);
-       $this->assertContains('.kf.cache', $er);
+        $this->assertContains('.kf.cache', $er);
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -46,15 +46,15 @@ class Dispatcher
     /**
      * @var array All registered Eventhandlers
      */
-    private $eventhandlers = array();
+    private $eventhandlers = [];
 
     /**
-     * Eventdispatcher is a Singleton implementation
+     * Eventdispatcher is a Singleton implementation.
      */
     public static function instantiate()
     {
         if (self::$instance === null) {
-            self::$instance = new Dispatcher;
+            self::$instance = new self();
         }
 
         return self::$instance;
@@ -69,14 +69,14 @@ class Dispatcher
     public function getEventHandlersForEvent($eventName)
     {
         if (isset($this->eventhandlers[$eventName]) === false) {
-            return array();
+            return [];
         }
 
         return $this->eventhandlers[$eventName];
     }
 
     /**
-     * Adds an Event to the Eventhandlers Array
+     * Adds an Event to the Eventhandlers Array.
      *
      * Usage
      * <code>
@@ -105,7 +105,7 @@ class Dispatcher
     {
         // if eventhandler is not set already, initialize as array
         if (isset($this->eventhandlers[$eventName]) === false) {
-            $this->eventhandlers[$eventName] = array();
+            $this->eventhandlers[$eventName] = [];
         }
 
         // add event to the eventhandler list
@@ -113,7 +113,7 @@ class Dispatcher
     }
 
     /**
-     * Removes an Event
+     * Removes an Event.
      *
      * Usage
      * <code>
@@ -133,7 +133,7 @@ class Dispatcher
     public function removeEventHandler($eventName, EventInterface $event_object = null)
     {
         // if eventhandler is not added, we have nothing to remove
-        if (isset($this->eventhandlers[$eventName]) == false) {
+        if (isset($this->eventhandlers[$eventName]) === false) {
             return false;
         }
 
@@ -142,7 +142,7 @@ class Dispatcher
             unset($this->eventhandlers[$eventName]);
         } else { // unset a specific eventhandler
             foreach ($this->eventhandlers[$eventName] as $key => $registered_event) {
-                if ($registered_event == $event_object) {
+                if ($registered_event === $event_object) {
                     unset($this->$this->eventhandlers[$eventName][$key]);
                 }
             }
@@ -150,7 +150,7 @@ class Dispatcher
     }
 
     /**
-     * triggerEvent
+     * triggerEvent.
      *
      * Usage
      * <code>
@@ -165,6 +165,7 @@ class Dispatcher
      * @param $event Name of Event or Event object to trigger.
      * @param $context default null The context of the event triggering, often the object from where we are calling.
      * @param $info default null Some pieces of information.
+     *
      * @return $event object
      */
     public function triggerEvent($event, $context = null, $info = null)
@@ -173,7 +174,7 @@ class Dispatcher
          * init a new event object with constructor settings
          * if $event is not an instance of \Koch\Event\Event.
          * $event string will be the $name inside $event object,
-         * accessible with $event->getName();
+         * accessible with $event->getName();.
          */
         if (false === ($event instanceof Event)) {
             $event = new Event($event, $context, $info);
@@ -192,7 +193,7 @@ class Dispatcher
             $eventhandler->execute($event);
 
             // break, on cancelled
-            if (method_exists($event, 'isCancelled') and $event->isCancelled() == true) {
+            if (method_exists($event, 'isCancelled') and $event->isCancelled() === true) {
                 break;
             }
         }

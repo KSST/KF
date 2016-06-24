@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -36,11 +36,11 @@ class Php extends AbstractRenderer
     private $file;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
     }
@@ -56,18 +56,19 @@ class Php extends AbstractRenderer
     }
 
     /**
-     * Assign specific variable to the template
+     * Assign specific variable to the template.
      *
-     * @param  mixed                   $key   Object with template vars (extraction method fetch), or array or key/value pair
-     * @param  string                  $value Variable value
+     * @param mixed  $key   Object with template vars (extraction method fetch), or array or key/value pair
+     * @param string $value Variable value
+     *
      * @return \Koch\View\Renderer\PHP
      */
     public function assign($key, $value = null)
     {
-        if (is_object($key) === true) {
+        if (is_object($key)) {
             // pull all non-static object properties
             $this->viewdata = get_object_vars($key);
-        } elseif (is_array($key) === true) {
+        } elseif (is_array($key)) {
             $this->viewdata += $key;
         } else {
             $this->viewdata[$key] = $value;
@@ -86,7 +87,8 @@ class Php extends AbstractRenderer
     /**
      * Executes the template rendering and returns the result.
      *
-     * @param  string $template Template Filename
+     * @param string $template Template Filename
+     *
      * @return string
      */
     public function fetch($template, $viewdata = null)
@@ -97,7 +99,7 @@ class Php extends AbstractRenderer
     }
 
     /**
-     * Display the rendered template
+     * Display the rendered template.
      *
      * @return string HTML Representation of Template with Vars
      */
@@ -107,7 +109,7 @@ class Php extends AbstractRenderer
 
         $this->file = $template;
 
-        /**
+        /*
          * extract all template variables to local scope,
          * but do not overwrite an existing variable.
          * on collision, prefix variable with "invalid_".

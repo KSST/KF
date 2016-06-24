@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,11 +32,12 @@ use Koch\Datatype\Conversion;
 class XML implements AdapterInterface
 {
     /**
-     * Write the configarray to the xml file
+     * Write the configarray to the xml file.
      *
      * @param string The filename
      * @param array  Array to transform and write as xml
-     * @return boolean array | boolean false
+     *
+     * @return bool array | boolean false
      */
     public static function write($file, array $array)
     {
@@ -46,11 +47,12 @@ class XML implements AdapterInterface
     }
 
     /**
-     * Read the config array from xml file
+     * Read the config array from xml file.
      *
      * @param   string  The filename
-     * @param  string $file
-     * @return mixed  array | boolean false
+     * @param string $file
+     *
+     * @return mixed array | boolean false
      */
     public static function read($file)
     {

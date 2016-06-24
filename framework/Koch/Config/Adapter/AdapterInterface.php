@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -29,7 +29,7 @@ interface AdapterInterface
     public static function read($file);
 
     /**
-     * @return boolean|null
+     * @return bool|null
      */
     public static function write($file, array $array);
 }

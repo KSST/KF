@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -36,7 +35,7 @@ class SimpleCaptcha extends Captcha implements FormElementInterface
     public $type = 'captcha';
 
     /**
-     * display captcha
+     * display captcha.
      */
     public function render()
     {
@@ -47,7 +46,7 @@ class SimpleCaptcha extends Captcha implements FormElementInterface
     }
 
     /**
-     * validate captcha
+     * validate captcha.
      *
      * In the code that processes the form submission, you need to add code to validate the CAPTCHA.
      */

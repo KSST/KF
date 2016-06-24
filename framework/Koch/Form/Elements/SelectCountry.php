@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -35,13 +34,13 @@ class SelectCountry extends Select implements FormElementInterface
     }
 
     /**
-     * getCountries()
+     * getCountries().
      *
      * @return array with country names
      */
     public static function getCountries()
     {
-        $countries = array (
+        $countries = [
             _('Afghanistan'),
             _('Albania'),
             _('Algeria'),
@@ -277,9 +276,9 @@ class SelectCountry extends Select implements FormElementInterface
             _('Western Sahara'),
             _('Yemen'),
             _('Zambia'),
-            _('Zimbabwe')
-         );
+            _('Zimbabwe'),
+         ];
 
-         return $countries;
+        return $countries;
     }
 }

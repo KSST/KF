@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -35,9 +35,10 @@ class Conversion
     }
 
     /**
-     * Converts a PHP array to XML (via XMLWriter)
+     * Converts a PHP array to XML (via XMLWriter).
      *
      * @param $array PHP Array
+     *
      * @return string XML string.
      */
     public static function arrayToXml($array)
@@ -64,6 +65,7 @@ class Conversion
      * writeArray() is a recursive looping over an php array,
      * adding all it's elemets to an XMLWriter object.
      * This method is used by arrayToXML().
+     *
      * @see arrayToXML()
      *
      * @param $xml XMLWriter Object
@@ -88,16 +90,17 @@ class Conversion
     }
 
     /**
-     * Converts a SimpleXML String recursivly to an Array
+     * Converts a SimpleXML String recursivly to an Array.
      *
      * @author Jason Sheets <jsheets at shadonet dot com>
-     * @return Array
+     *
+     * @return array
      */
     public static function simpleXMLToArrayLight($simplexml)
     {
-        $array = array();
+        $array = [];
 
-        if ($simplexml === true) {
+        if ($simplexml) {
             foreach ($simplexml as $k => $v) {
                 if ($simplexml['list'] === true) {
                     $array[] = self::SimpleXMLToArrayLight($v);
@@ -116,18 +119,19 @@ class Conversion
     }
 
     /**
-     * Converts an Object to an Array
+     * Converts an Object to an Array.
      *
      * @param $object object to convert
+     *
      * @return array
      */
     public static function objectToArray($object)
     {
         $array = null;
-        if (is_object($object) === true) {
-            $array = array();
+        if (is_object($object)) {
+            $array = [];
             foreach (get_object_vars($object) as $key => $value) {
-                if (is_object($value) === true) {
+                if (is_object($value)) {
                     $array[$key] = self::objectToArray($value);
                 } else {
                     $array[$key] = $value;
@@ -139,9 +143,10 @@ class Conversion
     }
 
     /**
-     * Converts an Array to an Object
+     * Converts an Array to an Object.
      *
      * @param $array array to convert to an object
+     *
      * @return array
      */
     public function arrayToObject($array)

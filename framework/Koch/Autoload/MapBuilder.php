@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -35,18 +35,18 @@ use Koch\Functions\Functions;
  */
 class MapBuilder
 {
-
     /**
      * Builds a class map file.
      *
-     * @param  string[] $dirs    One or multiple directories to scan for PHP files.
-     * @param  string   $mapfile Path to the classmap file to be written.
-     * @return bool     True, if map file written, false otherwise.
+     * @param string[] $dirs    One or multiple directories to scan for PHP files.
+     * @param string   $mapfile Path to the classmap file to be written.
+     *
+     * @return bool True, if map file written, false otherwise.
      */
     public static function build($dirs, $mapfile)
     {
-        $classmap = array();
-        $files = array();
+        $classmap = [];
+        $files    = [];
 
         $dirs = (array) $dirs;
         foreach ($dirs as $dir) {
@@ -73,21 +73,21 @@ class MapBuilder
     public static function extractClassnames($file)
     {
         if (is_file($file) === false) {
-            throw new \InvalidArgumentException('File ' . $file  . ' does not exist.');
+            throw new \InvalidArgumentException('File ' . $file . ' does not exist.');
         }
 
         // tokenize the content of the file
         $contents = file_get_contents($file);
-        $tokens = token_get_all($contents);
+        $tokens   = token_get_all($contents);
 
-        $classes = array();
-        $namespace = '';
+        $classes            = [];
+        $namespace          = '';
         $totaNumberOfTokens = count($tokens);
 
-        for ($i = 0, $max = $totaNumberOfTokens; $i < $max; $i++) {
+        for ($i = 0, $max = $totaNumberOfTokens; $i < $max; ++$i) {
             $token = $tokens[$i];
 
-            if (is_string($token) === true) {
+            if (is_string($token)) {
                 continue;
             }
 
@@ -97,8 +97,8 @@ class MapBuilder
                 $namespace = '';
 
                 // extract the namespace
-                while (($tok = $tokens[++$i]) and (is_array($tok) === true)) {
-                    if (in_array($tok[0], array(T_STRING, T_NS_SEPARATOR)) === true) {
+                while (($tok = $tokens[++$i]) && is_array($tok)) {
+                    if (in_array($tok[0], [T_STRING, T_NS_SEPARATOR], true)) {
                         $namespace .= $tok[1];
                     }
                 }
@@ -106,12 +106,12 @@ class MapBuilder
                 $namespace .= '\\';
             }
 
-            if (($token[0] === T_CLASS) or ($token[0] === T_INTERFACE)) {
+            if (($token[0] === T_CLASS) || ($token[0] === T_INTERFACE)) {
                 // extract the classname
-                while (($tok = $tokens[++$i]) and (is_array($tok) === true)) {
+                while (($tok = $tokens[++$i]) && is_array($tok)) {
                     if (T_STRING === $tok[0]) {
                         $classname .= $tok[1];
-                    } elseif ($classname !== '' and T_WHITESPACE == $tok[0]) {
+                    } elseif ($classname !== '' && T_WHITESPACE === $tok[0]) {
                         break;
                     }
                 }
@@ -124,7 +124,7 @@ class MapBuilder
     }
 
     /**
-     * Writes the classmap array to file
+     * Writes the classmap array to file.
      *
      * @param array  $classmap Array containing the classname to file relation.
      * @param string $mapfile  Path to the classmap file to be written.

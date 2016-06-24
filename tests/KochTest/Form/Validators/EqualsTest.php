@@ -17,7 +17,7 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->validator = new Equals;
+        $this->validator = new Equals();
     }
 
     /**
@@ -42,13 +42,13 @@ class EqualsTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodsetEqualsTo()
     {
-         // setter accepts numeric
+        // setter accepts numeric
          $this->validator->setEqualsTo(19);
-         $this->assertEquals(19, $this->validator->getEqualsTo());
+        $this->assertEquals(19, $this->validator->getEqualsTo());
 
          // setter accepts string
          $this->validator->setEqualsTo('19');
-         $this->assertEquals(19, $this->validator->getEqualsTo());
+        $this->assertEquals(19, $this->validator->getEqualsTo());
     }
 
     public function testMethodprocessValidationLogic()

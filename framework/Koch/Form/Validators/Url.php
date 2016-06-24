@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Validators;
@@ -41,19 +40,15 @@ class Url extends Validator
 
     protected function processValidationLogic($value)
     {
-        /**
+        /*
          * Note: filter_var() does not support IDNA.
          * The INTL extension provides the method idn_to_ascii().
          * It converts a multibyte URL to a punycode ASCII string.
          */
-        if (extension_loaded('intl') === true) {
+        if (extension_loaded('intl')) {
             $value = idn_to_ascii($value);
         }
 
-        if (true === (bool) filter_var($value, FILTER_VALIDATE_URL, $this->getOptions())) {
-            return true;
-        } else {
-            return false;
-        }
+        return filter_var($value, FILTER_VALIDATE_URL, $this->getOptions());
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Permissions;
 
 use Koch\Permissions\Acl;
@@ -16,7 +17,7 @@ class ACL extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->acl = new Acl;
+        $this->acl = new self();
     }
 
     /**
@@ -57,7 +58,6 @@ class ACL extends \PHPUnit_Framework_TestCase
         $this->acl->ruleAllow('Hausverwalter', 'view', 'Haus');
         $this->acl->ruleAllow('Mieter1', 'view', 'Wohnung1');
         $this->acl->ruleAllow('Mieter2', 'view', 'Wohnung2');
-
     }
 
     /**
@@ -65,8 +65,8 @@ class ACL extends \PHPUnit_Framework_TestCase
      */
     public function testRuleDeny()
     {
-        $this->acl->ruleDeny("Mieter1", "view", "Wohnung2");
-        $this->acl->ruleDeny("Mieter2", "view", "Wohnung1");
+        $this->acl->ruleDeny('Mieter1', 'view', 'Wohnung2');
+        $this->acl->ruleDeny('Mieter2', 'view', 'Wohnung1');
     }
 
     /**
@@ -79,5 +79,4 @@ class ACL extends \PHPUnit_Framework_TestCase
         // action and resource are identified by the router and exist in the TargetRoute object
         $this->acl->isAllowed($role, $action, $resource);
     }
-
 }

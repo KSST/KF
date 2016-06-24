@@ -1,11 +1,11 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
  * Google Analytics Plugin
- * Generate XHTML 1.1 valid Google Analytics code
+ * Generate XHTML 1.1 valid Google Analytics code.
  *
  * Name:     google_analytics<br>
  * Date:     26.Mai 2010.<br>
@@ -17,8 +17,9 @@
  *
  * @link http://code.google.com/intl/de-DE/apis/analytics/docs/tracking/asyncMigrationExamples.html
  *
- * @param array $params code parameter required
+ * @param array  $params code parameter required
  * @param Smarty $smarty
+ *
  * @return string
  */
 function Smarty_function_googleanalytics($params, $smarty)
@@ -26,11 +27,10 @@ function Smarty_function_googleanalytics($params, $smarty)
     // get the google analytics code to insert it later on into the script
     if (empty($params['code'])) {
         // fallback to config, if nothing was given
-        $config = Clansuite_CMS::getInjector('Koch_Config');
+        $config    = Clansuite_CMS::getInjector('Koch_Config');
         $google_id = $config->getConfigValue('googleanalytics_id');
 
-        if (empty($google_id) == false) {
-
+        if (empty($google_id) === false) {
         } else { // no code provided via smarty function nor config
             trigger_error("google_analytics: the parameter 'code' is missing. please specifiy your GA urchin id.");
 
@@ -40,7 +40,7 @@ function Smarty_function_googleanalytics($params, $smarty)
         $google_id = $params['code'];
     }
 
-    /**
+    /*
      * Determine the type of script to include
      * a) async = asynchronous script snippet
      * b) jquery = jquery loaded and cached snippet
@@ -51,7 +51,7 @@ function Smarty_function_googleanalytics($params, $smarty)
         return;
     }
 
-    if ('async' == $params['type']) {
+    if ('async' === $params['type']) {
         // asynchronous ga script
         $return = '
             <script type="text/javascript">
@@ -73,7 +73,7 @@ function Smarty_function_googleanalytics($params, $smarty)
             </script>';
     }
 
-    if ('jquery' == $params['type']) {
+    if ('jquery' === $params['type']) {
         // asynchronous and cached loading via jquery ajax
         $return = '
               <script type="text/javascript">

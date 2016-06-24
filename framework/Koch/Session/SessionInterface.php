@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,9 +25,10 @@
 namespace Koch\Session;
 
 /**
- * Interface for Session
+ * Interface for Session.
  *
  * Compatible with the SessionHandlerInterface of PHP 5.4.
+ *
  * @link http://php.net/manual/ro/class.sessionhandlerinterface.php
  */
 interface SessionInterface

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Formelement;
@@ -47,7 +46,7 @@ class Description extends AbstractFormElementDecorator
      */
     public function render($html_formelement)
     {
-        if (isset($this->formelement->description) === true) {
+        if (isset($this->formelement->description)) {
             $html_formelement .= '<br />' . CR;
             $html_formelement .= '<span class="' . $this->cssClass . '">';
             $html_formelement .= $this->formelement->getDescription();

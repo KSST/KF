@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -30,12 +30,11 @@ namespace Koch\View\Helper;
 class Partial extends Layout
 {
     // var $_blocks contains all block elements as Separate Objects
-    private $blockObjects = array();
+    private $blockObjects = [];
 
     // no constructor
     public function __construct()
     {
-
     }
 
     // add block object
@@ -53,7 +52,7 @@ class Partial extends Layout
     }
 
     /**
-     * Render Blocks
+     * Render Blocks.
      */
     public function render($params, $smarty)
     {
@@ -71,7 +70,7 @@ class Partial extends Layout
     }
 
     /**
-     * Getter for $this->_blockObjects
+     * Getter for $this->_blockObjects.
      */
     public function getBlocks()
     {

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -53,7 +53,7 @@ class Staging
     }
 
     /**
-     * Getter for the staging config filename, which is determined by the servername
+     * Getter for the staging config filename, which is determined by the servername.
      *
      * @return string filename of staging config
      */
@@ -67,8 +67,8 @@ class Staging
 
         switch ($_SERVER['SERVER_NAME']) {
             // development configuration
-            case "localhost":
-            case "intranet":
+            case 'localhost':
+            case 'intranet':
             case 'application-dev.com':
             case 'www.application-dev.com':
             case 'application.dev':

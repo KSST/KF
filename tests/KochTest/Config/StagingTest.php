@@ -20,16 +20,16 @@ class StagingTest extends \PHPUnit_Framework_Testcase
      */
     public function setUp()
     {
-        $this->object = new Staging;
+        $this->object = new Staging();
 
         // set faked server name to environment to test getFilename()
         $_SERVER['SERVER_NAME'] = 'www.application-dev.com';
 
-         vfsStreamWrapper::register();
+        vfsStreamWrapper::register();
 
         $this->fileURL = vfsStream::url('root/development.ini.php');
-        $this->file = vfsStream::newFile('development.ini.php', 0777)->withContent($this->getDevConfigFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file    = vfsStream::newFile('development.ini.php', 0777)->withContent($this->getDevConfigFileContent());
+        $this->root    = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -44,12 +44,12 @@ class StagingTest extends \PHPUnit_Framework_Testcase
      */
     public function testOverloadWithStagingConfig()
     {
-        $array_to_overload = array(
+        $array_to_overload = [
             // new key
             'overloaded-key' => 'overloaded-value',
             // overload existing key value
-            'error' => array ('development' => '0')
-        );
+            'error' => ['development' => '0'],
+        ];
 
         // manually set the config for overloading
         Staging::setFilename($this->fileURL);
@@ -99,7 +99,6 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         Staging::setFilename(null);
         $_SERVER['SERVER_NAME'] = 'application-intern.com';
         $this->assertEquals(Staging::getFilename(), 'intern.php');
-
     }
 
     /**
@@ -112,11 +111,11 @@ class StagingTest extends \PHPUnit_Framework_Testcase
         Staging::setFilename($expected_filename);
         $filename = Staging::getFilename();
 
-        $this->assertEquals($filename,$expected_filename);
-        $this->assertEquals($filename,$expected_filename);
+        $this->assertEquals($filename, $expected_filename);
+        $this->assertEquals($filename, $expected_filename);
     }
 
-        public function getDevConfigFileContent()
+    public function getDevConfigFileContent()
     {
         return <<<EOF
 ; <?php die( 'Access forbidden.' ); /* DO NOT MODIFY THIS LINE! ?>

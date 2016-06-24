@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,13 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Localization\Adapter\Gettext;
 
 /**
- * Gettext Extractor
+ * Gettext Extractor.
  *
  * Gettext extraction is normally performed by the "xgettext" tool.
  * http://www.gnu.org/software/hello/manual/gettext/xgettext-Invocation.html
@@ -45,28 +44,29 @@ class Extractor
     /**
      * @var array
      */
-    public $inputFiles = array();
+    public $inputFiles = [];
 
     /**
      * @var array
      */
-    public $extractors = array(
-        'php' => array('PHP'),
-        'tpl' => array('PHP', 'Template')
-    );
+    public $extractors = [
+        'php' => ['PHP'],
+        'tpl' => ['PHP', 'Template'],
+    ];
 
     /**
      * @var array
      */
-    public $data = array();
+    public $data = [];
 
     /**
      *  @var array
      */
-    protected $extractorStore = array();
+    protected $extractorStore = [];
 
     /**
-     * Log setup
+     * Log setup.
+     *
      * @param string|bool $logToFile Bool or path of custom log file
      */
     public function __construct($logToFile = false)
@@ -80,17 +80,17 @@ class Extractor
     }
 
     /**
-     * Close the log handler if needed
+     * Close the log handler if needed.
      */
     public function __destruct()
     {
-        if (is_resource($this->logHandler) === true) {
+        if (is_resource($this->logHandler)) {
             fclose($this->logHandler);
         }
     }
 
     /**
-     * Writes messages into log or dumps them on screen
+     * Writes messages into log or dumps them on screen.
      *
      * @param string $message
      *
@@ -98,7 +98,7 @@ class Extractor
      */
     public function log($message)
     {
-        if (is_resource($this->logHandler) === true) {
+        if (is_resource($this->logHandler)) {
             fwrite($this->logHandler, $message . "\n");
         } else {
             echo $message . "\n <br/>";
@@ -106,7 +106,7 @@ class Extractor
     }
 
     /**
-     * Exception factory
+     * Exception factory.
      *
      * @param string $message
      *
@@ -114,7 +114,7 @@ class Extractor
      */
     protected function throwException($message)
     {
-        if (empty($message) === true) {
+        if (empty($message)) {
             $message = 'Something unexpected occured. See Koch_Gettext_Extractor log for details.';
         }
 
@@ -215,7 +215,7 @@ class Extractor
                 $this->log('Processing file ' . $inputFile);
 
                 foreach ($extractor as $extractorName) {
-                    $extractor = $this->getExtractor($extractorName);
+                    $extractor     = $this->getExtractor($extractorName);
                     $extractorData = $extractor->extract($inputFile);
 
                     $this->log(' Extractor ' . $extractorName . ' applied.');
@@ -234,7 +234,7 @@ class Extractor
     }
 
     /**
-     * Factory Method - Gets an instance of a Koch_Gettext_Extractor
+     * Factory Method - Gets an instance of a Koch_Gettext_Extractor.
      *
      * @param string $extractor
      *
@@ -266,7 +266,7 @@ class Extractor
             }
         }
 
-        $this->extractors[$extractor] = new $class;
+        $this->extractors[$extractor] = new $class();
 
         $this->log('Extractor ' . $extractor . ' loaded.');
 
@@ -274,7 +274,7 @@ class Extractor
     }
 
     /**
-     * Assigns an extractor to an extension
+     * Assigns an extractor to an extension.
      *
      * @param string $extension
      * @param string $extractor
@@ -285,7 +285,7 @@ class Extractor
     {
         // not already set
         if (false === isset($this->extractor[$extension]) and
-            false === in_array($extractor, $this->extractor[$extension])) {
+            false === in_array($extractor, $this->extractor[$extension], true)) {
             $this->extractor[$extension][] = $extractor;
         } else { // already set
 
@@ -294,19 +294,19 @@ class Extractor
     }
 
     /**
-     * Removes all extractor settings
+     * Removes all extractor settings.
      *
      * @return Extractor
      */
     public function removeAllExtractors()
     {
-        $this->extractor = array();
+        $this->extractor = [];
 
         return $this;
     }
 
     /**
-     * Saves extracted data into gettext file
+     * Saves extracted data into gettext file.
      *
      * @param string $file
      * @param array  $data
@@ -341,13 +341,13 @@ class Extractor
     /**
      * Returns a fileheader for a gettext portable object file.
      *
-     * @param boolean $return_as_string True, returns a string (default) and false returns an array.
+     * @param bool $return_as_string True, returns a string (default) and false returns an array.
      *
      * @return mixed Array or String. Returns string by default.
      */
     public static function getPOFileHeader($return_as_string = true)
     {
-        $output = array();
+        $output   = [];
         $output[] = '// Gettext Portable Object Translation File.';
         $output[] = '#';
         $output[] = '// Koch Framework';
@@ -364,7 +364,7 @@ class Extractor
         $output[] = '"Plural-Forms: nplurals=2; plural=(n != 1);\n"';
         $output[] = '';
 
-        if ($return_as_string === true) {
+        if ($return_as_string) {
             return implode("\n", $output);
         } else { // return array
 
@@ -373,7 +373,7 @@ class Extractor
     }
 
     /**
-     * Formats fetched data to gettext portable object syntax
+     * Formats fetched data to gettext portable object syntax.
      *
      * @param array $data
      *
@@ -383,7 +383,7 @@ class Extractor
     {
         $pluralMatchRegexp = '#\%([0-9]+\$)*d#';
 
-        $output = array();
+        $output = [];
         $output = self::getPOFileHeader(false);
 
         ksort($data);
@@ -411,7 +411,7 @@ class Extractor
             $output[] = '';
         }
 
-        return join("\n", $output);
+        return implode("\n", $output);
     }
 
     /**

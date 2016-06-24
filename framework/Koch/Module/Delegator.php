@@ -2,11 +2,10 @@
 
 namespace Koch\Module;
 
-use \ReflectionClass;
+use ReflectionClass;
 
 class Delegator
 {
-
     /**
      * @var object delegated object
      */
@@ -28,10 +27,10 @@ class Delegator
         if ($r->hasMethod($name)) {
             $method = $r->getMethod($name);
             if ($method->isPublic() && false === $method->isAbstract()) {
-                call_user_func_array(array($this, $name), $args);
+                call_user_func_array([$this, $name], $args);
             }
         }
 
-        return call_user_func_array(array($this->delegate, $name), $args);
+        return call_user_func_array([$this->delegate, $name], $args);
     }
 }

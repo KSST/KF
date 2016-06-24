@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Form\Decorators\Form;
 
 use Koch\Form\Decorators\Form\Div;
@@ -12,7 +13,7 @@ class DivTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new Div;
+        $this->object = new Div();
     }
 
     protected function tearDown()
@@ -29,6 +30,6 @@ class DivTest extends \PHPUnit_Framework_TestCase
 
         $result = $this->object->render('formcontent');
 
-        $this->assertEquals(CR.'<div class="testCssClass" id="testID">formcontent</div>'.CR, $result);
+        $this->assertEquals(CR . '<div class="testCssClass" id="testID">formcontent</div>' . CR, $result);
     }
 }

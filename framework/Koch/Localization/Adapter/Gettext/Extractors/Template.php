@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Localization\Adapter\Gettext\Extractors;
@@ -29,7 +28,7 @@ use Koch\Localization\ExtractorBase;
 use Koch\Localization\ExtractorInterface;
 
 /**
- * Koch Framework - Class for extracting Gettext strings from Template
+ * Koch Framework - Class for extracting Gettext strings from Template.
  *
  * Extracts translation strings from templates by scanning for certain placeholders, like {t}, {_}.
  */
@@ -39,7 +38,8 @@ class Template extends ExtractorBase implements ExtractorInterface
     const R_DELIMITER = '}';
 
     /**
-     * This modified regexp is based on "tsmarty2c.php" by
+     * This modified regexp is based on "tsmarty2c.php" by.
+     *
      * @author Sagi Bashari <sagi@boom.org.il>
      * @license LGPL v2.1+
      *
@@ -48,14 +48,14 @@ class Template extends ExtractorBase implements ExtractorInterface
     const REGEXP = "/__LD__\s*(__TAGS__)\s*([^__RD__]*)__RD__([^__LD__]*)__LD__\/\\1__RD__/";
 
     /**
-     * The function tags to extract translation strings from
+     * The function tags to extract translation strings from.
      *
      * @var array
      */
-    protected $tags_to_scan = array('t', '_');
+    protected $tags_to_scan = ['t', '_'];
 
     /**
-     * Parses given file and returns found gettext phrases
+     * Parses given file and returns found gettext phrases.
      *
      * @param string $file
      *
@@ -78,18 +78,18 @@ class Template extends ExtractorBase implements ExtractorInterface
 
         // init vars
         $pathinfo = pathinfo($file);
-        $data = array();
+        $data     = [];
 
-        /**
+        /*
          *  construct the regular expression pattern
          */
         // join placeholders for multi-tag scan
         #$tags = $this->tags_to_scan[0];
-        $tags = join('|', $this->tags_to_scan);
+        $tags = implode('|', $this->tags_to_scan);
 
         // setup search/replace arrays
-        $search  = array('__TAGS__', '__LD__', '__RD__');
-        $replace = array($tags, self::L_DELIMITER, self::R_DELIMITER);
+        $search  = ['__TAGS__', '__LD__', '__RD__'];
+        $replace = [$tags, self::L_DELIMITER, self::R_DELIMITER];
 
         // replace tags and delimiters in regexp pattern
         $pattern = str_replace($search, $replace, self::REGEXP);
@@ -108,7 +108,7 @@ class Template extends ExtractorBase implements ExtractorInterface
             $calc_line = 1 + $line;
 
             foreach ($matches[3] as $match) {
-                /**
+                /*
                  *  $data array has the following structure
                  *  array('language-string') => array([0] => 'file:line')
                  */

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -33,33 +33,28 @@ interface HttpResponseInterface
 
     /**
      * @param string $statusCode
-     *
-     * @return void
      */
     public static function setStatusCode($statusCode);
 
     /**
      * @param string $name
      * @param string $value
-     *
-     * @return void
      */
     public static function addHeader($name, $value);
 
     /**
-     * @return void
      */
     public static function setContent($content, $replace = false);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function sendResponse();
 
     // Cookie Methods
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function setCookie(
         $name,
@@ -72,7 +67,6 @@ interface HttpResponseInterface
     );
 
     /**
-     * @return void
      */
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null);
 }

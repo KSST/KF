@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -36,18 +36,15 @@ interface ModuleInterface
     public function actionShow();     // GET     /foos/:foo_id
 
     /**
-     * @return void
      */
     public function actionNew();      // GET     /foos/new
     public function actionEdit();     // GET     /foos/:foo_id/edit
 
     /**
-     * @return void
      */
     public function actionInsert();   // POST    /foos
 
     /**
-     * @return void
      */
     public function actionUpdate();   // PUT     /foos/:foo_id
     public function actionDelete();   // DELETE  /foos/:foo_id

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Formelement;
@@ -28,7 +27,7 @@ namespace Koch\Form\Decorators\Formelement;
 use Koch\Form\AbstractFormElementDecorator;
 
 /**
- * Formelement_Decorator_None
+ * Formelement_Decorator_None.
  *
  * None - this hardly decorates anything at all.
  * Just wraps linebreaks around the html formelemnet content.

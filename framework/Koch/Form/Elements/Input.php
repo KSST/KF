@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -29,7 +28,7 @@ use Koch\Form\FormElement;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Input
+ * Formelement_Input.
  *
  * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/the-input-element.html
  */
@@ -44,64 +43,64 @@ class Input extends FormElement implements FormElementInterface
     public $type;
 
     /**
-     * custom css class
+     * custom css class.
      *
      * @var string
      */
     public $class;
 
     /**
-     * indicates whether checkbox is checked
+     * indicates whether checkbox is checked.
      *
      * @var int
      */
     public $checked;
 
     /**
-     * indicates whether radio button is selected
+     * indicates whether radio button is selected.
      *
      * @var int
      */
     public $selected;
 
     /**
-     * length of field in letters
+     * length of field in letters.
      *
      * @var int
      */
     public $size;
 
     /**
-     * allowed length of input in letters
+     * allowed length of input in letters.
      *
      * @var int
      */
     public $maxlength;
 
     /**
-     * disabled
+     * disabled.
      *
-     * @var boolean
+     * @var bool
      */
     public $disabled;
 
     /**
      * additional string to attach to the opening form tag
-     * for instance 'onSubmit="xy"'
+     * for instance 'onSubmit="xy"'.
      *
-     * @var $string;
+     * @var;
      */
     public $additional_attr_text;
 
     /**
-     * description
+     * description.
      *
      * @var int
      */
     public $description;
 
     /**
-     * A regular expression pattern, e.g. [A-Za-z]+\d+
+     * A regular expression pattern, e.g. [A-Za-z]+\d+.
      *
      * @var string
      */
@@ -109,7 +108,7 @@ class Input extends FormElement implements FormElementInterface
 
     /**
      * String value for the placeholder attribute
-     * <input placeholder="some placeholder">
+     * <input placeholder="some placeholder">.
      *
      * @var string
      */
@@ -124,7 +123,6 @@ class Input extends FormElement implements FormElementInterface
 
     /**
      * Sets the state of the input field to read-only.
-     *
      */
     public function setReadonly($readonly)
     {
@@ -132,7 +130,7 @@ class Input extends FormElement implements FormElementInterface
     }
 
     /**
-     * Set placeholder attribute value
+     * Set placeholder attribute value.
      *
      * @link http://dev.w3.org/html5/spec/Overview.html#the-placeholder-attribute
      */
@@ -144,7 +142,7 @@ class Input extends FormElement implements FormElementInterface
     }
 
     /**
-     * Get Placeholder <input placeholder="some placeholder">
+     * Get Placeholder <input placeholder="some placeholder">.
      *
      * @return string
      */
@@ -155,7 +153,7 @@ class Input extends FormElement implements FormElementInterface
 
     /**
      * Set the regular expression pattern for client-side validation
-     * e.g. [A-Za-z]+\d+
+     * e.g. [A-Za-z]+\d+.
      *
      * @var string
      */
@@ -165,7 +163,7 @@ class Input extends FormElement implements FormElementInterface
     }
 
     /**
-     * defines length of field in letters
+     * defines length of field in letters.
      *
      * @param int $size
      */
@@ -175,7 +173,7 @@ class Input extends FormElement implements FormElementInterface
     }
 
     /**
-     * defines allowed length of input in letters
+     * defines allowed length of input in letters.
      *
      * @param int $length
      */
@@ -185,9 +183,9 @@ class Input extends FormElement implements FormElementInterface
     }
 
     /**
-     * defines allowed length of input in letters
+     * defines allowed length of input in letters.
      *
-     * @param boolean $disabled True or False.
+     * @param bool $disabled True or False.
      */
     public function setDisabled($disabled)
     {
@@ -228,9 +226,9 @@ class Input extends FormElement implements FormElementInterface
         $html .= (bool) $this->maxlength ? ' maxlength="' . $this->maxlength . '"' : null;
         $html .= (bool) $this->pattern ? ' pattern="' . $this->pattern . '"' : null;
         $html .= (bool) $this->class ? ' class="' . $this->class . '"' : null;
-        if ($this->type == 'image') {
+        if ($this->type === 'image') {
             $html .= ' source="' . $this->source . '"';
-            if ((bool) $this->width and (bool) $this->height) {
+            if ((bool) $this->width && (bool) $this->height) {
                 $html .= ' style="width:' . $this->width . 'px; height:' . $this->height . 'px;"';
             }
         }

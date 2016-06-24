@@ -1,5 +1,7 @@
 <?php
+
 namespace KochTest\DI;
+
 class NotWithoutMe
 {
 }

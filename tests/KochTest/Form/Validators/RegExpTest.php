@@ -18,7 +18,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new RegExp;
+        $this->validator = new RegExp();
     }
 
     /**
@@ -49,7 +49,7 @@ class RegExpTest extends \PHPUnit_Framework_TestCase
      */
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

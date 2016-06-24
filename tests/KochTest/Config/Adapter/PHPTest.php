@@ -16,14 +16,14 @@ class PHPTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new PHP;
+        $this->object = new PHP();
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.php');
-        $this->file = vfsStream::newFile('config.php', 0777)->withContent($this->getConfigFileContent());
+        $this->file          = vfsStream::newFile('config.php', 0777)->withContent($this->getConfigFileContent());
 
         $this->configFileURL2 = vfsStream::url('root/config2.php');
-        $this->file2 = vfsStream::newFile('config2.php', 0777)->withContent('');
+        $this->file2          = vfsStream::newFile('config2.php', 0777)->withContent('');
 
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
@@ -85,8 +85,8 @@ EOF;
 
     public function getConfigArray()
     {
-        return array(
-            'test' => 'value'
-        );
+        return [
+            'test' => 'value',
+        ];
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -33,14 +32,14 @@ class ConfirmSubmitButton extends Input implements FormElementInterface
 
     public function __construct($message = null)
     {
-        $this->type = 'submit';
+        $this->type  = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
-        if ($message != null) {
+        if ($message !== null) {
             $this->message = $message;
         }
 
-        /**
+        /*
          * Add the Form Submit Confirmation Javascript.
          * This is a pure Javacript Return Confirm.
          * To add the value of specific "form.elements" to the message

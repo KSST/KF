@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Form;
 
 use Koch\Form\FormElement;
@@ -19,7 +20,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new FormElement;
+        $this->object = new FormElement();
     }
 
     /**
@@ -176,7 +177,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetAttribute()
     {
-        $value = array('required' => true, 'label' => 'someLabel');
+        $value = ['required' => true, 'label' => 'someLabel'];
         $this->object->setAttributes($value);
         $this->assertTrue($this->object->required);
         $this->assertEquals('someLabel', $this->object->getLabel());
@@ -199,7 +200,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testRenderAttributes()
     {
-        $attributes = array('key1' => 'value1', 'key2' => 'value2');
+        $attributes = ['key1' => 'value1', 'key2' => 'value2'];
         $this->assertEquals(' key1="value1" key2="value2" ', $this->object->renderAttributes($attributes));
     }
 
@@ -226,21 +227,21 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
 
     public function MapRulenameToClassnameDataprovider()
     {
-        return array(
-            array('email', 'Email'),
-            array('equals', 'Equals'),
-            array('ip', 'Ip'),
-            array('locale', 'Locale'),
-            array('maxlength', 'MaxLength'),
-            array('maxvalue', 'MaxValue'),
-            array('minlength', 'MinLength'),
-            array('minvalue', 'MinValue'),
-            array('range', 'Range'),
-            array('regexp', 'RegExp'),
-            array('required', 'Required'),
-            array('string', 'String'),
-            array('url', 'Url')
-        );
+        return [
+            ['email', 'Email'],
+            ['equals', 'Equals'],
+            ['ip', 'Ip'],
+            ['locale', 'Locale'],
+            ['maxlength', 'MaxLength'],
+            ['maxvalue', 'MaxValue'],
+            ['minlength', 'MinLength'],
+            ['minvalue', 'MinValue'],
+            ['range', 'Range'],
+            ['regexp', 'RegExp'],
+            ['required', 'Required'],
+            ['string', 'String'],
+            ['url', 'Url'],
+        ];
     }
 
     /**
@@ -320,7 +321,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetErrorMessages()
     {
-        $errormessages = array(0 => 'Message1', 1 => 'Message2');
+        $errormessages = [0 => 'Message1', 1 => 'Message2'];
 
         $this->object->addErrorMessage($errormessages[0]);
         $this->object->addErrorMessage($errormessages[1]);
@@ -343,7 +344,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
      */
     public function testMagicToString()
     {
-        $formelement = new \Koch\Form\Elements\Email;
+        $formelement = new \Koch\Form\Elements\Email();
         $this->assertEquals('<input type="email" name="" />' . CR, $formelement->__toString());
     }
 
@@ -419,6 +420,7 @@ class FormElementTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Form\FormElement::decoratorFactory
+     *
      * @todo   Implement testDecoratorFactory().
      */
     public function testDecoratorFactory()

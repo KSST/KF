@@ -21,7 +21,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the vendor library "mPDF".');
         }
 
-        $options = array();
+        $options = [];
 
         $this->object = new Pdf($options);
     }
@@ -53,6 +53,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Pdf::render
+     *
      * @todo   Implement testRender().
      */
     public function testRender()
@@ -65,6 +66,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Pdf::assign
+     *
      * @todo   Implement testAssign().
      */
     public function testAssign()
@@ -77,6 +79,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Pdf::display
+     *
      * @todo   Implement testDisplay().
      */
     public function testDisplay()
@@ -89,6 +92,7 @@ class PdfTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\View\Renderer\Pdf::fetch
+     *
      * @todo   Implement testFetch().
      */
     public function testFetch()

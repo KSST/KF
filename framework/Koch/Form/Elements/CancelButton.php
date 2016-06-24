@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -30,7 +29,7 @@ use Koch\Form\FormElementInterface;
 class CancelButton extends Input implements FormElementInterface
 {
     /**
-     * Holds the url when canceling
+     * Holds the url when canceling.
      *
      * @var string
      */
@@ -52,7 +51,7 @@ class CancelButton extends Input implements FormElementInterface
     }
 
     /**
-     * Sets the cancel URL (the url to redirect the user to, after clicking cancel)
+     * Sets the cancel URL (the url to redirect the user to, after clicking cancel).
      *
      * @example
      * $form->addElement('buttonbar')

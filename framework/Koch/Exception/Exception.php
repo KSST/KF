@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -49,6 +49,7 @@ class Exception extends \Exception
      * Rethrows uncatched Exceptions in our presentation style.
      *
      * @see http://php.net/manual/de/function.set-exception-handler.php
+     *
      * @param $exception PHP Exception Objects are valid (Type Hint).
      */
     public function handle(\Exception $exception)
@@ -83,7 +84,7 @@ class Exception extends \Exception
         self::fetchExceptionTemplate($code);
 
         // development template
-        if (defined('DEVELOPMENT') and DEVELOPMENT == 1) {
+        if (defined('DEVELOPMENT') and DEVELOPMENT === 1) {
             self::fetchExceptionDevelopmentTemplate($code);
         }
     }
@@ -100,13 +101,13 @@ class Exception extends \Exception
      * </code>
      * The file "exception-20.html" will be retrieved.
      *
-     * @param integer $code The exception code.
+     * @param int $code The exception code.
      */
     private static function fetchExceptionTemplate($code)
     {
         $file = APPLICATION_PATH . 'themes/core/exceptions/exception-' . $code . '.html';
 
-        if (is_file($file) === true) {
+        if (is_file($file)) {
             self::$exceptionTemplate = file_get_contents($file);
         }
     }
@@ -124,14 +125,14 @@ class Exception extends \Exception
      * </code>
      * The file "exception-dev-20.html" will be retrieved.
      *
-     * @param integer $code The exception code.
+     * @param int $code The exception code.
      */
     private static function fetchExceptionDevelopmentTemplate($code)
     {
         // construct filename with code
         $file = APPLICATION_PATH . 'themes/core/exceptions/exception-dev-' . $code . '.html';
 
-        if (is_file($file) === true) {
+        if (is_file($file)) {
             self::$developmentTemplate = file_get_contents($file);
 
             define('RAPIDDEVTPL', true);
@@ -144,7 +145,7 @@ class Exception extends \Exception
     }
 
     /**
-     * Getter Method for the exception_development_template_content
+     * Getter Method for the exception_development_template_content.
      *
      * @return string Representation of $exception_development_template_content
      */
@@ -171,12 +172,13 @@ class Exception extends \Exception
      * Formats the debugtrace ($this->string) by applying linebreaks.
      *
      * @param $string The debug-trace string to format.
+     *
      * @return string with Debugtrace String
      */
     public static function formatGetTraceString($string)
     {
-        $search  = array('#', '):');
-        $replace = array('<br/><br/>Call #', ')<br/>');
+        $search  = ['#', '):'];
+        $replace = ['<br/><br/>Call #', ')<br/>'];
         $string  = str_replace($search, $replace, $string);
         $string  = ltrim($string, '<br/>');
         unset($search, $replace);

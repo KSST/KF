@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -31,27 +31,28 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
 {
     /**
      * Configuration Array
-     * protected = only visible to childs
+     * protected = only visible to childs.
      *
      * @var array
      */
-    protected $config = array();
+    protected $config = [];
 
     /**
      * Returns $this->config Object as Array
      * On "unset = true" the array is returned and unset to save memory
      * and to avoid duplication of the config array.
      *
-     * @param  boolean $reset If reset is true, $this->config array will be reset. Defaults to false.
-     * @return config  array
+     * @param bool $reset If reset is true, $this->config array will be reset. Defaults to false.
+     *
+     * @return config array
      */
     public function toArray($reset = false)
     {
-        $array = array();
+        $array = [];
         $array = $this->config;
 
-        if ($reset === true) {
-            $this->config = array();
+        if ($reset) {
+            $this->config = [];
         }
 
         return $array;
@@ -70,7 +71,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * Gets a Config Value or sets a default value
+     * Gets a Config Value or sets a default value.
      *
      * @example
      * Usage for one default variable:
@@ -94,20 +95,19 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
         // return value or default
         if (empty($value) === false) {
             return $value;
-        } elseif ($default_one != null) {
+        } elseif ($default_one !== null) {
             return $default_one;
-        } elseif ($default_two != null) {
+        } elseif ($default_two !== null) {
             return $default_two;
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Gets a config file item based on keyname
+     * Gets a config file item based on keyname.
      *
      * @param    string    the config item key
-     * @return void
      */
     public function __get($key)
     {
@@ -117,7 +117,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * Set a config file item based on key:value
+     * Set a config file item based on key:value.
      *
      * @param string the config item key
      * @param string the config item value
@@ -128,10 +128,11 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * Method allows 'isset' to work on $this->data
+     * Method allows 'isset' to work on $this->data.
      *
-     * @param  string  $name Name of Variable Key $this->data[$name]
-     * @return boolean mixed
+     * @param string $name Name of Variable Key $this->data[$name]
+     *
+     * @return bool mixed
      */
     public function __isset($name)
     {
@@ -139,7 +140,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * Method allows 'unset' calls to work on $this->data
+     * Method allows 'unset' calls to work on $this->data.
      *
      * @param string $key
      */
@@ -149,14 +150,15 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * Implementation of SPL ArrayAccess
+     * Implementation of SPL ArrayAccess.
      */
 
     /**
-     * ArrayAccess::offsetExists()
+     * ArrayAccess::offsetExists().
      *
-     * @param  mixed   $offset
-     * @return boolean value
+     * @param mixed $offset
+     *
+     * @return bool value
      */
     public function offsetExists($offset)
     {
@@ -164,25 +166,26 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * ArrayAccess::offsetGet()
+     * ArrayAccess::offsetGet().
      *
-     * @param  mixed $offset
+     * @param mixed $offset
+     *
      * @return mixed value
      */
     public function offsetGet($offset)
     {
-        return (isset($this->config[$offset]) === true) ? $this->config[$offset] : null;
+        return isset($this->config[$offset]) ? $this->config[$offset] : null;
     }
 
     /**
-     * ArrayAccess::offsetSet()
+     * ArrayAccess::offsetSet().
      *
      * @param mixed $offset
      * @param mixed $value
      */
     public function offsetSet($offset, $value)
     {
-        if (is_null($offset) === true) {
+        if (is_null($offset)) {
             $this->config[] = $value;
         } else {
             $this->config[$offset] = $value;
@@ -190,10 +193,11 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     }
 
     /**
-     * ArrayAccess::offsetUnset()
+     * ArrayAccess::offsetUnset().
      *
-     * @param  mixed $offset
-     * @return bool  true
+     * @param mixed $offset
+     *
+     * @return bool true
      */
     public function offsetUnset($offset)
     {

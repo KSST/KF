@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,25 +25,22 @@
 namespace Koch\Router;
 
 /**
- * Interface for Router(s)
+ * Interface for Router(s).
  *
  * A router has to implement the following methods to resolve the Request to a Module and the Action/Command.
  */
 interface RouterInterface
 {
     /**
-     * @return void
      */
     public function addRoute($url_pattern, array $route_options = null);
 
     /**
-     * @return void
      */
     public function addRoutes(array $routes);
     public function getRoutes();
 
     /**
-     * @return void
      */
     public function delRoute($name);
 

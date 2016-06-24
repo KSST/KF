@@ -22,11 +22,11 @@ class EmailTest extends \PHPUnit_Framework_TestCase
         }
 
         $options['mail']['to_sysadmin'] = 'jakoch@web.de';
-        $options['mail']['from'] = 'jakoch@web.de';
+        $options['mail']['from']        = 'jakoch@web.de';
 
-        $options['email']['method'] = 'mail';
-        $options['email']['host'] = '';
-        $options['email']['port'] = '';
+        $options['email']['method']     = 'mail';
+        $options['email']['host']       = '';
+        $options['email']['port']       = '';
         $options['email']['encryption'] = '';
 
         $options['date']['format'] = 'D.M.Y';
@@ -48,9 +48,9 @@ class EmailTest extends \PHPUnit_Framework_TestCase
      */
     public function testLog()
     {
-        $level = 'ERROR';
+        $level   = 'ERROR';
         $message = 'Error Message';
-        $context = array('Yarp!', 'Some Content', 'Yarp! Yarp!');
+        $context = ['Yarp!', 'Some Content', 'Yarp! Yarp!'];
 
         $r = $this->object->log($level, $message, $context);
 

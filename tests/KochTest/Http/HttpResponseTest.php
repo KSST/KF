@@ -100,7 +100,7 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddHeader()
     {
-        $name = 'TestName';
+        $name  = 'TestName';
         $value = 'TestValue';
         HttpResponse::addHeader($name, $value);
 
@@ -113,12 +113,13 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
      * This is used to access and test private properties
      * for which no getters are implemented in the public api.
      *
-     * @param  string              $name Property name.
+     * @param string $name Property name.
+     *
      * @return \ReflectionProperty
      */
     protected static function reflectProperty($name)
     {
-        $class = new \ReflectionClass('Koch\Http\HttpResponse');
+        $class  = new \ReflectionClass('Koch\Http\HttpResponse');
         $method = $class->getProperty($name);
         $method->setAccessible(true);
 
@@ -144,12 +145,12 @@ class HttpResponseTest extends \PHPUnit_Framework_TestCase
 
     public function testSetNoCacheHeader()
     {
-         HttpResponse::setNoCacheHeader();
+        HttpResponse::setNoCacheHeader();
 
-         $this->assertArrayHasKey('Pragma', self::reflectProperty('headers')->getValue());
-         $this->assertArrayHasKey('Cache-Control', self::reflectProperty('headers')->getValue());
-         $this->assertArrayHasKey('Expires',  self::reflectProperty('headers')->getValue());
-         $this->assertArrayHasKey('Last-Modified', self::reflectProperty('headers')->getValue());
+        $this->assertArrayHasKey('Pragma', self::reflectProperty('headers')->getValue());
+        $this->assertArrayHasKey('Cache-Control', self::reflectProperty('headers')->getValue());
+        $this->assertArrayHasKey('Expires',  self::reflectProperty('headers')->getValue());
+        $this->assertArrayHasKey('Last-Modified', self::reflectProperty('headers')->getValue());
     }
 
     public function testSendResponse()

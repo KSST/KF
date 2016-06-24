@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Doctrine;
 
 use Koch\Doctrine\EntityTool;
@@ -26,10 +27,10 @@ class EntityToolTest extends DoctrineTestCase
      */
     public function testCreateEntity()
     {
-        $data = array(
-            'name' => 'Ford',
-            'price' => 15000
-        );
+        $data = [
+            'name'  => 'Ford',
+            'price' => 15000,
+        ];
 
         $product = $this->object->createEntity(
             new \KochTest\Fixtures\Doctrine\Entity\Product(),
@@ -46,10 +47,10 @@ class EntityToolTest extends DoctrineTestCase
      */
     public function testCannotAddInvalidProperty()
     {
-        $data = array(
-            'name' => 'Ford',
-            'category' => 'Cars'
-        );
+        $data = [
+            'name'     => 'Ford',
+            'category' => 'Cars',
+        ];
 
         $product = $this->object->createEntity(
             new \KochTest\Fixtures\Doctrine\Entity\Product(),

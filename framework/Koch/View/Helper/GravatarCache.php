@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\View\Helper;
 
 /**
- * Gravatar_Cache
+ * Gravatar_Cache.
  *
  * This is a service class for accessing cached Gravatars as provided
  * by http://www.gravatar.com.
@@ -33,16 +33,16 @@ namespace Koch\View\Helper;
 class GravatarCache
 {
     // Gravatar Cache Settings
-    public $cache_location       = 'Uploads/images';
-    public $gravatar_cache_url   = '/gravatars/%s-%s-%s.png';
-    public $cache_expire_time    = '7 days';
-    public $cacheable            = true;
+    public $cache_location     = 'Uploads/images';
+    public $gravatar_cache_url = '/gravatars/%s-%s-%s.png';
+    public $cache_expire_time  = '7 days';
+    public $cacheable          = true;
 
     // Gravatar Attributes
-    public $gravatar_url         = null;
-    public $gravatar_id          = null;
-    public $size                 = null;
-    public $rating               = null;
+    public $gravatar_url = null;
+    public $gravatar_id  = null;
+    public $size         = null;
+    public $rating       = null;
 
     /**
      * @param string $gravatarUrl
@@ -69,7 +69,7 @@ class GravatarCache
      */
     public function checkIfCachable()
     {
-        if ($this->cacheable == true or 1 == ini_get("allow_url_fopen")) {
+        if ($this->cacheable === true or 1 === ini_get('allow_url_fopen')) {
             $this->cacheable = true;
         }
 
@@ -77,7 +77,7 @@ class GravatarCache
     }
 
     /**
-     * Gets Gravatar from (1) cache or (2) "gavatar.com"
+     * Gets Gravatar from (1) cache or (2) "gavatar.com".
      */
     public function getGravatar()
     {
@@ -88,7 +88,7 @@ class GravatarCache
 
         // if cache file exists and is not expired
         if (is_file($cacheFileAbsolutePath) === true and
-            (filemtime($cacheFileAbsolutePath) > strtotime('-' . $this->cache_expire_time)) === true) {
+            (filemtime($cacheFileAbsolutePath) > strtotime('-' . $this->cache_expire_time))) {
             // return the relative path
             return $cacheFileRelativePath;
         } else {
@@ -98,14 +98,15 @@ class GravatarCache
     }
 
     /**
-     * sets the specified gravatar at $gravatar_url to the $cache_filename
+     * sets the specified gravatar at $gravatar_url to the $cache_filename.
+     *
      * @param string $cacheFile
      * @param string $gravatarUrl
      */
     public function setGravatar($cacheFile, $gravatarUrl)
     {
         // Check if caching is possible
-        if ($this->checkIfCachable() == true) {
+        if ($this->checkIfCachable() === true) {
 
             // get the Gravatar and cache it
             $gravatar = file_get_contents($gravatarUrl);
@@ -115,14 +116,14 @@ class GravatarCache
             chmod($cacheFile, 755);
 
             // Check if Cache file was created
-            if (is_file($cacheFile) === true) {
+            if (is_file($cacheFile)) {
                 return $cacheFile;
             } else {
                 // pass-through the original URL
                 return $gravatarUrl;
             }
         } else {
-             // caching was not possible due to lack of url_fopen
+            // caching was not possible due to lack of url_fopen
              // passthrough the original URL
              return $gravatarUrl;
         }

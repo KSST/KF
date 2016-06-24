@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Pagination\Adapter;
 
 use Koch\Pagination\Adapter\NativeArray;
@@ -10,12 +11,12 @@ class NativeArrayTest extends \PHPUnit_Framework_TestCase
      */
     protected $object;
 
-    protected $array = array();
+    protected $array = [];
 
     protected function setUp()
     {
-        $this->array = array();
-        for ($i = 0; $i < 10; $i++) {
+        $this->array = [];
+        for ($i = 0; $i < 10; ++$i) {
             $this->array[] = rand(1, 999);
         }
 
@@ -56,9 +57,9 @@ class NativeArrayTest extends \PHPUnit_Framework_TestCase
 
     public function dataProviderGetResults()
     {
-        return array(
-            array(5, 10),
-            array(10, 5),
-        );
+        return [
+            [5, 10],
+            [10, 5],
+        ];
     }
 }

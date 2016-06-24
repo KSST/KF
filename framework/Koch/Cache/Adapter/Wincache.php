@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -43,12 +43,12 @@ use Koch\Cache\CacheInterface;
  */
 class Wincache extends AbstractCache implements CacheInterface
 {
-     /**
-     * Constructor
+    /**
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('wincache') === false) {
             throw new Exception(
@@ -60,10 +60,11 @@ class Wincache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Contains checks if a key exists in the cache
+     * Contains checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
@@ -71,10 +72,11 @@ class Wincache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string $key Identifier for the data
-     * @return mixed  boolean FALSE if the data was not fetched from the cache, DATA on success
+     * @param string $key Identifier for the data
+     *
+     * @return mixed boolean FALSE if the data was not fetched from the cache, DATA on success
      */
     public function fetch($key)
     {
@@ -82,11 +84,12 @@ class Wincache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param  string  $key  Identifier for the data
-     * @param  mixed   $data Data to be cached
-     * @return boolean True if the data was successfully cached, false on failure
+     * @param string $key  Identifier for the data
+     * @param mixed  $data Data to be cached
+     *
+     * @return bool True if the data was successfully cached, false on failure
      */
     public function store($key, $data, $lifetime = 0)
     {
@@ -94,10 +97,11 @@ class Wincache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Delete data by key from cache
+     * Delete data by key from cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean True if the data was successfully removed, false on failure
+     * @param string $key Identifier for the data
+     *
+     * @return bool True if the data was successfully removed, false on failure
      */
     public function delete($key)
     {
@@ -105,9 +109,9 @@ class Wincache extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Clears the cache
+     * Clears the cache.
      *
-     * @return boolean
+     * @return bool
      */
     public function clear()
     {
@@ -121,15 +125,15 @@ class Wincache extends AbstractCache implements CacheInterface
      */
     public function stats()
     {
-        $info = wincache_ucache_info();
+        $info    = wincache_ucache_info();
         $meminfo = wincache_ucache_meminfo();
 
-        return array(
-            CacheInterface::STATS_HITS => $info['total_hit_count'],
-            CacheInterface::STATS_MISSES => $info['total_miss_count'],
-            CacheInterface::STATS_UPTIME => $info['total_cache_uptime'],
-            CacheInterface::STATS_MEMORY_USAGE => $meminfo['memory_total'],
+        return [
+            CacheInterface::STATS_HITS              => $info['total_hit_count'],
+            CacheInterface::STATS_MISSES            => $info['total_miss_count'],
+            CacheInterface::STATS_UPTIME            => $info['total_cache_uptime'],
+            CacheInterface::STATS_MEMORY_USAGE      => $meminfo['memory_total'],
             CacheInterface::STATS_MEMORY_AVAILIABLE => $meminfo['memory_free'],
-        );
+        ];
     }
 }

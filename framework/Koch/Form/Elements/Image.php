@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -30,7 +29,6 @@ use Koch\Form\FormElementInterface;
 
 class Image extends FormElement implements FormElementInterface
 {
-
     public static function render()
     {
         return '<input ' . $this->renderAttributes() . '>';

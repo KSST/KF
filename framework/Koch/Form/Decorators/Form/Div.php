@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Form;
@@ -28,7 +27,7 @@ namespace Koch\Form\Decorators\Form;
 use Koch\Form\AbstractFormDecorator;
 
 /**
- * Form_Decorator_Div
+ * Form_Decorator_Div.
  *
  * Wraps a <div> element around the html_form_content.
  */
@@ -49,12 +48,12 @@ class Div extends AbstractFormDecorator
 
         // add class
         if (mb_strlen($this->getClass()) > 0) {
-             $html_deco .= ' class="' . $this->getClass() .'"';
+            $html_deco .= ' class="' . $this->getClass() . '"';
         }
 
         // add class
         if (mb_strlen($this->getId()) > 0) {
-             $html_deco .= ' id="' . $this->getId() .'"';
+            $html_deco .= ' id="' . $this->getId() . '"';
         }
 
         // close opening div tag (close unclosed first tag)

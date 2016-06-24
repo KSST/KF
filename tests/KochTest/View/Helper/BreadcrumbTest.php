@@ -2,8 +2,8 @@
 
 namespace KochTest\View\Helper;
 
-use Koch\View\Helper\Breadcrumb;
 use Koch\Router\TargetRoute;
+use Koch\View\Helper\Breadcrumb;
 
 class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 {
@@ -18,7 +18,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->object = new Breadcrumb;
+        $this->object = new Breadcrumb();
     }
 
     /**
@@ -36,8 +36,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
     public function testAdd()
     {
         // test data
-        $array = array( array('title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'),
-                        array('title' => 'modulenameB', 'link' => 'index.php?mod=modulenameB'));
+        $array = [['title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'],
+                        ['title' => 'modulenameB', 'link' => 'index.php?mod=modulenameB'], ];
 
         $this->object->add($array[0]['title'], $array[0]['link']);
         $this->object->add($array[1]['title'], $array[1]['link']);
@@ -61,8 +61,8 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
     public function testReplace()
     {
         // test data
-        $array = array( array('title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'),
-                        array('title' => 'modulenameC', 'link' => '/index.php?mod=modulenameC'));
+        $array = [['title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'],
+                        ['title' => 'modulenameC', 'link' => '/index.php?mod=modulenameC'], ];
 
         // add array[0]
         $this->object->add($array[0]['title'], $array[0]['link']);
@@ -80,7 +80,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
      */
     public function testAddDynamicBreadcrumbs()
     {
-        /**
+        /*
          * case A -  normal module - frontend access => module = news, action =  action_show
          *
          * expected path = Home >> News >> Show
@@ -110,7 +110,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Show', $trailArray[2]['title']);
         $this->assertSame('/index.php?mod=news&amp;action=show', $trailArray[2]['link']);
 
-        /**
+        /*
          * case B -  normal module - backend access => module = news, ctrl = admin, action = show
          *
          * expected path = Controlcenter >> News Admin >> Show
@@ -140,7 +140,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Show', $trailArray[2]['title']);
         $this->assertSame('/index.php?mod=news&amp;ctrl=admin&amp;action=show', $trailArray[2]['link']);
 
-        /**
+        /*
          * case c -  Control Center => module = controlcenter, action = show
          *
          * expected path = Controlcenter
@@ -169,7 +169,6 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
         // Level 3 - Action  Show
         $this->assertSame('Show', $trailArray[2]['title']);
         $this->assertSame('/index.php?mod=news&amp;action=show', $trailArray[2]['link']);
-
     }
 
     /**
@@ -178,7 +177,7 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
     public function testGetTrail()
     {
         // test data
-        $array = array( array('title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA'));
+        $array = [['title' => 'modulenameA', 'link' => 'index.php?mod=modulenameA']];
 
         // insert
         $this->object->add($array[0]['title'], $array[0]['link']);
@@ -230,13 +229,13 @@ class BreadcrumbTest extends \PHPUnit_Framework_TestCase
 
     public function testResetBreadcrumbs()
     {
-       // lets add an HOME entry on [0]
+        // lets add an HOME entry on [0]
        $this->object->initialize();
        // and reset the paths array
        $this->object->resetBreadcrumbs();
 
-       $t_array = $this->object->getTrail(false);
+        $t_array = $this->object->getTrail(false);
 
-       $this->assertSame(array(), $t_array);
+        $this->assertSame([], $t_array);
     }
 }

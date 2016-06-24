@@ -21,7 +21,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "eaccelerator".');
         }
 
-        $this->object = new EAccelerator;
+        $this->object = new EAccelerator();
     }
 
     /**
@@ -34,6 +34,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::contains
+     *
      * @todo   Implement testContains().
      */
     public function testContains()
@@ -46,6 +47,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::fetch
+     *
      * @todo   Implement testFetch().
      */
     public function testFetch()
@@ -58,6 +60,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::store
+     *
      * @todo   Implement testStore().
      */
     public function testStore()
@@ -70,6 +73,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::delete
+     *
      * @todo   Implement testDelete().
      */
     public function testDelete()
@@ -82,6 +86,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::clear
+     *
      * @todo   Implement testClear().
      */
     public function testClear()
@@ -94,6 +99,7 @@ class EAcceleratorTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @covers Koch\Cache\Adapter\EAccelerator::stats
+     *
      * @todo   Implement testStats().
      */
     public function testStats()

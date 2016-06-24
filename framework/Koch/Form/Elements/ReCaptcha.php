@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -42,7 +41,6 @@ class ReCaptcha extends Captcha implements FormElementInterface
     /**
      * @var object Instance of \Koch\Http\HttpRequest Object.
      */
-
     public function __construct()
     {
         $this->request = Clansuite_CMS::getInjector()->instantiate('\Koch\Http\HttpRequest');
@@ -50,21 +48,21 @@ class ReCaptcha extends Captcha implements FormElementInterface
         // Load Recaptcha Library
         include_once VENDOR_PATH . '/recaptcha/recaptchalib.php';
 
-        /**
+        /*
          * Fetch publickey from config
          *
          * [recaptcha]
          * public_key  = ""
          * private_key = ""
          */
-        $config = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
+        $config           = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
         $this->publicKey  = $config['recaptcha']['public_key'];
         $this->privateKey = $config['recaptcha']['private_key'];
         unset($config);
     }
 
     /**
-     * Displays a ReCaptcha
+     * Displays a ReCaptcha.
      */
     public function render()
     {
@@ -72,7 +70,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
     }
 
     /**
-     * Validates a ReCaptcha
+     * Validates a ReCaptcha.
      *
      * In the code that processes the form submission, you need to add code to validate the CAPTCHA.
      */
@@ -85,13 +83,13 @@ class ReCaptcha extends Captcha implements FormElementInterface
             $this->request->getPost('recaptcha_response_field')
         );
 
-        if ($response->is_valid == false) {
+        if ($response->is_valid === false) {
             return _('The reCAPTCHA was not entered correctly. Try again. (recaptcha error ' . $response->error . ')');
         }
     }
 
     /**
-     * Administrative Functions for ReCaptcha
+     * Administrative Functions for ReCaptcha.
      */
     public function getAPIKey()
     {

@@ -1,11 +1,12 @@
 <?php
+
 namespace Koch\Doctrine\Extensions\Query\Mysql;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Lexer;
 
 /**
- * Mysql RAND() implementation for Doctrine2
+ * Mysql RAND() implementation for Doctrine2.
  */
 class Rand extends FunctionNode
 {

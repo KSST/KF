@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -32,17 +31,17 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
     protected $message = 'Please Confirm';
 
     /**
-     * @var string $formid Takes the name of the form (to trigger the original sumbit).
+     * @var string Takes the name of the form (to trigger the original sumbit).
      */
     protected $formid;
 
     public function __construct()
     {
-        $this->type = 'submit';
+        $this->type  = 'submit';
         $this->value = _('Confirm & Submit');
         $this->class = 'ButtonGreen';
 
-        /**
+        /*
          * Add the Form Submit Confirmation Javascript.
          * This is a jQuery UI Modal Confirm Dialog.
          *
@@ -66,7 +65,7 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
                                     resizable: false,
                                     buttons: {
                                         \"Submit Form\": function () {
-                                            document.".$this->formid.".submit();
+                                            document." . $this->formid . ".submit();
                                         },
                                         \"Cancel\": function () {
                                             $(this).dialog(\"close\");
@@ -75,7 +74,7 @@ class JqConfirmSubmitButton extends Input implements FormElementInterface
                                 });
 
 
-                              $('form#".$this->formid."').submit(function () {
+                              $('form#" . $this->formid . "').submit(function () {
                                 $('#dialog').dialog('open');
 
                                  return false;

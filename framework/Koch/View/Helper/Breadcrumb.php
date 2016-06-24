@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,12 +32,12 @@ use Koch\Router\TargetRoute;
 class Breadcrumb
 {
     /**
-     * @var array $path contains the complete path structured as array
+     * @var array contains the complete path structured as array
      */
-    private static $path = array();
+    private static $path = [];
 
     /**
-     * Adds a new breadcrumb
+     * Adds a new breadcrumb.
      *
      * @param string $title                  Name of the trail element
      * @param string $link                   Link of the trail element
@@ -46,10 +46,10 @@ class Breadcrumb
     public static function add($title, $link = '', $replace_array_position = null)
     {
         // set data to breadcrumb
-        $breadcrumb = array(
+        $breadcrumb = [
             'title' => ucwords($title),
-            'link' => '/' . ltrim($link, '/ ')
-        );
+            'link'  => '/' . ltrim($link, '/ '),
+        ];
 
         // replace
         if ($replace_array_position !== null) {
@@ -92,7 +92,7 @@ class Breadcrumb
             // do not add ctrl part, if controller and module are the same
             if ($controller !== '' and $controller !== $module) {
                 $url .= '&amp;ctrl=' . $controller;
-                $module .= ' '.$controller;
+                $module .= ' ' . $controller;
             }
             self::add($module, $url);
 
@@ -105,15 +105,16 @@ class Breadcrumb
     }
 
     /**
-     * Getter for the breadcrumbs/trail array
+     * Getter for the breadcrumbs/trail array.
      *
-     * @param  bool  $dynamic_add If true, adds the breadcrumbs dynamically (default), otherwise just returns.
+     * @param bool $dynamic_add If true, adds the breadcrumbs dynamically (default), otherwise just returns.
+     *
      * @return array self::$path The breadcrumbs array.
      */
     public static function getTrail($dynamic_add = true)
     {
         // if we got only one breadcrumb element, then only Home or ControlCenter was set before
-        if (count(self::$path) == 1 and $dynamic_add === true) {
+        if (count(self::$path) === 1 and $dynamic_add === true) {
             // add crumbs automatically
             self::addDynamicBreadcrumbs();
         }
@@ -122,7 +123,7 @@ class Breadcrumb
     }
 
     /**
-     * Breadcrumb Level 0    =>    Home or Controlcenter
+     * Breadcrumb Level 0    =>    Home or Controlcenter.
      *
      * @param string $module     The module name.
      * @param string $controller The controller name.
@@ -130,10 +131,10 @@ class Breadcrumb
     public static function initialize($module = null, $controller = null)
     {
         // ControlCenter (Backend)
-        if ($module == 'controlcenter' or $controller == 'admin') {
-            Breadcrumb::add('Control Center', '/index.php?mod=controlcenter');
+        if ($module === 'controlcenter' or $controller === 'admin') {
+            self::add('Control Center', '/index.php?mod=controlcenter');
         } else { // Home (Frontend)
-            Breadcrumb::add('Home');
+            self::add('Home');
         }
     }
 
@@ -142,6 +143,6 @@ class Breadcrumb
      */
     public static function resetBreadcrumbs()
     {
-        self::$path = array();
+        self::$path = [];
     }
 }

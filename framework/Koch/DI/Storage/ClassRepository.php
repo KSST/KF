@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\DI\Storage;
@@ -48,12 +47,12 @@ class ClassRepository
     public function isSupertype($class, $type)
     {
         $supertypes = array_merge(
-            array($class),
+            [$class],
             self::$reflection->interfacesOf($class),
             self::$reflection->parentsOf($class)
         );
 
-        return in_array($type, $supertypes);
+        return in_array($type, $supertypes, true);
     }
 
     public function getConstructorParameters($class)
@@ -66,14 +65,14 @@ class ClassRepository
             return $constructor->getParameters();
         }
 
-        return array();
+        return [];
     }
 
     public function getParameters($class, $method)
     {
         $reflection = self::$reflection->reflection($class);
         if (false === $reflection->hasMethod($method)) {
-            throw new \Koch\DI\Exception\SetterDoesNotExist;
+            throw new \Koch\DI\Exception\SetterDoesNotExist();
         }
 
         return $reflection->getMethod($method)->getParameters();

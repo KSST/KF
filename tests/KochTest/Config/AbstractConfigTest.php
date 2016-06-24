@@ -19,14 +19,14 @@ class AbstractConfigTest extends \PHPUnit_Framework_TestCase
         // we are using the config adapter native PHP here,
         // it's a class extending the abstract class
         // abstract classes cannot be instantiated
-        $this->object = new Config;
+        $this->object = new Config();
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/test.config.php');
-        $this->file = vfsStream::newFile('test.config.php', 0777)->withContent($this->getConfigFileContent());
+        $this->file          = vfsStream::newFile('test.config.php', 0777)->withContent($this->getConfigFileContent());
 
         $this->configFileURL2 = vfsStream::url('root/test2.config.php');
-        $this->file2 = vfsStream::newFile('test2.config.php', 0777)->withContent('');
+        $this->file2          = vfsStream::newFile('test2.config.php', 0777)->withContent('');
 
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
@@ -52,9 +52,9 @@ EOF;
 
     public function getConfigArray()
     {
-        return array(
-            'oldKey' => 'value'
-        );
+        return [
+            'oldKey' => 'value',
+        ];
     }
 
     /**
@@ -63,12 +63,12 @@ EOF;
      */
     public function testToArray()
     {
-       $array = $this->object->read($this->configFileURL);
-       $this->assertEquals($this->getConfigArray(), $this->object->toArray());
+        $array = $this->object->read($this->configFileURL);
+        $this->assertEquals($this->getConfigArray(), $this->object->toArray());
 
        // unset, returns the array one last time
        $this->assertEquals($array, $this->object->toArray(true));
-       $this->assertEquals(array(), $this->object->toArray());
+        $this->assertEquals([], $this->object->toArray());
     }
 
     /**
@@ -80,7 +80,7 @@ EOF;
         $this->object->read($this->configFileURL);
 
         // merge new values
-        $newConfig = array('newKey' => 'newKeyValue');
+        $newConfig = ['newKey' => 'newKeyValue'];
         $this->object->merge($newConfig);
 
         $this->assertArrayHasKey('oldKey', $this->object->toArray());
@@ -175,12 +175,13 @@ EOF;
 
     /**
      * @covers Koch\Config\AbstractConfig::offsetUnset
+     *
      * @todo   Implement testOffsetUnset().
      */
     public function testOffsetUnset()
     {
-       unset($this->object['newKey']);
+        unset($this->object['newKey']);
 
-       $this->assertFalse(isset($this->object->newKey));
+        $this->assertFalse(isset($this->object->newKey));
     }
 }

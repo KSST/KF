@@ -6,7 +6,6 @@ use Koch\Captcha\Captcha;
 
 class CaptchaTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Captcha
      */
@@ -34,7 +33,6 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
      */
     public function tearDown()
     {
-
     }
 
     public function testSetFontFolder()
@@ -47,7 +45,7 @@ class CaptchaTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('folder', $expectedFolders[1]);
 
         // accepts array
-        $folders = array('folder/A', 'folder/B');
+        $folders = ['folder/A', 'folder/B'];
 
         $this->object->setFontFolder($folders);
 

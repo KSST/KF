@@ -24,17 +24,17 @@ class XsltTest extends \PHPUnit_Framework_TestCase
             $this->markTestSkipped('This test requires the PHP extension "xsl" or "libxml".');
         }
 
-        $options = array();
+        $options = [];
 
         $this->object = new Xslt($options);
 
         vfsStreamWrapper::register();
 
         $this->stylesheetFileURL = vfsStream::url('root/stylesheet.xsl');
-        $this->file = vfsStream::newFile('stylesheet.xsl', 0777)->withContent($this->getStylesheetContent());
+        $this->file              = vfsStream::newFile('stylesheet.xsl', 0777)->withContent($this->getStylesheetContent());
 
         $this->dataFileURL = vfsStream::url('root/data.xml');
-        $this->file2 = vfsStream::newFile('data.xml', 0777)->withContent($this->getDataContent());
+        $this->file2       = vfsStream::newFile('data.xml', 0777)->withContent($this->getDataContent());
 
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
@@ -51,9 +51,9 @@ class XsltTest extends \PHPUnit_Framework_TestCase
         unset($this->object);
     }
 
-     /**
-      * @return string content of "stylesheet.xsl"
-      */
+    /**
+     * @return string content of "stylesheet.xsl"
+     */
     public function getStylesheetContent()
     {
         return <<< EOF
@@ -83,9 +83,9 @@ EOF;
      */
     public function testSetStylesheet()
     {
-       $xslfile = 'abc';
-       $this->object->setStylesheet($xslfile);
-       $this->assertEquals($xslfile, $this->object->getStylesheet());
+        $xslfile = 'abc';
+        $this->object->setStylesheet($xslfile);
+        $this->assertEquals($xslfile, $this->object->getStylesheet());
     }
 
     /**
@@ -111,11 +111,12 @@ EOF;
      */
     public function testAssign()
     {
-       $this->assertNull($this->object->assign(''));
+        $this->assertNull($this->object->assign(''));
     }
 
     /**
      * @covers Koch\View\Renderer\Xslt::configureEngine
+     *
      * @todo   Implement testConfigureEngine().
      */
     public function testConfigureEngine()

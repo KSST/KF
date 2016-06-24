@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Validators;
@@ -30,14 +29,14 @@ use Koch\Form\Validator;
 class Equals extends Validator
 {
     /**
-     * The equals to field
+     * The equals to field.
      *
      * @var string
      */
     public $equalsTo;
 
     /**
-     * EqualsTo Setter
+     * EqualsTo Setter.
      *
      * @param string $equalsTo The equals to field
      */
@@ -47,7 +46,7 @@ class Equals extends Validator
     }
 
     /**
-     * EqualsTo Getter
+     * EqualsTo Getter.
      *
      * @return string the equals to field
      */
@@ -68,7 +67,7 @@ class Equals extends Validator
 
     protected function processValidationLogic($value)
     {
-        if ($this->equalsTo == $value) {
+        if ($this->equalsTo === $value) {
             return true;
         } else {
             return false;

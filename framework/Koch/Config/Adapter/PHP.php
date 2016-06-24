@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -30,7 +30,7 @@ namespace Koch\Config\Adapter;
 class PHP implements AdapterInterface
 {
     /**
-     * Read the config array from php file
+     * Read the config array from php file.
      *
      * @param   string  The filename
      *

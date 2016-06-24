@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Session;
 
 use Koch\Session\FlashMessages;
@@ -21,7 +22,7 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('MyMessage', $_SESSION['user']['flashmessages']['error'][0]);
     }
 
-     /**
+    /**
      * @covers Koch\Session\FlashMessages::setErrorMessage
      */
     public function testSetErrorMessage()
@@ -37,7 +38,7 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetMessages()
     {
-         FlashMessages::setMessage('NoticeMessage', 'notice');
+        FlashMessages::setMessage('NoticeMessage', 'notice');
         // get message without type and unset
         $this->assertTrue(is_array(FlashMessages::getMessages()));
         $this->assertCount(1, FlashMessages::getMessages());
@@ -60,7 +61,6 @@ class FlashMessagesTest extends \PHPUnit_Framework_TestCase
         FlashMessages::reset();
         $this->assertTrue(is_array(FlashMessages::getMessages()));
         $this->assertCount(0, FlashMessages::getMessages());
-
     }
 
     /**

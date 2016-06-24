@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,11 +25,11 @@
 namespace Koch\Registry;
 
 /**
- * Koch Framework - Registry
+ * Koch Framework - Registry.
  */
 class Registry
 {
-    public static $registry = array();
+    public static $registry = [];
 
     /**
      * Set instance to registry.
@@ -45,7 +45,8 @@ class Registry
     /**
      * Isset check, if instance,classname or resolver is set to registry.
      *
-     * @param  string $name Name of instance.
+     * @param string $name Name of instance.
+     *
      * @return bool
      */
     public static function has($name)
@@ -54,11 +55,13 @@ class Registry
     }
 
     /**
-     * Getter for instance
+     * Getter for instance.
      *
-     * @param  string                    $name       Name of instance.
-     * @param  type                      $parameters
+     * @param string $name       Name of instance.
+     * @param type   $parameters
+     *
      * @return object
+     *
      * @throws \InvalidArgumentException
      */
     public static function get($name, $parameters = null)

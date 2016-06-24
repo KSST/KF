@@ -6,7 +6,6 @@ use Koch\Form\Validators\Ip;
 
 class IpTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Ip
      */
@@ -19,7 +18,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new Ip;
+        $this->validator = new Ip();
     }
 
     /**
@@ -33,7 +32,7 @@ class IpTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

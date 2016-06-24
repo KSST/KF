@@ -22,7 +22,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
         }
 
         $enabled = ini_get('apc.enabled');
-        if (PHP_SAPI == 'cli') {
+        if (PHP_SAPI === 'cli') {
             $enabled = $enabled && (bool) ini_get('apc.enable_cli');
         }
 
@@ -32,7 +32,7 @@ class ApcTest extends \PHPUnit_Framework_TestCase
             );
         }
 
-        $this->object = new Apc;
+        $this->object = new Apc();
     }
 
     /**

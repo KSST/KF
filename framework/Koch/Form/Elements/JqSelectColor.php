@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -34,7 +33,7 @@ use Koch\Form\FormElementInterface;
 class JqSelectColor extends FormElement implements FormElementInterface
 {
     /**
-     * JQSelectColor uses jQuery Farbtastic Colorpicker
+     * JQSelectColor uses jQuery Farbtastic Colorpicker.
      */
     public function __construct()
     {
@@ -55,16 +54,16 @@ class JqSelectColor extends FormElement implements FormElementInterface
     {
         // add the javascripts to the queue of the page (@todo queue, duplication check)
         $javascript = '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.farbtastic.js"></script>';
-        $javascript .= '<link rel="stylesheet" href="'.WWW_ROOT_THEMES_CORE . 'css/farbtastic.css" type="text/css" />';
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.farbtastic.js"></script>';
+        $javascript .= '<link rel="stylesheet" href="' . WWW_ROOT_THEMES_CORE . 'css/farbtastic.css" type="text/css" />';
 
-        /**
+        /*
          * Add the jQuery UI Date Select Dialog.
          *
          * WARNING: the div dialog must be present in the dom,
          *          before you assign a js function to it via $('#datepicker')
          */
-        $datepickerJs   = "<script type=\"text/javascript\">
+        $datepickerJs = "<script type=\"text/javascript\">
                                           $(document).ready(function () {
                                             $('#colorpicker').farbtastic('#color');
                                             $('#colorpicker').hide();
@@ -74,10 +73,10 @@ class JqSelectColor extends FormElement implements FormElementInterface
                                           });
                                         </script>";
 
-        $html = '<input type="text" id="color" name="'.$this->getName().'" value="'.$this->getValue().'" />';
-        $html .= '<img src="'.WWW_ROOT_THEMES_CORE . 'images/icons/colors.png"';
+        $html = '<input type="text" id="color" name="' . $this->getName() . '" value="' . $this->getValue() . '" />';
+        $html .= '<img src="' . WWW_ROOT_THEMES_CORE . 'images/icons/colors.png"';
         $html .= ' align="top" style="margin-top:1px; margin-left:3px;" id="color"></img><div id="colorpicker"></div>';
 
-        return $javascript.$datepickerJs.$html;
+        return $javascript . $datepickerJs . $html;
     }
 }

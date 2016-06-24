@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -28,7 +27,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Wysiwygtinymce
+ * Formelement_Wysiwygtinymce.
  *
  * @link http://tinymce.moxiecode.com/ Official Website
  * @link http://tinymce.moxiecode.com/js/tinymce/docs/api/index.html API Documentation
@@ -57,7 +56,7 @@ class WysiwygTinymce extends Textarea implements FormElementInterface
     public function render()
     {
         // a) loads the tinymce javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/tiny_mce/tiny_mce.js"';
+        $javascript = '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/tiny_mce/tiny_mce.js"';
         $javascript .= ' type="text/javascript"></script>';
 
         // b) handler to attach tinymce to a textarea named "mceSimple" and "mceAdvanced"
@@ -74,6 +73,7 @@ class WysiwygTinymce extends Textarea implements FormElementInterface
                                 editor_selector : "mceAdvanced"
                             });
                         // ]]></script>';
+
         return $javascript;
     }
 }

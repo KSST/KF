@@ -20,7 +20,7 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
         // we are using the cache adapter File here,
         // it's a class extending the abstract class
         // abstract classes cannot be instantiated
-        $this->object = new File;
+        $this->object = new File();
     }
 
     /**
@@ -40,7 +40,7 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
     {
         unset($this->object);
 
-        $options = array('prefix' => 'value');
+        $options      = ['prefix' => 'value'];
         $this->object = new File($options);
 
         $this->assertEquals('value', $this->object->options['prefix']);
@@ -52,10 +52,10 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOptions()
     {
-        $options = array(
+        $options = [
              'prefix' => 'someprefix',
-             'ttl' => 1337
-        );
+             'ttl'    => 1337,
+        ];
         $this->object->setOptions($options);
 
         $this->assertEquals('someprefix', $this->object->options['prefix']);
@@ -64,10 +64,10 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 
     public static function SetOptionDataprovider()
     {
-        return array(
-          array('prefix', 'some-prefix'),
-          array('ttl', 1337)
-        );
+        return [
+          ['prefix', 'some-prefix'],
+          ['ttl', 1337],
+        ];
     }
 
     /**
@@ -82,11 +82,11 @@ class AbstractCacheTest extends \PHPUnit_Framework_TestCase
 
     public static function SetOptionDataproviderInvalidData()
     {
-        return array(
-          array('prefix', ''),
-          array('ttl', -1),
-          array('unknown', 'unknown')
-        );
+        return [
+          ['prefix', ''],
+          ['ttl', -1],
+          ['unknown', 'unknown'],
+        ];
     }
 
     /**

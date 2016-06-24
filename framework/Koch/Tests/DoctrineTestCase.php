@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -24,12 +24,12 @@
 
 namespace Koch\Tests;
 
+use Doctrine\Common\Annotations\AnnotationReader;
+use Doctrine\Common\Cache\ArrayCache;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\AnnotationDriver;
 use Doctrine\ORM\Tools\SchemaTool;
-use Doctrine\Common\Annotations\AnnotationReader;
-use Doctrine\Common\Cache\ArrayCache;
 
 /**
  * Koch Framework - Base class for all unit-tests working with the Doctrine2 ORM.
@@ -59,9 +59,9 @@ class DoctrineTestCase extends TestCase
         require_once VENDOR_PATH . 'doctrine/orm/lib/Doctrine/ORM/Mapping/Driver/DoctrineAnnotations.php';
 
         // setup Annotation Driver
-        $driver = new AnnotationDriver(new AnnotationReader(), array(
+        $driver = new AnnotationDriver(new AnnotationReader(), [
             __DIR__ . '/../../../tests/KochTest/Fixtures/Doctrine/Entity',
-        ));
+        ]);
 
         $config = new Configuration();
         $config->setMetadataDriverImpl($driver);
@@ -71,10 +71,10 @@ class DoctrineTestCase extends TestCase
         $config->setProxyDir(__DIR__ . '/../../../tests/KochTest/Fixtures/Doctrine/Entity');
         $config->setProxyNamespace('/KochTest/Fixtures/Doctrine/Entity');
 
-        $connectionParams = array(
+        $connectionParams = [
             'driver' => 'pdo_sqlite',
             'memory' => true,
-        );
+        ];
 
         $em = EntityManager::create($connectionParams, $config);
 

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -31,7 +30,7 @@ class CheckboxList extends Checkbox implements FormElementInterface
 {
     public function getOptions()
     {
-        $options = array( '1' => 'eins', '2' => 'zwei', '3' => 'drei', '4' => 'Polizei' );
+        $options = ['1' => 'eins', '2' => 'zwei', '3' => 'drei', '4' => 'Polizei'];
 
         return $options;
     }

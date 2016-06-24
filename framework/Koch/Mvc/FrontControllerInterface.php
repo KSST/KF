@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -24,34 +24,30 @@
 
 namespace Koch\Mvc;
 
+use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
-use Koch\Filter\FilterInterface;
 
 /**
- * Interface for FrontController
+ * Interface for FrontController.
  *
  * The Frontcontroller has to implement the following methods.
  */
 interface FrontControllerInterface
 {
     /**
-     * @return void
      */
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response);
 
     /**
-     * @return void
      */
     public function processRequest();
 
     /**
-     * @return void
      */
     public function addPreFilter(FilterInterface $filter);
 
     /**
-     * @return void
      */
     public function addPostFilter(FilterInterface $filter);
 }

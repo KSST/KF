@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -37,7 +37,7 @@ class Compositum
     /**
      * @var array Array constains a object composition of all loggers
      */
-    public $loggers = array();
+    public $loggers = [];
 
     /**
      * Iterates over all registered loggers and writes the log entry.
@@ -46,7 +46,7 @@ class Compositum
      * @param string   $message
      * @param string[] $context Context Array
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $bool = true;
 
@@ -65,7 +65,7 @@ class Compositum
      */
     public function addLogger($logger)
     {
-        if ((in_array($logger, $this->loggers) === false)) {
+        if ((in_array($logger, $this->loggers, true) === false)) {
             $this->loggers[] = $logger;
         }
 

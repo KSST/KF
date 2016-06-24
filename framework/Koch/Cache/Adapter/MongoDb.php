@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -53,24 +53,23 @@ class MongoDb extends AbstractCache implements CacheInterface
     /* @var \MongoCollection */
     public $collection;
 
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
-
         if (class_exists('Mongo') === false) {
             throw new \Koch\Exception\Exception('MongoDb was not found.');
         }
 
         // omg. let's grab the passed in mock objects from the $options array
-        if (UNIT_TEST_RUN == true) {
-            $this->mongo = $options['mock']['mongo'];
+        if (UNIT_TEST_RUN === true) {
+            $this->mongo    = $options['mock']['mongo'];
             $this->database = $options['mock']['mongodb'];
             unset($options['mock']);
         }
 
-        $defaultOptions = array(
-            'database' => 'kf_database',
-            'collection' => 'kf_coll'
-        );
+        $defaultOptions = [
+            'database'   => 'kf_database',
+            'collection' => 'kf_coll',
+        ];
         $options = $options + $defaultOptions;
 
         parent::__construct($options);
@@ -123,14 +122,14 @@ class MongoDb extends AbstractCache implements CacheInterface
             return;
         }
 
-        if (empty($this->options['database']) === true) {
+        if (empty($this->options['database'])) {
             throw new \RuntimeException('The option "database" must be set.');
         }
-        if (empty($this->options['collection']) === true) {
+        if (empty($this->options['collection'])) {
             throw new \RuntimeException('The option "collection" must be set.');
         }
 
-        $this->database = $this->mongo->selectDB($this->options['database']);
+        $this->database   = $this->mongo->selectDB($this->options['database']);
         $this->collection = $this->database->selectCollection($this->options['collection']);
     }
 
@@ -143,7 +142,7 @@ class MongoDb extends AbstractCache implements CacheInterface
     {
         $data = $this->getData($key);
 
-        return (isset($data) === true) ? $data : false;
+        return isset($data) ? $data : false;
     }
 
     /**
@@ -151,11 +150,11 @@ class MongoDb extends AbstractCache implements CacheInterface
      */
     public function store($key, $value, $ttl = null)
     {
-        $item = array(
+        $item = [
             'key'   => $key,
             'value' => $value,
             'ttl'   => time() + $ttl,
-        );
+        ];
         $this->delete($key);
 
         return $this->collection->insert($item);
@@ -168,18 +167,19 @@ class MongoDb extends AbstractCache implements CacheInterface
 
     public function delete($key)
     {
-        return $this->collection->remove(array('key' => $key));
+        return $this->collection->remove(['key' => $key]);
     }
 
     /**
      * Get data value from mongo database and performs a TTL check.
      *
-     * @param  string      $key Keyname
+     * @param string $key Keyname
+     *
      * @return mixed|false
      */
     public function getData($key)
     {
-        $data = $this->collection->findOne(array('key' => $key));
+        $data = $this->collection->findOne(['key' => $key]);
 
         if (count($data) > 1) {
             if (time() > $data['ttl']) {
@@ -194,10 +194,11 @@ class MongoDb extends AbstractCache implements CacheInterface
 
     /**
      * @todo
+     *
      * @return array
      */
     public function stats()
     {
-        return array();
+        return [];
     }
 }

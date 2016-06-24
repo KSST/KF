@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -85,10 +85,10 @@ class Form implements FormInterface
      *
      * @var array
      */
-    protected $formelements = array();
+    protected $formelements = [];
 
     /**
-     * Form attributes:
+     * Form attributes:.
      *
      * accept-charset, action, autocomplete, enctype, method, name, novalidate, target
      *
@@ -112,7 +112,7 @@ class Form implements FormInterface
     /**
      * Contains autocomplete state of the form.
      *
-     * @var boolean
+     * @var bool
      */
     protected $autocomplete;
 
@@ -170,7 +170,7 @@ class Form implements FormInterface
     /**
      * Flag variable to indicate, if form has an error.
      *
-     * @var boolean
+     * @var bool
      */
     protected $error = false;
 
@@ -179,12 +179,12 @@ class Form implements FormInterface
      *
      * @var array
      */
-    private $formdecorators = array();
+    private $formdecorators = [];
 
     /**
      * Toogle variable to control registering of default Formdecorators during rendering.
      *
-     * @var boolean
+     * @var bool
      */
     private $useDefaultFormDecorators = true;
 
@@ -193,17 +193,17 @@ class Form implements FormInterface
      *
      * @var array
      */
-    protected $formgroups = array();
+    protected $formgroups = [];
 
     /**
-     * Errormessages Stack
+     * Errormessages Stack.
      *
      * @var array
      */
-    protected $errorMessages = array();
+    protected $errorMessages = [];
 
     /**
-     * Construct
+     * Construct.
      *
      * @example
      * $form = Koch_Form('news_form', 'post', 'index.php?mod=news&sub=admin&action=update&type=create');
@@ -237,7 +237,8 @@ class Form implements FormInterface
     /**
      * Sets the method (POST, GET) to the form.
      *
-     * @param  string $method POST or GET
+     * @param string $method POST or GET
+     *
      * @return Form
      */
     public function setMethod($method)
@@ -271,7 +272,8 @@ class Form implements FormInterface
     /**
      * Set action of this form (which is the target url).
      *
-     * @param  string $action string Target URL of the action of this form.
+     * @param string $action string Target URL of the action of this form.
+     *
      * @return Form
      */
     public function setAction($action)
@@ -305,7 +307,8 @@ class Form implements FormInterface
      * Set autocomplete of this form.
      * If "on" browsers can store the form's input values, to auto-fill the form if the user returns to the page.
      *
-     * @param  boolean $bool boolean state to set for autocomplete.
+     * @param bool $bool boolean state to set for autocomplete.
+     *
      * @return Form
      */
     public function setAutoComplete($bool)
@@ -316,7 +319,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Gets the target (_blank, _self, _parent, _top)
+     * Gets the target (_blank, _self, _parent, _top).
      *
      * @return string string
      */
@@ -333,7 +336,8 @@ class Form implements FormInterface
      * _parent  Open in the parent frameset
      * _top
      *
-     * @param  string $target _blank, _self, _parent, _top
+     * @param string $target _blank, _self, _parent, _top
+     *
      * @return Form
      */
     public function setTarget($target)
@@ -365,7 +369,9 @@ class Form implements FormInterface
      * If true the form should not be validated when submitted.
      *
      * @link http://dev.w3.org/html5/spec-author-view/association-of-controls-and-forms.html#attr-fs-novalidate
-     * @param  boolean $bool boolean state to set for novalidation.
+     *
+     * @param bool $bool boolean state to set for novalidation.
+     *
      * @return Form
      */
     public function setNoValidation($bool)
@@ -379,19 +385,20 @@ class Form implements FormInterface
      * Returns the requested attribute if existing else null.
      *
      * @param $parametername
+     *
      * @return mixed null or value of the attribute
      */
     public function getAttribute($attributename)
     {
-        if (isset($this->{$attributename}) === true) {
+        if (isset($this->{$attributename})) {
             return $this->{$attributename};
         } else {
-            return null;
+            return;
         }
     }
 
     /**
-     * Setter method for Attribute
+     * Setter method for Attribute.
      *
      * @param array $attribute attribute name
      * @param array $value     value
@@ -402,17 +409,17 @@ class Form implements FormInterface
     }
 
     /**
-     * Setter method for Attributes
+     * Setter method for Attributes.
      *
      * @param array $attributes Array with one or several attributename => value relationships.
      */
     public function setAttributes($attributes)
     {
         if (is_array($attributes)) {
-            /**
+            /*
              * The incomming attributes array contains a form description array for the formgenerator.
              */
-            if (isset($attributes['form']) === true) {
+            if (isset($attributes['form'])) {
                 // generate form
                 $form = new \Koch\Form\Generator\PHPArray($attributes);
                 // copy all properties of the inner form object to ($this) outer form object =)
@@ -420,7 +427,7 @@ class Form implements FormInterface
                 // unset inner form
                 unset($form);
             } else {
-                /**
+                /*
                  * Just normal <form attribute(s)=value></form>
                  */
                 foreach ($attributes as $attribute => $value) {
@@ -442,7 +449,7 @@ class Form implements FormInterface
 
         foreach ($varArray as $key => $value) {
             // use this object, if no target object is specified
-            if ($target == null) {
+            if ($target === null) {
                 $this->$key = $value;
             } else {
                 $target->$key = $value;
@@ -455,7 +462,8 @@ class Form implements FormInterface
     /**
      * Set id of this form.
      *
-     * @param  string $id ID of this form.
+     * @param string $id ID of this form.
+     *
      * @return Form
      */
     public function setID($id)
@@ -478,7 +486,8 @@ class Form implements FormInterface
     /**
      * Set name of this form.
      *
-     * @param  string $name Name of this form.
+     * @param string $name Name of this form.
+     *
      * @return Form
      */
     public function setName($name)
@@ -502,7 +511,8 @@ class Form implements FormInterface
      * Set accept-charset of this form.
      * Like accept-charset="ISO-8859-1".
      *
-     * @param  string $charset Charset of this form (utf-8, iso-8859-1).
+     * @param string $charset Charset of this form (utf-8, iso-8859-1).
+     *
      * @return Form
      */
     public function setAcceptCharset($charset)
@@ -529,7 +539,8 @@ class Form implements FormInterface
     /**
      * Set class of this form.
      *
-     * @param  string $class Css Classname of this form.
+     * @param string $class Css Classname of this form.
+     *
      * @return Form
      */
     public function setClass($class)
@@ -553,7 +564,8 @@ class Form implements FormInterface
      * Sets the description text of this form.
      * The description is a p tag after the heading (form > h2 > p).
      *
-     * @param  string $description Description of this form.
+     * @param string $description Description of this form.
+     *
      * @return Form
      */
     public function setDescription($description)
@@ -577,7 +589,8 @@ class Form implements FormInterface
      * Set a heading for this form.
      * The heading is a h2 tag directly after the opening form tag.
      *
-     * @param  string $heading Heading of this form.
+     * @param string $heading Heading of this form.
+     *
      * @return Form
      */
     public function setHeading($heading)
@@ -616,7 +629,7 @@ class Form implements FormInterface
      */
     public function setLegend($legend)
     {
-        $this->setDecoratorAttributesArray(array('form' => array('fieldset' => array('legend' => $legend))));
+        $this->setDecoratorAttributesArray(['form' => ['fieldset' => ['legend' => $legend]]]);
 
         return $this;
     }
@@ -637,7 +650,8 @@ class Form implements FormInterface
      * - text/plain
      *  Spaces are converted to "+" symbols, but no special characters are encoded
      *
-     * @param  string $encoding Encoding type of this form.
+     * @param string $encoding Encoding type of this form.
+     *
      * @return Form
      */
     public function setEncoding($encoding)
@@ -664,7 +678,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Getter for formelements array
+     * Getter for formelements array.
      *
      * @return array Formelements
      */
@@ -674,7 +688,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Set formelements
+     * Set formelements.
      *
      * @param string[] $formelements
      */
@@ -686,13 +700,13 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Form Errors
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Get the form error status.
      *
-     * @return boolean
+     * @return bool
      */
     public function formHasErrors()
     {
@@ -702,7 +716,7 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Render
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
@@ -725,7 +739,7 @@ class Form implements FormInterface
      */
     public function renderAllFormelements()
     {
-        $html_form = '';
+        $html_form        = '';
         $html_formelement = '';
 
         // fetch all formelements
@@ -733,7 +747,7 @@ class Form implements FormInterface
 
         #\Koch\Debug::printR($formelements);
         // developer hint: when $form->render() was triggered, but no formelement was added before
-        if (count($formelements) == 0) {
+        if (count($formelements) === 0) {
             throw new \Koch\Exception\Exception(
                 _('Error rendering formelements. ') .
                 _('No formelements on form object. Consider adding some formelements using addElement().')
@@ -748,12 +762,12 @@ class Form implements FormInterface
             // fetch all decorators of this formelement
             $formelementdecorators = $formelement->getDecorators();
 
-            /**
+            /*
              * Do not add default formelement decorators
              * 1) if some were already added manually
              * 2) if the feature is disabled (setting is then incomming from inside the formelement)
              */
-            if (empty($formelementdecorators) and ($formelement->disableDefaultDecorators == false)) {
+            if (empty($formelementdecorators) && ($formelement->disableDefaultDecorators === false)) {
                 // apply default decorators to the formelement
                 $this->registerDefaultFormelementDecorators($formelement);
 
@@ -780,7 +794,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Render this form
+     * Render this form.
      *
      * @return Koch_Formelement
      */
@@ -790,7 +804,7 @@ class Form implements FormInterface
         $html_form = $this->renderAllFormelements();
 
         // b) attach default decorators
-        //if (empty($this->formdecorators) === true) {
+        //if (empty($this->formdecorators)) {
             // should the default form decorators be applied?
             if ($this->useDefaultFormDecorators === true) {
                 // set a common style to the form by registering one or more decorators
@@ -821,9 +835,10 @@ class Form implements FormInterface
     }
 
     /**
-     * Returns a XHTML string representation of the form
+     * Returns a XHTML string representation of the form.
      *
      * @see Koch_Form::render()
+     *
      * @return string
      */
     public function __toString()
@@ -834,7 +849,7 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Formelement Handling (add, del, getByPos, getByName)
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
@@ -842,7 +857,9 @@ class Form implements FormInterface
      *
      * This is a case-insensitive file exists check.
      * This allows checking for names/file, which are not only ucfirst(), e.g. "SubmitButton".
-     * @param  string $fileName
+     *
+     * @param string $fileName
+     *
      * @return string
      */
     public static function fileExists($fileName)
@@ -853,7 +870,7 @@ class Form implements FormInterface
 
         // handle case insensitive requests
         $directoryName = dirname($fileName);
-        $fileArray = glob($directoryName . '/*', GLOB_NOSORT);
+        $fileArray     = glob($directoryName . '/*', GLOB_NOSORT);
         foreach ($fileArray as $file) {
             if (false !== stripos($file, $fileName . '.')) {
                 return realpath($file);
@@ -864,7 +881,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Adds a formelement to the form
+     * Adds a formelement to the form.
      *
      * You don't know the formelements available? Then take a look at
      * a) the directory core\viewhelper\form\formelements\*
@@ -893,20 +910,20 @@ class Form implements FormInterface
 
         // for easier use of the formelement "file":
         // this switches the "encytype" attribute of the form tag.
-        if (($formelement instanceof \Koch\Form\Formelement\File) === true) {
+        if ($formelement instanceof \Koch\Form\Formelement\File) {
             $this->setEncoding('multipart/form-data');
         }
 
         // helper for setting formelement attributes directly when adding
-        if (is_array($attributes) === true) {
+        if (is_array($attributes)) {
             $formelement->setAttributes($attributes);
         }
 
-        /**
+        /*
          * create formelement identifier automatically if not set manually.
          * this is needed for javascript selections via id tag.
          */
-        if (strlen($formelement->getID()) == 0) {
+        if (strlen($formelement->getID()) === 0) {
             $formelement->setID($formelement->type . '-formelement-' . count($this->formelements));
         }
 
@@ -914,7 +931,7 @@ class Form implements FormInterface
         // this is the default behaviour
         if ($position === null) {
             $this->formelements[] = $formelement;
-        } elseif (is_int($position) === true) {
+        } elseif (is_int($position)) {
             // else we position the element under it's number to keep things in an order
 
             // hmpf, there is already an element at this position
@@ -941,31 +958,31 @@ class Form implements FormInterface
     public function regenerateFormelementIdentifiers()
     {
         $pos_lastpart = '';
-        $pos = '';
-        $firstpart = '';
-        $id = '';
+        $pos          = '';
+        $firstpart    = '';
+        $id           = '';
 
         $i = 0;
 
         foreach ($this->formelements as $formelement) {
             $id = $formelement->getID();
 
-            /**
+            /*
              * the autogenerated id string has the following abstract format:
              * "type-formelement-id". it's exact string length is unknown.
              * the last part separated by a minus (the id part) is stripped off
              * of the string.
              */
             $pos_lastpart = strrpos($id, '-') + 1;
-            $pos = strlen($id) - $pos_lastpart;
-            $firstpart = substr($id, 0, -$pos);
+            $pos          = strlen($id) - $pos_lastpart;
+            $firstpart    = substr($id, 0, -$pos);
 
             // the new id is then appended to the remaining firstpart of the string
             $id = $firstpart .= $i;
 
             $formelement->setID($id);
 
-            $i++;
+            ++$i;
         }
 
         unset($i, $pos_lastpart, $pos, $firstpart, $id);
@@ -982,19 +999,20 @@ class Form implements FormInterface
      */
     private function arrayInsert($value, $index, &$array)
     {
-        return array_merge(array_slice($array, 0, $index), array($value), array_slice($array, $index));
+        return array_merge(array_slice($array, 0, $index), [$value], array_slice($array, $index));
     }
 
     /**
-     * Removes a formelement by name (not type!)
+     * Removes a formelement by name (not type!).
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return bool
      */
     public function delElementByName($name)
     {
         $cnt_formelements = count($this->formelements);
-        for ($i = 0; $i < $cnt_formelements; $i++) {
+        for ($i = 0; $i < $cnt_formelements; ++$i) {
             if ($name === $this->formelements[$i]->getName()) {
                 unset($this->formelements[$i]);
 
@@ -1006,9 +1024,10 @@ class Form implements FormInterface
     }
 
     /**
-     * Fetches a formelement via it's position number
+     * Fetches a formelement via it's position number.
      *
      * @param $position integer The position number the requested formelement (ordering).
+     *
      * @return Koch_Formelement $formelement Object implementing the Koch_Form_Interface
      */
     public function getElementByPosition($position)
@@ -1017,13 +1036,14 @@ class Form implements FormInterface
             return $this->formelements[$position];
         }
 
-        return null;
+        return;
     }
 
     /**
-     * Fetches a formelement via it's name (not type!)
+     * Fetches a formelement via it's name (not type!).
      *
      * @param $name string The name of the requested formelement.
+     *
      * @return Koch_Formelement $formelement Object
      */
     public function getElementByName($name)
@@ -1034,7 +1054,7 @@ class Form implements FormInterface
             }
         }
 
-        return null;
+        return;
     }
 
     /**
@@ -1042,6 +1062,7 @@ class Form implements FormInterface
      * returns the last element in the stack as default.
      *
      * @param $position string|int Name or position of the formelement.
+     *
      * @return Koch_Formelement $formelement Object
      */
     public function getElement($position = null)
@@ -1069,7 +1090,7 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Formelement Factory
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
@@ -1089,24 +1110,24 @@ class Form implements FormInterface
         }
 
         // get PSR-0 classname from file
-        $pi = pathinfo($file);
+        $pi        = pathinfo($file);
         $classname = $pi['filename'];
 
         // class = namespace "Koch\Form\Element\" + formelement name
         $class = '\Koch\Form\Elements\\' . $classname;
 
         // instantiate the new formelement and return
-        return new $class;
+        return new $class();
     }
 
     /**
      * ===================================================================================
      *      Form Processing
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * processForm
+     * processForm.
      *
      * This is the main formular processing loop.
      * If the form does not validate, then redisplay it,
@@ -1115,15 +1136,15 @@ class Form implements FormInterface
     public function processForm()
     {
         // check, if form has been submitted properly
-        if ($this->validateForm() === true) {
-             /**
+        if ($this->validateForm()) {
+            /*
              * Success - form content valid.
              * The "noerror" decorator implementation decides,
              * if a success web page or a flashmessage is used.
              */
             $this->addDecorator('NoError');
         } else {
-            /**
+            /*
              * Failure - form was not filled properly.
              * Redisplay the form with error decorator added.
              */
@@ -1132,17 +1153,16 @@ class Form implements FormInterface
     }
 
     /**
-     * Get the data array
+     * Get the data array.
      *
      * @return array containing all the form data.
      */
     protected function bind()
     {
-
     }
 
     /**
-     * Set Values to Form
+     * Set Values to Form.
      *
      * An associative array is used to pre-populate form elements.
      * The keys of this array correspond with the element names.
@@ -1158,9 +1178,10 @@ class Form implements FormInterface
     public function setValues($data = null)
     {
         // because $data might be an object, typecast $data object to array
-        if (is_object($data) === true) {
+        if (is_object($data)) {
             $data = (array) $data;
-        } if (null === $data) { // fetch data from POST
+        }
+        if (null === $data) { // fetch data from POST
             if ('POST' === \Koch\Http\HttpRequest::getRequestMethod()) {
                 $data = \Koch\Http\HttpRequest::getPost();
             }
@@ -1170,12 +1191,12 @@ class Form implements FormInterface
         foreach ($data as $key => $value) {
             foreach ($this->formelements as $formelement) {
 
-                /**
+                /*
                  * Exclude some formelements from setValue() by type, e.g. Buttons, etc.
                  * Setting the value would just change the visible "name" of these elements.
                  */
                 $type = $formelement->getType();
-                if (true === in_array($type, array('submit', 'button', 'cancelbutton', 'resetbutton'))) {
+                if (true === in_array($type, ['submit', 'button', 'cancelbutton', 'resetbutton'], true)) {
                     continue;
                 }
 
@@ -1200,10 +1221,10 @@ class Form implements FormInterface
      */
     public function getValues()
     {
-        $values = array();
+        $values = [];
 
         foreach ($this->formelements as $formelement) {
-            /**
+            /*
              * Create an associative array $value[id] => value
              */
             $values[$formelement->getId()] = $formelement->getValue();
@@ -1216,17 +1237,18 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Form Decoration
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Is a shortcut/proxy/convenience method for addDecorator()
-     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>
+     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>.
      *
      * @see $this->addDecorator()
      *
-     * @param  string             $decorators Array of decorator objects or names or just one string.
-     * @param  array              $attributes Array of properties for the decorator object.
+     * @param string $decorators Array of decorator objects or names or just one string.
+     * @param array  $attributes Array of properties for the decorator object.
+     *
      * @return Koch_Formdecorator object
      */
     public function setDecorator($decorators, $attributes = null)
@@ -1235,7 +1257,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Add multiple decorators at once
+     * Add multiple decorators at once.
      *
      * @param array $decorators Array of decorator objects or names.
      */
@@ -1249,13 +1271,14 @@ class Form implements FormInterface
 
     /**
      * Adds a decorator to the form
-     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>
+     * <strong>WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM</strong>.
      *
      * @example
      * $form->addDecorator('fieldset')->setLegend('legendname');
      *
-     * @param  array              $decorator  Array of decorator objects or names or just one string.
-     * @param  array              $attributes Array of properties for the decorator object.
+     * @param array $decorator  Array of decorator objects or names or just one string.
+     * @param array $attributes Array of properties for the decorator object.
+     *
      * @return Koch_Formdecorator object
      */
     public function addDecorator($decorator, $attributes = null)
@@ -1288,7 +1311,7 @@ class Form implements FormInterface
         }
 
         // now check if this decorator is not already set (prevent decorator duplications)
-        if (false === in_array($decorator, $this->formdecorators)) {
+        if (false === in_array($decorator, $this->formdecorators, true)) {
             // set this decorator object under its name into the array
             $this->formdecorators[$decoratorname] = $decorator;
         }
@@ -1301,7 +1324,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Getter Method for the formdecorators
+     * Getter Method for the formdecorators.
      *
      * @return array with registered formdecorators
      */
@@ -1312,7 +1335,7 @@ class Form implements FormInterface
 
     /**
      * Toggles the Usage of Default Form Decorators
-     * If set to false, registerDefaultFormDecorators() is not called during render()
+     * If set to false, registerDefaultFormDecorators() is not called during render().
      *
      * @see render()
      * @see registerDefaultFormDecorators()
@@ -1325,7 +1348,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Set default form decorators (form)
+     * Set default form decorators (form).
      */
     public function registerDefaultFormDecorators()
     {
@@ -1350,14 +1373,14 @@ class Form implements FormInterface
         }
 
         // here variable $decorator must be string
-        if (isset($this->formdecorators[$decorator]) === true || array_key_exists($decorator, $this->formdecorators)) {
+        if (isset($this->formdecorators[$decorator]) || array_key_exists($decorator, $this->formdecorators)) {
             unset($this->formdecorators[$decorator]);
         }
     }
 
     public function getDecorator($decorator)
     {
-        if (isset($this->formdecorators[$decorator]) === true) {
+        if (isset($this->formdecorators[$decorator])) {
             return $this->formdecorators[$decorator];
         } else {
             throw new \InvalidArgumentException('The Form does not have a Decorator called "' . $decorator . '".');
@@ -1368,17 +1391,18 @@ class Form implements FormInterface
      * Factory method. Instantiates and returns a new formdecorator object.
      *
      * @param string Name of Formdecorator.
-     * @param  string             $decorator
+     * @param string $decorator
+     *
      * @return Koch_Formdecorator
      */
     public function decoratorFactory($decorator)
     {
-        $classmap = array(
+        $classmap = [
             'html5validation' => 'Html5Validation',
-            'noerror' => 'NoError'
-        );
+            'noerror'         => 'NoError',
+        ];
 
-        if (isset($classmap[$decorator]) === true || array_key_exists($decorator, $classmap) === true) {
+        if (isset($classmap[$decorator]) || array_key_exists($decorator, $classmap)) {
             $decorator = $classmap[$decorator];
         } else {
             $decorator = ucfirst($decorator);
@@ -1390,7 +1414,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Sets the Decorator Attributes Array
+     * Sets the Decorator Attributes Array.
      *
      * Decorators are not instantiated at the time of the form definition via an array.
      * So configuration can only be applied indirtly to these objects.
@@ -1404,7 +1428,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Returns the Decorator Attributes Array
+     * Returns the Decorator Attributes Array.
      *
      * Decorators are not instantiated at the time of the form definition via an array.
      * So configuration can only be applied indirtly to these objects.
@@ -1418,7 +1442,7 @@ class Form implements FormInterface
     }
 
     /**
-     * Array Structure
+     * Array Structure.
      *
      * $decorator_attributes = array(
      *  Level 1 - key = decorator type
@@ -1473,17 +1497,20 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Formelement Decoration
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * setFormelementDecorator
+     * setFormelementDecorator.
      *
      * Is a shortcut/proxy/convenience method for addFormelementDecorator()
+     *
      * @see $this->addFormelementDecorator()
      *
      * WATCH OUT! THIS BREAKS THE CHAINING IN REGARD TO THE FORM
-     * @param  string             $decorator
+     *
+     * @param string $decorator
+     *
      * @return Koch_Formdecorator object
      */
     public function setFormelementDecorator($decorator, $formelement_position = null)
@@ -1499,6 +1526,7 @@ class Form implements FormInterface
      * (a) by its name or
      * (b) multiple decorators as an array or
      * (c) a instantied decorator object might me handed to this method.
+     *
      * @see addDecorator()
      *
      * The second parameter specifies the formelement_position.
@@ -1510,9 +1538,10 @@ class Form implements FormInterface
      * $form->addFormelementDecorator('fieldset')->setLegend('legendname');
      * This would attach the decorator fieldset to the last formelement of $form.
      *
-     * @param  string            $decorator                The formelement decorator(s) to apply to the formelement.
-     * @param  int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
-     * @return object            \Koch\Form\Decorators\Formelement\Interface
+     * @param string            $decorator                The formelement decorator(s) to apply to the formelement.
+     * @param int|string|object $formelement_pos_name_obj Position in the formelement stack or Name of formelement.
+     *
+     * @return object \Koch\Form\Decorators\Formelement\Interface
      */
     public function addFormelementDecorator($decorator, $formelement_pos_name_obj = null)
     {
@@ -1544,18 +1573,17 @@ class Form implements FormInterface
     /**
      * ===================================================================================
      *      Form Validation
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
-     * Adds a validator to the formelement
+     * Adds a validator to the formelement.
      *
      * @return Form
      */
     public function addValidator($validator)
     {
         if (is_object($validator) and is_a($validator, Koch\Form\ValidatorInterface)) {
-
         }
 
         return $this;
@@ -1569,7 +1597,7 @@ class Form implements FormInterface
      * If a formelement is not valid, the error flag on the form is raised and the error message
      * of the formelement is transferred to the error message stack of the form.
      *
-     * @return boolean Returns true if form validates, false if validation fails, because errors exist.
+     * @return bool Returns true if form validates, false if validation fails, because errors exist.
      */
     public function validateForm()
     {
@@ -1581,24 +1609,25 @@ class Form implements FormInterface
         }
 
         // if form has errors, it does not validate
-        return ($this->hasErrors() === true) ? false : true;
+        return $this->hasErrors() ? false : true;
     }
 
     /**
      * ===================================================================================
      *      Form Errormessages
-     * ===================================================================================
+     * ===================================================================================.
      */
 
     /**
      * Returns the error state of the form.
      *
-     * @param  boolean $boolean
-     * @return boolean True, if form has an error. False, otherwise.
+     * @param bool $boolean
+     *
+     * @return bool True, if form has an error. False, otherwise.
      */
     public function hasErrors($boolean = null)
     {
-        if (is_bool($boolean) === true) {
+        if (is_bool($boolean)) {
             $this->error = $boolean;
         }
 
@@ -1620,7 +1649,7 @@ class Form implements FormInterface
 
     public function resetErrorMessages()
     {
-        $this->errorMessages = array();
+        $this->errorMessages = [];
     }
 
     public function getErrorMessages()
@@ -1631,22 +1660,22 @@ class Form implements FormInterface
     /**
      * ============================
      *    Magic Methods: get/set
-     * ============================
+     * ============================.
      */
 
     /**
-     * Magic Method: set
+     * Magic Method: set.
      *
      * @param $name Name of the attribute to set to the form.
      * @param $value The value of the attribute.
      */
     public function __set($name, $value)
     {
-        $this->setAttributes(array($name => $value));
+        $this->setAttributes([$name => $value]);
     }
 
     /**
-     * Magic Method: get
+     * Magic Method: get.
      *
      * @param $name
      */

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -35,7 +34,7 @@ class JqSelectImage extends Select implements FormElementInterface
     private $directory;
 
     /**
-     * JQSelectImage uses a simple jquery selection to insert the img src into a preview div
+     * JQSelectImage uses a simple jquery selection to insert the img src into a preview div.
      */
     public function __construct()
     {
@@ -52,7 +51,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function getDirectory()
     {
@@ -60,7 +59,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * Setter for directory
+     * Setter for directory.
      */
     public function setDirectory($directory)
     {
@@ -70,7 +69,7 @@ class JqSelectImage extends Select implements FormElementInterface
     }
 
     /**
-     * Shortcut to $this->setDirectory
+     * Shortcut to $this->setDirectory.
      */
     public function fromDirectory($directory)
     {

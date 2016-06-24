@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Formelement;
@@ -28,7 +27,7 @@ namespace Koch\Form\Decorators\Formelement;
 use Koch\Form\AbstractFormElementDecorator;
 
 /**
- * Formelement_Decorator_Formelement
+ * Formelement_Decorator_Formelement.
  *
  * This decorator decorates a formelement (A) with another formelement (B).
  *
@@ -60,7 +59,8 @@ class Formelement extends AbstractFormElementDecorator
      *
      * <strong>WATCH IT! THIS BREAKS THE CHAINING IN REGARD TO THE DECORATOR.</strong>
      *
-     * @param  string $formelementname Name of the new formelement (B) to decorate the existing formelement (A) with.
+     * @param string $formelementname Name of the new formelement (B) to decorate the existing formelement (A) with.
+     *
      * @return object Instance of formelement.
      */
     public function newFormelement($formelementname)
@@ -69,11 +69,11 @@ class Formelement extends AbstractFormElementDecorator
         $this->formelementname = $formelementname;
 
         // instantiate, set to class and return formelement object
-        return $this->formelement_object = new $formelementname;
+        return $this->formelement_object = new $formelementname();
     }
 
     /**
-     * renders new formelement (B) AFTER formelement (A)
+     * renders new formelement (B) AFTER formelement (A).
      */
     public function render($html_formelement)
     {

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Module;
 
 /**
- * Module Generator
+ * Module Generator.
  *
  * Handles
  * - creation of folders,
@@ -35,10 +35,10 @@ namespace Koch\Module;
  */
 class Generator
 {
-    public $structure = array(
-        'folders' => array(),
-        'files' => array()
-    );
+    public $structure = [
+        'folders' => [],
+        'files'   => [],
+    ];
 
     public $module = null;
 

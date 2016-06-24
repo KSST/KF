@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -39,6 +39,7 @@ namespace Koch\Autoload;
  * 2) spl_autoload_register('Koch\Autoload\Loader::autoload');
  *
  * PHP Manual: __autoload
+ *
  * @link http://www.php.net/manual/en/language.oop5.autoload.php
  *
  * PHP Manual: spl_autoload_register
@@ -51,14 +52,14 @@ class Loader
      *
      * @var array
      */
-    private static $autoloaderMap = array();
+    private static $autoloaderMap = [];
 
     /**
      * A manually defined classmap you might set from outside.
      *
      * @var array
      */
-    public static $inclusionsClassmap = array();
+    public static $inclusionsClassmap = [];
 
     /**
      * Path to mapfile.
@@ -74,38 +75,38 @@ class Loader
      */
     public function __construct()
     {
-        spl_autoload_register(array($this, 'autoload'), true, true);
+        spl_autoload_register([$this, 'autoload'], true, true);
     }
 
     /**
-     * Autoloads a Class
+     * Autoloads a Class.
      *
      * @param string $classname The name of the class
      *
-     * @return boolean True on successful class loading, false otherwise.
+     * @return bool True on successful class loading, false otherwise.
      */
     public static function autoload($classname)
     {
         // stop early, if class or interface or trait already loaded
-        if (true === class_exists($classname, false) or true === interface_exists($classname, false)) {
+        if (class_exists($classname, false) || interface_exists($classname, false)) {
             return false;
         }
 
         // stop early, if trait already loaded (PHP 5.4)
-        if (true === function_exists('trait_exists') and true === trait_exists($classname, false)) {
+        if (function_exists('trait_exists') && trait_exists($classname, false)) {
             return false;
         }
 
-        /**
+        /*
          * if the classname is to exclude, then
          * 1) stop autoloading immediately by
          * returning false, to save any pointless processing
          */
-        if (true === self::autoloadExclusions($classname)) {
+        if (self::autoloadExclusions($classname)) {
             return false;
         }
 
-        /**
+        /*
          * try to load the file by searching the
          * 2) hardcoded mapping table
          *
@@ -114,7 +115,7 @@ class Loader
 
          return true === self::autoloadInclusions($classname);
 
-        /**
+        /*
          * try to load the file by searching the
          * 3) automatically created mapping table.
          *
@@ -123,7 +124,7 @@ class Loader
 
         return true === self::autoloadByApcOrFileMap($classname);
 
-        /**
+        /*
          * Try to load the file via include path lookup.
          * 5) psr-0 loader
          *
@@ -134,7 +135,7 @@ class Loader
 
         return true === self::autoloadIncludePath($classname);
 
-        /**
+        /*
          * If classname was not found by any of the above methods, it's an
          * 6) Autoloading Fail
          */
@@ -151,19 +152,19 @@ class Loader
      *
      * @param string $classname Classname to check for exclusion.
      *
-     * @return boolean true, if the class is to exclude.
+     * @return bool true, if the class is to exclude.
      */
     public static function autoloadExclusions($classname)
     {
         // define parts of classnames for exclusion
-        foreach (array('Smarty_Internal', 'Smarty_', 'PHPUnit', 'PHP_CodeCoverage') as $classnameToExclude) {
+        foreach (['Smarty_Internal', 'Smarty_', 'PHPUnit', 'PHP_CodeCoverage'] as $classnameToExclude) {
             if (false !== strpos($classname, $classnameToExclude)) {
                 return true;
             }
         }
 
         // exlude Doctrine
-        if (substr($classname, 0, 8) === "Doctrine") {
+        if (substr($classname, 0, 8) === 'Doctrine') {
             return true;
         }
 
@@ -175,12 +176,12 @@ class Loader
      *
      * @param string $classname Classname to check for inclusion.
      *
-     * @return boolean if classname was included
+     * @return bool if classname was included
      */
     public static function autoloadInclusions($classname)
     {
         // check if classname is in autoloading map
-        if (isset(self::$inclusionsClassmap[$classname]) === true) {
+        if (isset(self::$inclusionsClassmap[$classname])) {
             include self::$inclusionsClassmap[$classname];
 
             return true;
@@ -190,23 +191,23 @@ class Loader
     }
 
     /**
-     * Loads a file by classname using the autoloader mapping array from file or apc
+     * Loads a file by classname using the autoloader mapping array from file or apc.
      *
      * @param string $classname The classname to look for in the autoloading map.
      *
-     * @return boolean True on file load, otherwise false.
+     * @return bool True on file load, otherwise false.
      */
     public static function autoloadByApcOrFileMap($classname)
     {
-        if (empty(self::$autoloaderMap) === true) {
-            if (defined('APC') and APC  == true) {
+        if (empty(self::$autoloaderMap)) {
+            if (defined('APC') and APC  === true) {
                 self::$autoloaderMap = self::readAutoloadingMapApc();
             } else { // load the mapping from file
                 self::$autoloaderMap = self::readAutoloadingMapFile();
             }
         }
 
-        if (isset(self::$autoloaderMap[$classname]) === true) {
+        if (isset(self::$autoloaderMap[$classname])) {
             include_once self::$autoloaderMap[$classname];
 
             return true;
@@ -216,7 +217,7 @@ class Loader
     }
 
     /**
-     * PSR-0 Loader
+     * PSR-0 Loader.
      *
      * - hardcoded namespaceSeparator
      * - hardcoded extension
@@ -224,8 +225,9 @@ class Loader
      * @link https://groups.google.com/group/php-standards/web/psr-0-final-proposal
      * @link http://gist.github.com/221634
      *
-     * @param  string $classname
-     * @return bool   True on success of require, false otherwise.
+     * @param string $classname
+     *
+     * @return bool True on success of require, false otherwise.
      */
     public static function autoloadIncludePath($classname)
     {
@@ -234,7 +236,7 @@ class Loader
         // trim opening namespace separator
         $classname = ltrim($classname, '\\');
 
-        $filename  = '';
+        $filename = '';
 
         // determine position of last namespace separator
         if (false !== ($lastNsPos = strripos($classname, '\\'))) {
@@ -243,7 +245,7 @@ class Loader
             // everything after it, is the classname
             $classname = substr($classname, $lastNsPos + 1);
             // replace every namespace separator with a directory separator
-            $filename  = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
+            $filename = str_replace('\\', DIRECTORY_SEPARATOR, $namespace);
         }
 
         // convert underscore
@@ -256,7 +258,7 @@ class Loader
 
         #echo "$classname => $filename => $namespace<br>";
 
-        if (is_string($filename) === true) {
+        if (is_string($filename)) {
             return self::includeFileAndMap($filename, $classname);
         }
 
@@ -264,7 +266,7 @@ class Loader
     }
 
     /**
-     * Include File (and register it to the autoloading map file)
+     * Include File (and register it to the autoloading map file).
      *
      * This procedure ensures, that the autoload mapping array dataset
      * is increased stepwise resulting in a decreasing number of autoloading tries.
@@ -290,18 +292,19 @@ class Loader
     /**
      * Includes a file, if found.
      *
-     * @param  string $filename  The file to be included
-     * @param  string $classname (Optional) The classname expected inside this file.
-     * @return bool   True on success of include, false otherwise.
+     * @param string $filename  The file to be included
+     * @param string $classname (Optional) The classname expected inside this file.
+     *
+     * @return bool True on success of include, false otherwise.
      */
     public static function includeFile($filename, $classname = null)
     {
         $filename = realpath($filename);
 
-        if (is_file($filename) === true) {
+        if (is_file($filename)) {
             include $filename;
 
-            if (null === $classname or (class_exists($classname, false) === true)) {
+            if (null === $classname || class_exists($classname, false)) {
                 return true;
             }
         }
@@ -324,7 +327,7 @@ class Loader
             self::readAutoloadingMapFile();
         }
 
-        if (is_writable(self::$mapfile) === true) {
+        if (is_writable(self::$mapfile)) {
             return (bool) file_put_contents(self::$mapfile, serialize($array), LOCK_EX);
         } else {
             throw new \RuntimeException('Autoload cache file not writable: ' . self::$mapfile);
@@ -339,12 +342,12 @@ class Loader
     public static function readAutoloadingMapFile()
     {
         // create file, if not existant
-        if (is_file(self::$mapfile) === false) {
+        if (is_file(self::$mapfile)) {
             $file_resource = fopen(self::$mapfile, 'a', false);
             fclose($file_resource);
             unset($file_resource);
 
-            return array();
+            return [];
         } else { // load map from file
             try {
                 return (array) unserialize(file_get_contents(self::$mapfile));
@@ -368,8 +371,8 @@ class Loader
     /**
      * Writes the autoload mapping array to APC.
      *
-     * @return boolean automatically generated classmap
-     * @return boolean True if stored.
+     * @return bool automatically generated classmap
+     * @return bool True if stored.
      */
     public static function writeAutoloadingMapApc($array)
     {
@@ -380,15 +383,16 @@ class Loader
      * Adds a new $classname to $filename mapping to the map array.
      * The new map array is written to apc or file.
      *
-     * @param  string  $class Classname is the lookup key for $filename.
-     * @param  string  $file  Filename is the file to load.
-     * @return boolean True if added to map.
+     * @param string $class Classname is the lookup key for $filename.
+     * @param string $file  Filename is the file to load.
+     *
+     * @return bool True if added to map.
      */
     public static function addMapping($class, $file)
     {
-        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, array($class => $file));
+        self::$autoloaderMap = array_merge((array) self::$autoloaderMap, [$class => $file]);
 
-        if (defined('APC') and APC == true) {
+        if (defined('APC') and APC === true) {
             return self::writeAutoloadingMapApc(self::$autoloaderMap);
         }
 
@@ -406,7 +410,7 @@ class Loader
     }
 
     /**
-     * Setter for the classmap file
+     * Setter for the classmap file.
      *
      * @param string classmap filepath.
      */
@@ -432,14 +436,14 @@ class Loader
     {
         self::setClassMapFile($mapfile);
 
-        spl_autoload_register(array(__CLASS__, 'autoload'), true, true);
+        spl_autoload_register([__CLASS__, 'autoload'], true, true);
     }
 
     /**
-     * Unregisters the autoloader
+     * Unregisters the autoloader.
      */
     public static function unregister()
     {
-        spl_autoload_unregister(array(__CLASS__, 'autoload'));
+        spl_autoload_unregister([__CLASS__, 'autoload']);
     }
 }

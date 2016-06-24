@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -38,7 +38,7 @@ class Email extends AbstractLogger implements LoggerInterface
     /**
      * @var array Options.
      */
-    private $options = array();
+    private $options = [];
 
     /**
      * @var \Koch\Mail\SwiftMailer
@@ -64,19 +64,20 @@ class Email extends AbstractLogger implements LoggerInterface
     /**
      * Sends the log message via E-Mail.
      *
-     * @param  string   $level
-     * @param  string   $message
-     * @param  string[] $context
+     * @param string   $level
+     * @param string   $message
+     * @param string[] $context
+     *
      * @return bool
      */
-    public function log($level, $message, array $context = array())
+    public function log($level, $message, array $context = [])
     {
         $to_address   = $this->options['to_sysadmin'];
         $from_address = $this->options['from'];
 
         // append date/time to message
-        $subject      = '[' . date(DATE_RFC2822, time()) . '] ' . $message;
-        $body         = var_export($message, true);
+        $subject = '[' . date(DATE_RFC2822, time()) . '] ' . $message;
+        $body    = var_export($message, true);
 
         return (bool) $this->mailer->send($to_address, $from_address, $subject, $body);
     }

@@ -11,17 +11,16 @@
  *
  * @return $int upload progress value with range 1-100.
  */
-
 header('Expires: Mon, 19 Apr 1980 12:00:00 GMT');
 header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
 header('Cache-Control: no-store, no-cache, must-revalidate');
 header('Cache-Control: post-check=0, pre-check=0', false);
 header('Pragma: no-cache');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $status = apc_fetch('upload_'.$_POST['APC_UPLOAD_PROGRESS']);
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $status = apc_fetch('upload_' . $_POST['APC_UPLOAD_PROGRESS']);
     //echo round($status['current']/$status['total']*100);
-    $status['done']=1;
+    $status['done'] = 1;
     // direct encoding of the whole data-array with json
     echo json_encode($status);
 } elseif ($_GET['uniqueID'] !== null) {

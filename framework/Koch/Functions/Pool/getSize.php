@@ -7,13 +7,14 @@
  * Letter symbols to be used in electrical technology - Part 2: Telecommunications and electronics.
  *
  * @param $bytes bytes
+ *
  * @return string
  */
 function getSize($bytes)
 {
-    static $s = array('B', 'KB', 'MB', 'GB', 'TB'); //  'PB', 'EB', 'ZB', 'YB');
-    $e = (int) (log($bytes) / (M_LN2 * 10));
-    $size = $bytes / pow(1024, $e);
+    static $s = ['B', 'KB', 'MB', 'GB', 'TB']; //  'PB', 'EB', 'ZB', 'YB');
+    $e        = (int) (log($bytes) / (M_LN2 * 10));
+    $size     = $bytes / pow(1024, $e);
 
     return sprintf('%.2f' . $s[$e], $size);
 }

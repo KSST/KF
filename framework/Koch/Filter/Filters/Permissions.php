@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -35,8 +35,8 @@ use Koch\Http\HttpResponseInterface;
  */
 class Permissions implements FilterInterface
 {
-    private $user    = null;
-    private $rbacl   = null;
+    private $user  = null;
+    private $rbacl = null;
 
     public function __construct(Koch\User\User $user)
     {

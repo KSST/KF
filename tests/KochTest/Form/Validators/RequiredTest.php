@@ -18,7 +18,7 @@ class RequiredTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new \Koch\Form\Validators\Required;
+        $this->validator = new \Koch\Form\Validators\Required();
     }
 
     /**

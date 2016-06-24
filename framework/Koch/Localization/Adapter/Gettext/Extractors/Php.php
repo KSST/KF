@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Localization\Adapter\Gettext\Extractors;
@@ -29,21 +28,21 @@ use Koch\Localization\ExtractorBase;
 use Koch\Localization\ExtractorInterface;
 
 /**
- *  * Koch Framework - Class for extracting Gettext string from PHP
+ *  * Koch Framework - Class for extracting Gettext string from PHP.
  *
  * Extracts translation strings by scanning for certain functions: translate(), t(), _().
  */
 class Php extends ExtractorBase implements ExtractorInterface
 {
     /**
-     * The function tags to extract translation strings from
+     * The function tags to extract translation strings from.
      *
      * @var array
      */
-    protected $tags_to_scan = array('translate', 't', '_');
+    protected $tags_to_scan = ['translate', 't', '_'];
 
     /**
-     * Parses given file and returns found gettext phrases
+     * Parses given file and returns found gettext phrases.
      *
      * @param string $file
      *
@@ -51,10 +50,10 @@ class Php extends ExtractorBase implements ExtractorInterface
      */
     public function extract($file)
     {
-        $pInfo = pathinfo($file);
-        $data = array();
+        $pInfo  = pathinfo($file);
+        $data   = [];
         $tokens = token_get_all(file_get_contents($file));
-        $next = false;
+        $next   = false;
 
         foreach ($tokens as $c) {
             if (true === is_array($c)) {
@@ -62,14 +61,14 @@ class Php extends ExtractorBase implements ExtractorInterface
                     continue;
                 }
 
-                if ($c[0] === T_STRING and true === in_array($c[1], $this->tags_to_scan)) {
+                if ($c[0] === T_STRING and true === in_array($c[1], $this->tags_to_scan, true)) {
                     $next = true;
                     continue;
                 }
 
-                if ($c[0] === T_CONSTANT_ENCAPSED_STRING and $next === true) {
+                if ($c[0] === T_CONSTANT_ENCAPSED_STRING && $next === true) {
                     $data[substr($c[1], 1, -1)][] = $pInfo['basename'] . ':' . $c[2];
-                    $next = false;
+                    $next                         = false;
                 }
             } else {
                 if ($c === ')') {

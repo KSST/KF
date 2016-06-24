@@ -15,6 +15,7 @@
  *
  * @param array  $params
  * @param object $smarty Smarty Render Engine
+ *
  * @return string
  */
 function Smarty_function_breadcrumbs($params, $smarty)
@@ -41,11 +42,10 @@ function Smarty_function_breadcrumbs($params, $smarty)
         $length = 0;
     }
 
-    $links = array();
+    $links = [];
 
     $trailSize = count($trail);
-    for ($i = 0; $i < $trailSize; $i++) {
-
+    for ($i = 0; $i < $trailSize; ++$i) {
         if ($length > 0) {
             $title = mb_substr($trail[$i]['title'], 0, $length);
         } else {
@@ -70,9 +70,9 @@ function Smarty_function_breadcrumbs($params, $smarty)
         }
     }
 
-    $breadcrumb_string = join($separator . ' ', $links);
+    $breadcrumb_string = implode($separator . ' ', $links);
 
-    if (isset($params['assign']) === true) {
+    if (isset($params['assign'])) {
         $smarty->assign('breadcrumb',  $breadcrumb_string);
     } else {
         return $breadcrumb_string;

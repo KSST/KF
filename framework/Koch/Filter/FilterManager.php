@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -28,7 +28,7 @@ use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 
 /**
- * FilterManager
+ * FilterManager.
  *
  * Is a Intercepting-Filter (FilterChain).
  * The var $filters is an array containing the filters to be processed.
@@ -38,11 +38,11 @@ use Koch\Http\HttpResponseInterface;
  */
 class FilterManager
 {
-    private $filters = array();
+    private $filters = [];
 
     /**
      * addFilter method
-     * $filter is type-hinted, to ensure that the array filter only contains Filter-Objects
+     * $filter is type-hinted, to ensure that the array filter only contains Filter-Objects.
      *
      * @param FilterInterface $filter
      */
@@ -52,7 +52,7 @@ class FilterManager
     }
 
     /**
-     * processFilters executes each filter of the filters-array
+     * processFilters executes each filter of the filters-array.
      *
      * @param request HttpRequestInterface
      * @param response HttpResponseInterface

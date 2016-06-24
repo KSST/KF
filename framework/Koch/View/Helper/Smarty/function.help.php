@@ -1,7 +1,7 @@
 <?php
 /**
  * Smarty Help Tag
- * Displays help text of this module
+ * Displays help text of this module.
  *
  * Examples:
  * <pre>
@@ -12,8 +12,9 @@
  * Name:     help<br>
  * Purpose:  displays help.tpl for a module, if existing<br>
  *
- * @param array $params
+ * @param array  $params
  * @param Smarty $smarty
+ *
  * @return string
  */
 function Smarty_function_help($params, $smarty)

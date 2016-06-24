@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -42,6 +42,6 @@ class FileFilterIterator extends \FilterIterator
 
     public function accept()
     {
-        return (in_array($this->current(), $this->files) === true) ? true : false;
+        return in_array($this->current(), $this->files, true);
     }
 }

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -40,11 +40,11 @@ class Xtemplate extends AbstractRenderer
     public $renderer = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
     }
@@ -54,9 +54,9 @@ class Xtemplate extends AbstractRenderer
         $xtpl = VENDOR_PATH . '/xtemplate/xtemplate.class.php';
 
         // prevent redeclaration
-        if (class_exists('XTemplate', false) == false) {
+        if (!class_exists('XTemplate', false)) {
             // check if library exists
-            if (is_file($xtpl) === true) {
+            if (is_file($xtpl)) {
                 include $xtpl;
             } else {
                 throw new \Exception('The vendor library "XTemplate" is required.');
@@ -68,41 +68,35 @@ class Xtemplate extends AbstractRenderer
         #\Koch\Debug\Debug::firebug('Xtemplate loaded with Template: ' . $template);
 
         // Do it with XTemplate style > eat like a bird, poop like an elefant!
-        return $this->renderer = new XTemplate($template);
+        return $this->renderer = new self($template);
     }
 
     public function configureEngine()
     {
-
     }
 
     public function renderPartial($template)
     {
-
     }
 
     public function clearVars()
     {
-
     }
 
     public function clearCache()
     {
-
     }
 
     public function fetch($template, $data = null)
     {
-
     }
 
     public function display($template, $data = null)
     {
-
     }
 
     /**
-     * Returns a clean xTemplate Object
+     * Returns a clean xTemplate Object.
      *
      * @return Xtemplate Object
      */

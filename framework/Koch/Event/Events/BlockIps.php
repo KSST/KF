@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Event\Events;
@@ -34,7 +33,6 @@ use Koch\Event\EventInterface;
  * $blockip = new BlockIps(array('127.0.0.1'));
  * $dispatcher->addEventHandler('onLogin', $blockip);
  * if ($event->isCancelled()) { }
- *
  */
 class BlockIps implements EventInterface
 {
@@ -49,7 +47,7 @@ class BlockIps implements EventInterface
     {
         $ip = \Koch\Http\HttpRequest::getRemoteAddress();
 
-        if (in_array($ip, $this->blockedIps)) {
+        if (in_array($ip, $this->blockedIps, true)) {
             $event->cancel();
         }
     }

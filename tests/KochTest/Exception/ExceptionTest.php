@@ -14,8 +14,8 @@ class ExceptionTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         try {
-            $message = 'ExceptionMessage';
-            $code = 666;
+            $message  = 'ExceptionMessage';
+            $code     = 666;
             $previous = null;
             throw new Exception($message, $code, $previous);
         } catch (Exception $e) {

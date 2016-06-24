@@ -1,10 +1,11 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
  * Smarty Function to output the browser update (notice) javascript.
+ *
  * @link http://www.browser-update.org/customize.html
  *
  * @example
@@ -14,7 +15,7 @@
  */
 function Smarty_function_browserupdate()
 {
-$str = <<<EOD
+    $str = <<<EOD
 <!--
      Browser-Update - Notice http://www.browser-update.org/
 -->
@@ -31,5 +32,5 @@ window.onload=function () {
 </script>
 EOD;
 
-return $str;
+    return $str;
 }

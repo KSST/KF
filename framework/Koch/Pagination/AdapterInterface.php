@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -27,7 +27,7 @@ namespace Koch\Pagination;
 interface AdapterInterface
 {
     /**
-     * @return integer
+     * @return int
      */
     public function getTotalNumberOfResults();
     public function getSlice($offset, $length);

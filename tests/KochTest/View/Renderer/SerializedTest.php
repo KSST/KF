@@ -6,7 +6,6 @@ use Koch\View\Renderer\Serialized;
 
 class SerializedTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var Serialized
      */
@@ -18,7 +17,7 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $options = array();
+        $options = [];
 
         $this->object = new Serialized($options);
     }
@@ -55,12 +54,12 @@ class SerializedTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('value', $this->object->viewdata['key']);
 
         // array
-        $array = array('key' => 'value');
+        $array = ['key' => 'value'];
         $this->object->assign($array);
         $this->assertEquals('value', $this->object->viewdata['key']);
 
         // object
-        $object      = new \stdClass;
+        $object      = new \stdClass();
         $object->key = 'value';
         $this->object->assign($object);
         $this->assertEquals('value', $this->object->viewdata['key']);

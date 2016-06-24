@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -28,7 +28,7 @@ use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 
 /**
- * Interface \Koch\Filter\FilterInterface
+ * Interface \Koch\Filter\FilterInterface.
  */
 interface FilterManagerInterface
 {

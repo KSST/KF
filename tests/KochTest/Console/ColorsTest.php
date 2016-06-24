@@ -13,7 +13,7 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new Colors;
+        $this->object = new Colors();
     }
 
     public function tearDown()
@@ -28,11 +28,11 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('✖', Colors::unicodeSymbol('big fail'));
 
-        $this->assertEquals('\033[0;31m✖\033[0m', Colors::unicodeSymbol('big fail', array('red')));
+        $this->assertEquals('\033[0;31m✖\033[0m', Colors::unicodeSymbol('big fail', ['red']));
 
-        $this->assertEquals('\033[0;32m✔\033[0m', Colors::unicodeSymbol('big ok', array('green')));
+        $this->assertEquals('\033[0;32m✔\033[0m', Colors::unicodeSymbol('big ok', ['green']));
 
-        $this->assertEquals('\033[0;32;43m✖\033[0m', Colors::unicodeSymbol('big fail', array('green', 'yellow')));
+        $this->assertEquals('\033[0;32;43m✖\033[0m', Colors::unicodeSymbol('big fail', ['green', 'yellow']));
     }
 
     /**
@@ -68,7 +68,7 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
         );
 
         // foreground, background and two modifiers
-        $options = array('green', 'black', 'bold', 'underscore');
+        $options = ['green', 'black', 'bold', 'underscore'];
         $this->assertEquals(
             '\033[0;32;40;1mOn a dark desert highway\033[0m',
             Colors::write('On a dark desert highway', $options)
@@ -92,9 +92,9 @@ class ColorsTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetOptions()
     {
-        $options = 'a,b,c,d';
-        $array = Colors::setOptions($options);
-        $expectedArray = array(0 => 'a',  1 => 'b',  2 => 'c',  3 => 'd');
+        $options       = 'a,b,c,d';
+        $array         = Colors::setOptions($options);
+        $expectedArray = [0 => 'a',  1 => 'b',  2 => 'c',  3 => 'd'];
         $this->assertEquals($array, $expectedArray);
     }
 

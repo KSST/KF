@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Autoload;
 
 use Koch\Autoload\MapBuilder;

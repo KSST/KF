@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,9 +32,9 @@ use Koch\Mvc\Mapper;
 class Widget
 {
     /**
-     * loadModul
+     * loadModul.
      *
-     * @return boolean
+     * @return bool
      */
     public static function loadModul($module, $controller)
     {

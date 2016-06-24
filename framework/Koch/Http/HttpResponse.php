@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -33,16 +33,16 @@ class HttpResponse implements HttpResponseInterface
 {
     /**
      * Status of the response as integer value.
-     * $statusCode = '200' => 'OK'
+     * $statusCode = '200' => 'OK'.
      *
-     * @var       integer
+     * @var int
      */
     private static $statusCode = '200';
 
     /**
      * @var array Array holding the response headers.
      */
-    private static $headers = array();
+    private static $headers = [];
 
     /**
      * @var string String holding the response content (body).
@@ -59,7 +59,7 @@ class HttpResponse implements HttpResponseInterface
      * This method is also used to set the return status code when there
      * is no error (for example for the status codes 200 (OK) or 301 (Moved permanently) ).
      *
-     * @param integer $statusCode The status code to set
+     * @param int $statusCode The status code to set
      */
     public static function setStatusCode($statusCode)
     {
@@ -85,9 +85,10 @@ class HttpResponse implements HttpResponseInterface
     {
         /**
          * Array holding some often occuring status descriptions.
+         *
          * @var array
          */
-        static $statusCodes = array(
+        static $statusCodes = [
            // Successful
            '200' => 'OK',
            '201' => 'Created',
@@ -106,18 +107,18 @@ class HttpResponse implements HttpResponseInterface
            // Server Error
            '500' => 'Internal Server Error',
            '502' => 'Bad Gateway',
-           '503' => 'Service Temporarily Unavailable'
-        );
+           '503' => 'Service Temporarily Unavailable',
+        ];
 
         return $statusCodes[$statusCode];
     }
 
-     /**
-      * Adds a header to the response array, which is send to the browser
-      *
-      * @param  string $name the name of the header
-      * @param  string $value the value of the header
-      */
+    /**
+     * Adds a header to the response array, which is send to the browser.
+     *
+     * @param string $name  the name of the header
+     * @param string $value the value of the header
+     */
     public static function addHeader($name, $value)
     {
         self::$headers[$name] = $value;
@@ -129,8 +130,8 @@ class HttpResponse implements HttpResponseInterface
      * appends content to the response body.
      * when $replace is true, the bodycontent is replaced.
      *
-     * @param string  $content Content to store in the buffer
-     * @param boolean $replace Toggle between append or replace.
+     * @param string $content Content to store in the buffer
+     * @param bool   $replace Toggle between append or replace.
      */
     public static function setContent($content, $replace = false)
     {
@@ -145,7 +146,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * get content retunrs the response body
+     * get content retunrs the response body.
      */
     public static function getContent()
     {
@@ -153,14 +154,15 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * Set the content type
+     * Set the content type.
      *
-     * @param  string $type Content type: html, txt, xml, json.
+     * @param string $type Content type: html, txt, xml, json.
+     *
      * @return string
      */
     public static function setContentType($type = 'html', $charset = 'UTF-8')
     {
-        $types = array(
+        $types = [
             'csv'  => 'text/csv',
             'html' => 'text/html',
             'txt'  => 'text/plain',
@@ -168,7 +170,7 @@ class HttpResponse implements HttpResponseInterface
             'rss'  => 'application/rss+xml',
             'json' => 'application/json',
             'js'   => 'application/javascript',
-        );
+        ];
 
         if (isset($types[$type]) === false) {
             throw new \InvalidArgumentException('Specified type not valid. Use: html, txt, xml or json.');
@@ -204,13 +206,13 @@ class HttpResponse implements HttpResponseInterface
         }
 
         // Send the status line
-        self::addHeader('HTTP/1.1', self::$statusCode.' '.self::getStatusCodeDescription(self::$statusCode));
+        self::addHeader('HTTP/1.1', self::$statusCode . ' ' . self::getStatusCodeDescription(self::$statusCode));
 
         // Suppress Framesets
         self::addHeader('X-Frame-Options', 'deny'); // not SAMEORIGIN
 
         // Send our Content-Type with UTF-8 encoding
-        self::addHeader('Content-Type', self::getContentType(). '; charset=UTF-8');
+        self::addHeader('Content-Type', self::getContentType() . '; charset=UTF-8');
 
         // Send user specificed headers from self::$headers array
         if (false === headers_sent()) {
@@ -242,13 +244,13 @@ class HttpResponse implements HttpResponseInterface
      */
     public static function clearHeaders()
     {
-        self::$headers = array();
+        self::$headers = [];
         self::$content = null;
 
         return true;
     }
     /**
-     * A better alternative (RFC 2109 compatible) to the php setcookie() function
+     * A better alternative (RFC 2109 compatible) to the php setcookie() function.
      *
      * @param string Name of the cookie
      * @param string Value of the cookie
@@ -257,14 +259,15 @@ class HttpResponse implements HttpResponseInterface
      * @param string Domain which can read the cookie
      * @param bool Secure mode?
      * @param bool Only allow HTTP usage? (PHP 5.2)
-     * @return boolean Cookie set.
+     *
+     * @return bool Cookie set.
      */
     public static function setCookie($name, $value = '', $maxage = 0, $path = '', $domain = '', $secure = false, $HTTPOnly = false)
     {
         $ob = ini_get('output_buffering');
 
         // Abort the method if headers have already been sent, except when output buffering has been enabled
-        if (headers_sent() and (bool) $ob === false or mb_strtolower($ob) == 'off') {
+        if (headers_sent() && (bool) $ob === false or mb_strtolower($ob) === 'off') {
             return false;
         }
 
@@ -301,7 +304,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * Deletes a cookie
+     * Deletes a cookie.
      *
      * @param string $name   Name of the cookie
      * @param string $path   Path where the cookie is used
@@ -316,7 +319,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * Sets NoCache Header Values
+     * Sets NoCache Header Values.
      */
     public static function setNoCacheHeader()
     {
@@ -331,11 +334,11 @@ class HttpResponse implements HttpResponseInterface
         // force immediate expiration
         self::addHeader('Expires', '1');
         // set date of last modification
-        self::addHeader('Last-Modified', gmdate("D, d M Y H:i:s") . ' GMT');
+        self::addHeader('Last-Modified', gmdate('D, d M Y H:i:s') . ' GMT');
     }
 
     /**
-     * Detects a flashmessage tunneling via the redirect messagetext
+     * Detects a flashmessage tunneling via the redirect messagetext.
      *
      * @param string $message Redirect Message ("flashmessagetype#message text")
      */
@@ -353,7 +356,7 @@ class HttpResponse implements HttpResponseInterface
     }
 
     /**
-     * Redirect
+     * Redirect.
      *
      * Redirects to another action after disabling the caching.
      * This avoids the typical reposting after an POST is send by disabling the cache.
@@ -391,8 +394,8 @@ class HttpResponse implements HttpResponseInterface
         // convert from internal slashed format to external URL
         $url = \Koch\Router\Router::buildURL($url, false);
 
-        $filename = '';
-        $linenum = '';
+        $filename      = '';
+        $linenum       = '';
         $redirect_html = '';
 
         // redirect only, if headers are NOT already send
@@ -410,7 +413,7 @@ class HttpResponse implements HttpResponseInterface
             switch ($mode) {
                 default:
                 case 'LOCATION':
-                    header('LOCATION: '. $url);
+                    header('LOCATION: ' . $url);
                     #session_write_close(); // @todo figure out, if session closing is needed?
                     \Koch\Tools\ApplicationQuit::quit();
                     break;
@@ -437,7 +440,7 @@ class HttpResponse implements HttpResponseInterface
             // Flush the content on the normal way!
             self::sendResponse();
         } else { // headers already send!
-            $msg  = _('Header already send in file %s in line %s. Redirecting impossible.');
+            $msg = _('Header already send in file %s in line %s. Redirecting impossible.');
             $msg .= _('You might click this link instead to redirect yourself to the <a href="%s">target url</a> an');
             sprintf($msg, $filename, $linenum, $url);
             \Koch\Tools\ApplicationQuit::quit();

@@ -18,7 +18,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         // Test Subject
-        $this->validator = new Url;
+        $this->validator = new Url();
     }
 
     /**
@@ -32,7 +32,7 @@ class UrlTest extends \PHPUnit_Framework_TestCase
 
     public function testMethodprocessValidationLogic()
     {
-        /**
+        /*
          * method processValidationLogic is indirectly tested via calling
          * validate() on the parent class, which then calls processValidationLogic()
          */

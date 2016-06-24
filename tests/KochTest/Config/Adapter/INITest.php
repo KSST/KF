@@ -16,15 +16,15 @@ class INITest extends \PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->object = new INI;
+        $this->object = new INI();
 
         vfsStreamWrapper::register();
 
         $this->configFileURL = vfsStream::url('root/config.ini');
-        $this->file = vfsStream::newFile('config.ini', 0777)->withContent($this->getConfigFileContent());
+        $this->file          = vfsStream::newFile('config.ini', 0777)->withContent($this->getConfigFileContent());
 
         $this->booleanConfigFileURL = vfsStream::url('root/booleans.ini');
-        $this->fileB = vfsStream::newFile('booleans.ini', 0777)->withContent($this->getBooleanConfigFileContent());
+        $this->fileB                = vfsStream::newFile('booleans.ini', 0777)->withContent($this->getBooleanConfigFileContent());
 
         $this->root = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
@@ -68,7 +68,7 @@ class INITest extends \PHPUnit_Framework_TestCase
     public function testwriteAddValuesToExistingConfig()
     {
         // test appending to the just written config
-        $writtenTwo = $this->object->write($this->configFileURL, array('newKey' => 'newValue'));
+        $writtenTwo = $this->object->write($this->configFileURL, ['newKey' => 'newValue']);
         $this->assertTrue($writtenTwo);
         $this->assertEquals($this->object->read($this->configFileURL), $this->getConfigArrayOverloaded());
     }
@@ -80,7 +80,7 @@ class INITest extends \PHPUnit_Framework_TestCase
      */
     public function testWriteFirstParameterGiven()
     {
-        $this->object->write(null, array());
+        $this->object->write(null, []);
     }
 
     public function testReadingBooleanValues()
@@ -101,7 +101,7 @@ class INITest extends \PHPUnit_Framework_TestCase
     public function testReadingWithoutSection()
     {
         $this->fileCURL = vfsStream::url('root/no-section.ini');
-        $this->fileC = vfsStream::newFile('no-section.ini', 0777)->withContent(
+        $this->fileC    = vfsStream::newFile('no-section.ini', 0777)->withContent(
             'string_key = string_value
              bool_key = 1'
         );
@@ -112,10 +112,10 @@ class INITest extends \PHPUnit_Framework_TestCase
 
         $config = $this->object->read($this->fileCURL);
 
-        $expected = array(
+        $expected = [
             'string_key' => 'string_value',
-            'bool_key' => true
-        );
+            'bool_key'   => true,
+        ];
 
         $this->assertEquals($expected, $config);
     }
@@ -144,7 +144,7 @@ key3-int = 123
 EOF;
     }
 
-     public function getBooleanConfigFileContent()
+    public function getBooleanConfigFileContent()
     {
         return <<<EOF
 [booleans]
@@ -162,23 +162,23 @@ EOF;
 
     public function getConfigArray()
     {
-        return array(
-            'section' => array (
-                'key1' => 'value1',
-                'key2' => 'value2',
-                'key3-int' => 123
-        ));
+        return [
+            'section' => [
+                'key1'     => 'value1',
+                'key2'     => 'value2',
+                'key3-int' => 123,
+        ], ];
     }
 
     public function getConfigArrayOverloaded()
     {
-        return array (
-            'section' => array (
-                'key1' => 'value1',
-                'key2' => 'value2',
+        return  [
+            'section' => [
+                'key1'     => 'value1',
+                'key2'     => 'value2',
                 'key3-int' => 123,
-                'newKey' => 'newValue'
-            )
-        );
+                'newKey'   => 'newValue',
+            ],
+        ];
     }
 }

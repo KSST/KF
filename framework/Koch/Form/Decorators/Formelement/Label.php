@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Decorators\Formelement;
@@ -28,7 +27,7 @@ namespace Koch\Form\Decorators\Formelement;
 use Koch\Form\AbstractFormElementDecorator;
 
 /**
- * Formelement_Decorator_Label
+ * Formelement_Decorator_Label.
  *
  * Adds a <label> element containing the formelement label in-front of html_fromelement_content.
  */
@@ -40,14 +39,14 @@ class Label extends AbstractFormElementDecorator
     public $name = 'label';
 
     /**
-     * renders label BEFORE formelement
+     * renders label BEFORE formelement.
      *
      * @todo if required form field add (*)
      */
     public function render($html_formelement)
     {
         // add label
-        if ($this->formelement->hasLabel() == true) {
+        if ($this->formelement->hasLabel() === true) {
             // for attribute points to formelements id tag
             $html_formelement = CR . '<label for="' . $this->formelement->getId() . '">'
                 . $this->formelement->getLabel()

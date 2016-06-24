@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Tools;
 
 /**
- * Description of SysInfoCache
+ * Description of SysInfoCache.
  */
 class SysInfoCache
 {
@@ -36,20 +36,21 @@ class SysInfoCache
      */
     public static function getNamedArray()
     {
-        return array(
-            'xcache'        => self::hasXcache(),
-            'wincache'      => self::hasWincache(),
-            'apc'           => self::hasApc(),
-            'eaccelerator'  => self::hasEaccelerator(),
-            'ioncube'       => self::hasIoncube(),
-            'zend'          => self::hasZend()
-        );
+        return [
+            'xcache'       => self::hasXcache(),
+            'wincache'     => self::hasWincache(),
+            'apc'          => self::hasApc(),
+            'eaccelerator' => self::hasEaccelerator(),
+            'ioncube'      => self::hasIoncube(),
+            'zend'         => self::hasZend(),
+        ];
     }
 
     /**
-     * Check for Xcache
+     * Check for Xcache.
      *
      * @link http://xcache.lighttpd.net
+     *
      * @return bool
      */
     public static function hasXcache()
@@ -58,9 +59,10 @@ class SysInfoCache
     }
 
     /**
-     * Check for Wincache
+     * Check for Wincache.
      *
      * @link http://www.iis.net/expand/WinCacheForPHP
+     *
      * @return bool
      */
     public static function hasWincache()
@@ -69,9 +71,10 @@ class SysInfoCache
     }
 
     /**
-     * Check for Alternative PHP Cache
+     * Check for Alternative PHP Cache.
      *
      * @link http://pecl.php.net/package/apc
+     *
      * @return bool
      */
     public static function hasApc()
@@ -80,9 +83,10 @@ class SysInfoCache
     }
 
     /**
-     * Check for eAccelerator
+     * Check for eAccelerator.
      *
      * @link http://eaccelerator.net
+     *
      * @return bool
      */
     public static function hasEaccelerator()
@@ -91,9 +95,10 @@ class SysInfoCache
     }
 
     /**
-     * Check for ionCube Loader
+     * Check for ionCube Loader.
      *
      * @link http://www.php-accelerator.co.uk
+     *
      * @return bool
      */
     public static function hasIoncube()
@@ -102,9 +107,10 @@ class SysInfoCache
     }
 
     /**
-     * Check for Zend Optimizer+
+     * Check for Zend Optimizer+.
      *
      * @link http://www.zend.com/products/server
+     *
      * @return bool
      */
     public static function hasZend()

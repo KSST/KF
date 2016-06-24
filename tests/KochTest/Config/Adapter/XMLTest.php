@@ -19,8 +19,8 @@ class XMLTest extends \PHPUnit_Framework_TestCase
 
         vfsStreamWrapper::register();
         $this->configFileURL = vfsStream::url('root/config.xml');
-        $this->file = vfsStream::newFile('config.xml', 0777)->withContent($this->getConfigFileContent());
-        $this->root = new vfsStreamDirectory('root');
+        $this->file          = vfsStream::newFile('config.xml', 0777)->withContent($this->getConfigFileContent());
+        $this->root          = new vfsStreamDirectory('root');
         $this->root->addChild($this->file);
         vfsStreamWrapper::setRoot($this->root);
     }
@@ -59,13 +59,13 @@ class XMLTest extends \PHPUnit_Framework_TestCase
 
     public function getConfigArray()
     {
-        return array(
-            'data' => array(
-                'one' => "Content 1",
-                'two' => array(
-                    'three' => "Content 3",
-                    'four' => "Content 4"
-        )));
+        return [
+            'data' => [
+                'one' => 'Content 1',
+                'two' => [
+                    'three' => 'Content 3',
+                    'four'  => 'Content 4',
+        ], ], ];
     }
 
     public function getConfigFileContent()

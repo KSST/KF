@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -28,6 +28,7 @@ namespace Koch\Mail;
  * Koch Framework - Class for Mail Handling with SwiftMailer.
  *
  * This is a simple wrapper for SwiftMailer.
+ *
  * @link http://swiftmailer.org/
  * @link http://swiftmailer.org/docs/introduction.html Documentation
  */
@@ -37,7 +38,7 @@ class SwiftMailer
     public $mailer = null;
 
     /* @var array Options */
-    private $options = array();
+    private $options = [];
 
     /**
      * Constructor.
@@ -53,7 +54,7 @@ class SwiftMailer
     }
 
     /**
-     * Configure SwiftMailer
+     * Configure SwiftMailer.
      */
     public static function swiftmailerLazyConfiguration()
     {
@@ -63,7 +64,7 @@ class SwiftMailer
     }
 
     /**
-     * Instantiates and configures Swift Mailer
+     * Instantiates and configures Swift Mailer.
      */
     private function initializeMailer()
     {
@@ -99,12 +100,13 @@ class SwiftMailer
 
     /**
      * This is the sendmail command, it's a shortcut method to swiftmailer
-     * Return true or false if successfully
+     * Return true or false if successfully.
      *
-     * @param  string $to      Recipient email ('email => 'name')
-     * @param  string $from    Sender email ('email' => 'name')
-     * @param  string $subject Message subject (headline)
-     * @param  string $body    Message body ('text, 'text/html')
+     * @param string $to      Recipient email ('email => 'name')
+     * @param string $from    Sender email ('email' => 'name')
+     * @param string $subject Message subject (headline)
+     * @param string $body    Message body ('text, 'text/html')
+     *
      * @return string true|false
      */
     public function send($to, $from, $subject, $body)
@@ -124,7 +126,7 @@ class SwiftMailer
     }
 
     /**
-     * Getter Method for the Swiftmailer Object
+     * Getter Method for the Swiftmailer Object.
      *
      * @return \Swift_Mailer SwiftMailer
      */

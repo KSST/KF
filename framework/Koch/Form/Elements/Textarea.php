@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -66,19 +65,19 @@ class Textarea extends FormElement implements FormElementInterface
 
     public function __construct()
     {
-        $this->type  = 'textarea';
+        $this->type = 'textarea';
 
         return $this;
     }
 
     public function setEditor($editor = null)
     {
-        /**
+        /*
          *  if no editor is given, take the one definied in the general configuration.
          *  the expected config setting is [editor] type.
          *  if the configuration value is not given, use "ckeditor" as fallback.
          */
-        if ($editor == null) {
+        if ($editor === null) {
             $config = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
             $editor = isset($config['editor']['type']) ? $config['editor']['type'] : 'ckeditor';
             unset($config);
@@ -95,7 +94,7 @@ class Textarea extends FormElement implements FormElementInterface
     }
 
     /**
-     * defines width of textarea
+     * defines width of textarea.
      *
      * @param int $cols
      */
@@ -107,8 +106,7 @@ class Textarea extends FormElement implements FormElementInterface
     }
 
     /**
-     * get defined width of textarea
-     *
+     * get defined width of textarea.
      */
     public function getCols()
     {
@@ -116,7 +114,7 @@ class Textarea extends FormElement implements FormElementInterface
     }
 
     /**
-     * define height of textarea in rows
+     * define height of textarea in rows.
      *
      * @param int $rows
      */
@@ -128,8 +126,7 @@ class Textarea extends FormElement implements FormElementInterface
     }
 
     /**
-     * get defined height of textarea in rows
-     *
+     * get defined height of textarea in rows.
      */
     public function getRows()
     {
@@ -161,7 +158,7 @@ class Textarea extends FormElement implements FormElementInterface
 
     /**
      * editorFactory
-     * loads and instantiates an wysiwyg editor object
+     * loads and instantiates an wysiwyg editor object.
      */
     private function editorFactory()
     {
@@ -169,7 +166,7 @@ class Textarea extends FormElement implements FormElementInterface
         $name = 'Wysiwyg' . ucfirst($this->getEditor());
 
         // attach namespace
-        $classname = 'Koch\Form\Elements\\'. $name;
+        $classname = 'Koch\Form\Elements\\' . $name;
 
         // load file
         if (class_exists($classname, false) === false) {
@@ -219,38 +216,38 @@ class Textarea extends FormElement implements FormElementInterface
     {
         $html = '';
 
-        /**
+        /*
          * Opening of textarea tag
          */
         $html .= '<textarea';
-        $html .= (bool) $this->id ? ' id="'.$this->id.'"' : null;
-        $html .= (bool) $this->name ? ' name="'.$this->name.'"' : null;
-        $html .= (bool) $this->size ? ' size="'.$this->size.'"' : null;
-        $html .= (bool) $this->cols ? ' cols="'.$this->cols.'"' : null;
-        $html .= (bool) $this->rows ? ' rows="'.$this->rows.'"' : null;
-        $html .= (bool) $this->class ? ' class="'.$this->class.'"' : null;
+        $html .= (bool) $this->id ? ' id="' . $this->id . '"' : null;
+        $html .= (bool) $this->name ? ' name="' . $this->name . '"' : null;
+        $html .= (bool) $this->size ? ' size="' . $this->size . '"' : null;
+        $html .= (bool) $this->cols ? ' cols="' . $this->cols . '"' : null;
+        $html .= (bool) $this->rows ? ' rows="' . $this->rows . '"' : null;
+        $html .= (bool) $this->class ? ' class="' . $this->class . '"' : null;
         $html .= (bool) $this->disabled ? ' disabled="disabled"' : null;
-        $html .= (bool) $this->maxlength ? ' maxlength="'.$this->maxlength.'"' : null;
-        $html .= (bool) $this->style ? ' style="'.$this->style.'"' : null;
+        $html .= (bool) $this->maxlength ? ' maxlength="' . $this->maxlength . '"' : null;
+        $html .= (bool) $this->style ? ' style="' . $this->style . '"' : null;
         $html .= '>';
 
-        /**
+        /*
          * Content between tags (value)
          */
         $html .= Functions::UTF8_to_HTML($this->getValue());
 
-        /**
+        /*
          * Closing of textarea tag
          */
         $html .= '</textarea>';
 
-        /**
+        /*
          * Attach HTML content of WYSIWYG Editor
          *
          * Always after the textarea !
          * Because html elements are served first, before javascript dom selections are applied upon them!
          */
-        if (empty($this->editor) == false) {
+        if (empty($this->editor) === false) {
             $html .= $this->getEditorFormelement()->transferPropertiesToEditor()->render();
         }
 

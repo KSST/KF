@@ -1,10 +1,10 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  *
  * Type:     modifier<br>
  * Name:     duration<br>
@@ -12,12 +12,14 @@
  * Purpose:  show distanceOfTimeInWords from current timestamp to string timestamp
  * Input:
  * Example:  {$timestamp|duration}
+ *
  * @param string
+ *
  * @return string
  */
 function Smarty_modifier_duration($toTimestamp)
 {
-    return \Koch\Functions\Functions::distanceOfTimeInWords(time(),$toTimestamp, false);
+    return \Koch\Functions\Functions::distanceOfTimeInWords(time(), $toTimestamp, false);
 }
 
 /* vim: set expandtab: */

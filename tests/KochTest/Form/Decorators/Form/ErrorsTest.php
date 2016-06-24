@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Form\Decorators\Form;
 
 use Koch\Form\Decorators\Form\Errors;
@@ -12,7 +13,7 @@ class ErrorsTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->object = new Errors;
+        $this->object = new Errors();
 
         // create new form
         $form = new \Koch\Form\Form('my_form');

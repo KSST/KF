@@ -1,17 +1,19 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty round modifier plugin
+ * Smarty round modifier plugin.
  *
  * Type:     modifier<br>
  * Name:     round<br>
  * Purpose:  round a numeric string to a given decimal point
+ *
  * @param string
- * @param integer
- * @return double
+ * @param int
+ *
+ * @return float
  */
 function smarty_modifier_round($float, $precision = 0)
 {

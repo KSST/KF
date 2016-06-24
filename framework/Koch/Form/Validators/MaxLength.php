@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Validators;
@@ -42,7 +41,7 @@ class MaxLength extends Validator
     /**
      * Setter for the maximum length of the string.
      *
-     * @param integer $maxlength
+     * @param int $maxlength
      */
     public function setMaxlength($maxlength)
     {
@@ -67,8 +66,9 @@ class MaxLength extends Validator
      * Get length of passed string.
      * Takes multibyte characters into account, if functions available.
      *
-     * @param  string  $string
-     * @return integer $length
+     * @param string $string
+     *
+     * @return int $length
      */
     public static function getStringLength($string)
     {

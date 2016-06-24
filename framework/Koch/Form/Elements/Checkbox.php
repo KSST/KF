@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -30,21 +29,21 @@ use Koch\Form\FormElementInterface;
 class Checkbox extends Input implements FormElementInterface
 {
     /**
-     * Label next to element
+     * Label next to element.
      *
      * @var string
      */
     public $label;
 
     /**
-     * Default option
+     * Default option.
      *
      * @var string
      */
     public $default;
 
     /**
-     * Options
+     * Options.
      *
      * @var array
      */
@@ -67,18 +66,18 @@ class Checkbox extends Input implements FormElementInterface
     }
 
     /**
-     * constructor
+     * constructor.
      */
     public function __construct()
     {
-        $this->type = 'checkbox';
+        $this->type  = 'checkbox';
         $this->label = null;
 
         return $this;
     }
 
     /**
-     * check or unchecks the checkbox
+     * check or unchecks the checkbox.
      *
      * @param bool checked
      */
@@ -90,19 +89,19 @@ class Checkbox extends Input implements FormElementInterface
     }
 
     /**
-     * sets clickable label next to element
+     * sets clickable label next to element.
      *
      * @param string $text
      */
     public function setLabel($text)
     {
-        $this->label = '<label for="'.$this->id.'">'.$text.'</label>';
+        $this->label = '<label for="' . $this->id . '">' . $text . '</label>';
 
         return $this;
     }
 
     /**
-     * sets description
+     * sets description.
      *
      * @param string $text
      */

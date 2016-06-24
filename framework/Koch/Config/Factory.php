@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -33,7 +33,7 @@ namespace Koch\Config;
 class Factory
 {
     /**
-     * Instantiates the correct subclass determined by the fileextension
+     * Instantiates the correct subclass determined by the fileextension.
      *
      * Configuration Files must have one of the following extensions:
      *  .config.php
@@ -41,13 +41,14 @@ class Factory
      *  .config.yaml
      *  .info.php
      *
-     * @param  string $configfile string path to configuration file
-     * @return Cache  Engine Object reads the configfile -> access to values via $config
+     * @param string $configfile string path to configuration file
+     *
+     * @return Cache Engine Object reads the configfile -> access to values via $config
      */
     public static function determineConfigurationHandlerTypeBy($configfile)
     {
         // init var
-        $adapter = '';
+        $adapter   = '';
         $extension = '';
 
         // use the filename only to detect adapter
@@ -57,19 +58,19 @@ class Factory
         $configfile = basename($configfile);
         preg_match('^(.config.php|.config.ini|.config.xml|.config.yaml|.info.php)$^', $configfile, $extension);
         if (empty($extension)) {
-            throw new \Koch\Exception\Exception(_('Unknown file extension.'));
+            throw new \Koch\Exception\Exception('Unknown file extension.');
         }
         $extension = $extension[0];
 
-        static $extensionMap = array(
-            '.config.php' => 'PHP',
-            '.info.php' => 'PHP',
-            '.config.ini' => 'INI',
-            '.config.xml' => 'XML',
-            '.config.yaml' => 'YAML'
-        );
+        static $extensionMap = [
+            '.config.php'  => 'PHP',
+            '.info.php'    => 'PHP',
+            '.config.ini'  => 'INI',
+            '.config.xml'  => 'XML',
+            '.config.yaml' => 'YAML',
+        ];
 
-        if (isset($extensionMap[$extension]) === true) {
+        if (isset($extensionMap[$extension])) {
             $adapter = $extensionMap[$extension];
         } else {
             throw new \Koch\Exception\Exception(
@@ -81,13 +82,14 @@ class Factory
     }
 
     /**
-     * Get Configuration
+     * Get Configuration.
      *
      * Two in one method: determines the configuration handler automatically for a configfile.
      * Uses the confighandler to load the configfile and return the object.
      * The returned object contains the confighandler and the config array.
      *
-     * @param  string        $configfile Configuration file to load
+     * @param string $configfile Configuration file to load
+     *
      * @return Configuration Handler Object with confighandler and array of configfile.
      */
     public static function getConfiguration($configfile)
@@ -98,9 +100,10 @@ class Factory
     }
 
     /**
-     * Get Configuration Handler
+     * Get Configuration Handler.
      *
-     * @param  string $configfile
+     * @param string $configfile
+     *
      * @return object Configuration Handler Object
      */
     public static function getHandler($configfile)
@@ -113,15 +116,16 @@ class Factory
     }
 
     /**
-     * getAdapter()
+     * getAdapter().
      *
-     * @param  string $adapter A config adapter name "PHP", "XML", "YAML", "INI", "JSON".
+     * @param string $adapter A config adapter name "PHP", "XML", "YAML", "INI", "JSON".
+     *
      * @return object /Koch/Config/Adapter/AdapterInterface
      */
     public static function getAdapter($adapter)
     {
         $class = 'Koch\Config\Adapter\\' . $adapter;
 
-        return new $class;
+        return new $class();
     }
 }

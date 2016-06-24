@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -28,7 +27,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Wysiwygnicedit
+ * Formelement_Wysiwygnicedit.
  *
  * @see Http://www.nicedit.com/ Official Website of NicEdit
  * @see http://wiki.nicedit.com/ Wiki of NicEdit
@@ -56,7 +55,7 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
     public function render()
     {
         // a) loads the nicedit javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/nicedit/nicedit.js'. '"';
+        $javascript = '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/nicedit/nicedit.js' . '"';
         $javascript .= ' type="text/javascript"></script>';
 
         // b) handler to attach nicedit to all textareas
@@ -69,13 +68,13 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
                                     maxHeight : 320,
                                     bbCode    : true,
                                     xhtml     : true
-                                  }).panelInstance('".$this->name."');
+                                  }).panelInstance('" . $this->name . "');
                             });
                             // ]]></script>";
 
         // wysiwyg.instanceById('page_body').saveContent();
 
-        /**
+        /*
          * c) css style
          *
          * Developer Notice
@@ -88,15 +87,15 @@ class WysiwygNicedit extends Textarea implements FormElementInterface
          * .nicEdit-button
          * .nicEdit-select
          */
-        $html = '<style type="text/css">'.CR.'
+        $html = '<style type="text/css">' . CR . '
                  .nicEdit-main {
                     background-color: #eee !important;
                     font-size: 16px;
                     padding: 3px;
-                    }'.CR.'
+                    }' . CR . '
                 </style>';
 
         // if we are in inheritance mode, skip this, the parent class handles this already
-        return $javascript.$html;
+        return $javascript . $html;
     }
 }

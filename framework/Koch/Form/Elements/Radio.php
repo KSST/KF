@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -30,7 +29,7 @@ use Koch\Form\FormElementInterface;
 class Radio extends Input implements FormElementInterface
 {
     /**
-     * label next to element
+     * label next to element.
      *
      * @var string
      */
@@ -39,8 +38,7 @@ class Radio extends Input implements FormElementInterface
     protected $description;
 
     /**
-     * constructor
-     *
+     * constructor.
      */
     public function __construct()
     {
@@ -50,7 +48,7 @@ class Radio extends Input implements FormElementInterface
     }
 
     /**
-     * checks or unchecks radio button
+     * checks or unchecks radio button.
      *
      * @param bool checked
      */
@@ -62,19 +60,19 @@ class Radio extends Input implements FormElementInterface
     }
 
     /**
-     * sets clickable label next to element
+     * sets clickable label next to element.
      *
      * @param string $text
      */
     public function setLabel($text)
     {
-        $this->label = '<label for="'.$this->id.'">'.$text.'</label>';
+        $this->label = '<label for="' . $this->id . '">' . $text . '</label>';
 
         return $this;
     }
 
     /**
-     * sets description
+     * sets description.
      *
      * @param string $description
      */

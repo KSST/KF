@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Validators;
@@ -46,7 +45,7 @@ class MinValue extends Validator
      */
     public function setMinValue($minvalue)
     {
-        if (is_string($minvalue) === true) {
+        if (is_string($minvalue)) {
             $msg = _('Parameter Minvalue must be numeric (int|float) and not %s.');
             $msg = sprintf($msg, gettype($minvalue));
 

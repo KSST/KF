@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
@@ -18,6 +18,7 @@
  * {icon theme="lullacons" name="calendar"}
  *
  * @param array $params as described above
+ *
  * @return string
  */
 function Smarty_function_icon($params)
@@ -39,10 +40,10 @@ function Smarty_function_icon($params)
 
     extract($params);
 
-    /**
+    /*
      * if the src attribute contains a http://SERVER_NAME URL its cutted of
      */
-    if (isset($src) and empty($src) == false) {
+    if (isset($src) and empty($src) === false) {
         $needle = 'http://' . $_SERVER['SERVER_NAME'] . '/';
         $pos    = mb_strpos($src, $needle);
         if ($src !== null and is_int($pos)) {
@@ -56,8 +57,8 @@ function Smarty_function_icon($params)
     // a) src => user has set src, defining the path to the image and imagename
     // b) icondir, name => user has defined the icons dir (relative to core/images folder) and the name of a png file
     // check if it is a valid one
-    $icondir_whitelist = array('icons', 'lullacons');
-    if ((isset($icondir) === true) and in_array($icondir, $icondir_whitelist)) {
+    $icondir_whitelist = ['icons', 'lullacons'];
+    if ((isset($icondir)) and in_array($icondir, $icondir_whitelist, true)) {
         // valid
         $icondir .= ''; // leave this. would else be an empty if statement
     } else { // fallback to a valid default
@@ -68,7 +69,7 @@ function Smarty_function_icon($params)
     $src = realpath(APPLICATION_PATH . 'themes/' . 'core/images/' . $icondir . DIRECTORY_SEPARATOR . $name . '.png');
 
     // if we got no valid src, set a default image
-    if (isset($src) and is_file($src) == false) {
+    if (isset($src) and is_file($src) === false) {
         #$src = WWW_ROOT_THEMES_CORE . 'images/noimage.gif';
         $src  = APPLICATION_PATH . 'themes/' . 'core/images/noimage.gif';
         $name = 'No Image found.' . $src;
@@ -85,7 +86,7 @@ function Smarty_function_icon($params)
     }
 
     // we got no height nor width. well let's detect it automatically then.
-    if (($height == 0) or ($width == 0)) {
+    if (($height === 0) || ($width === 0)) {
         $currentimagesize = getimagesize($src);
         $width            = $currentimagesize[0];
         $height           = $currentimagesize[1];

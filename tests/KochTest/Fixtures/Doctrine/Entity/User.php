@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Fixtures\Doctrine\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +31,7 @@ class User
     private $email;
 
     /**
-     * @param integer $id
+     * @param int $id
      */
     public function setId($id)
     {

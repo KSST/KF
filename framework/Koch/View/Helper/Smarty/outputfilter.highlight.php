@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 /*
  * Smarty plugin
@@ -27,14 +27,14 @@
  */
 function smarty_outputfilter_highlight($source, $smarty)
 {
-    $highlight = $_REQUEST['highlight'];
+    $highlight                 = $_REQUEST['highlight'];
     $feature_referer_highlight = $GLOBALS['feature_referer_highlight']; // @todo remove globals
 
-    if (isset($feature_referer_highlight) && $$feature_referer_highlight == 'y') {
+    if (isset($feature_referer_highlight) && $$feature_referer_highlight === 'y') {
         $refererhi = _refererhi();
         if (($refererhi !== null) && !empty($refererhi)) {
             if (($highlight !== null) && !empty($highlight)) {
-                $highlight = $highlight . " " . $refererhi;
+                $highlight = $highlight . ' ' . $refererhi;
             } else {
                 $highlight = $refererhi;
             }
@@ -58,23 +58,24 @@ function smarty_outputfilter_highlight($source, $smarty)
 
 function _enlightColor($matches)
 {
-    static $colword = array();
+    static $colword = [];
     if (is_string($matches)) { // just to set the color array
         // This array is used to choose colors for supplied highlight terms
-        $colorArr = array('#ffff66', '#ff9999', '#A0FFFF', '#ff66ff', '#99ff99');
+        $colorArr = ['#ffff66', '#ff9999', '#A0FFFF', '#ff66ff', '#99ff99'];
 
         // Wrap all the highlight words with tags bolding them and changing
         // their background colors
-        $i = 0;
+        $i       = 0;
         $seaword = $seasep = '';
         $wordArr = preg_split('~%20|\+|\s+~', $matches);
         foreach ($wordArr as $word) {
-            if ($word == '')
+            if ($word === '') {
                 continue;
+            }
             $seaword .= $seasep . preg_quote($word, '~');
-            $seasep = '|';
+            $seasep                        = '|';
             $colword[mb_strtolower($word)] = $colorArr[$i % 5];
-            $i++;
+            ++$i;
         }
 
         return $seaword;
@@ -97,7 +98,8 @@ function _refererhi()
     if ($vars['q'] !== null) {
         return $vars['q'];
     } else {
-        if ($vars['p'] !== null)
+        if ($vars['p'] !== null) {
             return $vars['p'];
+        }
     }
 }

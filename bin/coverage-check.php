@@ -1,14 +1,15 @@
 <?php
 
 /**
- * Coverage Checker
+ * Coverage Checker.
  *
  * @author ocramius
+ *
  * @link http://ocramius.github.com/blog/automated-code-coverage-check-for-github-pull-requests-with-travis/
  *
  * Usage: "php coverage-checker.php clover.xml 70"
  */
-$inputFile = $argv[1];
+$inputFile          = $argv[1];
 $acceptedPercentage = min(100, max(0, (int) $argv[2]));
 
 if (!file_exists($inputFile)) {
@@ -19,15 +20,15 @@ if (!$acceptedPercentage) {
     throw new InvalidArgumentException('An integer checked percentage must be given as second parameter');
 }
 
-$cliColor = array(
+$cliColor = [
       'green' => "\x1b[30;42m",
-      'red' => "\x1b[37;41m",
+      'red'   => "\x1b[37;41m",
       'reset' => "\x1b[0m",
-);
+];
 
-$xml = new SimpleXMLElement(file_get_contents($inputFile));
-$metrics = $xml->xpath('//metrics');
-$totalElements = 0;
+$xml             = new SimpleXMLElement(file_get_contents($inputFile));
+$metrics         = $xml->xpath('//metrics');
+$totalElements   = 0;
 $checkedElements = 0;
 
 foreach ($metrics as $metric) {

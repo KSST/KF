@@ -1,10 +1,9 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- *
  * Name:         gravatar
  * Type:         function
  * Purpose: This TAG inserts a valid Gravatar Image.
@@ -23,6 +22,7 @@
  * {gravatar email="example@example.com" size="40" rating="R" default="http://myhost.com/myavatar.png"}
  *
  * @param array $params as described above (emmail, size, rating, defaultimage)
+ *
  * @return null|Koch\View\Helper\Gravatar
  */
 function Smarty_function_gravatar($params)
@@ -30,7 +30,7 @@ function Smarty_function_gravatar($params)
     $email = $defaultImage = $size = $rating = '';
 
     // check for email adress
-    if (isset($params['email']) === true) {
+    if (isset($params['email'])) {
         $email = trim(mb_strtolower($params['email']));
     } else {
         trigger_error("Gravatar Image couldn't be loaded! Parameter 'email' not specified!");
@@ -39,17 +39,17 @@ function Smarty_function_gravatar($params)
     }
 
     // default avatar
-    if (isset($params['default']) === true) {
+    if (isset($params['default'])) {
         $defaultImage = urlencode($params['default']);
     }
 
     // size
-    if (isset($params['size']) === true) {
+    if (isset($params['size'])) {
         $size = $params['size'];
     }
 
     // rating
-    if (isset($params['rating']) === true) {
+    if (isset($params['rating'])) {
         $rating = $params['rating'];
     }
 

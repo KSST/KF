@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -28,7 +27,7 @@ namespace Koch\Form\Elements;
 use Koch\Form\FormElementInterface;
 
 /**
- * Formelement_Wysiwygmarkitup
+ * Formelement_Wysiwygmarkitup.
  *
  * @see http://markitup.jaysalvat.com/home/ Official Website of markItUp!
  */
@@ -58,17 +57,17 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
         //$javascript = '<script type="text/javascript"';
         //$javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/jquery.js"></script>';
         $javascript = '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/jquery.markitup.js"></script>'.CR;
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/jquery.markitup.js"></script>' . CR;
 
         // b) load JSON default settings
         $javascript .= '<script type="text/javascript"';
-        $javascript .= ' src="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/set.js"></script>'.CR;
+        $javascript .= ' src="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/set.js"></script>' . CR;
 
         // c) include CSS
         $css = '<link rel="stylesheet" type="text/css"';
-        $css .= ' href="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/skins/markitup/style.css" />'.CR.'
+        $css .= ' href="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/skins/markitup/style.css" />' . CR . '
                  <link rel="stylesheet" type="text/css"';
-        $css .= ' href="'.WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/style.css" />'.CR;
+        $css .= ' href="' . WWW_ROOT_THEMES_CORE . 'javascript/markitup/sets/default/style.css" />' . CR;
 
         // d) plug it to an specific textarea by ID
         $javascript .= '<script type="text/javascript">// <![CDATA[
@@ -76,6 +75,7 @@ class WysiwygMarkitup extends Textarea implements FormElementInterface
                               $("textarea:visible").markItUp(mySettings);
                            });
                         // ]]></script>';
-        return $javascript.$css;
+
+        return $javascript . $css;
     }
 }

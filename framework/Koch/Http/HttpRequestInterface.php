@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -41,13 +41,10 @@ interface HttpRequestInterface
 
     /**
      * @param string $array
-     *
-     * @return void
      */
     public function expectParameter($parameter, $array);
 
     /**
-     * @return void
      */
     public function expectParameters(array $parameters);
 
@@ -70,12 +67,11 @@ interface HttpRequestInterface
     public static function getRequestMethod();
 
     /**
-     * @return void
      */
     public static function setRequestMethod($method);
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function isAjax();
 
@@ -87,7 +83,7 @@ interface HttpRequestInterface
     public static function getServerProtocol();
 
     /**
-     * @return boolean
+     * @return bool
      */
     public static function isSecure();
 

@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -45,7 +44,7 @@ class RadioList extends Radio implements FormElementInterface
 
     public function render()
     {
-        $i = 0;
+        $i    = 0;
         $html = '';
         while (list($key, $value) = each($this->options)) {
             // setup a new radio formelement
@@ -56,7 +55,7 @@ class RadioList extends Radio implements FormElementInterface
                 ->setLabel($value);
 
             // check the element, if value is "active"
-            if ($this->value == $key) {
+            if ($this->value === $key) {
                 $radio->setChecked();
             }
 
@@ -64,7 +63,7 @@ class RadioList extends Radio implements FormElementInterface
             $html .= $radio;
 
             // if we options, add a seperator
-            if (++$i != count($this->options)) {
+            if (++$i !== count($this->options)) {
                 $html .= $this->separator;
             }
         }

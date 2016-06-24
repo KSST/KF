@@ -1,4 +1,5 @@
 <?php
+
 namespace KochTest\Mvc;
 
 use Koch\Mvc\Mapper;
@@ -16,7 +17,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
      */
     protected function setUp()
     {
-        $this->object = new Mapper;
+        $this->object = new Mapper();
     }
 
     /**
@@ -59,7 +60,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
         );
 
         $module_path = '/Modules/ModuleB';
-        $controller = 'Admin';
+        $controller  = 'Admin';
         $this->assertEquals(
             '/Modules/ModuleBController/AdminController.php',
             $this->object->mapControllerToFilename($module_path, $controller)
@@ -79,7 +80,7 @@ class MapperTest extends \PHPUnit_Framework_TestCase
             $this->object->mapControllerToClassname($module)
         );
 
-        $module = 'SomeModuleB';
+        $module     = 'SomeModuleB';
         $controller = 'SomeControllerA';
         $this->assertEquals(
             '\Application\Modules\SomeModuleB\Controller\SomeControllerAController',

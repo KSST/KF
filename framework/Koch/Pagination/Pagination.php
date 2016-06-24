@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -37,6 +37,7 @@ class Pagination
 {
     /**
      * The pagination adapter (data provider).
+     *
      * @var object \AdapterInterface
      */
     public $adapter;
@@ -80,6 +81,7 @@ class Pagination
      * Sets the pagination adapter (which is the data provider).
      *
      * @param object AdapterInterface
+     *
      * @return Pagination The pagination.
      */
     public function setAdapter(AdapterInterface $adapter)
@@ -129,7 +131,7 @@ class Pagination
     }
 
     /**
-     * @param integer $count
+     * @param int $count
      */
     public function setTotalNumberOfResults($count)
     {
@@ -172,8 +174,8 @@ class Pagination
     public function getCurrentPageResults()
     {
         if (null === $this->currentPageResults) {
-            $offset = ($this->getCurrentPage() - 1) * $this->getMaxResultsPerPage();
-            $length = $this->getMaxResultsPerPage();
+            $offset                   = ($this->getCurrentPage() - 1) * $this->getMaxResultsPerPage();
+            $length                   = $this->getMaxResultsPerPage();
             $this->currentPageResults = $this->adapter->getSlice($offset, $length);
         }
 

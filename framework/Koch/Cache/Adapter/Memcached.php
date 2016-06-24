@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -37,6 +37,7 @@ use Koch\Exception\Exception;
  * You need two things to get this running: a memcache daemon (server) and the php extension memcached.
  *
  * More information can be obtained here:
+ *
  * @link http://www.danga.com/memcached/
  * @link http://libmemcached.org/libMemcached.html
  * @link http://php.net/manual/en/book.memcached.php
@@ -56,9 +57,10 @@ class Memcached extends AbstractCache implements CacheInterface
      * Constructor.
      *
      * Instantiate and connect to Memcache Server
+     *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         if (extension_loaded('memcached') === false) {
             throw new Exception(
@@ -66,14 +68,14 @@ class Memcached extends AbstractCache implements CacheInterface
             );
         }
 
-        $defaultOptions = array(
+        $defaultOptions = [
             'useConnection' => 'default',
-            'connection'    => array(
-                'default' => array(
-                    'servers' => array(
-                        array('host' => '127.0.0.1', 'port' => 11211, 'persistent' => true),
-                    )))
-        );
+            'connection'    => [
+                'default' => [
+                    'servers' => [
+                        ['host' => '127.0.0.1', 'port' => 11211, 'persistent' => true],
+                    ], ], ],
+        ];
 
         $options += $defaultOptions;
 
@@ -87,7 +89,8 @@ class Memcached extends AbstractCache implements CacheInterface
      *
      * @param string Key.
      * @param mixed Value.
-     * @return boolean True, if successfull.
+     *
+     * @return bool True, if successfull.
      */
     public function setOption($key, $value)
     {
@@ -117,7 +120,7 @@ class Memcached extends AbstractCache implements CacheInterface
     public function getMemcachedInstance($connection = 'default')
     {
         // one instantiation (per-connection per-request)
-        static $instances = array();
+        static $instances = [];
 
         // return early, if connection already exists
         if (array_key_exists($connection, $instances)) {
@@ -151,10 +154,11 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Contains checks if a key exists in the cache
+     * Contains checks if a key exists in the cache.
      *
-     * @param  string  $key Identifier for the data
-     * @return boolean true|false
+     * @param string $key Identifier for the data
+     *
+     * @return bool true|false
      */
     public function contains($key)
     {
@@ -162,10 +166,11 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Read a key from the cache
+     * Read a key from the cache.
      *
-     * @param  string $key Identifier for the data
-     * @return mixed  boolean FALSE if the data was not fetched from the cache, DATA on success
+     * @param string $key Identifier for the data
+     *
+     * @return mixed boolean FALSE if the data was not fetched from the cache, DATA on success
      */
     public function fetch($key)
     {
@@ -175,12 +180,13 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Stores data by key into cache
+     * Stores data by key into cache.
      *
-     * @param  string  $key  Identifier for the data
-     * @param  string  $data Data to be cached
-     * @param  integer $ttl  How long to cache the data (in minutes).
-     * @return boolean True if the data was successfully cached, false on failure.
+     * @param string $key  Identifier for the data
+     * @param string $data Data to be cached
+     * @param int    $ttl  How long to cache the data (in minutes).
+     *
+     * @return bool True if the data was successfully cached, false on failure.
      */
     public function store($key, $data, $ttl = null)
     {
@@ -192,7 +198,7 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Deletes a $key or an array of $keys from the Memcache
+     * Deletes a $key or an array of $keys from the Memcache.
      *
      * @param $key string
      */
@@ -202,9 +208,9 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Clears the Cache
+     * Clears the Cache.
      *
-     * @return boolean flushed cache
+     * @return bool flushed cache
      */
     public function clear()
     {
@@ -212,12 +218,12 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Display Memcached Usage Informations
+     * Display Memcached Usage Informations.
      */
     public function stats()
     {
-        $version = $this->memcached->getVersion();
-        $stats = $this->memcached->getStats();
+        $version    = $this->memcached->getVersion();
+        $stats      = $this->memcached->getStats();
         $serverlist = $this->memcached->getServerList();
 
         // combine arrays
@@ -225,7 +231,7 @@ class Memcached extends AbstractCache implements CacheInterface
     }
 
     /**
-     * Returns an the Memcached instance
+     * Returns an the Memcached instance.
      *
      * @return object \Memcached Cache Engine
      */

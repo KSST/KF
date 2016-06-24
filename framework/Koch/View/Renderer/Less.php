@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -42,11 +42,11 @@ class Less extends AbstractRenderer
     public $renderer = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
 
@@ -58,7 +58,7 @@ class Less extends AbstractRenderer
     public function initializeEngine($template = null)
     {
         // initialize the LESS compiler as renderer
-        $this->renderer = new \lessc;
+        $this->renderer = new \lessc();
     }
 
     public function configureEngine()
@@ -89,5 +89,4 @@ class Less extends AbstractRenderer
     {
         ;
     }
-
 }

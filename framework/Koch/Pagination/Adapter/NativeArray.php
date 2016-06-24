@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Pagination\Adapter;
@@ -57,7 +56,7 @@ class NativeArray implements AdapterInterface
     /**
      * Returns the total number of results.
      *
-     * @return integer The total number of results.
+     * @return int The total number of results.
      */
     public function getTotalNumberOfResults()
     {
@@ -67,8 +66,9 @@ class NativeArray implements AdapterInterface
     /**
      * Returns a slice of the result set.
      *
-     * @param  integer            $offset The offset.
-     * @param  integer            $length The length.
+     * @param int $offset The offset.
+     * @param int $length The length.
+     *
      * @return array|\Traversable The slice.
      */
     public function getSlice($offset, $length)

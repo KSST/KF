@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -32,7 +32,7 @@ abstract class Validator
     /**
      * Error state of the validator.
      *
-     * @var boolean
+     * @var bool
      */
     public $error = false;
 
@@ -43,7 +43,7 @@ abstract class Validator
      *
      * @var array
      */
-    public $options = array();
+    public $options = [];
 
     /**
      * Getter for Options.
@@ -68,7 +68,7 @@ abstract class Validator
     /**
      * Setter for the error state of the validator.
      *
-     * @param boolean $bool True if error, false if not.
+     * @param bool $bool True if error, false if not.
      */
     public function setError($bool)
     {
@@ -78,7 +78,7 @@ abstract class Validator
     /**
      * Getter for the error state of the validator.
      *
-     * @return boolean
+     * @return bool
      */
     public function hasError()
     {
@@ -88,7 +88,7 @@ abstract class Validator
     /**
      * Each Formelement Validator must return an errormessage.
      * The errormessage must be wrapped in a gettext shorthand call, like:
-     * return _('This value is not ok.');
+     * return _('This value is not ok.');.
      *
      * @param string The Errormessage, when the validation fails.
      */
@@ -113,7 +113,7 @@ abstract class Validator
      * add some static helper functions for usage inside this method.
      *
      * @param $value The value to validate.
-     * @param boolean True if formelement validates, false if not.
+     * @param bool True if formelement validates, false if not.
      */
     abstract protected function processValidationLogic($value);
 
@@ -141,10 +141,10 @@ abstract class Validator
     /**
      * Main method for the validation of this formelement.
      *
-     * @param boolean True if formelement validates, false if not.
+     * @param bool True if formelement validates, false if not.
      */
     public function validate($value)
     {
-        return ($this->processValidationLogic($value) === true) ? true : false;
+        return $this->processValidationLogic($value) ? true : false;
     }
 }

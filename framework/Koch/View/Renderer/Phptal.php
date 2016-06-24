@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -40,11 +40,11 @@ class Phptal extends AbstractRenderer
     public $renderer = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($config);
         $this->initializeEngine();
@@ -52,7 +52,7 @@ class Phptal extends AbstractRenderer
     }
 
     /**
-     * Sets up PHPTAL Template Engine
+     * Sets up PHPTAL Template Engine.
      *
      * @return PHPTAL Object
      */
@@ -68,12 +68,12 @@ class Phptal extends AbstractRenderer
 
     /**
      * Render Engine Configuration
-     * Configures the PHPTAL Object
+     * Configures the PHPTAL Object.
      *
      * @param int    $outputMode (optional) output mode (XML, XHTML, HTML5 (see PHPTAL constants). Default XHTML.
      * @param string $encoding   (optional) charset encoding for template. Default UTF-8.
      */
-    public function configureEngine($outputMode = PHPTAL::XHTML, $encoding = 'UTF-8', $cache_lifetime_days = 1)
+    public function configureEngine($outputMode = self::XHTML, $encoding = 'UTF-8', $cache_lifetime_days = 1)
     {
         $this->setOutputMode($outputMode);
         $this->SetEncoding($encoding);
@@ -82,13 +82,13 @@ class Phptal extends AbstractRenderer
         $this->renderer->setTemplateRepository(__DIR__ . '/../../view/');
         $this->tenderer->setPhpCodeDestination(__DIR__ . '/../../viewc/');
 
-        if (DEBUG == true) {
+        if (DEBUG === true) {
             $this->tpl->setForceReparse(true);
         }
     }
 
     /**
-     * Add data to the PHPTAL view
+     * Add data to the PHPTAL view.
      *
      * @param mixed $tpl_parameter The placeholder.
      * @param mixed $value         The value.
@@ -100,17 +100,18 @@ class Phptal extends AbstractRenderer
                 $this->renderer->$param = $val;
             }
         } else {
-            if ($tpl_parameter != null) {
+            if ($tpl_parameter !== null) {
                 $this->renderer->$tpl_parameter = $value;
             }
         }
     }
 
-     /**
+    /**
      * Renders a template and displays the content.
      *
      * @param $template
      * @param $returnOutput
+     *
      * @return string Rendered Template Content
      */
     public function display($template, $viewdata = null)
@@ -135,9 +136,10 @@ class Phptal extends AbstractRenderer
     }
 
     /**
-     * Fetches Template
+     * Fetches Template.
      *
      * @param $template Template
+     *
      * @return string Rendered Template Content.
      */
     public function fetch($template, $data = null)
@@ -148,10 +150,11 @@ class Phptal extends AbstractRenderer
     /**
      * Renders a template and returns the content.
      *
-     * @param  string  $template
+     * @param string $template
      * @param $returnOutput
-     * @param  boolean $viewdata
-     * @return string  Rendered Template Content
+     * @param bool $viewdata
+     *
+     * @return string Rendered Template Content
      */
     public function render($template = null, $viewdata = null)
     {

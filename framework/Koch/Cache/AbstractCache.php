@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -29,17 +29,17 @@ namespace Koch\Cache;
  */
 abstract class AbstractCache
 {
-    public $options = array(
-        'ttl' => 900,
-        'prefix' => 'kf_'
-    );
+    public $options = [
+        'ttl'    => 900,
+        'prefix' => 'kf_',
+    ];
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         $this->setOptions($options);
     }
@@ -49,9 +49,9 @@ abstract class AbstractCache
      *
      * @param array Options.
      */
-    public function setOptions($options = array())
+    public function setOptions($options = [])
     {
-        if (is_array($options) === true) {
+        if (is_array($options)) {
             foreach ($options as $key => $value) {
                 $this->setOption($key, $value);
             }
@@ -63,7 +63,8 @@ abstract class AbstractCache
      *
      * @param string Key.
      * @param mixed Value.
-     * @return boolean True, if successfull.
+     *
+     * @return bool True, if successfull.
      */
     public function setOption($key, $value)
     {
@@ -94,12 +95,13 @@ abstract class AbstractCache
     /**
      * Set Prefix for the cache key.
      *
-     * @param  string                   $prefix The prefix for all cache keys.
+     * @param string $prefix The prefix for all cache keys.
+     *
      * @throws InvalidArgumentException if prefix is empty
      */
     public function setPrefix($prefix)
     {
-        if (empty($prefix) === true) {
+        if (empty($prefix)) {
             throw new \InvalidArgumentException('Prefix must not be empty.');
         }
 
@@ -119,7 +121,8 @@ abstract class AbstractCache
     /**
      * Prepends key with prefix.
      *
-     * @param  string $key Cache Key.
+     * @param string $key Cache Key.
+     *
      * @return string Prefixed Cache Key.
      */
     public function prefixKey($key)
@@ -131,9 +134,10 @@ abstract class AbstractCache
      * Set cache (magic)
      * If value is null, the key is deleted.
      *
-     * @param  string  $key
-     * @param  mixed   $value
-     * @return boolean
+     * @param string $key
+     * @param mixed  $value
+     *
+     * @return bool
      */
     public function __set($key, $value)
     {
@@ -141,9 +145,10 @@ abstract class AbstractCache
     }
 
     /**
-     * Get cache (magic)
+     * Get cache (magic).
      *
-     * @param  string $key
+     * @param string $key
+     *
      * @return mixed
      */
     public function __get($key)
@@ -152,10 +157,11 @@ abstract class AbstractCache
     }
 
     /**
-     * Delete cache (magic)
+     * Delete cache (magic).
      *
-     * @param  string  $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function __unset($key)
     {
@@ -163,10 +169,11 @@ abstract class AbstractCache
     }
 
     /**
-     * Checks if cache contains key (magic)
+     * Checks if cache contains key (magic).
      *
-     * @param  string  $key
-     * @return boolean
+     * @param string $key
+     *
+     * @return bool
      */
     public function __isset($key)
     {

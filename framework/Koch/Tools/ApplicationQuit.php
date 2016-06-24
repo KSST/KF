@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Tools;
 
 /**
- * Application Quit
+ * Application Quit.
  *
  * ExitExpressions are nice. They allow breaking the application control flow at any time.
  * Within regular code ExitExpressions are said to be untestable and therefore they should be avoided.
@@ -46,7 +46,7 @@ class ApplicationQuit
      */
     public static function quit($exitCode = 0, $lastWords = '')
     {
-        if ($lastWords != '') {
+        if ($lastWords !== '') {
             echo $lastWords;
         }
 

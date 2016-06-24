@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -27,28 +27,30 @@ namespace Koch\Pagination;
 class Renderer
 {
     public $style;
-    public $options = array();
+    public $options = [];
     public $adapter;
 
     /**
      * Constructor.
      *
-     * @param string     $style
-     * @param array      $options
+     * @param string $style
+     * @param array  $options
      * @param object Pagination with Adapter
      * @param Pagination $adapter
      */
     public function __construct($style = null, $options = null, $adapter = null)
     {
         $this->adapter = $adapter;
-        $this->style = $this->factory($style, $options);
+        $this->style   = $this->factory($style, $options);
     }
 
     /**
      * Returns the classname of a pagination renderer by it's shortcut name.
      *
      * @staticvar array $viewRendererClassMap
-     * @param  string $style Name of Pagination Renderer. Default "classic".
+     *
+     * @param string $style Name of Pagination Renderer. Default "classic".
+     *
      * @return string Filename
      */
     public function getStyleClassname($style)
@@ -56,12 +58,12 @@ class Renderer
         // use 'classic' as fallback style
         $style = ($style === null) ? 'classic' : $style;
 
-        static $viewRendererClassMap = array(
-          'classic' => 'Classic',
-          'digg' => 'Digg',
+        static $viewRendererClassMap = [
+          'classic'  => 'Classic',
+          'digg'     => 'Digg',
           'extended' => 'Extended',
-          'punbb' => 'PunBB'
-        );
+          'punbb'    => 'PunBB',
+        ];
 
         return '\Koch\Pagination\Style\\' . $viewRendererClassMap[$style];
     }
@@ -71,7 +73,7 @@ class Renderer
      */
     public function factory($style = null, $options = null)
     {
-        $style = isset($style) ? $style : $this->style;
+        $style   = isset($style) ? $style : $this->style;
         $options = isset($options) ? $options : $this->options;
 
         $class = $this->getStyleClassname($style);

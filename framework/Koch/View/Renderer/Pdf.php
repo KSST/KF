@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -39,11 +39,11 @@ class Pdf extends AbstractRenderer
     public $renderer = null;
 
     /**
-     * Constructor
+     * Constructor.
      *
      * @param array $options
      */
-    public function __construct($options = array())
+    public function __construct($options = [])
     {
         parent::__construct($options);
         // composer autoload not working, due to missing autoload section in mpdfs composer.json
@@ -55,31 +55,25 @@ class Pdf extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-
     }
 
     public function configureEngine()
     {
-
     }
 
     public function assign($tpl_parameter, $value = null)
     {
-
     }
 
     public function display($template, $viewdata = null)
     {
-
     }
 
     public function fetch($template, $viewdata = null)
     {
-
     }
 
     public function render($template = null, $viewdata = null)
     {
-
     }
 }

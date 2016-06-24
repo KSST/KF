@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -58,6 +57,7 @@ class File extends Input implements FormElementInterface
      * There are several different formelements available to upload files:
      *
      * @param $uploadType ajaxupload, apc, uploadify, html
+     *
      * @return File \Koch\Form\Element\File
      */
     public function setUploadType($uploadType)
@@ -81,7 +81,7 @@ class File extends Input implements FormElementInterface
                 return new \Koch\Form\Elements\Uploadify();
                 break;
             case 'html':
-                /**
+                /*
                  * Fallback to normal <input type="file"> upload
                  * Currently not using the render method of the parent class
                  * return parent::render();

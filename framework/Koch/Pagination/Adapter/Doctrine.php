@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,13 +20,12 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Pagination\Adapter;
 
-use Koch\Pagination\AdapterInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Koch\Pagination\AdapterInterface;
 
 /**
  * Koch Framework - Pagination Adapter for Doctrine Models.
@@ -41,7 +40,7 @@ class Doctrine implements AdapterInterface
      * Constructor.
      *
      * @param \Doctrine\ORM\Query $query               A Doctrine Query or the QueryBuilder.
-     * @param boolean             $fetchJoinCollection Whether the query joins a collection (true by default).
+     * @param bool                $fetchJoinCollection Whether the query joins a collection (true by default).
      */
     public function __construct($query, $fetchJoinCollection = true)
     {
@@ -49,7 +48,7 @@ class Doctrine implements AdapterInterface
     }
 
     /**
-     * Returns the query
+     * Returns the query.
      *
      * @return \Doctrine\ORM\Query
      */
@@ -61,7 +60,7 @@ class Doctrine implements AdapterInterface
     /**
      * Returns whether the query joins a collection.
      *
-     * @return Boolean Whether the query joins a collection.
+     * @return bool Whether the query joins a collection.
      */
     public function isQueryJoinsCollection()
     {
@@ -74,8 +73,8 @@ class Doctrine implements AdapterInterface
     }
 
     /**
-     * @param integer $offset
-     * @param integer $length
+     * @param int $offset
+     * @param int $length
      */
     public function getSlice($offset, $length)
     {

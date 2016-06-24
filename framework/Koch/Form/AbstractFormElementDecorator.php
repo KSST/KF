@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -47,11 +47,12 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     }
 
     /**
-    * Set a CSS class attribute.
-    *
-    * @param string $cssClass
-    * @return Elements\Checkbox Formelement
-    */
+     * Set a CSS class attribute.
+     *
+     * @param string $cssClass
+     *
+     * @return Elements\Checkbox Formelement
+     */
     public function setCssClass($cssClass)
     {
         $this->cssClass = $cssClass;
@@ -60,10 +61,10 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     }
 
     /**
-    * Get the CSS class attribute.
-    *
-    * @return string
-    */
+     * Get the CSS class attribute.
+     *
+     * @return string
+     */
     public function getClass()
     {
         return $this->cssClass;
@@ -84,7 +85,8 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
      * The method checks, if this object or a decorator implements a certain method.
      *
      * @param $method
-     * @return boolean
+     *
+     * @return bool
      */
     public function hasMethod($method)
     {
@@ -100,7 +102,7 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
     }
 
     /**
-     * __call Magic Method
+     * __call Magic Method.
      *
      * In general this calls a certain method with parameters on the object which is to decorate ($form).
      *
@@ -109,6 +111,6 @@ abstract class AbstractFormElementDecorator implements DecoratorInterface
      */
     public function __call($method, $parameters)
     {
-        return call_user_func_array(array($this->formelement, $method), $parameters);
+        return call_user_func_array([$this->formelement, $method], $parameters);
     }
 }

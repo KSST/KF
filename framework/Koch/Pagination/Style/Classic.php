@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Pagination\Style;
@@ -36,9 +35,9 @@ class Classic implements StyleInterface
 {
     public function render(\Koch\Pagination\Pagination $pagination)
     {
-        $lastPage = $pagination->getLastPage();
+        $lastPage      = $pagination->getLastPage();
         $numberOfPages = $pagination->getNumberOfPages();
-        $current_page = $pagination->getCurrentPage();
+        $current_page  = $pagination->getCurrentPage();
 
         $url = /* Router*/ 'URL';
 
@@ -51,8 +50,8 @@ class Classic implements StyleInterface
         }
 
         // render page range around the current page
-        for ($i = 1; $i <= $numberOfPages; $i++) {
-            if ($i == $current_page) {
+        for ($i = 1; $i <= $numberOfPages; ++$i) {
+            if ($i === $current_page) {
                 $html .= sprintf('<li class="active">%s</li>', $i);
             } else {
                 $html .= sprintf('<a href="%s">%s</a>', str_replace('{page}', $i, $url), $i);

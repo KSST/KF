@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -20,7 +20,6 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
- *
  */
 
 namespace Koch\Form\Elements;
@@ -35,7 +34,7 @@ class UploadAjax extends File implements FormElementInterface
     public function render()
     {
         // a) loads the ajaxupload javascript file
-        $javascript = '<script src="'.WWW_ROOT_THEMES_CORE . 'javascript/jquery/ajaxupload.js'. '" '
+        $javascript = '<script src="' . WWW_ROOT_THEMES_CORE . 'javascript/jquery/ajaxupload.js' . '" '
             . 'type="text/javascript"></script>';
 
         // b) handler for the ajaxupload
@@ -76,7 +75,7 @@ class UploadAjax extends File implements FormElementInterface
             // ]]></script>";
 
         // c) css style
-        $html = '<STYLE type="text/css">'.CR.'
+        $html = '<STYLE type="text/css">' . CR . '
                  #upload{
                      margin:30px 200px; padding:15px;
                      font-weight:bold; font-size:1.3em;
@@ -88,7 +87,7 @@ class UploadAjax extends File implements FormElementInterface
                      width:150px;
                      cursor:pointer !important;
                      -moz-border-radius:5px; -webkit-border-radius:5px;
-                     }'.CR.
+                     }' . CR .
                 '</STYLE>';
 
         // d) output div elements (Button, Status, Files)
@@ -96,6 +95,6 @@ class UploadAjax extends File implements FormElementInterface
                   <!-- Ajax Upload Status --><span id="upload_status"></span>
                   <!-- List Files --><ul id="files"></ul>';
 
-        return $javascript.$html;
+        return $javascript . $html;
     }
 }

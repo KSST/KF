@@ -2,7 +2,7 @@
 
 /**
  * Koch Framework
- * Jens-André Koch © 2005 - onwards
+ * Jens-André Koch © 2005 - onwards.
  *
  * This file is part of "Koch Framework".
  *
@@ -25,7 +25,7 @@
 namespace Koch\Permissions;
 
 /**
- * ACL
+ * ACL.
  */
 class Acl
 {
@@ -35,7 +35,6 @@ class Acl
      */
     public function addRole($roleGroup, $role)
     {
-
     }
 
     /**
@@ -44,7 +43,6 @@ class Acl
      */
     public function addResource($resourceGroup, $resource)
     {
-
     }
 
     /**
@@ -54,7 +52,6 @@ class Acl
      */
     public function ruleAllow($role, $action, $resource)
     {
-
     }
 
     /**
@@ -64,6 +61,5 @@ class Acl
      */
     public function ruleDeny($role, $action, $resource)
     {
-
     }
 }

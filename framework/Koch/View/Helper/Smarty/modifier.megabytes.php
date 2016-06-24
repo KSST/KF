@@ -1,10 +1,10 @@
 <?php
 /**
- * Smarty plugin
+ * Smarty plugin.
  */
 
 /**
- * Smarty plugin
+ * Smarty plugin.
  *
  * Type:     modifier<br>
  * Name:     megabytes<br>
@@ -13,7 +13,9 @@
  * Input:<br>
  *         - string = bytesize to convert to mb, kb, b
  * Example:  {$bytesize|megabytes}
+ *
  * @param string
+ *
  * @return string
  */
 function smarty_modifier_megabytes($string)

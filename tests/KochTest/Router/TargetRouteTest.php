@@ -6,7 +6,6 @@ use Koch\Router\TargetRoute;
 
 class TargetRouteTest extends \PHPUnit_Framework_TestCase
 {
-
     /**
      * @var TargetRoute
      */
@@ -178,7 +177,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
 
-        $this->object->setParameters(array('param1' => 'p1-value'));
+        $this->object->setParameters(['param1' => 'p1-value']);
 
         $this->assertArrayHasKey('param1', $this->object->getParameters());
 
@@ -236,7 +235,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetLayoutMode()
     {
-        $this->object->setParameters(array('layout' => true));
+        $this->object->setParameters(['layout' => true]);
         $this->assertTrue($this->object->getLayoutMode());
     }
 
@@ -267,7 +266,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('default', $this->object->getBackendTheme());
 
-        $theme = 'A-Backend-Theme';
+        $theme                             = 'A-Backend-Theme';
         $_SESSION['user']['backend_theme'] = $theme;
         $this->assertEquals($theme, $this->object->getBackendTheme());
     }
@@ -279,7 +278,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         $this->assertEquals('default', $this->object->getFrontendTheme());
 
-        $theme = 'A-Frontend-Theme';
+        $theme                              = 'A-Frontend-Theme';
         $_SESSION['user']['frontend_theme'] = $theme;
         $this->assertEquals($theme, $this->object->getFrontendTheme());
     }
@@ -333,7 +332,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
     {
         $_SERVER['REQUEST_METHOD'] = 'GET';
 
-        $segments = array();
+        $segments = [];
         $er       = $this->object->setSegmentsToTargetRoute($segments);
 
         $this->assertTrue(is_object($er));
@@ -351,7 +350,7 @@ class TargetRouteTest extends \PHPUnit_Framework_TestCase
         $targetRouteParameters_MODDED = $this->object->getRoute();
         $this->assertNotEquals($targetRouteParameters_MODDED, $targetRouteParameters_BEFORE);
         $this->object->reset();
-        $targetRouteParameters_AFTER  = $this->object->getRoute();
+        $targetRouteParameters_AFTER = $this->object->getRoute();
         $this->assertEquals($targetRouteParameters_AFTER, $targetRouteParameters_BEFORE);
     }
 
