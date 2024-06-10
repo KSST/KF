@@ -19,9 +19,9 @@
             "type": "package",
             "package": {
                 "name": "codemirror/CodeMirror",
-                "version": "5.10.0",
+                "version": "5.65.16",
                 "dist": {
-                    "url": "https://github.com/codemirror/CodeMirror/archive/v5.10.0.zip",
+                    "url": "https://github.com/codemirror/codemirror5/archive/refs/tags/5.65.16.zip",
                     "type": "zip"
                 }
             }
