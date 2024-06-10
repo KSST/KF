@@ -35,7 +35,7 @@
         "beberlei/doctrineextensions"     : "^1.0",
         "gedmo/doctrine-extensions"       : "^2.4",
         "smarty/smarty"                   : "^4.5",
-        "swiftmailer/swiftmailer"         : "^5.4"
+        "swiftmailer/swiftmailer"         : "^6.2"
     },
     "require-dev": {
         "mikey179/vfsstream"              : "^1.6",
