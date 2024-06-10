@@ -34,7 +34,7 @@
         "doctrine/migrations"             : "^1.2",
         "beberlei/doctrineextensions"     : "^1.0",
         "gedmo/doctrine-extensions"       : "^2.4",
-        "smarty/smarty"                   : "^3.1",
+        "smarty/smarty"                   : "^4.5",
         "swiftmailer/swiftmailer"         : "^5.4"
     },
     "require-dev": {
