@@ -24,14 +24,6 @@
         </exec>
     </target>
 
-    <target name="install-box" description="Install Box [phar Builder]">
-        <exec executable="wget" failonerror="true">
-            <arg value="-nc"/>
-            <arg value="-P ${basedir}/bin/phar" />
-            <arg value="https://github.com/kherge/Box/releases/latest"/>
-        </exec>
-    </target>
-
     <target name="composer-install" description="Installs project dependencies via Composer">
         <exec executable="php" failonerror="true">
             <arg value="${basedir}/bin/composer/composer.phar" />
