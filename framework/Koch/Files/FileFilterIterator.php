@@ -28,6 +28,10 @@ class FileFilterIterator extends \FilterIterator
         parent::__construct($iterator);
     }
 
+    /**
+     * Implements method from FilterIterator (SPL.php).
+     */
+    #[\ReturnTypeWillChange]
     public function accept()
     {
         return in_array($this->current(), $this->files, true);

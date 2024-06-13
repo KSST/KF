@@ -10,7 +10,1098 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace "Koch\Form\Element\" + formelement name
+namespace Koch\Form;
+
+/**
+ * Class for creation and handling of HTML Forms.
+ *
+ * The Formular Object provides methods to deal with the following problem:
+ *
+ * Normally you would define your form on html side. When the form gets submitted
+ * you would perform a server-side validation on the incomming formdata against
+ * certain validation rules. If your system is one of the better ones, you would
+ * add these validations also on client-side as an useability enhancement.
+ *
+ * Problem:
+ * This means that you have to implement the validation rules and validation methods two times.
+ * One time via javascript on client-side, one time via php on server-side.
+ *
+ * Koch Framework's formhandling abstracts the form generation and solves the problem described above.
+ *
+ * The formular handling process can be described as the following:
+ *
+ * 1) Formcreation
+ *    The formular is defined/described only one-time in xml (Data-Dictionary).
+ *
+ *    The form-definition/description contains:
+ *    a) Elements
+ *    b) Attributes
+ *    c) Validation rules
+ *
+ * 2) Transformation / Generation
+ *    The formular definition is then transformed into a valid html/xhtml/xml document segment
+ *    with client-side validation rules and methods applied.
+ *
+ *    The form contains:
+ *    a) Formular
+ *    b) Client-side formular validation rules
+ *    c) Client-side formular validation methods
+ *
+ * 3) The generated form is ready for getting embedded into the template/document providing the formular.
+ *    The form element represents a collection of form-associated elements, some of which can represent
+ *    editable values that can be submitted to a server for processing.
+ *
+ * Form Workflow
+ *
+ *    a) Embed formular
+ *       -> Perform client-side validation while data is collected from user
+ *       -> If validation is ok:
+ *    b) Submit
+ *       -> Perform server-side validation on incomming data
+ *       -> If validation is ok:
+ *          -> Save Data !
+ *       -> Else
+ *    c) Repopulate formfields on submission error
+ *       -> goto a)
+ *
+ * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html
+ */
+class Form implements FormInterface
+{
+    /**
+     * Contains all formelements / formobjects registered for this form.
+     *
+     * @var array
+     */
+    protected $formelements = [];
+
+    /**
+     * Form attributes:.
+     *
+     * accept-charset, action, autocomplete, enctype, method, name, novalidate, target
+     *
+     * @link http://dev.w3.org/html5/html-author/#forms
+     */
+
+    /**
+     * Contains accept-charset of the form.
+     *
+     * @var string
+     */
+    protected $acceptcharset;
+
+    /**
+     * Contains action of the form.
+     *
+     * @var string
+     */
+    protected $action;
+
+    /**
+     * Contains autocomplete state of the form.
+     *
+     * @var bool
+     */
+    protected $autocomplete;
+
+    /**
+     * Contains encoding of the form.
+     *
+     * @var string
+     */
+    protected $encoding;
+
+    /**
+     * Contains action of the form.
+     *
+     * @var string
+     */
+    protected $method;
+
+    /**
+     * Contains action of the form.
+     *
+     * @var string
+     */
+    protected $name;
+    protected $noValidation;
+    protected $target;
+
+    /**
+     * Contains id of the form.
+     *
+     * @var string
+     */
+    protected $id;
+
+    /**
+     * Contains class of the form.
+     *
+     * @var string
+     */
+    protected $class;
+
+    /**
+     * Contains description of the form.
+     *
+     * @var string
+     */
+    protected $description;
+
+    /**
+     * Contains heading of the form.
+     *
+     * @var string
+     */
+    protected $heading;
+
+    /**
+     * Flag variable to indicate, if form has an error.
+     *
+     * @var bool
+     */
+    protected $error = false;
+
+    /**
+     * Form Decorators Array, contains one or several formdecorator objects.
+     *
+     * @var array
+     */
+    private $formdecorators = [];
+
+    /**
+     * Toogle variable to control registering of default Formdecorators during rendering.
+     *
+     * @var bool
+     */
+    private $useDefaultFormDecorators = true;
+
+    /**
+     * Form Groups Array, contains one or several formgroup objects.
+     *
+     * @var array
+     */
+    protected $formgroups = [];
+
+    /**
+     * Errormessages Stack.
+     *
+     * @var array
+     */
+    protected $errorMessages = [];
+
+    /**
+     * Construct.
+     *
+     * @example
+     * $form = Koch_Form('news_form', 'post', 'index.php?mod=news&sub=admin&action=update&type=create');
+     *
+     * @param mixed|array|string $name_or_attributes Set the name of the form OR and array with attributes.
+     * @param string             $method             Set the method of the form. Valid are get/post.
+     * @param string             $action             Set the action of the form.
+     */
+    public function __construct($name_or_attributes = null, $method = null, $action = null)
+    {
+        if (null === $name_or_attributes) {
+            throw new \InvalidArgumentException(
+                'Missing argument 1. Expected a string (Name of Form) or an array (Form Description Array).'
+            );
+        }
+
+        if (is_string($name_or_attributes)) {
+            // case 1: $name is a string, the name of the form
+            $this->setName($name_or_attributes);
+        } elseif (is_array($name_or_attributes)) {
+            // case 2: $name is an array with several attribute => value relationships
+            $this->setAttributes($name_or_attributes);
+        }
+
+        if ($method !== null and $action !== null) {
+            $this->setMethod($method);
+            $this->setAction($action);
+        }
+    }
+
+    /**
+     * Sets the method (POST, GET) to the form.
+     *
+     * @param string $method POST or GET
+     *
+     * @return Form
+     */
+    public function setMethod($method)
+    {
+        if ($method === 'POST' or $method === 'GET') {
+            $this->method = $method;
+        } else {
+            throw new \InvalidArgumentException(
+                _('The method parameter is "' . $method . '", but has to be GET or POST.')
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns method (GET or POST) of this form.
+     *
+     * @return string Name of the method of this form. Defaults to POST.
+     */
+    public function getMethod()
+    {
+        // defaults to post
+        if ($this->method === null) {
+            $this->method = 'POST';
+        }
+
+        return $this->method;
+    }
+
+    /**
+     * Set action of this form (which is the target url).
+     *
+     * @param string $action string Target URL of the action of this form.
+     *
+     * @return Form
+     */
+    public function setAction($action)
+    {
+        $this->action = \Koch\Router\Router::buildURL($action);
+
+        return $this;
+    }
+
+    /**
+     * Returns action of this form (target url).
+     *
+     * @return string Target Url as the action of this form.
+     */
+    public function getAction()
+    {
+        return $this->action;
+    }
+
+    /**
+     * Returns the auto-completion state of this form.
+     *
+     * @return string Returns the auto-completion state of this form.
+     */
+    public function isAutoComplete()
+    {
+        return ($this->autocomplete === true) ? 'on' : 'off';
+    }
+
+    /**
+     * Set autocomplete of this form.
+     * If "on" browsers can store the form's input values, to auto-fill the form if the user returns to the page.
+     *
+     * @param bool $bool boolean state to set for autocomplete.
+     *
+     * @return Form
+     */
+    public function setAutoComplete($bool)
+    {
+        $this->autocomplete = (bool) $bool;
+
+        return $this;
+    }
+
+    /**
+     * Gets the target (_blank, _self, _parent, _top).
+     *
+     * @return string string
+     */
+    public function getTarget()
+    {
+        return $this->target;
+    }
+
+    /**
+     * Set the target of the form.
+     *
+     * _blank    Open in a new window
+     * _self      Open in the same frame as it was clicked
+     * _parent  Open in the parent frameset
+     * _top
+     *
+     * @param string $target _blank, _self, _parent, _top
+     *
+     * @return Form
+     */
+    public function setTarget($target)
+    {
+        if ($target === '_blank' or $target === '_self' or $target === '_parent' or $target === '_top') {
+            $this->target = $target;
+        } else {
+            throw new \InvalidArgumentException(
+                'The target parameter is "' . $target . '", but has to be one of _blank, _self, _parent, _top.'
+            );
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns novalidation state of this form.
+     * If present the form should not be validated when submitted.
+     *
+     * @return string Returns novalidation state of this form.
+     */
+    public function isNoValidation()
+    {
+        return ($this->noValidation === true) ? 'novalidate' : '';
+    }
+
+    /**
+     * Set novalidation state of this form.
+     * If true the form should not be validated when submitted.
+     *
+     * @link http://dev.w3.org/html5/spec-author-view/association-of-controls-and-forms.html#attr-fs-novalidate
+     *
+     * @param bool $bool boolean state to set for novalidation.
+     *
+     * @return Form
+     */
+    public function setNoValidation($bool)
+    {
+        $this->noValidation = (bool) $bool;
+
+        return $this;
+    }
+
+    /**
+     * Returns the requested attribute if existing else null.
+     *
+     * @param $parametername
+     *
+     * @return mixed null or value of the attribute
+     */
+    public function getAttribute($attributename)
+    {
+        if (isset($this->{$attributename})) {
+            return $this->{$attributename};
+        } else {
+            return;
+        }
+    }
+
+    /**
+     * Setter method for Attribute.
+     *
+     * @param array $attribute attribute name
+     * @param array $value     value
+     */
+    public function setAttribute($attribute, $value)
+    {
+        $this->{$attribute} = $value;
+    }
+
+    /**
+     * Setter method for Attributes.
+     *
+     * @param array $attributes Array with one or several attributename => value relationships.
+     */
+    public function setAttributes($attributes)
+    {
+        if (is_array($attributes)) {
+            /*
+             * The incomming attributes array contains a form description array for the formgenerator.
+             */
+            if (isset($attributes['form'])) {
+                // generate form
+                $form = new \Koch\Form\Generator\PHPArray($attributes);
+                // copy all properties of the inner form object to ($this) outer form object =)
+                $this->copyObjectProperties($form, $this);
+                // unset inner form
+                unset($form);
+            } else {
+                /*
+                 * Just normal <form attribute(s)=value></form>
+                 */
+                foreach ($attributes as $attribute => $value) {
+                    $this->setAttribute($attribute, $value);
+                }
+            }
+        }
+    }
+
+    /**
+     * Copy properties from object A to object B.
+     *
+     * @param object $object_to_copy The Object to copy the properties from.
+     * @param object $target         The Object to copy the properties to. Defaults to $this.
+     */
+    public function copyObjectProperties($object_to_copy, $target = null)
+    {
+        $varArray = get_object_vars($object_to_copy);
+
+        foreach ($varArray as $key => $value) {
+            // use this object, if no target object is specified
+            if ($target === null) {
+                $this->$key = $value;
+            } else {
+                $target->$key = $value;
+            }
+        }
+
+        unset($key, $value);
+    }
+
+    /**
+     * Set id of this form.
+     *
+     * @param string $id ID of this form.
+     *
+     * @return Form
+     */
+    public function setID($id)
+    {
+        $this->id = $id;
+
+        return $this;
+    }
+
+    /**
+     * Returns action of this form.
+     *
+     * @return string ID of this form.
+     */
+    public function getID()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set name of this form.
+     *
+     * @param string $name Name of this form.
+     *
+     * @return Form
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Returns name of this form.
+     *
+     * @return string Name of this form.
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set accept-charset of this form.
+     * Like accept-charset="ISO-8859-1".
+     *
+     * @param string $charset Charset of this form (utf-8, iso-8859-1).
+     *
+     * @return Form
+     */
+    public function setAcceptCharset($charset)
+    {
+        $this->acceptcharset = $charset;
+
+        return $this;
+    }
+
+    /**
+     * Returns accept-charset of this form.
+     *
+     * @return string Accept-charset of this form. Defaults to UTF-8.
+     */
+    public function getAcceptCharset()
+    {
+        if (empty($this->acceptcharset)) {
+            $this->setAcceptCharset('utf-8');
+        }
+
+        return $this->acceptcharset;
+    }
+
+    /**
+     * Set class of this form.
+     *
+     * @param string $class Css Classname of this form.
+     *
+     * @return Form
+     */
+    public function setClass($class)
+    {
+        $this->class = $class;
+
+        return $this;
+    }
+
+    /**
+     * Returns css classname of this form.
+     *
+     * @return string Css Classname of this form.
+     */
+    public function getClass()
+    {
+        return $this->class;
+    }
+
+    /**
+     * Sets the description text of this form.
+     * The description is a p tag after the heading (form > h2 > p).
+     *
+     * @param string $description Description of this form.
+     *
+     * @return Form
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Returns class of this form.
+     *
+     * @return string Description of this form.
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set a heading for this form.
+     * The heading is a h2 tag directly after the opening form tag.
+     *
+     * @param string $heading Heading of this form.
+     *
+     * @return Form
+     */
+    public function setHeading($heading)
+    {
+        $this->heading = $heading;
+
+        return $this;
+    }
+
+    /**
+     * Returns heading of this form.
+     *
+     * @return string Heading of this form.
+     */
+    public function getHeading()
+    {
+        return $this->heading;
+    }
+
+    /**
+     * Shortcut to set the Legend text of the fieldset decorator.
+     *
+     * The legend tag belongs to the fieldset decorator.
+     * The fieldset decorator is a default decorator instantiated, when rendering the form.
+     * It does not exist at the time of form definition.
+     * So we keep the legend value stored, till the fieldset decorator is instantiated.
+     * Then the decorator attributes array is automatically assigned to the form and it's objects.
+     *
+     * Note: you can use the long form (array notation) anytime, when defining your form.
+     * Though using method chaining is a bit nicer (fluent interface).
+     *
+     * @param string String for the legend tag of the fieldset.
+     * @param string $legend
+     *
+     * @return Form Koch_Form
+     */
+    public function setLegend($legend)
+    {
+        $this->setDecoratorAttributesArray(['form' => ['fieldset' => ['legend' => $legend]]]);
+
+        return $this;
+    }
+
+    public function getLegend()
+    {
+        return $this->decoratorAttributes['form']['fieldset']['legend'];
+    }
+
+    /**
+     * Set encoding type of this form.
+     *
+     * - application/x-www-form-urlencoded
+     *  All characters are encoded before sent (this is default)
+     * - multipart/form-data
+     *  No characters are encoded.
+     *  This value is required when you are using forms that have a file upload control
+     * - text/plain
+     *  Spaces are converted to "+" symbols, but no special characters are encoded
+     *
+     * @param string $encoding Encoding type of this form.
+     *
+     * @return Form
+     */
+    public function setEncoding($encoding)
+    {
+        $this->encoding = $encoding;
+
+        return $this;
+    }
+
+    /**
+     * Returns encoding type of this form.
+     *
+     * @return string Encoding type of this form.
+     */
+    public function getEncoding()
+    {
+        if (empty($this->encoding)) {
+            $this->encoding = 'multipart/form-data';
+
+            return $this->encoding;
+        } else {
+            return $this->encoding;
+        }
+    }
+
+    /**
+     * Getter for formelements array.
+     *
+     * @return array Formelements
+     */
+    public function getFormelements()
+    {
+        return $this->formelements;
+    }
+
+    /**
+     * Set formelements.
+     *
+     * @param string[] $formelements
+     */
+    public function setFormelements(array $formelements)
+    {
+        $this->formelements = $formelements;
+    }
+
+    /**
+     * ===================================================================================
+     *      Form Errors
+     * ===================================================================================.
+     */
+
+    /**
+     * Get the form error status.
+     *
+     * @return bool
+     */
+    public function formHasErrors()
+    {
+        return $this->error;
+    }
+
+    /**
+     * ===================================================================================
+     *      Render
+     * ===================================================================================.
+     */
+
+    /**
+     * Registers the default decorators for a formelement.
+     * The default decorators are: label, description, div.
+     *
+     * @param object $formelement \Koch\Form\Element\Interface
+     */
+    public function registerDefaultFormelementDecorators($formelement)
+    {
+        $formelement->addDecorator('label');
+        $formelement->addDecorator('description');
+        $formelement->addDecorator('div')->setCssClass('formline');
+    }
+
+    /**
+     * Renders all fromelements.
+     *
+     * @return string HTML of Formelements.
+     */
+    public function renderAllFormelements()
+    {
+        $html_form        = '';
+        $html_formelement = '';
+
+        // fetch all formelements
+        $formelements = $this->getFormelements();
+
+        #\Koch\Debug::printR($formelements);
+        // developer hint: when $form->render() was triggered, but no formelement was added before
+        if (count($formelements) === 0) {
+            throw new \Koch\Exception\Exception(
+                _('Error rendering formelements. ') .
+                _('No formelements on form object. Consider adding some formelements using addElement().')
+            );
+        }
+
+        // sort formelements by index
+        ksort($formelements);
+
+        // loop over all registered formelements of this form and render them
+        foreach ($formelements as $formelement) {
+            // fetch all decorators of this formelement
+            $formelementdecorators = $formelement->getDecorators();
+
+            /*
+             * Do not add default formelement decorators
+             * 1) if some were already added manually
+             * 2) if the feature is disabled (setting is then incomming from inside the formelement)
+             */
+            if (empty($formelementdecorators) && ($formelement->disableDefaultDecorators === false)) {
+                // apply default decorators to the formelement
+                $this->registerDefaultFormelementDecorators($formelement);
+
+                // fetch again all decorators of this formelement
+                $formelementdecorators = $formelement->getDecorators();
+            }
+
+            // then render this formelement
+            $html_formelement = $formelement->render();
+
+            // for each decorator, decorate the formelement and render it
+            foreach ($formelementdecorators as $formelementdecorator) {
+                $formelementdecorator->decorateWith($formelement);
+                $html_formelement = $formelementdecorator->render($html_formelement);
+            }
+
+            // append the form html with the decorated formelement html
+            $html_form .= $html_formelement;
+        }
+
+        #\Koch\Debug::printR($html_form);
+
+        return $html_form;
+    }
+
+    /**
+     * Render this form.
+     *
+     * @return Koch_Formelement
+     */
+    public function render()
+    {
+        // a) the content of the form are all the formelements
+        $html_form = $this->renderAllFormelements();
+
+        // b) attach default decorators
+        //if (empty($this->formdecorators)) {
+            // should the default form decorators be applied?
+            if ($this->useDefaultFormDecorators === true) {
+                // set a common style to the form by registering one or more decorators
+                $this->registerDefaultFormDecorators();
+            }
+        //}
+
+        // iterate over all decorators
+        foreach ($this->getDecorators() as $decorator) {
+            // stick form into the decorator decorator
+            $decorator->decorateWith($this);
+
+            // apply some settings or call some methods on the decorator
+            // before rendering $decorator->$value; or $decorator->$method($value);
+            // combined into $decorator->setAttributes();
+            $this->applyDecoratorAttributes();
+
+            $html_form = $decorator->render($html_form);
+
+            // remove the processed decorator from the decorators stack
+            $this->removeDecorator($decorator);
+
+            // unset decorator var in foreach context
+            unset($decorator);
+        }
+
+        return $html_form;
+    }
+
+    /**
+     * Returns a XHTML string representation of the form.
+     *
+     * @see Koch_Form::render()
+     *
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->render();
+    }
+
+    /**
+     * ===================================================================================
+     *      Formelement Handling (add, del, getByPos, getByName)
+     * ===================================================================================.
+     */
+
+    /**
+     * PSR-0 is idiotic! Inventors should shit theirs pants and attend PHP conferences wearing them.
+     *
+     * This is a case-insensitive file exists check.
+     * This allows checking for names/file, which are not only ucfirst(), e.g. "SubmitButton".
+     *
+     * @param string $fileName
+     *
+     * @return string
+     */
+    public static function fileExists($fileName)
+    {
+        if (is_file($fileName)) {
+            return $fileName;
+        }
+
+        // handle case insensitive requests
+        $directoryName = dirname($fileName);
+        $fileArray     = glob($directoryName . '/*', GLOB_NOSORT);
+        foreach ($fileArray as $file) {
+            if (false !== stripos($file, $fileName . '.')) {
+                return realpath($file);
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Adds a formelement to the form.
+     *
+     * You don't know the formelements available? Then take a look at
+     * a) the directory core\viewhelper\form\formelements\*
+     * b) the manual
+     *
+     * @param $formelement string|object Name of formelement or Object implementing the Koch_Form_Interface
+     * @param $attributes array Attributes for the formelement.
+     * @param $position int The position of this formelement in the formelements stack.
+     *
+     * @return object \Koch\Form\Form
+     */
+    public function addElement($formelement, $attributes = null, $position = null)
+    {
+        /**
+         * Continue, if parameter $formelement is an formelement object, implementing
+         * the \Koch\Form\Element\Interface. Else it's a string with the name of the formelement,
+         * which we pass to the factory to deliver that formelement object.
+         *
+         * Note: Checking for the interface is necessary here, because checking for type string,
+         * like if(is_string(formelement)), would result in true, because all formelement
+         * objects provide the __toString() method for easier rendering.
+         */
+        if (($formelement instanceof \Koch\Form\FormelementInterface) === false) {
+            $formelement = self::formelementFactory($formelement);
+        }
+
+        // for easier use of the formelement "file":
+        // this switches the "encytype" attribute of the form tag.
+        if ($formelement instanceof \Koch\Form\Formelement\File) {
+            $this->setEncoding('multipart/form-data');
+        }
+
+        // helper for setting formelement attributes directly when adding
+        if (is_array($attributes)) {
+            $formelement->setAttributes($attributes);
+        }
+
+        /*
+         * create formelement identifier automatically if not set manually.
+         * this is needed for javascript selections via id tag.
+         */
+        if (strlen($formelement->getID()) === 0) {
+            $formelement->setID($formelement->type . '-formelement-' . count($this->formelements));
+        }
+
+        // if we don't have a position to order the elements, we just add an element
+        // this is the default behaviour
+        if ($position === null) {
+            $this->formelements[] = $formelement;
+        } elseif (is_int($position)) {
+            // else we position the element under it's number to keep things in an order
+
+            // hmpf, there is already an element at this position
+            if ($this->formelements[$position] !== null) {
+                // insert the new element to the requested position and reorder
+                $this->formelements = $this->arrayInsert($formelement, $position, $this->formelements);
+
+                // after repositioning we need to recalculate the formelement ids
+                $this->regenerateFormelementIdentifiers();
+            }
+        } else {
+            // just add to the requested position
+            $this->formelements[$position] = $formelement;
+        }
+
+        // return formelement object -> fluent interface / method chaining
+        return $formelement;
+    }
+
+    /**
+     * Regenerates the generic identifier of each formelement in the stack by it's position.
+     * The formelement at stack position 1 becomes "name-formelement-1", etc.
+     */
+    public function regenerateFormelementIdentifiers()
+    {
+        $pos_lastpart = '';
+        $pos          = '';
+        $firstpart    = '';
+        $id           = '';
+
+        $i = 0;
+
+        foreach ($this->formelements as $formelement) {
+            $id = $formelement->getID();
+
+            /*
+             * the autogenerated id string has the following abstract format:
+             * "type-formelement-id". it's exact string length is unknown.
+             * the last part separated by a minus (the id part) is stripped off
+             * of the string.
+             */
+            $pos_lastpart = strrpos($id, '-') + 1;
+            $pos          = strlen($id) - $pos_lastpart;
+            $firstpart    = substr($id, 0, -$pos);
+
+            // the new id is then appended to the remaining firstpart of the string
+            $id = $firstpart .= $i;
+
+            $formelement->setID($id);
+
+            ++$i;
+        }
+
+        unset($i, $pos_lastpart, $pos, $firstpart, $id);
+    }
+
+    /**
+     * Inserts value at a certain index into an array.
+     *
+     * @param mixed $value The new element to insert into the array.
+     * @param array $array The "old" array.
+     * @param int   $index The index to insert the value
+     *
+     * @return array $array with $value at position $index.
+     */
+    private function arrayInsert($value, $index, &$array)
+    {
+        return array_merge(array_slice($array, 0, $index), [$value], array_slice($array, $index));
+    }
+
+    /**
+     * Removes a formelement by name (not type!).
+     *
+     * @param string $name
+     *
+     * @return bool
+     */
+    public function delElementByName($name)
+    {
+        $cnt_formelements = count($this->formelements);
+        for ($i = 0; $i < $cnt_formelements; ++$i) {
+            if ($name === $this->formelements[$i]->getName()) {
+                unset($this->formelements[$i]);
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Fetches a formelement via it's position number.
+     *
+     * @param $position int The position number the requested formelement (ordering).
+     *
+     * @return Koch_Formelement $formelement Object implementing the Koch_Form_Interface
+     */
+    public function getElementByPosition($position)
+    {
+        if (is_numeric($position) and isset($this->formelements[$position])) {
+            return $this->formelements[$position];
+        }
+
+        return;
+    }
+
+    /**
+     * Fetches a formelement via it's name (not type!).
+     *
+     * @param $name string The name of the requested formelement.
+     *
+     * @return Koch_Formelement $formelement Object
+     */
+    public function getElementByName($name)
+    {
+        foreach ($this->formelements as $formelement) {
+            if ($name === $formelement->getName()) {
+                return $formelement;
+            }
+        }
+
+        return;
+    }
+
+    /**
+     * Fetches a formelement by it's name or position or
+     * returns the last element in the stack as default.
+     *
+     * @param $position string|int Name or position of the formelement.
+     *
+     * @return Koch_Formelement $formelement Object
+     */
+    public function getElement($position = null)
+    {
+        $formelement_object = '';
+
+        // if no position is incomming, the last formelement is returned.
+        // this is the normal call to this method, while chaining.
+        if ($position === null) {
+            // fetch last item of array = last_formelement
+            $formelement_object = end($this->formelements);
+        } elseif (is_numeric($position)) {
+            // fetch formelements from certain position
+            $formelement_object = $this->getElementByPosition($position);
+        } else {
+            // position is_string
+            $formelement_object = $this->getElementByName($position);
+        }
+
+        /* @var \Koch\Form\FormElement */
+
+        return $formelement_object;
+    }
+
+    /**
+     * ===================================================================================
+     *      Formelement Factory
+     * ===================================================================================.
+     */
+
+    /**
+     * Factory method. Instantiates and returns a new formelement object.
+     * For a list of all available formelements visit the "/formelements" directory.
+     *
+     * @return Koch_Formelement object
+     */
+    public static function formelementFactory($formelement)
+    {
+        // case-insensitve file in folder check to get filename, which is the classname
+        // thanks to PSR-0
+        $file = self::fileExists(__DIR__ . '/Elements/' . $formelement);
+
+        if ($file === false) {
+            throw new \Exception('The Formelement "' . $formelement . '" does not exist.');
+        }
+
+        // get PSR-0 classname from file
+        $pi        = pathinfo($file);
+        $classname = $pi['filename'];
+
+        // class = namespace "Koch\Form\Element\" + formelement name
         $class = '\Koch\Form\Elements\\' . $classname;
 
         // instantiate the new formelement and return

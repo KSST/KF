@@ -283,13 +283,11 @@ class Theme
         $dirs = new \DirectoryIterator($dir);
 
         foreach ($dirs as $dir) {
-            /*
-             * Skip early on dots, like "." or ".." or ".svn", by cheching the first char.
-             * we can not use DirectoryIterator::isDot() here, because it only checks "." and "..".
-             */
+
             $dir_tmp = $dir->getFilename();
 
-            if ($dir_tmp{0} === '.') {
+            // Skip early on dots
+            if (in_array($dir_tmp, ['.', '..', '.git', 'vendor'], true)) {
                 continue;
             }
 

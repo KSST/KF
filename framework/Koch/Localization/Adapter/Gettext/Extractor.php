@@ -10,7 +10,230 @@
  * the LICENSE file that was distributed with this source code.
  */
 
-namespace
+namespace Koch\Localization\Adapter\Gettext;
+
+/**
+ * Gettext Extractor.
+ *
+ * Gettext extraction is normally performed by the "xgettext" tool.
+ * http://www.gnu.org/software/hello/manual/gettext/xgettext-Invocation.html
+ *
+ * This is a php implementation of a gettext extractor on basis of preg_matching.
+ * The extractor matches certain translation functions, like translate('term') or t('term') or _('term').
+ * and their counterparts in templates, often {t('term')} or {_('term')}.
+ */
+class Extractor
+{
+    /**
+     * @var resource
+     */
+    public $logHandler;
+
+    /**
+     * @var array
+     */
+    public $inputFiles = [];
+
+    /**
+     * @var array
+     */
+    public $extractors = [
+        'php' => ['PHP'],
+        'tpl' => ['PHP', 'Template'],
+    ];
+
+    /**
+     * @var array
+     */
+    public $data = [];
+
+    /**
+     *  @var array
+     */
+    protected $extractorStore = [];
+
+    /**
+     * Log setup.
+     *
+     * @param string|bool $logToFile Bool or path of custom log file
+     */
+    public function __construct($logToFile = false)
+    {
+        // default log file
+        if (false === $logToFile) {
+            $this->logHandler = fopen(ROOT_LOGS . 'gettext-extractor.log', 'w');
+        } else { // custom log file
+            $this->logHandler = fopen($logToFile, 'w');
+        }
+    }
+
+    /**
+     * Close the log handler if needed.
+     */
+    public function __destruct()
+    {
+        if (is_resource($this->logHandler)) {
+            fclose($this->logHandler);
+        }
+    }
+
+    /**
+     * Writes messages into log or dumps them on screen.
+     *
+     * @param string $message
+     *
+     * @return string Html Log Message if logHandler resource is false.
+     */
+    public function log($message)
+    {
+        if (is_resource($this->logHandler)) {
+            fwrite($this->logHandler, $message . "\n");
+        } else {
+            echo $message . "\n <br/>";
+        }
+    }
+
+    /**
+     * Exception factory.
+     *
+     * @param string $message
+     *
+     * @throws \Koch\Exception\Exception
+     */
+    protected function throwException($message)
+    {
+        if (empty($message)) {
+            $message = 'Something unexpected occured. See Koch_Gettext_Extractor log for details.';
+        }
+
+        $this->log($message);
+
+        throw new \Koch\Exception\Exception($message);
+    }
+
+    /**
+     * Scans given files or directories (recursively) for input files.
+     *
+     * @param string $resource File or directory
+     */
+    protected function scan($resource)
+    {
+        if (false === is_dir($resource) and false === is_file($resource)) {
+            $this->throwException('Resource ' . $resource . ' is not a directory or file.');
+        }
+
+        if (true === is_file($resource)) {
+            $this->inputFiles[] = realpath($resource);
+
+            return;
+        }
+
+        // It's a directory
+        $resource = realpath($resource);
+
+        if (false === $resource) {
+            return;
+        }
+
+        $iterator = dir($resource);
+
+        if (false === $iterator) {
+            return;
+        }
+
+        while (false !== ($entry = $iterator->read())) {
+            if ($entry === '.' or $entry === '..' or  $entry === '.svn') {
+                continue;
+            }
+
+            $path = $resource . DIRECTORY_SEPARATOR . $entry;
+
+            if (false === is_readable($path)) {
+                continue;
+            }
+
+            if (true === is_dir($path)) {
+                $this->scan($path);
+                continue;
+            }
+
+            if (true === is_file($path)) {
+                $info = pathinfo($path);
+
+                if (false === isset($this->extractors[$info['extension']])) {
+                    continue;
+                }
+
+                $this->inputFiles[] = realpath($path);
+            }
+        }
+
+        $iterator->close();
+    }
+
+    /**
+     * Extracts gettext keys from multiple input files using multiple extraction adapters.
+     *
+     * @param array $inputFiles Array, defining a set of files.
+     *
+     * @return array All gettext keys of all input files.
+     */
+    protected function extract($inputFiles)
+    {
+        foreach ($inputFiles as $inputFile) {
+            if (false === file_exists($inputFile)) {
+                $this->throwException('Invalid input file specified: ' . $inputFile);
+            }
+
+            if (false === is_readable($inputFile)) {
+                $this->throwException('Input file is not readable: ' . $inputFile);
+            }
+
+            $this->log('Extracting data from file ' . $inputFile);
+
+            // Check file extension
+            $fileExtension = pathinfo($inputFile, PATHINFO_EXTENSION);
+
+            foreach ($this->extractors as $extension => $extractor) {
+                // check, if the extractor handles a file extension like this
+                if ($fileExtension !== $extension) {
+                    continue;
+                }
+
+                $this->log('Processing file ' . $inputFile);
+
+                foreach ($extractor as $extractorName) {
+                    $extractor     = $this->getExtractor($extractorName);
+                    $extractorData = $extractor->extract($inputFile);
+
+                    $this->log(' Extractor ' . $extractorName . ' applied.');
+
+                    // do not merge if incomming array is empty
+                    if (false === empty($extractorData)) {
+                        $this->data = array_merge_recursive($this->data, $extractorData);
+                    }
+                }
+            }
+        }
+
+        $this->log('Data exported successfully');
+
+        return $this->data;
+    }
+
+    /**
+     * Factory Method - Gets an instance of a Koch_Gettext_Extractor.
+     *
+     * @param string $extractor
+     *
+     * @return object Extractor Object implementing Koch\Localization\Gettext\Extractor_Interface
+     */
+    public function getExtractor($extractor)
+    {
+        // build classname
+        $extractor = ucfirst($extractor);
+
+        // attach namespace
         $class = 'Koch\Localization\Gettext\Extractors\\' . ucfirst($extractor);
 
         // was loaded before?

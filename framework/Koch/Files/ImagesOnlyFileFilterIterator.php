@@ -28,6 +28,7 @@ class ImagesOnlyFileFilterIterator extends \FilterIterator
     /**
      * Implements method from FilterIterator (SPL.php).
      */
+    #[\ReturnTypeWillChange]
     public function accept()
     {
         // get the current element from the iterator to examine the fileinfos
