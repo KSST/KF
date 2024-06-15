@@ -18,7 +18,7 @@
         {
             "type": "package",
             "package": {
-                "name": "codemirror/CodeMirror",
+                "name": "codemirror/codemirror",
                 "version": "5.65.16",
                 "dist": {
                     "url": "https://github.com/codemirror/codemirror5/archive/refs/tags/5.65.16.zip",
@@ -29,7 +29,7 @@
     ],
     "require": {
         "php"                             : ">=8.2",
-        "doctrine/orm"                    : "^4",
+        "doctrine/orm"                    : "^3.2",
         "doctrine/migrations"             : "^3.7",
         "beberlei/doctrineextensions"     : "^1.5",
         "gedmo/doctrine-extensions"       : "^3",
@@ -37,11 +37,12 @@
         "symfony/mailer"                  : "^7.1"
     },
     "require-dev": {
-        "mikey179/vfsstream"              : "^1.6",
-        "fabpot/php-cs-fixer"             : "*",
-        "phpunit/phpunit"                 : "^11",
         "doctrine/data-fixtures"          : "*",
-        "php-coveralls/php-coveralls"     : "^2.7"
+        "friendsofphp/php-cs-fixer"       : "*",
+        "mikey179/vfsstream"              : "^1.6",
+        "php-coveralls/php-coveralls"     : "^2.7",
+        "phpstan/phpstan"                 : "^1.11",
+        "phpunit/phpunit"                 : "^11"
     },
     "suggest": {
         "ext-apc"         : "*",
