@@ -41,7 +41,6 @@
         "mikey179/vfsstream"              : "^1.6",
         "fabpot/php-cs-fixer"             : "*",
         "phpunit/phpunit"                 : "^4.5",
-        "phpunit/dbunit"                  : "*",
         "doctrine/data-fixtures"          : "*",
         "firephp/firephp-core"            : "*",
         "satooshi/php-coveralls"          : "^0.7"
