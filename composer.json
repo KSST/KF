@@ -30,7 +30,7 @@
     "require": {
         "php"                             : ">=8.2",
         "doctrine/orm"                    : "^4",
-        "doctrine/migrations"             : "^4",
+        "doctrine/migrations"             : "^3.7",
         "beberlei/doctrineextensions"     : "^1.5",
         "gedmo/doctrine-extensions"       : "^3",
         "smarty/smarty"                   : "^5.3",
