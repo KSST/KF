@@ -29,7 +29,6 @@
     ],
     "require": {
         "php"                             : ">=5.5",
-        "pyrech/composer-changelogs"      : "^1.3",
         "doctrine/orm"                    : "^2.5",
         "doctrine/migrations"             : "^1.2",
         "beberlei/doctrineextensions"     : "^1.0",
