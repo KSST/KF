@@ -28,21 +28,20 @@
         }
     ],
     "require": {
-        "php"                             : ">=5.5",
-        "doctrine/orm"                    : "^2.5",
-        "doctrine/migrations"             : "^1.2",
-        "beberlei/doctrineextensions"     : "^1.0",
-        "gedmo/doctrine-extensions"       : "^2.4",
-        "smarty/smarty"                   : "^4.5",
-        "swiftmailer/swiftmailer"         : "^6.2"
+        "php"                             : ">=8.2",
+        "doctrine/orm"                    : "^4",
+        "doctrine/migrations"             : "^4",
+        "beberlei/doctrineextensions"     : "^1.5",
+        "gedmo/doctrine-extensions"       : "^3",
+        "smarty/smarty"                   : "^5.3",
+        "symfony/mailer"                  : "^7.1"
     },
     "require-dev": {
         "mikey179/vfsstream"              : "^1.6",
         "fabpot/php-cs-fixer"             : "*",
-        "phpunit/phpunit"                 : "^4.5",
+        "phpunit/phpunit"                 : "^11",
         "doctrine/data-fixtures"          : "*",
-        "firephp/firephp-core"            : "*",
-        "satooshi/php-coveralls"          : "^0.7"
+        "php-coveralls/php-coveralls"     : "^2.7"
     },
     "suggest": {
         "ext-apc"         : "*",
@@ -67,6 +66,8 @@
         ]
     },
     "config": {
-      "preferred-install": "dist"
+      "preferred-install": "dist",
+      "optimize-autoloader": true,
+      "sort-packages": true
     }
 }
