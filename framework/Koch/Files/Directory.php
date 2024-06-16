@@ -234,7 +234,7 @@ class Directory
      *
      * @return bool|null
      */
-    public function deleteDir($directory, $delete_dir_itself = false)
+    public static function deleteDir($directory, $delete_dir_itself = false)
     {
         $it = new RecursiveDirectoryIterator($directory, RecursiveDirectoryIterator::SKIP_DOTS);
         $ri = new RecursiveIteratorIterator($it, RecursiveIteratorIterator::CHILD_FIRST);
