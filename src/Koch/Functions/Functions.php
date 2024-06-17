@@ -72,9 +72,9 @@ class Functions
     public static function inString($needle, $haystack, $insensitive = false)
     {
         if ($insensitive === true) {
-            return (false !== stristr($haystack, $needle)) ? true : false;
+            return (false !== stristr($haystack, (string) $needle)) ? true : false;
         } else {
-            return (false !== strpos($haystack, $needle)) ? true : false;
+            return (false !== strpos($haystack, (string) $needle)) ? true : false;
         }
     }
 

@@ -262,7 +262,7 @@ class Html /* extends DOMDocument */
      */
     public static function renderElement($tagname, $text = null, $attributes = [])
     {
-        if (method_exists(self, $tagname)) {
+        if (method_exists(\SELF, $tagname)) {
             if ($attributes['src'] !== null) {
                 return self::$tagname($attributes['src'], $text, $attributes);
             } elseif ($attributes['href'] !== null) {

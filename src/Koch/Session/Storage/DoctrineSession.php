@@ -139,7 +139,7 @@ class DoctrineSession extends AbstractSession
         // START THE SESSION
         if (true === session_start()) {
             // Set Cookie + adjust the expiration time upon page load
-            setcookie(self::SESSION_NAME, session_id(), time() + $time, '/');
+            setcookie(self::SESSION_NAME, session_id(), ['expires' => time() + $time, 'path' => '/']);
         } else {
             throw new \Koch\Exception\Exception('The session start failed!', 200);
         }

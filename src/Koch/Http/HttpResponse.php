@@ -303,7 +303,7 @@ class HttpResponse implements HttpResponseInterface
     public static function deleteCookie($name, $path = '/', $domain = '', $secure = false, $httponly = null)
     {
         // expire = 324993600 = 1980-04-19
-        setcookie($name, '', 324993600, $path, $domain, $secure, $httponly);
+        setcookie($name, '', ['expires' => 324993600, 'path' => $path, 'domain' => $domain, 'secure' => $secure, 'httponly' => $httponly]);
     }
 
     /**

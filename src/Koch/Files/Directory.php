@@ -43,7 +43,7 @@ class Directory
         $directory = str_replace('\\', DIRECTORY_SEPARATOR, $directory);
 
         // prefix directory with ROOT for security purposes
-        if (stristr($directory, ROOT) === false) {
+        if (stristr($directory, (string) ROOT) === false) {
             $directory = APPLICATION_PATH . $directory;
         }
 
