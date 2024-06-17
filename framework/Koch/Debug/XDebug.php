@@ -342,8 +342,8 @@ class XDebug
 
     public static function showBrowserInfo()
     {
-        $browser     = new \Koch\Browser\Browser();
-        $browserInfo = $browser->getBrowserInfo();
+        $browser = new \BrowscapPHP\Browscap();
+        $info = $browser->getBrowser();
 
         echo self::getSectionHeadlineHTML('Browserinfo');
         echo '<table class="xdebug-console" id="table-browserinfo" style="display:none;">';
@@ -351,11 +351,11 @@ class XDebug
 
         echo '<td class="td1"><b>Browser-Information</b></td>';
         echo '<td class="td2">';
-        echo 'Browser: <b>' . $browserInfo['name'] . '</b><br/>';
-        echo 'Version:&nbsp;&nbsp;<b>' . $browserInfo['version'] . '</b><br/>';
-        echo 'Engine:&nbsp;&nbsp;&nbsp;' . $browserInfo['engine'] . '<br/>';
-        echo 'Browser ist Bot: ' . ($browser->isBot() ? 'Ja' : 'Nein') . '<br/>';
-        echo 'Betriebssystem: ' . $browserInfo['os'] . '<br/>';
+        echo 'Browser: <b>' . $info['name'] . '</b><br/>';
+        echo 'Version:&nbsp;&nbsp;<b>' . $info['version'] . '</b><br/>';
+        echo 'Engine:&nbsp;&nbsp;&nbsp;' . $info['engine'] . '<br/>';
+        //echo 'Browser ist Bot: ' . ($browser->isBot() ? 'Ja' : 'Nein') . '<br/>';
+        echo 'Betriebssystem: ' . $info['os'] . '<br/>';
         echo '</td></tr>';
     }
 
