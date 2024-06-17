@@ -1,5 +1,5 @@
 parameters:
 	level: 0
 	paths:
-		- ../../framework
+		- ../../src
 		#- ../../tests
