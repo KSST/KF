@@ -43,7 +43,7 @@ function Smarty_function_icon($params)
     /*
      * if the src attribute contains a http://SERVER_NAME URL its cutted of
      */
-    if (isset($src) and empty($src) === false) {
+    if (isset($src) and ($src === '' || $src === '0') === false) {
         $needle = 'http://' . $_SERVER['SERVER_NAME'] . '/';
         $pos    = mb_strpos($src, $needle);
         if ($src !== null and is_int($pos)) {
@@ -76,12 +76,12 @@ function Smarty_function_icon($params)
     }
 
     // we got no height, set it to zero
-    if (empty($height)) {
+    if ($height === '' || $height === '0') {
         $height = 0;
     }
 
     // we got no width, ok then its zero again
-    if (empty($width)) {
+    if ($width === '' || $width === '0') {
         $width = 0;
     }
 
@@ -93,7 +93,7 @@ function Smarty_function_icon($params)
     }
 
     // we got no alternative text. let's add a default text with $name;
-    if (($src !== null) and empty($alt)) {
+    if (($src !== null) and $alt === '' || $alt === '0') {
         $file = $src;
 
         $info      = pathinfo($file);
@@ -102,7 +102,7 @@ function Smarty_function_icon($params)
     }
 
     // no extra attributes to add, then let it be an empty string
-    if (empty($extra)) {
+    if ($extra === '' || $extra === '0') {
         $extra = '';
     }
 

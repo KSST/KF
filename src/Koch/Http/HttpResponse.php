@@ -420,7 +420,7 @@ class HttpResponse implements HttpResponseInterface
                     break;
             }
 
-            if (empty($redirect_html) === false) {
+            if (($redirect_html === '' || $redirect_html === '0') === false) {
                 #self::addHeader('Location', $url);
                 self::setContent($redirect_html, $time);
             }

@@ -149,7 +149,7 @@ class Conversion
             foreach ($array as $name => $value) {
                 $name = mb_strtolower(trim($name));
 
-                if (empty($name) === false) {
+                if (($name === '' || $name === '0') === false) {
                     // WATCH OUT ! Recursion.
                     $object->$name = self::arrayToObject($value);
                 }

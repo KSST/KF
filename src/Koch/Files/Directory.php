@@ -179,7 +179,7 @@ class Directory
                     $target_path = $destination . $file;
 
                     if (is_file($target_path) === false or $overwrite) {
-                        if ([mb_strstr($target_path, '.') === true]) {
+                        if ([mb_strstr($target_path, '.') === true] !== []) {
                             $folder_path = dirname($target_path);
                         } else {
                             $folder_path = $target_path;
@@ -189,7 +189,7 @@ class Directory
                         and dirname((string) end($folder_path)) !== '/'
                         and dirname((string) end($folder_path)) !== '.'
                         and dirname((string) end($folder_path)) !== ''
-                        and !preg_match('#^[A-Za-z]+\:\\\$#', dirname((string) end($folder_path)))) {
+                        and preg_match('#^[A-Za-z]+\:\\\$#', dirname((string) end($folder_path))) === 0 || preg_match('#^[A-Za-z]+\:\\\$#', dirname((string) end($folder_path))) === 0 || preg_match('#^[A-Za-z]+\:\\\$#', dirname((string) end($folder_path))) === false) {
                             array_push($folder_path, dirname((string) end($folder_path)));
                         }
 

@@ -359,7 +359,7 @@ class FTP
 
         $f = @ftp_nlist($this->connection, $dir);
 
-        if (empty($f)) {
+        if ($f === [] || $f === false) {
             $this->errors[] = 'Unable to read remote directory.';
             $this->closeConnection();
 

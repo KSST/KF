@@ -53,7 +53,7 @@ function smarty_function_serverload($params)
 
         // get
         $cpuload = sys_getloadavg();
-        if (empty($cpuload)) {
+        if ($cpuload === [] || $cpuload === false) {
             $cpuload = [0, 0, 0];
         }
         echo '1[' . $cpuload[0] . '] 5[' . $cpuload[1] . '] 15[' . $cpuload[2] . ']';

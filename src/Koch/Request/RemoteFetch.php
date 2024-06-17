@@ -58,7 +58,7 @@ class RemoteFetch
         $content = curl_exec($curl);
         curl_close($curl);
 
-        if (false === empty($content)) {
+        if (false === ($content === false || ($content === '' || $content === '0'))) {
             return $content;
         }
 
@@ -80,7 +80,7 @@ class RemoteFetch
         $content     = file_get_contents($url, $flags, $context);
         #}
 
-        if (false === empty($content)) {
+        if (false === ($content === '' || $content === '0' || $content === false)) {
             return $content;
         }
 

@@ -125,7 +125,7 @@ class Memcached extends AbstractCache implements CacheInterface
         #$this->memcached->setOption(Memcached::OPT_DISTRIBUTION, Memcached::DISTRIBUTION_CONSISTENT);
         #$this->memcached->setOption(Memcached::OPT_HASH, Memcached::MD5);
 
-        if (!count($memcached->getServerList())) {
+        if (count($memcached->getServerList()) === 0) {
             if (isset($this->options[$connection]) || array_key_exists($connection, $this->options['connection'])) {
                 // specific servers set per connection
                 $memcached->addServers($this->options['connection'][$connection]['servers']);

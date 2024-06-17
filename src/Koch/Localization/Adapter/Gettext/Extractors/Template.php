@@ -54,7 +54,7 @@ class Template extends ExtractorBase implements ExtractorInterface
         $filecontent = file($file);
 
         // ensure we got the filecontent
-        if (empty($filecontent)) {
+        if ($filecontent === [] || $filecontent === false) {
             return;
         }
 

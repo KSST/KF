@@ -3,7 +3,7 @@
 exit(0);
 
 //var_dump($_FILES);
-if (!empty($_FILES) and isset($_FILES['uploadfile']['tmp_name'])) {
+if ($_FILES !== [] and isset($_FILES['uploadfile']['tmp_name'])) {
     // define a upload directory as restriction
     $uploaddir = './uploads/';
     // build complete filepath, by cutting of the dirnames with basename()

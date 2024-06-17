@@ -37,13 +37,13 @@ function smarty_function_png_image($params, $smarty)
 
     extract($params);
 
-    if (empty($src)) {
+    if ($src === '' || $src === '0') {
         trigger_error("assign_array: missing 'src' parameter");
 
         return;
     }
 
-    if (empty($height)) {
+    if ($height === '' || $height === '0') {
         $height = 0;
     }
 

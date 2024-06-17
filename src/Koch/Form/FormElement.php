@@ -459,7 +459,7 @@ class FormElement implements \Stringable
      */
     public function setAttributes($attributes)
     {
-        if (is_array($attributes) and empty($attributes)) {
+        if (is_array($attributes) and $attributes === []) {
             foreach ($attributes as $attribute => $value) {
                 /*
                  * In DEBUG mode the attributes are set via a setter method.
@@ -506,7 +506,7 @@ class FormElement implements \Stringable
      */
     public function renderAttributes(array $attributes = [])
     {
-        if (empty($attributes)) {
+        if ($attributes === []) {
             return '';
         }
 

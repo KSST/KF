@@ -108,7 +108,7 @@ function Smarty_block_t($params, $text, $smarty)
     }
 
     // run strarg if there are parameters
-    if (count($params)) {
+    if (count($params) !== 0) {
         $text = smarty_gettext_strarg($text, $params);
     }
 
