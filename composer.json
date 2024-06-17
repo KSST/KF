@@ -59,7 +59,12 @@
         "psr-4": { "Koch\\": "src/Koch/" }
     },
     "autoload-dev": {
-        "psr-4": { "KochTest\\": "tests/KochTest/" }
+        "psr-4": { "KochTest\\": "tests/KochTest/" },
+        "exclude-from-classmap": [
+            "tests/KochTest/Autoload/fixtures/",
+            "tests/KochTest/DI/fixtures/",
+            "tests/KochTest/Fixtures"
+        ]
     },
     "scripts": {
         "post-update-cmd": [
