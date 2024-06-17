@@ -18,6 +18,12 @@ updates:
       # ignore all updates for "https://github.com/actions/github-script"
       - dependency-name: "github-script"
 
+  # Enable automatic version updates for the devcontainer image
+  - package-ecosystem: "devcontainers"
+    directory: "/"
+    schedule:
+      interval: weekly
+
   # Enable automatic version updates for Composer packages
   - package-ecosystem: "composer"
     directory: "/"

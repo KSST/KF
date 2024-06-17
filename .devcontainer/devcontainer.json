@@ -1,0 +1,5 @@
+{
+    "name":"PHP DevBox",
+    "image": "mcr.microsoft.com/devcontainers/php:8",
+    "remoteUser": "root"
+}
