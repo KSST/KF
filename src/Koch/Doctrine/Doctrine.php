@@ -170,7 +170,7 @@
           *
           * We need some more functions for MySQL, like RAND for random values.
           */
-         $D2Config->addCustomNumericFunction('RAND', 'Koch\Doctrine\Extensions\Query\Mysql\Rand');
+         $D2Config->addCustomNumericFunction('RAND', \Koch\Doctrine\Extensions\Query\Mysql\Rand::class);
 
          // Entity manager
          $em = \Doctrine\ORM\EntityManager::create($connectionOptions, $D2Config, $event);

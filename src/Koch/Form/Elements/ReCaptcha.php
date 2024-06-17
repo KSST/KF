@@ -31,7 +31,7 @@ class ReCaptcha extends Captcha implements FormElementInterface
      */
     public function __construct()
     {
-        $this->request = Clansuite_CMS::getInjector()->instantiate('\Koch\Http\HttpRequest');
+        $this->request = Clansuite_CMS::getInjector()->instantiate(\Koch\Http\HttpRequest::class);
 
         // Load Recaptcha Library
         // @todo replace with google/recaptcha

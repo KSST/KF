@@ -190,7 +190,7 @@ abstract class AbstractController
      */
     public static function getModuleConfig($modulename = null)
     {
-        $config = self::getInjector()->instantiate('\Koch\Config\Config');
+        $config = self::getInjector()->instantiate(\Koch\Config\Config::class);
 
         return self::$moduleconfig = $config->readModuleConfig($modulename);
     }

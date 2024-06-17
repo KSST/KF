@@ -46,7 +46,7 @@ class Guest
 
     public function __construct()
     {
-        $this->config = \Clansuite\Application::getInjector()->instantiate('Koch\Config\Config');
+        $this->config = \Clansuite\Application::getInjector()->instantiate(Koch\Config\Config::class);
 
         /*
          * Fill $_SESSION[user] with Guest-User-infos

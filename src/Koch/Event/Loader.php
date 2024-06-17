@@ -42,7 +42,7 @@ class Loader
                 $filename = $array[0];
 
                 // array[1] classname
-                $classname = \Koch\Functions\Functions::ensurePrefixedWith($array[1], '\Koch\Event\Event');
+                $classname = \Koch\Functions\Functions::ensurePrefixedWith($array[1], \Koch\Event\Event::class);
 
                 // load eventhandler
                 \Koch\Autoload\Loader::requireFile($filename, $classname);

@@ -78,4 +78,35 @@ class TextTemplate extends AbstractRenderer
     {
         return (bool) file_put_contents($file, $this->render());
     }
+
+    public function fetch($template, $viewdata = null)
+    {
+        // @todo
+    }
+
+    /**
+     * Assigns a value to a template parameter.
+     *
+     * @param string $tpl_parameter The template parameter name
+     * @param mixed  $value         The value to assign
+     */
+    public function assign($tpl_parameter, $value = null)
+    {
+        // @todo
+    }
+
+    public function display($template, $viewdata = null)
+    {
+        echo $this->render($template, $viewdata);
+    }
+
+    public function initializeEngine($template = null)
+    {
+        // @todo
+    }
+
+    public function configureEngine()
+    {
+        // @todo
+    }
 }

@@ -25,7 +25,7 @@ use Koch\View\AbstractRenderer;
 class Xtemplate extends AbstractRenderer
 {
     /* @var \XTemplate */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Constructor.
@@ -41,21 +41,17 @@ class Xtemplate extends AbstractRenderer
     {
         $xtpl = VENDOR_PATH . '/xtemplate/xtemplate.class.php';
 
-        // prevent redeclaration
-        if (!class_exists('XTemplate', false)) {
-            // check if library exists
-            if (is_file($xtpl)) {
-                include $xtpl;
-            } else {
-                throw new \Exception('The vendor library "XTemplate" is required.');
-            }
+        // prevent redeclaration and check if file exists
+        if (!class_exists('XTemplate', false) && is_file($xtpl)) {
+            include $xtpl;
+        } else {
+            throw new \Exception('The vendor library "XTemplate" is required.');
         }
 
         $template = $this->getTemplatePath($template);
 
         #\Koch\Debug\Debug::firebug('Xtemplate loaded with Template: ' . $template);
 
-        // Do it with XTemplate style > eat like a bird, poop like an elefant!
         return $this->renderer = new self($template);
     }
 
@@ -75,12 +71,29 @@ class Xtemplate extends AbstractRenderer
     {
     }
 
-    public function fetch($template, $data = null)
+    /**
+     * Executes the template rendering and returns the result.
+     *
+     * @param string $template Template Filename
+     *
+     * @return string
+     */
+    public function fetch($template, $viewdata = null)
     {
+        return $this->render($template, $viewdata);
     }
 
-    public function display($template, $data = null)
+    /**
+     * Executes the template rendering and displays the result.
+     *
+     * @param string $template Template Filename
+     * @param mixed $viewdata Optional view data to be passed to the template
+     *
+     * @return void
+     */
+    public function display($template, $viewdata = null)
     {
+        echo $this->render($template, $viewdata);
     }
 
     /**
@@ -94,6 +107,14 @@ class Xtemplate extends AbstractRenderer
         return $this->renderer;
     }
 
+    /**
+     * Renders the template and returns it.
+     *
+     * @param string Template File.
+     * @param array Viewdata
+     *
+     * @return void
+     */
     public function render($template = null, $viewdata = null)
     {
         $this->renderer->assign($viewdata);

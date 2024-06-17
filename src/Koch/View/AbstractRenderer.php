@@ -162,8 +162,9 @@ abstract class AbstractRenderer
      * Executes the template rendering and displays the result.
      *
      * @param string $template Template Filename
+     * @param mixed $viewdata Optional view data to be passed to the template
      *
-     * @return string
+     * @return void
      */
     abstract public function display($template, $viewdata = null);
 
