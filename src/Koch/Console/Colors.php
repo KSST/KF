@@ -167,9 +167,7 @@ class Colors
      */
     public static function colorizePart($text, $search_regexp, $color)
     {
-        $callback = function ($matches) use ($color) {
-            return Colors::write($matches[1], $color);
-        };
+        $callback = fn($matches) => Colors::write($matches[1], $color);
 
         $ansi_text = preg_replace_callback("/($search_regexp)/", $callback, $text);
 

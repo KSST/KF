@@ -120,7 +120,7 @@ class Localization
     public function loadTextDomain($domain, $locale, $module = null)
     {
         // if, $locale string is not over 3 chars long -> $locale = "en", build "en_EN"
-        if (isset($locale{3}) === false) {
+        if (isset($locale[3]) === false) {
             $locale = mb_strtolower($locale) . '_' . mb_strtoupper($locale);
         }
 

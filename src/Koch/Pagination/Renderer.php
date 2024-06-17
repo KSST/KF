@@ -44,7 +44,7 @@ class Renderer
     public function getStyleClassname($style)
     {
         // use 'classic' as fallback style
-        $style = $style ?? 'classic';
+        $style ??= 'classic';
 
         static $viewRendererClassMap = [
           'classic'  => 'Classic',
@@ -61,8 +61,8 @@ class Renderer
      */
     public function factory($style = null, $options = null)
     {
-        $style   = $style ?? $this->style;
-        $options = $options ?? $this->options;
+        $style ??= $this->style;
+        $options ??= $this->options;
 
         $class = $this->getStyleClassname($style);
 
