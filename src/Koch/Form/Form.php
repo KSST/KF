@@ -1171,7 +1171,7 @@ class Form implements FormInterface
         }
         if (null === $data) { // fetch data from POST
             if ('POST' === \Koch\Http\HttpRequest::getRequestMethod()) {
-                $data = \Koch\Http\HttpRequest::getPost();
+                $data = (new \Koch\Http\HttpRequest())->getPost();
             }
         }
 

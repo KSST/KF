@@ -208,7 +208,7 @@
       */
      protected function loadSchema($classes = null)
      {
-         $em = $this->getEntityManager();
+         $em = static::getEntityManager();
 
          if ($classes === null) {
              $classes = $em->getMetadataFactory()->getAllMetadata();

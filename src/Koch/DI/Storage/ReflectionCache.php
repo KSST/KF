@@ -28,14 +28,12 @@ class ReflectionCache
 
     public function implementationsOf($interface)
     {
-        return isset($this->implementations_of[$interface]) ?
-                $this->implementations_of[$interface] : [];
+        return $this->implementations_of[$interface] ?? [];
     }
 
     public function interfacesOf($class)
     {
-        return isset($this->interfaces_of[$class]) ?
-                $this->interfaces_of[$class] : [];
+        return $this->interfaces_of[$class] ?? [];
     }
 
     public function concreteSubgraphOf($class)

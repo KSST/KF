@@ -320,7 +320,7 @@ class Smarty extends AbstractRenderer
     {
         // create cache_id
         if ($cache_id === null) {
-            $cache_id = $this->createCacheId();
+            $cache_id = static::createCacheId();
         }
 
         return $this->renderer->fetch($template, $cache_id, $compile_id, $parent, $display);

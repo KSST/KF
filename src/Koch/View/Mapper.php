@@ -95,7 +95,7 @@ class Mapper
         // try to find the template in Theme or Module Path
         $theme_template = self::getThemeTemplatePath($template);
 
-        return ($theme_template !== null) ? $theme_template : self::getModuleTemplatePath($template);
+        return $theme_template ?? self::getModuleTemplatePath($template);
     }
 
     /**
@@ -208,7 +208,7 @@ class Mapper
             return $module_template;
         } else {
             // fetch renderer name for template path construction
-            $renderer = HttpRequest::getRoute()->getRenderEngine();
+            $renderer = (new HttpRequest())->getRoute()->getRenderEngine();
 
             // the template with that name is not found on our default paths
             // @todo if this would be a html template, we could skip determining the render engine

@@ -239,12 +239,12 @@ class TargetRoute extends Mapper
 
     public static function getBackendTheme()
     {
-        return (isset($_SESSION['user']['backend_theme'])) ? $_SESSION['user']['backend_theme'] : 'default';
+        return $_SESSION['user']['backend_theme'] ?? 'default';
     }
 
     public static function getFrontendTheme()
     {
-        return (isset($_SESSION['user']['frontend_theme']))  ? $_SESSION['user']['frontend_theme'] : 'default';
+        return $_SESSION['user']['frontend_theme'] ?? 'default';
     }
 
     public static function getThemeName()

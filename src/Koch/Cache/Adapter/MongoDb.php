@@ -130,7 +130,7 @@ class MongoDb extends AbstractCache implements CacheInterface
     {
         $data = $this->getData($key);
 
-        return isset($data) ? $data : false;
+        return $data ?? false;
     }
 
     /**

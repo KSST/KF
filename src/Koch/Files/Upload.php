@@ -78,7 +78,7 @@ class Upload implements \ArrayAccess, \IteratorAggregate, \Countable
      */
     public function offsetGet($offset)
     {
-        return isset($this->files[$offset]) ? $this->files[$offset] : null;
+        return $this->files[$offset] ?? null;
     }
 
     /**

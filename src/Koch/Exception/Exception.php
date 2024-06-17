@@ -40,7 +40,7 @@ class Exception extends \Exception
      *
      * @param $exception PHP Exception Objects are valid (Type Hint).
      */
-    public function handle(\Exception $exception)
+    public function handle(\Throwable $exception)
     {
         if ($exception->getCode() > 0) {
             self::fetchExceptionTemplates($exception->getCode());

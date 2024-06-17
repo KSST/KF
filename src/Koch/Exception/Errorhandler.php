@@ -108,7 +108,7 @@ class Errorhandler
         ];
 
         // get the errorname from the array via $errornumber
-        $errorname = isset($errorTypes[$errnum]) ? $errorTypes[$errnum] : '';
+        $errorname = $errorTypes[$errnum] ?? '';
 
         // Handling the ErrorType via Switch
         switch ($errorname) {
@@ -634,7 +634,7 @@ class Errorhandler
             'milestone'   => 'Triage-Neuzuteilung',
             'version'     => APPLICATION_VERSION,
             #'component'   => '',
-            'author' => isset($_SESSION['user']['email']) ? $_SESSION['user']['email'] : '',
+            'author' => $_SESSION['user']['email'] ?? '',
         ];
 
         return 'http://trac.clansuite.com/newticket/?' . http_build_query($array);

@@ -208,7 +208,7 @@ class Captcha
     public function generateCaptchaImage()
     {
         // a random captcha string
-        $string_length  = rand(3, 6);
+        $string_length  = random_int(3, 6);
         $captcha_string = $this->generateRandomString($string_length);
 
         // set string class (user needs set this to session)
@@ -226,12 +226,12 @@ class Captcha
                 /*
                  *  Create Background-Color from random RGB colors
                  */
-                $background_color = imagecolorallocate($this->captcha, rand(100, 255), rand(100, 255), rand(0, 255));
+                $background_color = imagecolorallocate($this->captcha, random_int(100, 255), random_int(100, 255), random_int(0, 255));
 
                 /*
                  * Background Fill Effects
                  */
-                switch (rand(1, 2)) {
+                switch (random_int(1, 2)) {
                     // Solid Fill
                     case 1:
                         imagefill($this->captcha, 0, 0, $background_color);

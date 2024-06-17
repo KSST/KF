@@ -2,18 +2,16 @@
 
 /**
  * Koch Framework
+ *
  * SPDX-FileCopyrightText: 2005-2024 Jens A. Koch
+ * SPDX-License-Identifier: MIT
  *
- * This file is part of https://github.com/KSST/KF
-* SPDX-License-Identifier: MIT *
- *
- * *
- * *
- * */
+ * For the full copyright and license information, please view
+ * the LICENSE file that was distributed with this source code.
+ */
 
 /**
  * Koch Framework Smarty Viewhelper.
- *
  *
  * Name:        tabpanel
  * Type:        function
@@ -21,7 +19,7 @@
  */
 function Smarty_block_tabpanel($params, $content, $smarty, &$repeat)
 {
-    $name = isset($params['name']) ? $params['name'] : '1';
+    $name = $params['name'] ?? '1';
 
     // replace whitespaces with underscore
     // else javascript selection will not work properly

@@ -43,10 +43,10 @@ class Manager
     public function deleteRoutesOfModule($module)
     {
         // load module routes
-        $moduleRoutes = $this->loadRoutesFromConfig($module);
+        $moduleRoutes = static::loadRoutesFromConfig($module);
 
         // load main routes file
-        $applicationRoutes = $this->loadRoutesFromConfig();
+        $applicationRoutes = static::loadRoutesFromConfig();
 
         // @todo subtract the $module_routes from $application_routes array
         //$this->deleteRoute($route_name);

@@ -32,7 +32,7 @@ class JsonException extends \Exception
         $this->error      = sprintf(
             _('JSON Error in file "%s". %s'),
             $filename,
-            $this->getJsonErrorMessage($error_code)
+            static::getJsonErrorMessage($error_code)
         );
 
         parent::__construct();

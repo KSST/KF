@@ -24,7 +24,7 @@
  */
 function Smarty_function_modulenavigation($params, $smarty)
 {
-    $module = \Koch\Http\HttpRequest::getRoute()->getModule();
+    $module = (new \Koch\Http\HttpRequest())->getRoute()->getModule();
 
     $file = APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR . $module . '.menu.php';
 

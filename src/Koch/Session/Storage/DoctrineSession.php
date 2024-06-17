@@ -173,7 +173,7 @@ class DoctrineSession extends AbstractSession
              * CSRF: http://shiflett.org/articles/cross-site-request-forgeries
              */
             // session token
-            $_SESSION['application']['token'] = md5(uniqid(rand(), true));
+            $_SESSION['application']['token'] = md5(uniqid(random_int(0, mt_getrandmax()), true));
 
             // session time
             $_SESSION['application']['token_time'] = time();

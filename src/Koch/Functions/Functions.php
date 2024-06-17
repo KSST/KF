@@ -112,12 +112,12 @@ class Functions
 
     public function issetOrDefault($var, $defaultValue = null)
     {
-        return isset($var) ? $var : $defaultValue;
+        return $var ?? $defaultValue;
     }
 
     public function issetArrayKeyOrDefault(array $array, $key, $defaultValue = null)
     {
-        return isset($array[$key]) ? $array[$key] : $defaultValue;
+        return $array[$key] ?? $defaultValue;
     }
 
     /**
@@ -496,7 +496,7 @@ class Functions
         }
 
         $old   = $var;
-        $var   = $new   = $prefix . rand() . $suffix;
+        $var   = $new   = $prefix . random_int(0, mt_getrandmax()) . $suffix;
         $vname = false;
 
         foreach ($values as $key => $val) {

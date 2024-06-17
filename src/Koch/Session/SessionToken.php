@@ -43,7 +43,7 @@ class SessionToken extends Session
         $token     = $this->session->get('_' . $tokenName);
 
         if (empty($token)) {
-            $token = md5(uniqid(rand(), true));
+            $token = md5(uniqid(random_int(0, mt_getrandmax()), true));
             $this->session->set('_' . $tokenName, $token);
             $this->session->set('_token_time', time());
         }

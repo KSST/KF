@@ -67,7 +67,7 @@ class Textarea extends FormElement implements FormElementInterface
          */
         if ($editor === null) {
             $config = Clansuite_CMS::getInjector()->instantiate('Koch\Config');
-            $editor = isset($config['editor']['type']) ? $config['editor']['type'] : 'ckeditor';
+            $editor = $config['editor']['type'] ?? 'ckeditor';
             unset($config);
         }
 

@@ -591,7 +591,7 @@ class FormElement
             'url'       => 'Url',
         ];
 
-        return isset($array[$rule]) ? $array[$rule] : $rule;
+        return $array[$rule] ?? $rule;
     }
 
     /**

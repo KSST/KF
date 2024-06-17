@@ -153,7 +153,7 @@ abstract class AbstractController
          * This is for lazy usage in the modulecontroller: $this->initModel();
          */
         if ($modulename === null) {
-            $modulename = HttpRequest::getRoute()->getModuleName();
+            $modulename = (new HttpRequest())->getRoute()->getModuleName();
         }
 
         $module_models_path = APPLICATION_MODULES_PATH . mb_strtolower($modulename) . '/model/';
