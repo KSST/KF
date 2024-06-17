@@ -14,7 +14,7 @@ function getSize($bytes)
 {
     static $s = ['B', 'KB', 'MB', 'GB', 'TB']; //  'PB', 'EB', 'ZB', 'YB');
     $e        = (int) (log($bytes) / (M_LN2 * 10));
-    $size     = $bytes / pow(1024, $e);
+    $size     = $bytes / 1024 ** $e;
 
     return sprintf('%.2f' . $s[$e], $size);
 }
