@@ -14,17 +14,11 @@ namespace Koch\DI\Engine;
 
 class IncomingParameters
 {
-    private $injector;
-
-    private $names;
-
     /**
      * @param \Koch\DI\DependencyInjector $injector
      */
-    public function __construct($names, $injector)
+    public function __construct(private $names, private $injector)
     {
-        $this->names    = $names;
-        $this->injector = $injector;
     }
 
     public function with()

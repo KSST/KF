@@ -75,7 +75,7 @@ class Debug
             } else {
                 $print_r = print_r($var, true);
                 // str_contains < or >
-                if ((strstr($print_r, '<') !== false) || (strstr($print_r, '>') !== false)) {
+                if ((str_contains($print_r, '<')) || (str_contains($print_r, '>'))) {
                     $print_r = htmlspecialchars($print_r);
                 }
                 echo $print_r;
@@ -99,10 +99,9 @@ class Debug
      * Displays the content of a variable with var_dump.
      * The content gets escaping and pre tags are applied for better readability.
      *
-     * @param mixed $var  The variable to debug.
      * @param bool  $exit Stop execution after dump? Default is true (stops).
      */
-    public static function dump($var, $exit = true)
+    public static function dump(mixed $var, $exit = true)
     {
         // var_dump the content into a buffer and store it to variable
         ob_start();
@@ -137,12 +136,10 @@ class Debug
     /**
      * Debug logs the output of $var to the firebug console in your browser.
      *
-     * @param mixed $var The variable to debug.
      * @param $logmethod The firebug method to call for logging (log,info,warn, error). Defaults to "log".
-     *
      * @return FirePHP object.
      */
-    public static function firebug($var, $logmethod = 'log')
+    public static function firebug(mixed $var, $logmethod = 'log')
     {
         // @codeCoverageIgnoreStart
         // We don't need to test vendor library functionality.

@@ -31,16 +31,6 @@ use Koch\View\Helper\Breadcrumb;
 class FrontController implements FrontControllerInterface
 {
     /**
-     * @var object \Koch\Http\HttpRequest
-     */
-    private $request;
-
-    /**
-     * @var object \Koch\Http\HttpResponse
-     */
-    private $response;
-
-    /**
      * @var object \Koch\Router\Router
      */
     private $router;
@@ -63,10 +53,14 @@ class FrontController implements FrontControllerInterface
     /**
      * Constructor.
      */
-    public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
+    public function __construct(/**
+     * @var object \Koch\Http\HttpRequest
+     */
+    private HttpRequestInterface $request, /**
+     * @var object \Koch\Http\HttpResponse
+     */
+    private HttpResponseInterface $response)
     {
-        $this->request           = $request;
-        $this->response          = $response;
         $this->preFilterManager  = new \Koch\Filter\FilterManager();
         $this->postFilterManager = new \Koch\Filter\FilterManager();
         $this->eventDispatcher   = \Koch\Event\Dispatcher::instantiate();

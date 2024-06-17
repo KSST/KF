@@ -16,11 +16,8 @@ use Koch\DI\AbstractLifecycle;
 
 class Value extends AbstractLifecycle
 {
-    private $instance;
-
-    public function __construct($instance)
+    public function __construct(private $instance)
     {
-        $this->instance = $instance;
     }
 
     public function instantiate($dependencies)

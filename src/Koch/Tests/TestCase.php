@@ -182,7 +182,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
                 throw new \ReflectionException(sprintf(
                     'The method "%s" does not exist in the class "%s".',
                     $name,
-                    is_object($class) ? get_class($class) : $class
+                    is_object($class) ? $class::class : $class
                 ));
             }
         }
@@ -209,7 +209,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
                 throw new \ReflectionException(sprintf(
                     'The property "%s" does not exist in the class "%s".',
                     $name,
-                    is_object($class) ? get_class($class) : $class
+                    is_object($class) ? $class::class : $class
                 ));
             }
         }
@@ -238,9 +238,8 @@ class TestCase extends \PHPUnit_Framework_TestCase
      *
      * @param object|string $class The class name or object.
      * @param string        $name  The property name.
-     * @param mixed         $value The property value.
      */
-    public function setPropertyValue($class, $name, $value)
+    public function setPropertyValue($class, $name, mixed $value)
     {
         $property = $this->findProperty($class, $name);
         $property->setAccessible(true);

@@ -17,14 +17,10 @@ namespace Koch\DI;
  */
 abstract class AbstractLifecycle
 {
-    public $class;
-
-    public function __construct($class)
+    public function __construct(public $class)
     {
-        $this->class = $class;
-
         // trigger autoloading
-        class_exists($class, true);
+        class_exists($this->class, true);
     }
 
     public function isOneOf($candidates)

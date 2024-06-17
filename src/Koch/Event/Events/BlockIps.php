@@ -24,11 +24,8 @@ use Koch\Event\EventInterface;
  */
 class BlockIps implements EventInterface
 {
-    protected $blockedIps;
-
-    public function __construct($blockedIps)
+    public function __construct(protected $blockedIps)
     {
-        $this->blockedIps = $blockedIps;
     }
 
     public function execute(\Koch\Event\Event $event)

@@ -32,7 +32,7 @@ function Smarty_function_is_authorized($params)
     }
 
     // ensure parameter name contains a dot
-    if (false === strpos($params['name'], '.')) {
+    if (!str_contains($params['name'], '.')) {
         trigger_error(
             'Parameter "name" is not in the correct format. Please provide a name in the format "module.action".'
         );

@@ -111,38 +111,17 @@ class Errorhandler
         $errorname = $errorTypes[$errnum] ?? '';
 
         // Handling the ErrorType via Switch
-        switch ($errorname) {
-            // This one is handled by register_shutdown_function + catchFatalErrorsShutdownHandler
-            case 'E_ERROR':
-                $errorname .= ' [PHP Fatal Error]';
-                break;
-            // What are the errortypes that can be handled by a user-defined errorhandler?
-            case 'E_WARNING':
-                $errorname .= ' [PHP Warning]';
-                break;
-            case 'E_NOTICE':
-                $errorname .= ' [PHP Notice]';
-                break;
-            case 'E_USER_ERROR':
-                $errorname .= ' [Koch Framework Internal Error]';
-                break;
-            case 'E_USER_WARNING':
-                $errorname .= ' [Koch Framework Internal Error]';
-                break;
-            case 'E_USER_NOTICE':
-                $errorname .= ' [Koch Framework Internal Error]';
-                break;
-            case 'E_ALL':
-            case 'E_STRICT':
-                $errorname .= ' [PHP Strict]';
-                break;
-            case 'E_RECOVERABLE_ERROR':
-                $errorname .= ' [php not-unstable]';
-                break;
-            // when it's not in there, its an unknown errorcode
-            default:
-                $errorname .= ' Unknown Errorcode [' . $errnum . ']: ';
-        }
+        match ($errorname) {
+            'E_ERROR' => $errorname .= ' [PHP Fatal Error]',
+            'E_WARNING' => $errorname .= ' [PHP Warning]',
+            'E_NOTICE' => $errorname .= ' [PHP Notice]',
+            'E_USER_ERROR' => $errorname .= ' [Koch Framework Internal Error]',
+            'E_USER_WARNING' => $errorname .= ' [Koch Framework Internal Error]',
+            'E_USER_NOTICE' => $errorname .= ' [Koch Framework Internal Error]',
+            'E_ALL', 'E_STRICT' => $errorname .= ' [PHP Strict]',
+            'E_RECOVERABLE_ERROR' => $errorname .= ' [php not-unstable]',
+            default => $errorname .= ' Unknown Errorcode [' . $errnum . ']: ',
+        };
 
         // make the errorstring more useful by linking it to the php manual
         $pattern     = "/<a href='(.*)'>(.*)<\/a>/";
@@ -415,7 +394,7 @@ class Errorhandler
                 break;
             case 'object':
                 $type .= '<span>object</span>';
-                $arg .= get_class($argument);
+                $arg .= $argument::class;
                 /* @todo use self::getClassProperties($backtraceArgument) */
                 break;
             case 'resource':
@@ -495,7 +474,7 @@ class Errorhandler
             $lines_array[$surround_lines] .= '<span class="error-triangle">&#9654;</span>';
 
             // transform linenumbers array to string for later display, use spaces as separator
-            $lines_html = implode($lines_array, ' ');
+            $lines_html = implode(' ', $lines_array);
 
             // get ALL LINES syntax highlighted source-code of the file and explode it into an array
             // the if check is needed to workaround "highlight_file() has been disabled for security reasons"
@@ -521,7 +500,7 @@ class Errorhandler
 
             // transform the array into html string
             // enhance readablility by imploding the array with spaces (try either ' ' or  '<br>')
-            $errorcontext_lines = implode($result, '<br>');
+            $errorcontext_lines = implode('<br>', $result);
 
             $sprintf_html = '<table>
                                 <tr>

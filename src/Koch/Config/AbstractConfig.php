@@ -72,10 +72,8 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      * incomming via GET, if nothing is incomming, sets the default value of 8.
      *
      * @param string $keyname     The keyname to find in the array.
-     * @param mixed  $default_one Default value. Returned, if the keyname was not found.
-     * @param mixed  $default_two Default value. Returned, if the keyname was not found and default_one is null.
      */
-    public function getConfigValue($keyname, $default_one = null, $default_two = null)
+    public function getConfigValue($keyname, mixed $default_one = null, mixed $default_two = null)
     {
         // try a lookup of the value by keyname
         $value = \Koch\Functions\Functions::findKeyInArray($keyname, $this->config);
@@ -140,15 +138,13 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * Implementation of SPL ArrayAccess.
      */
-
     /**
      * ArrayAccess::offsetExists().
      *
-     * @param mixed $offset
      *
      * @return bool value
      */
-    public function offsetExists($offset)
+    public function offsetExists(mixed $offset)
     {
         return isset($this->config[$offset]);
     }
@@ -156,22 +152,18 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * ArrayAccess::offsetGet().
      *
-     * @param mixed $offset
      *
      * @return mixed value
      */
-    public function offsetGet($offset)
+    public function offsetGet(mixed $offset)
     {
         return $this->config[$offset] ?? null;
     }
 
     /**
      * ArrayAccess::offsetSet().
-     *
-     * @param mixed $offset
-     * @param mixed $value
      */
-    public function offsetSet($offset, $value)
+    public function offsetSet(mixed $offset, mixed $value)
     {
         if (is_null($offset)) {
             $this->config[] = $value;
@@ -183,11 +175,10 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * ArrayAccess::offsetUnset().
      *
-     * @param mixed $offset
      *
      * @return bool true
      */
-    public function offsetUnset($offset)
+    public function offsetUnset(mixed $offset)
     {
         unset($this->config[$offset]);
 

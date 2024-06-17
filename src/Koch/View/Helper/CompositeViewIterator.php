@@ -17,11 +17,8 @@ namespace Koch\View\Helper;
  */
 class CompositeViewIterator implements \ArrayAccess, \Countable, \Iterator
 {
-    private $composite = [];
-
-    public function __construct($composite)
+    public function __construct(private $composite)
     {
-        $this->composite = $composite;
     }
 
     /**

@@ -23,16 +23,15 @@ class User
     private $user = null;
 
     /**
-     * @var object Koch\Configuration
-     */
-    private $config = null;
-
-    /**
      * Constructor.
      */
-    public function __construct(\Koch\Config\Config $config)
+    public function __construct(
+        /**
+         * @var object Koch\Configuration
+         */
+        private \Koch\Config\Config $config
+    )
     {
-        $this->config = $config;
     }
 
     /**

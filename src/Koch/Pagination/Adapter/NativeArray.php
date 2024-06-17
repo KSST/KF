@@ -19,16 +19,13 @@ use Koch\Pagination\AdapterInterface;
  */
 class NativeArray implements AdapterInterface
 {
-    private $array;
-
     /**
      * Constructor.
      *
      * @param array $array The array.
      */
-    public function __construct(array $array)
+    public function __construct(private array $array)
     {
-        $this->array = $array;
     }
 
     /**

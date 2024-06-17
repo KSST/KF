@@ -81,7 +81,7 @@ class Po
                     $temp[$state][] = $data;
                     break;
                 default:
-                    if (strpos($key, 'msgstr[') !== false) {
+                    if (str_contains($key, 'msgstr[')) {
                         // translated-string-case-n
                         $state          = 'msgstr';
                         $temp[$state][] = $data;

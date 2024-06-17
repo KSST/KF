@@ -93,7 +93,7 @@ class File extends Input implements FormElementInterface
      *      $formelement = new Koch\Form\Element\UploadAjax();
      *      $formelement->render();
      */
-    public function __toString()
+    public function __toString(): string
     {
         return $this->render();
     }

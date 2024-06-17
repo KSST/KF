@@ -53,30 +53,12 @@ class Staging
 
         $filename = '';
 
-        switch ($_SERVER['SERVER_NAME']) {
-            // development configuration
-            case 'localhost':
-            case 'intranet':
-            case 'application-dev.com':
-            case 'www.application-dev.com':
-            case 'application.dev':
-                $filename = 'development.php';
-                break;
-            // staging configuration
-            case 'application-stage.com':
-            case 'www.application-stage.com':
-            case 'application.stage':
-                $filename = 'staging.php';
-                break;
-            // intern configuration
-            case 'application-intern.com':
-            case 'www.application-intern.com':
-            case 'application.intern':
-                $filename = 'intern.php';
-                break;
-            default:
-                $filename = 'production.php';
-        }
+        $filename = match ($_SERVER['SERVER_NAME']) {
+            'localhost', 'intranet', 'application-dev.com', 'www.application-dev.com', 'application.dev' => 'development.php',
+            'application-stage.com', 'www.application-stage.com', 'application.stage' => 'staging.php',
+            'application-intern.com', 'www.application-intern.com', 'application.intern' => 'intern.php',
+            default => 'production.php',
+        };
 
         // return staging config filename
         return $filename;

@@ -26,21 +26,11 @@ class GravatarCache
     public $cache_expire_time  = '7 days';
     public $cacheable          = true;
 
-    // Gravatar Attributes
-    public $gravatar_url = null;
-    public $gravatar_id  = null;
-    public $size         = null;
-    public $rating       = null;
-
     /**
-     * @param string $gravatarUrl
+     * @param string $gravatar_url
      */
-    public function __construct($gravatarUrl, $gravatarId, $size, $rating)
+    public function __construct(public $gravatar_url, public $gravatar_id, public $size, public $rating)
     {
-        $this->gravatar_url = $gravatarUrl;
-        $this->gravatar_id  = $gravatarId;
-        $this->size         = $size;
-        $this->rating       = $rating;
     }
 
     /**

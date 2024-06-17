@@ -83,12 +83,10 @@ class INI implements AdapterInterface
     /**
      * String formatting based on type.
      *
-     * @param mixed $key  A Key.
-     * @param mixed $item An item.
      *
      * @return string The result string. No you know more.
      */
-    public static function isNumericOrBoolean($key, $item)
+    public static function isNumericOrBoolean(mixed $key, mixed $item)
     {
         $content = '';
 

@@ -235,7 +235,7 @@ class DoctrineSession extends AbstractSession
             $msg = '';
 
             if (defined('DEBUG') and DEBUG === true) {
-                $msg .= get_class($e) . ' thrown within the session handler.';
+                $msg .= $e::class . ' thrown within the session handler.';
                 $msg .= '<br /> Message: ' . $e->getMessage();
             }
 

@@ -81,7 +81,7 @@ class XML
         if ($recursionDepth === 0) {
             // If the external caller doesn't call this function initially
             // with a SimpleXMLElement object just return
-            if (get_class($xml) !== 'SimpleXMLElement') {
+            if ($xml::class !== 'SimpleXMLElement') {
                 return;
             } else { // store original SimpleXmlElementObject sent by the caller.
                 $provided_xml_object = $xml;

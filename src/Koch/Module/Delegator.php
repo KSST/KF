@@ -7,13 +7,15 @@ use ReflectionClass;
 class Delegator
 {
     /**
-     * @var object delegated object
+     * @param object $delegate
      */
-    protected $delegate;
-
-    public function __construct($delegate)
+    public function __construct(
+        /**
+         * @var object delegated object
+         */
+        protected $delegate
+    )
     {
-        $this->delegate = $delegate;
     }
 
     public function getDelegate()

@@ -16,7 +16,6 @@ class Renderer
 {
     public $style;
     public $options = [];
-    public $adapter;
 
     /**
      * Constructor.
@@ -26,9 +25,8 @@ class Renderer
      * @param object Pagination with Adapter
      * @param Pagination $adapter
      */
-    public function __construct($style = null, $options = null, $adapter = null)
+    public function __construct($style = null, $options = null, public $adapter = null)
     {
-        $this->adapter = $adapter;
         $this->style   = $this->factory($style, $options);
     }
 

@@ -39,7 +39,7 @@ class EntityTool
      */
     public function createEntity($entity, array $data)
     {
-        $class    = is_object($entity) ? get_class($entity) : $entity;
+        $class    = is_object($entity) ? $entity::class : $entity;
         $metadata = $this->em->getClassMetadata($class);
         $entity   = $metadata->newInstance();
 

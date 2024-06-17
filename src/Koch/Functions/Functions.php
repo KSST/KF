@@ -74,7 +74,7 @@ class Functions
         if ($insensitive === true) {
             return (false !== stristr($haystack, (string) $needle)) ? true : false;
         } else {
-            return (false !== strpos($haystack, (string) $needle)) ? true : false;
+            return (str_contains($haystack, (string) $needle)) ? true : false;
         }
     }
 

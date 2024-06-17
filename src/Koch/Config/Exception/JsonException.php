@@ -18,7 +18,6 @@ namespace Koch\Config\Exception;
 class JsonException extends \Exception
 {
     public $error      = null;
-    public $error_code = JSON_ERROR_NONE;
 
     /**
      * Constructor.
@@ -26,13 +25,12 @@ class JsonException extends \Exception
      * @param $filename
      * @param int $error_code
      */
-    public function __construct($filename, $error_code = null)
+    public function __construct($filename, public $error_code = null)
     {
-        $this->error_code = $error_code;
         $this->error      = sprintf(
             _('JSON Error in file "%s". %s'),
             $filename,
-            static::getJsonErrorMessage($error_code)
+            static::getJsonErrorMessage($this->error_code)
         );
 
         parent::__construct();
@@ -64,8 +62,8 @@ class JsonException extends \Exception
         return $json_error_messages[$json_error_type];
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->error;
+        return (string) $this->error;
     }
 }

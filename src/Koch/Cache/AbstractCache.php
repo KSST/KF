@@ -123,11 +123,10 @@ abstract class AbstractCache
      * If value is null, the key is deleted.
      *
      * @param string $key
-     * @param mixed  $value
      *
      * @return bool
      */
-    public function __set($key, $value)
+    public function __set($key, mixed $value)
     {
         return (null === $value) ? $this->delete($key) : $this->store($key, $value);
     }

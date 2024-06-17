@@ -18,10 +18,6 @@ namespace Koch\Files;
 class File
 {
     protected $name;
-    protected $type;
-    protected $size;
-    protected $temporaryName;
-    protected $error;
     protected $allowedExtensions = [];
 
     /**
@@ -33,13 +29,9 @@ class File
      * @param $temporaryName string
      * @param $error int
      */
-    public function __construct($name, $type, $size, $temporaryName, $error)
+    public function __construct($name, protected $type, protected $size, protected $temporaryName, protected $error)
     {
         $this->name          = basename($name);
-        $this->type          = $type;
-        $this->size          = $size;
-        $this->temporaryName = $temporaryName;
-        $this->error         = $error;
     }
 
     /**

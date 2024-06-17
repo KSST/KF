@@ -21,11 +21,8 @@ class DebugConsoleResponse implements EventInterface
 {
     public $name = 'DebugConsoleResponse';
 
-    private $debugbarHTML;
-
-    public function __construct($debugbarHTML)
+    public function __construct(private $debugbarHTML)
     {
-        $this->debugbarHTML = $debugbarHTML;
     }
 
     public function execute(\Koch\Event\Event $event)

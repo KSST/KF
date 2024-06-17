@@ -30,31 +30,6 @@ class FTP
     private $connection;
 
     /**
-     * @var string The server hostname to connect to.
-     */
-    private $server;
-
-    /**
-     * @var string The username required to access the FTP server.
-     */
-    private $username;
-
-    /**
-     * @var string The password required to access the FTP server.
-     */
-    private $password;
-
-    /**
-     * @var int The port number to connect to the FTP server on.
-     */
-    private $port;
-
-    /**
-     * @var bool Whether or not to use a passive or active connection.
-     */
-    private $passive;
-
-    /**
      * Default Constructor.
      *
      * @param string $server   The server hostname to connect to.
@@ -63,17 +38,11 @@ class FTP
      * @param int    $port     The port number to connect to the FTP server on.
      * @param bool   $passive  Whether or not to use a passive or active connection.
      */
-    public function __construct($server, $username, $password, $port = 21, $passive = false)
+    public function __construct(private $server, private $username, private $password, private $port = 21, private $passive = false)
     {
         if (extension_loaded('ftp') === false) {
             throw new Exception('PHP extension FTP is not loaded.');
         }
-
-        $this->server   = $server;
-        $this->username = $username;
-        $this->password = $password;
-        $this->port     = $port;
-        $this->passive  = $passive;
     }
 
     /**

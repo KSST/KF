@@ -56,31 +56,18 @@ class SwiftMailer
      */
     private function initializeMailer()
     {
-        switch ($this->options['method']) {
-            case 'smtp':
-                $transport = \Swift_SmtpTransport::newInstance(
-                    $this->options['host'], // 'smtp.gmail.com'
-                    $this->options['port'], // 465
-                    $this->options['encryption'] // tls or ssl
-                );
-                //->setUsername('me@ff.com')->setPassword('pass');
-                break;
-            case 'sendmail':
-                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs');
-                break;
-            case 'exim':
-                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/exim -bs');
-                break;
-            case 'qmail':
-                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/qmail -bs');
-                break;
-            case 'postfix':
-                $transport = \Swift_SendmailTransport::newInstance('/usr/sbin/postfix -bs');
-                break;
-            case 'mail':
-            default:
-                $transport = \Swift_MailTransport::newInstance();
-        }
+        $transport = match ($this->options['method']) {
+            'smtp' => \Swift_SmtpTransport::newInstance(
+                $this->options['host'], // 'smtp.gmail.com'
+                $this->options['port'], // 465
+                $this->options['encryption'] // tls or ssl
+            ),
+            'sendmail' => \Swift_SendmailTransport::newInstance('/usr/sbin/sendmail -bs'),
+            'exim' => \Swift_SendmailTransport::newInstance('/usr/sbin/exim -bs'),
+            'qmail' => \Swift_SendmailTransport::newInstance('/usr/sbin/qmail -bs'),
+            'postfix' => \Swift_SendmailTransport::newInstance('/usr/sbin/postfix -bs'),
+            default => \Swift_MailTransport::newInstance(),
+        };
 
         // Create the Mailer using the created Transport
         $this->mailer = \Swift_Mailer::newInstance($transport);

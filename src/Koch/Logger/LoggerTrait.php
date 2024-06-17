@@ -121,9 +121,8 @@ trait LoggerTrait
     /**
      * Logs with an arbitrary level.
      *
-     * @param mixed  $level
      * @param string $message
      * @param array  $context
      */
-    abstract public function log($level, $message, array $context = []);
+    abstract public function log(mixed $level, $message, array $context = []);
 }

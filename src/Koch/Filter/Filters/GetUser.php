@@ -24,11 +24,8 @@ use Koch\User\User;
  */
 class GetUser implements FilterInterface
 {
-    private $user = null;
-
-    public function __construct(User $user)
+    public function __construct(private User $user)
     {
-        $this->user = $user;
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)

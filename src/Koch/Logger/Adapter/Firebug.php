@@ -41,24 +41,16 @@ class Firebug extends AbstractLogger implements LoggerInterface
      */
     public function getFirePHPLoglevel($level = '')
     {
-        switch (strtoupper($level)) {
-            case 'LOG':
-                return \FirePHP::LOG;
-            case 'INFO':
-                return \FirePHP::INFO;
-            case 'WARN':
-                return \FirePHP::WARN;
-            case 'ERROR':
-                return \FirePHP::ERROR;
-            case 'TABLE':
-                return \FirePHP::TABLE;
-            case 'TRACE':
-                return \FirePHP::TRACE; // backtracing
-            case 'DUMP':
-                return \FirePHP::DUMP; // variable dumps
-            default:
-                return \FirePHP::ERROR;
-        }
+        return match (strtoupper($level)) {
+            'LOG' => \FirePHP::LOG,
+            'INFO' => \FirePHP::INFO,
+            'WARN' => \FirePHP::WARN,
+            'ERROR' => \FirePHP::ERROR,
+            'TABLE' => \FirePHP::TABLE,
+            'TRACE' => \FirePHP::TRACE,
+            'DUMP' => \FirePHP::DUMP,
+            default => \FirePHP::ERROR,
+        };
     }
 
     /**

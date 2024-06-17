@@ -61,7 +61,7 @@ class CompositeView implements ViewNodeInterface
     /**
      * Loops over all components / nodes and renders.
      */
-    public function render($response)
+    public function render($response = null)
     {
         $subview = '';
 

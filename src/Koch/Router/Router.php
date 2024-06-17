@@ -151,7 +151,7 @@ class Router implements RouterInterface, \ArrayAccess
          * They will be handled as "static named" routes and route directly to
          * a controller with the same name!
          */
-        if (strpos($url_pattern, '(') !== false) {
+        if (str_contains($url_pattern, '(')) {
             $url_pattern = self::placeholdersToRegexp($url_pattern);
         }
 
@@ -198,7 +198,7 @@ class Router implements RouterInterface, \ArrayAccess
              * Static named parameters starts with a ":".
              * Example: ":contoller".
              */
-            if (strpos($segment, ':') !== false) {
+            if (str_contains($segment, ':')) {
                 $name = substr($segment, 1); // remove :
 
                 // is there a requirement for this param? 'id' => '([0-9])'
@@ -327,17 +327,17 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // return, if urlstring is already a qualified url (http://...)
-        if (false !== strpos($url, WWW_ROOT . 'index.php?')) {
+        if (str_contains($url, WWW_ROOT . 'index.php?')) {
             return $url;
         }
 
         // only the http prefix is missing
-        if (false !== strpos($url, 'index.php?')) {
+        if (str_contains($url, 'index.php?')) {
             return 'http://' . $url;
         }
 
         // cleanup: remove all double slashes
-        while (false !== strpos($url, '//')) {
+        while (str_contains($url, '//')) {
             $url = str_replace('//', '/', $url);
         }
 
@@ -362,7 +362,7 @@ class Router implements RouterInterface, \ArrayAccess
              */
 
             // get only the part after "index.php?"
-            if (false !== strpos($url, 'index.php?')) {
+            if (str_contains($url, 'index.php?')) {
                 $url = strstr($url, 'index.php?');
             }
 
@@ -696,7 +696,7 @@ class Router implements RouterInterface, \ArrayAccess
      */
     private function parseUrlNoRewrite($uri)
     {
-        if (false !== strpos('?', $uri)) {
+        if (str_contains('?', $uri)) {
             return [0 => $uri];
         }
 
@@ -723,7 +723,7 @@ class Router implements RouterInterface, \ArrayAccess
             $value      = '';
             $query_pair = '';
             foreach ($uri_query_array as $query_pair) {
-                if (false !== strpos($query_pair, '=')) {
+                if (str_contains($query_pair, '=')) {
                     [$key, $value]  = explode('=', $query_pair);
                     $uri_segments[$key] = $value;
                 }

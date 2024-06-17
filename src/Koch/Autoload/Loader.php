@@ -146,13 +146,13 @@ class Loader
     {
         // define parts of classnames for exclusion
         foreach (['Smarty_Internal', 'Smarty_', 'PHPUnit', 'PHP_CodeCoverage'] as $classnameToExclude) {
-            if (false !== strpos($classname, $classnameToExclude)) {
+            if (str_contains($classname, $classnameToExclude)) {
                 return true;
             }
         }
 
         // exlude Doctrine
-        if (substr($classname, 0, 8) === 'Doctrine') {
+        if (str_starts_with($classname, 'Doctrine')) {
             return true;
         }
 
@@ -339,7 +339,7 @@ class Loader
         } else { // load map from file
             try {
                 return (array) unserialize(file_get_contents(self::$mapfile));
-            } catch (\Exception $e) {
+            } catch (\Exception) {
                 // delete mapfile, on unserialization error (error at offset xy)
                 unlink(self::$mapfile);
             }

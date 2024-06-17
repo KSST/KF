@@ -15,7 +15,7 @@ namespace Koch\Form;
 /**
  * Class for a FormElement.
  */
-class FormElement
+class FormElement implements \Stringable
 {
     /**
      * @var string
@@ -548,7 +548,7 @@ class FormElement
             $rule = trim($rule);
 
             // handle values (a property name to value relationship, like maxlength=20)
-            if (strpos($rule, '=') !== false) {
+            if (str_contains($rule, '=')) {
                 $array = explode('=', $rule);
                 $rule  = $array[0];
                 $value = $array[1];
@@ -786,9 +786,9 @@ class FormElement
      *
      * @return @return HTML Representation of the subclassed Formelement
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->render();
+        return (string) $this->render();
     }
 
     /**

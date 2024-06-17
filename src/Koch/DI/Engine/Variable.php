@@ -17,14 +17,12 @@ use Koch\DI\Lifecycle\Value;
 class Variable
 {
     public $preference;
-    private $context;
 
     /**
      * @param Context $context
      */
-    public function __construct($context)
+    public function __construct(private $context)
     {
-        $this->context = $context;
     }
 
     public function willUse($preference)

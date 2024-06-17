@@ -23,16 +23,6 @@ class Event implements \ArrayAccess
     private $eventname;
 
     /**
-     * @var array The context of the event triggering. Often the object from where we are calling.
-     */
-    private $context;
-
-    /**
-     * @var string Some pieces of additional information
-     */
-    private $info;
-
-    /**
      * @var bool The cancel state of the event
      */
     private $cancelled = false;
@@ -43,12 +33,18 @@ class Event implements \ArrayAccess
      * @param $name     Event Name
      * @param $context  The context of the event triggering. Often the object from where we are calling. Default null.
      * @param $info     Some pieces of additional information. Default null.
+     * @param mixed[] $context
+     * @param string $info
      */
-    public function __construct($name, $context = null, $info = null)
+    public function __construct($name, /**
+     * @var array The context of the event triggering. Often the object from where we are calling.
+     */
+    private $context = null, /**
+     * @var string Some pieces of additional information
+     */
+    private $info = null)
     {
         $this->eventname = $name;
-        $this->context   = $context;
-        $this->info      = $info;
     }
 
     /**
@@ -137,9 +133,8 @@ class Event implements \ArrayAccess
      * Sets a parameter (implements the ArrayAccess interface).
      *
      * @param string $name  The parameter name
-     * @param mixed  $value The parameter value
      */
-    public function offsetSet($name, $value)
+    public function offsetSet($name, mixed $value)
     {
         $this->context[$name] = $value;
     }

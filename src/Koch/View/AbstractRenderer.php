@@ -145,9 +145,8 @@ abstract class AbstractRenderer
      * Assigns a value to a template parameter.
      *
      * @param string $tpl_parameter The template parameter name
-     * @param mixed  $value         The value to assign
      */
-    abstract public function assign($tpl_parameter, $value = null);
+    abstract public function assign($tpl_parameter, mixed $value = null);
 
     /**
      * Executes the template rendering and returns the result.
@@ -162,11 +161,10 @@ abstract class AbstractRenderer
      * Executes the template rendering and displays the result.
      *
      * @param string $template Template Filename
-     * @param mixed $viewdata Optional view data to be passed to the template
      *
      * @return void
      */
-    abstract public function display($template, $viewdata = null);
+    abstract public function display($template, mixed $viewdata = null);
 
     /**
      * Clear all assigned Variables.
@@ -339,11 +337,10 @@ abstract class AbstractRenderer
      * Character encoding used is UTF-8.
      *
      * @param string $key   The variable name.
-     * @param mixed  $value The variable value.
      *
      * @return bool True if data was assigned to view; false if not.
      */
-    public function autoEscape($key, $value)
+    public function autoEscape($key, mixed $value)
     {
         if (is_array($value)) {
             $clean = [];
@@ -376,7 +373,7 @@ abstract class AbstractRenderer
             return call_user_func_array([$this->renderer, $method], $arguments);
         } else {
             throw new \InvalidArgumentException(
-                'Method "' . $method . '()" not existant in Render Engine "' . get_class($this->renderer) . '"!'
+                'Method "' . $method . '()" not existant in Render Engine "' . $this->renderer::class . '"!'
             );
         }
     }

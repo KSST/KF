@@ -25,13 +25,8 @@ use Koch\Router\TargetRoute;
  */
 class SetModuleLanguage implements FilterInterface
 {
-    /* @var Koch\Localization */
-    private $locale = null;
-
-    public function __construct(Localization $locale)
+    public function __construct(private Localization $locale)
     {
-        // set instance of localization to class
-        $this->locale = $locale;
     }
 
     public function executeFilter(HttpRequestInterface $request, HttpResponseInterface $response)

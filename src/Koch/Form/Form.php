@@ -66,7 +66,7 @@ namespace Koch\Form;
  *
  * @link http://www.whatwg.org/specs/web-apps/current-work/multipage/forms.html
  */
-class Form implements FormInterface
+class Form implements FormInterface, \Stringable
 {
     /**
      * Contains all formelements / formobjects registered for this form.
@@ -829,9 +829,9 @@ class Form implements FormInterface
      *
      * @return string
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->render();
+        return (string) $this->render();
     }
 
     /**
@@ -979,13 +979,11 @@ class Form implements FormInterface
     /**
      * Inserts value at a certain index into an array.
      *
-     * @param mixed $value The new element to insert into the array.
      * @param array $array The "old" array.
      * @param int   $index The index to insert the value
-     *
      * @return array $array with $value at position $index.
      */
-    private function arrayInsert($value, $index, &$array)
+    private function arrayInsert(mixed $value, $index, &$array)
     {
         return array_merge(array_slice($array, 0, $index), [$value], array_slice($array, $index));
     }

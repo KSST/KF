@@ -20,17 +20,13 @@ use Koch\Pagination\AdapterInterface;
  */
 class DoctrineCollection implements AdapterInterface
 {
-    /* @var Doctrine\Common\Collections\Collection */
-    private $collection;
-
     /**
      * Constructor.
      *
      * @param Collection $collection A Doctrine collection.
      */
-    public function __construct(Collection $collection)
+    public function __construct(private Collection $collection)
     {
-        $this->collection = $collection;
     }
 
     /**

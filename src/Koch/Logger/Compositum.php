@@ -71,7 +71,7 @@ class Compositum
 
         foreach ($this->loggers as $key => $compositeLogger) {
             // compare classnames
-            if (get_class($compositeLogger) === $logger) {
+            if ($compositeLogger::class === $logger) {
                 unset($this->loggers[$key]);
             }
         }

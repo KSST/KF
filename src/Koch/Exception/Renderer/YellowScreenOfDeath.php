@@ -161,7 +161,7 @@ class YellowScreenOfDeath
 
         // save session before exit - but only if this is not a pdo exception
         // that would trigger a fatal error, when trying to write to the db during session save
-        if ((bool) session_id() and false === strpos($message, 'SQLSTATE')) {
+        if ((bool) session_id() and !str_contains($message, 'SQLSTATE')) {
             session_write_close();
         }
 

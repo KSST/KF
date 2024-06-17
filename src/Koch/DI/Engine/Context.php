@@ -19,7 +19,6 @@ use Koch\DI\Lifecycle\Value;
 
 class Context
 {
-    private $parent;
     /*private $repository;*/
     private $registry  = [];
     private $variables = [];
@@ -27,9 +26,8 @@ class Context
     private $types     = [];
     private $wrappers  = [];
 
-    public function __construct($parent)
+    public function __construct(private $parent)
     {
-        $this->parent = $parent;
     }
 
     public function willUse($preference)

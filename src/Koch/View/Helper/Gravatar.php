@@ -26,7 +26,7 @@ namespace Koch\View\Helper;
  * 2) TalkPHP :
  *    http://www.talkphp.com/script-giveaway/1905-gravatar-wrapper-class.html
  */
-class Gravatar
+class Gravatar implements \Stringable
 {
     // Gravatar BASE URL
     private $gravatar_baseurl = 'http://www.gravatar.com/avatar/%s?&size=%s&rating=%s&default=%s';
@@ -222,8 +222,8 @@ class Gravatar
     /**
      *  toString.
      */
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getHTML();
+        return (string) $this->getHTML();
     }
 }
