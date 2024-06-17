@@ -38,13 +38,14 @@
         "symfony/mailer"                 : "^7.1"
     },
     "require-dev": {
-        "browscap/browscap-php"          : "^7.4",
-        "doctrine/data-fixtures"         : "*",
-        "friendsofphp/php-cs-fixer"      : "*",
-        "mikey179/vfsstream"             : "^1.6",
-        "php-coveralls/php-coveralls"    : "^2.7",
-        "phpstan/phpstan"                : "^1.11",
-        "phpunit/phpunit"                : "^11"
+        "browscap/browscap-php": "^7.4",
+        "doctrine/data-fixtures": "*",
+        "friendsofphp/php-cs-fixer": "*",
+        "mikey179/vfsstream": "^1.6",
+        "php-coveralls/php-coveralls": "^2.7",
+        "phpstan/phpstan": "^1.11",
+        "phpunit/phpunit": "^11",
+        "rector/rector": "^1.1"
     },
     "suggest": {
         "ext-apc"         : "*",
@@ -55,10 +56,10 @@
         "ext-yaml"        : "*"
     },
     "autoload": {
-        "psr-0": { "Koch\\": "framework/" }
+        "psr-4": { "Koch\\": "framework/Koch/" }
     },
     "autoload-dev": {
-        "psr-0": { "KochTest\\": "tests/" }
+        "psr-4": { "KochTest\\": "tests/KochTest/" }
     },
     "scripts": {
         "post-update-cmd": [
@@ -66,6 +67,9 @@
         ],
         "post-install-cmd": [
             "composer dump-autoload --optimize"
+        ],
+        "phpstan": [
+            "vendor/bin/phpstan analyse -c ./build-tools/phpstan/phpstan.neon.dist --memory-limit=1G"
         ]
     },
     "config": {
