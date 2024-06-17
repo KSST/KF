@@ -56,7 +56,7 @@
         "ext-yaml"        : "*"
     },
     "autoload": {
-        "psr-4": { "Koch\\": "framework/Koch/" }
+        "psr-4": { "Koch\\": "src/Koch/" }
     },
     "autoload-dev": {
         "psr-4": { "KochTest\\": "tests/KochTest/" }
