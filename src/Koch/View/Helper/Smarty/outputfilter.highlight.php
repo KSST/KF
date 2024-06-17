@@ -30,7 +30,7 @@ function smarty_outputfilter_highlight($source, $smarty)
     $highlight                 = $_REQUEST['highlight'];
     $feature_referer_highlight = $GLOBALS['feature_referer_highlight']; // @todo remove globals
 
-    if (isset($feature_referer_highlight) && $$feature_referer_highlight === 'y') {
+    if (isset($feature_referer_highlight) && ${$feature_referer_highlight} === 'y') {
         $refererhi = _refererhi();
         if (($refererhi !== null) && !empty($refererhi)) {
             if (($highlight !== null) && !empty($highlight)) {
