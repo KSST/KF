@@ -153,7 +153,7 @@ class YellowScreenOfDeath
          *
          * Footer with Support-Backlinks
          */
-        $html  .= Errorhandler::getSupportBacklinks($this);
+        $html  .= Errorhandler::getSupportBacklinks();
 
         // close all html elements: fieldset, body+page
         $html   .= '</fieldset>';

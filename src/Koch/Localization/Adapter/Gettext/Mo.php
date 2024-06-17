@@ -75,7 +75,7 @@ class Mo
 
         // calculate
         foreach ($offsets as $v) {
-            list($o1, $l1, $o2, $l2) = $v;
+            [$o1, $l1, $o2, $l2] = $v;
             $key_offsets[]           = $l1;
             $key_offsets[]           = $o1 + $key_start;
             $value_offsets[]         = $l2;

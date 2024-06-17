@@ -49,7 +49,7 @@ class Po
                 continue;
             }
 
-            list($key, $data) = preg_split('/\s/', $line, 2);
+            [$key, $data] = preg_split('/\s/', $line, 2);
 
             switch ($key) {
                 case '#,': // flag...

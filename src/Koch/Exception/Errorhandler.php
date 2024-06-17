@@ -461,7 +461,7 @@ class Errorhandler
                 $html .= 'public';
             }
             $html .= ' </span><span>$' . $p->getName() . ' </span>';
-            $html .= '<span>' . self::formatBacktraceArgument($p->getValue($class), $nestingLevel - 1) . '</span>';
+            $html .= '<span>' . self::formatBacktraceArgument($p->getValue($class)) . '</span>';
             $html .= '</li>';
         }
         $html .= '</ul>';

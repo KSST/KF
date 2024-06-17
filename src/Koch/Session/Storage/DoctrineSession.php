@@ -20,7 +20,7 @@ use Koch\Session\AbstractSession;
 class DoctrineSession extends AbstractSession
 {
     // stop applications to influcence each other by applying a session_name
-    const SESSION_NAME = 'CsuiteSID';
+    public const SESSION_NAME = 'CsuiteSID';
 
     /**
      * Session Expire time in seconds.

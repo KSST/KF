@@ -35,7 +35,7 @@ class SecurityToken extends Hidden implements FormElementInterface
             $validHash = null;
         }
 
-        $this->addValidator('Identical', true, [$validHash]);
+        $this->addValidator('Identical', true);
 
         return $this;
     }

@@ -22,8 +22,8 @@ use Koch\Localization\ExtractorInterface;
  */
 class Template extends ExtractorBase implements ExtractorInterface
 {
-    const L_DELIMITER = '{';
-    const R_DELIMITER = '}';
+    public const L_DELIMITER = '{';
+    public const R_DELIMITER = '}';
 
     /**
      * This regexp is based on "tsmarty2c.php".
@@ -32,7 +32,7 @@ class Template extends ExtractorBase implements ExtractorInterface
      *
      * @const regexp to match the smarty curly bracket syntax
      */
-    const REGEXP = "/__LD__\s*(__TAGS__)\s*([^__RD__]*)__RD__([^__LD__]*)__LD__\/\\1__RD__/";
+    public const REGEXP = "/__LD__\s*(__TAGS__)\s*([^__RD__]*)__RD__([^__LD__]*)__LD__\/\\1__RD__/";
 
     /**
      * The function tags to extract translation strings from.

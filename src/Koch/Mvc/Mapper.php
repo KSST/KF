@@ -22,19 +22,19 @@ namespace Koch\Mvc;
 class Mapper extends \ArrayObject
 {
     /* @const string Classname prefix for modules */
-    const MODULE_NAMESPACE = '\Modules';
+    public const MODULE_NAMESPACE = '\Modules';
 
     /* @const string suffix for module controller files */
-    const MODULE_CLASS_SUFFIX = 'Controller.php';
+    public const MODULE_CLASS_SUFFIX = 'Controller.php';
 
     /* @const string Method prefix for module actions */
-    const ACTION_PREFIX = 'action';
+    public const ACTION_PREFIX = 'action';
 
     /* @const string Name of the Default Module */
-    const DEFAULT_MODULE = 'index';
+    public const DEFAULT_MODULE = 'index';
 
     /* @const string Name of the Default Action */
-    const DEFAULT_ACTION = 'index';
+    public const DEFAULT_ACTION = 'index';
 
     public static $applicationNamespace = '';
 

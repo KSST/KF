@@ -319,7 +319,7 @@ class Router implements RouterInterface, \ArrayAccess
         // if urlstring is array, then a relation (urlstring => parameter_order) is given
         if (is_array($url)) {
             $parameterOrder             = '';
-            list($url, $parameterOrder) = each($url);
+            [$url, $parameterOrder] = each($url);
         }
 
         // return, if urlstring is already a qualified url (http://...)
@@ -720,7 +720,7 @@ class Router implements RouterInterface, \ArrayAccess
             $query_pair = '';
             foreach ($uri_query_array as $query_pair) {
                 if (false !== strpos($query_pair, '=')) {
-                    list($key, $value)  = explode('=', $query_pair);
+                    [$key, $value]  = explode('=', $query_pair);
                     $uri_segments[$key] = $value;
                 }
             }

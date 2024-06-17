@@ -49,7 +49,7 @@ class SessionSecurity implements FilterInterface
             if (!isset($_SESSION['client_ip'])) {
                 $_SESSION['client_ip'] = $_SERVER['REMOTE_ADDR'];
             } elseif ($_SERVER['REMOTE_ADDR'] !== $_SESSION['client_ip']) {
-                session_destroy(session_id());
+                session_destroy();
 
                 $this->response->redirect('index.php?mod=login');
             }

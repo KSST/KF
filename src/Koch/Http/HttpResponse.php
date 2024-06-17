@@ -422,7 +422,7 @@ class HttpResponse implements HttpResponseInterface
 
             if (empty($redirect_html) === false) {
                 #self::addHeader('Location', $url);
-                self::setContent($redirect_html, $time, htmlspecialchars($url, ENT_QUOTES, 'UTF-8'));
+                self::setContent($redirect_html, $time);
             }
 
             // Flush the content on the normal way!

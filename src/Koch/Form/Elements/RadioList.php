@@ -34,7 +34,7 @@ class RadioList extends Radio implements FormElementInterface
     {
         $i    = 0;
         $html = '';
-        while (list($key, $value) = each($this->options)) {
+        while ([$key, $value] = each($this->options)) {
             // setup a new radio formelement
             $radio = new   \Koch\Form\Element\Radio();
             $radio->setValue($key)

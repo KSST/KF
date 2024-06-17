@@ -44,7 +44,7 @@ function smarty_function_serverload($params)
                 // get average server load in the last minute. Keep quiet cause virtual hosts can give perm denied
                 if (is_readable('/proc/loadavg') and $load = file('/proc/loadavg')) {
                     $serverload       = [];
-                    list($serverload) = explode(' ', $load[0]);
+                    [$serverload] = explode(' ', $load[0]);
 
                     return $serverload;
                 }

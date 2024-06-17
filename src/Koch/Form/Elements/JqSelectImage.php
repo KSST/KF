@@ -33,7 +33,7 @@ class JqSelectImage extends Select implements FormElementInterface
     {
         $dir = new \Koch\Files\Directory();
 
-        $files = $dir->getFiles($this->getDirectory(), true);
+        $files = $dir->getFiles($this->getDirectory());
 
         return $files;
     }

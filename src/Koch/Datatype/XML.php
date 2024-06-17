@@ -19,9 +19,9 @@ namespace Koch\Datatype;
  */
 class XML
 {
-    const MAX_RECURSION_DEPTH_ALLOWED = 25;
-    const FETCH_ATTRIBUTES            = true;
-    const REMOVE_ATTRIBUTES_SUBLEVEL  = true;
+    public const MAX_RECURSION_DEPTH_ALLOWED = 25;
+    public const FETCH_ATTRIBUTES            = true;
+    public const REMOVE_ATTRIBUTES_SUBLEVEL  = true;
 
     /**
      * toJson.
