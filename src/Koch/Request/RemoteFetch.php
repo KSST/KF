@@ -15,36 +15,11 @@ namespace Koch\Request;
 /**
  * Koch Framework Remote Request Manager.
  *
- * 1: Snoppy
- * 2: cURL
- * 3: Remote
- * (4: FTP)
+ * 1: cURL
+ * 2: Remote
  */
 class RemoteFetch
 {
-    /**
-     * Fetches remote content with Snoopy.
-     *
-     * @param $url URL of remote content to fetch
-     */
-    public static function snoopyGetFile($url)
-    {
-        $remote_content = null;
-
-        $s = new \Snoopy();
-        $s->fetch($url);
-
-        if ($s->status === 200) {
-            $content = $s->results;
-        }
-
-        if (false === empty($content)) {
-            return $content;
-        }
-
-        return false;
-    }
-
     /**
      * Fetches remote content with cURL.
      *
