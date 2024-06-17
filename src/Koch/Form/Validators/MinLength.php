@@ -64,7 +64,7 @@ class MinLength extends Validator
             return mb_strlen($string, 'UTF-8');
         }
 
-        return strlen(utf8_decode($string));
+        return strlen(mb_convert_encoding($string, 'ISO-8859-1'));
     }
 
     protected function processValidationLogic($value)

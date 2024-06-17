@@ -326,7 +326,7 @@ class ManifestManager
 
         // lets recurse this directory
         $iterator = new \RecursiveIteratorIterator(
-            new \RecursiveDirectoryIterator($moduleLangDir, \FilesystemIterator::UNIX_PATHS),
+            new \RecursiveDirectoryIterator($moduleLangDir, \FilesystemIterator::UNIX_PATHS | \FilesystemIterator::SKIP_DOTS),
             \RecursiveIteratorIterator::LEAVES_ONLY
         );
 
