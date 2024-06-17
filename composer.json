@@ -37,6 +37,7 @@
         "symfony/mailer"                  : "^7.1"
     },
     "require-dev": {
+        "browscap/browscap-php"           : "^7.4",
         "doctrine/data-fixtures"          : "*",
         "friendsofphp/php-cs-fixer"       : "*",
         "mikey179/vfsstream"              : "^1.6",
