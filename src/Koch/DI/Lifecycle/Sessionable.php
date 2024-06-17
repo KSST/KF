@@ -21,7 +21,7 @@ class Sessionable extends AbstractLifecycle
     public function __construct($class, $slot = false)
     {
         parent::__construct($class);
-        $this->slot = $slot ? $slot : $class;
+        $this->slot = $slot ?: $class;
     }
 
     public function instantiate($dependencies)

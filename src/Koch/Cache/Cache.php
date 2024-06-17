@@ -77,7 +77,7 @@ class Cache
     {
         $data = self::$cacheAdapter->fetch($key);
 
-        return ($data) ? $data : null;
+        return $data ?: null;
     }
 
     /**
