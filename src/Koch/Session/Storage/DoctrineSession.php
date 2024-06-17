@@ -289,7 +289,7 @@ class DoctrineSession extends AbstractSession
             [
                 'id'         => $session_id,
                 'name'       => self::SESSION_NAME,
-                'time'       => (int) time(),
+                'time'       => time(),
                 'data'       => $data, // @todo serialize($data)
                 'visibility' => '1', // @todo ghost mode
                 'where'      => 'session_start',

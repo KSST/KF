@@ -26,7 +26,7 @@ use Koch\View\AbstractRenderer;
 class Smarty extends AbstractRenderer
 {
     /* @var \Smarty */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Constructor.

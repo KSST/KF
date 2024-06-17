@@ -24,7 +24,7 @@ class PunBB implements StyleInterface
     public function render(\Koch\Pagination\Pagination $pagination)
     {
         $current_page = $pagination->getCurrentPage();
-        $total_pages;
+        $total_pages = 10;
 
         $html = '<nav class="pagination">' . _('Pages');
 

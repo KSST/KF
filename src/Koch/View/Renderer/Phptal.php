@@ -25,7 +25,7 @@ use Koch\View\AbstractRenderer;
 class Phptal extends AbstractRenderer
 {
     /* @var \PHPTAL */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Constructor.
@@ -34,7 +34,7 @@ class Phptal extends AbstractRenderer
      */
     public function __construct($options = [])
     {
-        parent::__construct($config);
+        parent::__construct($options);
         $this->initializeEngine();
         $this->configureEngine();
     }

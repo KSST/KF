@@ -235,14 +235,12 @@ class Html /* extends DOMDocument */
     {
         $html = '';
 
-        if (is_array($attributes)) {
-            // insert all attributes, but ignore null values
-            foreach ($attributes as $key => $value) {
-                if (is_null($value)) {
-                    continue;
-                }
-                $html .= ' ' . $key . '"' . $value . '"';
+        // insert all attributes, but ignore null values
+        foreach ($attributes as $key => $value) {
+            if (is_null($value)) {
+                continue;
             }
+            $html .= ' ' . $key . '"' . $value . '"';
         }
 
         return $html;

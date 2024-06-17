@@ -29,7 +29,7 @@ class Manager
     public function __construct($module)
     {
         // load the relavant stuff of the module
-        // $this->config = loadRelevantStuff($module);
+        $this->config = loadRelevantStuff($module);
 
         // allow fluent chaining
         return $this;

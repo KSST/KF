@@ -82,7 +82,7 @@ class Gravatar implements \Stringable
           throw new \InvalidArgumentException('Invalid value of $email: '.$email);
           } */
 
-        $this->email = (string) strtolower((string) $email);
+        $this->email = strtolower((string) $email);
 
         $this->gravatar_properties['gravatar_id'] = md5($this->email);
 
@@ -120,7 +120,7 @@ class Gravatar implements \Stringable
      */
     public function setDefaultAvatar($image_url)
     {
-        $this->gravatar_properties['default'] = (string) urlencode((string) $image_url);
+        $this->gravatar_properties['default'] = urlencode((string) $image_url);
 
         return $this;
     }
@@ -171,7 +171,7 @@ class Gravatar implements \Stringable
      */
     public function getGravatarURL()
     {
-        $gravatar_url = (string) sprintf(
+        $gravatar_url = sprintf(
             $this->gravatar_baseurl,
             $this->gravatar_properties['gravatar_id'],
             $this->gravatar_properties['size'],

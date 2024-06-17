@@ -30,8 +30,8 @@ function Smarty_function_googleanalytics($params, $smarty)
         $config    = Clansuite_CMS::getInjector('Koch_Config');
         $google_id = $config->getConfigValue('googleanalytics_id');
 
-        if (empty($google_id) === false) {
-        } else { // no code provided via smarty function nor config
+        if (empty($google_id) !== false) {
+            // no code provided via smarty function nor config
             trigger_error("google_analytics: the parameter 'code' is missing. please specifiy your GA urchin id.");
 
             return;

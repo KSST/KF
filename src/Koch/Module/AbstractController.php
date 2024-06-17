@@ -28,37 +28,37 @@ abstract class AbstractController
     /**
      * @var object The rendering engine / view object
      */
-    public $view = null;
+    public $view;
 
     /**
      * @var string Name of the rendering engine
      */
-    public $renderEngineName = null;
+    public $renderEngineName;
 
     /**
      * @var string The name of the template to render
      */
-    public $template = null;
+    public $template;
 
     /**
      * @var \Koch\Http\HttpResponse
      */
-    public $response = null;
+    public $response;
 
     /**
      * @var \Koch\Http\HttpRequest
      */
-    public $request = null;
+    public $request;
 
     /**
      * @var \Doctrine\ORM\EntityManager
      */
-    public $entityManager = null;
+    public $entityManager;
 
     /**
      * @var array The Module Configuration Array
      */
-    public static $moduleconfig = null;
+    public static $moduleconfig;
 
     public function __construct(HttpRequestInterface $request, HttpResponseInterface $response)
     {

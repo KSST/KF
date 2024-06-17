@@ -47,7 +47,6 @@ class ClassRepository
     {
         $reflection = self::$reflection->reflection($class);
 
-        $constructor = '';
         $constructor = $reflection->getConstructor();
         if ($constructor) {
             return $constructor->getParameters();

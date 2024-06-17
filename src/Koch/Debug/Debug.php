@@ -34,7 +34,6 @@ class Debug
             $vars = func_get_args();
         }
 
-        $backtrace_array = [];
         $backtrace_array = debug_backtrace();
         $trace           = array_shift($backtrace_array);
         $file            = file($trace['file']);

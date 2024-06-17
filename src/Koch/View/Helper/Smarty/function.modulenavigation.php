@@ -53,8 +53,6 @@ function Smarty_function_modulenavigation($params, $smarty)
  * 1) convert short urls
  * 2) execute callback conditions of menu items
  * 3) use name as title, if title is not defined
- *
- * @param array $modulenavigation
  */
 function applyCallbacks(array $modulenavigation)
 {

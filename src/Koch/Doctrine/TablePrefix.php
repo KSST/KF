@@ -37,9 +37,6 @@ class TablePrefix implements \Doctrine\Common\EventSubscriber
         return ['loadClassMetadata'];
     }
 
-    /**
-     * @param \Doctrine\ORM\Event\LoadClassMetadataEventArgs $eventArgs
-     */
     public function loadClassMetadata(LoadClassMetadataEventArgs $eventArgs)
     {
         $classMetadata = $eventArgs->getClassMetadata();

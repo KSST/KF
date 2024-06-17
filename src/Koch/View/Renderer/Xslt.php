@@ -22,14 +22,14 @@ use Koch\View\AbstractRenderer;
 class Xslt extends AbstractRenderer
 {
     /* @var \XSLTProcessor */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Absolute path to the XSL StyleSheet file.
      *
      * @var string
      */
-    public $xslfile = null;
+    public $xslfile;
 
     /**
      * Constructor.

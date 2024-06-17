@@ -33,7 +33,6 @@ class EntityTool
      * Creates an entity with the given data.
      *
      * @param string|object $entity
-     * @param array         $data
      *
      * @return object
      */

@@ -47,8 +47,6 @@ class Pagination
 
     /**
      * Sets the pagination adapter (data provider).
-     *
-     * @param \Koch\Pagination\AdapterInterface $adapter
      */
     public function __construct(AdapterInterface $adapter)
     {

@@ -24,7 +24,7 @@ use Koch\View\AbstractRenderer;
 class Pdf extends AbstractRenderer
 {
     /* @var \mPDF */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Constructor.

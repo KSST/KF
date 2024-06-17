@@ -30,27 +30,27 @@ abstract class AbstractRenderer
     /**
      * @var object Holds instance of the Rendering Engine Object
      */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * @var object Holds instance of the Theme Object
      */
-    public $theme = null;
+    public $theme;
 
     /**
      * @var string The layout template
      */
-    public $layoutTemplate = null;
+    public $layoutTemplate;
 
     /**
      * @var string Variable for the RenderMode (LAYOUT, PARTIAL)
      */
-    public $renderMode = null;
+    public $renderMode;
 
     /**
      * @var object Koch\Config
      */
-    protected $config = null;
+    protected $config;
 
     /**
      * @var array|object Viewdata
@@ -60,7 +60,7 @@ abstract class AbstractRenderer
     /**
      * @var object Koch\View\Mapper
      */
-    public $viewMapper = null;
+    public $viewMapper;
 
     /**
      * Directive for auto-escaping of template variables before rendering.
@@ -95,8 +95,6 @@ abstract class AbstractRenderer
 
     /**
      * Set options.
-     *
-     * @param array $options
      */
     public function setOptions(array $options)
     {

@@ -27,7 +27,7 @@ use Koch\View\AbstractRenderer;
 class Less extends AbstractRenderer
 {
     /* @var \LessC */
-    public $renderer = null;
+    public $renderer;
 
     /**
      * Constructor.

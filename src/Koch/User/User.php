@@ -20,7 +20,7 @@ class User
     /**
      * @var object User Object
      */
-    private $user = null;
+    private $user;
 
     /**
      * Constructor.

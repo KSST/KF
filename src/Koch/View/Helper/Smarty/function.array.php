@@ -54,8 +54,6 @@ function smarty_function_array($params, $smarty)
         return;
     }
 
-    // set up temporary array
-    $temporary_array = [];
     // explode values at delimiter into the array
     $temporary_array = explode($params['delimiter'], (string) $params['values']);
 

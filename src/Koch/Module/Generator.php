@@ -28,7 +28,7 @@ class Generator
         'files'   => [],
     ];
 
-    public $module = null;
+    public $module;
 
     public function __construct($module)
     {

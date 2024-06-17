@@ -23,12 +23,12 @@ class Guest
     /**
      * @var object Koch_GuestUser is a singleton.
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * @var object Koch\Configuration
      */
-    private $config = null;
+    private $config;
 
     /**
      * @todo get rid of singleton

@@ -42,6 +42,8 @@ class CompositeView implements ViewNodeInterface
      */
     private $components = [];
 
+    private $composite = [];
+
     /**
      * Adds / appends a new view-node (leaf-object) to the bottom of the stack.
      */

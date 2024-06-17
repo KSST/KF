@@ -32,7 +32,7 @@ class Mapper
     /**
      * @var string Template name.
      */
-    public $template = null;
+    public $template;
 
     /**
      * Returns the Template Name

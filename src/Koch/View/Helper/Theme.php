@@ -305,10 +305,10 @@ class Theme
                     $themes[$i]['type'] = $type;
 
                     // add dirname
-                    $themes[$i]['name'] = $type . DIRECTORY_SEPARATOR . (string) $dir;
+                    $themes[$i]['name'] = $type . DIRECTORY_SEPARATOR . $dir;
                 } else {
                     // add dirname
-                    $themes[$i] = $type . DIRECTORY_SEPARATOR . (string) $dir;
+                    $themes[$i] = $type . DIRECTORY_SEPARATOR . $dir;
                 }
             }
         }
