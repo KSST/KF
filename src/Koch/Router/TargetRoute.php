@@ -103,7 +103,7 @@ class TargetRoute extends Mapper
 
     public static function setController($controller)
     {
-        self::$parameters['controller'] = ucfirst($controller);
+        self::$parameters['controller'] = ucfirst((string) $controller);
     }
 
     /**
@@ -119,12 +119,12 @@ class TargetRoute extends Mapper
             self::$parameters['controller'] = self::$parameters['module'];
         }
 
-        return ucfirst(self::$parameters['controller']);
+        return ucfirst((string) self::$parameters['controller']);
     }
 
     public static function getModule()
     {
-        return ucfirst(self::$parameters['module']);
+        return ucfirst((string) self::$parameters['module']);
     }
 
     public static function setModule($module)

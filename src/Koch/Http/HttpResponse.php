@@ -261,25 +261,25 @@ class HttpResponse implements HttpResponseInterface
 
         if (false === empty($domain)) {
             // Fix the domain to accept domains with and without 'www.'.
-            if (mb_strtolower(mb_substr($domain, 0, 4)) === 'www.') {
-                $domain = mb_substr($domain, 4);
+            if (mb_strtolower(mb_substr((string) $domain, 0, 4)) === 'www.') {
+                $domain = mb_substr((string) $domain, 4);
             }
 
             // Add the dot prefix to ensure compatibility with subdomains
-            if (mb_substr($domain, 0, 1) !== '.') {
+            if (mb_substr((string) $domain, 0, 1) !== '.') {
                 $domain = '.' . $domain;
             }
 
             // Remove port information.
-            $port = mb_strpos($domain, ':');
+            $port = mb_strpos((string) $domain, ':');
 
             if ($port !== false) {
-                $domain = mb_substr($domain, 0, $port);
+                $domain = mb_substr((string) $domain, 0, $port);
             }
         }
 
         header(
-            'Set-Cookie: ' . rawurlencode($name) . '=' . rawurlencode($value)
+            'Set-Cookie: ' . rawurlencode((string) $name) . '=' . rawurlencode((string) $value)
             . (true === empty($domain) ? '' : '; Domain=' . $domain)
             . (true === empty($maxage) ? '' : '; Max-Age=' . $maxage)
             . (true === empty($path) ? '' : '; Path=' . $path)

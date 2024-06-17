@@ -56,10 +56,10 @@ class FrontController implements FrontControllerInterface
     public function __construct(/**
      * @var object \Koch\Http\HttpRequest
      */
-    private HttpRequestInterface $request, /**
+    private readonly HttpRequestInterface $request, /**
      * @var object \Koch\Http\HttpResponse
      */
-    private HttpResponseInterface $response)
+    private readonly HttpResponseInterface $response)
     {
         $this->preFilterManager  = new \Koch\Filter\FilterManager();
         $this->postFilterManager = new \Koch\Filter\FilterManager();

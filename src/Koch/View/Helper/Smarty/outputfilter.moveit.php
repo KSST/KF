@@ -20,7 +20,7 @@ function smarty_outputfilter_moveit($tpl_output, $smarty)
 {
     // PRE_HEAD_CLOSE = x</head>
     $matches = [];
-    preg_match_all('!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is', $tpl_output, $matches);
+    preg_match_all('!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is', (string) $tpl_output, $matches);
     $tpl_output = preg_replace('!@@@SMARTY:PRE_HEAD_CLOSE:BEGIN@@@(.*?)@@@SMARTY:PRE_HEAD_CLOSE:END@@@!is', '', $tpl_output);
     $tpl_output = str_replace('</head>', implode("\n", array_keys(array_flip($matches[1]))) . "\n" . '</head>', $tpl_output);
 

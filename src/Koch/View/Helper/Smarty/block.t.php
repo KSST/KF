@@ -80,7 +80,7 @@ function Smarty_block_t($params, $text, $smarty)
         return;
     }
 
-    $text = stripslashes($text);
+    $text = stripslashes((string) $text);
 
     // set escape mode
     if (isset($params['escape'])) {

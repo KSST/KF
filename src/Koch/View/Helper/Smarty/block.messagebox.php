@@ -14,7 +14,7 @@
  */
 function Smarty_block_messagebox($params, $text, $smarty)
 {
-    $text          = stripslashes($text);
+    $text          = stripslashes((string) $text);
     $textbox_type  = null;
     $textbox_level = null;
 
@@ -28,8 +28,8 @@ function Smarty_block_messagebox($params, $text, $smarty)
     // whitelist for messagebox levels
     $messagebox_level = ['hint', 'notice', 'alert', 'info'];
 
-    if ($params['level'] !== null and in_array(mb_strtolower($params['level']), $messagebox_level, true)) {
-        $textbox_level = mb_strtolower($params['level']);
+    if ($params['level'] !== null and in_array(mb_strtolower((string) $params['level']), $messagebox_level, true)) {
+        $textbox_level = mb_strtolower((string) $params['level']);
     } else {
         return trigger_error('Please define a parameter level, e.g. hint, notice, alert, info.');
     }

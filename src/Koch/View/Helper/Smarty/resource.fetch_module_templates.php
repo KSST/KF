@@ -2,7 +2,7 @@
 
 function smarty_fetch_module_templates($resource_type, $resource_name, &$template_source, &$template_timestamp, $smarty)
 {
-    $resource_name = substr_replace($resource_name, '/view', mb_strpos($resource_name, '/'), 0);
+    $resource_name = substr_replace($resource_name, '/view', mb_strpos((string) $resource_name, '/'), 0);
     $template      = APPLICATION_MODULES_PATH . $resource_name;
 
     if (is_readable($template)) {

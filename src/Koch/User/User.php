@@ -357,7 +357,7 @@ class User
     {
         // Check for login cookie
         if (isset($_COOKIE['cs_cookie'])) {
-            $cookie_array    = explode('#', $_COOKIE['cs_cookie']);
+            $cookie_array    = explode('#', (string) $_COOKIE['cs_cookie']);
             $cookie_user_id  = (int) $cookie_array['0'];
             $cookie_password = (string) $cookie_array['1'];
 

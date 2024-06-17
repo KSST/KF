@@ -134,7 +134,7 @@ class Download
              */
             if (isset($_SERVER['HTTP_RANGE'])) {
                 // calculate the range to use
-                $range = explode('-', mb_substr($_SERVER['HTTP_RANGE'], 6));
+                $range = explode('-', mb_substr((string) $_SERVER['HTTP_RANGE'], 6));
 
                 $seekStart = intval($range[0]);
 

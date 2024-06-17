@@ -129,10 +129,10 @@ class Bbcode
          */
         foreach ($bbcodes as $key => $code) {
             // allowed
-            $allowed_in = explode(',', $code['allowed_in']);
+            $allowed_in = explode(',', (string) $code['allowed_in']);
 
             // not allowed
-            $not_allowed_in = explode(',', $code['not_allowed_in']);
+            $not_allowed_in = explode(',', (string) $code['not_allowed_in']);
 
             /*
              * assign the code via stringparser object and its method addCode()
@@ -181,10 +181,10 @@ class Bbcode
         }
 
         if (!isset($attributes['default'])) {
-            return '<a href="' . htmlspecialchars($content) . '">' . htmlspecialchars($content) . '</a>';
+            return '<a href="' . htmlspecialchars((string) $content) . '">' . htmlspecialchars((string) $content) . '</a>';
         }
 
-        return '<a href="' . htmlspecialchars($attributes['default']) . '">' . $content . '</a>';
+        return '<a href="' . htmlspecialchars((string) $attributes['default']) . '">' . $content . '</a>';
     }
 
     /**
@@ -200,7 +200,7 @@ class Bbcode
             return true;
         }
 
-        return '<img src="' . htmlspecialchars($content) . '" alt="">';
+        return '<img src="' . htmlspecialchars((string) $content) . '" alt="">';
     }
 
     /**

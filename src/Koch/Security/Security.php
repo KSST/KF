@@ -109,7 +109,7 @@ final class Security
             return skein_hash($string, 512);
         }
 
-        return hash($hash_algorithm, $string);
+        return hash((string) $hash_algorithm, (string) $string);
     }
 
     /**

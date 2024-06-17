@@ -373,7 +373,7 @@ class XDebug
              * $headers['0'] = 'Expires';
              * $headers['1'] = 'Thu, 19 Nov 1981 08:52:00 GMT';.
              */
-            $headers = explode(':', $header, 2);
+            $headers = explode(':', (string) $header, 2);
 
             echo '<tr><td class="td1">' . $headers[0] . '</td>';
             echo '<td class="td2">' . trim($headers[1]) . '</td></tr>';

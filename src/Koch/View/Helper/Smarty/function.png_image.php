@@ -57,7 +57,7 @@ function smarty_function_png_image($params, $smarty)
         $height           = $currentimagesize[1];
     }
 
-    if (false === (stristr($_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
+    if (false === (stristr((string) $_SERVER['HTTP_USER_AGENT'], 'MSIE'))) {
         $html = "<img src='$src' height='$height' width='$width' alt='$alt' $extra />";
     } else {
         $html = "<SPAN $extra STYLE='position:relative;height:$height;width:$width;filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src=\"$src\",sizingMethod=\"scale\");'></SPAN>";

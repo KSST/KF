@@ -37,7 +37,7 @@ function Smarty_block_move_to($params, $content, $smarty, &$repeat)
     }
 
     if (isset($params['target'])) {
-        $target = mb_strtoupper($params['target']);
+        $target = mb_strtoupper((string) $params['target']);
     } else {
         /*
          * the full errormessage is created by appending the first string

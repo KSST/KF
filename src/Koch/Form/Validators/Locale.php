@@ -37,7 +37,7 @@ class Locale extends Validator
         // @todo try to skip str_replace, explode, implode and use sscanf
         // list($short_code, $sublocale) = sscanf($locale, '%s-%s');
 
-        if (strlen($locale) === 2) {
+        if (strlen((string) $locale) === 2) {
             $short_code = $locale;
         } else {
             // 1) transform "de-DE" into "de_DE"
@@ -58,7 +58,7 @@ class Locale extends Validator
 
         if (isset($l10n_langs[$short_code]) || array_key_exists($short_code, $l10n_langs)) {
             // return if locale is just short_code, e.g. "de"
-            if (strlen($locale) === 2) {
+            if (strlen((string) $locale) === 2) {
                 return true;
             }
              // fetch sublocales (looks in "de" array, returns "de_AT", "de_CH", "de_DE"...)

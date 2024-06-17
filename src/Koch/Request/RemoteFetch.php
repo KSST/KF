@@ -96,7 +96,7 @@ class RemoteFetch
         $data = self::remoteGetFile($remote_file);
 
         if ($data !== false) {
-            if (sha1($data) !== sha1_file($local_file)) {
+            if (sha1((string) $data) !== sha1_file($local_file)) {
                 file_put_contents($local_file, $data);
             }
         }

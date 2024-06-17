@@ -41,7 +41,7 @@ class ImagesOnlyFileFilterIterator extends \FilterIterator
 
         // set filename and pathinfo
         $filename  = $current->getFilename();
-        $extension = pathinfo($filename, PATHINFO_EXTENSION);
+        $extension = pathinfo((string) $filename, PATHINFO_EXTENSION);
 
         // if false, it's not a whitelisted extension
         return (in_array($extension, $this->allowed_image_filetypes, true)) ? true : false;

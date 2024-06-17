@@ -121,7 +121,7 @@ class Localization
     {
         // if, $locale string is not over 3 chars long -> $locale = "en", build "en_EN"
         if (isset($locale[3]) === false) {
-            $locale = mb_strtolower($locale) . '_' . mb_strtoupper($locale);
+            $locale = mb_strtolower((string) $locale) . '_' . mb_strtoupper((string) $locale);
         }
 
         // Environment Variable LANGUAGE has priority above any local setting
@@ -220,7 +220,7 @@ class Localization
             return (array) mb_substr($lang, 0, 2);
         } else { // fallback for non "ext/intl" environments
             // explode environment variable HTTP_ACCEPT_LANGUAGE at ,
-            $browserLanguages = explode(',', $_SERVER['HTTP_ACCEPT_LANGUAGE']);
+            $browserLanguages = explode(',', (string) $_SERVER['HTTP_ACCEPT_LANGUAGE']);
 
             // convert the headers string to an array
             $browserLanguagesSize = count($browserLanguages);

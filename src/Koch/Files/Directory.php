@@ -112,7 +112,7 @@ class Directory
      */
     public function filePath($filePath)
     {
-        $fileParts = pathinfo($filePath);
+        $fileParts = pathinfo((string) $filePath);
 
         if (!isset($fileParts['filename'])) {
             $fileParts['filename'] = mb_substr($fileParts['basename'], 0, mb_strrpos($fileParts['basename'], '.'));
@@ -185,12 +185,12 @@ class Directory
                             $folder_path = $target_path;
                         }
 
-                        while (is_dir(dirname(end($folder_path)))
-                        and dirname(end($folder_path)) !== '/'
-                        and dirname(end($folder_path)) !== '.'
-                        and dirname(end($folder_path)) !== ''
-                        and !preg_match('#^[A-Za-z]+\:\\\$#', dirname(end($folder_path)))) {
-                            array_push($folder_path, dirname(end($folder_path)));
+                        while (is_dir(dirname((string) end($folder_path)))
+                        and dirname((string) end($folder_path)) !== '/'
+                        and dirname((string) end($folder_path)) !== '.'
+                        and dirname((string) end($folder_path)) !== ''
+                        and !preg_match('#^[A-Za-z]+\:\\\$#', dirname((string) end($folder_path)))) {
+                            array_push($folder_path, dirname((string) end($folder_path)));
                         }
 
                         while ($parent_folder_path = array_pop($folder_path)) {

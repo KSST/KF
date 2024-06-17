@@ -78,7 +78,7 @@ class Mapper extends \ArrayObject
 
         // Mapping Example:
         // "/Modules/News/Controller/" + "Index" + "Controller.php"
-        return $module_path . ucfirst($controller) . self::MODULE_CLASS_SUFFIX;
+        return $module_path . ucfirst((string) $controller) . self::MODULE_CLASS_SUFFIX;
     }
 
     /**

@@ -911,7 +911,7 @@ class Form implements FormInterface, \Stringable
          * create formelement identifier automatically if not set manually.
          * this is needed for javascript selections via id tag.
          */
-        if (strlen($formelement->getID()) === 0) {
+        if (strlen((string) $formelement->getID()) === 0) {
             $formelement->setID($formelement->type . '-formelement-' . count($this->formelements));
         }
 
@@ -961,9 +961,9 @@ class Form implements FormInterface, \Stringable
              * the last part separated by a minus (the id part) is stripped off
              * of the string.
              */
-            $pos_lastpart = strrpos($id, '-') + 1;
-            $pos          = strlen($id) - $pos_lastpart;
-            $firstpart    = substr($id, 0, -$pos);
+            $pos_lastpart = strrpos((string) $id, '-') + 1;
+            $pos          = strlen((string) $id) - $pos_lastpart;
+            $firstpart    = substr((string) $id, 0, -$pos);
 
             // the new id is then appended to the remaining firstpart of the string
             $id = $firstpart .= $i;

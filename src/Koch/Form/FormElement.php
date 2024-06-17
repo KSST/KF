@@ -930,7 +930,7 @@ class FormElement implements \Stringable
      */
     public function decoratorFactory($decorator)
     {
-        $class = '\Koch\Form\Decorators\Formelement\\' . ucfirst($decorator);
+        $class = '\Koch\Form\Decorators\Formelement\\' . ucfirst((string) $decorator);
 
         return new $class();
     }

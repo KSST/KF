@@ -63,7 +63,7 @@ class Loader
      */
     public function __construct()
     {
-        spl_autoload_register([$this, 'autoload'], true, true);
+        spl_autoload_register($this->autoload(...), true, true);
     }
 
     /**
@@ -424,7 +424,7 @@ class Loader
     {
         self::setClassMapFile($mapfile);
 
-        spl_autoload_register([self::class, 'autoload'], true, true);
+        spl_autoload_register(self::autoload(...), true, true);
     }
 
     /**
@@ -432,6 +432,6 @@ class Loader
      */
     public static function unregister()
     {
-        spl_autoload_unregister([self::class, 'autoload']);
+        spl_autoload_unregister(self::autoload(...));
     }
 }

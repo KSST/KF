@@ -55,7 +55,7 @@ class RegExp extends Validator
 
     protected function processValidationLogic($value)
     {
-        if (true === preg_match($this->regexp, $value)) {
+        if (true === preg_match($this->regexp, (string) $value)) {
             return true;
         } else {
             return false;

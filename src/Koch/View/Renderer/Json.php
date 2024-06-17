@@ -123,7 +123,7 @@ class Json extends AbstractRenderer
 
         $json = $this->jsonEncode($this->viewdata);
 
-        \Koch\Http\HttpResponse::addHeader('Content-Length', mb_strlen($json));
+        \Koch\Http\HttpResponse::addHeader('Content-Length', mb_strlen((string) $json));
 
         return $json;
     }

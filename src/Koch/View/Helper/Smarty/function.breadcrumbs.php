@@ -47,7 +47,7 @@ function Smarty_function_breadcrumbs($params, $smarty)
     $trailSize = count($trail);
     for ($i = 0; $i < $trailSize; ++$i) {
         if ($length > 0) {
-            $title = mb_substr($trail[$i]['title'], 0, $length);
+            $title = mb_substr((string) $trail[$i]['title'], 0, $length);
         } else {
             $title = $trail[$i]['title'];
         }
@@ -56,9 +56,9 @@ function Smarty_function_breadcrumbs($params, $smarty)
             // if parameter "title" (only) is not set, give links
             if (isset($params['title']) === false) {
                 $links[] = sprintf('<a href="%s" title="%s">%s</a>',
-                    htmlspecialchars($trail[$i]['link']),
-                    htmlspecialchars($trail[$i]['title']),
-                    htmlspecialchars($trail[$i]['title'])
+                    htmlspecialchars((string) $trail[$i]['link']),
+                    htmlspecialchars((string) $trail[$i]['title']),
+                    htmlspecialchars((string) $trail[$i]['title'])
                 );
             }
             // if parameter "title" is set, render title only

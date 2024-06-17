@@ -110,12 +110,12 @@ class DoctrineSession extends AbstractSession
          * Userspace Session Storage
          */
         session_set_save_handler(
-            [$this, 'open'],
-            [$this, 'close'],
-            [$this, 'read'],
-            [$this, 'write'],
-            [$this, 'destroy'],
-            [$this, 'gc']
+            $this->open(...),
+            $this->close(...),
+            $this->read(...),
+            $this->write(...),
+            $this->destroy(...),
+            $this->gc(...)
         );
 
         // prevents unexpected effects when using objects as save handlers
@@ -242,7 +242,7 @@ class DoctrineSession extends AbstractSession
             $uri = sprintf(
                 'http://%s%s',
                 $_SERVER['SERVER_NAME'],
-                dirname($_SERVER['PHP_SELF']) . 'installation/index.php'
+                dirname((string) $_SERVER['PHP_SELF']) . 'installation/index.php'
             );
             $uri = str_replace('\\', '/', $uri);
 

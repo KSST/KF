@@ -25,7 +25,7 @@ use Koch\Router\TargetRoute;
  */
 class SetModuleLanguage implements FilterInterface
 {
-    public function __construct(private Localization $locale)
+    public function __construct(private readonly Localization $locale)
     {
     }
 

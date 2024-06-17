@@ -30,7 +30,7 @@ class Factory
      */
     public static function getRenderer($adapter = 'smarty', $injector = null)
     {
-        $adapter = ucfirst($adapter);
+        $adapter = ucfirst((string) $adapter);
 
         $file = realpath(__DIR__ . '/Renderer/' . $adapter . '.php');
 

@@ -119,14 +119,14 @@ class YellowScreenOfDeath
          */
         $placeholders = [];
         // assign placeholders for replacements in the html
-        if (strpos($message, 'action_')) {
-            $placeholders['actionname'] = substr($message, strpos($message, 'action_'));
-        } elseif (strpos($message, 'module_')) {
-            $placeholders['classname'] = substr($message, strpos($message, 'module_'));
+        if (strpos((string) $message, 'action_')) {
+            $placeholders['actionname'] = substr((string) $message, strpos((string) $message, 'action_'));
+        } elseif (strpos((string) $message, 'module_')) {
+            $placeholders['classname'] = substr((string) $message, strpos((string) $message, 'module_'));
         }
 
         if (empty($_GET['mod']) === false) {
-            $placeholders['modulename'] = (string) stripslashes($_GET['mod']);
+            $placeholders['modulename'] = (string) stripslashes((string) $_GET['mod']);
         } else {
             $placeholders['modulename'] = '';
         }
@@ -161,7 +161,7 @@ class YellowScreenOfDeath
 
         // save session before exit - but only if this is not a pdo exception
         // that would trigger a fatal error, when trying to write to the db during session save
-        if ((bool) session_id() and !str_contains($message, 'SQLSTATE')) {
+        if ((bool) session_id() and !str_contains((string) $message, 'SQLSTATE')) {
             session_write_close();
         }
 
@@ -237,7 +237,7 @@ class YellowScreenOfDeath
         $html .= '<tr><td colspan="2"></td></tr>';
         $html .= '<tr><td><strong>Date: </strong></td><td>' . date('r') . '</td></tr>';
         $html .= '<tr><td><strong>Remote: </strong></td><td>' . $_SERVER['REMOTE_ADDR'] . '</td></tr>';
-        $html .= '<tr><td><strong>Request: </strong></td><td>' . htmlentities($_SERVER['QUERY_STRING'], ENT_QUOTES);
+        $html .= '<tr><td><strong>Request: </strong></td><td>' . htmlentities((string) $_SERVER['QUERY_STRING'], ENT_QUOTES);
         $html .= '</td></tr>';
         $html .= '<tr><td><strong>PHP: </strong></td><td>' . PHP_VERSION . ' ' . PHP_EXTRA_VERSION . '</td></tr>';
         $html .= '<tr><td><strong>Server: </strong></td><td>' . $_SERVER['SERVER_SOFTWARE'] . '</td></tr>';

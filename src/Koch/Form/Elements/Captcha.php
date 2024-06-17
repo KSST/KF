@@ -51,7 +51,7 @@ class Captcha extends FormElement implements FormElementInterface
             unset($config);
         }
 
-        $this->captcha = mb_strtolower($captcha);
+        $this->captcha = mb_strtolower((string) $captcha);
 
         return $this;
     }

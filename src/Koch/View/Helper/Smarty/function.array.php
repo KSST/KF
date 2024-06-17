@@ -57,7 +57,7 @@ function smarty_function_array($params, $smarty)
     // set up temporary array
     $temporary_array = [];
     // explode values at delimiter into the array
-    $temporary_array = explode($params['delimiter'], $params['values']);
+    $temporary_array = explode($params['delimiter'], (string) $params['values']);
 
     // ok, check the assigned template vars and see if a variable name exists and if it's an array
     if (is_array($smarty->getTemplateVars($params['name']))) {

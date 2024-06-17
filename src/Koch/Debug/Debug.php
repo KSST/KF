@@ -116,7 +116,7 @@ class Debug
          */
         if (false === extension_loaded('xdebug')) {
             $var_dump = preg_replace('/\]\=\>\n(\s+)/m', '] => ', $var_dump);
-            $var_dump = '<pre>' . htmlspecialchars($var_dump, ENT_QUOTES, 'UTF-8') . '</pre>';
+            $var_dump = '<pre>' . htmlspecialchars((string) $var_dump, ENT_QUOTES, 'UTF-8') . '</pre>';
         }
 
         // display where this debug statement

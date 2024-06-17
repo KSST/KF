@@ -41,7 +41,7 @@ class XML
             return false;
         }
 
-        $xml = simplexml_load_string($xml);
+        $xml = simplexml_load_string((string) $xml);
 
         $json = '';
 

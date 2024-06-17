@@ -345,10 +345,10 @@ abstract class AbstractRenderer
         if (is_array($value)) {
             $clean = [];
             foreach ($value as $key2 => $value2) {
-                $clean[$key2] = htmlentities($value2, ENT_QUOTES, 'utf-8');
+                $clean[$key2] = htmlentities((string) $value2, ENT_QUOTES, 'utf-8');
             }
         } else {
-            $clean = htmlentities($value, ENT_QUOTES, 'utf-8');
+            $clean = htmlentities((string) $value, ENT_QUOTES, 'utf-8');
         }
 
         return $this->assign($key, $clean);

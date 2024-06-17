@@ -25,7 +25,7 @@ class DoctrineCollection implements AdapterInterface
      *
      * @param Collection $collection A Doctrine collection.
      */
-    public function __construct(private Collection $collection)
+    public function __construct(private readonly Collection $collection)
     {
     }
 

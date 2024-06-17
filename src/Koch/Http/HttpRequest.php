@@ -69,9 +69,9 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
          */
 
         // block XSS
-        $_SERVER['PHP_SELF'] = htmlspecialchars($_SERVER['PHP_SELF']);
+        $_SERVER['PHP_SELF'] = htmlspecialchars((string) $_SERVER['PHP_SELF']);
         if (isset($_SERVER['QUERY_STRING'])) {
-            htmlspecialchars($_SERVER['QUERY_STRING']);
+            htmlspecialchars((string) $_SERVER['QUERY_STRING']);
         }
 
         /*
@@ -404,7 +404,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function isSecure()
     {
-        if (isset($_SERVER['HTTPS']) && (mb_strtolower($_SERVER['HTTPS']) === 'on' or $_SERVER['HTTPS'] === '1')) {
+        if (isset($_SERVER['HTTPS']) && (mb_strtolower((string) $_SERVER['HTTPS']) === 'on' or $_SERVER['HTTPS'] === '1')) {
             return true;
         } else {
             return false;
@@ -473,12 +473,12 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     public static function getRequestURI()
     {
         if ($_SERVER['REQUEST_URI'] !== null) {
-            return urldecode(mb_strtolower($_SERVER['REQUEST_URI']));
+            return urldecode(mb_strtolower((string) $_SERVER['REQUEST_URI']));
         }
 
         // MS-IIS and ISAPI Rewrite Filter (only on windows platforms)
         if (isset($_SERVER['HTTP_X_REWRITE_URL']) and stripos(PHP_OS, 'WIN') !== false) {
-            return urldecode(mb_strtolower($_SERVER['HTTP_X_REWRITE_URL']));
+            return urldecode(mb_strtolower((string) $_SERVER['HTTP_X_REWRITE_URL']));
         }
 
         $p = $_SERVER['SCRIPT_NAME'];
@@ -486,7 +486,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             $p .= '?' . $_SERVER['QUERY_STRING'];
         }
 
-        return urldecode(mb_strtolower($p));
+        return urldecode(mb_strtolower((string) $p));
     }
 
     /**
@@ -531,7 +531,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         if ($_SERVER['HTTP_CLIENT_IP'] !== null) {
             $ip = $_SERVER['HTTP_CLIENT_IP'];
         } elseif ($_SERVER['HTTP_X_FORWARDED_FOR'] !== null) {
-            $ip = explode(',', $_SERVER['HTTP_X_FORWARDED_FOR']);
+            $ip = explode(',', (string) $_SERVER['HTTP_X_FORWARDED_FOR']);
             $ip = array_pop($ip);
         } elseif ($_SERVER['HTTP_X_REAL_IP'] !== null) {
             // NGINX - with natural russian config passes the IP as REAL_IP
@@ -562,7 +562,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function getUserAgent()
     {
-        $ua          = strip_tags($_SERVER['HTTP_USER_AGENT']);
+        $ua          = strip_tags((string) $_SERVER['HTTP_USER_AGENT']);
         $ua_filtered = filter_var($ua, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
         return $ua_filtered;
@@ -576,7 +576,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     public static function getReferer()
     {
         if ($_SERVER['HTTP_REFERER'] !== null) {
-            $refr          = strip_tags($_SERVER['HTTP_REFERER']);
+            $refr          = strip_tags((string) $_SERVER['HTTP_REFERER']);
             $refr_filtered = filter_var($refr, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
         }
 
@@ -651,7 +651,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
         if (isset($_SERVER['REQUEST_METHOD']) && $_SERVER['REQUEST_METHOD'] === 'POST'
             and $this->issetParameter('GET', 'method')) {
             // check for allowed rest commands
-            if (in_array(mb_strtoupper($_GET['method']), $allowed_rest_methodnames, true)) {
+            if (in_array(mb_strtoupper((string) $_GET['method']), $allowed_rest_methodnames, true)) {
                 // set the internal (tunneled) method as new REQUEST_METHOD
                 self::setRequestMethod($_GET['method']);
 
@@ -719,7 +719,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      */
     public static function setRequestMethod($method)
     {
-        self::$request_method = strtoupper($method);
+        self::$request_method = strtoupper((string) $method);
     }
 
     /**

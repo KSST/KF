@@ -58,7 +58,7 @@ function Smarty_function_load_module($params, $smarty)
             }
 
             // build array from string "param|param|etc"
-            $items = explode('\|', $params['params']);
+            $items = explode('\|', (string) $params['params']);
 
             return $module_controller->$action($items);
         }

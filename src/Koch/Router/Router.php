@@ -120,7 +120,7 @@ class Router implements RouterInterface, \ArrayAccess
 
         // add slash in front + remove slash at the end
         if ($uri !== '/') {
-            $uri = '/' . trim($uri, '/');
+            $uri = '/' . trim((string) $uri, '/');
         }
 
         $this->uri = $uri;
@@ -156,7 +156,7 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // explode the uri pattern to get uri segments
-        $segments = explode('/', $url_pattern);
+        $segments = explode('/', (string) $url_pattern);
 
         // combines all regexp patterns of segements to one regexp pattern for the route
         $regexp = $this->processSegmentsRegExp($segments, $requirements);
@@ -198,8 +198,8 @@ class Router implements RouterInterface, \ArrayAccess
              * Static named parameters starts with a ":".
              * Example: ":contoller".
              */
-            if (str_contains($segment, ':')) {
-                $name = substr($segment, 1); // remove :
+            if (str_contains((string) $segment, ':')) {
+                $name = substr((string) $segment, 1); // remove :
 
                 // is there a requirement for this param? 'id' => '([0-9])'
                 if (isset($requirements[$name])) {
@@ -327,22 +327,22 @@ class Router implements RouterInterface, \ArrayAccess
         }
 
         // return, if urlstring is already a qualified url (http://...)
-        if (str_contains($url, WWW_ROOT . 'index.php?')) {
+        if (str_contains((string) $url, WWW_ROOT . 'index.php?')) {
             return $url;
         }
 
         // only the http prefix is missing
-        if (str_contains($url, 'index.php?')) {
+        if (str_contains((string) $url, 'index.php?')) {
             return 'http://' . $url;
         }
 
         // cleanup: remove all double slashes
-        while (str_contains($url, '//')) {
+        while (str_contains((string) $url, '//')) {
             $url = str_replace('//', '/', $url);
         }
 
         // cleanup: remove space and slashes from begin and end of string
-        $url = trim($url, ' /');
+        $url = trim((string) $url, ' /');
 
         /*
          * Mod_Rewrite is ON.
@@ -631,7 +631,7 @@ class Router implements RouterInterface, \ArrayAccess
      */
     private static function parseUrlRewrite($uri)
     {
-        $uri = str_replace(strtolower($_SERVER['SCRIPT_NAME']), '', $uri);
+        $uri = str_replace(strtolower((string) $_SERVER['SCRIPT_NAME']), '', $uri);
 
         /*
          * The query string up to the question mark (?)

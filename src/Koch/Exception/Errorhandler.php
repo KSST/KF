@@ -50,7 +50,7 @@ class Errorhandler
      *
      * @throws \ErrorException
      */
-    public function handleErrorAsErrorException($errnum, $message, $filename, $lineno)
+    public function handleErrorAsErrorException($errnum, $message, $filename, $lineno): never
     {
         throw new \ErrorException($message, 0, $severity, $filename, $lineno);
     }
@@ -261,7 +261,7 @@ class Errorhandler
                 $html .= $trace[$i]['class'] . $trace[$i]['type'] . $trace[$i]['function'] . '()';
 
                 // if the class is one of our own, add backlink to API Documentation
-                if (1 === preg_match('/^Koch/', $trace[$i]['class'])) {
+                if (1 === preg_match('/^Koch/', (string) $trace[$i]['class'])) {
                     $html .= '<span class="error-class">';
                     $html .= '<a target="_new" href="http://docs.kf.com/en/latest/api/';
                     $html .= str_replace('\\', '_', $trace[$i]['class']);
@@ -271,7 +271,7 @@ class Errorhandler
                     $classReflection = new \ReflectionClass($trace[$i]['class']);
                     if ($classReflection->isInternal()) {
                         $html .= '<span class="error-class"><a target="_new" href="http://php.net/manual/en/class.';
-                        $html .= str_replace('_', '-', strtolower($trace[$i]['class']));
+                        $html .= str_replace('_', '-', strtolower((string) $trace[$i]['class']));
                         $html .= '.php">' . $trace[$i]['class'] . '</a></span>';
                     } else {
                         $html .= '<span class="error-class">' . $trace[$i]['class'] . '</span>';

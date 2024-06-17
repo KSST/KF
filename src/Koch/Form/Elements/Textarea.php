@@ -71,7 +71,7 @@ class Textarea extends FormElement implements FormElementInterface
             unset($config);
         }
 
-        $this->editor = mb_strtolower($editor);
+        $this->editor = mb_strtolower((string) $editor);
 
         return $this;
     }
@@ -151,7 +151,7 @@ class Textarea extends FormElement implements FormElementInterface
     private function editorFactory()
     {
         // build classname
-        $name = 'Wysiwyg' . ucfirst($this->getEditor());
+        $name = 'Wysiwyg' . ucfirst((string) $this->getEditor());
 
         // attach namespace
         $classname = 'Koch\Form\Elements\\' . $name;

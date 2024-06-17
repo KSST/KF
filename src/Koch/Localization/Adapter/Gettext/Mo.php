@@ -54,7 +54,7 @@ class Mo
             $str = implode("\x00", $entry['msgstr']);
 
             // keep track of offsets
-            $offsets[] = [mb_strlen($ids), mb_strlen($id), mb_strlen($strings), mb_strlen($str)];
+            $offsets[] = [mb_strlen($ids), mb_strlen((string) $id), mb_strlen($strings), mb_strlen($str)];
 
             // plural msgids are not stored (?)
             $ids .= $id . "\x00";

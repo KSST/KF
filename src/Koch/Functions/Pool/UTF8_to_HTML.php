@@ -31,7 +31,7 @@
 function UTF8_to_HTML($utf8, $encodeTags = false)
 {
     $result      = '';
-    $utf8_strlen = strlen($utf8);
+    $utf8_strlen = strlen((string) $utf8);
 
     for ($i = 0; $i < $utf8_strlen; ++$i) {
         $char  = $utf8[$i];
@@ -39,13 +39,13 @@ function UTF8_to_HTML($utf8, $encodeTags = false)
 
         if ($ascii < 128) {
             // one-byte character
-            $result .= ($encodeTags) ? htmlentities($char) : $char;
+            $result .= ($encodeTags) ? htmlentities((string) $char) : $char;
         } elseif ($ascii < 192) {
             // non-utf8 character or not a start byte
             $result .= ''; // leave this. would else be an empty elseif statement.
         } elseif ($ascii < 224) {
             // two-byte character
-            $result .= htmlentities(substr($utf8, $i, 2), ENT_QUOTES, 'UTF-8');
+            $result .= htmlentities(substr((string) $utf8, $i, 2), ENT_QUOTES, 'UTF-8');
             ++$i;
         } elseif ($ascii < 240) {
             // three-byte character

@@ -96,7 +96,7 @@ class DependencyInjector
      * @param string $type
      * @param string $candidates
      */
-    public function pickFactory($type, $candidates)
+    public function pickFactory($type, $candidates): never
     {
         throw new \Koch\DI\Exception\CannotDetermineImplementation($type);
     }

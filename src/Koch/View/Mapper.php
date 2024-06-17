@@ -181,7 +181,7 @@ class Mapper
             APPLICATION_MODULES_PATH,
             APPLICATION_MODULES_PATH . $module . DIRECTORY_SEPARATOR,
             APPLICATION_MODULES_PATH . $module . '/View/',
-            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst($renderer) . DIRECTORY_SEPARATOR,
+            APPLICATION_MODULES_PATH . $module . '/View/' . ucfirst((string) $renderer) . DIRECTORY_SEPARATOR,
         ];
 
         return $module_paths;

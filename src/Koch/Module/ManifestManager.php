@@ -202,7 +202,7 @@ class ManifestManager
      */
     public static function getModuleInformations($module = null)
     {
-        $modulename = strtolower($module);
+        $modulename = strtolower((string) $module);
 
         // check if the infos of this specific module were catched before
         if (self::$modulesInfo[$modulename] !== null) {
@@ -333,12 +333,12 @@ class ManifestManager
         // some leaves found (dirs and files)
         foreach ($iterator as $file) {
             // proceed with iteration instantly, if file is not a gettext file
-            if (0 === preg_match('/.(mo|po)$/', $file->getFileName())) {
+            if (0 === preg_match('/.(mo|po)$/', (string) $file->getFileName())) {
                 continue;
             }
 
             // fetch locale from path (en_UK, de_DE)
-            if (1 === preg_match('/[a-z]{2}_[A-Z]{2}/', $file->getPathName(), $match)) {
+            if (1 === preg_match('/[a-z]{2}_[A-Z]{2}/', (string) $file->getPathName(), $match)) {
                 $locale = $match[0];
             }
 
@@ -346,7 +346,7 @@ class ManifestManager
             if (version_compare(PHP_VERSION, '5.3.6') >= 0) {
                 $ext = $file->getExtension();
             } else { // php lower then 5.3.6
-                $ext = pathinfo($file->getFilename(), PATHINFO_EXTENSION);
+                $ext = pathinfo((string) $file->getFilename(), PATHINFO_EXTENSION);
             }
 
             $isReadable = $file->isReadable() ? 'r' : '';

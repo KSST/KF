@@ -69,7 +69,7 @@ class Breadcrumb
      */
     public static function addDynamicBreadcrumbs()
     {
-        $module     = strtolower(TargetRoute::getModule());
+        $module     = strtolower((string) TargetRoute::getModule());
         $controller = strtolower(TargetRoute::getController());
         $action     = TargetRoute::getActionNameWithoutPrefix();
 

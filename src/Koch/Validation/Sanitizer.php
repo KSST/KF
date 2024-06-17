@@ -286,7 +286,7 @@ class Sanitizer
                 . 'onkeyup|onfocus|onblur|onabort|onerror|onload)'
         ;
 
-        $str = stripslashes(preg_replace("/$HTML_Sanitizer_stripAttrib/i", 'forbidden', $str));
+        $str = stripslashes((string) preg_replace("/$HTML_Sanitizer_stripAttrib/i", 'forbidden', $str));
 
         return $str;
     }
@@ -318,7 +318,7 @@ class Sanitizer
 
         $HTML_Sanitizer_stripAttrib = '(style)';
 
-        $str = stripslashes(preg_replace("/$HTML_Sanitizer_stripAttrib/i", 'forbidden', $str));
+        $str = stripslashes((string) preg_replace("/$HTML_Sanitizer_stripAttrib/i", 'forbidden', $str));
 
         return $str;
     }

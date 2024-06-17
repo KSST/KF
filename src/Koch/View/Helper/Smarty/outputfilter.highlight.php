@@ -83,7 +83,7 @@ function _enlightColor($matches)
     // actual replacement callback
     if ($matches[1] !== null) {
         return '<span style="color:black; background-color:'
-            . $colword[mb_strtolower($matches[1])] . ';">' . $matches[1] . '</span>';
+            . $colword[mb_strtolower((string) $matches[1])] . ';">' . $matches[1] . '</span>';
     }
 
     return $matches[0];
@@ -93,7 +93,7 @@ function _enlightColor($matches)
 // q= for Google, p= for Yahoo
 function _refererhi()
 {
-    $referer = parse_url($_SERVER['HTTP_REFERER']);
+    $referer = parse_url((string) $_SERVER['HTTP_REFERER']);
     parse_str($referer['query'], $vars);
     if ($vars['q'] !== null) {
         return $vars['q'];

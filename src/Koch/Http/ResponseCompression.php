@@ -175,19 +175,19 @@ class ResponseCompression
         $http_accept_encoding = $_SERVER['HTTP_ACCEPT_ENCODING'];
 
         // check Accept-Encoding for x-gzip
-        if (mb_strpos($http_accept_encoding, 'x-gzip') !== false) {
+        if (mb_strpos((string) $http_accept_encoding, 'x-gzip') !== false) {
             $encoding = 'x-gzip';
         }
 
         // check Accept-Encoding for gzip
-        if (mb_strpos($http_accept_encoding, 'gzip') !== false) {
+        if (mb_strpos((string) $http_accept_encoding, 'gzip') !== false) {
             $encoding = 'gzip';
         }
 
         // Perform a "qvalue" check. The Accept-Encoding "gzip;q=0" means that gzip is NOT accepted.
         // preg_matches only, if first condition is true.
-        if ((mb_strpos($http_accept_encoding, 'gzip;q=') !== false)
-            && (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', $http_accept_encoding, $match)
+        if ((mb_strpos((string) $http_accept_encoding, 'gzip;q=') !== false)
+            && (preg_match('/(^|,\s*)(x-)?gzip(;q=(\d(\.\d+)?))?(,|$)/i', (string) $http_accept_encoding, $match)
             && ($match[4] === '' or $match[4] > 0))) {
             $encoding = 'gzip';
         }

@@ -72,9 +72,9 @@ class Functions
     public static function inString($needle, $haystack, $insensitive = false)
     {
         if ($insensitive === true) {
-            return (false !== stristr($haystack, (string) $needle)) ? true : false;
+            return (false !== stristr((string) $haystack, (string) $needle)) ? true : false;
         } else {
-            return (str_contains($haystack, (string) $needle)) ? true : false;
+            return (str_contains((string) $haystack, (string) $needle)) ? true : false;
         }
     }
 
@@ -151,10 +151,10 @@ class Functions
      */
     public static function cutStringBackwards($haystack, $needle)
     {
-        $needle_length = mb_strlen($needle);
+        $needle_length = mb_strlen((string) $needle);
 
-        if (($i = mb_strpos($haystack, $needle) !== false)) {
-            return mb_substr($haystack, 0, -$needle_length);
+        if (($i = mb_strpos((string) $haystack, (string) $needle) !== false)) {
+            return mb_substr((string) $haystack, 0, -$needle_length);
         }
 
         return $haystack;
@@ -634,7 +634,7 @@ class Functions
     public function __call($method, $arguments)
     {
         // Because value of $name is case sensitive, its forced to be lowercase.
-        $method = mb_strtolower($method);
+        $method = mb_strtolower((string) $method);
 
         // Debug message for Method Overloading
         // Making it easier to see which method is called magically

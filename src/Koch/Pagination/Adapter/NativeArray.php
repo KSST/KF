@@ -24,7 +24,7 @@ class NativeArray implements AdapterInterface
      *
      * @param array $array The array.
      */
-    public function __construct(private array $array)
+    public function __construct(private readonly array $array)
     {
     }
 

@@ -31,7 +31,7 @@ class File
      */
     public function __construct($name, protected $type, protected $size, protected $temporaryName, protected $error)
     {
-        $this->name          = basename($name);
+        $this->name          = basename((string) $name);
     }
 
     /**
@@ -93,7 +93,7 @@ class File
      */
     public function getExtension()
     {
-        return mb_substr($this->name, mb_strrpos($this->name, '.'));
+        return mb_substr((string) $this->name, mb_strrpos((string) $this->name, '.'));
     }
 
     /**

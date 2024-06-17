@@ -192,7 +192,7 @@ class Extractor
             $this->log('Extracting data from file ' . $inputFile);
 
             // Check file extension
-            $fileExtension = pathinfo($inputFile, PATHINFO_EXTENSION);
+            $fileExtension = pathinfo((string) $inputFile, PATHINFO_EXTENSION);
 
             foreach ($this->extractors as $extension => $extractor) {
                 // check, if the extractor handles a file extension like this

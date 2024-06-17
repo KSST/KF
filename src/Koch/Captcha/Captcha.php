@@ -297,8 +297,8 @@ class Captcha
                             break;
                     }
 
-                    $defaultSize = min($this->image_width, $this->image_height * 2) / strlen($captcha_string);
-                    $spacing     = (int) ($this->image_width * 0.9 / strlen($captcha_string));
+                    $defaultSize = min($this->image_width, $this->image_height * 2) / strlen((string) $captcha_string);
+                    $spacing     = (int) ($this->image_width * 0.9 / strlen((string) $captcha_string));
 
                     /*
                      * Font Size
@@ -310,7 +310,7 @@ class Captcha
                      *
                      * This is done using the bounding box of a text via imageftbbox.
                      */
-                    $bbox = imageftbbox($size, $angle, $this->font, $captcha_string[$i]);
+                    $bbox = imageftbbox($size, $angle, $this->font, (string) $captcha_string[$i]);
                     $x    = $spacing / 4 + $i * $spacing + 2;
                     /*
                      * @todo $height is undefined
@@ -328,7 +328,7 @@ class Captcha
                     /*
                      * Finally: Add the CHAR from the captcha string to the image
                      */
-                    imagettftext($this->captcha, $size, $angle, $x, $y, $color, $this->font, $captcha_string[$i]);
+                    imagettftext($this->captcha, $size, $angle, $x, $y, $color, $this->font, (string) $captcha_string[$i]);
                 }
 
                 // add interlacing
