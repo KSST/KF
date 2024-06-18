@@ -1,12 +1,9 @@
 ; https://github.com/editorconfig/
 
-; top-most EditorConfig file
 root = true
 
-# General
 [*]
 charset = utf-8
-; Unix-style newlines
 end_of_line = lf
 trim_trailing_whitespace = true
 insert_final_newline = true
@@ -19,17 +16,11 @@ end_of_line = crlf
 [*.php]
 indent_size = 4
 
-[*.js]
-indent_size = 2
-
-[*.css]
+[*.{css,js,mjs,json,scss,yml,yaml}]
 indent_size = 2
 
 [*.xml]
 indent_size = 4
-
-[*.yaml, *.yml]
-indent_size = 2
 
 [*.{md,adoc}]
 trim_trailing_whitespace = false
