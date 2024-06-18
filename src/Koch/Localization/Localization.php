@@ -20,20 +20,20 @@ use Koch\Config\Config;
 class Localization
 {
     // Locale Variables
-    public $locale = null;
+    public $locale;
 
     /**
      * @var Set Locale Defaults: the textdomain.
      */
-    private $domain = null;
+    private $domain;
 
     /**
      * @var Sets Encoding.
      */
-    private $encoding = null;
+    private $encoding;
 
     // References
-    private static $config = null;
+    private static $config;
 
     public function __construct(Config $config)
     {

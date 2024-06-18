@@ -138,9 +138,7 @@ class Colors
             }
         }
 
-        if (is_array($codes)) {
-            $escapeCodes = implode(';', $codes);
-        }
+        $escapeCodes = implode(';', $codes);
 
         return sprintf('\033[%sm%s\033[0m', $escapeCodes, $text);
     }

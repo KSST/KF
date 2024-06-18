@@ -37,7 +37,7 @@ use Koch\Http\HttpResponseInterface;
  */
 class LanguageViaGet implements FilterInterface
 {
-    private $config = null;
+    private $config;
 
     public function __construct(Config $config)
     {

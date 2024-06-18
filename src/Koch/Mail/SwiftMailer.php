@@ -23,7 +23,7 @@ namespace Koch\Mail;
 class SwiftMailer
 {
     /* @var \Swift_Mailer */
-    public $mailer = null;
+    public $mailer;
 
     /* @var array Options */
     private $options = [];

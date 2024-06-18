@@ -39,7 +39,7 @@ class Memcached extends AbstractCache implements CacheInterface
     /**
      * @var object PHP Memcached instance
      */
-    protected $memcached = null;
+    protected $memcached;
 
     /**
      * Constructor.

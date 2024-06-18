@@ -17,7 +17,7 @@ namespace Koch\Config\Exception;
  */
 class JsonException extends \Exception
 {
-    public $error      = null;
+    public $error;
 
     /**
      * Constructor.

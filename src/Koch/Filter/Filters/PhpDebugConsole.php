@@ -21,7 +21,7 @@ use Koch\Http\HttpResponseInterface;
  */
 class PhpDebugConsole implements FilterInterface
 {
-    private $config = null;
+    private $config;
 
     public function __construct(Koch\Config $config)
     {

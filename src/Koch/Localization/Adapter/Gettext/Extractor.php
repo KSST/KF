@@ -371,7 +371,6 @@ class Extractor
     {
         $pluralMatchRegexp = '#\%([0-9]+\$)*d#';
 
-        $output = [];
         $output = self::getPOFileHeader(false);
 
         ksort($data);

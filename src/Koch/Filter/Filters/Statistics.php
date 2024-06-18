@@ -23,14 +23,14 @@ use Koch\Http\HttpResponseInterface;
  */
 class Statistics implements FilterInterface
 {
-    private $config             = null;
-    private $user               = null;
-    private $curTimestamp       = null;
-    private $curDate            = null;
-    private $statsWhoDeleteTime = null;
-    private $statsWhoTimeout    = null;
+    private $config;
+    private $user;
+    private $curTimestamp;
+    private $curDate;
+    private $statsWhoDeleteTime;
+    private $statsWhoTimeout;
 
-    public function __construct(Koch\Config $config, Koch\User\User $user)
+    public function __construct(\Koch\Config $config, \Koch\User\User $user)
     {
         $this->config       = $config;
         $this->curTimestamp = time();
@@ -93,10 +93,10 @@ class Statistics implements FilterInterface
     {
         $curTimestamp = $this->curTimestamp;
 
-        $result = Doctrine::getTable('CsStatistic')->updateWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
+        $result = \Doctrine::getTable('CsStatistic')->updateWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
 
         if ($result === 0) {
-            Doctrine::getTable('CsStatistic')->insertWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
+            \Doctrine::getTable('CsStatistic')->insertWhoIsOnline($ip, $targetSite, $curTimestamp, $userID);
         }
     }
 
@@ -108,14 +108,14 @@ class Statistics implements FilterInterface
     private function updateStatistics($visitorIp)
     {
         // if there is no entry for this ip, increment hits
-        if (false === Doctrine::getTable('CsStatistic')->existsIpEntryWithIp($visitorIp)) {
-            Doctrine::getTable('CsStatistic')->incrementHitsByOne();
+        if (false === \Doctrine::getTable('CsStatistic')->existsIpEntryWithIp($visitorIp)) {
+            \Doctrine::getTable('CsStatistic')->incrementHitsByOne();
             $this->updateStatisticStats();
         }
 
-        $userOnline = Doctrine::getTable('CsStatistic')->countVisitorsOnline($this->statsWhoTimeout);
+        $userOnline = \Doctrine::getTable('CsStatistic')->countVisitorsOnline($this->statsWhoTimeout);
 
-        Doctrine::getTable('CsStatistic')->updateStatisticMaxUsers($userOnline);
+        \Doctrine::getTable('CsStatistic')->updateStatisticMaxUsers($userOnline);
     }
 
     /**

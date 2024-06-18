@@ -36,7 +36,6 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      */
     public function toArray($reset = false)
     {
-        $array = [];
         $array = $this->config;
 
         if ($reset) {

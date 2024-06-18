@@ -81,7 +81,7 @@ class Wincache extends AbstractCache implements CacheInterface
      */
     public function store($key, $data, $lifetime = 0)
     {
-        return (bool) wincache_ucache_set($key, $data, (int) $lifetime * 60);
+        return wincache_ucache_set($key, $data, (int) $lifetime * 60);
     }
 
     /**

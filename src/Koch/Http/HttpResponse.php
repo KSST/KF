@@ -35,7 +35,7 @@ class HttpResponse implements HttpResponseInterface
     /**
      * @var string String holding the response content (body).
      */
-    private static $content = null;
+    private static $content;
 
     /**
      * @var string String holding the content type.
@@ -71,11 +71,7 @@ class HttpResponse implements HttpResponseInterface
      */
     public static function getStatusCodeDescription($statusCode)
     {
-        /**
-         * Array holding some often occuring status descriptions.
-         *
-         * @var array
-         */
+        // Array holding some often occuring status descriptions.
         static $statusCodes = [
            // Successful
            '200' => 'OK',

@@ -126,7 +126,7 @@ class YellowScreenOfDeath
         }
 
         if (empty($_GET['mod']) === false) {
-            $placeholders['modulename'] = (string) stripslashes((string) $_GET['mod']);
+            $placeholders['modulename'] = stripslashes((string) $_GET['mod']);
         } else {
             $placeholders['modulename'] = '';
         }

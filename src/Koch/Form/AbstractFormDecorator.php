@@ -46,7 +46,8 @@ abstract class AbstractFormDecorator implements DecoratorInterface
      *
      * @var \Koch\Form\Form Defaults to null.
      */
-    protected $form = null;
+    protected $form;
+
     private $name;
     private $class;
     private $id;
@@ -166,7 +167,7 @@ abstract class AbstractFormDecorator implements DecoratorInterface
             return true;
         }
 
-        if ($this->form instanceof Koch\Form\DecoratorInterface) {
+        if ($this->form instanceof DecoratorInterface) {
             return $this->form->hasMethod($method);
         }
 

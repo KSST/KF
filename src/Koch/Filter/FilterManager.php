@@ -29,10 +29,8 @@ class FilterManager
     private $filters = [];
 
     /**
-     * addFilter method
+     * addFilter
      * $filter is type-hinted, to ensure that the array filter only contains Filter-Objects.
-     *
-     * @param FilterInterface $filter
      */
     public function addFilter(FilterInterface $filter)
     {

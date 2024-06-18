@@ -16,6 +16,7 @@ use Koch\Filter\FilterInterface;
 use Koch\Http\HttpRequestInterface;
 use Koch\Http\HttpResponseInterface;
 
+
 /**
  * Filter for HTML Tidy (postfilter).
  *
@@ -26,7 +27,7 @@ use Koch\Http\HttpResponseInterface;
  */
 class HtmlTidy implements FilterInterface
 {
-    private $config = null;
+    private $config;
 
     public function __construct(Koch\Config $config)
     {

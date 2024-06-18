@@ -30,7 +30,7 @@ use Koch\Http\HttpResponseInterface;
  */
 class SessionSecurity implements FilterInterface
 {
-    private $config = null;
+    private $config;
 
     public function __construct(Koch\Config $config)
     {

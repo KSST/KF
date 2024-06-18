@@ -26,7 +26,7 @@ use Koch\View\Renderer\Smarty;
  */
 class Maintenance implements FilterInterface
 {
-    private $config = null;
+    private $config;
 
     public function __construct(Config $config)
     {

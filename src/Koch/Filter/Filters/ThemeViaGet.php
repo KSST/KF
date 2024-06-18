@@ -32,7 +32,7 @@ class ThemeViaGet implements FilterInterface
         'theme_via_get' => 0,
     ];
 
-    private $input = null;
+    private $input;
 
     public function __construct(Config $config, InputFilter $input)
     {

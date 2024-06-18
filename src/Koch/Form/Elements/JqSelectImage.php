@@ -12,12 +12,14 @@
 
 namespace Koch\Form\Elements;
 
+use Koch\Form\FormElementInterface;
+
 /**
  *
  */
 class JqSelectImage extends Select implements FormElementInterface
 {
-    private $html = null;
+    private $html;
 
     private $directory;
 

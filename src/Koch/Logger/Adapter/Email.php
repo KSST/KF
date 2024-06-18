@@ -31,7 +31,7 @@ class Email extends AbstractLogger implements LoggerInterface
     /**
      * @var \Koch\Mail\SwiftMailer
      */
-    private $mailer = null;
+    private $mailer;
 
     public function __construct($config)
     {

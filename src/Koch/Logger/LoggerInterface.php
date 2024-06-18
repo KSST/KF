@@ -25,7 +25,6 @@ interface LoggerInterface
      * System is unusable.
      *
      * @param string $message
-     * @param array  $context
      */
     public function emergency($message, array $context = []);
 
@@ -36,7 +35,6 @@ interface LoggerInterface
      * trigger the SMS alerts and wake you up.
      *
      * @param string $message
-     * @param array  $context
      */
     public function alert($message, array $context = []);
 
@@ -46,7 +44,6 @@ interface LoggerInterface
      * Example: Application component unavailable, unexpected exception.
      *
      * @param string $message
-     * @param array  $context
      */
     public function critical($message, array $context = []);
 
@@ -55,7 +52,6 @@ interface LoggerInterface
      * be logged and monitored.
      *
      * @param string $message
-     * @param array  $context
      */
     public function error($message, array $context = []);
 
@@ -66,7 +62,6 @@ interface LoggerInterface
      * that are not necessarily wrong.
      *
      * @param string $message
-     * @param array  $context
      */
     public function warning($message, array $context = []);
 
@@ -74,7 +69,6 @@ interface LoggerInterface
      * Normal but significant events.
      *
      * @param string $message
-     * @param array  $context
      */
     public function notice($message, array $context = []);
 
@@ -84,7 +78,6 @@ interface LoggerInterface
      * Example: User logs in, SQL logs.
      *
      * @param string $message
-     * @param array  $context
      */
     public function info($message, array $context = []);
 
@@ -92,7 +85,6 @@ interface LoggerInterface
      * Detailed debug information.
      *
      * @param string $message
-     * @param array  $context
      */
     public function debug($message, array $context = []);
 
@@ -100,7 +92,6 @@ interface LoggerInterface
      * Logs with an arbitrary level.
      *
      * @param string $message
-     * @param array  $context
      */
     public function log(mixed $level, $message, array $context = []);
 }

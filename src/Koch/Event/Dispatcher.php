@@ -29,7 +29,7 @@ class Dispatcher
     /**
      * @var object Instance of \Koch\Event\Dispatcher
      */
-    private static $instance = null;
+    private static $instance;
 
     /**
      * @var array All registered Eventhandlers

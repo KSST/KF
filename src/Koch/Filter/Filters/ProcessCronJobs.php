@@ -23,8 +23,8 @@ use Koch\Http\HttpResponseInterface;
  */
 class ProcessCronJobs implements FilterInterface
 {
-    private $config   = null;
-    private $cronjobs = null;
+    private $config;
+    private $cronjobs;
 
     public function __construct(Koch\Config $config, Koch\Cronjobs $cronjobs)
     {

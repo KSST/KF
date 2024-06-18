@@ -133,7 +133,6 @@ class DependencyInjector
             return $this->named_parameters[$name];
         }
 
-        $value = [];
         $value = array_shift($this->unnamed_parameters);
         if ($value) {
             return $value;

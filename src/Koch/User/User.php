@@ -359,7 +359,7 @@ class User
         if (isset($_COOKIE['cs_cookie'])) {
             $cookie_array    = explode('#', (string) $_COOKIE['cs_cookie']);
             $cookie_user_id  = (int) $cookie_array['0'];
-            $cookie_password = (string) $cookie_array['1'];
+            $cookie_password = $cookie_array['1'];
 
             #Koch_Module_Controller::initModel('users');
 
