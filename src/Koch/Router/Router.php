@@ -318,11 +318,11 @@ class Router implements RouterInterface, \ArrayAccess
     {
         // if urlstring is array, then a relation (urlstring => parameter_order) is given
         if (is_array($url)) {
-            $parameterOrder             = '';
-            [$url, $parameterOrder][1] = current($url);
-            [$url, $parameterOrder]['value'] = current($url);
-            [$url, $parameterOrder][0] = key($url);
-            [$url, $parameterOrder]['key'] = key($url);
+            $parameterOrder = '';
+            $parameterOrder = current($url);
+            $urlValue = current($url);
+            $urlKey = key($url);
+            $parameterOrderKey = key($url);
             next($url);
         }
 
