@@ -25,12 +25,15 @@ class Utf8
             throw new \Koch\Exception\Exception('The PHP extension "mbstring" is required.');
         }
 
-        // do not accept mbstring function overloading set in php.ini
-        if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING) {
-            throw new \Koch\Exception\Exception(
-                'The string functions are overloaded by mbstring. Please stop that. ' .
-                'Check the "php.ini" setting: "mbstring.func_overload".'
-            );
+        // Check if PHP version is less than 8.0.0
+        if (version_compare(PHP_VERSION, '8.0.0', '<')) {
+            // Do not accept mbstring function overloading set in php.ini
+            if (ini_get('mbstring.func_overload') & MB_OVERLOAD_STRING) {
+                throw new \Koch\Exception\Exception(
+                    'The string functions are overloaded by mbstring. Please stop that. ' .
+                    'Check the "php.ini" setting: "mbstring.func_overload".'
+                );
+            }
         }
 
         mb_internal_encoding('UTF-8');
