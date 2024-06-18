@@ -139,22 +139,16 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
      */
     /**
      * ArrayAccess::offsetExists().
-     *
-     *
-     * @return bool value
      */
-    public function offsetExists(mixed $offset)
+    public function offsetExists(mixed $offset) : bool
     {
         return isset($this->config[$offset]);
     }
 
     /**
      * ArrayAccess::offsetGet().
-     *
-     *
-     * @return mixed value
      */
-    public function offsetGet(mixed $offset)
+    public function offsetGet(mixed $offset) : mixed
     {
         return $this->config[$offset] ?? null;
     }
@@ -162,7 +156,7 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
     /**
      * ArrayAccess::offsetSet().
      */
-    public function offsetSet(mixed $offset, mixed $value)
+    public function offsetSet(mixed $offset, mixed $value) : void
     {
         if (is_null($offset)) {
             $this->config[] = $value;
@@ -173,14 +167,9 @@ abstract class AbstractConfig /*extends ArrayObject*/ implements \ArrayAccess
 
     /**
      * ArrayAccess::offsetUnset().
-     *
-     *
-     * @return bool true
      */
-    public function offsetUnset(mixed $offset)
+    public function offsetUnset(mixed $offset) : void
     {
         unset($this->config[$offset]);
-
-        return true;
     }
 }
