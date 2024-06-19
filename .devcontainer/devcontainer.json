@@ -1,5 +1,24 @@
 {
-    "name":"PHP DevBox",
-    "image": "mcr.microsoft.com/devcontainers/php:8",
-    "remoteUser": "root"
+  "name": "PHP",
+  "dockerFile": "Dockerfile",
+  // config settings you would have in ".vscode/settings.json"
+  "customizations": {
+      "vscode": {
+          // Add the IDs of extensions you want installed when the container is created.
+          "extensions": [
+              // VS Code specific
+              "EditorConfig.EditorConfig",
+              // Asciidoc specific
+              "asciidoctor.asciidoctor-vscode",
+              // Markdown specific
+              "yzhang.markdown-all-in-one",
+              // PHP specific
+              "xdebug.php-pack"
+          ],
+          "settings": {
+              "terminal.integrated.defaultProfile.linux": "zsh",
+          }
+      }
+  },
+  "remoteUser": "root"
 }
