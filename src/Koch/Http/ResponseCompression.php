@@ -43,16 +43,19 @@ class ResponseCompression
             throw new \Koch\Exception\Exception('The PHP Extension "zlib" is required.');
         }
 
-        if ((bool) ini_get('zlib.output_compression') === false and ob_get_length() === false
+        $zlib_output_compression = (bool) ini_get('zlib.output_compression');
+
+        if ($zlib_output_compression === false and ob_get_length() === false
             && (ini_get('output_handler') !== 'ob_gzhandler')) {
             // Method 1: on-the-fly transparent zlib.output_compression
             // Additional output handlers are not valid, when zlib.output_compression is activated.
             ini_set('zlib.output_compression', true);
+            $zlib_output_compression = true;
             ini_set('zlib.output_compression_level', 7);
 
-            // if zlib.output_compression still not enabled
+            // if zlib.output_compression is still not enabled
             // Method 2: compression via this class
-            if ((bool) ini_get('zlib.output_compression') === false) {
+            if ($zlib_output_compression === false) {
                 ob_start();
                 ob_implicit_flush(0);
             }
