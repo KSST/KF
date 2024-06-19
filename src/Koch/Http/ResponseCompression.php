@@ -13,7 +13,9 @@
 namespace Koch\Http;
 
 /**
- * Response Encode.
+ * Response Compression.
+ *
+ * @todo rewrite and take possible external compression into account
  *
  * The class is used to buffer and compress the response content.
  *
@@ -136,7 +138,7 @@ class ResponseCompression
 
         header('Content-Encoding: ' . $encoding);
         header('Vary: Accept-Encoding');
-        header('Content-Length: ' . (int) mb_strlen($gzdata));
+        header('Content-Length: ' . mb_strlen($gzdata));
 
         /*
          * Note by Jens A. Koch:

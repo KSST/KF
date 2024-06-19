@@ -88,8 +88,6 @@ class Functions
      */
     public static function ensurePrefixedWith($string, $prefix)
     {
-        $pos = null;
-
         $pos = mb_strpos($string, $prefix);
 
         if (is_int($pos) && ($pos === 0)) {
@@ -208,7 +206,7 @@ class Functions
         }
 
         // dig a little bit deeper in the array structure
-        foreach ($haystack as $k => $v) {
+        foreach ($haystack as $v) {
             if (is_array($v)) {
                 // recursion
                 return self::findKeyInArray($needle, $v);
@@ -342,8 +340,6 @@ class Functions
      * flatten multi-dimensional array.
      *
      * @param array $array
-     *
-     * @return array
      */
     public static function arrayFlatten(array $array)
     {
@@ -480,7 +476,8 @@ class Functions
     /**
      * Get the variable name as string.
      *
-     * @author http://us2.php.net/manual/en/language.variables.php#76245
+     * @todo https://stackoverflow.com/q/255312/1163786
+     * @link https://wiki.php.net/rfc/nameof PHP84 RFC
      *
      * @param $var variable as reference
      * @param $scope scope
@@ -496,7 +493,7 @@ class Functions
         }
 
         $old   = $var;
-        $var   = $new   = $prefix . random_int(0, mt_getrandmax()) . $suffix;
+        $var   = $new = $prefix . random_int(0, mt_getrandmax()) . $suffix;
         $vname = false;
 
         foreach ($values as $key => $val) {

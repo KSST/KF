@@ -293,7 +293,9 @@ class Router implements RouterInterface, \ArrayAccess
      */
     public function generateURL($url_pattern, array $params = null, $absolute = false)
     {
-        $url = '';
+        // @todo
+
+        /*$url = '';
 
         // @todo merge with buildURL + routing rules + parameters
 
@@ -303,7 +305,7 @@ class Router implements RouterInterface, \ArrayAccess
 
         if ($absolute) {
         } else {
-        }
+        }*/
 
         return $url;
     }

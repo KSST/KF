@@ -44,12 +44,12 @@ class Json extends AbstractRenderer
 
     public function initializeEngine($template = null)
     {
-        return;
+        // @todo
     }
 
     public function configureEngine()
     {
-        return;
+        // @todo
     }
 
     /**

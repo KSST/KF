@@ -42,12 +42,14 @@ class Generator
 
     public function create()
     {
-        foreach ($structure['folders'] as $folder) {
+        // @todo
+
+        /*foreach ($structure['folders'] as $folder) {
             ;
         }
 
         foreach ($structure['files'] as $file) {
             ;
-        }
+        }*/
     }
 }

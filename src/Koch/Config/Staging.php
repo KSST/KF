@@ -51,8 +51,6 @@ class Staging
             return self::$filename;
         }
 
-        $filename = '';
-
         $filename = match ($_SERVER['SERVER_NAME']) {
             'localhost', 'intranet', 'application-dev.com', 'www.application-dev.com', 'application.dev' => 'development.php',
             'application-stage.com', 'www.application-stage.com', 'application.stage' => 'staging.php',

@@ -17,7 +17,7 @@ use Koch\Form\FormElementInterface;
 
 class Image extends FormElement implements FormElementInterface
 {
-    public static function render()
+    public function render()
     {
         return '<input ' . $this->renderAttributes() . '>';
     }

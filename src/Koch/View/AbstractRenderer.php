@@ -12,6 +12,8 @@
 
 namespace Koch\View;
 
+use Exception;
+
 /**
  * Abstract base class for View Renderers.
  *
@@ -376,10 +378,12 @@ abstract class AbstractRenderer
         }
     }
 
-    // object duplication / cloning is not permitted
-    protected function __clone()
+    /**
+     * Cloning instances of the class is forbidden
+     */
+    private function __clone()
     {
-        return;
+        throw new Exception("Object cloning is not permitted.");
     }
 
     /**

@@ -105,7 +105,7 @@ class Xslt extends AbstractRenderer
 
     public function assign($tpl_parameter, $value = null)
     {
-        return;
+        // @todo
     }
 
     public function display($template, $viewdata = null)

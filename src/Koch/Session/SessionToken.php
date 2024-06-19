@@ -53,7 +53,7 @@ class SessionToken extends Session
 
     public function getTokenTime()
     {
-        return;
+        // @todo
     }
 
     /**

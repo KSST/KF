@@ -62,7 +62,7 @@ class XDebug
      */
     public static function isXdebugActive()
     {
-        if (extension_loaded('xdebug') and xdebug_is_enabled()) {
+        if (\extension_loaded('xdebug') && \function_exists('xdebug_is_enabled') && xdebug_is_enabled()) {
             return true;
         }
 
@@ -269,7 +269,7 @@ class XDebug
             echo '<td class="td2">' . self::roundMB(xdebug_memory_usage()) . ' MB</td>';
             echo '</tr><tr>';
             echo '<td class="td1">Memory Peak</td>';
-            echo '<td class="td2">' . self::roundMB(xdebug_peak_memory_usage()) . ' MB</td>';
+            echo '<td class="td2">' . self::roundMB(\xdebug_peak_memory_usage()) . ' MB</td>';
             echo '</tr>';
             // stop tracings and var_dump
             #var_dump(xdebug_get_code_coverage());
@@ -328,7 +328,7 @@ class XDebug
                 echo sprintf('<tr><th colspan="2">%s</th></tr>', $headline);
 
                 // table row "constant"
-                foreach ($aConsts[$category] as $name => $value) {
+                foreach ($aConsts[$category] as $value) {
 
                     // format value handle true and false
                     $val = (gettype($value) === 'boolean') ? (int) $value : self::formatter($value);

@@ -163,8 +163,6 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * $this->expectParameters(array('modulename','language'));
      * // parameters, one with rules
      * // parameters, all with rules
-     *
-     * @param array $parameters
      */
     public function expectParameters(array $parameters)
     {
@@ -247,7 +245,6 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
                 if (isset($this->cookie_parameters[$parameter])) {
                     return ($where === false) ? true : 'cookie';
                 }
-                break;
             default:
                 return false;
                 break;
@@ -352,7 +349,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     public function getParameterFromCookie($name)
     {
         if (isset($this->cookie_parameters[$name]) === true) {
-            return $this->cookie_parameters($name);
+            return $this->cookie_parameters[$name];
         }
     }
 
@@ -371,7 +368,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
             return $_SERVER[$parameter];
         }
 
-        return;
+        return '';
     }
 
     /**
@@ -563,7 +560,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     public static function getUserAgent()
     {
         $ua          = strip_tags((string) $_SERVER['HTTP_USER_AGENT']);
-        $ua_filtered = filter_var($ua, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+        $ua_filtered = filter_var($ua, FILTER_DEFAULT, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
 
         return $ua_filtered;
     }
@@ -577,7 +574,7 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
     {
         if ($_SERVER['HTTP_REFERER'] !== null) {
             $refr          = strip_tags((string) $_SERVER['HTTP_REFERER']);
-            $refr_filtered = filter_var($refr, FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
+            $refr_filtered = filter_var($refr, FILTER_DEFAULT, FILTER_FLAG_STRIP_LOW | FILTER_FLAG_STRIP_HIGH);
         }
 
         return $refr_filtered;
@@ -789,25 +786,23 @@ class HttpRequest implements HttpRequestInterface, \ArrayAccess
      * Implementation of SPL ArrayAccess
      * only offsetExists and offsetGet are relevant.
      */
-    public function offsetExists($offset)
+    public function offsetExists($offset) : bool
     {
         return $this->issetParameter($offset);
     }
 
-    public function offsetGet($offset)
+    public function offsetGet($offset) : mixed
     {
         return $this->getParameter($offset);
     }
 
-    // not setting request vars
-    public function offsetSet($offset, $value)
+    public function offsetSet($offset, $value) : void
     {
-        return false;
+        // not setting request vars
     }
 
-    // not unsetting request vars
-    public function offsetUnset($offset)
+    public function offsetUnset($offset) : void
     {
-        return false;
+        // not unsetting request vars
     }
 }

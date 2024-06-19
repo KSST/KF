@@ -58,7 +58,6 @@ class ThemeViaGet implements FilterInterface
         }
 
         // get parameter
-        $theme = '';
         $theme = $request->getParameterFromGet('theme');
 
         // Inputfilter for $_GET['theme']. Allowed Chars are: az, 0-9, underscore.
@@ -67,7 +66,6 @@ class ThemeViaGet implements FilterInterface
         }
 
         // compose theme dir
-        $themedir = '';
         $themedir = APPLICATION_PATH . 'themes/frontend/' . $theme . DIRECTORY_SEPARATOR;
 
         // if theme exists, set it as frontend theme to the session

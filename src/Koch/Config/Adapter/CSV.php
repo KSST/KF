@@ -66,7 +66,7 @@ class CSV implements AdapterInterface
     {
         if (($handle = fopen($file, 'r+')) !== false) {
             // transform array to csv notation
-            foreach ($array as $key => $value) {
+            foreach ($array as $value) {
                 if (is_string($value)) {
                     $value = explode(',', $value);
                     $value = array_map('trim', $value);

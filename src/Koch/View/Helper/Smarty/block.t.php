@@ -40,7 +40,6 @@ function Smarty_gettext_strarg($str)
 {
     $tr   = [];
     $p    = 0;
-    $args = 0;
 
     $args = func_num_args();
     for ($i = 1; $i < $args; ++$i) {

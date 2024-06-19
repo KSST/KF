@@ -41,6 +41,9 @@ class Redis extends AbstractCache implements CacheInterface
      */
     public function __construct($options = [])
     {
+        // @todo remove hardcoded prefix
+        $options['prefix'] = 'KochFramework:';
+
         if (extension_loaded('redis') === false) {
             throw new Exception(
                 'The PHP extension Redis (key-value store) is not loaded. You may enable it in "php.ini"!'
@@ -55,8 +58,12 @@ class Redis extends AbstractCache implements CacheInterface
         }
 
         // configure
-        $this->redis->setOption(self::OPT_SERIALIZER, self::SERIALIZER_IGBINARY);
-        $this->redis->setOption(self::OPT_PREFIX, 'KochFramework:'); // use custom prefix on all keys
+        $this->redis->setOption(\Redis::OPT_SERIALIZER, \Redis::SERIALIZER_IGBINARY);
+
+        // use custom prefix on all keys
+        if(empty($options['prefix']) === false) {
+            $this->redis->setOption(\Redis::OPT_PREFIX, $options['prefix']);
+        }
     }
 
     /**

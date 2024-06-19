@@ -391,7 +391,6 @@ class Captcha
                     '<img alt="Embedded Captcha Image" src="data:image/png;base64,%s" />',
                     base64_encode($imagesource)
                 );
-                break;
             case 'file':
                 // remove outdated captcha images
                 $this->collectGarbage();
@@ -403,7 +402,6 @@ class Captcha
                     '<img alt="Captcha Image" src="%s" />',
                     $file
                 );
-                break;
         }
     }
 

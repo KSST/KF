@@ -127,7 +127,7 @@ class Bbcode
         /*
          * Add the BBCodes from DB via addCode
          */
-        foreach ($bbcodes as $key => $code) {
+        foreach ($bbcodes as $code) {
             // allowed
             $allowed_in = explode(',', (string) $code['allowed_in']);
 

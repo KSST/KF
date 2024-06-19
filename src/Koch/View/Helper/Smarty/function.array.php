@@ -43,8 +43,6 @@ function smarty_function_array($params, $smarty)
         trigger_error('array: missing explode (true, false) as parameter');
 
         return;
-    } else {
-        (bool) $params['explode'];
     }
 
     // be sure delimiter parameter is present

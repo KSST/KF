@@ -25,7 +25,7 @@ namespace Koch\View\Helper;
  * For single (non-library) files: "/themes/core/css" and "/themes/core/javascripts/".
  * For libraries with own subfolders for css, js, misc stuff: "/themes/core/libraries/".
  */
-class Javascripts extends Layout
+class Javascripts extends Theme
 {
     public static function addJQuery()
     {
@@ -90,7 +90,7 @@ class Javascripts extends Layout
             }
         } else {
             // load from google.com
-            self::addJS_JQuery_GoogleCDN_Service($version);
+            self::addJQueryGoogleCDNService($version);
         }
     }
 
@@ -116,14 +116,14 @@ class Javascripts extends Layout
             $jquery_version_whitelist = ['1.7.2', '1.8.1']; // not 'latest'
 
             if (in_array($version, $jquery_version_whitelist, true)) {
-                $this->jquery_initscript = '';
-                $this->jquery_initscript .= "    <script src=\"http://www.google.com/jsapi\"></script>\n";
-                $this->jquery_initscript .= "    <script>\n";
-                $this->jquery_initscript .= "      google.load('jquery', '{$version}');\n";
-                $this->jquery_initscript .= "      var $j = jQuery.noConflict();;\n";
-                $this->jquery_initscript .= "    </script>\n";
+                $jq_init = '';
+                $jq_init .= "    <script src=\"http://www.google.com/jsapi\"></script>\n";
+                $jq_init .= "    <script>\n";
+                $jq_init .= "      google.load('jquery', '{$version}');\n";
+                $jq_init .= "      var $j = jQuery.noConflict();\n";
+                $jq_init .= "    </script>\n";
 
-                return $this->jquery_initscript;
+                return $jq_init;
             }
         }
     }

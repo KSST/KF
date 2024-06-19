@@ -61,22 +61,17 @@ class File extends Input implements FormElementInterface
             default:
             case 'ajaxupload':
                 return new \Koch\Form\Elements\UploadAjax();
-                break;
             case 'apc':
                 return new \Koch\Form\Elements\UploadApc();
-                break;
             case 'uploadify':
                 return new \Koch\Form\Elements\Uploadify();
-                break;
             case 'html':
                 /*
                  * Fallback to normal <input type="file"> upload
                  * Currently not using the render method of the parent class
                  * return parent::render();
                  */
-
                 return '<input type="file" name="file[]" multiple="true">';
-                break;
         }
     }
 

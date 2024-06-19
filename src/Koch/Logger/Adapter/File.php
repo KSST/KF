@@ -49,7 +49,6 @@ class File extends AbstractLogger implements LoggerInterface
      *
      * @param string $level
      * @param string $message
-     * @param array  $context
      *
      * @return bool
      */

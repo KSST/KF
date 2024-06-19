@@ -551,7 +551,7 @@ class Errorhandler
 
         // a
         $fileLinkFormatString = ini_get('xdebug.file_link_format');
-        if (isset($fileLinkFormatString)) {
+        if ($fileLinkFormatString !== false) {
             $link = strtr($fileLinkFormatString, ['%f' => $file, '%l' => $line]);
 
             return sprintf(' in <a href="%s" title="Edit file">%s line #%d</a>', $link, $file, $line);
